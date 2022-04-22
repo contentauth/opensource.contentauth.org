@@ -4,15 +4,51 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 170px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
+.heroTitle {
+  width: 840px;
+  font-family: var(--cai-font-family-acuminprowide-black);
+  font-size: var(--cai-font-size-80);
+  letter-spacing: var(--cai-character-spacing--1-5);
+  line-height: var(--cai-line-spacing-86);
+  color: var(--cai-color-000000);
+  text-align: left;
+}
+
+.heroDescription {
+  width: 460px;
+  font-family: var(--cai-font-family-acuminpro-regular);
+  font-size: var(--cai-font-size-20);
+  letter-spacing: var(--cai-character-spacing--0-1);
+  line-height: var(--cai-line-spacing-18);
+  color: var(--cai-color-000000);
+  text-align: left;
+  margin: 55px 60px 100px 60px;
+}
+
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 4rem 2rem;
+  }
+
+  .heroTitle {
+    width: auto;
+    font-size: var(--cai-font-size-56);
+    line-height: 1;
+    text-align: center;
+  }
+
+  .heroDescription {
+    width: 80%;
+    margin: 2rem auto;
+    font-size: var(--cai-font-size-20);
+    text-align: center;
+    line-height: 1;
   }
 }
 

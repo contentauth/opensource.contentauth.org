@@ -60,6 +60,7 @@ const config = {
           width: 180,
           height: 54,
         },
+
         items: [
           {
             type: 'doc',
@@ -85,41 +86,14 @@ const config = {
         ],
       },
       footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/intro',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/contentauth',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/contentauth',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/contentauth',
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} Adobe`,
+        style: 'light',
+        logo: {
+          alt: 'Content Authenticity Initiative',
+          src: 'img/logo-text.svg',
+          width: 180,
+          height: 54,
+        },
+        copyright: `Copyright © ${new Date().getFullYear()} Adobe. All rights reserved. <a href="/privary">Privacy</a> | <a href="/termsofuse">Terms of Use</a> | <a href="/cookie">Cookie Preferences</a>`,
       },
       prism: {
         theme: lightCodeTheme,

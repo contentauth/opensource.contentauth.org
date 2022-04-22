@@ -5,22 +5,19 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import HomepageTable from '@site/src/components/HomepageTable';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header className={clsx('hero', styles.heroBanner)}>
       <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro"
-          >
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
+        <h1 className={styles.heroTitle}>{siteConfig.tagline}</h1>
+        <p className={styles.heroDescription}>
+          Lorem ipsum dolor sit amet, praesent pericula imperdiet duo te. Duo te
+          aeterno reprimique ullamcorper. Eos commodo philosophia ex, et per
+          iudico quando, ut his commune necessitatibus.
+        </p>
       </div>
     </header>
   );
@@ -37,6 +34,7 @@ export default function Home() {
       <HomepageHeader />
       <main>
         <HomepageFeatures />
+        <HomepageTable />
       </main>
     </Layout>
   );
