@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 const FeatureList = [
   {
     title: 'JavaScript UI kit',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: require('@site/static/img/js-ui-kit.svg').default,
     description: (
       <>
         Everything you need to develop rich, browser-based experiences with
@@ -16,11 +16,11 @@ const FeatureList = [
       link: '/docs/intro',
       label: 'View documentation',
     },
-    bgImage: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    bgImage: '/img/js-ui-kit-bg-image.png',
   },
   {
     title: 'Full SDK',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    Svg: require('@site/static/img/full-sdk.svg').default,
     description: (
       <>
         Develop custom applications across desktop, mobile, and services that
@@ -31,11 +31,11 @@ const FeatureList = [
       link: '/docs/intro',
       label: 'View documentation',
     },
-    bgImage: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    bgImage: '/img/full-sdk-bg-image.svg',
   },
   {
     title: 'Command line utility',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    Svg: require('@site/static/img/command-line.svg').default,
     description: (
       <>
         Install this tool to create, verify and explore content credentials on
@@ -47,7 +47,7 @@ const FeatureList = [
       label: 'Coming Soon',
       disabled: true,
     },
-    bgImage: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    bgImage: '/img/command-line-bg-image.svg',
   },
 ];
 
@@ -77,7 +77,7 @@ function Feature({
         </div>
       </div>
       <div className={styles.rightSide}>
-        <Svg className={styles.bgImage} role="img" />
+        <img className={styles.bgImage} src={bgImage} />
       </div>
     </div>
   );
@@ -87,7 +87,7 @@ export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div>
+        <div className={styles.featuresContent}>
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}

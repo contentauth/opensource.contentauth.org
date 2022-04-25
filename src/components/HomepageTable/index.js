@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
+import TickSvg from '@site/static/img/table-check-mark.svg';
 
 export default function HomepageTable() {
   return (
@@ -19,51 +20,83 @@ export default function HomepageTable() {
           <tbody>
             <tr>
               <td scope="row">View data</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+              <td>
+                <TickSvg />
+              </td>
+              <td>
+                <TickSvg />
+              </td>
+              <td>
+                <TickSvg />
+              </td>
             </tr>
             <tr>
               <td scope="row">Write data</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
+              <td>
+                <TickSvg />
+              </td>
+              <td>
+                <TickSvg />
+              </td>
+              <td>
+                <TickSvg />
+              </td>
             </tr>
             <tr>
               <td scope="row">Lorem ipsum dolor sit amet</td>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+              <td>
+                <TickSvg />
+              </td>
+              <td>
+                <TickSvg />
+              </td>
+              <td>
+                <TickSvg />
+              </td>
             </tr>
             <tr>
               <td scope="row">Lorem ipsum dolor sit amet</td>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+              <td></td>
+              <td>
+                <TickSvg />
+              </td>
+              <td>
+                <TickSvg />
+              </td>
             </tr>
             <tr>
               <td scope="row">Lorem ipsum dolor sit amet</td>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+              <td></td>
+              <td>
+                <TickSvg />
+              </td>
+              <td>
+                <TickSvg />
+              </td>
             </tr>
             <tr>
               <td scope="row">Lorem ipsum dolor sit amet</td>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+              <td></td>
+              <td></td>
+              <td>
+                <TickSvg />
+              </td>
             </tr>
             <tr>
               <td scope="row">Lorem ipsum dolor sit amet</td>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+              <td></td>
+              <td></td>
+              <td>
+                <TickSvg />
+              </td>
             </tr>
             <tr>
               <td scope="row">Lorem ipsum dolor sit amet</td>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+              <td></td>
+              <td></td>
+              <td>
+                <TickSvg />
+              </td>
             </tr>
           </tbody>
         </table>

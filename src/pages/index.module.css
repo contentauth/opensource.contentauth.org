@@ -31,7 +31,25 @@
   margin: 55px 60px 100px 60px;
 }
 
+.heroDescWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.heroDescWrapper img {
+  transform: translateY(-70px);
+}
+
 @media screen and (max-width: 996px) {
+  .heroDescWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .heroDescWrapper img {
+    transform: translateY(0px);
+  }
+
   .heroBanner {
     padding: 4rem 2rem;
   }

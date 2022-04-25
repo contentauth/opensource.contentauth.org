@@ -23,6 +23,8 @@
   --ifm-table-stripe-background: var(--cai-color-e6e3e0);
   --ifm-footer-background-color: transparent;
   --ifm-link-color: var(--cai-color-000000);
+  --ifm-container-width-xl: 1038px;
+  --ifm-container-width: 1038px;
 
   /* CAI values */
   --cai-color-000000: #000000;

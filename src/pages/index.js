@@ -13,11 +13,19 @@ function HomepageHeader() {
     <header className={clsx('hero', styles.heroBanner)}>
       <div className="container">
         <h1 className={styles.heroTitle}>{siteConfig.tagline}</h1>
-        <p className={styles.heroDescription}>
-          Lorem ipsum dolor sit amet, praesent pericula imperdiet duo te. Duo te
-          aeterno reprimique ullamcorper. Eos commodo philosophia ex, et per
-          iudico quando, ut his commune necessitatibus.
-        </p>
+        <div className={styles.heroDescWrapper}>
+          <p className={styles.heroDescription}>
+            Lorem ipsum dolor sit amet, praesent pericula imperdiet duo te. Duo
+            te aeterno reprimique ullamcorper. Eos commodo philosophia ex, et
+            per iudico quando, ut his commune necessitatibus.
+          </p>
+          <img
+            src="/img/hero-bg-image.svg"
+            alt="Hero Background"
+            width={460}
+            height={345}
+          />
+        </div>
       </div>
     </header>
   );

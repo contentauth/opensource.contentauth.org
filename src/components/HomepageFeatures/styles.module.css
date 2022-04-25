@@ -69,7 +69,19 @@
   color: var(--cai-color-6e6e6e);
 }
 
+.featuresContent {
+  display: flex;
+  flex-direction: column;
+  gap: 200px;
+  margin-bottom: 200px;
+}
+
 @media screen and (max-width: 996px) {
+  .featuresContent {
+    gap: 50px;
+    margin-bottom: 50px;
+  }
+
   .feature {
     flex-direction: column;
     margin-bottom: 4rem;

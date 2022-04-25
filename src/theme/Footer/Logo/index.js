@@ -29,13 +29,28 @@ function LogoImage({ logo }) {
 
 export default function FooterLogo({ logo }) {
   return (
-    <>
+    <div className={styles.footerLogoWrapper}>
       <Link href={logo.href} className={styles.footerLogoLink}>
         <LogoImage logo={logo} />
       </Link>
+      <LogoImage
+        logo={{
+          src: '/img/footer-x.svg',
+          alt: 'Footer X',
+          width: 21,
+          height: 21,
+        }}
+      />
       <Link href={logo.href} className={styles.footerLogoLink}>
-        <LogoImage logo={logo} />
+        <LogoImage
+          logo={{
+            src: '/img/adobe-logo-text.png',
+            alt: 'Adobe Logo Text',
+            width: 119,
+            height: 31,
+          }}
+        />
       </Link>
-    </>
+    </div>
   );
 }

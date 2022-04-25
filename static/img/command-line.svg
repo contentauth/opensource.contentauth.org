@@ -1,0 +1,8 @@
+<svg id="Command_Line_Utility_icon_cli" data-name="Command Line Utility icon/cli" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="Group_8" data-name="Group 8">
+    <path id="Fill_13" data-name="Fill 13" d="M0,40H40V0H0Z" fill="none"/>
+    <path id="Stroke_15" data-name="Stroke 15" d="M34.489,37.966H3.477A3.477,3.477,0,0,1,0,34.489V3.477A3.477,3.477,0,0,1,3.477,0H34.489a3.477,3.477,0,0,1,3.477,3.477V34.489A3.477,3.477,0,0,1,34.489,37.966Z" transform="translate(1.017 1.017)" fill="rgba(90,169,250,0.2)" stroke="#5aa9fa" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="Stroke_17" data-name="Stroke 17" d="M0,0,5.676,4.941,0,9.883" transform="translate(6.55 6.708)" fill="none" stroke="#5aa9fa" stroke-miterlimit="10" stroke-width="2"/>
+    <path id="Stroke_19" data-name="Stroke 19" d="M0,.379H7.757" transform="translate(14.685 16.212)" fill="none" stroke="#5aa9fa" stroke-miterlimit="10" stroke-width="2"/>
+  </g>
+</svg>

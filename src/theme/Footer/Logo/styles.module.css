@@ -14,3 +14,10 @@
 .footerLogoLink:hover {
   opacity: 1;
 }
+
+.footerLogoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}

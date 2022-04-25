@@ -90,8 +90,8 @@ const config = {
         logo: {
           alt: 'Content Authenticity Initiative',
           src: 'img/logo-text.svg',
-          width: 180,
-          height: 54,
+          width: 135.5,
+          height: 40,
         },
         copyright: `Copyright © ${new Date().getFullYear()} Adobe. All rights reserved. <a href="/privary">Privacy</a> | <a href="/termsofuse">Terms of Use</a> | <a href="/cookie">Cookie Preferences</a>`,
       },
