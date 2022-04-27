@@ -6,7 +6,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
+  --ifm-color-primary: var(--cai-color-378ef0);
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
   --ifm-color-primary-darkest: #205d3b;
@@ -25,6 +25,8 @@
   --ifm-link-color: var(--cai-color-000000);
   --ifm-container-width-xl: 1038px;
   --ifm-container-width: 1038px;
+  --ifm-heading-font-family: var(--cai-font-family-acuminprowide-black);
+  --ifm-heading-line-height: var(--cai-line-spacing-46);
 
   /* CAI values */
   --cai-color-000000: #000000;
@@ -36,6 +38,7 @@
   --cai-color-f8f6f4: #f8f6f4;
   --cai-color-e3e3e3: #e3e3e3;
   --cai-color-5aa9fa33: #5aa9fa33;
+  --cai-color-378ef0: #378ef0;
 
   --cai-font-family-acuminpro-regular: acumin-pro, sans-serif;
   --cai-font-family-adobeclean-bold: adobe-clean-bold, sans-serif;
@@ -184,7 +187,15 @@
   color: var(--cai-color-000000);
 }
 
-.h4 {
+ul {
+  font-family: var(--cai-font-family-acuminpro-regular);
+}
+
+.theme-doc-markdown {
+  font-family: var(--cai-font-family-acuminpro-regular);
+}
+
+h4 {
   font-family: var(--cai-font-family-acuminpro-regular);
   font-style: var(--cai-font-style-normal);
   font-weight: var(--cai-font-weight-normal);
@@ -194,7 +205,7 @@
   color: var(--cai-color-000000);
 }
 
-.label {
+label {
   font-family: var(--cai-font-family-adobeclean-bold);
   font-style: var(--cai-font-style-normal);
   font-weight: var(--cai-font-weight-normal);
@@ -211,10 +222,10 @@ body {
   background-color: var(--cai-color-f8f6f4);
 }
 
-h1 {
+/* h1 {
   font-family: acumin-pro-wide, sans-serif;
   font-weight: 700;
-}
+} */
 
 .button {
   font-family: adobe-clean, sans-serif;
