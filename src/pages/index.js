@@ -19,12 +19,14 @@ function HomepageHeader() {
             te aeterno reprimique ullamcorper. Eos commodo philosophia ex, et
             per iudico quando, ut his commune necessitatibus.
           </p>
-          <img
-            src="/img/hero-bg-image.svg"
-            alt="Hero Background"
-            width={460}
+          <object
+            type="image/svg+xml"
+            width={470}
             height={345}
-          />
+            data={'/img/hero-bg-image.svg'}
+          >
+            svg-animation
+          </object>
         </div>
       </div>
     </header>
