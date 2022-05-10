@@ -1,0 +1,12 @@
+<svg data-name="Hero" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 459.813 345.691">
+  <defs>
+    <linearGradient id="Hero_gradient" data-name="Hero_gradient" x1="0.314" y1="0.725" x2="0.686" y2="0.275" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#323232" stop-opacity="0"/>
+      <stop offset="1" stop-color="#323232"/>
+    </linearGradient>
+  </defs>
+  <path data-name="Hero_1" d="M.42,0,0,147.763l171.46,98.993.42-147.764Z" transform="translate(287.933 0)" fill="url(#Hero_gradient)"/>
+  <path data-name="Hero_4" d="M171.879,98.993.419,0,0,147.764l171.46,98.992Z" transform="translate(191.956 32.978)" fill="url(#Hero_gradient)"/>
+  <path data-name="Hero_7" d="M171.879,98.992.419,0,0,147.763l171.46,98.993Z" transform="translate(95.978 65.957)" fill="url(#Hero_gradient)"/>
+  <path data-name="Hero_10" d="M0,147.763l171.46,98.993.419-147.764L.419,0Z" transform="translate(0 98.935)" fill="url(#Hero_gradient)"/>
+</svg>
