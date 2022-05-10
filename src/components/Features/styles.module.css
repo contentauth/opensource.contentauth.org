@@ -57,16 +57,15 @@
   text-decoration: none;
 }
 
-.disabled {
+.ctaDisabled,
+.ctaDisabled:hover,
+.ctaDisabled:active,
+.ctaDisabled:focus {
   background: var(--cai-color-e3e3e3) 0% 0% no-repeat padding-box;
   color: var(--cai-color-6e6e6e);
   cursor: not-allowed;
   text-decoration: none;
   pointer-events: none;
-}
-
-.disabled:hover {
-  color: var(--cai-color-6e6e6e);
 }
 
 .featuresContent {
