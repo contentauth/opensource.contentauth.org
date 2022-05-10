@@ -3,9 +3,10 @@ import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import HomepageTable from '@site/src/components/HomepageTable';
+import Features from '@site/src/components/Features';
+import ComparisonTable from '@site/src/components/ComparisonTable';
 import styles from './index.module.css';
+import { homepageFeatures } from '../data/homepage-features';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -40,8 +41,8 @@ export default function Home() {
     >
       <HomepageHeader />
       <main>
-        <HomepageFeatures />
-        <HomepageTable />
+        <Features features={homepageFeatures} />
+        <ComparisonTable />
       </main>
     </Layout>
   );
