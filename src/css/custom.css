@@ -23,8 +23,8 @@
   --ifm-table-stripe-background: var(--cai-color-e6e3e0);
   --ifm-footer-background-color: transparent;
   --ifm-link-color: var(--cai-color-000000);
-  --ifm-container-width-xl: 1038px;
-  --ifm-container-width: 1038px;
+  --ifm-container-width-xl: 1080px;
+  --ifm-container-width: 1080px;
   --ifm-heading-font-family: var(--cai-font-family-acuminprowide-black);
   --ifm-heading-line-height: var(--cai-line-spacing-46);
 
@@ -64,7 +64,7 @@
   --cai-character-spacing--1-5: -1.5px;
   --cai-character-spacing--0-6: -0.6px;
   --cai-line-spacing-14: 14px;
-  --cai-line-spacing-19: 19px;
+  --cai-line-spacing-18: 18px;
   --cai-line-spacing-20: 20px;
   --cai-line-spacing-22: 22px;
   --cai-line-spacing-24: 24px;
@@ -132,7 +132,7 @@
   font-style: var(--cai-font-style-normal);
   font-weight: var(--cai-font-weight-normal);
   font-size: var(--cai-font-size-15);
-  line-height: var(--cai-line-spacing-19);
+  line-height: var(--cai-line-spacing-18);
   letter-spacing: var(--cai-character-spacing-0-1);
   color: var(--cai-color-6e6e6e);
 }
