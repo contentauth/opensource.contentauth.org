@@ -112,4 +112,8 @@
   .featureMedia {
     width: 100%;
   }
+
+  .featureDescription {
+    font-size: 1rem;
+  }
 }
