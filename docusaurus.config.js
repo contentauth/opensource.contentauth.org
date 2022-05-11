@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.png',
+  favicon: '/favicon.png',
   organizationName: 'contentauth',
   projectName: 'opensource.contentauth.org',
   stylesheets: [
@@ -21,7 +21,6 @@ const config = {
     // Adobe Clean
     'https://use.typekit.net/dnb4eqs.css',
   ],
-
   presets: [
     [
       'classic',
@@ -36,31 +35,21 @@ const config = {
       }),
     ],
   ],
-
   // See here for configuration options:
   // https://docusaurus.io/docs/api/themes/configuration
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // announcementBar: {
-      //   id: 'sample',
-      //   content:
-      //     '<strong>Note:</strong> Our SDK is still pre-1.0. Features and API may change.',
-      //   backgroundColor: '#ffca32',
-      //   textColor: '#2b2b2b',
-      //   isCloseable: true,
-      // },
       colorMode: {
         disableSwitch: true,
       },
       navbar: {
         logo: {
           alt: 'Content Authenticity Initiative',
-          src: 'img/logo-text.svg',
+          src: 'img/logo-cai.svg',
           width: 180,
           height: 54,
         },
-
         items: [
           {
             type: 'doc',
@@ -69,29 +58,30 @@ const config = {
             label: 'Get started',
           },
           {
-            href: 'https://github.com/contentauth',
-            label: 'GitHub',
+            type: 'doc',
+            docId: 'intro',
             position: 'right',
+            label: 'Docs',
           },
           {
-            href: 'https://www.contentauthenticity.org',
+            to: 'https://www.contentauthenticity.org',
             label: 'Learn more',
             position: 'right',
           },
           {
-            href: 'https://verify.contentauthenticity.org',
+            to: 'https://verify.contentauthenticity.org',
             label: 'Verify',
             position: 'right',
+            className: 'navbar__button',
           },
         ],
       },
       footer: {
         style: 'light',
         logo: {
+          src: '#', // stop warning.
           alt: 'Content Authenticity Initiative',
-          src: 'img/logo-text.svg',
-          width: 135.5,
-          height: 40,
+          href: 'https://contentauthenticity.org',
         },
         copyright: `Copyright © ${new Date().getFullYear()} Adobe. All rights reserved. <a href="/privary">Privacy</a> | <a href="/termsofuse">Terms of Use</a> | <a href="/cookie">Cookie Preferences</a>`,
       },

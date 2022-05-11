@@ -6,18 +6,11 @@
  */
 
 .footerLogoLink {
-  opacity: 1;
+  opacity: 0.5;
   transition: opacity var(--ifm-transition-fast)
     var(--ifm-transition-timing-default);
 }
 
 .footerLogoLink:hover {
   opacity: 1;
-}
-
-.footerLogoWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
 }

@@ -1,39 +1,42 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
+import Link from '@docusaurus/Link';
 
-export function Feature({ id, Icon, title, description, cta, bgImage }) {
+export function Feature({ id, icon, media, title, description, cta }) {
   return (
     <div id={id} className={styles.feature}>
-      <div className={styles.leftSide}>
-        <Icon className={styles.featureSvg} role="img" />
-        <div className="text--left">
+      <div className={styles.featureInfo}>
+        <div className={styles.featureContent}>
+          <i className={styles.featureIcon}>{icon}</i>
           <h3 className={styles.featureTitle}>{title}</h3>
-          <p className={styles.featureDescription}>{description}</p>
+          <div className={styles.featureDescription}>
+            <p>{description}</p>
+          </div>
         </div>
-        <div>
-          <a
-            className={clsx(styles.cta, { [styles.ctaDisabled]: cta.disabled })}
-            href={cta.link}
+        <div className={styles.featureActions}>
+          <Link
+            to={cta.link}
+            className={clsx(styles.featureCTA, {
+              [styles.featureCTADisabled]: cta.disabled,
+            })}
           >
             {cta.label}
-          </a>
+          </Link>
         </div>
       </div>
-      <div className={styles.rightSide}>
-        <img className={styles.bgImage} src={bgImage} />
-      </div>
+      <div className={styles.featureMedia}>{media}</div>
     </div>
   );
 }
 
 export default function Features({ features = [] }) {
   return (
-    <section className={styles.features}>
+    <section className={styles.root}>
       <div className="container">
-        <div className={styles.featuresContent}>
+        <div className={styles.list}>
           {features.map((props, i) => (
-            <Feature key={`homepage-feature-${props.id || i}`} {...props} />
+            <Feature key={props.id || i} {...props} />
           ))}
         </div>
       </div>

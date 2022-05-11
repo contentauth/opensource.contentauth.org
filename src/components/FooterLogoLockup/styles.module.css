@@ -1,0 +1,24 @@
+.root {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: var(--ifm-paragraph-margin-bottom);
+}
+
+.logoCAI {
+  width: auto;
+  height: 40px;
+}
+
+.logoAdobe {
+  width: auto;
+  height: 30px;
+}
+
+.x {
+  width: 20px;
+  min-width: 12px;
+  flex-shrink: 1;
+}

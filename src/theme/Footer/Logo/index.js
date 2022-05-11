@@ -5,52 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import Link from '@docusaurus/Link';
-import { useBaseUrlUtils } from '@docusaurus/useBaseUrl';
-import styles from './styles.module.css';
-import ThemedImage from '@theme/ThemedImage';
+import FooterLogoLockup from '../../../components/FooterLogoLockup';
 
-function LogoImage({ logo }) {
-  const { withBaseUrl } = useBaseUrlUtils();
-  const sources = {
-    light: withBaseUrl(logo.src),
-    dark: withBaseUrl(logo.srcDark ?? logo.src),
-  };
-  return (
-    <ThemedImage
-      className="footer__logo"
-      alt={logo.alt}
-      sources={sources}
-      width={logo.width}
-      height={logo.height}
-    />
-  );
-}
-
-export default function FooterLogo({ logo }) {
-  return (
-    <div className={styles.footerLogoWrapper}>
-      <Link href={logo.href} className={styles.footerLogoLink}>
-        <LogoImage logo={logo} />
-      </Link>
-      <LogoImage
-        logo={{
-          src: '/img/footer-x.svg',
-          alt: 'Footer X',
-          width: 21,
-          height: 21,
-        }}
-      />
-      <Link href={logo.href} className={styles.footerLogoLink}>
-        <LogoImage
-          logo={{
-            src: '/img/adobe-logo-text.png',
-            alt: 'Adobe Logo Text',
-            width: 119,
-            height: 31,
-          }}
-        />
-      </Link>
-    </div>
-  );
+export default function FooterLogo() {
+  return <FooterLogoLockup />;
 }

@@ -1,0 +1,84 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.root {
+  padding: 200px 0;
+  position: relative;
+}
+
+.title {
+  --ifm-h1-font-size: 5rem;
+  --ifm-heading-margin-bottom: 0;
+  max-width: 974px;
+}
+
+.content {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+}
+
+.description {
+  font-size: 1.25rem;
+  width: 55%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.8em;
+  line-height: 1.6em;
+  padding: 3em 0;
+}
+
+.description p {
+  flex-grow: 1;
+}
+
+.description p:last-child {
+  margin-bottom: 0;
+}
+
+.image {
+  width: 45%;
+}
+
+.hr {
+  --ifm-hr-margin-vertical: 0.8em;
+  width: 40px;
+  height: 3px;
+  background-color: var(--cai-color-primary);
+  border: 0;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .title {
+    --ifm-h1-font-size: 2.25rem;
+  }
+
+  .content {
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .description {
+    font-size: 1rem;
+    padding: 1.25em 0;
+    width: 100%;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .image {
+    width: 100%;
+  }
+}

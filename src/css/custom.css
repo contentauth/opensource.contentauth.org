@@ -6,241 +6,108 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: var(--cai-color-378ef0);
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
+  --cai-color-background: #f8f6f4;
+  --cai-color-on-background: #000000;
+  --cai-color-background-dark: #e6e3e0;
+  --cai-color-on-background-dark: #000000;
+  --cai-color-disabled: #e3e3e3;
+  --cai-color-on-disabled: #6e6e6e;
+  --cai-color-surface: #ffffff;
+  --cai-color-on-surface: #000000;
+  --cai-color-primary: #5aa9fa;
+  --cai-color-primary-light: #d8e7f5;
+  --cai-color-secondary: #fade3b;
+  --cai-color-secondary-light: #fade3b;
+  --cai-color-shadow: rgba(0, 0, 0, 0.15);
+
+  --cai-font-family-acuminpro-regular: 'acumin-pro', sans-serif;
+  --cai-font-family-acuminpro-bold: 'acumin-pro-bold', sans-serif;
+  --cai-font-family-acuminprowide-black: 'acumin-pro-wide', sans-serif;
+  --cai-font-family-adobeclean-bold: 'adobe-clean-bold', sans-serif;
+  --cai-font-family-adobeclean-regular: 'adobe-clean', sans-serif;
+
+  --ifm-color-primary: var(--cai-color-primary);
+  --ifm-color-primary-dark: var(--cai-color-primary);
+  --ifm-color-primary-darker: var(--cai-color-primary);
+  --ifm-color-primary-darkest: var(--cai-color-primary);
+  --ifm-color-primary-light: var(--cai-color-primary-light);
+  --ifm-color-primary-lighter: var(--cai-color-primary-light);
+  --ifm-color-primary-lightest: var(--cai-color-primary-light);
+  --ifm-color-secondary: var(--cai-color-secondary);
+  --ifm-color-secondary-dark: var(--cai-color-secondary);
+  --ifm-color-secondary-darker: var(--cai-color-secondary);
+  --ifm-color-secondary-darkest: var(--cai-color-secondary);
+  --ifm-color-secondary-light: var(--cai-color-secondary-light);
+  --ifm-color-secondary-lighter: var(--cai-color-secondary-light);
+  --ifm-color-secondary-lightest: var(--cai-color-secondary-light);
+  --ifm-code-font-size: 0.9rem;
   --ifm-navbar-height: 114px;
   --ifm-navbar-padding-vertical: 30px;
   --ifm-navbar-padding-horizontal: 20px;
-  --ifm-navbar-shadow: none;
-  --ifm-navbar-background-color: var(--cai-color-f8f6f4);
+  --ifm-navbar-shadow: 0px 0px 40px var(--cai-color-shadow);
+  --ifm-navbar-background-color: var(--cai-color-background);
   --ifm-hero-background-color: transparent;
-  --ifm-table-stripe-background: var(--cai-color-e6e3e0);
+  --ifm-table-background: var(--cai-color-background);
+  --ifm-table-stripe-background: var(--cai-color-background-dark);
   --ifm-footer-background-color: transparent;
-  --ifm-link-color: var(--cai-color-000000);
   --ifm-container-width-xl: 1080px;
   --ifm-container-width: 1080px;
   --ifm-heading-font-family: var(--cai-font-family-acuminprowide-black);
-  --ifm-heading-line-height: var(--cai-line-spacing-46);
-
-  /* CAI values */
-  --cai-color-000000: #000000;
-  --cai-color-2c2c2c: #2c2c2c;
-  --cai-color-ffffff: #ffffff;
-  --cai-color-6e6e6e: #6e6e6e;
-  --cai-color-e6e3e0: #e6e3e0;
-  --cai-color-fade3b: #fade3b;
-  --cai-color-f8f6f4: #f8f6f4;
-  --cai-color-e3e3e3: #e3e3e3;
-  --cai-color-5aa9fa33: #5aa9fa33;
-  --cai-color-378ef0: #378ef0;
-
-  --cai-font-family-acuminpro-regular: acumin-pro, sans-serif;
-  --cai-font-family-adobeclean-bold: adobe-clean-bold, sans-serif;
-  --cai-font-family-adobeclean-regular: adobe-clean, sans-serif;
-  --cai-font-family-acuminpro-bold: acumin-pro-bold, sans-serif;
-  --cai-font-family-acuminprowide-black: acumin-pro-wide, sans-serif;
-  --cai-font-style-normal: normal;
-  --cai-font-weight-normal: normal;
-  --cai-font-size-12: 12px;
-  --cai-font-size-14: 14px;
-  --cai-font-size-15: 15px;
-  --cai-font-size-16: 16px;
-  --cai-font-size-20: 20px;
-  --cai-font-size-32: 32px;
-  --cai-font-size-56: 56px;
-  --cai-font-size-80: 80px;
-  --cai-character-spacing-0: 0px;
-  --cai-character-spacing--0-08: -0.08px;
-  --cai-character-spacing--0-1: -0.1px;
-  --cai-character-spacing--0-3: -0.3px;
-  --cai-character-spacing-0-1: 0.1px;
-  --cai-character-spacing--1-05: -1.05px;
-  --cai-character-spacing--1-5: -1.5px;
-  --cai-character-spacing--0-6: -0.6px;
-  --cai-line-spacing-14: 14px;
-  --cai-line-spacing-18: 18px;
-  --cai-line-spacing-20: 20px;
-  --cai-line-spacing-22: 22px;
-  --cai-line-spacing-24: 24px;
-  --cai-line-spacing-28: 28px;
-  --cai-line-spacing-46: 46px;
-  --cai-line-spacing-64: 64px;
-  --cai-line-spacing-86: 86px;
-}
-
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-}
-
-.footer {
-  border-top: 2px solid var(--cai-color-e6e3e0);
-}
-
-.navbar__logo {
-  height: 100%;
-}
-
-.navbar__item {
-  padding: 10px 20px;
-  font-family: var(--cai-font-family-acuminpro-regular);
-  font-size: var(--cai-font-size-16);
-  line-height: var(--cai-line-spacing-22);
-  letter-spacing: var(--cai-character-spacing-0-1);
-  color: var(--cai-color-2c2c2c);
-}
-
-.navbar__items--right > :last-child {
-  padding-right: 20px;
-  background: var(--cai-color-fade3b) 0% 0% no-repeat padding-box;
-}
-
-.cta {
-  font-family: var(--cai-font-family-adobeclean-bold);
-  font-style: var(--cai-font-style-normal);
-  font-weight: var(--cai-font-weight-normal);
-  font-size: var(--cai-font-size-14);
-  line-height: var(--cai-line-spacing-14);
-  letter-spacing: var(--cai-character-spacing-0);
-  color: var(--cai-color-6e6e6e);
-}
-
-.cta-white {
-  font-family: var(--cai-font-family-adobeclean-bold);
-  font-style: var(--cai-font-style-normal);
-  font-weight: var(--cai-font-weight-normal);
-  font-size: var(--cai-font-size-14);
-  line-height: var(--cai-line-spacing-14);
-  letter-spacing: var(--cai-character-spacing-0);
-  color: var(--cai-color-ffffff);
-}
-
-.description {
-  font-family: var(--cai-font-family-adobeclean-regular);
-  font-style: var(--cai-font-style-normal);
-  font-weight: var(--cai-font-weight-normal);
-  font-size: var(--cai-font-size-15);
-  line-height: var(--cai-line-spacing-18);
-  letter-spacing: var(--cai-character-spacing-0-1);
-  color: var(--cai-color-6e6e6e);
-}
-
-.body-bold {
-  font-family: var(--cai-font-family-adobeclean-bold);
-  font-style: var(--cai-font-style-normal);
-  font-weight: var(--cai-font-weight-normal);
-  font-size: var(--cai-font-size-15);
-  line-height: var(--cai-line-spacing-20);
-  letter-spacing: var(--cai-character-spacing-0-1);
-  color: var(--cai-color-2c2c2c);
-}
-
-.body {
-  font-family: var(--cai-font-family-adobeclean-regular);
-  font-style: var(--cai-font-style-normal);
-  font-weight: var(--cai-font-weight-normal);
-  font-size: var(--cai-font-size-15);
-  line-height: var(--cai-line-spacing-20);
-  letter-spacing: var(--cai-character-spacing-0-1);
-  color: var(--cai-color-2c2c2c);
-}
-
-.body-black {
-  font-family: var(--cai-font-family-acuminpro-regular);
-  font-style: var(--cai-font-style-normal);
-  font-weight: var(--cai-font-weight-normal);
-  font-size: var(--cai-font-size-16);
-  line-height: var(--cai-line-spacing-24);
-  letter-spacing: var(--cai-character-spacing--0-08);
-  color: var(--cai-color-000000);
-}
-
-.body-bold-black {
-  font-family: var(--cai-font-family-acuminpro-bold);
-  font-style: var(--cai-font-style-normal);
-  font-weight: var(--cai-font-weight-normal);
-  font-size: var(--cai-font-size-16);
-  line-height: var(--cai-line-spacing-22);
-  letter-spacing: var(--cai-character-spacing--0-08);
-  color: var(--cai-color-000000);
-}
-
-.h1 {
-  font-family: var(--cai-font-family-acuminprowide-black);
-  font-style: var(--cai-font-style-normal);
-  font-weight: var(--cai-font-weight-normal);
-  font-size: var(--cai-font-size-56);
-  line-height: var(--cai-line-spacing-64);
-  letter-spacing: var(--cai-character-spacing--1-05);
-  color: var(--cai-color-000000);
-}
-
-ul {
-  font-family: var(--cai-font-family-acuminpro-regular);
-}
-
-.theme-doc-markdown {
-  font-family: var(--cai-font-family-acuminpro-regular);
-}
-
-h4 {
-  font-family: var(--cai-font-family-acuminpro-regular);
-  font-style: var(--cai-font-style-normal);
-  font-weight: var(--cai-font-weight-normal);
-  font-size: var(--cai-font-size-20);
-  line-height: var(--cai-line-spacing-28);
-  letter-spacing: var(--cai-character-spacing--0-1);
-  color: var(--cai-color-000000);
-}
-
-label {
-  font-family: var(--cai-font-family-adobeclean-bold);
-  font-style: var(--cai-font-style-normal);
-  font-weight: var(--cai-font-weight-normal);
-  font-size: var(--cai-font-size-12);
-  line-height: var(--cai-line-spacing-14);
-  letter-spacing: var(--cai-character-spacing-0);
-  color: var(--cai-color-6e6e6e);
+  --ifm-heading-line-height: 1.1;
+  --ifm-heading-color: var(--cai-color-on-background);
+  --ifm-color-content: var(--cai-color-on-background);
+  --ifm-link-color: var(--cai-color-on-background);
+  --ifm-footer-padding-vertical: 80px;
 }
 
 body {
-  /* font-family: acumin-pro, sans-serif;
-  font-weight: 400;
-  font-style: normal; */
-  background-color: var(--cai-color-f8f6f4);
+  background-color: var(--cai-color-background);
+  font-family: var(--cai-font-family-acuminpro-regular);
+  font-weight: normal;
 }
 
-/* h1 {
-  font-family: acumin-pro-wide, sans-serif;
-  font-weight: 700;
-} */
-
-.button {
-  font-family: adobe-clean, sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  border-radius: 9999px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.025em;
 }
 
-.docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.1);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
+.navbar {
+  transition: box-shadow 250ms ease-out;
 }
 
-[data-theme='dark'] .docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.3);
+body:not(.is-scrolling) .navbar {
+  --ifm-navbar-shadow: 0px 0px 0px var(--cai-color-shadow);
+}
+
+.navbar__logo {
+  height: 54px;
+}
+
+.navbar__button {
+  background-color: var(--ifm-color-secondary);
+  padding: 0.625em 1.25em !important;
+  margin-left: 10px;
+  margin-right: 10px;
+  line-height: 1.25em;
+}
+
+.navbar__button:hover,
+.navbar__button:active,
+.navbar__button:focus {
+  background-color: var(--ifm-color-secondary-light);
+  color: inherit;
+}
+
+.navbar__items .navbar__button:last-child {
+  margin-right: 0;
+}
+
+.demo-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
