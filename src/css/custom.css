@@ -226,7 +226,7 @@ body:not(.is-scrolling) .navbar {
 
 @media (min-width: 997px) {
   .sidebar_node_modules-\@docusaurus-theme-classic-lib-next-theme-DocSidebar-Desktop-styles-module {
-    padding-top: calc(var(--ifm-navbar-height) + 2rem) !important;
+    top: 2rem !important;
   }
 }
 
