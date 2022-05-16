@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 459.81 345.69">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-4);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="-724.35" y1="711.78" x2="-724.15" y2="712.3" gradientTransform="translate(124859.46 175817.78) scale(171.88 -246.76)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#323232" stop-opacity="0"/>
+      <stop offset=".89" stop-color="#323232"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="-724.37" y1="711.76" x2="-724.14" y2="712.28" gradientTransform="translate(124762.75 175850.77) scale(171.88 -246.76)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#323232" stop-opacity="0"/>
+      <stop offset=".91" stop-color="#323232"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="-724.35" y1="711.75" x2="-724.17" y2="712.28" gradientTransform="translate(124666.77 175883.74) scale(171.88 -246.76)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#323232" stop-opacity="0"/>
+      <stop offset=".97" stop-color="#323232"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="-724.35" y1="711.74" x2="-724.17" y2="712.29" gradientTransform="translate(124570.8 175916.72) scale(171.88 -246.76)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#323232" stop-opacity="0"/>
+      <stop offset=".94" stop-color="#323232"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_15" data-name="Group 15" transform="translate(0 0)">
+    <path id="Fill_1" data-name="Fill 1" class="cls-4" d="M288.35,0l-.42,147.76,171.46,98.99,.42-147.76L288.35,0Z"/>
+    <path id="Fill_4" data-name="Fill 4" class="cls-2" d="M363.83,131.97L192.37,32.98l-.42,147.76,171.46,98.99,.42-147.76Z"/>
+    <path id="Fill_7" data-name="Fill 7" class="cls-1" d="M267.86,164.95L96.4,65.96l-.42,147.76,171.46,98.99,.42-147.76Z"/>
+    <path id="Fill_10" data-name="Fill 10" class="cls-3" d="M0,246.7l171.46,98.99,.42-147.76L.42,98.93l-.42,147.76Z"/>
+  </g>
+</svg>
