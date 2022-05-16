@@ -240,6 +240,10 @@ body:not(.is-scrolling) .navbar {
   margin-bottom: 0.25em;
 }
 
+.admonition-icon {
+  margin-right: 0.9em;
+}
+
 .admonition-icon svg {
   width: 18px;
   height: 18px;
