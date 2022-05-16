@@ -14,6 +14,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    manageScrollClass();
     window.addEventListener('scroll', manageScrollClass);
   });
 })();
