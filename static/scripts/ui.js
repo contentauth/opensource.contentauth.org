@@ -1,4 +1,8 @@
 (function () {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return;
+  }
+
   function manageScrollClass() {
     var className = 'is-scrolling';
     var scrollTop =
@@ -12,7 +16,6 @@
       document.body.classList.remove(className);
     }
   }
-
   document.addEventListener('DOMContentLoaded', function () {
     manageScrollClass();
     window.addEventListener('scroll', manageScrollClass);
