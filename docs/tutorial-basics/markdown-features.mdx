@@ -39,6 +39,28 @@ Let's see how to [Create a page](./create-a-page.md).
 
 **Result:** Let's see how to [Create a page](./create-a-page.md).
 
+## Lists
+
+Markdown lists can be rendered as ordered or unordered, and can be nested.
+
+```md
+- Unordered list item 1.
+- Unordered list item 2.
+- Unordered list item 3.
+
+1. Ordered list item 1.
+1. Ordered list item 2.
+1. Ordered list item 3.
+```
+
+- Unordered list item 1.
+- Unordered list item 2.
+- Unordered list item 3.
+
+1. Ordered list item 1.
+2. Ordered list item 2.
+3. Ordered list item 3.
+
 ## Images
 
 Regular Markdown images are supported.
@@ -85,15 +107,33 @@ Docusaurus has a special syntax to create admonitions and callouts:
 
     :::
 
-:::tip My tip
+:::note
 
-Use this awesome feature option
+Some **content** with _markdown_ `syntax`. Check [this `api`](#).
 
 :::
 
-:::danger Take care
+:::info
 
-This action is dangerous
+Some **content** with _markdown_ `syntax`. Check [this `api`](#).
+
+:::
+
+:::tip
+
+Some **content** with _markdown_ `syntax`. Check [this `api`](#).
+
+:::
+
+:::caution
+
+Some **content** with _markdown_ `syntax`. Check [this `api`](#).
+
+:::
+
+:::danger
+
+Some **content** with _markdown_ `syntax`. Check [this `api`](#).
 
 :::
 
@@ -108,7 +148,7 @@ export const Highlight = ({children, color}) => (
       backgroundColor: color,
       borderRadius: '20px',
       color: '#fff',
-      padding: '10px',
+      padding: '10px 20px',
       cursor: 'pointer',
     }}
     onClick={() => {
@@ -129,7 +169,7 @@ export const Highlight = ({ children, color }) => (
       backgroundColor: color,
       borderRadius: '20px',
       color: '#fff',
-      padding: '10px',
+      padding: '10px 20px',
       cursor: 'pointer',
     }}
     onClick={() => {
