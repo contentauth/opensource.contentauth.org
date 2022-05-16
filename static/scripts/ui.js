@@ -1,4 +1,7 @@
 (function () {
+  // Check if window/document is defined because build fails on
+  // server on client modules.
+  // See: https://github.com/facebook/docusaurus/issues/4268
   if (typeof window === 'undefined' || typeof document === 'undefined') {
     return;
   }
