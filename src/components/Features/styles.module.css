@@ -16,7 +16,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  gap: 40px;
+  gap: 56px;
 }
 
 .featureIcon {
@@ -69,15 +69,17 @@
   color: inherit;
   text-decoration: none;
   line-height: 1.25em;
-  font-weight: var(--ifm-font-weight-semibold);
+  font-weight: var(--ifm-font-weight-bold);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
+  transition: background-color 100ms ease-out;
 }
 
 .featureCTA:hover {
   text-decoration: none;
+  background-color: var(--ifm-color-secondary-light);
 }
 
 .featureCTADisabled,
