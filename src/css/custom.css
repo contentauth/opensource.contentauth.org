@@ -105,6 +105,7 @@ body:not(.is-scrolling) .navbar {
   margin-left: 10px;
   margin-right: 10px;
   line-height: 1.25em;
+  transition: background-color 100ms ease-out;
 }
 
 .navbar__button:hover,
