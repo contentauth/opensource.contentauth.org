@@ -134,10 +134,16 @@ export default function Home() {
         description={
           <>
             Integrate secure provenance signals into your site, app, or service
-            using open-source tools developed by the Content Authenticity
-            Initiative. Join the ecosystem of transparency of provenance and
-            attribution of digital content to counter the rise of
-            misinformation.
+            using open-source tools developed by the&nbsp;
+            <a
+              href="https://contentauthenticity.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Content Authenticity Initiative
+            </a>
+            . Join the ecosystem of transparency of provenance and attribution
+            of digital content to counter the rise of misinformation.
           </>
         }
       />
