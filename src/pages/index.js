@@ -7,7 +7,7 @@ import Hero from '../components/Hero';
 import JSSDKIcon from '../assets/images/image.svg';
 import C2PAToolIcon from '../assets/images/cli.svg';
 import RustSDKIcon from '../assets/images/wrench.svg';
-import HeroImage from '../assets/images/hero.svg';
+import HeroImage from '../assets/images/hero-2.svg';
 
 export const features = [
   {
@@ -124,29 +124,8 @@ const comparisonRecords = [
   },
 ];
 
-function manageScrollClass() {
-  const className = 'is-scrolling';
-  const scrollTop =
-    window.pageYOffset ||
-    document.documentElement.scrollTop ||
-    document.body.scrollTop ||
-    0;
-  if (scrollTop > 0) {
-    document.body.classList.add(className);
-  } else {
-    document.body.classList.remove(className);
-  }
-}
-
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
-  useEffect(() => {
-    manageScrollClass();
-    window.addEventListener('scroll', manageScrollClass, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', manageScrollClass);
-    };
-  });
   return (
     <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
       <Hero
