@@ -50,7 +50,7 @@
   --ifm-table-background: var(--cai-color-background);
   --ifm-table-stripe-background: var(--cai-color-background-dark);
   --ifm-footer-background-color: transparent;
-  --ifm-container-width-xl: 1080px;
+  --ifm-container-width-xl: 1200px;
   --ifm-container-width: 1080px;
   --ifm-heading-font-family: var(--cai-font-family-acuminprowide-black);
   --ifm-heading-line-height: 1.1;
@@ -146,7 +146,7 @@ body:not(.is-scrolling) .navbar {
   padding-top: 100px;
   margin-left: auto;
   margin-right: auto;
-  max-width: var(--ifm-container-width);
+  max-width: var(--ifm-container-width-xl);
   width: 100%;
 }
 
@@ -154,7 +154,6 @@ body:not(.is-scrolling) .navbar {
   height: 100%;
   max-height: calc(100vh - var(--ifm-navbar-height)) !important;
   top: var(--ifm-navbar-height) !important;
-  padding: 0.5rem;
 }
 
 .theme-doc-toc-mobile {
@@ -179,6 +178,12 @@ body:not(.is-scrolling) .navbar {
 
 .theme-doc-sidebar-container {
   border: 0 !important;
+}
+
+.theme-doc-toc-desktop,
+.theme-doc-markdown,
+.theme-doc-sidebar-container .menu {
+  padding: 2rem 0.5rem;
 }
 
 .theme-doc-sidebar-container + main > .container {
