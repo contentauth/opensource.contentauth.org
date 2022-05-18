@@ -83,7 +83,7 @@ const config = {
           alt: 'Content Authenticity Initiative',
           href: 'https://contentauthenticity.org',
         },
-        copyright: `Copyright © ${new Date().getFullYear()} Adobe. All rights reserved. <a href="/privary">Privacy</a> | <a href="/termsofuse">Terms of Use</a> | <a href="/cookie">Cookie Preferences</a>`,
+        copyright: `Copyright © ${new Date().getFullYear()} Adobe. All rights reserved. <a href="https://www.adobe.com/privacy.html" target="_blank" rel="noopener noreferrer">Privacy</a> | <a href="https://www.adobe.com/legal/terms.html" target="_blank" rel="noopener noreferrer">Terms of Use</a> | <a href="/">Cookie Preferences</a>`,
       },
       prism: {
         theme: lightCodeTheme,
