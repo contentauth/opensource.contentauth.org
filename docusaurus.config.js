@@ -53,16 +53,15 @@ const config = {
         },
         items: [
           {
-            type: 'doc',
-            docId: 'intro',
+            to: '/docs/get-started',
             position: 'right',
             label: 'Get started',
           },
           {
-            type: 'doc',
-            docId: 'intro',
+            to: '/docs/introduction',
             position: 'right',
             label: 'Docs',
+            activeBaseRegex: '/docs/(?!get-started)',
           },
           {
             to: 'https://www.contentauthenticity.org',
