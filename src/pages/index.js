@@ -21,7 +21,7 @@ export const features = [
       </>
     ),
     cta: {
-      link: '/docs/intro',
+      link: '/docs/introduction',
       label: 'View documentation',
     },
     media: <img src="/img/demo.png" />,
