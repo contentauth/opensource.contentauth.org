@@ -1,23 +1,17 @@
 (function () {
-  // Check if window is defined because build fails on
-  // server on client modules.
-  // See: https://github.com/facebook/docusaurus/issues/4268
-  if (typeof window === 'undefined' || typeof document === 'undefined') {
-    return;
-  }
-
+  // Configure marketing tech - Make sure this is done
+  // prior to initializing the marketing tech lib script
   window.marketingtech = {
     adobe: {
       launch: {
         property: 'global',
-        // Environment: "dev" for local “production” for prod/live site or
-        // “stage” for qa/staging site
-        environment:
-          process.env.NODE_ENV === 'production' ? 'production' : 'dev',
+        // Environment: "dev" for local, "production" for prod/live site,
+        // "stage" for qa/staging site
+        environment: 'production',
       },
       analytics: {
         // Additional Accounts: if there are any additional report suites send
-        // values with “,” separated  Ex: “RS1,RS2”
+        // values with "," separated  Ex: "RS1,RS2"
         // additionalAccounts: ' ',
       },
       // Target: if target needs to be enabled else false

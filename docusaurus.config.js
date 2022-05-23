@@ -10,18 +10,19 @@ const config = {
   tagline: 'Open-source tools for content authenticity and provenance',
   url: 'https://contentauth.netlify.com',
   baseUrl: '/',
+  staticDirectories: ['static'],
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: '/favicon.png',
   organizationName: 'contentauth',
   projectName: 'opensource.contentauth.org',
-  clientModules: [
-    require.resolve('./static/scripts/ui.js'),
-    require.resolve('./static/scripts/analytics.js'),
+  clientModules: [require.resolve('./src/assets/scripts/ui.js')],
+  scripts: [
+    '/scripts/analytics.js',
+    'https://www.adobe.com/marketingtech/main.min.js',
   ],
-  scripts: ['https://www.adobe.com/marketingtech/main.min.js'],
   stylesheets: [
-    // Acumin Pro (temporary)
+    // Acumin Pro
     'https://use.typekit.net/wgs7uns.css',
     // Adobe Clean
     'https://use.typekit.net/dnb4eqs.css',
