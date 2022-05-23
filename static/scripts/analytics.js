@@ -12,7 +12,8 @@
         property: 'global',
         // Environment: "dev" for local “production” for prod/live site or
         // “stage” for qa/staging site
-        environment: 'production',
+        environment:
+          process.env.NODE_ENV === 'production' ? 'production' : 'dev',
       },
       analytics: {
         // Additional Accounts: if there are any additional report suites send
