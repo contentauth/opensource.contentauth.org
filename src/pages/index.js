@@ -24,7 +24,7 @@ export const features = [
       link: '/docs/introduction',
       label: 'View documentation',
     },
-    media: <img src="/img/demo.png" />,
+    media: <img src="/img/Sunset.jpg" />,
   },
   {
     id: 'c2pa-tool',
@@ -41,7 +41,7 @@ export const features = [
       label: 'Coming soon',
       disabled: true,
     },
-    media: <img src="/img/demo-tool.png" />,
+    media: <img src="/img/c2patool@2x.png" />,
   },
   {
     id: 'rust-sdk',
@@ -58,7 +58,7 @@ export const features = [
       label: 'Coming soon',
       disabled: true,
     },
-    media: <img src="/img/demo-devices.png" />,
+    media: <img src="/img/rust-sdk@2x.png" />,
   },
 ];
 
