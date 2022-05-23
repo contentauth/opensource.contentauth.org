@@ -15,7 +15,11 @@ const config = {
   favicon: '/favicon.png',
   organizationName: 'contentauth',
   projectName: 'opensource.contentauth.org',
-  clientModules: [require.resolve('./static/scripts/ui.js')],
+  clientModules: [
+    require.resolve('./static/scripts/ui.js'),
+    require.resolve('./static/scripts/analytics.js'),
+  ],
+  scripts: ['https://www.adobe.com/marketingtech/main.min.js'],
   stylesheets: [
     // Acumin Pro (temporary)
     'https://use.typekit.net/wgs7uns.css',
