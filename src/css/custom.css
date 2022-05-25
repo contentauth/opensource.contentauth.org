@@ -52,6 +52,7 @@
   --ifm-table-background: var(--cai-color-background);
   --ifm-table-stripe-background: var(--cai-color-background-dark);
   --ifm-footer-background-color: transparent;
+  --ifm-container-width-xxl: 1600px;
   --ifm-container-width-xl: 1200px;
   --ifm-container-width: 1080px;
   --ifm-heading-font-family: var(--cai-font-family-acuminprowide-black);
@@ -297,4 +298,11 @@ body:not(.is-scrolling) .navbar {
   --ifm-alert-background-color: var(--ifm-color-secondary-light);
   --ifm-alert-background-color-highlight: var(--ifm-color-secondary-light);
   --ifm-alert-border-color: var(--ifm-color-secondary);
+}
+
+/* Responsiveness */
+@media (min-width: 2000px) {
+  .container {
+    max-width: var(--ifm-container-width-xxl);
+  }
 }
