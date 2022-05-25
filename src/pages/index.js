@@ -58,7 +58,7 @@ export const features = [
       label: 'Coming soon',
       disabled: true,
     },
-    media: <img src="/img/rust-sdk@2x.png" />,
+    media: <img src="/img/rust-sdk@3x.png" />,
   },
 ];
 

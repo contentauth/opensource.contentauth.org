@@ -13,7 +13,7 @@ export function TabelCellValue({ value, type }) {
 
 export default function Table({ title, columns, records }) {
   return (
-    <div className={styles.root}>
+    <div className="container">
       <div className={styles.content}>
         <h2 className={styles.title}>{title}</h2>
         <div className={styles.scroller}>
