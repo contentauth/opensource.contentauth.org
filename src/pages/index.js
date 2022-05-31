@@ -14,6 +14,7 @@ export const features = [
     id: 'js-sdk',
     title: 'JS SDK',
     icon: <JSSDKIcon />,
+    c2pa: true,
     description: (
       <>
         Everything you need to develop rich, browser-based experiences with
@@ -30,6 +31,7 @@ export const features = [
     id: 'c2pa-tool',
     title: 'C2PA Tool',
     icon: <C2PAToolIcon />,
+    c2pa: false,
     description: (
       <>
         Install this tool to create, verify and explore content credentials on
@@ -47,6 +49,7 @@ export const features = [
     id: 'rust-sdk',
     title: 'Rust SDK',
     icon: <RustSDKIcon />,
+    c2pa: false,
     description: (
       <>
         Develop custom applications across desktop, mobile, and services that
