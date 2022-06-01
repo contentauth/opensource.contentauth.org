@@ -136,45 +136,44 @@ export default function Home() {
     'https://cdn.jsdelivr.net/npm/c2pa@0.9.1/dist/assets/wasm/toolkit_bg.wasm';
   const workerSrc =
     'https://cdn.jsdelivr.net/npm/c2pa@0.9.1/dist/c2pa.worker.min.js';
-  if (ExecutionEnvironment.canUseDOM) {
-    return (
-      <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
-        <Hero
-          title={siteConfig.tagline}
-          media={<HeroImage />}
-          description={
-            <>
-              Integrate secure provenance signals into your site, app, or
-              service using open-source tools developed by the&nbsp;
-              <a
-                href="https://contentauthenticity.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Content Authenticity Initiative
-              </a>
-              . Join the ecosystem of transparency of provenance and attribution
-              of digital content to counter the rise of misinformation.
-            </>
-          }
-        />
-        <main>
-          <C2paProvider
-            config={{
-              wasmSrc,
-              workerSrc,
-            }}
-          >
-            <Features features={features} />
-            <ComparisonTable
-              title="Which tool is right for you?"
-              columns={comparisonColumns}
-              records={comparisonRecords}
-            />
-          </C2paProvider>
-          ;
-        </main>
-      </Layout>
-    );
-  }
+
+  return (
+    <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
+      <Hero
+        title={siteConfig.tagline}
+        media={<HeroImage />}
+        description={
+          <>
+            Integrate secure provenance signals into your site, app, or service
+            using open-source tools developed by the&nbsp;
+            <a
+              href="https://contentauthenticity.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Content Authenticity Initiative
+            </a>
+            . Join the ecosystem of transparency of provenance and attribution
+            of digital content to counter the rise of misinformation.
+          </>
+        }
+      />
+      <main>
+        <C2paProvider
+          config={{
+            wasmSrc,
+            workerSrc,
+          }}
+        >
+          <Features features={features} />
+          <ComparisonTable
+            title="Which tool is right for you?"
+            columns={comparisonColumns}
+            records={comparisonRecords}
+          />
+        </C2paProvider>
+        ;
+      </main>
+    </Layout>
+  );
 }
