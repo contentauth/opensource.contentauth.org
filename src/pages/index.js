@@ -8,7 +8,7 @@ import JSSDKIcon from '../assets/images/image.svg';
 import C2PAToolIcon from '../assets/images/cli.svg';
 import RustSDKIcon from '../assets/images/wrench.svg';
 import HeroImage from '../assets/images/hero-2.svg';
-
+import { C2paProvider } from '@contentauth/react-hooks';
 export const features = [
   {
     id: 'js-sdk',
@@ -129,6 +129,12 @@ const comparisonRecords = [
 
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
+
+  const wasmSrc =
+    'https://cdn.jsdelivr.net/npm/c2pa@0.9.1/dist/assets/wasm/toolkit_bg.wasm';
+  const workerSrc =
+    'https://cdn.jsdelivr.net/npm/c2pa@0.9.1/dist/c2pa.worker.min.js';
+
   return (
     <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
       <Hero
@@ -151,12 +157,19 @@ export default function Home() {
         }
       />
       <main>
-        <Features features={features} />
-        <ComparisonTable
-          title="Which tool is right for you?"
-          columns={comparisonColumns}
-          records={comparisonRecords}
-        />
+        <C2paProvider
+          config={{
+            wasmSrc,
+            workerSrc,
+          }}
+        >
+          <Features features={features} />
+          <ComparisonTable
+            title="Which tool is right for you?"
+            columns={comparisonColumns}
+            records={comparisonRecords}
+          />
+        </C2paProvider>
       </main>
     </Layout>
   );

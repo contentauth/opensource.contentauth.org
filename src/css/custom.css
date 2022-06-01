@@ -64,6 +64,7 @@
   --ifm-menu-color: var(--cai-color-on-background);
   --ifm-menu-color-background-active: transparent;
   --ifm-menu-color-background-hover: transparent;
+  --ifm-menu-color-active: var(--cai-color-primary-dark);
   --ifm-menu-link-padding-vertical: 0.75em;
   --ifm-menu-link-padding-horizontal: 2rem;
   --ifm-alert-border-radius: 4px;

@@ -1,0 +1,57 @@
+.app {
+  text-align: center;
+}
+
+.claim-info {
+  border: solid 1px #ccc;
+  border-collapse: collapse;
+  margin: auto;
+  margin-bottom: 40px;
+}
+.claim-info td {
+  border: solid 1px #ccc;
+  padding: 5px;
+}
+
+.web-components {
+  width: 800px;
+  padding: 40px;
+}
+.web-components .wrapper {
+  position: relative;
+}
+.web-components .wrapper > img {
+  width: 100%;
+  height: auto;
+}
+.web-components .wrapper cai-popover {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.theme-spectrum {
+  --cai-font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  --cai-font-size-md: 0.875rem;
+  --cai-font-size-sm: 0.8125rem;
+  --cai-popover-bg-color: #fff;
+  color: #2c2c2c;
+}
+.theme-spectrum a {
+  color: #0d66d0;
+}
+.theme-spectrum .sections {
+  border-top: solid 1px #d8d8d8;
+}
+.theme-spectrum .sections cai-panel-section {
+  border-bottom: solid 1px #d8d8d8;
+  padding: 20px 0;
+}
+.theme-spectrum .sections .social-media > div {
+  display: flex;
+  margin-bottom: 5px;
+  align-items: center;
+}
+.theme-spectrum::part(section-produced-with-beta) {
+  color: #6e6e6e;
+}
