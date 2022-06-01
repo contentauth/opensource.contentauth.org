@@ -11,7 +11,6 @@ export function Feature({ id, icon, c2pa, media, title, description, cta }) {
   const sampleImage = '/img/Sunset.jpg';
 
   const provenance = useC2pa(sampleImage);
-  const viewMoreUrl = generateVerifyUrl(sampleImage);
 
   return (
     <div id={id} className={styles.feature}>
@@ -38,6 +37,10 @@ export function Feature({ id, icon, c2pa, media, title, description, cta }) {
         <div>
           <BrowserOnly fallback={<div>Loading...</div>}>
             {() => {
+              const viewMoreUrl = generateVerifyUrl(
+                window.location.origin + sampleImage,
+              );
+              console.log(viewMoreUrl);
               const { WebComponents } = require('../WebComponents');
               return (
                 <WebComponents
@@ -48,7 +51,6 @@ export function Feature({ id, icon, c2pa, media, title, description, cta }) {
               );
             }}
           </BrowserOnly>
-          ;
         </div>
       ) : (
         <div className={styles.featureMedia}>{media}</div>

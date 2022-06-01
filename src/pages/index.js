@@ -10,7 +10,12 @@ import RustSDKIcon from '../assets/images/wrench.svg';
 import HeroImage from '../assets/images/hero-2.svg';
 import { C2paProvider } from '@contentauth/react-hooks';
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import { resolvers } from 'c2pa';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
+
+const manifestResolvers = resolvers.createTypedResolvers(
+  resolvers.editsAndActivity,
+);
 export const features = [
   {
     id: 'js-sdk',
@@ -166,6 +171,7 @@ export default function Home() {
               config={{
                 wasmSrc,
                 workerSrc,
+                manifestResolvers,
               }}
             >
               <Features features={features} />
