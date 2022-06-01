@@ -24,6 +24,7 @@ const config = {
       src: 'https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js',
       'data-domain-script': '20e82cdb-918a-4036-93c6-c356dc13a801',
     },
+    '/scripts/cookie-pro.js',
   ],
   stylesheets: [
     // Acumin Pro
