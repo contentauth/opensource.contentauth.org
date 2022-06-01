@@ -9,7 +9,7 @@ import './App.css';
 export function WebComponents({ imageUrl, provenance, viewMoreUrl }) {
   const [manifest, setManifest] = useState(null);
   const summaryRef = useRef();
-  console.log(provenance);
+
   useEffect(() => {
     let dispose = () => {};
     provenance.manifestStore?.activeManifest

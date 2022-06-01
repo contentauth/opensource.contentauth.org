@@ -8,6 +8,7 @@ import { generateVerifyUrl } from 'c2pa';
 
 export function Feature({ id, icon, c2pa, media, title, description, cta }) {
   const sampleImage = '/img/Sunset.jpg';
+
   const provenance = useC2pa(sampleImage);
   const viewMoreUrl = generateVerifyUrl(sampleImage);
 

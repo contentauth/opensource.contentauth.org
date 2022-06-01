@@ -159,19 +159,21 @@ export default function Home() {
       />
       <main>
         <BrowserOnly>
-          <C2paProvider
-            config={{
-              wasmSrc,
-              workerSrc,
-            }}
-          >
-            <Features features={features} />
-            <ComparisonTable
-              title="Which tool is right for you?"
-              columns={comparisonColumns}
-              records={comparisonRecords}
-            />
-          </C2paProvider>
+          {() => (
+            <C2paProvider
+              config={{
+                wasmSrc,
+                workerSrc,
+              }}
+            >
+              <Features features={features} />
+              <ComparisonTable
+                title="Which tool is right for you?"
+                columns={comparisonColumns}
+                records={comparisonRecords}
+              />
+            </C2paProvider>
+          )}
         </BrowserOnly>
       </main>
     </Layout>
