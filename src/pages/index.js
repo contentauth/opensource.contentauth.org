@@ -9,6 +9,7 @@ import C2PAToolIcon from '../assets/images/cli.svg';
 import RustSDKIcon from '../assets/images/wrench.svg';
 import HeroImage from '../assets/images/hero-2.svg';
 import { C2paProvider } from '@contentauth/react-hooks';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 export const features = [
   {
     id: 'js-sdk',
@@ -157,19 +158,21 @@ export default function Home() {
         }
       />
       <main>
-        <C2paProvider
-          config={{
-            wasmSrc,
-            workerSrc,
-          }}
-        >
-          <Features features={features} />
-          <ComparisonTable
-            title="Which tool is right for you?"
-            columns={comparisonColumns}
-            records={comparisonRecords}
-          />
-        </C2paProvider>
+        <BrowserOnly>
+          <C2paProvider
+            config={{
+              wasmSrc,
+              workerSrc,
+            }}
+          >
+            <Features features={features} />
+            <ComparisonTable
+              title="Which tool is right for you?"
+              columns={comparisonColumns}
+              records={comparisonRecords}
+            />
+          </C2paProvider>
+        </BrowserOnly>
       </main>
     </Layout>
   );
