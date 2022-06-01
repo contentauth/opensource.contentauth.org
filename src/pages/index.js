@@ -8,7 +8,7 @@ import JSSDKIcon from '../assets/images/image.svg';
 import C2PAToolIcon from '../assets/images/cli.svg';
 import RustSDKIcon from '../assets/images/wrench.svg';
 import HeroImage from '../assets/images/hero-2.svg';
-import { C2paProvider } from '@contentauth/react-hooks';
+// import { C2paProvider } from '@contentauth/react-hooks';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 export const features = [
@@ -159,7 +159,7 @@ export default function Home() {
         }
       />
       <main>
-        <C2paProvider
+        {/* <C2paProvider
           config={{
             wasmSrc,
             workerSrc,
@@ -171,8 +171,7 @@ export default function Home() {
             columns={comparisonColumns}
             records={comparisonRecords}
           />
-        </C2paProvider>
-        ;
+        </C2paProvider> */}
       </main>
     </Layout>
   );
