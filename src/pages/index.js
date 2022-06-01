@@ -159,7 +159,7 @@ export default function Home() {
       />
       <main>
         <BrowserOnly>
-          {() => (
+          {() => {
             <C2paProvider
               config={{
                 wasmSrc,
@@ -172,8 +172,8 @@ export default function Home() {
                 columns={comparisonColumns}
                 records={comparisonRecords}
               />
-            </C2paProvider>
-          )}
+            </C2paProvider>;
+          }}
         </BrowserOnly>
       </main>
     </Layout>
