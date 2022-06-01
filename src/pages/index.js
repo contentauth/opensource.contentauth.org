@@ -10,6 +10,7 @@ import RustSDKIcon from '../assets/images/wrench.svg';
 import HeroImage from '../assets/images/hero-2.svg';
 import { C2paProvider } from '@contentauth/react-hooks';
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 export const features = [
   {
     id: 'js-sdk',
@@ -135,47 +136,45 @@ export default function Home() {
     'https://cdn.jsdelivr.net/npm/c2pa@0.9.1/dist/assets/wasm/toolkit_bg.wasm';
   const workerSrc =
     'https://cdn.jsdelivr.net/npm/c2pa@0.9.1/dist/c2pa.worker.min.js';
-
-  return (
-    <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
-      <Hero
-        title={siteConfig.tagline}
-        media={<HeroImage />}
-        description={
-          <>
-            Integrate secure provenance signals into your site, app, or service
-            using open-source tools developed by the&nbsp;
-            <a
-              href="https://contentauthenticity.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Content Authenticity Initiative
-            </a>
-            . Join the ecosystem of transparency of provenance and attribution
-            of digital content to counter the rise of misinformation.
-          </>
-        }
-      />
-      <main>
-        <BrowserOnly>
-          {() => {
-            <C2paProvider
-              config={{
-                wasmSrc,
-                workerSrc,
-              }}
-            >
-              <Features features={features} />
-              <ComparisonTable
-                title="Which tool is right for you?"
-                columns={comparisonColumns}
-                records={comparisonRecords}
-              />
-            </C2paProvider>;
-          }}
-        </BrowserOnly>
-      </main>
-    </Layout>
-  );
+  if (ExecutionEnvironment.canUseDOM) {
+    return (
+      <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
+        <Hero
+          title={siteConfig.tagline}
+          media={<HeroImage />}
+          description={
+            <>
+              Integrate secure provenance signals into your site, app, or
+              service using open-source tools developed by the&nbsp;
+              <a
+                href="https://contentauthenticity.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Content Authenticity Initiative
+              </a>
+              . Join the ecosystem of transparency of provenance and attribution
+              of digital content to counter the rise of misinformation.
+            </>
+          }
+        />
+        <main>
+          <C2paProvider
+            config={{
+              wasmSrc,
+              workerSrc,
+            }}
+          >
+            <Features features={features} />
+            <ComparisonTable
+              title="Which tool is right for you?"
+              columns={comparisonColumns}
+              records={comparisonRecords}
+            />
+          </C2paProvider>
+          ;
+        </main>
+      </Layout>
+    );
+  }
 }
