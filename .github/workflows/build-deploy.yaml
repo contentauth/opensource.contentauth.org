@@ -15,7 +15,8 @@ jobs:
       - name: Checkout c2pa
         uses: actions/checkout@v3
         with:
-          path: c2pa
+          repository: contentauth/c2pa-js
+          path: c2pa-js
       - name: Checkout site
         uses: actions/checkout@v3
         with:
