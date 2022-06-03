@@ -5,7 +5,6 @@ on:
     types: [opened]
 jobs:
   build-deploy:
-    name: Build and deploy to Netlify
     runs-on: ubuntu-20.04
     defaults:
       run:
@@ -21,10 +20,10 @@ jobs:
           path: site
       - name: Install dependencies
         run: npm install
-      - name: Build site
-        run: npm run build
       - name: Generate API docs
         run: npm run generate-api-docs
+      - name: Build site
+        run: npm run build
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
