@@ -13,10 +13,6 @@
   border: solid 1px #ccc;
   padding: 5px;
 }
-/* .container {
-  max-height: 600px;
-  overflow: hidden scroll;
-} */
 .web-components .wrapper {
   position: relative;
 }

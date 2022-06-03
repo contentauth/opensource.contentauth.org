@@ -295,13 +295,12 @@ body:not(.is-scrolling) .navbar {
   --ifm-alert-border-color: var(--ifm-color-secondary);
 }
 
-
 /* Responsiveness */
 @media (min-width: 2000px) {
   .container {
     max-width: var(--ifm-container-width-xxl);
   }
-
+}
 /* Cookie Pro */
 
 .ot-sdk-show-settings {
@@ -318,5 +317,4 @@ body:not(.is-scrolling) .navbar {
 
 .ot-sdk-show-settings:hover {
   text-decoration: underline;
-
 }

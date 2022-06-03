@@ -38,7 +38,7 @@ export function Feature({
           </Link>
         </div>
       </div>
-      {hasC2paMetadata && provenance != null ? (
+      {hasC2paMetadata && provenance ? (
         <BrowserOnly fallback={<div>Loading...</div>}>
           {() => {
             const viewMoreUrl = generateVerifyUrl(
