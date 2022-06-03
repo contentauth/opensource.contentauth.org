@@ -63,15 +63,9 @@ const config = {
         },
         items: [
           {
-            to: '/docs/get-started',
-            position: 'right',
-            label: 'Get started',
-          },
-          {
             to: '/docs/introduction',
             position: 'right',
             label: 'Docs',
-            activeBaseRegex: '/docs/(?!get-started)',
           },
           {
             to: 'https://www.contentauthenticity.org',

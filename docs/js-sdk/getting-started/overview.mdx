@@ -1,7 +1,6 @@
 ---
 id: overview
 title: Overview
-slug: /
 ---
 
 Welcome to the [Content Authenticity Initiative](https://contentauthenticity.org/) JavaScript SDK. This library aims to make viewing and verifying
@@ -22,7 +21,7 @@ Additionally, we have a couple supporting libraries that are utilized by the one
 - **@cai/detector** provides a high-performance binary scanner to quickly detect if C2PA metadata exists in a file.
   It is used to determine whether to download a file for further processing. This library is also brought in via `c2pa`.
 
-To learn how to use these libraries, please consult the [Quick start](getting-started/quick-start) page.
+To learn how to use these libraries, please consult the [Quick start](quick-start) page.
 
 ## Features
 
@@ -40,7 +39,7 @@ main thread.
 ### Lazy loading and processing
 
 Since images can be quite large, our library tries to inspect the start of the file for C2PA metadata before the entire
-asset is requested, [if the server supports it](guides/hosting#range-requests). The rest of the image will only be downloaded if
+asset is requested, [if the server supports it](../guides/hosting#range-requests). The rest of the image will only be downloaded if
 the metadata marker is found. Additionally, we delay loading of the WebAssembly binary until the first processing request is made.
 
 ### Adherence to the C2PA specification
