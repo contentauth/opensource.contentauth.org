@@ -19,8 +19,7 @@
       document.body.classList.remove(className);
     }
   }
-  document.addEventListener('DOMContentLoaded', function () {
-    manageScrollClass();
-    window.addEventListener('scroll', manageScrollClass);
-  });
+
+  manageScrollClass();
+  window.addEventListener('scroll', manageScrollClass);
 })();

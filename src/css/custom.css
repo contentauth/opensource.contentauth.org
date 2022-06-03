@@ -262,12 +262,6 @@ body:not(.is-scrolling) .navbar {
   }
 }
 
-@media (min-width: 997px) {
-  .theme-doc-sidebar-container > div {
-    /* top: 2rem !important; */
-  }
-}
-
 /*  Admonitions */
 
 .admonition-heading h5 {
@@ -301,9 +295,28 @@ body:not(.is-scrolling) .navbar {
   --ifm-alert-border-color: var(--ifm-color-secondary);
 }
 
+
 /* Responsiveness */
 @media (min-width: 2000px) {
   .container {
     max-width: var(--ifm-container-width-xxl);
   }
+
+/* Cookie Pro */
+
+.ot-sdk-show-settings {
+  background: transparent;
+  font: inherit;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  line-height: inherit;
+  letter-spacing: inherit;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.ot-sdk-show-settings:hover {
+  text-decoration: underline;
+
 }
