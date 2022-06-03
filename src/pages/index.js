@@ -8,12 +8,20 @@ import JSSDKIcon from '../assets/images/image.svg';
 import C2PAToolIcon from '../assets/images/cli.svg';
 import RustSDKIcon from '../assets/images/wrench.svg';
 import HeroImage from '../assets/images/hero-2.svg';
+import { C2paProvider } from '@contentauth/react-hooks';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import { resolvers } from 'c2pa';
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
+const manifestResolvers = resolvers.createTypedResolvers(
+  resolvers.editsAndActivity,
+);
 export const features = [
   {
     id: 'js-sdk',
     title: 'JS SDK',
     icon: <JSSDKIcon />,
+    hasC2paMetadata: true,
     description: (
       <>
         Everything you need to develop rich, browser-based experiences with
@@ -24,12 +32,13 @@ export const features = [
       link: '/docs/introduction',
       label: 'View documentation',
     },
-    media: <img src="/img/demo.png" />,
+    media: '/img/Sunset.jpg',
   },
   {
     id: 'c2pa-tool',
     title: 'C2PA Tool',
     icon: <C2PAToolIcon />,
+    hasC2paMetadata: false,
     description: (
       <>
         Install this tool to create, verify and explore content credentials on
@@ -41,12 +50,13 @@ export const features = [
       label: 'Coming soon',
       disabled: true,
     },
-    media: <img src="/img/demo-tool.png" />,
+    media: <img src="/img/c2patool@2x.png" />,
   },
   {
     id: 'rust-sdk',
     title: 'Rust SDK',
     icon: <RustSDKIcon />,
+    hasC2paMetadata: false,
     description: (
       <>
         Develop custom applications across desktop, mobile, and services that
@@ -58,7 +68,7 @@ export const features = [
       label: 'Coming soon',
       disabled: true,
     },
-    media: <img src="/img/demo-devices.png" />,
+    media: <img src="/img/rust-sdk@3x.png" />,
   },
 ];
 
@@ -126,35 +136,54 @@ const comparisonRecords = [
 
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
+
+  const wasmSrc =
+    'https://cdn.jsdelivr.net/npm/c2pa@0.9.1/dist/assets/wasm/toolkit_bg.wasm';
+  const workerSrc =
+    'https://cdn.jsdelivr.net/npm/c2pa@0.9.1/dist/c2pa.worker.min.js';
+
   return (
-    <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
-      <Hero
-        title={siteConfig.tagline}
-        media={<HeroImage />}
-        description={
-          <>
-            Integrate secure provenance signals into your site, app, or service
-            using open-source tools developed by the&nbsp;
-            <a
-              href="https://contentauthenticity.org/"
-              target="_blank"
-              rel="noopener noreferrer"
+    <BrowserOnly>
+      {() => (
+        <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
+          <Hero
+            title={siteConfig.tagline}
+            media={<HeroImage />}
+            description={
+              <>
+                Integrate secure provenance signals into your site, app, or
+                service using open-source tools developed by the&nbsp;
+                <a
+                  href="https://contentauthenticity.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Content Authenticity Initiative
+                </a>
+                . Join the ecosystem of transparency of provenance and
+                attribution of digital content to counter the rise of
+                misinformation.
+              </>
+            }
+          />
+          <main>
+            <C2paProvider
+              config={{
+                wasmSrc,
+                workerSrc,
+                manifestResolvers,
+              }}
             >
-              Content Authenticity Initiative
-            </a>
-            . Join the ecosystem of transparency of provenance and attribution
-            of digital content to counter the rise of misinformation.
-          </>
-        }
-      />
-      <main>
-        <Features features={features} />
-        <ComparisonTable
-          title="Which tool is right for you?"
-          columns={comparisonColumns}
-          records={comparisonRecords}
-        />
-      </main>
-    </Layout>
+              <Features features={features} />
+              <ComparisonTable
+                title="Which tool is right for you?"
+                columns={comparisonColumns}
+                records={comparisonRecords}
+              />
+            </C2paProvider>
+          </main>
+        </Layout>
+      )}
+    </BrowserOnly>
   );
 }

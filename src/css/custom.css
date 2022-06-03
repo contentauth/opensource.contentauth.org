@@ -15,6 +15,7 @@
   --cai-color-surface: #ffffff;
   --cai-color-on-surface: #000000;
   --cai-color-primary: #5aa9fa;
+  --cai-color-primary-dark: #2680eb;
   --cai-color-primary-light: #d8e7f5;
   --cai-color-secondary: #fade3b;
   --cai-color-secondary-light: #f8efbc;
@@ -26,7 +27,7 @@
   --cai-font-family-adobeclean-bold: 'adobe-clean-bold', sans-serif;
   --cai-font-family-adobeclean-regular: 'adobe-clean', sans-serif;
 
-  --ifm-color-primary: var(--cai-color-primary);
+  --ifm-color-primary: var(--cai-color-primary-light);
   --ifm-color-primary-dark: var(--cai-color-primary);
   --ifm-color-primary-darker: var(--cai-color-primary);
   --ifm-color-primary-darkest: var(--cai-color-primary);
@@ -45,11 +46,13 @@
   --ifm-navbar-padding-vertical: 30px;
   --ifm-navbar-padding-horizontal: 20px;
   --ifm-navbar-shadow: 0px 0px 40px var(--cai-color-shadow);
+  --ifm-navbar-link-hover-color: var(--cai-color-primary-dark);
   --ifm-navbar-background-color: var(--cai-color-background);
   --ifm-hero-background-color: transparent;
   --ifm-table-background: var(--cai-color-background);
   --ifm-table-stripe-background: var(--cai-color-background-dark);
   --ifm-footer-background-color: transparent;
+  --ifm-container-width-xxl: 1600px;
   --ifm-container-width-xl: 1200px;
   --ifm-container-width: 1080px;
   --ifm-heading-font-family: var(--cai-font-family-acuminprowide-black);
@@ -61,6 +64,7 @@
   --ifm-menu-color: var(--cai-color-on-background);
   --ifm-menu-color-background-active: transparent;
   --ifm-menu-color-background-hover: transparent;
+  --ifm-menu-color-active: var(--cai-color-primary-dark);
   --ifm-menu-link-padding-vertical: 0.75em;
   --ifm-menu-link-padding-horizontal: 2rem;
   --ifm-alert-border-radius: 4px;
@@ -113,7 +117,8 @@ body:not(.is-scrolling) .navbar {
 .navbar__button:hover,
 .navbar__button:active,
 .navbar__button:focus {
-  background-color: var(--ifm-color-secondary-light);
+  background-color: var(--ifm-color-secondary-dark);
+  opacity: 0.7;
   color: inherit;
 }
 
@@ -290,6 +295,12 @@ body:not(.is-scrolling) .navbar {
   --ifm-alert-border-color: var(--ifm-color-secondary);
 }
 
+/* Responsiveness */
+@media (min-width: 2000px) {
+  .container {
+    max-width: var(--ifm-container-width-xxl);
+  }
+}
 /* Cookie Pro */
 
 .ot-sdk-show-settings {

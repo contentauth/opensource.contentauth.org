@@ -2,8 +2,21 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 import Link from '@docusaurus/Link';
+import { useC2pa } from '@contentauth/react-hooks';
+import { generateVerifyUrl } from 'c2pa';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
-export function Feature({ id, icon, media, title, description, cta }) {
+export function Feature({
+  id,
+  icon,
+  hasC2paMetadata,
+  media,
+  title,
+  description,
+  cta,
+}) {
+  let provenance = null;
+  hasC2paMetadata ? (provenance = useC2pa(media)) : (provenance = null);
   return (
     <div id={id} className={styles.feature}>
       <div className={styles.featureInfo}>
@@ -25,7 +38,27 @@ export function Feature({ id, icon, media, title, description, cta }) {
           </Link>
         </div>
       </div>
-      <div className={styles.featureMedia}>{media}</div>
+      {hasC2paMetadata && provenance ? (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+          {() => {
+            const viewMoreUrl = generateVerifyUrl(
+              window.location.origin + media,
+            );
+            const { WebComponents } = require('../WebComponents');
+            return (
+              <div className={styles.featureMedia}>
+                <WebComponents
+                  imageUrl={media}
+                  provenance={provenance}
+                  viewMoreUrl={viewMoreUrl}
+                />
+              </div>
+            );
+          }}
+        </BrowserOnly>
+      ) : (
+        <div className={styles.featureMedia}>{media}</div>
+      )}
     </div>
   );
 }
