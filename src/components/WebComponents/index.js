@@ -5,8 +5,6 @@ import 'c2pa-wc/dist/components/Popover';
 import 'c2pa-wc/dist/components/panels/ManifestSummary';
 import 'c2pa-wc/dist/components/panels/PanelSection';
 import './App.css';
-import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
-import BrowserOnly from '@docusaurus/BrowserOnly';
 
 export function WebComponents({ imageUrl, provenance, viewMoreUrl }) {
   const [manifest, setManifest] = useState(null);

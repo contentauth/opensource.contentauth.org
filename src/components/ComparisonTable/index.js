@@ -7,7 +7,7 @@ export function TabelCellValue({ value, type }) {
     case 'boolean':
       return value ? <CheckIcon /> : null;
     default:
-      return <span>{value}</span>;
+      return <span style={{ fontSize: '16px' }}>{value}</span>;
   }
 }
 

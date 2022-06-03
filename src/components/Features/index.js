@@ -2,16 +2,21 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 import Link from '@docusaurus/Link';
-// import { WebComponents } from '../WebComponents';
 import { useC2pa } from '@contentauth/react-hooks';
 import { generateVerifyUrl } from 'c2pa';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
-export function Feature({ id, icon, c2pa, media, title, description, cta }) {
-  const sampleImage = '/img/Sunset.jpg';
-
-  const provenance = useC2pa(sampleImage);
-
+export function Feature({
+  id,
+  icon,
+  hasC2paMetadata,
+  media,
+  title,
+  description,
+  cta,
+}) {
+  let provenance = null;
+  hasC2paMetadata ? (provenance = useC2pa(media)) : (provenance = null);
   return (
     <div id={id} className={styles.feature}>
       <div className={styles.featureInfo}>
@@ -33,25 +38,24 @@ export function Feature({ id, icon, c2pa, media, title, description, cta }) {
           </Link>
         </div>
       </div>
-      {c2pa && provenance ? (
-        <div>
-          <BrowserOnly fallback={<div>Loading...</div>}>
-            {() => {
-              const viewMoreUrl = generateVerifyUrl(
-                window.location.origin + sampleImage,
-              );
-              console.log(viewMoreUrl);
-              const { WebComponents } = require('../WebComponents');
-              return (
+      {hasC2paMetadata && provenance != null ? (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+          {() => {
+            const viewMoreUrl = generateVerifyUrl(
+              window.location.origin + media,
+            );
+            const { WebComponents } = require('../WebComponents');
+            return (
+              <div className={styles.featureMedia}>
                 <WebComponents
-                  imageUrl={sampleImage}
+                  imageUrl={media}
                   provenance={provenance}
                   viewMoreUrl={viewMoreUrl}
                 />
-              );
-            }}
-          </BrowserOnly>
-        </div>
+              </div>
+            );
+          }}
+        </BrowserOnly>
       ) : (
         <div className={styles.featureMedia}>{media}</div>
       )}

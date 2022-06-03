@@ -1,7 +1,8 @@
+@import '../../css/custom.css';
+
 .app {
   text-align: center;
 }
-
 .claim-info {
   border: solid 1px #ccc;
   border-collapse: collapse;
@@ -12,11 +13,10 @@
   border: solid 1px #ccc;
   padding: 5px;
 }
-
-.web-components {
-  width: 800px;
-  padding: 40px;
-}
+/* .container {
+  max-height: 600px;
+  overflow: hidden scroll;
+} */
 .web-components .wrapper {
   position: relative;
 }
@@ -29,9 +29,14 @@
   top: 10px;
   right: 10px;
 }
-
+.web-components
+  .wrapper
+  cai-manifest-summary::part(manifest-summary-container) {
+  max-height: 600px;
+  overflow: hidden scroll;
+}
 .theme-spectrum {
-  --cai-font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  --cai-font-family: var(--cai-font-family-acuminpro-regular);
   --cai-font-size-md: 0.875rem;
   --cai-font-size-sm: 0.8125rem;
   --cai-popover-bg-color: #fff;
