@@ -1,4 +1,4 @@
-// const api = require('./api/api-sidebar');
+const api = require('./api/api-sidebar');
 
 const sidebars = {
   docs: [
@@ -26,12 +26,12 @@ const sidebars = {
       ],
       collapsed: false,
     },
-    // {
-    //   type: 'category',
-    //   label: 'API documentation',
-    //   items: api('js-sdk/api'),
-    //   collapsed: true,
-    // },
+    {
+      type: 'category',
+      label: 'API documentation',
+      items: api('js-sdk/api'),
+      collapsed: true,
+    },
   ],
 };
 

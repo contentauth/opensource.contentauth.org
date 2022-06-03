@@ -1,9 +1,11 @@
-name: Build and Deploy to Netlify
+name: Build and deploy to Netlify
 on:
   push:
   pull_request:
+    types: [opened]
 jobs:
-  build-site:
+  build-deploy:
+    name: Build and deploy to Netlify
     runs-on: ubuntu-20.04
     defaults:
       run:
