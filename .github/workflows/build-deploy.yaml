@@ -17,6 +17,9 @@ jobs:
         with:
           repository: contentauth/c2pa-js
           path: c2pa-js
+      - name: Remove old sdk file (temporary)
+        working-directory: c2pa-js
+        run: rm -f common/api/sdk.api.json
       - name: Checkout site
         uses: actions/checkout@v3
         with:
