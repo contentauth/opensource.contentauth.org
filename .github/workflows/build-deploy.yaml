@@ -3,18 +3,45 @@ on:
   push:
   pull_request:
 jobs:
-  build:
+  checkout-c2pa:
     runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: c2pa
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout c2pa
+        uses: actions/checkout@v3
+        with:
+          path: c2pa
+  build-site:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v3
+        with:
+          path: site
       - name: Install dependencies
         run: npm install
       - name: Build site
         run: npm run build
+  add-docs:
+    runs-on: ubuntu-20.04
+    needs: [checkout-c2pa, build-site]
+    steps:
+      - name: Generate API docs
+        working-directory: site
+        run: npm run generate-api-docs
+  deploy:
+    runs-on: ubuntu-20.04
+    needs: add-docs
+    steps:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
-          publish-dir: './build'
+          publish-dir: './site/build'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: 'Deploy from GitHub Actions'
