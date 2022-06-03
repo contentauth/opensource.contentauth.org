@@ -1,8 +1,10 @@
 name: Build and deploy to Netlify
 on:
   push:
+    branches:
+      - main
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
 jobs:
   build-deploy:
     runs-on: ubuntu-20.04
@@ -31,7 +33,7 @@ jobs:
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: 'Deploy from GitHub Actions'
-          alias: deploy-preview-${{ github.pull_request.number }}
+          alias: deploy-preview-${{ github.event.number }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
