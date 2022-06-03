@@ -1,0 +1,26 @@
+---
+id: viewing-provenance
+title: Viewing provenance data
+---
+
+import Sandbox from '../../../src/components/Sandbox';
+
+:::tip
+
+Please view the [architecture diagram](../#architecture) for an illustrated example of the `c2pa` API.
+
+:::
+
+### Initializing the SDK
+
+Importing `wasmSrc` and `workerSrc` vary by build system. For more info, please reference the [Quick start guide](../getting-started/quick-start#bringing-in-the-library).
+
+### Determining whether provenance data exists
+
+You can check if an asset has provenance data by testing if the `manifestStore` that comes back from `c2pa.read` is truthy:
+
+<Sandbox file="/examples/check-provenance/main.ts" displayType="preview" />
+
+### Viewing manifest data
+
+<Sandbox file="/examples/active-manifest/main.ts" displayType="preview" />

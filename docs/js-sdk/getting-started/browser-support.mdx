@@ -1,0 +1,58 @@
+---
+id: browser-support
+title: Browser support
+---
+
+export const CanIUse = ({ feature }) => (
+  <p
+    className="ciu_embed"
+    data-feature={feature}
+    data-periods="future_1,current,past_1,past_2"
+    data-accessible-colours="false"
+  >
+    <picture>
+      <source
+        type="image/webp"
+        srcSet={`https://caniuse.bitsofco.de/image/${feature}.webp`}
+      />
+      <source
+        type="image/png"
+        srcSet={`https://caniuse.bitsofco.de/image/${feature}.png`}
+      />
+      <img
+        src={`https://caniuse.bitsofco.de/image/${feature}.jpg`}
+        alt="Data on support for the wasm feature across the major browsers from caniuse.com"
+      />
+    </picture>
+  </p>
+);
+
+We use a number of modern browser technologies to run this SDK in the client, so **it is unsupported for all versions of
+Internet Explorer and a few less-used mobile browsers**.
+
+:::info
+You can see a matrix of all of the technologies used, together with
+browser support at [caniuse.com](https://caniuse.com/wasm,webworkers,cryptography,typedarrays,fetch).
+:::
+
+Below is a summary of the "Can I use" information for convenience:
+
+## WebAssembly
+
+<CanIUse feature="wasm" />
+
+## Web Workers
+
+<CanIUse feature="webworkers" />
+
+## WebCrypto
+
+<CanIUse feature="cryptography" />
+
+## Typed Arrays
+
+<CanIUse feature="typedarrays" />
+
+## Fetch
+
+<CanIUse feature="fetch" />

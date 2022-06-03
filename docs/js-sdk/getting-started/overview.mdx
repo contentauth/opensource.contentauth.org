@@ -1,0 +1,79 @@
+---
+id: overview
+title: Overview
+slug: /
+---
+
+Welcome to the [Content Authenticity Initiative](https://contentauthenticity.org/) JavaScript SDK. This library aims to make viewing and verifying
+[C2PA](https://c2pa.org/) metadata in the browser as easy as possible. It is set up as a monorepo comprised of the following libraries
+intended for client use:
+
+- **c2pa** is the main package that is used for loading and verifying C2PA data. This runs all of the processing
+  logic on the client using a [WebAssembly](https://webassembly.org/) module and exposes a [TypeScript](https://www.typescriptlang.org/)-compatible API for easy integration.
+- **c2pa-wc** provides UI components designed with input from the C2PA UX working group. It is meant to
+  allow users to get up and running with standard UI patterns quickly and easily in any front end environment.
+- **@contentauth/react-hooks** provides a hooks interface for React components to quickly get provenance and thumbnail data
+  in your React app.
+
+Additionally, we have a couple supporting libraries that are utilized by the ones above, and _not_ intended for mainstream use:
+
+- **@cai/toolkit** houses the WebAssembly module, data binding functions, and related build tools. `c2pa` consumes
+  this library under the hood. The WebAssembly module handles all parsing, validation, and
+- **@cai/detector** provides a high-performance binary scanner to quickly detect if C2PA metadata exists in a file.
+  It is used to determine whether to download a file for further processing. This library is also brought in via `c2pa`.
+
+To learn how to use these libraries, please consult the [Quick start](getting-started/quick-start) page.
+
+## Features
+
+### Developer friendly
+
+Our library aims to make integration a developer-friendly experience, with comprehensive documentation,
+robust debugging (utilitizing the [debug](https://github.com/visionmedia/debug) library), and full TypeScript support.
+
+### Performance
+
+The processing code of this library uses a high-performance WebAssembly binary. Additionally, processing tasks are
+offloaded to a configurable Web Worker pool to enable parallelization and discourage blocking of your web application's
+main thread.
+
+### Lazy loading and processing
+
+Since images can be quite large, our library tries to inspect the start of the file for C2PA metadata before the entire
+asset is requested, [if the server supports it](guides/hosting#range-requests). The rest of the image will only be downloaded if
+the metadata marker is found. Additionally, we delay loading of the WebAssembly binary until the first processing request is made.
+
+### Adherence to the C2PA specification
+
+We strive to maintain compliance with the [C2PA specification](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html) as much as possible, and
+our web components follow the [C2PA user experience guidance](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html) recommendations.
+
+### Security and encryption
+
+The SDK handles all [validation](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_validation)
+via the [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) and any validation errors are passed back to the client.
+
+### Framework-agnostic
+
+Our UI components are created as [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) using the [Lit library](https://lit.dev/).
+Because of this, they can be used in [React, Vue, Angular, Svelte](https://custom-elements-everywhere.com/), or even vanilla JavaScript.
+
+:::caution
+This feature is currently a work-in-progress.
+:::
+
+## Architecture
+
+### c2pa API
+
+:::tip
+`Control` + scroll or pinch to zoom in
+:::
+
+<iframe
+  allowfullscreen
+  frameborder="0"
+  style={{ width: `100%`, height: `600px`, borderRadius: `4px` }}
+  src="https://lucid.app/documents/embeddedchart/78db2dc0-a2d9-420b-bbb3-9c8a3e21cea0"
+  id="QfrbQg-QZFyD"
+></iframe>

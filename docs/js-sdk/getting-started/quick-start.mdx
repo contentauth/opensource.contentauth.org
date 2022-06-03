@@ -1,0 +1,83 @@
+---
+id: quick-start
+title: Quick start
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Sandbox from '../../../src/components/Sandbox';
+
+## Prerequisites
+
+### Node.js & Yarn
+
+You'll need both [Node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/) installed to run the examples.
+
+#### macOS
+
+1. **Install Homebrew:** The easiest way to install Node.js on your macOS system is via [Homebrew](https://brew.sh/).
+   Please follow the instructions on their page to get this up and running.
+1. **Install Node.js:** The quickest way to install Node.js is through Homebrew directly. Open up your terminal,
+   enter `brew install node@14`, and press "return". _Note: For any more advanced JavaScript development, we recommend
+   using [nvm](https://github.com/nvm-sh/nvm) rather than Homebrew to install Node.js._
+
+## Bringing in the library
+
+We have a couple ways to bring in the library, depending on your build configuration:
+
+### Package managers
+
+The recommended way to bring in our library is with a package manager, such as `npm` or `yarn`. This way, all of the
+client side code is hosted with your app and there are no external dependencies.
+
+<Tabs>
+  <TabItem value="yarn" label="Yarn" default>
+    <CodeBlock>yarn add c2pa</CodeBlock>
+  </TabItem>
+  <TabItem value="npm" label="NPM">
+    <CodeBlock>npm install c2pa</CodeBlock>
+  </TabItem>
+</Tabs>
+
+#### Static asset configuration
+
+In addition to bringing in the main `createC2pa` function from `c2pa`, you also will need to statically host
+assets for the following resources so that heavier resources can be lazily loaded:
+
+- `c2pa/dist/assets/wasm/toolkit_bg.wasm` - the WebAssembly binary
+- `c2pa/dist/c2pa.worker.min.js` - the Web Worker script
+
+:::note
+Please be sure to configure your server to send proper `Content-Type` headers for these files. For more information,
+please see our guide on [hosting](../guides/hosting).
+:::
+
+Examples for common build systems are shown below. They are also available in the `examples` directory in our repo.
+
+export const ExampleLink = ({ example }) => {
+  const linkText = `examples/${example}`;
+  const link = `https://github.com/contentauth/c2pa-js/tree/main/${linkText}`;
+  return (
+    <div className="example-link">
+      An example project is available here: <a href={link}>{linkText}</a>
+    </div>
+  );
+};
+
+<Tabs lazy>
+  <TabItem value="vite" label="Vite" default>
+    <Sandbox file="/examples/quick-start/main.ts" />
+  </TabItem>
+  <TabItem value="rollup" label="Rollup">
+    <Sandbox example="minimal-ts-rollup" file="/src/main.ts" browserPath="/" />
+  </TabItem>
+  <TabItem value="webpack" label="Webpack">
+    <Sandbox example="minimal-ts-webpack" file="/src/main.ts" browserPath="/" />
+  </TabItem>
+</Tabs>
+
+### ES module imports
+
+We also be support bringing in the library using ES module imports for those who cannot (or do not wish to) use a package manager.
+
+<Sandbox example="esm-imports" file="/index.html" />

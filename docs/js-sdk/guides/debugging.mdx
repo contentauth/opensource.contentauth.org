@@ -1,0 +1,24 @@
+---
+id: debugging
+title: Debugging
+---
+
+We use the [debug](https://github.com/visionmedia/debug) library to get debug-level information about the SDK, under the
+`c2pa` namespace. To view debug messages in the console, you can load your browser's inspector, go to the Console
+tab, and enter:
+
+```js
+localStorage.debug = 'c2pa:*';
+```
+
+This also includes millisecond timing diffs so you can get an idea of how long different events are taking.
+
+:::note
+Debug calls and statements are stripped out of minified production builds to reduce file size.
+:::
+
+To turn off debugging, you can enter:
+
+```js
+localStorage.debug = false;
+```
