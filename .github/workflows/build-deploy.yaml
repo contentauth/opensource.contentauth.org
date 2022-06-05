@@ -26,8 +26,6 @@ jobs:
           path: site
       - name: Install dependencies
         run: npm install
-      - name: Generate API docs
-        run: npm run generate-api-docs
       - name: Build site
         run: npm run build
       - name: Deploy to Netlify
