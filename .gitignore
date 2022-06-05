@@ -8,6 +8,7 @@
 .docusaurus
 .cache-loader
 /docs/js-sdk/api
+/docs/**/readme.md
 
 # Misc
 .DS_Store

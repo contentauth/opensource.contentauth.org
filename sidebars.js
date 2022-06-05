@@ -13,14 +13,41 @@ const sidebars = {
       items: jsSdkSidebar.docs,
     },
     {
-      type: 'link',
+      type: 'category',
       label: 'Rust SDK',
-      href: 'https://docs.rs/c2pa/',
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'rust-sdk/readme',
+        },
+        {
+          type: 'link',
+          label: 'API documentation',
+          href: 'https://docs.rs/c2pa',
+        },
+        {
+          type: 'link',
+          label: 'GitHub',
+          href: 'https://github.com/contentauth/c2pa-rs',
+        },
+      ],
     },
     {
-      type: 'link',
+      type: 'category',
       label: 'c2patool',
-      href: 'https://github.com/contentauth/c2pa-rs/tree/main/c2patool/src',
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'c2patool/readme',
+        },
+        {
+          type: 'link',
+          label: 'GitHub',
+          href: 'https://github.com/contentauth/c2pa-rs/tree/main/c2patool/src',
+        },
+      ],
     },
   ],
 };

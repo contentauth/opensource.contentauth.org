@@ -32,6 +32,11 @@ const sidebars = {
       items: api('js-sdk/api'),
       collapsed: true,
     },
+    {
+      type: 'link',
+      label: 'GitHub',
+      href: 'https://github.com/contentauth/c2pa-js',
+    },
   ],
 };
 
