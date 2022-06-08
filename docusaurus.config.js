@@ -18,8 +18,9 @@ const config = {
   projectName: 'opensource.contentauth.org',
   clientModules: [require.resolve('./src/assets/scripts/ui.js')],
   scripts: [
-    '/scripts/analytics.js',
-    'https://www.adobe.com/marketingtech/main.min.js',
+    // TODO: Re-enable analytics once we solve flicker problem
+    // '/scripts/analytics.js',
+    // 'https://www.adobe.com/marketingtech/main.min.js',
     {
       src: 'https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js',
       'data-domain-script': '20e82cdb-918a-4036-93c6-c356dc13a801',
