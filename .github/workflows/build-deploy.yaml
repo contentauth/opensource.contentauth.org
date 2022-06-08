@@ -17,6 +17,7 @@ jobs:
         with:
           repository: contentauth/c2pa-js
           path: c2pa-js
+          ref: fc829c8dfe15135ff3f691459b3485be438eddf9
       - name: Remove old sdk file (temporary)
         working-directory: c2pa-js
         run: rm -f common/api/sdk.api.json
