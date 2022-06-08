@@ -3,9 +3,19 @@ id: introduction
 title: Introduction
 ---
 
+## Overview
+
+The Content Authenticity Initiative's open-source offerings are comprised of three products:
+
+### JavaScript SDK
+
+### Rust SDK
+
+### c2patool
+
 ## Concepts
 
-:::tip
+:::info
 The C2PA Technical Specification has a [handy diagram](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_overview_2) that
 illustrates the different concepts mentioned in this page.
 :::

@@ -35,7 +35,7 @@ export const features = [
   },
   {
     id: 'c2patool',
-    title: 'c2patool',
+    title: 'C2PA Tool',
     icon: <C2PAToolIcon />,
     hasC2paMetadata: false,
     description: (
