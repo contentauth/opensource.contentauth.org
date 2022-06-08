@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Features from '../components/Features';
@@ -11,7 +11,6 @@ import HeroImage from '../assets/images/hero-2.svg';
 import { C2paProvider } from '@contentauth/react-hooks';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import { resolvers } from 'c2pa';
-import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 const manifestResolvers = resolvers.createTypedResolvers(
   resolvers.editsAndActivity,
@@ -19,7 +18,7 @@ const manifestResolvers = resolvers.createTypedResolvers(
 export const features = [
   {
     id: 'js-sdk',
-    title: 'JS SDK',
+    title: 'JavaScript SDK',
     icon: <JSSDKIcon />,
     hasC2paMetadata: true,
     description: (
@@ -35,8 +34,8 @@ export const features = [
     media: '/img/Sunset.jpg',
   },
   {
-    id: 'c2pa-tool',
-    title: 'C2PA Tool',
+    id: 'c2patool',
+    title: 'c2patool',
     icon: <C2PAToolIcon />,
     hasC2paMetadata: false,
     description: (

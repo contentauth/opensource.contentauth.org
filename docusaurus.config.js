@@ -73,10 +73,14 @@ const config = {
             position: 'right',
           },
           {
-            to: 'https://verify.contentauthenticity.org',
-            label: 'Verify',
+            href: 'https://discord.gg/CAI',
             position: 'right',
-            className: 'navbar__button',
+            className: 'header-logo header-discord-link',
+          },
+          {
+            href: 'https://github.com/contentauth',
+            position: 'right',
+            className: 'header-logo header-github-link',
           },
         ],
       },

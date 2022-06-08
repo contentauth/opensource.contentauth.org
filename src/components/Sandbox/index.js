@@ -4,9 +4,9 @@ import sbSdk from '@stackblitz/sdk';
 const codeSandboxDefaults = {
   settings: {
     autoresize: 1,
-    codemirror: 1,
+    codemirror: 0,
     runonclick: 1,
-    expanddevtools: 0,
+    expanddevtools: 1,
     previewwindow: 'console',
     hidenavigation: 1,
     fontsize: 12,
@@ -38,6 +38,7 @@ const CodeSandbox = ({
   };
   if (displayType === 'preview') {
     settings.previewwindow = 'browser';
+    settings.expanddevtools = 0;
   }
   const styles = {
     ...codeSandboxDefaults.styles,
@@ -48,7 +49,7 @@ const CodeSandbox = ({
     styles.height = '900px';
   }
   const params = new URLSearchParams({ ...settings, ...opts.settings });
-  const src = `https://codesandbox.io/embed/github/dkozma/c2pa-js/tree/update-examples/examples/${example}?${params.toString()}`;
+  const src = `https://codesandbox.io/embed/github/contentauth/c2pa-js/tree/main/examples/${example}?${params.toString()}`;
 
   return (
     <iframe
@@ -82,11 +83,13 @@ const StackBlitz = ({
   opts = {},
 }) => {
   const ref = useRef();
+  const openFile = file.replace(/^\//, '');
   const settings = {
     ...stackBlitzDefaults.settings,
     ...opts.settings,
-    openFile: file,
-    initialPath: browserPath ?? file.replace(/main\.ts$/, 'index.html'),
+    openFile,
+    initialPath: browserPath ?? openFile.replace(/main\.ts$/, 'index.html'),
+    theme: 'light',
   };
   const styles = stackBlitzDefaults.styles;
   if (size === 'small') {
@@ -98,17 +101,14 @@ const StackBlitz = ({
   useEffect(() => {
     (async () => {
       if (ref.current) {
-        const project = await sbSdk.embedGithubProject(
+        await sbSdk.embedGithubProject(
           ref.current,
-          `dkozma/c2pa-js/tree/update-examples/examples/${example}`,
+          `contentauth/c2pa-js/tree/main/examples/${example}`,
           settings,
         );
       }
     })();
   }, []);
-
-  const params = new URLSearchParams();
-  const src = `https://stackblitz.com/github/dkozma/c2pa-js/tree/update-examples/examples/${example}?${params.toString()}`;
 
   return <div ref={ref} style={{ ...styles, ...opts.styles }}></div>;
 };

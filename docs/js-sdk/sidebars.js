@@ -8,7 +8,7 @@ const sidebars = {
       items: [
         'js-sdk/getting-started/overview',
         'js-sdk/getting-started/quick-start',
-        'js-sdk/getting-started/concepts',
+        'js-sdk/getting-started/architecture',
         'js-sdk/getting-started/browser-support',
       ],
       collapsed: false,
@@ -18,9 +18,9 @@ const sidebars = {
       label: 'Guides',
       items: [
         'js-sdk/guides/viewing-provenance',
-        // "guides/resolvers",
-        // "guides/web-components",
-        // "guides/react-hooks",
+        'js-sdk/guides/validation',
+        // "js-sdk/guides/resolvers",
+        // "js-sdk/guides/web-components",
         'js-sdk/guides/debugging',
         'js-sdk/guides/hosting',
       ],

@@ -1,6 +1,7 @@
 ---
 id: quick-start
 title: Quick start
+hide_table_of_contents: true
 ---
 
 import Tabs from '@theme/Tabs';
@@ -18,16 +19,38 @@ You'll need both [Node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/)
 1. **Install Homebrew:** The easiest way to install Node.js on your macOS system is via [Homebrew](https://brew.sh/).
    Please follow the instructions on their page to get this up and running.
 1. **Install Node.js:** The quickest way to install Node.js is through Homebrew directly. Open up your terminal,
-   enter `brew install node@14`, and press "return". _Note: For any more advanced JavaScript development, we recommend
+   enter `brew install node@16`, and press "return". _Note: For any more advanced JavaScript development, we recommend
    using [nvm](https://github.com/nvm-sh/nvm) rather than Homebrew to install Node.js._
 
 ## Bringing in the library
 
-We have a couple ways to bring in the library, depending on your build configuration:
+### Using a CDN
+
+The quickest way to get up and running is to use a CDN, such as [jsDelivr](https://www.jsdelivr.com/):
+
+<Sandbox file="/examples/cdn/main.ts" displayType="preview" />
+
+#### Static assets
+
+One of the big advantages with using a CDN is that all of the required static assets are provided, so you do not have
+to self-host them. They are also delivered at the edge, which enables faster downloads to your users. The static assets
+include the following, as seen in the config passed to [`createC2pa`](../../js-sdk/api/c2pa.createc2pa):
+
+```js
+{
+  wasmSrc: `https://cdn.jsdelivr.net/npm/c2pa@${version}/dist/assets/wasm/toolkit_bg.wasm`,
+  workerSrc: `https://cdn.jsdelivr.net/npm/c2pa@${version}/dist/c2pa.worker.min.js`,
+}
+```
+
+:::caution
+Please note the version numbers provided in the CDN URLs. These _must_ match in all of the places you reference the
+library, so it is recommended that you reference a single variable that provides the version as shown in the example.
+:::
 
 ### Package managers
 
-The recommended way to bring in our library is with a package manager, such as `npm` or `yarn`. This way, all of the
+You can also bring in our library with a package manager, such as `npm` or `yarn`. This way, all of the
 client side code is hosted with your app and there are no external dependencies.
 
 <Tabs>
@@ -37,12 +60,15 @@ client side code is hosted with your app and there are no external dependencies.
   <TabItem value="npm" label="NPM">
     <CodeBlock>npm install c2pa</CodeBlock>
   </TabItem>
+  <TabItem value="pnpm" label="pNPM">
+    <CodeBlock>pnpm install c2pa</CodeBlock>
+  </TabItem>
 </Tabs>
 
-#### Static asset configuration
+#### Static assets
 
-In addition to bringing in the main `createC2pa` function from `c2pa`, you also will need to statically host
-assets for the following resources so that heavier resources can be lazily loaded:
+When loading via a package manager, the `c2pa` library needs access to two externally-hosted assets so that these can be
+lazily loaded:
 
 - `c2pa/dist/assets/wasm/toolkit_bg.wasm` - the WebAssembly binary
 - `c2pa/dist/c2pa.worker.min.js` - the Web Worker script
@@ -52,7 +78,7 @@ Please be sure to configure your server to send proper `Content-Type` headers fo
 please see our guide on [hosting](../guides/hosting).
 :::
 
-Examples for common build systems are shown below. They are also available in the `examples` directory in our repo.
+Examples for common build systems are shown below. They are also available in the [`examples` directory](https://github.com/contentauth/c2pa-js/tree/main/examples) in our repo.
 
 export const ExampleLink = ({ example }) => {
   const linkText = `examples/${example}`;
@@ -75,9 +101,3 @@ export const ExampleLink = ({ example }) => {
     <Sandbox example="minimal-ts-webpack" file="/src/main.ts" browserPath="/" />
   </TabItem>
 </Tabs>
-
-### ES module imports
-
-We also be support bringing in the library using ES module imports for those who cannot (or do not wish to) use a package manager.
-
-<Sandbox example="esm-imports" file="/index.html" />
