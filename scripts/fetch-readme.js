@@ -17,8 +17,8 @@ const readmes = [
   },
   {
     dest: resolve(__dirname, '../docs/c2patool/readme.md'),
-    repo: 'contentauth/c2pa-rs',
-    path: 'c2patool/src/README.md',
+    repo: 'contentauth/c2patool',
+    path: 'README.md',
   },
 ];
 
