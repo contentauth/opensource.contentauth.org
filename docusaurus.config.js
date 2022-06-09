@@ -11,7 +11,7 @@ const config = {
   url: 'https://contentauth.netlify.com',
   baseUrl: '/',
   staticDirectories: ['static'],
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: '/favicon.png',
   organizationName: 'contentauth',
