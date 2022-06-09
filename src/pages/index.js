@@ -28,7 +28,7 @@ export const features = [
       </>
     ),
     cta: {
-      link: '/docs/introduction',
+      link: '/docs/js-sdk/getting-started/overview',
       label: 'View documentation',
     },
     media: '/img/Sunset.jpg',
@@ -45,9 +45,8 @@ export const features = [
       </>
     ),
     cta: {
-      link: '/',
-      label: 'Coming soon',
-      disabled: true,
+      link: '/docs/c2patool',
+      label: 'View documentation',
     },
     media: <img src="/img/c2patool@2x.png" />,
   },
@@ -63,9 +62,8 @@ export const features = [
       </>
     ),
     cta: {
-      link: '/',
-      label: 'Coming soon',
-      disabled: true,
+      link: '/docs/rust-sdk',
+      label: 'View documentation',
     },
     media: <img src="/img/rust-sdk@3x.png" />,
   },
