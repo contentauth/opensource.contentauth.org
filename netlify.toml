@@ -2,4 +2,10 @@
   for = "/img/*"
 
   [headers.values]
-  	Access-Control-Allow-Origin = "*""
+  	Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "*"
+
+  [headers.values]
+    X-Robots-Tag = "noindex"
