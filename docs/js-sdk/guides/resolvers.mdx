@@ -2,3 +2,27 @@
 id: resolvers
 title: Resolvers
 ---
+
+Resolvers are used by the `c2pa` library as a convenient way to return meaningful data from the parsed manifest store. For instance, finding info on who produced an asset involves locating and processing the `stds.schema-org.CreativeWork` assertion and having familiarity with its data structure:
+
+```typescript
+function getProducer(manifest) {
+  const cwAssertion = manifest.assertions.get('stds.schema-org.CreativeWork');
+  return assertion.author?.find((x) => !x.hasOwnProperty('@id'));
+}
+```
+
+However, the [default resolvers](https://github.com/contentauth/c2pa-js/blob/main/packages/c2pa/src/resolvers/defaults.ts) that are provided by the SDK allow us to simplify this to:
+
+```typescript
+function getProducer(manifest) {
+  return manifest.producer;
+}
+```
+
+This allows implementers to:
+
+- Access common assertion data without having familiarity details of the spec/assertions
+- Combine data from different assertions to access a related set of information
+- Publish custom sets of resolvers to third parties that provide intuitive accessors into their custom assertions
+- Run async transformations on assertion data before accessing it
