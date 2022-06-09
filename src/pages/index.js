@@ -77,7 +77,7 @@ const comparisonColumns = [
   },
   {
     key: 'jsSDK',
-    label: 'JS SDK',
+    label: 'JavaScript SDK',
     type: 'boolean',
   },
   {
