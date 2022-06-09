@@ -9,11 +9,30 @@ The Content Authenticity Initiative's open-source offerings are comprised of thr
 
 ### JavaScript SDK
 
+The [JavaScript SDK](js-sdk/getting-started/overview) is our open-source project for **working with C2PA data in the browser**. Use this to:
+
+- Verify and display C2PA data on your site or web application
+- Link C2PA data displayed on your site to [Verify](https://verify.contentauthenticity.org/)
+- Easily add user interface elements to your web site that display C2PA data while following the [user experience recommendations](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html) set forth by the C2PA
+
 ### Rust SDK
+
+The [Rust SDK](rust-sdk) is our open-source project for **adding C2PA capabilities to your desktop, mobile, or embedded application**. Use this to:
+
+- Create and sign C2PA claims and manifests
+- Embed manifests into certain file formats
+- Parse and validate manifests found in certain file formats
 
 ### c2patool
 
+[c2patool](c2patool) is an open-source utility that allows you to **work with C2PA data from the command line**. Use this to:
+
+- Read a JSON report of C2PA manifests in supported file formats
+- Add a C2PA manifest to supported file formats
+
 ## Concepts
+
+Regardless of which product you use, there are certain concepts that are helpful for you to be aware of.
 
 :::info
 The C2PA Technical Specification has a [handy diagram](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_overview_2) that
