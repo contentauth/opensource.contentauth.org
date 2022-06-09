@@ -83,6 +83,11 @@ const config = {
             position: 'right',
             className: 'header-logo header-github-link',
           },
+          {
+            href: 'https://twitter.com/ContentAuth',
+            position: 'right',
+            className: 'header-logo header-twitter-link',
+          },
         ],
       },
       footer: {
