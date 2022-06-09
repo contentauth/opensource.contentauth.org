@@ -45,7 +45,7 @@ const sidebars = {
         {
           type: 'link',
           label: 'GitHub',
-          href: 'https://github.com/contentauth/c2pa-rs/tree/main/c2patool/src',
+          href: 'https://github.com/contentauth/c2patool',
         },
       ],
     },
