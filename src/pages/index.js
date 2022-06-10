@@ -11,6 +11,7 @@ import HeroImage from '../assets/images/hero-2.svg';
 import { C2paProvider } from '@contentauth/react-hooks';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import { resolvers } from 'c2pa';
+import FeedbackLink from '../components/FeedbackLink';
 
 const manifestResolvers = resolvers.createTypedResolvers(
   resolvers.editsAndActivity,
@@ -177,6 +178,7 @@ export default function Home() {
                 columns={comparisonColumns}
                 records={comparisonRecords}
               />
+              <FeedbackLink />
             </C2paProvider>
           </main>
         </Layout>

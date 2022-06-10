@@ -8,9 +8,13 @@ import styles from './styles.module.css';
 export default function FooterLogoLockup() {
   return (
     <div className={styles.root}>
-      <CAILogo className={styles.logoCAI} />
+      <a href="https://contentauthenticity.org/" target="_blank">
+        <CAILogo className={styles.logoCAI} />
+      </a>
       <XIcon className={styles.x} />
-      <AdobeLogo className={styles.logoAdobe} />
+      <a href="https://www.adobe.com/" target="_blank">
+        <AdobeLogo className={styles.logoAdobe} />
+      </a>
     </div>
   );
 }
