@@ -5,11 +5,48 @@ title: Validation & errors
 
 ## Validation
 
-Part of processing a C2PA asset involves [validating the manifests](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_validation) that it contains.
-Any validation errors that occur in one of two places:
+Part of processing a C2PA asset involves [validating the manifests](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_validation) that it contains. Any validation errors that occur in one of two places:
 
 ### Validation errors in the active manifest
 
+When C2PA assets are loaded via [c2pa.read](../api/c2pa.c2pa#methods), the current manifest is validated and any [failure codes](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_failure_codes) codes are available via the `manifest.errors` array. Some examples of events that could trigger errors in this field are:
+
+- editing the bits of an asset after it was signed
+- a claim or assertion was missing or tampered with
+- an invalid credential was used when signing the manifest
+
 ### Validation errors in ingredients
 
+[Ingredients](../../introduction#ingredient) are validated at the time they are imported into an asset. The results of this are stored in the manifest in the ingredient's [`validationStatus`](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_existing_manifests) object, which contains both [success](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_success_codes) and [failure](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_failure_codes) codes that represent the results of all of the validation checks that took place.
+
+In the JavaScript SDK, you can access validation errors in ingredients like so:
+
+```typescript
+manifest.ingredients.forEach((ingredient) => {
+  console.log('validationStatus', data.ingredient.validationStatus);
+});
+```
+
+:::note
+The `validationStatus` array provided by the SDK only reports failure `validationStatus` codes, as success codes are generally informational and do not affect the UI.
+:::
+
 ## Errors
+
+Errors can also occur when trying to process the asset, which will throw a JavaScript error when calling [c2pa.read](../api/c2pa.c2pa#methods). You can capture these errors by always surrounding `c2pa.read` in a `try...catch` block:
+
+```typescript
+try {
+  const { manifestStore } = await c2pa.read(sampleImage);
+  console.log('manifestStore', manifestStore);
+} catch (err) {
+  console.error('Error reading image:', err);
+}
+```
+
+Errors will have a name that corresponds with an [`c2pa::Error` enum variant](https://docs.rs/c2pa/latest/c2pa/enum.Error.html), surrounded with `C2pa()`, for instance `C2pa(UnsupportedType)`.
+
+Examples of events that can cause an error to be thrown are:
+
+- Passing in an asset that is not a supported file type (e.g. `image/jpeg`, `image/png`)
+- Passing in an asset containing corrupted data

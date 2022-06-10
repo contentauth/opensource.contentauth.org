@@ -19,7 +19,7 @@ const sidebars = {
       items: [
         'js-sdk/guides/viewing-provenance',
         'js-sdk/guides/validation',
-        // "js-sdk/guides/resolvers",
+        'js-sdk/guides/resolvers',
         // "js-sdk/guides/web-components",
         'js-sdk/guides/debugging',
         'js-sdk/guides/hosting',
