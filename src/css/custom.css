@@ -170,6 +170,12 @@ body:not(.is-scrolling) .navbar {
   margin-right: 0;
 }
 
+.navbar__items--right > :last-child {
+  display: none;
+}
+.navbar__items--right > :nth-last-child(2) {
+  padding-right: 0;
+}
 .navbar-sidebar .navbar__button {
   background-color: transparent;
   padding: var(--ifm-menu-link-padding-vertical)

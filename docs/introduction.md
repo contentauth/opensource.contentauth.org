@@ -9,9 +9,9 @@ The Content Authenticity Initiative's open-source offerings are comprised of thr
 
 ### JavaScript SDK
 
-### Rust SDK
-
 ### c2patool
+
+### Rust SDK
 
 ## Concepts
 
