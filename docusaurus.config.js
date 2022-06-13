@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'CAI Open Source',
+  title: 'Open-source tools for content authenticity and provenance',
   tagline: 'Open-source tools for content authenticity and provenance',
   url: 'https://contentauth.netlify.com',
   baseUrl: '/',
@@ -52,6 +52,37 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        { property: 'twitter:card', content: 'summary_large_image' },
+        { property: 'og:card', content: 'summary_large_image' },
+        {
+          property: 'twitter:image',
+          content:
+            'https://opensource.contentauthenticity.org/img/rust-sdk@3x.png?v=1',
+        },
+        {
+          property: 'twitter:description',
+          content:
+            'Integrate secure provenance signals into your site, app, or service using open-source tools developed by the Content Authenticity Initiative.',
+        },
+        {
+          property: 'og:description',
+          content:
+            'Integrate secure provenance signals into your site, app, or service using open-source tools developed by the Content Authenticity Initiative.',
+        },
+        {
+          property: 'twitter:title',
+          content: 'Open-source tools for content authenticity and provenance',
+        },
+        {
+          property: 'og:title',
+          content: 'Open-source tools for content authenticity and provenance',
+        },
+      ],
+
+      // Relative to your site's 'static' directory.
+      // Cannot be SVGs. Can be external URLs too.
+      image: 'img/open source@2x.png',
       colorMode: {
         disableSwitch: true,
       },
