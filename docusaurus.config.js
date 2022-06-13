@@ -58,7 +58,7 @@ const config = {
         {
           property: 'twitter:image',
           content:
-            'https://opensource.contentauthenticity.org/img/open_source@2x.png?v=1',
+            'https://opensource.contentauthenticity.org/img/open-source@2x.png?v=1',
         },
         {
           property: 'twitter:description',
