@@ -1,4 +1,6 @@
-/*
+/
+  X-Robots-Tag: noindex
+/docs/*
   X-Robots-Tag: noindex
 /img/*
   Access-Control-Allow-Origin: *
