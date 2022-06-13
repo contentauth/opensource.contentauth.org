@@ -82,7 +82,6 @@ const config = {
 
       // Relative to your site's 'static' directory.
       // Cannot be SVGs. Can be external URLs too.
-      image: 'img/open source@2x.png',
       colorMode: {
         disableSwitch: true,
       },
