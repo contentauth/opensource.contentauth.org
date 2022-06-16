@@ -1,33 +1,12 @@
-@import '../../css/custom.css';
-
-.app {
-  text-align: center;
-}
-.claim-info {
-  border: solid 1px #ccc;
-  border-collapse: collapse;
-  margin: auto;
-  margin-bottom: 40px;
-}
-.claim-info td {
-  border: solid 1px #ccc;
-  padding: 5px;
-}
 .web-components .wrapper {
   position: relative;
-}
-.web-components .wrapper > img {
-  width: 100%;
-  height: auto;
 }
 .web-components .wrapper cai-popover {
   position: absolute;
   top: 10px;
   right: 10px;
 }
-.web-components
-  .wrapper
-  cai-manifest-summary::part(manifest-summary-container) {
+.web-components cai-manifest-summary::part(manifest-summary-container) {
   max-height: 600px;
   overflow: hidden scroll;
 }
