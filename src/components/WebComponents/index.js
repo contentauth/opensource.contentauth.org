@@ -35,11 +35,7 @@ export function WebComponents({ imageUrl, provenance, viewMoreUrl }) {
         <img src={imageUrl} />
         {manifest ? (
           <div>
-            <cai-popover
-              interactive
-              placement="left-start"
-              class="theme-spectrum"
-            >
+            <cai-popover interactive class="theme-spectrum">
               <cai-indicator slot="trigger"></cai-indicator>
               <cai-manifest-summary
                 ref={summaryRef}
