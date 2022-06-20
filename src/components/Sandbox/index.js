@@ -49,7 +49,7 @@ const CodeSandbox = ({
     styles.height = '900px';
   }
   const params = new URLSearchParams({ ...settings, ...opts.settings });
-  const src = `https://codesandbox.io/embed/github/contentauth/c2pa-js/tree/main/examples/${example}?${params.toString()}`;
+  const src = `https://codesandbox.io/embed/github/contentauth/c2pa-js-examples/tree/main/${example}?${params.toString()}`;
 
   return (
     <iframe
@@ -103,7 +103,7 @@ const StackBlitz = ({
       if (ref.current) {
         await sbSdk.embedGithubProject(
           ref.current,
-          `contentauth/c2pa-js/tree/main/examples/${example}`,
+          `contentauth/c2pa-js-examples/tree/main/${example}`,
           settings,
         );
       }
