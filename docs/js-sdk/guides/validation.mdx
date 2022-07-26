@@ -9,7 +9,7 @@ Part of processing a C2PA asset involves [validating the manifests](https://c2pa
 
 ### Validation errors in the active manifest
 
-When C2PA assets are loaded via [c2pa.read](../api/c2pa.c2pa#methods), the current manifest is validated and any [failure codes](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_failure_codes) codes are available via the `manifest.errors` array. Some examples of events that could trigger errors in this field are:
+When C2PA assets are loaded via [c2pa.read](../api/c2pa.c2pa#methods), the current manifest is validated and any [failure codes](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_failure_codes) codes are available via the `manifestStore.validationStatus` array. Some examples of events that could trigger errors in this field are:
 
 - editing the bits of an asset after it was signed
 - a claim or assertion was missing or tampered with
