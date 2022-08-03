@@ -4,9 +4,6 @@
 # Production
 /build
 
-# Rust
-/target
-
 # Generated files
 .docusaurus
 .cache-loader
