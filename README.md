@@ -32,8 +32,6 @@ This command generates static content into the `build` directory and can be serv
 Deployments are handled automatically by Netlify. Please open up a pull request with any changes and a preview site
 should be created automatically so that the preview can be shared before merging.
 
-Any changes in `main` will automatically be deployed to https://contentauth.netlify.app/ (password is `oss stage`).
-
 ## License
 
 [![CC BY 4.0][cc-by-image]][cc-by]
