@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@contentauth/react-hooks": "^0.5.0",
-    "@docusaurus/core": "2.0.0-beta.21",
-    "@docusaurus/preset-classic": "2.0.0-beta.21",
+    "@docusaurus/core": "^2.0.1",
+    "@docusaurus/preset-classic": "^2.0.1",
     "@mdx-js/react": "^1.6.22",
     "@stackblitz/sdk": "^1.6.0",
     "c2pa": "0.9.1",
