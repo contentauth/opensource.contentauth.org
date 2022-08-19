@@ -224,62 +224,6 @@ checksum = "ec8a7b6a70fde80372154c65702f00a0f56f3e1c36abbc6c440484be248856db"
 
 [[package]]
 name = "c2pa"
-version = "0.7.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2c59006f457910bc2b58bfe9c62af8bd6a5fdcb859aaa11f9d3d855bb6c38003"
-dependencies = [
- "atree",
- "base64",
- "bcder",
- "blake3",
- "byteorder",
- "bytes 1.2.1",
- "chrono",
- "ciborium",
- "console_log",
- "conv",
- "coset",
- "extfmt",
- "getrandom",
- "hex",
- "image 0.23.14",
- "img-parts",
- "instant",
- "js-sys",
- "log",
- "multibase",
- "multihash",
- "nom",
- "openssl",
- "png_pong",
- "quick-xml",
- "range-set",
- "ring",
- "serde",
- "serde-transcode",
- "serde-wasm-bindgen",
- "serde_bytes",
- "serde_cbor",
- "serde_derive",
- "serde_json",
- "sha2 0.9.9",
- "tempfile",
- "thiserror",
- "time 0.3.12",
- "twoway",
- "ureq",
- "url",
- "uuid",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "web-sys",
- "x509-certificate",
- "x509-parser",
- "xmp_toolkit",
-]
-
-[[package]]
-name = "c2pa"
 version = "0.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1c73e98725f6c64dbe7225b81f1919bc57da7fe41d67458c4393386baf1c3f02"
@@ -298,7 +242,7 @@ dependencies = [
  "extfmt",
  "getrandom",
  "hex",
- "image 0.24.3",
+ "image",
  "img-parts",
  "instant",
  "js-sys",
@@ -306,6 +250,7 @@ dependencies = [
  "multibase",
  "multihash",
  "nom",
+ "openssl",
  "png_pong",
  "quick-xml",
  "rand",
@@ -333,16 +278,17 @@ dependencies = [
  "web-sys",
  "x509-certificate",
  "x509-parser",
+ "xmp_toolkit",
 ]
 
 [[package]]
 name = "c2patool"
-version = "0.2.1"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9fe2a2c16fd9a57b063bca55495bd7e0f5ca9efbd12f93cc9650d0ea5dfce07e"
+checksum = "3b21c8b8e058d75e09e2f421c58a696d29fc31345c276c29873a70ac5284adf3"
 dependencies = [
  "anyhow",
- "c2pa 0.7.2",
+ "c2pa",
  "env_logger",
  "log",
  "serde",
@@ -598,16 +544,6 @@ dependencies = [
 
 [[package]]
 name = "deflate"
-version = "0.8.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "73770f8e1fe7d64df17ca66ad28994a0a623ea497fa69486e14984e715c5d174"
-dependencies = [
- "adler32",
- "byteorder",
-]
-
-[[package]]
-name = "deflate"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c86f7e25f518f4b81808a2cf1c50996a61f5c2eb394b2393bd87f2a4780a432f"
@@ -706,7 +642,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "14cc0e06fb5f67e5d6beadf3a382fec9baca1aa751c6d5368fdeee7e5932c215"
 dependencies = [
  "bit_field",
- "deflate 1.0.0",
+ "deflate",
  "flume",
  "half",
  "inflate",
@@ -884,25 +820,6 @@ dependencies = [
 
 [[package]]
 name = "image"
-version = "0.23.14"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "24ffcb7e7244a9bf19d35bf2883b9c080c4ced3c07a9895572178cdb8f13f6a1"
-dependencies = [
- "bytemuck",
- "byteorder",
- "color_quant",
- "gif",
- "jpeg-decoder 0.1.22",
- "num-iter",
- "num-rational 0.3.2",
- "num-traits",
- "png 0.16.8",
- "scoped_threadpool",
- "tiff 0.6.1",
-]
-
-[[package]]
-name = "image"
 version = "0.24.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7e30ca2ecf7666107ff827a8e481de6a132a9b687ed3bb20bb1c144a36c00964"
@@ -912,12 +829,12 @@ dependencies = [
  "color_quant",
  "exr",
  "gif",
- "jpeg-decoder 0.2.6",
- "num-rational 0.4.1",
+ "jpeg-decoder",
+ "num-rational",
  "num-traits",
- "png 0.17.5",
+ "png",
  "scoped_threadpool",
- "tiff 0.7.3",
+ "tiff",
 ]
 
 [[package]]
@@ -957,15 +874,6 @@ name = "itoa"
 version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6c8af84674fe1f223a982c933a0ee1086ac4d4052aa0fb8060c12c6ad838e754"
-
-[[package]]
-name = "jpeg-decoder"
-version = "0.1.22"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "229d53d58899083193af11e15917b5640cd40b29ff475a1fe4ef725deb02d0f2"
-dependencies = [
- "rayon",
-]
 
 [[package]]
 name = "jpeg-decoder"
@@ -1069,15 +977,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5aa361d4faea93603064a027415f07bd8e1d5c88c9fbf68bf56a285428fd79ce"
 dependencies = [
  "autocfg",
-]
-
-[[package]]
-name = "miniz_oxide"
-version = "0.3.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "791daaae1ed6889560f8c4359194f56648355540573244a5448a83ba1ecc7435"
-dependencies = [
- "adler32",
 ]
 
 [[package]]
@@ -1198,17 +1097,6 @@ dependencies = [
 
 [[package]]
 name = "num-rational"
-version = "0.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "12ac428b1cb17fce6f731001d307d351ec70a6d202fc2e60f7d4c5e42d8f4f07"
-dependencies = [
- "autocfg",
- "num-integer",
- "num-traits",
-]
-
-[[package]]
-name = "num-rational"
 version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0638a1c9d0a3c0914158145bc76cff373a75a627e6ecbfb71cbe6f453a5a19b0"
@@ -1293,7 +1181,7 @@ checksum = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
 name = "opensource-contentauthenticity-org"
 version = "0.1.0"
 dependencies = [
- "c2pa 0.12.0",
+ "c2pa",
  "c2patool",
 ]
 
@@ -1426,25 +1314,13 @@ checksum = "1df8c4ec4b0627e53bdf214615ad287367e482558cf84b109250b37464dc03ae"
 
 [[package]]
 name = "png"
-version = "0.16.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3c3287920cb847dee3de33d301c463fba14dda99db24214ddf93f83d3021f4c6"
-dependencies = [
- "bitflags",
- "crc32fast",
- "deflate 0.8.6",
- "miniz_oxide 0.3.7",
-]
-
-[[package]]
-name = "png"
 version = "0.17.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dc38c0ad57efb786dd57b9864e5b18bae478c00c824dc55a38bbc9da95dde3ba"
 dependencies = [
  "bitflags",
  "crc32fast",
- "deflate 1.0.0",
+ "deflate",
  "miniz_oxide 0.5.3",
 ]
 
@@ -1996,23 +1872,12 @@ dependencies = [
 
 [[package]]
 name = "tiff"
-version = "0.6.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9a53f4706d65497df0c4349241deddf35f84cee19c87ed86ea8ca590f4464437"
-dependencies = [
- "jpeg-decoder 0.1.22",
- "miniz_oxide 0.4.4",
- "weezl",
-]
-
-[[package]]
-name = "tiff"
 version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7259662e32d1e219321eb309d5f9d898b779769d81b76e762c07c8e5d38fcb65"
 dependencies = [
  "flate2",
- "jpeg-decoder 0.2.6",
+ "jpeg-decoder",
  "weezl",
 ]
 
