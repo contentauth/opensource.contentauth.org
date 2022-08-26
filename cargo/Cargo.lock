@@ -282,13 +282,70 @@ dependencies = [
 ]
 
 [[package]]
+name = "c2pa"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a0c6f1d2a7795db0749c88395c8723dcba50626399811516fa064d77800dc56d"
+dependencies = [
+ "atree",
+ "base64",
+ "bcder",
+ "blake3",
+ "byteorder",
+ "bytes 1.2.1",
+ "chrono",
+ "ciborium",
+ "console_log",
+ "conv",
+ "coset",
+ "extfmt",
+ "getrandom",
+ "hex",
+ "image",
+ "img-parts",
+ "instant",
+ "js-sys",
+ "log",
+ "multibase",
+ "multihash",
+ "nom",
+ "png_pong",
+ "quick-xml",
+ "rand",
+ "range-set",
+ "ring",
+ "rsa",
+ "serde",
+ "serde-transcode",
+ "serde-wasm-bindgen",
+ "serde_bytes",
+ "serde_cbor",
+ "serde_derive",
+ "serde_json",
+ "sha2 0.10.2",
+ "spki 0.6.0",
+ "tempfile",
+ "thiserror",
+ "time 0.3.12",
+ "twoway",
+ "ureq",
+ "url",
+ "uuid",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
+ "x509-certificate",
+ "x509-parser",
+]
+
+[[package]]
 name = "c2patool"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3b21c8b8e058d75e09e2f421c58a696d29fc31345c276c29873a70ac5284adf3"
 dependencies = [
  "anyhow",
- "c2pa",
+ "c2pa 0.12.0",
  "env_logger",
  "log",
  "serde",
@@ -1181,7 +1238,7 @@ checksum = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
 name = "opensource-contentauthenticity-org"
 version = "0.1.0"
 dependencies = [
- "c2pa",
+ "c2pa 0.13.0",
  "c2patool",
 ]
 
