@@ -20,7 +20,7 @@ The [JavaScript SDK](js-sdk/getting-started/overview) enables **working with C2P
 
 - Verify and display manifest data on a website or web application.
 - Link manifest data displayed on your site to [Verify](https://verify.contentauthenticity.org/).
-- Easily add user interface elements to your website that display manifest data while following the [C2PA user experience recommendations](https://c2pa.org/specifications/specifications/1.1/ux/UX_Recommendations.html).
+- Easily add user interface elements to your website that display manifest data while following the [C2PA user experience recommendations](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html).
 
 ### c2patool
 
