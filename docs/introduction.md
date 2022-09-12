@@ -51,7 +51,7 @@ Regardless of which SDK or tool you use, it's important to understand some key c
 
 **Active manifest**: The last manifest in the list of _C2PA manifests_ inside of a _C2PA manifest store_ which is the one with the set of _content bindings_ that are able to be validated.
 
-**Assertion**: A data structure which represents a statement asserted by an _actor_ concerning the _asset_. This data is part of the _C2PA manifest_. For a list of standard C2PA assertions, see [C2PA 1.0 Technical Specification](https://c2pa.org/specifications/specifications/1.1/specs/C2PA_Specification.html#_c2pa_standard_assertions).
+**Assertion**: A data structure which represents a statement asserted by an _actor_ concerning the _asset_. This data is part of the _C2PA manifest_. For a list of standard C2PA assertions, see [C2PA 1.1 Technical Specification](https://c2pa.org/specifications/specifications/1.1/specs/C2PA_Specification.html#_c2pa_standard_assertions).
 
 **Ingredient**: Part of a _composed asset_, such as an image superimposed on top of another image.
 
