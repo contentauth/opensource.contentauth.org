@@ -224,9 +224,9 @@ checksum = "ec8a7b6a70fde80372154c65702f00a0f56f3e1c36abbc6c440484be248856db"
 
 [[package]]
 name = "c2pa"
-version = "0.12.0"
+version = "0.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1c73e98725f6c64dbe7225b81f1919bc57da7fe41d67458c4393386baf1c3f02"
+checksum = "18432c19484bc770d40b980b6994c38ae18cf7cd56bae3793fae270a0819dfda"
 dependencies = [
  "atree",
  "base64",
@@ -282,70 +282,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "c2pa"
-version = "0.13.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "18432c19484bc770d40b980b6994c38ae18cf7cd56bae3793fae270a0819dfda"
-dependencies = [
- "atree",
- "base64",
- "bcder",
- "blake3",
- "byteorder",
- "bytes 1.2.1",
- "chrono",
- "ciborium",
- "console_log",
- "conv",
- "coset",
- "extfmt",
- "getrandom",
- "hex",
- "image",
- "img-parts",
- "instant",
- "js-sys",
- "log",
- "multibase",
- "multihash",
- "nom",
- "png_pong",
- "quick-xml",
- "rand",
- "range-set",
- "ring",
- "rsa",
- "serde",
- "serde-transcode",
- "serde-wasm-bindgen",
- "serde_bytes",
- "serde_cbor",
- "serde_derive",
- "serde_json",
- "sha2 0.10.2",
- "spki 0.6.0",
- "tempfile",
- "thiserror",
- "time 0.3.12",
- "twoway",
- "ureq",
- "url",
- "uuid",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "web-sys",
- "x509-certificate",
- "x509-parser",
-]
-
-[[package]]
 name = "c2patool"
-version = "0.3.0"
+version = "0.3.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3b21c8b8e058d75e09e2f421c58a696d29fc31345c276c29873a70ac5284adf3"
+checksum = "da4f6477e568006b6b3c267a1643c8c5f9807bf42415d430a71a1cd12819c155"
 dependencies = [
  "anyhow",
- "c2pa 0.12.0",
+ "c2pa",
  "env_logger",
  "log",
  "serde",
@@ -1238,7 +1181,7 @@ checksum = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
 name = "opensource-contentauthenticity-org"
 version = "0.1.0"
 dependencies = [
- "c2pa 0.13.1",
+ "c2pa",
  "c2patool",
 ]
 
