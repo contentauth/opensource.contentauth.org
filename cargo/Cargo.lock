@@ -224,9 +224,9 @@ checksum = "ec8a7b6a70fde80372154c65702f00a0f56f3e1c36abbc6c440484be248856db"
 
 [[package]]
 name = "c2pa"
-version = "0.13.1"
+version = "0.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "18432c19484bc770d40b980b6994c38ae18cf7cd56bae3793fae270a0819dfda"
+checksum = "c9f42af1b4a0c8d365d4bec40ebdc9555f980b0fd0478f0d299a462597204468"
 dependencies = [
  "atree",
  "base64",
@@ -268,7 +268,6 @@ dependencies = [
  "spki 0.6.0",
  "tempfile",
  "thiserror",
- "time 0.3.12",
  "twoway",
  "ureq",
  "url",
@@ -320,7 +319,7 @@ dependencies = [
  "libc",
  "num-integer",
  "num-traits",
- "time 0.1.44",
+ "time",
  "wasm-bindgen",
  "winapi",
 ]
@@ -1148,15 +1147,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "num_threads"
-version = "0.1.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2819ce041d2ee131036f4fc9d6ae7ae125a3a40e97ba64d04fe799ad9dabbb44"
-dependencies = [
- "libc",
-]
-
-[[package]]
 name = "oid-registry"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1890,17 +1880,6 @@ dependencies = [
  "libc",
  "wasi 0.10.0+wasi-snapshot-preview1",
  "winapi",
-]
-
-[[package]]
-name = "time"
-version = "0.3.12"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "74b7cc93fc23ba97fde84f7eea56c55d1ba183f495c6715defdfc7b9cb8c870f"
-dependencies = [
- "js-sys",
- "libc",
- "num_threads",
 ]
 
 [[package]]
