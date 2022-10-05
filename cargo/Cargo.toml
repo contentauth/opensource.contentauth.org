@@ -4,4 +4,4 @@ version = "0.1.0"
 
 [dependencies]
 c2pa = "0.14.1"
-c2patool = "0.3.6"
+c2patool = "0.3.7"
