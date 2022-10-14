@@ -42,6 +42,14 @@ The SDK strives to maintain compliance with the [C2PA specification](https://c2p
 The SDK handles all [validation](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_validation)
 via the [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) and passes any validation errors back to the client.
 
+#### Supported signature algorithms
+
+The JS SDK supports all ECDSA and RSASSA-PSS algorithms listed in the [C2PA specification](https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_digital_signatures).
+
+:::caution
+Ed25519 signatures are currently **not** supported by the JS SDK.
+:::caution
+
 ### Framework-agnostic
 
 The UI components are [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) that use the [Lit library](https://lit.dev/).
