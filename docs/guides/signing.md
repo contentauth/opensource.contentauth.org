@@ -33,8 +33,26 @@ You must supply credentials (certificates and keys) that correspond to your desi
   - If the configuration store does not contain a list of EKUs, a certificate that signs C2PA manifests must be valid for the `id-kp-emailProtection` (1.3.6.1.5.5.7.3.4) purpose.
   - The `id-kp-emailProtection` purpose is not implicitly included by default if a list of EKUs has been configured. If desired, it must explicitly be added to the list in the configuration store.
 
-Trust lists are used to connect the end-entity certificate that signed a manifest back to the originating root CA. This is accomplished by supplying the subordinate public X509 certificates forming the trust chain. If those are not supplied a private credential store may be used to validate the certificate trust chain. If you do not supply a certificate chain or trust list, validators may reject the manifest. See C2PA specification for more details.
 
+
+### Recommended signature type by signatureAlgorithm
+| signatureAlgorithm | Recommended Signature type |
+|--------------------|:----------------------------:|
+| `ecdsa-with-SHA256` | ES256                      |
+| `ecdsa-with-SHA384` | ES384                      | 
+| `ecdsa-with-SHA512` | ES512                      |
+| `sha256WithRSAEncryption` | PS256                 |
+| `sha256WithRSAEncryption` | PS384|
+| `sha256WithRSAEncryption` | PS512|
+| `id-RSASSA-PSS` ASN1 OID: prime256v1, NIST CURVE: P-256 | ES256|
+| `id-RSASSA-PSS` ASN1 OID: secp384r1 | ES384|
+| `id-RSASSA-PSS` ASN1 OID: secp521r1 | ES512|
+| `id-Ed2551` Ed25519 | Ed25519|
+
+
+
+Trust lists are used to connect the end-entity certificate that signed a manifest back to the originating root CA. This is accomplished by supplying the subordinate public X509 certificates forming the trust chain (the public X509 certificate chain). If those are not supplied a private credential store may be used to validate the certificate trust chain. If you do not supply a certificate chain or trust list, validators may reject the manifest. See C2PA specification for more details.
+ 
 Two other certificates are supported in the C2PA spec for timestamp responses and OCSP certificate revocation. Neither of those are covered here.
 
 ## Example credential generation
@@ -64,6 +82,7 @@ openssl pkcs12 -in mycertfile.pfx -nocerts -out mykey.pem -nodes
 ```
 
 #### Extract the certificate chain:
+For many certificate providers the pfx contains not just your certificate but the complete certificate trust chain.  When the pfx does not contain the certificate chain it can be obtained from your provider. 
 
 ```shell
 openssl pkcs12 -in mycertfile.pfx -nokeys -out mycerts.pem
@@ -89,7 +108,7 @@ To use the credentials extracted above you must know the signature types they su
 openssl x509 -inform PEM -in mycerts.pem -text
 ```
 
-That will produce a text summary (shown below) of the certificate properties. Look for a line containing `Signature Algorithm`. For a GlobalSign issued certificate, it would contain: `Signature Algorithm: sha256WithRSAEncryption`. This corresponds to the PS256 signature type, so that is what we will use for c2patool.
+That will produce a text summary (shown below) of the certificate properties. Look for a line containing `Signature Algorithm`. For a GlobalSign issued certificate, it would contain: `Signature Algorithm: sha256WithRSAEncryption`. This corresponds to the PS256 signature type (see table above), so that is what we will use for c2patool.
 
 ```
 Certificate:
