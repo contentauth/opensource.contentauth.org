@@ -50,6 +50,17 @@ const sidebars = {
       ],
     },
     {
+      type: 'category',
+      label: 'Guides',
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'guides/signing',
+        },
+      ],
+    },
+    {
       type: 'doc',
       id: 'community-resources',
     },
