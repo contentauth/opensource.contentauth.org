@@ -65,7 +65,7 @@ Credential management is a complex topic and different for every organization so
 
 ### Step 1: Purchase compliant credentials
 
-For this example, we used the [PersonSign1](https://shop.globalsign.com/en/secure-email) certificate. This certificate contains KU and EKU values that are compliant with C2PA manifest signing. Follow the instructions to purchase and download your .pfx file. This file is a PKCS12 container that holds your certificate chain and private signing key. Note: other certificate vendors may include only the end-entity certificate and you must manually download the rest of the certificate chain.
+For this example, we used the [PersonSign1](https://shop.globalsign.com/en/secure-email) certificate. This certificate contains KU and EKU values that are compliant with C2PA manifest signing. Follow the instructions to purchase and download your .pfx file. This file is a PKCS12 container that holds your certificate chain and private signing key. Note: other certificate vendors may include only the end-entity certificate and you must manually download the rest of the certificate chain.  We use OpenSSL (a set of cryptographic utilities) for the rest of this tutorial.  If OpenSSL is not installed on your system a quick web search will yield instructions for your specific installation.
 
 ### Step 2: Extract the certificate and key using OpenSSL
 
