@@ -11,31 +11,11 @@ Signing C2PA manifests requires an end-entity certificate that complies with the
 Best practices for handling keys and certificates are available from many sources and not directly covered here. Always protect your private keys with the highest level of security.
 :::note
 
-The open source [c2patool](/docs/c2patool) and [Rust SDK](/docs/rust-sdk) support signing with the following signature types:
+The following table summarizes important credential information provided in the [C2PA specification Trust Model section](https://c2pa.org/specifications/specifications/1.1/specs/C2PA_Specification.html#_trust_model). The table describes the signature algorithms and recommended signature types that the [c2patool](/docs/c2patool) and [Rust SDK](/docs/rust-sdk) support. You must supply credentials (certificates and keys) that correspond to the signing algorithm. Signing/validation will fail if the signature type is not supported by the supplied credentials.
 
-- ES256 (ECDSA with SHA-256)
-- ES384 (ECDSA with SHA-384)
-- ES512 (ECDSA with SHA-512)
-- PS256 (RSASSA-PSS using SHA-256 and MGF1 with SHA-256)
-- PS384 (RSASSA-PSS using SHA-384 and MGF1 with SHA-384)
-- PS512 (RSASSA-PSS using SHA-512 and MGF1 with SHA-512)
-- EdDSA (Edwards-Curve DSA)
-  - Ed25519 instance only. No other EdDSA instances are allowed.
+Additionally:
 
-You must supply credentials (certificates and keys) that correspond to your desired signing algorithm. Signing/validation will fail if the signature type is not supported by the supplied credentials.
-
-Here is a condensed summary of important credential information provided in the [Trust Model section](https://c2pa.org/specifications/specifications/1.1/specs/C2PA_Specification.html#_trust_model) of the C2PA specification. See the [spec](https://c2pa.org/specifications/specifications/1.1/specs/C2PA_Specification.html) for complete details.
-
-- Certificate must follow the X509 V3 specification
-- Certificate's `signatureAlgorithm` must be one of:
-  - `ecdsa-with-SHA256` ([RFC 5758 section 3.2](https://datatracker.ietf.org/doc/html/rfc5758#section-3.2))
-  - `ecdsa-with-SHA384` ([RFC 5758 section 3.2](https://datatracker.ietf.org/doc/html/rfc5758#section-3.2))
-  - `ecdsa-with-SHA512` ([RFC 5758 section 3.2](https://datatracker.ietf.org/doc/html/rfc5758#section-3.2))
-  - `sha256WithRSAEncryption` ([RFC 8017 appendix A.2.4](https://datatracker.ietf.org/doc/html/rfc8017#appendix-A.2.4))
-  - `sha384WithRSAEncryption` ([RFC 8017 appendix A.2.4](https://datatracker.ietf.org/doc/html/rfc8017#appendix-A.2.4))
-  - `sha512WithRSAEncryption` ([RFC 8017 appendix A.2.4](https://datatracker.ietf.org/doc/html/rfc8017#appendix-A.2.4))
-  - `id-RSASSA-PSS` ([RFC 8017 appendix A.2.3](https://datatracker.ietf.org/doc/html/rfc8017#appendix-A.2.3))
-  - `id-Ed25519` ([RFC 8410 section 3](https://datatracker.ietf.org/doc/html/rfc8410#section-3))
+- The certificate must follow the X.509 V3 specification.
 - The Key Usage (KU) extension must be present and marked as critical. Certificates used to sign C2PA manifests must assert the `digitalSignature` bit.
 - The Extended Key Usage (EKU) extension must be present and non-empty in any certificate where the Basic Constraints extension is absent or the certificate authority (CA) Boolean is not asserted.
   - The `anyExtendedKeyUsageEKU` (2.5.29.37.0) must not be present.
@@ -44,22 +24,24 @@ Here is a condensed summary of important credential information provided in the 
 
 ### Recommended signature type by signatureAlgorithm
 
-| signatureAlgorithm                                      | Recommended Signature type |
-| ------------------------------------------------------- | :------------------------: |
-| `ecdsa-with-SHA256`                                     |           ES256            |
-| `ecdsa-with-SHA384`                                     |           ES384            |
-| `ecdsa-with-SHA512`                                     |           ES512            |
-| `sha256WithRSAEncryption`                               |           PS256            |
-| `sha256WithRSAEncryption`                               |           PS384            |
-| `sha256WithRSAEncryption`                               |           PS512            |
-| `id-RSASSA-PSS` ASN1 OID: prime256v1, NIST CURVE: P-256 |           ES256            |
-| `id-RSASSA-PSS` ASN1 OID: secp384r1                     |           ES384            |
-| `id-RSASSA-PSS` ASN1 OID: secp521r1                     |           ES512            |
-| `id-Ed2551` Ed25519                                     |          Ed25519           |
-
 Trust lists connect the end-entity certificate that signed a manifest back to the originating root CA. This is accomplished by supplying the subordinate public X.509 certificates forming the trust chain (the public X.509 certificate chain). If those are not supplied, you can use a private credential store to validate the certificate trust chain. If you do not supply a certificate chain or trust list, validators may reject the manifest. See the C2PA specification for more details.
 
-Two other certificates are supported in the C2PA spec for timestamp responses and OCSP certificate revocation. Neither of those are covered here.
+| Certificate `signatureAlgorithm`                          | Description                                                   | Recommended signature type | RFC Reference                                                                         |
+| --------------------------------------------------------- | ------------------------------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------- |
+| `ecdsa-with-SHA256`                                       | ES256: ECDSA with SHA-256                                     | ES256                      | [RFC 5758 section 3.2](https://www.rfc-editor.org/rfc/rfc5758.html#section-3.2)       |
+| `ecdsa-with-SHA384`                                       | ES384: ECDSA with SHA-384                                     | ES384                      | [RFC 5758 section 3.2](https://www.rfc-editor.org/rfc/rfc5758.html#section-3.2)       |
+| `ecdsa-with-SHA512`                                       | ES512: ECDSA with SHA-512                                     | ES512                      | [RFC 5758 section 3.2](https://www.rfc-editor.org/rfc/rfc5758.html#section-3.2)       |
+| `sha256WithRSAEncryption`                                 | PS256: RSASSA-PSS with SHA-256<br/>MGF1 with SHA-256          | PS256                      | [RFC 8017 appendix A.2.4](https://www.rfc-editor.org/rfc/rfc8017.html#appendix-A.2.4) |
+| `sha384WithRSAEncryption`                                 | PS384: RSASSA-PSS<br/>SHA-384, MGF1 with SHA-384              | PS384                      | [RFC 8017 appendix A.2.4](https://www.rfc-editor.org/rfc/rfc8017.html#appendix-A.2.4) |
+| `sha512WithRSAEncryption`                                 | PS512: RSASSA-PSS<br/>SHA-512, MGF1 with SHA-512              | PS512                      | [RFC 8017 appendix A.2.4](https://www.rfc-editor.org/rfc/rfc8017.html#appendix-A.2.4) |
+| `id-RSASSA-PSS` - ASN1 OID: prime256v1, NIST CURVE: P-256 | RSA-PSS                                                       | ES256                      | [RFC 5758 section 3.2](https://www.rfc-editor.org/rfc/rfc5758.html#section-3.2)       |
+| `id-RSASSA-PSS` - ASN1 OID: secp384r1                     | RSA-PSS                                                       | ES384                      | [RFC 5758 section 3.2](https://www.rfc-editor.org/rfc/rfc5758.html#section-3.2)       |
+| `id-RSASSA-PSS` - ASN1 OID: secp521r1                     | RSA-PSS                                                       | ES512                      | [RFC 5758 section 3.2](https://www.rfc-editor.org/rfc/rfc5758.html#section-3.2)       |
+| `id-Ed25519`                                              | EdDSA (Edwards-Curve DSA) with SHA-512 (SHA-2) and Curve25519 | Ed25519 instance ONLY.     | [RFC 8410 section 3](https://www.rfc-editor.org/rfc/rfc8410.html#section-3)           |
+
+:::note
+The C2PA spec covers two other certificates for timestamp responses and OCSP certificate revocation, not covered here.
+:::note
 
 ## Example credential generation
 
