@@ -224,9 +224,9 @@ checksum = "ec8a7b6a70fde80372154c65702f00a0f56f3e1c36abbc6c440484be248856db"
 
 [[package]]
 name = "c2pa"
-version = "0.13.2"
+version = "0.15.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c9f42af1b4a0c8d365d4bec40ebdc9555f980b0fd0478f0d299a462597204468"
+checksum = "d5eadc06ea58cfa080c18314541bd6c2dfe2a6aa662fbe4270f3c25fe7e11e58"
 dependencies = [
  "atree",
  "base64",
@@ -281,69 +281,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "c2pa"
-version = "0.15.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d5eadc06ea58cfa080c18314541bd6c2dfe2a6aa662fbe4270f3c25fe7e11e58"
-dependencies = [
- "atree",
- "base64",
- "bcder",
- "blake3",
- "byteorder",
- "bytes 1.2.1",
- "chrono",
- "ciborium",
- "console_log",
- "conv",
- "coset",
- "extfmt",
- "getrandom",
- "hex",
- "image",
- "img-parts",
- "instant",
- "js-sys",
- "log",
- "multibase",
- "multihash",
- "nom",
- "png_pong",
- "quick-xml",
- "rand",
- "range-set",
- "ring",
- "rsa",
- "serde",
- "serde-transcode",
- "serde-wasm-bindgen",
- "serde_bytes",
- "serde_cbor",
- "serde_derive",
- "serde_json",
- "sha2 0.10.2",
- "spki 0.6.0",
- "tempfile",
- "thiserror",
- "twoway",
- "ureq",
- "url",
- "uuid",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "web-sys",
- "x509-certificate",
- "x509-parser",
-]
-
-[[package]]
 name = "c2patool"
-version = "0.3.7"
+version = "0.3.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6bc7096e37d2d7de00c42118eef6b49e9d800a15bd36a53b60f6415acb1ad09f"
+checksum = "e5cf4c10516240d220c2103f28fcd3b87369ad4c32aaaa4e0c8f9bd3deaea333"
 dependencies = [
  "anyhow",
- "c2pa 0.13.2",
+ "c2pa",
  "env_logger",
  "log",
  "serde",
@@ -1227,7 +1171,7 @@ checksum = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
 name = "opensource-contentauthenticity-org"
 version = "0.1.0"
 dependencies = [
- "c2pa 0.15.0",
+ "c2pa",
  "c2patool",
 ]
 
@@ -2270,9 +2214,9 @@ dependencies = [
 
 [[package]]
 name = "xmp_toolkit"
-version = "0.5.3"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "88109ef849824bb028f75ee2f6860420a48bb38b9c4f28702e6e7418923f9949"
+checksum = "22c639009c72fd52b12e0e9edd9a10093f521958571ed7e71c0d1d8503db4a32"
 dependencies = [
  "cc",
  "fs_extra",
