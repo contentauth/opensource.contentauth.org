@@ -4,6 +4,32 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+const copyright = `
+<div>
+  Copyright © ${new Date().getFullYear()} Adobe. All rights reserved.<br /><a
+    href="https://www.adobe.com/privacy.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Privacy</a
+  >
+  |
+  <a
+    href="https://www.adobe.com/legal/terms.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Terms of Use</a
+  >
+  |
+  <button href="/" id="ot-sdk-button" class="ot-sdk-show-settings">
+    Cookie Preferences</button
+  ><br /><a
+    href="https://www.adobe.com/privacy/us-rights.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Do not sell or share my personal information</a
+  >
+</div>`;
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Open-source tools for content authenticity and provenance',
@@ -127,7 +153,7 @@ const config = {
           alt: 'Content Authenticity Initiative',
           href: 'https://contentauthenticity.org',
         },
-        copyright: `Copyright © ${new Date().getFullYear()} Adobe. All rights reserved. <a href="https://www.adobe.com/privacy.html" target="_blank" rel="noopener noreferrer">Privacy</a> | <a href="https://www.adobe.com/legal/terms.html" target="_blank" rel="noopener noreferrer">Terms of Use</a> | <button href="/" id="ot-sdk-button" class="ot-sdk-show-settings">Cookie Preferences</button>`,
+        copyright,
       },
       prism: {
         theme: lightCodeTheme,
