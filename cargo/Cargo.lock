@@ -291,9 +291,9 @@ dependencies = [
 
 [[package]]
 name = "c2pa"
-version = "0.16.0"
+version = "0.16.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "10379bdc706ed11e6e3368c1edcd387caaaa9a10b73f2f9da161a53f088da241"
+checksum = "d0cf6bca507b49e93db9d29a8e886d3c4db7c28ff46283ae6bbedfc8f24289d0"
 dependencies = [
  "atree",
  "base64",
@@ -1247,7 +1247,7 @@ checksum = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
 name = "opensource-contentauthenticity-org"
 version = "0.1.0"
 dependencies = [
- "c2pa 0.16.0",
+ "c2pa 0.16.1",
  "c2patool",
 ]
 
