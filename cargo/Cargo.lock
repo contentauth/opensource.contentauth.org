@@ -103,7 +103,7 @@ version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "52e7c3bae57b01ec5b1b028af1f77b7d41dd2bd97a41bab7968739b5329c0e39"
 dependencies = [
- "bytes 1.2.1",
+ "bytes",
  "smallvec",
 ]
 
@@ -221,28 +221,23 @@ dependencies = [
 
 [[package]]
 name = "bytes"
-version = "0.5.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0e4cec68f03f32e44924783795810fa50a7035d8c8ebe78580ad7e6c703fba38"
-
-[[package]]
-name = "bytes"
 version = "1.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ec8a7b6a70fde80372154c65702f00a0f56f3e1c36abbc6c440484be248856db"
 
 [[package]]
 name = "c2pa"
-version = "0.15.0"
+version = "0.16.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d5eadc06ea58cfa080c18314541bd6c2dfe2a6aa662fbe4270f3c25fe7e11e58"
+checksum = "d0cf6bca507b49e93db9d29a8e886d3c4db7c28ff46283ae6bbedfc8f24289d0"
 dependencies = [
  "atree",
  "base64",
  "bcder",
  "blake3",
  "byteorder",
- "bytes 1.2.1",
+ "byteordered",
+ "bytes",
  "chrono",
  "ciborium",
  "console_log",
@@ -252,13 +247,12 @@ dependencies = [
  "getrandom",
  "hex",
  "image",
- "img-parts 0.2.3",
+ "img-parts",
  "instant",
  "js-sys",
  "log",
  "multibase",
  "multihash",
- "nom",
  "openssl",
  "png_pong",
  "quick-xml",
@@ -290,69 +284,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "c2pa"
-version = "0.16.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d0cf6bca507b49e93db9d29a8e886d3c4db7c28ff46283ae6bbedfc8f24289d0"
-dependencies = [
- "atree",
- "base64",
- "bcder",
- "blake3",
- "byteorder",
- "byteordered",
- "bytes 1.2.1",
- "chrono",
- "ciborium",
- "console_log",
- "conv",
- "coset",
- "extfmt",
- "getrandom",
- "hex",
- "image",
- "img-parts 0.3.0",
- "instant",
- "js-sys",
- "log",
- "multibase",
- "multihash",
- "png_pong",
- "quick-xml",
- "rand",
- "range-set",
- "ring",
- "rsa",
- "serde",
- "serde-transcode",
- "serde-wasm-bindgen",
- "serde_bytes",
- "serde_cbor",
- "serde_derive",
- "serde_json",
- "sha2 0.10.2",
- "spki 0.6.0",
- "tempfile",
- "thiserror",
- "twoway",
- "ureq",
- "url",
- "uuid",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "web-sys",
- "x509-certificate",
- "x509-parser",
-]
-
-[[package]]
 name = "c2patool"
-version = "0.3.8"
+version = "0.3.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e5cf4c10516240d220c2103f28fcd3b87369ad4c32aaaa4e0c8f9bd3deaea333"
+checksum = "3bc98db7268ee3af83dd60bd029941656b4ab61e4b4c181c5f398e0d0d7459d5"
 dependencies = [
  "anyhow",
- "c2pa 0.15.0",
+ "c2pa",
  "env_logger",
  "log",
  "serde",
@@ -903,22 +841,11 @@ dependencies = [
 
 [[package]]
 name = "img-parts"
-version = "0.2.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e210871d2017abd6d46ffc9f743747549cb54fdeef37fbcc829400f52794e4e5"
-dependencies = [
- "bytes 0.5.6",
- "crc32fast",
- "miniz_oxide 0.4.4",
-]
-
-[[package]]
-name = "img-parts"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b19358258d99a5fc34466fed27a5318f92ae636c3e36165cf9b1e87b5b6701f0"
 dependencies = [
- "bytes 1.2.1",
+ "bytes",
  "crc32fast",
  "miniz_oxide 0.5.3",
 ]
@@ -1247,7 +1174,7 @@ checksum = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
 name = "opensource-contentauthenticity-org"
 version = "0.1.0"
 dependencies = [
- "c2pa 0.16.1",
+ "c2pa",
  "c2patool",
 ]
 
@@ -2263,7 +2190,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ecce82ba1a532273edf6cd88d1efca9b3417fd24abe81baf143657909f7c12a8"
 dependencies = [
  "bcder",
- "bytes 1.2.1",
+ "bytes",
  "chrono",
  "hex",
  "pem",
@@ -2290,9 +2217,9 @@ dependencies = [
 
 [[package]]
 name = "xmp_toolkit"
-version = "0.6.0"
+version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "22c639009c72fd52b12e0e9edd9a10093f521958571ed7e71c0d1d8503db4a32"
+checksum = "a0e15005dd0db58bc4a86e5f1fb26774372d84058c9f7df60d7723b0694245d9"
 dependencies = [
  "cc",
  "fs_extra",
