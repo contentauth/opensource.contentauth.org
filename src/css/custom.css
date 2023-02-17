@@ -171,7 +171,7 @@ body:not(.is-scrolling) .navbar {
 }
 
 .navbar__items--right > :last-child {
-  display: none;
+  /* display: none; */
 }
 .navbar__items--right > :nth-last-child(2) {
   padding-right: 0;
@@ -377,4 +377,12 @@ body:not(.is-scrolling) .navbar {
 
 .ot-sdk-show-settings:hover {
   text-decoration: underline;
+}
+
+[data-theme='light'] .DocSearch {
+  --docsearch-highlight-color: var(--cai-color-primary-dark);
+}
+
+[data-theme='dark'] .DocSearch {
+  --docsearch-highlight-color: var(--cai-color-primary-dark);
 }
