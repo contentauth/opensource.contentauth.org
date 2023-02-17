@@ -1,7 +1,3 @@
-:root {
-  --docsearch-highlight-color: var(--cai-color-primary-dark);
-  --docsearch-hit-active-color: var(--cai-color-primary-dark);
-}
 .web-components .wrapper {
   position: relative;
 }
