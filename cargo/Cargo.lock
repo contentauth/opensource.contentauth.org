@@ -291,9 +291,9 @@ dependencies = [
 
 [[package]]
 name = "c2patool"
-version = "0.5.0"
+version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bd0066e67109e660e61c637a99620b1a9b40179bc1ace66e13b2c1f77b45fee4"
+checksum = "dad0e734df78e5d738d15468b062c9c8fd008f5ec652c86bc46fecf2aceb2b51"
 dependencies = [
  "anyhow",
  "c2pa",
