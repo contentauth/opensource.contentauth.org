@@ -7,6 +7,10 @@ const sidebars = {
       id: 'introduction',
     },
     {
+      type: 'doc',
+      id: 'getting-started',
+    },
+    {
       type: 'category',
       label: 'JavaScript SDK',
       collapsed: true,
