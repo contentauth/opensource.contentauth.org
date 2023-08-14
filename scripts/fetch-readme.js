@@ -30,6 +30,21 @@ const readmes = [
     path: 'README.md',
   },
   {
+    dest: resolve(__dirname, '../docs/c2patool/docs/manifest.md'),
+    repo: 'contentauth/c2patool',
+    path: 'manifest.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/c2patool/docs/x_509.md'),
+    repo: 'contentauth/c2patool',
+    path: 'x_509.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/c2patool/docs/release-notes.md'),
+    repo: 'contentauth/c2patool',
+    path: 'release-notes.md',
+  },
+  {
     dest: resolve(__dirname, '../docs/c2pa-service-example/readme.md'),
     repo: 'contentauth/c2pa-service-example',
     path: 'README.md',
@@ -48,8 +63,21 @@ function resolveMarkdownLinks(linkBase, content) {
 
 async function download() {
   for await (const { repo, path, dest } of readmes) {
-    const src = `${RAW_GITHUB_HOST}/${repo}/main/${path}`;
-    const linkBase = `${GITHUB_HOST}/${repo}/blob/main/${path}`;
+    /*
+     * Below code is TEMPORARY to get site to run locally with the c2patool Git branch chunk-docs.
+     * Once that branch is merged to main in c2patool repo, this should be removed.
+     * This code should not be merged to main.
+     */
+    if (repo == 'contentauth/c2patool') {
+      branch = 'chunk-docs';
+    } else {
+      branch = 'main';
+    }
+    const src = `${RAW_GITHUB_HOST}/${repo}/' + branch + '/${path}`;
+    const linkBase = `${GITHUB_HOST}/${repo}/blob/' + branch + '/${path}`;
+
+    //const src = `${RAW_GITHUB_HOST}/${repo}/main/${path}`;
+    //const linkBase = `${GITHUB_HOST}/${repo}/blob/main/${path}`;
     const res = await fetch(src);
     const markdown = await res.text();
     const resolvedMarkdown = resolveMarkdownLinks(linkBase, markdown);

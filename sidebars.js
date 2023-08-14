@@ -28,6 +28,18 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'c2patool/manifest',
+        },
+        {
+          type: 'doc',
+          id: 'c2patool/x_509',
+        },
+        {
+          type: 'doc',
+          id: 'c2patool/release-notes',
+        },
+        {
+          type: 'doc',
           id: 'c2pa-service-example/readme',
         },
         {
