@@ -28,21 +28,25 @@ const readmes = [
     dest: resolve(__dirname, '../docs/c2patool/readme.md'),
     repo: 'contentauth/c2patool',
     path: 'README.md',
+    branch: 'chunk-docs', // Remove when c2patool repo chunk-docs branch is merged to main
   },
   {
-    dest: resolve(__dirname, '../docs/c2patool/docs/manifest.md'),
+    dest: resolve(__dirname, '../docs/c2patool/manifest.md'),
     repo: 'contentauth/c2patool',
-    path: 'manifest.md',
+    path: 'docs/manifest.md',
+    branch: 'chunk-docs', // Remove when c2patool repo chunk-docs branch is merged to main
   },
   {
-    dest: resolve(__dirname, '../docs/c2patool/docs/x_509.md'),
+    dest: resolve(__dirname, '../docs/c2patool/x_509.md'),
     repo: 'contentauth/c2patool',
-    path: 'x_509.md',
+    path: 'docs/x_509.md',
+    branch: 'chunk-docs', // Remove when c2patool repo chunk-docs branch is merged to main
   },
   {
-    dest: resolve(__dirname, '../docs/c2patool/docs/release-notes.md'),
+    dest: resolve(__dirname, '../docs/c2patool/release-notes.md'),
     repo: 'contentauth/c2patool',
-    path: 'release-notes.md',
+    path: 'docs/release-notes.md',
+    branch: 'chunk-docs', // Remove when c2patool repo chunk-docs branch is merged to main
   },
   {
     dest: resolve(__dirname, '../docs/c2pa-service-example/readme.md'),
@@ -62,22 +66,15 @@ function resolveMarkdownLinks(linkBase, content) {
 }
 
 async function download() {
-  for await (const { repo, path, dest } of readmes) {
+  for await (const { repo, path, dest, branch = 'main' } of readmes) {
     /*
      * Below code is TEMPORARY to get site to run locally with the c2patool Git branch chunk-docs.
      * Once that branch is merged to main in c2patool repo, this should be removed.
      * This code should not be merged to main.
      */
-    if (repo == 'contentauth/c2patool') {
-      branch = 'chunk-docs';
-    } else {
-      branch = 'main';
-    }
-    const src = `${RAW_GITHUB_HOST}/${repo}/' + branch + '/${path}`;
-    const linkBase = `${GITHUB_HOST}/${repo}/blob/' + branch + '/${path}`;
 
-    //const src = `${RAW_GITHUB_HOST}/${repo}/main/${path}`;
-    //const linkBase = `${GITHUB_HOST}/${repo}/blob/main/${path}`;
+    const src = `${RAW_GITHUB_HOST}/${repo}/${branch}/${path}`;
+    const linkBase = `${GITHUB_HOST}/${repo}/blob/${branch}/${path}`;
     const res = await fetch(src);
     const markdown = await res.text();
     const resolvedMarkdown = resolveMarkdownLinks(linkBase, markdown);
