@@ -22,6 +22,14 @@ $ npm start
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
+### Running fetch script
+
+The `/scripts/fetch-readme.js` script pulls markdown files from other repos (e.g. `c2patool`). To rerun this script for local build, enter this command:
+
+```
+npm run docs:fetch-readme
+```
+
 ## Build
 
 ```
@@ -37,7 +45,7 @@ should be created automatically so that the preview can be shared before merging
 
 ### Forcing a site rebuild
 
-To rebuild the site when one of the SDK/tool repos hasn't been versioned, simply make any change to the `main` branch of this repo.  This is a workaround until a manual site rebuild capability is added.
+To rebuild the site when one of the SDK/tool repos hasn't been versioned, simply make any change to the `main` branch of this repo. This is a workaround until a manual site rebuild capability is added.
 
 ## License
 

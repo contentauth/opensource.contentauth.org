@@ -28,25 +28,21 @@ const readmes = [
     dest: resolve(__dirname, '../docs/c2patool/readme.md'),
     repo: 'contentauth/c2patool',
     path: 'README.md',
-    branch: 'chunk-docs', // Remove when c2patool repo chunk-docs branch is merged to main
   },
   {
     dest: resolve(__dirname, '../docs/c2patool/manifest.md'),
     repo: 'contentauth/c2patool',
     path: 'docs/manifest.md',
-    branch: 'chunk-docs', // Remove when c2patool repo chunk-docs branch is merged to main
   },
   {
     dest: resolve(__dirname, '../docs/c2patool/x_509.md'),
     repo: 'contentauth/c2patool',
     path: 'docs/x_509.md',
-    branch: 'chunk-docs', // Remove when c2patool repo chunk-docs branch is merged to main
   },
   {
     dest: resolve(__dirname, '../docs/c2patool/release-notes.md'),
     repo: 'contentauth/c2patool',
     path: 'docs/release-notes.md',
-    branch: 'chunk-docs', // Remove when c2patool repo chunk-docs branch is merged to main
   },
   {
     dest: resolve(__dirname, '../docs/c2pa-service-example/readme.md'),
@@ -68,9 +64,7 @@ function resolveMarkdownLinks(linkBase, content) {
 async function download() {
   for await (const { repo, path, dest, branch = 'main' } of readmes) {
     /*
-     * Below code is TEMPORARY to get site to run locally with the c2patool Git branch chunk-docs.
-     * Once that branch is merged to main in c2patool repo, this should be removed.
-     * This code should not be merged to main.
+     * Pass {branch} var to pull docs from other than main branch.
      */
 
     const src = `${RAW_GITHUB_HOST}/${repo}/${branch}/${path}`;

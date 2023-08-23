@@ -8,6 +8,8 @@
 .docusaurus
 .cache-loader
 /docs/js-sdk/api
+/docs/c2patool
+/docs/rust-sdk
 /docs/**/readme.md
 
 # Misc
