@@ -5,13 +5,13 @@ title: Signing manifests
 
 ## Overview
 
-Signing C2PA manifests requires an end-entity certificate that complies with the [C2PA Trust Model](https://c2pa.org/specifications/specifications/1.1/specs/C2PA_Specification.html#_trust_model). C2PA follows the Public Key Infrastructure (PKI) using your private key and public certificates in the signing process.
+Signing C2PA manifests requires an end-entity certificate that complies with the [C2PA Trust Model](https://c2pa.org/specifications/specifications/3.0/specs/C2PA_Specification.html#_trust_model). C2PA follows the Public Key Infrastructure (PKI) using your private key and public certificates in the signing process.
 
 :::note
 Best practices for handling keys and certificates are available from many sources and not directly covered here. Always protect your private keys with the highest level of security.
 :::note
 
-The following table summarizes important credential information provided in the [C2PA specification Trust Model section](https://c2pa.org/specifications/specifications/1.1/specs/C2PA_Specification.html#_trust_model). The table describes the signature algorithms and recommended signature types that the [c2patool](/docs/c2patool) and [Rust SDK](/docs/rust-sdk) support. You must supply credentials (certificates and keys) that correspond to the signing algorithm. Signing/validation will fail if the signature type is not supported by the supplied credentials.
+The following table summarizes important credential information provided in the [C2PA specification Trust Model section](https://c2pa.org/specifications/specifications/3.0/specs/C2PA_Specification.html#_trust_model). The table describes the signature algorithms and recommended signature types that the [c2patool](/docs/c2patool) and [Rust SDK](/docs/rust-sdk) support. You must supply credentials (certificates and keys) that correspond to the signing algorithm. Signing/validation will fail if the signature type is not supported by the supplied credentials.
 
 Additionally:
 
