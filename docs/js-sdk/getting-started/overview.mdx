@@ -35,16 +35,16 @@ Since images can be quite large, the library inspects the start of an asset file
 
 ### Adherence to the C2PA specification
 
-The SDK strives to maintain compliance with the [C2PA specification](https://c2pa.org/specifications/specifications/3.0/specs/C2PA_Specification.html) as much as possible, and the web components follow the [C2PA user experience guidance](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html) recommendations.
+The SDK strives to maintain compliance with the [C2PA specification](https://c2pa.org/specifications/specifications/1.3/specs/C2PA_Specification.html) as much as possible, and the web components follow the [C2PA user experience guidance](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html) recommendations.
 
 ### Security and encryption
 
-The SDK handles all [validation](https://c2pa.org/specifications/specifications/3.0/specs/C2PA_Specification.html#_validation)
+The SDK handles all [validation](https://c2pa.org/specifications/specifications/1.3/specs/C2PA_Specification.html#_validation)
 via the [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) and passes any validation errors back to the client.
 
 #### Supported signature algorithms
 
-The JS SDK supports all ECDSA and RSASSA-PSS algorithms listed in the [C2PA specification](https://c2pa.org/specifications/specifications/3.0/specs/C2PA_Specification.html#_digital_signatures).
+The JS SDK supports all ECDSA and RSASSA-PSS algorithms listed in the [C2PA specification](https://c2pa.org/specifications/specifications/1.3/specs/C2PA_Specification.html#_digital_signatures).
 
 :::caution
 Ed25519 signatures are currently **not** supported by the JS SDK.
