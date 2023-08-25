@@ -1,6 +1,6 @@
 ---
 id: getting-started
-title: Getting started with content credentials
+title: Getting started with Content Credentials
 ---
 
 import c2pa_terms from '../static/img/c2pa-terms.png';
@@ -16,9 +16,9 @@ This document refers to the implementations in the CAI open-source repositories,
 
 To understand how CAI works, you need to understand some basic vocabulary. Having this vocabulary makes it easier to discuss CAI's technical aspects. The definitions below are summarized and slightly simplified from the [Glossary in the C2PA specification](https://c2pa.org/specifications/specifications/1.3/specs/C2PA_Specification.html#_glossary). This document is meant to convey the general concepts and may not cover all technical details or edge cases that the specification addresses.
 
-Let's start with a broad definition of _content provenance_ which means information on the creation, authorship, and editing of a digital asset such as an image. _Content credentials_ include this provenance information, along with the cryptographic means to authenticate that the information is correctly tied to the content and is unchanged from when it was originally published with Content Credentials. Sometimes these two terms are used to loosely mean the same thing: Technology to verify the origin and history of a digital asset.
+Let's start with a broad definition of _content provenance_ which means information on the creation, authorship, and editing of a digital asset such as an image. _Content Credentials_ include this provenance information, along with the cryptographic means to authenticate that the information is correctly tied to the content and is unchanged from when it was originally published with Content Credentials. Sometimes these two terms are used to loosely mean the same thing: Technology to verify the origin and history of a digital asset.
 
-In practice, Content Credentials are stored in a _C2PA manifest_ (or just a "manifest"), and the CAI open-source tools and libraries work with such manifests.
+In practice, Content Credentials are kept in a _C2PA manifest store_, which is what the CAI open-source tools and libraries work with. A manifest store consists of one or more individual _manifests_. Each manifest contains information about the asset; the most recently-added manifest is called the _active manifest_. The active manifest has content bindings that can be validated with the asset; that is, it's hashed with the asset to ensure its validity.
 
 As illustrated below, the manifest contains _assertions_ about the asset's creation and history, wrapped up with additional information into entities called _claims_ that are digitally signed with an _actor's_ private key (the _claim signature_).
 
