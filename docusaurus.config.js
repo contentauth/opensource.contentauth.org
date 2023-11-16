@@ -42,6 +42,7 @@ const config = {
   favicon: '/favicon.png',
   organizationName: 'contentauth',
   projectName: 'opensource.contentauth.org',
+  plugins: ['docusaurus-plugin-sass'],
   clientModules: [require.resolve('./src/assets/scripts/ui.js')],
   scripts: [
     // TODO: Re-enable analytics once we solve flicker problem
