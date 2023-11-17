@@ -440,22 +440,22 @@
 
   <h3 id="properties">Properties</h3>
 
-  <table>
+  <table class="manifest-ref-table">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>active_manifest</td>
+        <td class="manifest-ref-table">active_manifest</td>
 
         <!-- Type -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -470,41 +470,41 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <p>A label for the active (most recent) manifest in the store</p>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
       </tr>
 
       <tr>
-        <td>manifests</td>
+        <td class="manifest-ref-table">manifests</td>
 
         <!-- Type -->
-        <td>Object</td>
+        <td class="manifest-ref-table">Object</td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <p>A HashMap of Manifests</p>
 
           See
           <a href="#manifest">Manifest</a>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
       </tr>
 
       <tr>
-        <td>validation_status</td>
+        <td class="manifest-ref-table">validation_status</td>
 
         <!-- Type -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -519,14 +519,14 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <p>
             ValidationStatus generated when loading the ManifestStore from an
             asset
           </p>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
@@ -600,23 +600,23 @@
 
   <p>Identifies a person responsible for an action.</p>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>credentials</td>
+        <td class="manifest-ref-table">credentials</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -631,19 +631,19 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>List of references to W3C Verifiable Credentials.</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -651,10 +651,10 @@
       </tr>
 
       <tr>
-        <td>identifier</td>
+        <td class="manifest-ref-table">identifier</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -669,7 +669,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               An identifier for a human actor, used when the “type” is
@@ -680,13 +680,13 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -705,23 +705,23 @@
 
   <h3 id="assettype">AssetType</h3>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>type</td>
+        <td class="manifest-ref-table">type</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -730,14 +730,16 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -745,10 +747,10 @@
       </tr>
 
       <tr>
-        <td>version</td>
+        <td class="manifest-ref-table">version</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -763,14 +765,16 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -796,23 +800,23 @@
 
   <p>This structure is also used for actions softwareAgent</p>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>icon</td>
+        <td class="manifest-ref-table">icon</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <a href="#uriorresource">UriOrResource</a>
@@ -821,18 +825,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>hashed URI to the icon (either embedded or remote)</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -840,10 +844,10 @@
       </tr>
 
       <tr>
-        <td>name</td>
+        <td class="manifest-ref-table">name</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -852,18 +856,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>A human readable string naming the claim_generator</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -871,10 +875,10 @@
       </tr>
 
       <tr>
-        <td>version</td>
+        <td class="manifest-ref-table">version</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -889,18 +893,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>A human readable string of the product’s version</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -925,23 +929,23 @@
 
   <p>A description of the source for assertion data</p>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>actors</td>
+        <td class="manifest-ref-table">actors</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -956,7 +960,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               A list of
@@ -969,12 +973,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -982,10 +986,10 @@
       </tr>
 
       <tr>
-        <td>details</td>
+        <td class="manifest-ref-table">details</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -1000,7 +1004,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               A human-readable string giving details about the source of the
@@ -1009,12 +1013,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1022,10 +1026,10 @@
       </tr>
 
       <tr>
-        <td>type</td>
+        <td class="manifest-ref-table">type</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -1034,7 +1038,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               A value from among the enumerated list indicating the source of
@@ -1043,12 +1047,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1072,23 +1076,23 @@
     correctly tagged cbor serialization
   </p>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>alg</td>
+        <td class="manifest-ref-table">alg</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -1103,18 +1107,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>hash algorithm used (“sha256”, “sha384”, “sha512”)</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1122,10 +1126,10 @@
       </tr>
 
       <tr>
-        <td>hash</td>
+        <td class="manifest-ref-table">hash</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -1136,18 +1140,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>“alg” hash of stored as cbor byte string</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1155,10 +1159,10 @@
       </tr>
 
       <tr>
-        <td>url</td>
+        <td class="manifest-ref-table">url</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -1167,16 +1171,16 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc"><p>URI stored as tagged cbor</p></div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1200,23 +1204,23 @@
     any external asset that has been used in the creation of an image.
   </p>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>active_manifest</td>
+        <td class="manifest-ref-table">active_manifest</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -1231,7 +1235,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>The active manifest label (if one exists).</p>
 
@@ -1251,12 +1255,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1264,10 +1268,10 @@
       </tr>
 
       <tr>
-        <td>data</td>
+        <td class="manifest-ref-table">data</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <a href="#resourceref">ResourceRef</a>
@@ -1276,18 +1280,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>A reference to the actual data of the ingredient.</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1295,10 +1299,10 @@
       </tr>
 
       <tr>
-        <td>description</td>
+        <td class="manifest-ref-table">description</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -1313,18 +1317,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>Additional description of the ingredient.</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1332,10 +1336,10 @@
       </tr>
 
       <tr>
-        <td>document_id</td>
+        <td class="manifest-ref-table">document_id</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -1350,7 +1354,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               Document ID from
@@ -1362,12 +1366,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1375,10 +1379,10 @@
       </tr>
 
       <tr>
-        <td>format</td>
+        <td class="manifest-ref-table">format</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -1387,18 +1391,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>The format of the source file as a MIME type.</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           application/octet-stream
@@ -1406,10 +1410,10 @@
       </tr>
 
       <tr>
-        <td>hash</td>
+        <td class="manifest-ref-table">hash</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -1424,18 +1428,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>An optional hash of the asset to prevent duplicates.</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1443,10 +1447,10 @@
       </tr>
 
       <tr>
-        <td>informational_URI</td>
+        <td class="manifest-ref-table">informational_URI</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -1461,7 +1465,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               URI to an informational page about the ingredient or its data.
@@ -1469,12 +1473,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1482,10 +1486,10 @@
       </tr>
 
       <tr>
-        <td>instance_id</td>
+        <td class="manifest-ref-table">instance_id</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -1500,7 +1504,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               Instance ID from
@@ -1512,12 +1516,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1525,10 +1529,10 @@
       </tr>
 
       <tr>
-        <td>manifest_data</td>
+        <td class="manifest-ref-table">manifest_data</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <a href="#resourceref">ResourceRef</a>
@@ -1537,7 +1541,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               A
@@ -1551,12 +1555,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1564,10 +1568,10 @@
       </tr>
 
       <tr>
-        <td>metadata</td>
+        <td class="manifest-ref-table">metadata</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <a href="#metadata">Metadata</a>
@@ -1576,7 +1580,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               Any additional
@@ -1590,12 +1594,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1603,10 +1607,10 @@
       </tr>
 
       <tr>
-        <td>provenance</td>
+        <td class="manifest-ref-table">provenance</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -1621,7 +1625,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               URI from
@@ -1633,12 +1637,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1646,10 +1650,10 @@
       </tr>
 
       <tr>
-        <td>relationship</td>
+        <td class="manifest-ref-table">relationship</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <a href="#relationship">Relationship</a>
@@ -1658,7 +1662,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               Set to
@@ -1670,12 +1674,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           componentOf
@@ -1683,10 +1687,10 @@
       </tr>
 
       <tr>
-        <td>thumbnail</td>
+        <td class="manifest-ref-table">thumbnail</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <a href="#resourceref">ResourceRef</a>
@@ -1695,7 +1699,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               A thumbnail image capturing the visual state at the time of
@@ -1711,12 +1715,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1724,10 +1728,10 @@
       </tr>
 
       <tr>
-        <td>title</td>
+        <td class="manifest-ref-table">title</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -1736,18 +1740,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>A human-readable title, generally source filename.</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1755,10 +1759,10 @@
       </tr>
 
       <tr>
-        <td>validation_status</td>
+        <td class="manifest-ref-table">validation_status</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -1773,16 +1777,16 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc"><p>Validation results.</p></div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1803,23 +1807,23 @@
 
   <p>A Manifest represents all the information in a c2pa manifest</p>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>assertions</td>
+        <td class="manifest-ref-table">assertions</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -1830,27 +1834,27 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc"><p>A list of assertions</p></div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
           Empty array
         </td>
       </tr>
 
       <tr>
-        <td>claim_generator</td>
+        <td class="manifest-ref-table">claim_generator</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -1859,7 +1863,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               A User Agent formatted string identifying the
@@ -1870,13 +1874,13 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           c2pa/0.25.2
@@ -1884,10 +1888,10 @@
       </tr>
 
       <tr>
-        <td>claim_generator_info</td>
+        <td class="manifest-ref-table">claim_generator_info</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -1902,15 +1906,17 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1918,10 +1924,10 @@
       </tr>
 
       <tr>
-        <td>credentials</td>
+        <td class="manifest-ref-table">credentials</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -1934,7 +1940,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               An array of
@@ -1948,13 +1954,13 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -1962,10 +1968,10 @@
       </tr>
 
       <tr>
-        <td>format</td>
+        <td class="manifest-ref-table">format</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -1974,19 +1980,19 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>The format of the source file as a MIME type.</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           application/octet-stream
@@ -1994,10 +2000,10 @@
       </tr>
 
       <tr>
-        <td>ingredients</td>
+        <td class="manifest-ref-table">ingredients</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -2008,27 +2014,27 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc"><p>A List of ingredients</p></div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
           Empty array
         </td>
       </tr>
 
       <tr>
-        <td>instance_id</td>
+        <td class="manifest-ref-table">instance_id</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -2037,7 +2043,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               Instance ID from
@@ -2049,13 +2055,13 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           xmp:iid:3b9389f3-0bcb-4554-9a3c-1ab73ac5b81c
@@ -2063,10 +2069,10 @@
       </tr>
 
       <tr>
-        <td>label</td>
+        <td class="manifest-ref-table">label</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -2081,15 +2087,17 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2097,10 +2105,10 @@
       </tr>
 
       <tr>
-        <td>redactions</td>
+        <td class="manifest-ref-table">redactions</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -2113,19 +2121,19 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>A list of redactions - URIs to a redacted assertions</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2133,10 +2141,10 @@
       </tr>
 
       <tr>
-        <td>signature_info</td>
+        <td class="manifest-ref-table">signature_info</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <a href="#signatureinfo">SignatureInfo</a>
@@ -2145,19 +2153,19 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>Signature data (only used for reporting)</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2165,10 +2173,10 @@
       </tr>
 
       <tr>
-        <td>thumbnail</td>
+        <td class="manifest-ref-table">thumbnail</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <a href="#resourceref">ResourceRef</a>
@@ -2177,15 +2185,17 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2193,10 +2203,10 @@
       </tr>
 
       <tr>
-        <td>title</td>
+        <td class="manifest-ref-table">title</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -2211,19 +2221,19 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>A human-readable title, generally source filename.</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2231,10 +2241,10 @@
       </tr>
 
       <tr>
-        <td>vendor</td>
+        <td class="manifest-ref-table">vendor</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -2249,7 +2259,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               Optional prefix added to the generated Manifest Label This is
@@ -2259,13 +2269,13 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2286,23 +2296,23 @@
 
   <p>A labeled container for an Assertion value in a Manifest</p>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>data</td>
+        <td class="manifest-ref-table">data</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <a href="#manifestdata">ManifestData</a>
@@ -2311,16 +2321,16 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc"><p>The data of the assertion as Value</p></div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2328,10 +2338,10 @@
       </tr>
 
       <tr>
-        <td>instance</td>
+        <td class="manifest-ref-table">instance</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -2347,18 +2357,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>There can be more than one assertion for any label</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2366,10 +2376,10 @@
       </tr>
 
       <tr>
-        <td>kind</td>
+        <td class="manifest-ref-table">kind</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <a href="#manifestassertionkind">ManifestAssertionKind</a>
@@ -2378,7 +2388,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               The
@@ -2392,12 +2402,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2405,10 +2415,10 @@
       </tr>
 
       <tr>
-        <td>label</td>
+        <td class="manifest-ref-table">label</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -2417,18 +2427,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>An assertion label in reverse domain format</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2488,23 +2498,23 @@
     to reference others
   </p>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>data_source</td>
+        <td class="manifest-ref-table">data_source</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <a href="#datasource">DataSource</a>
@@ -2513,15 +2523,17 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2529,10 +2541,10 @@
       </tr>
 
       <tr>
-        <td>dateTime</td>
+        <td class="manifest-ref-table">dateTime</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -2541,17 +2553,17 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc"><p>A date time in ISO 8601 format.</p></div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2559,10 +2571,10 @@
       </tr>
 
       <tr>
-        <td>reference</td>
+        <td class="manifest-ref-table">reference</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <a href="#hasheduri">HashedUri</a>
@@ -2571,15 +2583,17 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2587,10 +2601,10 @@
       </tr>
 
       <tr>
-        <td>reviewRatings</td>
+        <td class="manifest-ref-table">reviewRatings</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -2605,15 +2619,17 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2654,23 +2670,23 @@
 
   <p>A reference to a resource to be used in JSON serialization</p>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>data_types</td>
+        <td class="manifest-ref-table">data_types</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -2685,14 +2701,16 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2700,10 +2718,10 @@
       </tr>
 
       <tr>
-        <td>format</td>
+        <td class="manifest-ref-table">format</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -2712,14 +2730,16 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2727,10 +2747,10 @@
       </tr>
 
       <tr>
-        <td>identifier</td>
+        <td class="manifest-ref-table">identifier</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -2739,14 +2759,16 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2780,23 +2802,23 @@
     >.
   </p>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>code</td>
+        <td class="manifest-ref-table">code</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -2811,14 +2833,16 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2826,10 +2850,10 @@
       </tr>
 
       <tr>
-        <td>explanation</td>
+        <td class="manifest-ref-table">explanation</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -2838,14 +2862,16 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2853,10 +2879,10 @@
       </tr>
 
       <tr>
-        <td>value</td>
+        <td class="manifest-ref-table">value</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -2866,14 +2892,16 @@
         </td>
 
         <!-- Description -->
-        <td><p class="comment">Description TBD.</p></td>
+        <td class="manifest-ref-table">
+          <p class="comment">Description TBD.</p>
+        </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2894,23 +2922,23 @@
 
   <p>Holds information about a signature</p>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>cert_serial_number</td>
+        <td class="manifest-ref-table">cert_serial_number</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -2925,19 +2953,19 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>The serial number of the certificate</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2945,10 +2973,10 @@
       </tr>
 
       <tr>
-        <td>issuer</td>
+        <td class="manifest-ref-table">issuer</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -2963,19 +2991,19 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>human readable issuing authority for this signature</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -2983,10 +3011,10 @@
       </tr>
 
       <tr>
-        <td>time</td>
+        <td class="manifest-ref-table">time</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -3001,17 +3029,17 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc"><p>the time the signature was created</p></div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
 
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -3067,23 +3095,23 @@
     >.
   </p>
 
-  <table style="margin-top: 10px">
+  <table class="manifest-ref-table" style="margin-top: 10px">
     <thead>
       <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Required?</th>
-        <th>Default Value</th>
+        <th class="manifest-ref-table">Property</th>
+        <th class="manifest-ref-table">Type</th>
+        <th class="manifest-ref-table">Description</th>
+        <th class="manifest-ref-table">Required?</th>
+        <th class="manifest-ref-table">Default Value</th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>code</td>
+        <td class="manifest-ref-table">code</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!--   -->
@@ -3092,16 +3120,16 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc"><p>Validation status code.</p></div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           YES
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -3109,10 +3137,10 @@
       </tr>
 
       <tr>
-        <td>explanation</td>
+        <td class="manifest-ref-table">explanation</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -3127,7 +3155,7 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>
               Human-readable description of the validation that was performed.
@@ -3135,12 +3163,12 @@
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
@@ -3148,10 +3176,10 @@
       </tr>
 
       <tr>
-        <td>url</td>
+        <td class="manifest-ref-table">url</td>
 
         <!-- Type  -->
-        <td>
+        <td class="manifest-ref-table">
           <!--  -->
 
           <!-- Either -->
@@ -3166,18 +3194,18 @@
         </td>
 
         <!-- Description -->
-        <td>
+        <td class="manifest-ref-table">
           <div class="prop_desc">
             <p>Internal JUMBF reference to the entity that was validated.</p>
           </div>
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Required? -->
           NO
         </td>
 
-        <td>
+        <td class="manifest-ref-table">
           <!-- Default Value -->
 
           N/A
