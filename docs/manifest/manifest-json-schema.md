@@ -8,4 +8,4 @@ pagination_prev: null
 
 This is the JSON schema for a Manifest store. For a more readable reference based on this schema, see [Manifest store reference](./manifest-ref).
 
-<iframe src="https://contentauth.github.io/json-manifest-reference/json-schema-cai" height="100%" width="100%" scrolling="no"></iframe>
+<iframe src="https://contentauth.github.io/json-manifest-reference/json-schema-cai" height="500px" width="95%" scrolling="yes"></iframe>
