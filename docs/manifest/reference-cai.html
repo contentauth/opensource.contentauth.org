@@ -1,0 +1,2971 @@
+<body>
+ <div class="manifest-object" style="margin-bottom: 0; font-size: 110%;">
+  <a href="#manifeststore">
+   ManifestStore
+  </a>
+ </div>
+ <div style="position: relative;">
+  <div style="position: absolute; left: 65px; top: 30px; font-size: 90%; ">
+   <span style="font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    active_manifest
+   </span>
+   :
+   <span style="font-size:80%;">
+    <i>
+     UUID
+    </i>
+   </span>
+  </div>
+  <div style="position: absolute; left: 65px; top: 70px; font-size: 90%; ">
+   <span style="font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    manifests
+   </span>
+  </div>
+  <div style="position: absolute; left: 145px; top: 125px; font-size: 90%; ">
+   <div style="display: inline; font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    <i>
+     UUID
+    </i>
+    :
+   </div>
+   <div class="manifest-object">
+    <a href="#manifest">
+     Manifest
+    </a>
+   </div>
+  </div>
+  <div style="position: absolute; left: 145px; top: 165px; font-size: 90%; ">
+   <div style="display: inline; font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    <i>
+     UUID
+    </i>
+    :
+   </div>
+   <div class="manifest-object">
+    <a href="#manifest">
+     Manifest
+    </a>
+   </div>
+  </div>
+  <div style="position: absolute; left: 145px; top: 200px; font-size: 90%; ">
+   <span style="font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    ...
+   </span>
+  </div>
+  <div style="position: absolute; left: 65px; top: 245px; font-size: 90%; ">
+   <div style="display: inline;">
+    <span style="font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+     validation_status
+    </span>
+    : Array of
+   </div>
+   <div class="manifest-object">
+    <a href="#validationstatus">
+     ValidationStatus
+    </a>
+   </div>
+  </div>
+  <svg height="300" width="300" style="margin-top: 0;">
+   <polyline points="20,0 20,260" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,40 60,40" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,80 60,80" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,260 60,260" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,40 60,40" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,40 60,40" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <polyline points="100,100 100,220" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- small vertical -->
+   <!-- xfinish  = 140 -->
+   <polyline points="100,140 140,140" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 140 -->
+   <polyline points="100,180 140,180" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 140 -->
+   <polyline points="100,220 140,220" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+  </svg>
+ </div>
+ <div class="manifest-object" style="margin-bottom: 0; font-size: 110%;">
+  <a href="#manifest">
+   Manifest
+  </a>
+ </div>
+ <div style="position: relative;">
+  <div style="position: absolute; left: 65px; top: 20px; font-size: 90%; ">
+   <!--  -->
+   <div style="display: table-cell; font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    title
+   </div>
+   <div style="display: table-cell; line-height: 100%; padding-top: 0;">
+    :
+    <span style="font-size:80%;">
+     A human-readable title, generally source filename.
+    </span>
+   </div>
+  </div>
+  <div style="position: absolute; left: 65px; top: 60px; font-size: 90%; ">
+   <!--  -->
+   <div style="display: table-cell; font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    label
+   </div>
+   <div style="display: table-cell; line-height: 100%; padding-top: 0;">
+    :
+    <span style="font-size:80%;">
+     :
+     <i>
+      Description TBD
+     </i>
+     .
+    </span>
+   </div>
+  </div>
+  <div style="position: absolute; left: 65px; top: 100px; font-size: 90%; ">
+   <!--  -->
+   <div style="display: table-cell; font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    format
+   </div>
+   <div style="display: table-cell; line-height: 100%; padding-top: 0;">
+    :
+    <span style="font-size:80%;">
+     The format of the source file as a MIME type.
+    </span>
+   </div>
+  </div>
+  <div style="position: absolute; left: 65px; top: 140px; font-size: 90%; ">
+   <!--  -->
+   <div style="display: table-cell; font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    credentials
+   </div>
+   <div style="display: table-cell; line-height: 100%; padding-top: 0;">
+    :
+    <span style="font-size:80%;">
+     An array of
+     <a href="https://verifiablecredentials.dev/">
+      W3C Verifiable Credentials
+     </a>
+     . See also the
+     <a href="https://www.w3.org/TR/vc-data-model/">
+      W3C Recommendation
+     </a>
+     . NOTE: This area is under active development and may change.
+    </span>
+   </div>
+  </div>
+  <div style="position: absolute; left: 65px; top: 180px; font-size: 90%; ">
+   <!--  -->
+   <div style="display: table-cell; font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    instance_id
+   </div>
+   <div style="display: table-cell; line-height: 100%; padding-top: 0;">
+    :
+    <span style="font-size:80%;">
+     Instance ID from
+     <code class="language-plaintext highlighter-rouge">
+      xmpMM:InstanceID
+     </code>
+     in XMP metadata.
+    </span>
+   </div>
+  </div>
+  <div style="position: absolute; left: 65px; top: 220px; font-size: 90%; ">
+   <!--  -->
+   <div style="display: table-cell; font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    redactions
+   </div>
+   <div style="display: table-cell; line-height: 100%; padding-top: 0;">
+    :
+    <span style="font-size:80%;">
+     A list of redactions - URIs to a redacted assertions
+    </span>
+   </div>
+  </div>
+  <div style="position: absolute; left: 65px; top: 260px; font-size: 90%; ">
+   <!--  -->
+   <div style="display: table-cell; font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    claim_generator
+   </div>
+   <div style="display: table-cell; line-height: 100%; padding-top: 0;">
+    :
+    <span style="font-size:80%;">
+     A User Agent formatted string identifying the software/hardware/system produced this claim Spaces are not allowed in names, versions can be specified with product/1.0 syntax
+    </span>
+   </div>
+  </div>
+  <div style="position: absolute; left: 65px; top: 310px; font-size: 90%; ">
+   <div style="display: inline; font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    claim_generator_info
+   </div>
+   <div class="manifest-object">
+    <a href="#claimgeneratorinfo">
+     ClaimGeneratorInfo
+    </a>
+   </div>
+  </div>
+  <div style="position: absolute; left: 65px; top: 355px; font-size: 90%; ">
+   <div style="display: inline; font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    thumbnail
+   </div>
+   <div class="manifest-object">
+    <a href="#resourceref">
+     ResourceRef
+    </a>
+   </div>
+  </div>
+  <div style="position: absolute; left: 65px; top: 390px; font-size: 90%; ">
+   <div style="display: inline;">
+    <span style="font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+     ingredients
+    </span>
+    : Array of
+   </div>
+   <div class="manifest-object">
+    <a href="#ingredient">
+     Ingredient
+    </a>
+   </div>
+  </div>
+  <div style="position: absolute; left: 65px; top: 430px; font-size: 90%; ">
+   <div style="display: inline;">
+    <span style="font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+     assertions
+    </span>
+    : Array of
+   </div>
+   <div class="manifest-object">
+    <a href="#manifestassertion">
+     ManifestAssertion
+    </a>
+   </div>
+  </div>
+  <div style="position: absolute; left: 65px; top: 470px; font-size: 90%; ">
+   <div style="display: inline; font-family: &#39;Courier New&#39;, Courier, monospace; font-weight: bold;">
+    signature_info
+   </div>
+   <div class="manifest-object">
+    <a href="#signatureinfo">
+     SignatureInfo
+    </a>
+   </div>
+  </div>
+  <svg height="500" width="300" style="margin-top: 0;">
+   <polyline points="20,0 20,485" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,30 60,30" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,70 60,70" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,110 60,110" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,150 60,150" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,190 60,190" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,230 60,230" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,270 60,270" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,325 60,325" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,370 60,370" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,405 60,405" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,405 60,405" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,445 60,445" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+   <!-- xfinish  = 60 -->
+   <polyline points="20,485 60,485" style="fill:none;stroke:black;stroke-width:2">
+   </polyline>
+  </svg>
+ </div>
+ <h2 id="manifeststore">
+  ManifestStore
+ </h2>
+ <p>
+  A Container for a set of Manifests and a ValidationStatus list.
+ </p>
+ <h3 id="properties">
+  Properties
+ </h3>
+ <table>
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     active_manifest
+    </td>
+    <!-- Type -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <p>
+      A label for the active (most recent) manifest in the store
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+   </tr>
+   <tr>
+    <td>
+     manifests
+    </td>
+    <!-- Type -->
+    <td>
+     Object
+    </td>
+    <!-- Description -->
+    <td>
+     <p>
+      A HashMap of Manifests
+     </p>
+     See
+     <a href="#manifest">
+      Manifest
+     </a>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+   </tr>
+   <tr>
+    <td>
+     validation_status
+    </td>
+    <!-- Type -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     Array of
+     <a href="#validationstatus">
+      ValidationStatus
+     </a>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <p>
+      ValidationStatus generated when loading the ManifestStore from an asset
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!---------------------------------------------------------------------->
+ <h2 id="definitions">
+  Definitions
+ </h2>
+ <!-- TOC-like links -->
+ <table style="border: 0;" width="900">
+  <tbody>
+   <tr>
+    <td style="border: 0; vertical-align: top;">
+     <a href="#actor">
+      Actor
+     </a>
+     <br>
+     <a href="#assettype">
+      AssetType
+     </a>
+     <br>
+     <a href="#claimgeneratorinfo">
+      ClaimGeneratorInfo
+     </a>
+     <br>
+     <a href="#datasource">
+      DataSource
+     </a>
+     <br>
+     <a href="#hasheduri">
+      HashedUri
+     </a>
+     <br>
+    </td>
+    <td style="border: 0; vertical-align: top;">
+     <a href="#ingredient">
+      Ingredient
+     </a>
+     <br>
+     <a href="#manifest">
+      Manifest
+     </a>
+     <br>
+     <a href="#manifestassertion">
+      ManifestAssertion
+     </a>
+     <br>
+     <a href="#manifestassertionkind">
+      ManifestAssertionKind
+     </a>
+     <br>
+     <a href="#manifestdata">
+      ManifestData
+     </a>
+     <br>
+    </td>
+    <td style="border: 0; vertical-align: top;">
+     <a href="#metadata">
+      Metadata
+     </a>
+     <br>
+     <a href="#relationship">
+      Relationship
+     </a>
+     <br>
+     <a href="#resourceref">
+      ResourceRef
+     </a>
+     <br>
+     <a href="#reviewrating">
+      ReviewRating
+     </a>
+     <br>
+     <a href="#signatureinfo">
+      SignatureInfo
+     </a>
+     <br>
+    </td>
+    <td style="border: 0; vertical-align: top;">
+     <a href="#uriorresource">
+      UriOrResource
+     </a>
+     <br>
+     <a href="#validationstatus">
+      ValidationStatus
+     </a>
+     <br>
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!-- Definitions reference -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="actor">
+  Actor
+ </h3>
+ <p>
+  Identifies a person responsible for an action.
+ </p>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     credentials
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     Array of
+     <a href="#hasheduri">
+      HashedUri
+     </a>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       List of references to W3C Verifiable Credentials.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     identifier
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       An identifier for a human actor, used when the “type” is
+       <code class="language-plaintext highlighter-rouge">
+        humanEntry.identified
+       </code>
+       .
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!-- Not an object but an enum -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="assettype">
+  AssetType
+ </h3>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     type
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     version
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!-- Not an object but an enum -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="claimgeneratorinfo">
+  ClaimGeneratorInfo
+ </h3>
+ <p>
+  Description of the claim generator, or the software used in generating the claim.
+ </p>
+ <p>
+  This structure is also used for actions softwareAgent
+ </p>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     icon
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <a href="#uriorresource">
+      UriOrResource
+     </a>
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       hashed URI to the icon (either embedded or remote)
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     name
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A human readable string naming the claim_generator
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     version
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A human readable string of the product’s version
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <p>
+  NOTE: This object can have any number of additional user-defined properties.
+ </p>
+ <!-- Not an object but an enum -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="datasource">
+  DataSource
+ </h3>
+ <p>
+  A description of the source for assertion data
+ </p>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     actors
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     Array of
+     <a href="#actor">
+      Actor
+     </a>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A list of
+       <a href="crate::Actor">
+        <code class="language-plaintext highlighter-rouge">
+         Actor
+        </code>
+       </a>
+       s associated with this source.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     details
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A human-readable string giving details about the source of the assertion data.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     type
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A value from among the enumerated list indicating the source of the assertion.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!-- Not an object but an enum -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="hasheduri">
+  HashedUri
+ </h3>
+ <p>
+  Hashed Uri structure as defined by C2PA spec It is annotated to produce the correctly tagged cbor serialization
+ </p>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     alg
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       hash algorithm used (“sha256”, “sha384”, “sha512”)
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     hash
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     <!--  -->
+     An array of
+     <a href="#integer">
+      integer
+     </a>
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       “alg” hash of stored as cbor byte string
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     url
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       URI stored as tagged cbor
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!-- Not an object but an enum -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="ingredient">
+  Ingredient
+ </h3>
+ <p>
+  An
+  <code class="language-plaintext highlighter-rouge">
+   Ingredient
+  </code>
+  is any external asset that has been used in the creation of an image.
+ </p>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     active_manifest
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       The active manifest label (if one exists).
+      </p>
+      <p>
+       If this ingredient has a
+       <a href="crate::ManifestStore">
+        <code class="language-plaintext highlighter-rouge">
+         ManifestStore
+        </code>
+       </a>
+       , this will hold the label of the active
+       <a href="crate::Manifest">
+        <code class="language-plaintext highlighter-rouge">
+         Manifest
+        </code>
+       </a>
+       .
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     data
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <a href="#resourceref">
+      ResourceRef
+     </a>
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A reference to the actual data of the ingredient.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     description
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       Additional description of the ingredient.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     document_id
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       Document ID from
+       <code class="language-plaintext highlighter-rouge">
+        xmpMM:DocumentID
+       </code>
+       in XMP metadata.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     format
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       The format of the source file as a MIME type.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     application/octet-stream
+    </td>
+   </tr>
+   <tr>
+    <td>
+     hash
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       An optional hash of the asset to prevent duplicates.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     informational_URI
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       URI to an informational page about the ingredient or its data.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     instance_id
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       Instance ID from
+       <code class="language-plaintext highlighter-rouge">
+        xmpMM:InstanceID
+       </code>
+       in XMP metadata.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     manifest_data
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <a href="#resourceref">
+      ResourceRef
+     </a>
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A
+       <a href="crate::ManifestStore">
+        <code class="language-plaintext highlighter-rouge">
+         ManifestStore
+        </code>
+       </a>
+       from the source asset extracted as a binary C2PA blob.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     metadata
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <a href="#metadata">
+      Metadata
+     </a>
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       Any additional
+       <a href="crate::Metadata">
+        <code class="language-plaintext highlighter-rouge">
+         Metadata
+        </code>
+       </a>
+       as defined in the C2PA spec.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     provenance
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       URI from
+       <code class="language-plaintext highlighter-rouge">
+        dcterms:provenance
+       </code>
+       in XMP metadata.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     relationship
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <a href="#relationship">
+      Relationship
+     </a>
+     <!-- obj.type is an array of possible types-->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       Set to
+       <code class="language-plaintext highlighter-rouge">
+        ParentOf
+       </code>
+       if this is the parent ingredient.
+      </p>
+      <p>
+       There can only be one parent ingredient in the ingredients.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     componentOf
+    </td>
+   </tr>
+   <tr>
+    <td>
+     thumbnail
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <a href="#resourceref">
+      ResourceRef
+     </a>
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A thumbnail image capturing the visual state at the time of import.
+      </p>
+      <p>
+       A tuple of thumbnail MIME format (i.e.
+       <code class="language-plaintext highlighter-rouge">
+        image/jpeg
+       </code>
+       ) and binary bits of the image.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     title
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A human-readable title, generally source filename.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     validation_status
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     Array of
+     <a href="#validationstatus">
+      ValidationStatus
+     </a>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       Validation results.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!-- Not an object but an enum -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="manifest">
+  Manifest
+ </h3>
+ <p>
+  A Manifest represents all the information in a c2pa manifest
+ </p>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     assertions
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     <!--  -->
+     An array of
+     <a href="#manifestassertion">
+      ManifestAssertion
+     </a>
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A list of assertions
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     Empty array
+    </td>
+   </tr>
+   <tr>
+    <td>
+     claim_generator
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A User Agent formatted string identifying the software/hardware/system produced this claim Spaces are not allowed in names, versions can be specified with product/1.0 syntax
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     c2pa/0.25.2
+    </td>
+   </tr>
+   <tr>
+    <td>
+     claim_generator_info
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     Array of
+     <a href="#claimgeneratorinfo">
+      ClaimGeneratorInfo
+     </a>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     credentials
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     Array of 
+      
+
+      
+         
+        &#34;object&#34;
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       An array of
+       <a href="https://verifiablecredentials.dev/">
+        W3C Verifiable Credentials
+       </a>
+       . See also the
+       <a href="https://www.w3.org/TR/vc-data-model/">
+        W3C Recommendation
+       </a>
+       . NOTE: This area is under active development and may change.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     format
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       The format of the source file as a MIME type.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     application/octet-stream
+    </td>
+   </tr>
+   <tr>
+    <td>
+     ingredients
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     <!--  -->
+     An array of
+     <a href="#ingredient">
+      Ingredient
+     </a>
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A List of ingredients
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     Empty array
+    </td>
+   </tr>
+   <tr>
+    <td>
+     instance_id
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       Instance ID from
+       <code class="language-plaintext highlighter-rouge">
+        xmpMM:InstanceID
+       </code>
+       in XMP metadata.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     xmp:iid:3b9389f3-0bcb-4554-9a3c-1ab73ac5b81c
+    </td>
+   </tr>
+   <tr>
+    <td>
+     label
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     redactions
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     Array of 
+      
+
+      
+         
+          string
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A list of redactions - URIs to a redacted assertions
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     signature_info
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <a href="#signatureinfo">
+      SignatureInfo
+     </a>
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       Signature data (only used for reporting)
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     thumbnail
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <a href="#resourceref">
+      ResourceRef
+     </a>
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     title
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A human-readable title, generally source filename.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     vendor
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       Optional prefix added to the generated Manifest Label This is typically Internet domain name for the vendor (i.e.
+       <code class="language-plaintext highlighter-rouge">
+        adobe
+       </code>
+       )
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!-- Not an object but an enum -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="manifestassertion">
+  ManifestAssertion
+ </h3>
+ <p>
+  A labeled container for an Assertion value in a Manifest
+ </p>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     data
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <a href="#manifestdata">
+      ManifestData
+     </a>
+     <!-- obj.type is an array of possible types-->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       The data of the assertion as Value
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     instance
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     Integer
+     <!--  -->
+     <br>
+     Format: uint
+     <br>
+     Minimum: 0.0
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       There can be more than one assertion for any label
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     kind
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <a href="#manifestassertionkind">
+      ManifestAssertionKind
+     </a>
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       The
+       <a href="crate::ManifestAssertionKind">
+        <code class="language-plaintext highlighter-rouge">
+         ManifestAssertionKind
+        </code>
+       </a>
+       for this assertion (as stored in c2pa content).
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     label
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       An assertion label in reverse domain format
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!-- Not an object but an enum -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="manifestassertionkind">
+  ManifestAssertionKind
+ </h3>
+ <p>
+  A string that is one of the following:
+ </p>
+ <ul>
+  <li>
+   “Cbor”
+  </li>
+  <li>
+   “Json”
+  </li>
+  <li>
+   “Binary”
+  </li>
+  <li>
+   “Uri”
+   <!-- Not an object or enum, but a string -->
+  </li>
+ </ul>
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="manifestdata">
+  ManifestData
+ </h3>
+ <p class="comment">
+  Description TBD.
+ </p>
+ <p>
+  Any of the following:
+ </p>
+ <ul>
+  <!-- i is a simple type -->
+  <li>
+   true
+  </li>
+  <!-- i is an object or array -->
+  <li>
+   type: integer,
+      format: uint8,
+      minimum: 0.0
+  </li>
+ </ul>
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="metadata">
+  Metadata
+ </h3>
+ <p>
+  The Metadata structure can be used as part of other assertions or on its own to reference others
+ </p>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     data_source
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <a href="#datasource">
+      DataSource
+     </a>
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     dateTime
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       A date time in ISO 8601 format.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     reference
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <a href="#hasheduri">
+      HashedUri
+     </a>
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     reviewRatings
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     Array of
+     <a href="#reviewrating">
+      ReviewRating
+     </a>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <p>
+  NOTE: This object can have any number of additional user-defined properties.
+ </p>
+ <!-- Not an object but an enum -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="relationship">
+  Relationship
+ </h3>
+ <p>
+  A string that is one of the following:
+ </p>
+ <ul>
+  <li>
+   “parentOf”
+  </li>
+  <li>
+   “componentOf”
+  </li>
+  <li>
+   “inputTo”
+   <!-- Not an object or enum, but a string -->
+  </li>
+ </ul>
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="resourceref">
+  ResourceRef
+ </h3>
+ <p>
+  A reference to a resource to be used in JSON serialization
+ </p>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     data_types
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     Array of
+     <a href="#assettype">
+      AssetType
+     </a>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     format
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     identifier
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!-- Not an object but an enum -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="reviewrating">
+  ReviewRating
+ </h3>
+ <p>
+  A rating on an
+  <a href="crate::Assertion.">
+   <code class="language-plaintext highlighter-rouge">
+    Assertion
+   </code>
+  </a>
+  .
+ </p>
+ <p>
+  See
+  <a href="https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_claim_review">
+   https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_claim_review
+  </a>
+  .
+ </p>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     code
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     explanation
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     value
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     Integer
+     <br>
+     Format: uint8
+     <br>
+     Minimum: 0.0
+    </td>
+    <!-- Description -->
+    <td>
+     <p class="comment">
+      Description TBD.
+     </p>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!-- Not an object but an enum -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="signatureinfo">
+  SignatureInfo
+ </h3>
+ <p>
+  Holds information about a signature
+ </p>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     cert_serial_number
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       The serial number of the certificate
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     issuer
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       human readable issuing authority for this signature
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     time
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       the time the signature was created
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!-- Not an object but an enum -->
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="uriorresource">
+  UriOrResource
+ </h3>
+ <p class="comment">
+  Description TBD.
+ </p>
+ <p>
+  Any of the following:
+ </p>
+ <ul>
+  <!-- i is a simple type -->
+  <li>
+   <a href="#resourceref">
+    ResourceRef
+   </a>
+  </li>
+  <!-- i is a simple type -->
+  <li>
+   <a href="#hasheduri">
+    HashedUri
+   </a>
+  </li>
+ </ul>
+ <p>
+  <a class="top-scroll-btn" title="Go to top" href="#manifeststore">
+   Scroll To Top
+  </a>
+ </p>
+ <h3 id="validationstatus">
+  ValidationStatus
+ </h3>
+ <p>
+  A
+  <code class="language-plaintext highlighter-rouge">
+   ValidationStatus
+  </code>
+  struct describes the validation status of a specific part of a manifest.
+ </p>
+ <p>
+  See
+  <a href="https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_existing_manifests">
+   https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_existing_manifests
+  </a>
+  .
+ </p>
+ <table style="margin-top: 10px;">
+  <thead>
+   <tr>
+    <th>
+     Property
+    </th>
+    <th>
+     Type
+    </th>
+    <th>
+     Description
+    </th>
+    <th>
+     Required?
+    </th>
+    <th>
+     Default Value
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     code
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!--   -->
+     String
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       Validation status code.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     YES
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     explanation
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       Human-readable description of the validation that was performed.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+   <tr>
+    <td>
+     url
+    </td>
+    <!-- Type  -->
+    <td>
+     <!--  -->
+     <!-- Either -->
+     String
+     <!--  -->
+     <br>
+     <!--  or  -->
+     <!--  -->
+    </td>
+    <!-- Description -->
+    <td>
+     <div class="prop_desc">
+      <p>
+       Internal JUMBF reference to the entity that was validated.
+      </p>
+     </div>
+    </td>
+    <td>
+     <!-- Required? -->
+     NO
+    </td>
+    <td>
+     <!-- Default Value -->
+     N/A
+    </td>
+   </tr>
+  </tbody>
+ </table>
+ <!-- Not an object but an enum -->
+ <p>
+  <!-- end iteration over site.data.ManifestStore_schema.definitions obj -->
+ </p>
+</body>
