@@ -1,17 +1,28 @@
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './cai-addon.css';
-import { customScript } from './cai-customscripts.js';
 const referenceCAI = require('!!raw-loader!./reference-cai.html')?.default;
 
 const ManifestReference = () => {
-  //using a ref to be able to access the innerHTML of the referenceCAI file so that the <body></body> tags dont show in the DOM
-  let myRef = useRef(null);
+  const myRef = useRef(null);
+  const [refAquired, setRefAquired] = useState(false);
+  useEffect(() => {
+    setRefAquired(true);
+  }, []);
 
   useEffect(() => {
-    myRef = referenceCAI.innerHTML;
-    customScript;
-  });
+    if (myRef.current) {
+      for (const link of myRef.current.querySelectorAll('a')) {
+        if (link.hasAttribute('href')) {
+          let linkStr = link.getAttribute('href');
+          //console.log("Getting href for " + linkStr)
+          if (linkStr.startsWith('crate::')) {
+            link.setAttribute('href', '#' + linkStr.substring(7).toLowerCase());
+          }
+        }
+      }
+    }
+  }, [refAquired]);
 
   return (
     <BrowserOnly>
