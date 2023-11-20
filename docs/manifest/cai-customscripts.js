@@ -1,4 +1,4 @@
-window.onload = function () {
+const customScript = () => {
   all_property_desc = document.getElementsByClassName('prop_desc');
 
   //for (let i = 0; i < all_property_desc.length; i++) {
@@ -16,3 +16,4 @@ window.onload = function () {
     }
   } //for
 };
+export { customScript };
