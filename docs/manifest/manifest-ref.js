@@ -15,7 +15,6 @@ const ManifestReference = () => {
       for (const link of myRef.current.querySelectorAll('a')) {
         if (link.hasAttribute('href')) {
           let linkStr = link.getAttribute('href');
-          //console.log("Getting href for " + linkStr)
           if (linkStr.startsWith('crate::')) {
             link.setAttribute('href', '#' + linkStr.substring(7).toLowerCase());
           }
