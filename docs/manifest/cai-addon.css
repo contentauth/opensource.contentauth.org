@@ -53,3 +53,7 @@ th.manifest-ref-table {
   background-color: #555; /* Add a dark-grey background on hover */
   color: white;
 }
+
+h3 {
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 0.5rem);
+}
