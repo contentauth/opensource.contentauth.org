@@ -1,45 +1,59 @@
+import { createL2ManifestStore } from 'c2pa';
 import 'c2pa-wc/dist/components/Icon';
 import 'c2pa-wc/dist/components/Indicator';
-import 'c2pa-wc/dist/components/panels/ManifestSummary';
-import 'c2pa-wc/dist/components/panels/PanelSection';
+import 'c2pa-wc/dist/components/ManifestSummary';
+import 'c2pa-wc/dist/components/PanelSection';
 import 'c2pa-wc/dist/components/Popover';
 import React, { useEffect, useRef, useState } from 'react';
 import './styles.css';
 
 export function WebComponents({ imageUrl, provenance, viewMoreUrl }) {
-  const [manifest, setManifest] = useState(null);
+  console.log('imageUrl', imageUrl);
+  const [manifestStore, setManifestStore] = useState(null);
   const summaryRef = useRef();
 
   useEffect(() => {
-    let dispose = () => {};
-    provenance.manifestStore?.activeManifest
-      ?.asSerializable()
-      .then((result) => {
-        setManifest(result.data);
-        dispose = result.dispose;
-      });
-    return dispose;
-  }, [provenance.manifestStore?.activeManifest?.label]);
+    let disposeFn = () => {};
+
+    if (!provenance.manifestStore?.activeManifest) {
+      return;
+    }
+
+    createL2ManifestStore(provenance.manifestStore).then(
+      ({ manifestStore, dispose }) => {
+        setManifestStore(manifestStore);
+        disposeFn = dispose;
+      },
+    );
+
+    return disposeFn;
+  }, [provenance.manifestStore?.activeManifest]);
 
   useEffect(() => {
     const summaryElement = summaryRef.current;
-    if (summaryElement && manifest) {
-      summaryElement.manifest = manifest;
+    if (summaryElement && manifestStore) {
+      summaryElement.manifestStore = manifestStore;
       summaryElement.viewMoreUrl = viewMoreUrl;
     }
-  }, [summaryRef, manifest]);
+  }, [summaryRef, manifestStore]);
 
   return (
     <div className="web-components">
       <div className="wrapper">
         <img src={imageUrl} />
-        {manifest ? (
+        {manifestStore ? (
           <div>
-            <cai-popover interactive class="theme-spectrum">
+            <cai-popover
+              interactive
+              class="theme-spectrum"
+              strategy="fixed"
+              placement="left-start"
+            >
               <cai-indicator slot="trigger"></cai-indicator>
               <cai-manifest-summary
                 ref={summaryRef}
                 slot="content"
+                class="theme-spectrum"
               ></cai-manifest-summary>
             </cai-popover>
           </div>

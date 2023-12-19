@@ -1,10 +1,10 @@
-import React from 'react';
-import clsx from 'clsx';
-import styles from './styles.module.css';
-import Link from '@docusaurus/Link';
-import { useC2pa } from '@contentauth/react-hooks';
-import { generateVerifyUrl } from 'c2pa';
+import { useC2pa } from '@contentauth/react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import Link from '@docusaurus/Link';
+import { generateVerifyUrl } from 'c2pa';
+import clsx from 'clsx';
+import React from 'react';
+import styles from './styles.module.css';
 
 export function Feature({
   id,

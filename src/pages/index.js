@@ -1,21 +1,17 @@
-import React from 'react';
-import Layout from '@theme/Layout';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import Features from '../components/Features';
-import ComparisonTable from '../components/ComparisonTable';
-import Hero from '../components/Hero';
-import JSSDKIcon from '../assets/images/image.svg';
-import C2PAToolIcon from '../assets/images/cli.svg';
-import RustSDKIcon from '../assets/images/wrench.svg';
-import HeroImage from '../assets/images/hero-2.svg';
-import { C2paProvider } from '@contentauth/react-hooks';
+import { C2paProvider } from '@contentauth/react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import { resolvers } from 'c2pa';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Layout from '@theme/Layout';
+import React from 'react';
+import C2PAToolIcon from '../assets/images/cli.svg';
+import HeroImage from '../assets/images/hero-2.svg';
+import JSSDKIcon from '../assets/images/image.svg';
+import RustSDKIcon from '../assets/images/wrench.svg';
+import ComparisonTable from '../components/ComparisonTable';
+import Features from '../components/Features';
 import FeedbackLink from '../components/FeedbackLink';
+import Hero from '../components/Hero';
 
-const manifestResolvers = resolvers.createTypedResolvers(
-  resolvers.editsAndActivity,
-);
 export const features = [
   {
     id: 'js-sdk',
@@ -164,9 +160,9 @@ export default function Home() {
   const { siteConfig } = useDocusaurusContext();
 
   const wasmSrc =
-    'https://cdn.jsdelivr.net/npm/c2pa@0.9.1/dist/assets/wasm/toolkit_bg.wasm';
+    'https://cdn.jsdelivr.net/npm/c2pa@0.17.6/dist/assets/wasm/toolkit_bg.wasm';
   const workerSrc =
-    'https://cdn.jsdelivr.net/npm/c2pa@0.9.1/dist/c2pa.worker.min.js';
+    'https://cdn.jsdelivr.net/npm/c2pa@0.17.6/dist/c2pa.worker.min.js';
 
   return (
     <BrowserOnly>
@@ -190,7 +186,6 @@ export default function Home() {
               config={{
                 wasmSrc,
                 workerSrc,
-                manifestResolvers,
               }}
             >
               <Features features={features} />
