@@ -80,13 +80,35 @@ except Exception as err:
 
 </TabItem>
 
-<TabItem value="cpp" label="C++">
-  This is how to read a manifest using C++. 
-</TabItem>
-
   <TabItem value="node" label="Node.js">
-    This is how to read a manifest using Node.js.
+Use the `c2pa.read()` function to read a manifest; for example:
+
+```ts
+import { createC2pa } from 'c2pa-node';
+import { readFile } from 'node:fs/promises';
+
+const c2pa = createC2pa();
+
+async function read(path, mimeType) {
+  const buffer = await readFile(path);
+  const result = await c2pa.read({ buffer, mimeType });
+
+  if (result) {
+    const { active_manifest, manifests, validation_status } = result;
+    console.log(active_manifest);
+  } else {
+    console.log('No claim found');
+  }
+}
+
+await read('my-c2pa-file.jpg', 'image/jpeg');
+```
   </TabItem>
+
+  <TabItem value="cpp" label="C++">
+    This is how to read a manifest using C++. 
+  </TabItem>
+
 </Tabs>
 
 ## Getting resources from a manifest
