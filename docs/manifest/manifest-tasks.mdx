@@ -11,7 +11,43 @@ import TabItem from '@theme/TabItem';
 <Tabs groupId="programming-lang">
 
 <TabItem value="js" label="JavaScript" default>
-  This is how to read a manifest using JavaScript.
+
+If the input provided to [`c2pa.read`](../../js-sdk/api/c2pa.c2pa#methods) has a C2PA manifest and was processed without errors, the returned [`c2paReadResult`](../../js-sdk/api/c2pa.c2pareadresult) contains a [`manifestStore`](../../js-sdk/api/c2pa.c2pareadresult.manifeststore).
+
+The [`manifestStore`](../../js-sdk/api/c2pa.c2pareadresult.manifeststore) object contains a few properties:
+
+- **manifests**: An object containing _all_ manifests found in an asset, keyed by UUID.
+- **activeManifest**: A pointer to the latest [`manifest`](../../js-sdk/api/c2pa.manifest) in the manifest store. Effectively the "parent" manifest, this is the likely starting point when inspecting an asset's C2PA data.
+- **validationStatus**: A list of any validation errors the library generated when processing an asset. See [Validation](./validation) for more information.
+
+[`Manifest`](../../js-sdk/api/c2pa.manifest) objects contain properties pertaining to an asset's provenance, along with convenient interfaces for [accessing assertion data](../../js-sdk/api/c2pa.assertionaccessor) and [generating a thumbnail](../../js-sdk/api/c2pa.thumbnail).
+
+```js
+  const { manifestStore, source } = await c2pa.read(sampleImage);
+  const activeManifest = manifestStore?.activeManifest;
+  if (activeManifest) {
+    // Get thumbnail
+    // Note: You would normally call `dispose()` when working with a
+    // component-based UI library (e.g. on component un-mount)
+    // @ts-expect-error noUnusedLocals
+    const { url, dispose } = source.thumbnail.getUrl();
+
+    // Get properties
+    const properties: Record<string, string | undefined> = {
+      title: activeManifest.title,
+      format: activeManifest.format,
+      claimGenerator: activeManifest.claimGenerator.split('(')[0]?.trim(),
+      producer: selectProducer(activeManifest)?.name ?? 'Unknown',
+      thumbnail: `<img src="${url}" class="thumbnail" />`,
+      ingredients: (activeManifest.ingredients ?? [])
+        .map((i) => i.title)
+        .join(', '),
+      signatureIssuer: activeManifest.signatureInfo?.issuer,
+      signatureDate: activeManifest.signatureInfo?.time
+        ? parseISO(activeManifest.signatureInfo.time).toString()
+        : 'No date available',
+    };
+```
 </TabItem>
 
 <TabItem value="python" label="Python">
