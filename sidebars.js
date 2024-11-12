@@ -46,6 +46,10 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'manifest/tasks',
+        },        
+        {
+          type: 'doc',
           id: 'manifest/manifest-examples',
           label: 'Examples',
         },
