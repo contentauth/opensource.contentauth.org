@@ -15,11 +15,37 @@ import TabItem from '@theme/TabItem';
 </TabItem>
 
 <TabItem value="python" label="Python">
-  This is how to read a manifest using Python.
+
+Use the `Reader` object to read manifest data from a file or stream and perform validation on the manifest store. Use the `json()` method to return a JSON manifest report; If there are validation errors, the report includes a `validation_status` field.
+
+Use the `resource_to_file` and `resource_to_stream` methods to write resources to a file or stream, respectively.
+
+An asset file may contain many manifests in a manifest store. The most recent manifest is identified by the value of the `active_manifest` field in the manifests map.  Retrieve binary resources such as thumbnails from the manifest data, use the `resource_to_stream` or `resource_to_file` methods using the associated `identifier` field values and a `uri`.
+
+```py
+try:
+  # Create a reader from a file path
+  reader = c2pa.Reader.from_file("path/to/media_file.jpg")
+
+  # Print the JSON for a manifest. 
+  print("manifest store:", reader.json())
+
+  # Get the active manifest.
+  manifest = reader.get_active_manifest()
+  if manifest != None:
+
+    # Get the URI to the manifest's thumbnail and write it to a file
+    uri = manifest["thumbnail"]["identifier"]
+    reader.resource_to_file(uri, "thumbnail_v2.jpg") 
+
+except Exception as err:
+    print(err)
+```
+
 </TabItem>
 
 <TabItem value="cpp" label="C++">
-  This is how to read a manifest using C++. Do we want also want C?
+  This is how to read a manifest using C++. 
 </TabItem>
 
   <TabItem value="node" label="Node.js">
