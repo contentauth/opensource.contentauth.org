@@ -1,0 +1,157 @@
+---
+id: read
+title: Reading manifest data
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs groupId="programming-lang">
+
+<TabItem value="js" label="JavaScript" default>
+
+Use [`c2pa.read`](../../docs/js-sdk/api/c2pa.c2pa#methods) to read manifest data from an asset; if the asset has a C2PA manifest and was processed without errors, the returned [`c2paReadResult`](../../docs/js-sdk/api/c2pa.c2pareadresult) contains a [`manifestStore`](../../docs/js-sdk/api/c2pa.c2pareadresult.manifeststore) object with several useful properties:
+
+- **manifests**: An object containing all the asset's manifests ([`Manifest`](../../docs/js-sdk/api/c2pa.manifest) objects), keyed by UUID.
+- **activeManifest**: A pointer to the latest [`manifest`](../../docs/js-sdk/api/c2pa.manifest) in the manifest store. Effectively the "parent" manifest, this is the likely starting point when inspecting an asset's C2PA data.
+- **validationStatus**: A list of any validation errors encountered. See [Validation](../../docs/js-sdk/guides/validation) for more information.
+
+```js
+import { createC2pa } from 'https://cdn.jsdelivr.net/npm/c2pa@0.17.2/+esm';
+
+const sampleImage = '<IMAGE_URL>';
+
+(async () => {
+  // Initialize the c2pa-js SDK
+  const c2pa = await createC2pa({
+    wasmSrc:
+      'https://cdn.jsdelivr.net/npm/c2pa@0.17.2/dist/assets/wasm/toolkit_bg.wasm',
+    workerSrc:
+      'https://cdn.jsdelivr.net/npm/c2pa@0.17.2/dist/c2pa.worker.min.js',
+  });
+
+  try {
+    // Read in image and get a manifest store
+    const { manifestStore } = await c2pa.read(sampleImage);
+    console.log('manifestStore', manifestStore);
+
+    // Get the active manifest
+    const activeManifest = manifestStore?.activeManifest;
+    console.log('activeManifest', activeManifest);
+  } catch (err) {
+    console.error('Error reading image:', err);
+  }
+})();
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+Use the `Reader` object to read manifest data from a file or stream and perform validation on the manifest store. Use the `json()` method to return a JSON manifest report; If there are validation errors, the report includes a `validation_status` field.
+
+An asset file may contain many manifests in a manifest store. The most recent manifest is identified by the value of the `active_manifest` field in the manifests map.
+
+```py
+try:
+  # Create a reader from a file path
+  reader = c2pa.Reader.from_file("path/to/media_file.jpg")
+
+  # Print the JSON for a manifest.
+  print("manifest store:", reader.json())
+
+  # Get the active manifest.
+  manifest = reader.get_active_manifest()
+  if manifest != None:
+
+    # Get the URI to the manifest's thumbnail and write it to a file
+    uri = manifest["thumbnail"]["identifier"]
+    reader.resource_to_file(uri, "thumbnail_v2.jpg")
+
+except Exception as err:
+    print(err)
+```
+
+</TabItem>
+
+<TabItem value="node" label="Node.js">
+
+Use the `c2pa.read()` function to read a manifest; for example:
+
+```ts
+import { createC2pa } from 'c2pa-node';
+import { readFile } from 'node:fs/promises';
+
+const c2pa = createC2pa();
+
+async function read(path, mimeType) {
+  const buffer = await readFile(path);
+  const result = await c2pa.read({ buffer, mimeType });
+
+  if (result) {
+    const { active_manifest, manifests, validation_status } = result;
+    console.log(active_manifest);
+  } else {
+    console.log('No claim found');
+  }
+}
+
+await read('my-c2pa-file.jpg', 'image/jpeg');
+```
+
+</TabItem>
+
+<TabItem value="cpp" label="C++">
+
+Use the `read_file` function to read C2PA data from the specified file. This function examines the specified asset file for C2PA data and its return value is a JSON report if it finds C2PA data. If there are validation errors, the report includes a `validation_status` field. Exceptions are thrown on errors.
+
+```cpp
+auto json_store = C2pa::read_file("<ASSET_FILE>", "<DATA_DIR>")
+```
+
+Where:
+
+- `<ASSET_FILE>`- The asset file to read.
+- `<DATA_DIR>` - Optional path to data output directory; If provided, the function extracts any binary resources, such as thumbnails, icons, and C2PA data into that directory. These files are referenced by the identifier fields in the manifest store report.
+
+For example:
+
+```cpp
+auto json_store = C2pa::read_file("work/media_file.jpg", "output/data_dir")
+```
+
+</TabItem>
+
+<TabItem value="rust" label="Rust">
+
+Use the [`Reader`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html) struct to read manifest data from a file or stream.
+
+### Reading from a file
+
+Use [`from_file`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html#method.from_file) to read manifest data from a file:
+
+```rs
+use c2pa::Reader;
+let reader = Reader::from_file("path/to/file.jpg").unwrap();
+```
+
+There is also an asynchronous version of this method, [`from_stream_async`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html#method.from_file_async).
+
+### Reading from a stream
+
+Use [`from_stream`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html#method.from_stream) to read manifest data from a stream:
+
+```rs
+use std::io::Cursor;
+
+use c2pa::Reader;
+let mut stream = Cursor::new(include_bytes!("../tests/fixtures/CA.jpg"));
+let reader = Reader::from_stream("image/jpeg", stream).unwrap();
+println!("{}", reader.json());
+```
+
+There is also an asynchronous version of this method, [`from_stream_async`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html#method.from_stream_async).
+
+</TabItem>
+
+</Tabs>

@@ -46,10 +46,6 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'manifest/tasks',
-        },        
-        {
-          type: 'doc',
           id: 'manifest/manifest-examples',
           label: 'Examples',
         },
@@ -61,6 +57,35 @@ const sidebars = {
           type: 'doc',
           id: 'manifest/manifest-json-schema',
           label: 'JSON schema',
+        },
+      ],
+    },
+
+    {
+      type: 'category',
+      label: 'Common tasks',
+      link: { type: 'doc', id: 'tasks/common-tasks' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'tasks/read',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/get-resources',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/build',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/write',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/sign',
         },
       ],
     },

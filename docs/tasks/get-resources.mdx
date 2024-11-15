@@ -1,0 +1,48 @@
+---
+id: get-resources
+title: Getting resources from a manifest
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Manifest data can include binary resources such as thumbnail and icon images which are referenced by JUMBF URIs in manifest data.
+
+<Tabs groupId="programming-lang" >
+  <TabItem value="js" label="JavaScript" default>
+    This is how to get resources from a manifest using JavaScript.
+  </TabItem>
+
+<TabItem value="python" label="Python">
+
+Retrieve binary resources such as thumbnails from the manifest data, use the `resource_to_stream` or `resource_to_file` methods using the associated `identifier` field values and a `uri`.
+
+NOTE: Need to add example of using `reader.resource_to_stream()`.
+
+```python
+try:
+# Create a reader from a file path
+reader = c2pa.Reader.from_file("path/to/media_file.jpg")
+
+# Get the active manifest.
+manifest = reader.get_active_manifest()
+if manifest != None:
+
+  # get the uri to the manifest's thumbnail and write it to a file
+  uri = manifest["thumbnail"]["identifier"]
+  reader.resource_to_file(uri, "thumbnail_v2.jpg")
+
+except Exception as err:
+  print(err)
+```
+
+</TabItem>
+
+<TabItem value="cpp" label="C++">
+  This is how to get resources from a manifest using C++.
+</TabItem>
+
+  <TabItem value="node" label="Node.js">
+    This is how to get resources from a manifest using Node.js.
+  </TabItem>
+</Tabs>
