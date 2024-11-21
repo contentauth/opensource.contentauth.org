@@ -1,6 +1,7 @@
 ---
 id: read
 title: Reading manifest data
+hide_table_of_contents: true
 ---
 
 import Tabs from '@theme/Tabs';
@@ -57,16 +58,12 @@ try:
   # Create a reader from a file path
   reader = c2pa.Reader.from_file("path/to/media_file.jpg")
 
+  # Alternatively, create a reader from a stream
+  stream = open("path/to/media_file.jpg", "rb")
+  reader = c2pa.Reader("image/jpeg", stream)
+
   # Print the JSON for a manifest.
   print("manifest store:", reader.json())
-
-  # Get the active manifest.
-  manifest = reader.get_active_manifest()
-  if manifest != None:
-
-    # Get the URI to the manifest's thumbnail and write it to a file
-    uri = manifest["thumbnail"]["identifier"]
-    reader.resource_to_file(uri, "thumbnail_v2.jpg")
 
 except Exception as err:
     print(err)
@@ -103,7 +100,7 @@ await read('my-c2pa-file.jpg', 'image/jpeg');
 
 <TabItem value="cpp" label="C++">
 
-Use the `read_file` function to read C2PA data from the specified file. This function examines the specified asset file for C2PA data and its return value is a JSON report if it finds C2PA data. If there are validation errors, the report includes a `validation_status` field. Exceptions are thrown on errors.
+Use the `read_file` function to read C2PA data from the specified file. This function examines the specified asset file for C2PA data and returns a JSON report if it finds any; it throws exceptions on errors. If there are validation errors, the report includes a `validation_status` field.
 
 ```cpp
 auto json_store = C2pa::read_file("<ASSET_FILE>", "<DATA_DIR>")
