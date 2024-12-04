@@ -24,14 +24,28 @@
 
 
 <tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/412"> Make_test_images validation tests </a> </td>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/487"> Support for Collections Assertion </a> </td>
 <td>c2pa-rs </td>
 </tr>
 
 
 
 <tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/451"> Test tool for API 2024, create and compare manifests </a> </td>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/406"> Zip format support </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/557"> Custom serializer/deserialize that can read 1.4-2.x. Claims </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/558"> Change Claim Signature URI to be full path </a> </td>
 <td>c2pa-rs </td>
 </tr></table>
 
@@ -48,34 +62,6 @@
 
 
 <tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-python/issues/13"> Python API 2024 first release </a> </td>
-<td>c2pa-python </td>
-</tr>
-
-
-
-<tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/384"> Rust API 2024 first release </a> </td>
-<td>c2pa-rs </td>
-</tr>
-
-
-
-<tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-c/issues/11"> C/C++ API 2024 first release </a> </td>
-<td>c2pa-c </td>
-</tr>
-
-
-
-<tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/376"> Complete 1.3 validation </a> </td>
-<td>c2pa-rs </td>
-</tr>
-
-
-
-<tr>
 <td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/486"> Claim_V2 support </a> </td>
 <td>c2pa-rs </td>
 </tr>
@@ -83,8 +69,39 @@
 
 
 <tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/475"> Enable BoxHash generation (1.4) </a> </td>
+<td> <a target="_blank" href="https://github.com/contentauth/c2patool/issues/248"> Update c2patool to 24 API </a> </td>
+<td>c2patool </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/455"> API 2024 documentation review </a> </td>
 <td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/547"> Support for timestamp V2 </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/553"> Remove VC support/generation when writing Claim V2 manifests </a> </td>
+<td>c2pa-rs </td>
+</tr></table>
+
+<h3 id="todo">Todo</h3>
+
+<p>Planned for future work.</p>
+
+<table>
+<tr>
+<th>Task</th>
+<th>Repository</th>
 </tr>
 
 
@@ -97,7 +114,49 @@
 
 
 <tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/487"> Support for Collections Assertion </a> </td>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/452"> API 2024 errors review </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td>Figure out how to represent 2.1 manifests and ingredients compatibly in the SDK.  </td>
+<td> </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/398"> Separating Asset_IO to support third party contributions </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/451"> Test tool for API 2024, create and compare manifests </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/586"> Implement Mandatory Created and Opened Actions </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2patool/issues/249"> Update c2patool for 2.1 spec support </a> </td>
+<td>c2patool </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/585"> Integrate Dynamic Assertion via Signer for CAWG </a> </td>
 <td>c2pa-rs </td>
 </tr>
 
@@ -118,36 +177,23 @@
 
 
 <tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-c/issues/12"> C++ istream/ostream support </a> </td>
-<td>c2pa-c </td>
-</tr>
-
-
-
-<tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/406"> Zip format support </a> </td>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/634"> Update manifest schema documentation </a> </td>
 <td>c2pa-rs </td>
 </tr>
 
 
 
 <tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/455"> API 2024 documentation review </a> </td>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/637"> Complete '24 API Deprecations </a> </td>
 <td>c2pa-rs </td>
 </tr>
 
 
 
 <tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/456"> Support remote URLs in 2024 API. </a> </td>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/638"> Add validation_state API </a> </td>
 <td>c2pa-rs </td>
 </tr></table>
-
-<h3 id="todo">Todo</h3>
-
-<p>Planned for future work.</p>
-
-<p><em>There are currently no items with this status.</em></p>
 
 <h3 id="in-review--triage">In Review / Triage</h3>
 
@@ -162,7 +208,14 @@
 
 
 <tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/383"> C2PA spec 2.0 support </a> </td>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/376"> Complete 1.3 validation </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/383"> C2PA spec 2.1 support </a> </td>
 <td>c2pa-rs </td>
 </tr>
 
@@ -183,13 +236,6 @@
 
 
 <tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/452"> API 2024 errors review </a> </td>
-<td>c2pa-rs </td>
-</tr>
-
-
-
-<tr>
 <td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/379"> Update manifest enablement </a> </td>
 <td>c2pa-rs </td>
 </tr>
@@ -197,29 +243,8 @@
 
 
 <tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/397"> Regions of interest support </a> </td>
-<td>c2pa-rs </td>
-</tr>
-
-
-
-<tr>
-<td>Standard method to reference ingredients from Actions  </td>
-<td> </td>
-</tr>
-
-
-
-<tr>
 <td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/503"> Figure out if embeddable manifests can be used everywhere </a> </td>
 <td>c2pa-rs </td>
-</tr>
-
-
-
-<tr>
-<td>Embeddable Manifest support in V2  </td>
-<td> </td>
 </tr>
 
 
@@ -234,13 +259,6 @@
 <tr>
 <td>Provide an external way to do OCSP stapling  </td>
 <td> </td>
-</tr>
-
-
-
-<tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/387"> DASH Completion </a> </td>
-<td>c2pa-rs </td>
 </tr>
 
 
@@ -309,13 +327,6 @@
 
 
 <tr>
-<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/398"> Separating Asset_IO to support third party contributions </a> </td>
-<td>c2pa-rs </td>
-</tr>
-
-
-
-<tr>
 <td> <a target="_blank" href="https://github.com/contentauth/c2pa-js/issues/167"> Add Region of Interest Assertion helper </a> </td>
 <td>c2pa-js </td>
 </tr>
@@ -332,4 +343,103 @@
 <tr>
 <td>AIFF support  </td>
 <td> </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/548"> Support timestamp manifests </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/549"> Read support for c2md (JUMBF data) manifests </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/550"> BMFF Hash V3 support to enable Merkle generation for BMFF </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/554"> Add redactions for databoxes </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/555"> New structures to support 1.x and 2.x namespaces </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/556"> Change ValidationLogs to support standardized 2.x logging </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/559"> Update ClaimAssertion to map assertions to correct assertion list </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/560"> Support user exclusions for DataHash </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/561"> During standard Claim validation validate Claim icon if present </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/567"> Remove writing of native camera RAW formats form SDK. </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2patool/issues/250"> Convert c2patool to use settings config </a> </td>
+<td>c2patool </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2patool/issues/251"> CAWG integration for c2patool </a> </td>
+<td>c2patool </td>
+</tr>
+
+
+
+<tr>
+<td> <a target="_blank" href="https://github.com/contentauth/c2pa-rs/issues/590"> Option to automatically add parent in Builder API </a> </td>
+<td>c2pa-rs </td>
+</tr>
+
+
+
+<tr>
+<td>c2patool Ingredients use trust list and warn for errors.  </td>
+<td> </td>
 </tr></table>
+

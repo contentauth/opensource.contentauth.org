@@ -72,7 +72,7 @@ function appendStringToFiles(directory, stringToAppend) {
             return;
           }
 
-          console.log(`Appended "${stringToAppend}" to ${file}`);
+          //console.log(`Appended "${stringToAppend}" to ${file}`);
         });
       });
     });

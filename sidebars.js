@@ -98,17 +98,33 @@ const sidebars = {
       items: [
         {
           type: 'doc',
+          id: 'c2patool/docs/usage',
+          label: 'Using C2PA Tool',
+        },
+        {
+          type: 'doc',
+          id: 'c2patool/docs/supported-formats',
+          label: 'Supported media formats',
+        },
+        {
+          type: 'doc',
           id: 'c2patool/docs/manifest',
           label: 'Using a manifest file',
         },
         {
           type: 'doc',
           id: 'c2patool/docs/x_509',
-          label: 'Creating and using a certificate',
+          label: 'Using a certificate',
+        },
+        {
+          type: 'doc',
+          id: 'c2patool/docs/release-notes',
+          label: 'Release notes',
         },
         {
           type: 'doc',
           id: 'c2pa-service-example/readme',
+          label: 'C2PA Tool service example',
         },
         {
           type: 'link',
@@ -138,13 +154,29 @@ const sidebars = {
           collapsed: true,
           items: [
             {
-              type: 'link',
-              label: 'GitHub',
-              href: 'https://github.com/contentauth/c2pa-node',
+              type: 'doc',
+              id: 'c2pa-node/docs/usage',
+              label: 'Using the Node library',
             },
             {
               type: 'doc',
+              id: 'c2pa-node/docs/supported-formats',
+              label: 'Supported media formats',
+            },
+            {
+              type: 'doc',
+              id: 'c2pa-node/docs/release-notes',
+              label: 'Release notes',
+            },
+            {
+              type: 'doc',
+              label: 'C2PA Node example',
               id: 'c2pa-node-example/readme',
+            },
+            {
+              type: 'link',
+              label: 'GitHub',
+              href: 'https://github.com/contentauth/c2pa-node',
             },
           ],
         },
@@ -155,14 +187,29 @@ const sidebars = {
           collapsed: true,
           items: [
             {
-              type: 'link',
-              label: 'GitHub',
-              href: 'https://github.com/contentauth/c2pa-python',
+              type: 'doc',
+              id: 'c2pa-python/docs/usage',
+              label: 'Using the Python library',
             },
             {
               type: 'doc',
-              label: 'C2PA Python Example',
+              id: 'c2pa-python/docs/supported-formats',
+              label: 'Supported media formats',
+            },
+            {
+              type: 'doc',
+              id: 'c2pa-python/docs/release-notes',
+              label: 'Release notes',
+            },
+            {
+              type: 'doc',
               id: 'c2pa-python-example/readme',
+              label: 'C2PA Python example',
+            },
+            {
+              type: 'link',
+              label: 'GitHub',
+              href: 'https://github.com/contentauth/c2pa-python',
             },
           ],
         },
@@ -172,6 +219,16 @@ const sidebars = {
           link: { type: 'doc', id: 'c2pa-c/readme' },
           collapsed: true,
           items: [
+            {
+              type: 'doc',
+              id: 'c2pa-c/docs/usage',
+              label: 'Using the C++ library',
+            },
+            {
+              type: 'doc',
+              id: 'c2pa-c/docs/supported-formats',
+              label: 'Supported media formats',
+            },
             {
               type: 'link',
               label: 'GitHub',
@@ -189,19 +246,34 @@ const sidebars = {
       collapsed: true,
       items: [
         {
+          type: 'doc',
+          id: 'rust-sdk/docs/usage',
+          label: 'Using the Rust library',
+        },
+        {
+          type: 'doc',
+          id: 'rust-sdk/docs/supported-formats',
+          label: 'Supported media formats',
+        },
+        {
+          type: 'doc',
+          id: 'rust-sdk/docs/release-notes',
+          label: 'Release notes',
+        },
+        {
           type: 'link',
           label: 'API documentation',
           href: 'https://docs.rs/c2pa',
         },
         {
+          type: 'doc',
+          id: 'c2pa-min/readme',
+          label: 'C2PA Rust example application',
+        },
+        {
           type: 'link',
           label: 'GitHub',
           href: 'https://github.com/contentauth/c2pa-rs',
-        },
-        {
-          type: 'doc',
-          label: 'C2PA Rust example application',
-          id: 'c2pa-min/readme',
         },
       ],
     },
