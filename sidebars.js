@@ -98,12 +98,12 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          id: 'c2patool/manifest',
+          id: 'c2patool/docs/manifest',
           label: 'Using a manifest file',
         },
         {
           type: 'doc',
-          id: 'c2patool/x_509',
+          id: 'c2patool/docs/x_509',
           label: 'Creating and using a certificate',
         },
         {
