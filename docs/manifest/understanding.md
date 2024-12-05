@@ -1,6 +1,6 @@
 ---
 id: understanding-manifest
-title: Working with manifests
+title: Understanding manifests
 ---
 
 ## Overview
