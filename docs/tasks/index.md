@@ -4,7 +4,7 @@ title: Working with manifests
 ---
 
 There are a number of common tasks when working with manifests. 
-Although the tasks and APIs are similar at a high level, the way you accomplish each task is specific to the language being used.
+The way you accomplish each task is specific to the language you're using, although at a high level the process is similar.
 
 - [Reading manifest data](./read.mdx)
 - [Getting resources from a manifest](./get-resources.mdx)
