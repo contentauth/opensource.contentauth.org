@@ -1,0 +1,93 @@
+---
+id: setup
+title: Setup
+hide_table_of_contents: true
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs groupId="programming-lang">
+
+{' '}
+<TabItem value="js" label="JavaScript" default>
+  This is how to setup the JavaScript library.
+</TabItem>
+
+  <TabItem value="python" label="Python" default>
+  This is how to setup the Python library.
+
+```python
+# Import the C2PA Python package
+from c2pa import *
+
+# Import standard general-purpose packages
+import os
+import io
+import logging
+import json
+import base64
+
+# Import web packages used in example implementation
+from flask import Flask, request, abort
+from flask_cors import CORS
+from waitress import serve
+
+# Import AWS SDK package (to use KMS)
+import boto3
+```
+
+  </TabItem>
+
+  <TabItem value="node" label="Node.js">
+  This is how to setup the Node.js library.
+
+```js
+import { createC2pa } from 'c2pa-node';
+import { readFile } from 'node:fs/promises';
+
+const c2pa = createC2pa();
+```
+
+  </TabItem>
+
+  <TabItem value="cpp" label="C++">
+
+```cpp
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <stdexcept>
+#include <openssl/evp.h>
+#include <openssl/pem.h>
+#include <openssl/err.h>
+#include "c2pa.hpp"
+#include "test_signer.hpp"
+#include <nlohmann/json.hpp>
+
+// this example uses nlohmann json for parsing the manifest
+using json = nlohmann::json;
+using namespace std;
+namespace fs = std::filesystem;
+using namespace c2pa;
+```
+
+  </TabItem>
+
+  <TabItem value="rust" label="Rust">
+  This is how to setup the Rust library.
+
+```rust
+use std::{
+    io::{Cursor, Write},
+    process::{Command, Stdio},
+};
+
+use anyhow::Result;
+use c2pa::{settings::load_settings_from_str, Builder, CallbackSigner, SigningAlg};
+```
+
+  </TabItem>
+  
+</Tabs>

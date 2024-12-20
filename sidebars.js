@@ -69,6 +69,10 @@ const sidebars = {
       items: [
         {
           type: 'doc',
+          id: 'tasks/setup',
+        },
+        {
+          type: 'doc',
           id: 'tasks/read',
         },
         {
