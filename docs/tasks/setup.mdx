@@ -9,9 +9,24 @@ import TabItem from '@theme/TabItem';
 
 <Tabs groupId="programming-lang">
 
-{' '}
 <TabItem value="js" label="JavaScript" default>
-  This is how to setup the JavaScript library.
+
+```js
+const version = '0.24.2';
+const sampleImage = '<IMAGE_URL>';
+
+import { createC2pa } from 'https://cdn.jsdelivr.net/npm/c2pa@${version}/+esm';
+
+(async () => {
+  // Initialize the c2pa-js SDK
+  const c2pa = await createC2pa({
+    wasmSrc:
+      'https://cdn.jsdelivr.net/npm/c2pa@${version}/dist/assets/wasm/toolkit_bg.wasm',
+    workerSrc:
+      'https://cdn.jsdelivr.net/npm/c2pa@${version}/dist/c2pa.worker.min.js',
+  });
+```
+
 </TabItem>
 
   <TabItem value="python" label="Python" default>
@@ -85,7 +100,14 @@ use std::{
 };
 
 use anyhow::Result;
-use c2pa::{settings::load_settings_from_str, Builder, CallbackSigner, SigningAlg};
+use c2pa::{settings::load_settings_from_str, Builder, CallbackSigner, Reader};
+
+use c2pa_crypto::raw_signature::SigningAlg;
+use serde_json::json;
+
+const TEST_IMAGE: &[u8] = include_bytes!("../tests/fixtures/CA.jpg");
+const CERTS: &[u8] = include_bytes!("../tests/fixtures/certs/ed25519.pub");
+const PRIVATE_KEY: &[u8] = include_bytes!("../tests/fixtures/certs/ed25519.pem");
 ```
 
   </TabItem>

@@ -18,20 +18,6 @@ Use [`c2pa.read`](../../docs/js-sdk/api/c2pa.c2pa#methods) to read manifest data
 - **validationStatus**: A list of any validation errors encountered. See [Validation](../../docs/js-sdk/guides/validation) for more information.
 
 ```js
-const version = '0.17.2';
-const sampleImage = '<IMAGE_URL>';
-
-import { createC2pa } from 'https://cdn.jsdelivr.net/npm/c2pa@${version}/+esm';
-
-(async () => {
-  // Initialize the c2pa-js SDK
-  const c2pa = await createC2pa({
-    wasmSrc:
-      'https://cdn.jsdelivr.net/npm/c2pa@${version}/dist/assets/wasm/toolkit_bg.wasm',
-    workerSrc:
-      'https://cdn.jsdelivr.net/npm/c2pa@${version}/dist/c2pa.worker.min.js',
-  });
-
   try {
     // Read in image and get a manifest store
     const { manifestStore } = await c2pa.read(sampleImage);
