@@ -9,6 +9,4 @@ The way you accomplish each task is specific to the language you're using, altho
 - [Preliminary setup](./setup.mdx)
 - [Reading manifest data](./read.mdx)
 - [Getting resources from a manifest](./get-resources.mdx)
-- [Building a manifest](./build.mdx)
-- [Writing a manifest](./write.mdx)
-- [Signing a manifest](./sign.mdx)
+- [Attaching a manifest to an asset and signing it](./build.mdx)

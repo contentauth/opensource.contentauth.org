@@ -83,14 +83,6 @@ const sidebars = {
           type: 'doc',
           id: 'tasks/build',
         },
-        {
-          type: 'doc',
-          id: 'tasks/write',
-        },
-        {
-          type: 'doc',
-          id: 'tasks/sign',
-        },
       ],
     },
 
