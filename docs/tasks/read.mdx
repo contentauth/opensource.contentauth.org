@@ -114,7 +114,7 @@ Use the [`Reader`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html) struct t
 
 Use [`from_file`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html#method.from_file) to read manifest data from a file:
 
-```rs
+```rust
 use c2pa::Reader;
 let reader = Reader::from_file("path/to/file.jpg").unwrap();
 ```
@@ -125,7 +125,7 @@ There is also an asynchronous version of this method, [`from_stream_async`](http
 
 Use [`from_stream`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html#method.from_stream) to read manifest data from a stream:
 
-```rs
+```rust
 use std::io::Cursor;
 
 use c2pa::Reader;
