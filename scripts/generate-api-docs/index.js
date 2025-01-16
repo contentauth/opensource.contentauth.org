@@ -113,17 +113,24 @@ async function generateSidebarFile(inputDir, outDir) {
 }
 
 async function generateMarkdownFiles(inputDir, outDir) {
-  return new Promise((resolve, reject) => {
-    exec(
+  try {
+    const { stdout } = await execPromise(
       `api-documenter markdown --input-folder ${inputDir} --output-folder ${outDir}`,
-      (err, stdout) => {
-        if (err) {
-          return reject(err);
-        }
-
-        return resolve(stdout);
-      },
     );
+    return stdout;
+  } catch (err) {
+    throw new Error(`Error generating markdown files: ${err.message}`);
+  }
+}
+
+function execPromise(command) {
+  return new Promise((resolve, reject) => {
+    exec(command, (err, stdout, stderr) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve({ stdout, stderr });
+    });
   });
 }
 
