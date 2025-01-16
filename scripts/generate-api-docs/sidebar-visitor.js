@@ -1,7 +1,7 @@
 const { ApiItemKind } = require('@microsoft/api-extractor-model');
 
 /**
- * @dkozma: We had to change this code because the API model parsed an `IndexSignature` from `c2pa.manifestresolvers`  which gets picked up by the sidebar but a file doesn't get generated.
+ * @dkozma: The API model parsed an `IndexSignature` from `c2pa.manifestresolvers`, which gets picked up by the sidebar but a file doesn't get generated.
  * HACK: Strip the `._indexer_` suffix since standard-markdown-documenter doesn't seem to let
  * you return an empty node or node that returns a valid `html` or `link` type.
  */
