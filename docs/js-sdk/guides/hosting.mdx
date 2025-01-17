@@ -16,7 +16,7 @@ The vast majority of major CDNs and hosting providers allow customizing these he
 
 ### Range requests
 
-Since images can be quite large, the JavaScript library uses [HTTP range requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests) to download the first part of the file (by default, the first 64KB). It then tests if C2PA manifest data exists in this downloaded fragment; if it does, the download proceeds and the JavaScript library processes the rest of the file. This avoids downloading potentially large amounts of data if an image does not contain a manifest.
+Since images can be large, the JavaScript library uses [HTTP range requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests) to download the first part of the file (by default, the first 64KB). It then tests if C2PA manifest data exists in this downloaded fragment; if it does, the download proceeds and the JavaScript library processes the rest of the file. This avoids downloading potentially large amounts of data if an image does not contain a manifest.
 
 For this feature to work, the server hosting the images must support HTTP range requests. To check, open
 your terminal and enter the following command (assuming you have [curl](https://curl.se/) installed):
