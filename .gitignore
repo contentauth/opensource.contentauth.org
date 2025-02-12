@@ -8,6 +8,8 @@
 .docusaurus
 .cache-loader
 /docs/js-sdk/api
+/docs/examples/quickstart/*
+/docs/examples/view-manifest/*
 /docs/c2patool/*.md
 /docs/c2patool/docs/*.md
 /docs/c2pa-node/*.md
