@@ -14,29 +14,38 @@ import RustBuild from './includes/_rust-build.md';
 
 <Tabs groupId="programming-lang">
 
-{' '}
-<TabItem value="js" label="JavaScript" default>
-  You can't currently attach and sign a manifest using the JavaScript library.
+<TabItem value="js" label="JavaScript">
+
+You can't currently attach a manifest to an asset and sign the claim using the JavaScript library.
+
 </TabItem>
 
-{' '}
 <TabItem value="python" label="Python" default>
-  <PythonBuild name="python-build" />
-</TabItem>
 
 {' '}
+<PythonBuild name="python-build" />
+
+</TabItem>
+
 <TabItem value="node" label="Node.js">
-  <NodeBuild name="node-build" />
-</TabItem>
 
 {' '}
+<NodeBuild name="node-build" />
+
+</TabItem>
+
 <TabItem value="cpp" label="C++">
-  <CppBuild name="cpp-build" />
-</TabItem>
 
 {' '}
+<CppBuild name="cpp-build" />
+
+</TabItem>
+
 <TabItem value="rust" label="Rust">
-  <RustBuild name="rust-build" />
+
+{' '}
+<RustBuild name="rust-build" />
+
 </TabItem>
 
   </Tabs>
