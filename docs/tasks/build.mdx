@@ -1,0 +1,47 @@
+---
+id: build
+title: Attaching and signing a manifest
+hide_table_of_contents: true
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import PythonBuild from './includes/_python-build.md';
+import NodeBuild from './includes/_node-build.md';
+import CppBuild from './includes/_cpp-build.md';
+import RustBuild from './includes/_rust-build.md';
+
+<Tabs groupId="programming-lang">
+
+<TabItem value="js" label="JavaScript">
+
+You can't currently attach a manifest to an asset and sign the claim using the JavaScript library.
+
+</TabItem>
+
+<TabItem value="python" label="Python" default>
+
+<PythonBuild name="python-build" />
+
+</TabItem>
+
+<TabItem value="node" label="Node.js">
+
+<NodeBuild name="node-build" />
+
+</TabItem>
+
+<TabItem value="cpp" label="C++">
+
+<CppBuild name="cpp-build" />
+
+</TabItem>
+
+<TabItem value="rust" label="Rust">
+
+<RustBuild name="rust-build" />
+
+</TabItem>
+
+  </Tabs>
