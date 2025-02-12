@@ -269,7 +269,7 @@ For example:
 
 ## Actions
 
-Actions provide information about creation, edits, and other things that have occurred to an asset. In the manifest, an `actions` assertion is an array of [ManifestAssertion](manifest-ref.mdx#manifestassertion) objects.   For example:
+An action is an assertion that provides information about creation, edits, and other things that have occurred to an asset. In the manifest, an `actions` assertion is an array of [ManifestAssertion](manifest-ref.mdx#manifestassertion) objects.   For example:
 
 ```json
 ...
@@ -295,9 +295,9 @@ Each object in the `actions` array has the following standard properties.
 | Property | Required? | Description | Example |
 |----------|-----------| ------------|---------|
 | `action` | Yes | The action name.  See [Action names](#action-names). | `c2pa.created` |
-| `digitalSourceType` | No | A URL identifying a [IPTC term](https://cv.iptc.org/newscodes/digitalsourcetype/). See [Digital source type](#digital-source-type). | `http://cv.iptc.org/newscodes/digitalsourcetype/`<br/>`compositeWithTrainedAlgorithmicMedia` |
+| `digitalSourceType` | No | A URL identifying a [IPTC term](https://cv.iptc.org/newscodes/digitalsourcetype/). See [Digital source type](#digital-source-type). | `http://cv.iptc.org/newscodes/`<br/> `digitalsourcetype/digitalCapture` |
 | `softwareAgent` | No | The software or hardware used to perform the action.   | `"Adobe Firefly"` |
-| `parameters` | No | Additional information describing the action. | Reference to an ingredient. |
+| `parameters` | No | Additional information describing the action; see [Parameters](#parameters) | Reference to ingredients in the `org.cai.ingredientIds` array. |
 
 ### Action names
 
@@ -316,17 +316,18 @@ The value of `digitalSourceType` is one of the URLs specified by the Internation
 |---|---|
 | algorithmicallyEnhanced | Minor augmentation or correction by algorithm. |
 | algorithmicMedia | Media created purely by an algorithm not based on any sampled training data, e.g. an image created by software using a mathematical formula. |
+| composite | Mix or composite of several elements, any of which may or may not be generative AI. |
 | compositeCapture | Mix or composite of several elements that are all captures of real life. |
 | compositeSynthetic | Mix or composite of several elements, at least one of which is synthetic. |
 | compositeWithTrainedAlgorithmicMedia | The compositing of trained algorithmic media with some other media, such as with inpainting or outpainting operations. |
 | dataDrivenMedia | Digital media representation of data via human programming or creativity. |
-| digitalArt | Media created by a human using digital tools. |
+| digitalCreation | Media created by a human using non-generative tools. Use instead of retired digitalArt code. | 
 | digitalCapture | The digital media is captured from a real-life source using a digital camera or digital recording device. |
-| minorHumanEdits | Minor augmentation or correction by a human, such as a digitally-retouched photo used in a magazine. |
+| humanEdits | Augmentation, correction or enhancement by one or more humans using non-generative tools.  Use instead of retired minorHumanEdits code. | 
 | negativeFilm | The digital image was digitized from a negative on film or any other transparent medium. |
 | positiveFilm | The digital image was digitized from a positive on a transparency or any other transparent medium. |
 | print | The digital image was digitized from an image printed on a non-transparent medium. |
-| softwareImage | The digital image was created by computer software. |
+| screenCapture | A capture of the contents of the screen of a computer or mobile device. |
 | trainedAlgorithmicMedia | Digital media created algorithmically using a model derived from sampled content. |
 | virtualRecording | Live recording of virtual event based on synthetic and optionally captured elements. |
 
@@ -379,6 +380,29 @@ The `parameters` property can contain any data that provide more details on the 
   ...
 ]
 ```
+
+When creating an actions assertion that has an associated ingredient, the `parameters` object must include a `org.cai.ingredientIds` property with an array of one or more [`instanceID` values](#the-instanceid-property) from ingredients. This is how you associate an action with one or more ingredients. 
+
+:::info
+The [C2PA specification](https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_parameters) requires that a `c2pa.transcoded`, `c2pa.repackaged`, `c2pa.opened`, or a `c2pa.placed` action have one or more associated ingredients, so it is very important to add the `org.cai.ingredientIds` parameter with a matching ingredient.
+:::
+
+For example:
+
+```json
+"actions": [
+  {
+    "action": "c2pa.opened",
+    "parameters": {
+      "org.cai.ingredientIds": [
+        "xmp.iid:813ee422-9736-4cdc-9be6-4e35ed8e41cb"
+      ]
+    }
+  },
+  ...
+```
+
+The SDK supports the older `ingredientId` field, but it is deprecated and will at some point not be supported.
 
 For more information on action parameters, see the [C2PA Technical Specification](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_parameters).
 

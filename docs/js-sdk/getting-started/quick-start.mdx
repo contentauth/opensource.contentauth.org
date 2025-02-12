@@ -5,7 +5,6 @@ title: Quick start
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Sandbox from '../../../src/components/Sandbox';
 
 ## Prerequisites
 
@@ -37,6 +36,7 @@ The quickest way to get up and running is to use a CDN such as [jsDelivr](https:
 Static assets include the following, as seen in the config passed to [`createC2pa`](../../js-sdk/api/c2pa.createc2pa):
 
 ```js
+const version = '0.24.2';
 {
   wasmSrc: `https://cdn.jsdelivr.net/npm/c2pa@${version}/dist/assets/wasm/toolkit_bg.wasm`,
   workerSrc: `https://cdn.jsdelivr.net/npm/c2pa@${version}/dist/c2pa.worker.min.js`,
@@ -44,11 +44,8 @@ Static assets include the following, as seen in the config passed to [`createC2p
 ```
 
 :::caution
-The version numbers provided in the CDN URLs _must_ match in all of the places you reference the
-library. To make it easy, use a variable that provides the version as shown in the example.
+The version numbers provided in the CDN URLs _must_ be the same in all of the places you reference the library. To make it easy, use a variable that provides the version as shown in the example.
 :::
-
-<Sandbox file="/examples/cdn/main.ts" displayType="preview" />
 
 ### Using a package manager
 
@@ -71,24 +68,30 @@ Be sure to configure your server to send proper `Content-Type` headers for these
 
 Examples for common build systems are shown below. They are also available in the [c2pa-js-examples repository](https://github.com/contentauth/c2pa-js-examples).
 
-export const ExampleLink = ({ example }) => {
-  const linkText = `examples/${example}`;
-  const link = `https://github.com/contentauth/c2pa-js/tree/main/${linkText}`;
-  return (
-    <div className="example-link">
-      An example project is available here: <a href={link}>{linkText}</a>
-    </div>
-  );
-};
+import CodeBlock from '@theme/CodeBlock';
+import ViteExample from '!!raw-loader!../examples/quickstart/vite-main.ts';
+import RollupExample from '!!raw-loader!../examples/quickstart/rollup-main.ts';
+import WebPackExample from '!!raw-loader!../examples/quickstart/webpack-main.ts';
 
 <Tabs lazy>
-  <TabItem value="vite" label="Vite" default>
-    <Sandbox file="/examples/quick-start/main.ts" />
-  </TabItem>
-  <TabItem value="rollup" label="Rollup">
-    <Sandbox example="minimal-ts-rollup" file="/src/main.ts" browserPath="/" />
-  </TabItem>
-  <TabItem value="webpack" label="Webpack">
-    <Sandbox example="minimal-ts-webpack" file="/src/main.ts" browserPath="/" />
-  </TabItem>
+<TabItem value="vite" label="Vite" default>
+
+This example is from [c2pa-js-examples/minimal-ts-vite/](https://github.com/contentauth/c2pa-js-examples/blob/main/minimal-ts-vite/). To view and execute this example in a live [code sandbox](https://codesandbox.io/docs/learn/legacy-sandboxes/overview), see [Code Sandbox: Vite example](../guides/sandbox-qs-vite.mdx).
+
+<CodeBlock language="ts">{ViteExample}</CodeBlock>
+</TabItem>
+
+<TabItem value="rollup" label="Rollup">
+
+This example is from [c2pa-js-examples/minimal-ts-rollup/](https://github.com/contentauth/c2pa-js-examples/blob/main/minimal-ts-rollup/). To view and execute this example in a live [code sandbox](https://codesandbox.io/docs/learn/legacy-sandboxes/overview), see [Code Sandbox: Rollup example](../guides/sandbox-qs-rollup.mdx).
+
+<CodeBlock language="ts">{RollupExample}</CodeBlock>
+</TabItem>
+
+<TabItem value="webpack" label="Webpack">
+
+This example is from [c2pa-js-examples/minimal-ts-webpack/](https://github.com/contentauth/c2pa-js-examples/blob/main/minimal-ts-webpack/). To view and execute this example in a live [code sandbox](https://codesandbox.io/docs/learn/legacy-sandboxes/overview), see [Code Sandbox: Webpack example](../guides/sandbox-qs-webpack.mdx).
+
+<CodeBlock language="ts">{WebPackExample}</CodeBlock>
+</TabItem>
 </Tabs>

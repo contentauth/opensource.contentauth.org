@@ -9,6 +9,10 @@ import CodeBlock from '@theme/CodeBlock';
 
 The C2PA [public-testfiles](https://github.com/c2pa-org/public-testfiles) repository contains numerous examples of asset files with Content Credentials. See https://c2pa.org/public-testfiles/ for links to easily inspect each asset file using Verify using [an asset URL](../verify#entering-an-asset-url) and to the corresponding [manifest report](../c2patool/#displaying-manifest-data) and [detailed manifest report](../c2patool/#detailed-manifest-report) from C2PA Tool.
 
+:::note
+The claims on these test files were signed with C2PA Tool's built-in test certificate and key (which is not on the [known certificate list](../trust-list.mdx)). Thus, Verify will display the warning: "The Content Credential issuer couldn’t be recognized. This file may not come from where it claims to."
+:::
+
 ## Examples from C2PA Tool
 
 The command-line [C2PA Tool](/docs/c2patool), `c2patool`, is helpful when developing applications to work with manifest data. When saving a manifest, it has two modes:

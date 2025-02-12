@@ -7,7 +7,11 @@ Processing an asset includes [validating the manifests](https://c2pa.org/specifi
 
 ## Validation errors in manifests
 
-When you load an asset, all the manifests in the manifest store are validated and any [failure codes](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_failure_codes) are assigned to the `validation_status` array. Inspect the array to find the validation errors. Validation returns ONLY error codes; success is not explicitly indicated.
+When you load an asset, all the manifests in the manifest store are validated and any [failure codes](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_failure_codes) are assigned to the `validation_status` array. Inspect the array to find the validation errors. 
+
+:::tip
+Validation returns ONLY error codes; success is not explicitly indicated. If there are no validation errors, then the manifest won't have the `validation_status` element.
+:::
 
 Manifest validation errors can occur, for example, when:
 

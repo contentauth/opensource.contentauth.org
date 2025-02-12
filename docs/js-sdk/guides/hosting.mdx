@@ -42,7 +42,7 @@ examples of configuring popular build systems, see the [Quick start guide](../ge
 
 To host the library yourself, expose the static asset files with the following response headers to avoid errors with some browsers:
 
-- `c2pa/dist/assets/wasm/toolkit_bg.wasm`: Serve with `Content-Type: application/wasm` reponse header.
+- `c2pa/dist/assets/wasm/toolkit_bg.wasm`: Serve with `Content-Type: application/wasm` response header.
 - `c2pa/dist/c2pa.worker.min.js`: Serve with `Content-Type: text/javascript` response header.
 
 Then pass these URLs to the `createC2pa` function; for example:

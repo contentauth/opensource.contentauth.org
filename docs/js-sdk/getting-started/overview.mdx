@@ -25,8 +25,7 @@ The JavaScript library uses several modern browser technologies, including:
 
 The JavaScript library is a monorepo containing the following packages intended for client use:
 
-- [**c2pa**](https://opensource.contentauthenticity.org/docs/js-sdk/api/c2pa) is the main package used for loading and verifying manifests. This package runs all of the processing
-  logic on the client using a [WebAssembly](https://webassembly.org/) module and exposes a [TypeScript](https://www.typescriptlang.org/)-compatible API for easy integration.
+- [**c2pa**](https://opensource.contentauthenticity.org/docs/js-sdk/api/c2pa) is the main package used for loading and verifying manifests. This package runs all of the processing logic on the client using a [WebAssembly](https://webassembly.org/) module and exposes a [TypeScript](https://www.typescriptlang.org/)-compatible API for easy integration.
 - **c2pa-wc** provides UI components designed with input from the C2PA UX working group. It enables users to get up and running with standard UI patterns quickly and easily in any front-end environment.
 - **@contentauth/react** provides a hooks interface for React components to quickly get manifest and thumbnail data in your React app.
 
@@ -59,7 +58,7 @@ Because of these requirements, **the library is not supported on any version of 
 ![CAI JavaScript library browser support](../../../static/img/caniuse.png)
 
 :::info
-This chart is accurate as of June, 2024. For the most up-to-date browser support information, see [caniuse.com](https://caniuse.com/wasm,webworkers,cryptography,typedarrays,fetch).
+This chart is accurate as of December, 2024. For the most up-to-date browser support information, see [caniuse.com](https://caniuse.com/wasm,webworkers,cryptography,typedarrays,fetch).
 :::
 
 ## Debugging
@@ -72,7 +71,7 @@ To view debug messages in the console, use your browser's inspector, go to the C
 localStorage.debug = 'c2pa:*';
 ```
 
-The debuging information includes millisecond timing differences so you can get an idea of how long different events take.
+The debugging information includes millisecond timing differences so you can get an idea of how long different events take.
 
 :::note
 Debug calls and statements are stripped out of minified production builds to reduce file size.
