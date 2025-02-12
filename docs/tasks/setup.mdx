@@ -6,110 +6,36 @@ hide_table_of_contents: true
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import JSSetup from './includes/_js-setup.md';
+import PythonSetup from './includes/_python-setup.md';
+import NodeSetup from './includes/_node-setup.md';
+import CppSetup from './includes/_cpp-setup.md';
+import RustSetup from './includes/_rust-setup.md';
 
 <Tabs groupId="programming-lang">
 
+{' '}
 <TabItem value="js" label="JavaScript" default>
-
-```js
-const version = '0.24.2';
-const sampleImage = '<IMAGE_URL>';
-
-import { createC2pa } from 'https://cdn.jsdelivr.net/npm/c2pa@${version}/+esm';
-
-(async () => {
-  // Initialize the c2pa-js SDK
-  const c2pa = await createC2pa({
-    wasmSrc:
-      'https://cdn.jsdelivr.net/npm/c2pa@${version}/dist/assets/wasm/toolkit_bg.wasm',
-    workerSrc:
-      'https://cdn.jsdelivr.net/npm/c2pa@${version}/dist/c2pa.worker.min.js',
-  });
-```
-
+  <JSSetup name="js-setup" />
 </TabItem>
 
-  <TabItem value="python" label="Python" default>
-  This is how to setup the Python library.
+{' '}
+<TabItem value="python" label="Python" default>
+  <PythonSetup name="python-setup" />
+</TabItem>
 
-```python
-# Import the C2PA Python package
-from c2pa import *
+{' '}
+<TabItem value="node" label="Node.js">
+  <NodeSetup name="node-setup" />
+</TabItem>
 
-# Import standard general-purpose packages
-import os
-import io
-import logging
-import json
-import base64
-
-# Import web packages used in example implementation
-from flask import Flask, request, abort
-from flask_cors import CORS
-from waitress import serve
-
-# Import AWS SDK package (to use KMS)
-import boto3
-```
-
-  </TabItem>
-
-  <TabItem value="node" label="Node.js">
-  This is how to setup the Node.js library.
-
-```js
-import { createC2pa } from 'c2pa-node';
-import { readFile } from 'node:fs/promises';
-
-const c2pa = createC2pa();
-```
-
-  </TabItem>
-
-  <TabItem value="cpp" label="C++">
-
-```cpp
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <stdexcept>
-#include <openssl/evp.h>
-#include <openssl/pem.h>
-#include <openssl/err.h>
-#include "c2pa.hpp"
-#include "test_signer.hpp"
-#include <nlohmann/json.hpp>
-
-// this example uses nlohmann json for parsing the manifest
-using json = nlohmann::json;
-using namespace std;
-namespace fs = std::filesystem;
-using namespace c2pa;
-```
-
-  </TabItem>
+{' '}
+<TabItem value="cpp" label="C++">
+  <CppSetup name="cpp-setup" />
+</TabItem>
 
   <TabItem value="rust" label="Rust">
-  This is how to setup your code to use the Rust library.
-
-```rust
-use std::{
-    io::{Cursor, Write},
-    process::{Command, Stdio},
-};
-
-use anyhow::Result;
-use c2pa::{settings::load_settings_from_str, Builder, CallbackSigner, Reader};
-
-use c2pa_crypto::raw_signature::SigningAlg;
-use serde_json::json;
-
-const TEST_IMAGE: &[u8] = include_bytes!("../tests/fixtures/CA.jpg");
-const CERTS: &[u8] = include_bytes!("../tests/fixtures/certs/ed25519.pub");
-const PRIVATE_KEY: &[u8] = include_bytes!("../tests/fixtures/certs/ed25519.pem");
-```
-
+    <RustSetup name="rust-setup" />
   </TabItem>
   
 </Tabs>

@@ -6,213 +6,39 @@ title: Getting resources from a manifest
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+import JSGetResources from './includes/_js-get-resources.md';
+import PythonGetResources from './includes/_python-get-resources.md';
+import NodeGetResources from './includes/_node-get-resources.md';
+import CppGetResources from './includes/_cpp-get-resources.md';
+import RustGetResources from './includes/_rust-get-resources.md';
+
 Manifest data can include binary resources such as thumbnail and icon images which are referenced by JUMBF URIs in manifest data.
 
-<Tabs groupId="programming-lang" >
-  <TabItem value="js" label="JavaScript" default>
+<Tabs groupId="programming-lang">
 
-```js
-import { createC2pa, selectProducer } from 'c2pa';
-import wasmSrc from 'c2pa/dist/assets/wasm/toolkit_bg.wasm?url';
-import workerSrc from 'c2pa/dist/c2pa.worker.js?url';
-import { parseISO } from 'date-fns';
-
-const sampleImage =
-  'https://raw.githubusercontent.com/contentauth/c2pa-js/main/tools/testing/fixtures/images/CAICAI.jpg';
-
-(async () => {
-  let output: string[] = [];
-
-  const c2pa = await createC2pa({
-    wasmSrc,
-    workerSrc,
-  });
-
-  const { manifestStore, source } = await c2pa.read(sampleImage);
-  const activeManifest = manifestStore?.activeManifest;
-  if (activeManifest) {
-    // Get thumbnail
-    // Note: You would normally call `dispose()` when working with a
-    // component-based UI library (e.g. on component un-mount)
-    // @ts-expect-error noUnusedLocals
-    const { url, dispose } = source.thumbnail.getUrl();
-
-    // Get properties
-    const properties: Record<string, string | undefined> = {
-      title: activeManifest.title,
-      format: activeManifest.format,
-      claimGenerator: activeManifest.claimGenerator.split('(')[0]?.trim(),
-      producer: selectProducer(activeManifest)?.name ?? 'Unknown',
-      thumbnail: `<img src="${url}" class="thumbnail" />`,
-      ingredients: (activeManifest.ingredients ?? [])
-        .map((i) => i.title)
-        .join(', '),
-      signatureIssuer: activeManifest.signatureInfo?.issuer,
-      signatureDate: activeManifest.signatureInfo?.time
-        ? parseISO(activeManifest.signatureInfo.time).toString()
-        : 'No date available',
-    };
-
-    output = Object.keys(properties).map((key) => {
-      return `
-        <tr>
-          <td>${key}</td>
-          <td>${properties[key]}</td>
-        </tr>
-      `;
-    });
-  } else {
-    output.push(`
-      <tr>
-        <td colspan="2">No provenance data found</td>
-      </tr>
-    `);
-  }
-
-  document.querySelector('#results tbody')!.innerHTML = output.join('');
-})();
-```
-
-  </TabItem>
-
-<TabItem value="python" label="Python">
-
-Retrieve binary resources such as thumbnails from the manifest data, use the `resource_to_stream` or `resource_to_file` methods using the associated `identifier` field values and a `uri`.
-
-NOTE: Need to add example of using `reader.resource_to_stream()`.
-
-```python
-try:
-# Create a reader from a file path
-reader = c2pa.Reader.from_file("path/to/media_file.jpg")
-
-# Get the active manifest.
-manifest = reader.get_active_manifest()
-if manifest != None:
-
-  # get the uri to the manifest's thumbnail and write it to a file
-  uri = manifest["thumbnail"]["identifier"]
-  reader.resource_to_file(uri, "thumbnail_v2.jpg")
-
-except Exception as err:
-  print(err)
-```
-
+{' '}
+<TabItem value="js" label="JavaScript" default>
+  <JSGetResources name="js-read" />
 </TabItem>
 
+{' '}
+<TabItem value="python" label="Python" default>
+  <PythonGetResources name="python-read" />
+</TabItem>
+
+{' '}
 <TabItem value="node" label="Node.js">
-  This is how to get resources from a manifest using Node.js.
+  <NodeGetResources name="node-read" />
 </TabItem>
 
+{' '}
 <TabItem value="cpp" label="C++">
-  This is how to get resources from a manifest using C++.
-
-```cpp
-string read_text_file(const fs::path &path)
-{
-    ifstream file(path);
-    if (!file.is_open())
-    {
-        throw runtime_error("Could not open file " + string(path));
-    }
-    string contents((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
-    file.close();
-    return contents.data();
-}
-
-int main()
-{
-  fs::path manifest_path = current_dir / "../tests/fixtures/training.json";
-  //fs::path certs_path = current_dir / "../tests/fixtures/es256_certs.pem";
-  //fs::path image_path = current_dir / "../tests/fixtures/A.jpg";
-  fs::path output_path = current_dir / "../target/example/training.jpg";
-  fs::path thumbnail_path = current_dir / "../target/example/thumbnail.jpg";
-
-  try
-      {
-          // load the manifest, certs, and private key
-      /* Commenting out, because not part of resource reading
-          string manifest_json = read_text_file(manifest_path).data();
-
-          string certs = read_text_file(certs_path).data();
-
-          // create a signer
-          Signer signer = Signer(&test_signer, Es256, certs, "http://timestamp.digicert.com");
-
-          auto builder = Builder(manifest_json);
-          auto manifest_data = builder.sign(image_path, output_path, signer);
-      */
-
-          // read the new manifest and display the JSON
-          auto reader = Reader(output_path);
-
-          auto manifest_store_json = reader.json();
-          cout << "The new manifest is " << manifest_store_json << endl;
-
-          // get the active manifest
-          json manifest_store = json::parse(manifest_store_json);
-          if (manifest_store.contains("active_manifest"))
-          {
-              string active_manifest = manifest_store["active_manifest"];
-              json &manifest = manifest_store["manifests"][active_manifest];
-
-              string identifer = manifest["thumbnail"]["identifier"];
-
-              reader.get_resource(identifer, thumbnail_path);
-
-              cout << "thumbnail written to" << thumbnail_path << endl;
-          }
-      }
-      catch (c2pa::Exception const &e)
-      {
-          cout << "C2PA Error: " << e.what() << endl;
-      }
-      catch (runtime_error const &e)
-      {
-          cout << "setup error" << e.what() << endl;
-      }
-      catch (json::parse_error const &e)
-      {
-          cout << "parse error " << e.what() << endl;
-      }
-}
-```
-
+  <CppGetResources name="cpp-read" />
 </TabItem>
 
+{' '}
 <TabItem value="rust" label="Rust">
-  This is how to get resources using Rust.
-
-This is from [`resource_to_stream`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html#method.resource_to_stream) API doc:
-
-```rust
-use c2pa::Reader;
-let stream = std::io::Cursor::new(Vec::new());
-let reader = Reader::from_file("path/to/file.jpg").unwrap();
-let manifest = reader.active_manifest().unwrap();
-let uri = &manifest.thumbnail_ref().unwrap().identifier;
-let bytes_written = reader.resource_to_stream(uri, stream).unwrap();
-```
-
-This is from [`c2pa-rs/examples/v2api.rs`](https://github.com/contentauth/c2pa-rs/blob/main/sdk/examples/v2api.rs#L138):
-
-```rust
-let reader = Reader::from_stream(format, &mut dest)?;
-
-// extract a thumbnail image from the ManifestStore
-let mut thumbnail = Cursor::new(Vec::new());
-if let Some(manifest) = reader.active_manifest() {
-    if let Some(thumbnail_ref) = manifest.thumbnail_ref() {
-        reader.resource_to_stream(&thumbnail_ref.identifier, &mut thumbnail)?;
-        println!(
-            "wrote thumbnail {} of size {}",
-            thumbnail_ref.format,
-            thumbnail.get_ref().len()
-        );
-    }
-}
-```
-
+  <RustGetResources name="rust-read" />
 </TabItem>
 
 </Tabs>
