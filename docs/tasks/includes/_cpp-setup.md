@@ -1,4 +1,4 @@
-To setup the C++ library:
+This is how to set up your code to use the C++ library:
 
 ```cpp
 #include <iostream>

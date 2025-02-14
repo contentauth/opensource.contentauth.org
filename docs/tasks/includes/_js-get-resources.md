@@ -1,3 +1,5 @@
+The example below shows how to get resources from manifest data using the JavaScript library.
+
 ```js
 import { createC2pa, selectProducer } from 'c2pa';
 import wasmSrc from 'c2pa/dist/assets/wasm/toolkit_bg.wasm?url';

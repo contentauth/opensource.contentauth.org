@@ -1,4 +1,4 @@
-This is how to attach and sign a manifest using Rust.
+This is an example of how to assign a manifest to an asset and sign the claim using Rust.
 
 This example is from [`c2pa-rs/sdk/examples/v2api.rs`](https://github.com/contentauth/c2pa-rs/blob/main/sdk/examples/v2api.rs#L88C5-L134C1):
 

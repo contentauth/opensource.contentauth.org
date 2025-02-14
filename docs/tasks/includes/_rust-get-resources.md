@@ -1,4 +1,6 @@
-This is how to get resources using Rust.
+The example below shows how to get resources from manifest data using the Rust library.
+
+_NOTE: Need to clarify if/how these two code examples work together._
 
 This is from [`resource_to_stream`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html#method.resource_to_stream) API doc:
 

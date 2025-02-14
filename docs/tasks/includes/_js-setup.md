@@ -1,4 +1,4 @@
-This is how to setup the JavaScript library:
+This is how to set up your code to use the JavaScript library:
 
 ```js
 const version = '0.24.2';

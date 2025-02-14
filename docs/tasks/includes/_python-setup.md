@@ -1,4 +1,4 @@
-This is how to setup the Python library.
+This is how to set up your code to use the Python library.
 
 ```python
 # Import the C2PA Python package

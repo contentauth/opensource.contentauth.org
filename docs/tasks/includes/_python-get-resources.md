@@ -1,7 +1,9 @@
 
+The example below shows how to get resources from manifest data using the Python library.
+
 Retrieve binary resources such as thumbnails from the manifest data, use the `resource_to_stream` or `resource_to_file` methods using the associated `identifier` field values and a `uri`.
 
-NOTE: Need to add example of using `reader.resource_to_stream()`.
+_NOTE: Need to add example of using `reader.resource_to_stream()`._
 
 ```python
 try:

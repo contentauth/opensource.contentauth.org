@@ -1,4 +1,4 @@
-This is how to setup the Node.js library.
+This is how to set up your code to use the Node.js library.
 
 ```js
 import { createC2pa } from 'c2pa-node';

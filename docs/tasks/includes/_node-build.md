@@ -1,3 +1,4 @@
+This is an example of how to assign a manifest to an asset and sign the claim using Node.js:
 
 ```ts
 import { ManifestBuilder } from 'c2pa-node';

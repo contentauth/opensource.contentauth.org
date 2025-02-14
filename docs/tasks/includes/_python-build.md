@@ -1,4 +1,6 @@
 
+This is an example of how to assign a manifest to an asset and sign the claim using Python.
+
 Use a `Builder` object to add a manifest to an asset.
 
 ```python

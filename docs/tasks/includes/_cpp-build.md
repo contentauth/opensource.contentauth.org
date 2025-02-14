@@ -1,3 +1,4 @@
+This is an example of how to assign a manifest to an asset and sign the claim using C++:
 
 ```cpp
 const std::string manifest_json = R"{
