@@ -18,8 +18,8 @@ Use [`from_stream`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html#method.f
 
 ```rust
 use std::io::Cursor;
-
 use c2pa::Reader;
+
 let mut stream = Cursor::new(include_bytes!("../tests/fixtures/CA.jpg"));
 let reader = Reader::from_stream("image/jpeg", stream).unwrap();
 println!("{}", reader.json());

@@ -1,21 +1,21 @@
 This is how to set up your code to use the Python library.
 
 ```python
-# Import the C2PA Python package
+# Import the C2PA Python package.
 from c2pa import *
 
-# Import standard general-purpose packages
+# Import standard general-purpose packages.
 import os
 import io
 import logging
 import json
 import base64
 
-# Import web packages used in example implementation
+# Import web packages used in example implementation.
 from flask import Flask, request, abort
 from flask_cors import CORS
 from waitress import serve
 
-# Import AWS SDK package (to use KMS)
+# Import AWS SDK package (to use KMS).
 import boto3
 ```

@@ -7,10 +7,10 @@ An asset file may contain many manifests in a manifest store. The most recent ma
 
 ```py
 try:
-  # Create a reader from a file path
+  # Create a reader from a file path.
   reader = c2pa.Reader.from_file("path/to/media_file.jpg")
 
-  # Alternatively, create a reader from a stream
+  # Alternatively, create a reader from a stream.
   stream = open("path/to/media_file.jpg", "rb")
   reader = c2pa.Reader("image/jpeg", stream)
 
