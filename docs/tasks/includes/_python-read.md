@@ -1,5 +1,7 @@
 
-Use the `Reader` object to read manifest data from a file or stream and perform validation on the manifest store. Use the `json()` method to return a JSON manifest report; If there are validation errors, the report includes a `validation_status` field.
+Use the `Reader` object to read manifest data from a file or stream and perform validation on the manifest store. 
+
+Use the `json()` method to return a JSON manifest report; If there are validation errors, the report includes a `validation_status` field.
 
 An asset file may contain many manifests in a manifest store. The most recent manifest is identified by the value of the `active_manifest` field in the manifests map.
 
