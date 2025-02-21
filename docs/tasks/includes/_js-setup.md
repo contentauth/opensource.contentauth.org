@@ -14,6 +14,10 @@ import { createC2pa } from 'https://cdn.jsdelivr.net/npm/c2pa@${version}/+esm';
     workerSrc:
       'https://cdn.jsdelivr.net/npm/c2pa@${version}/dist/c2pa.worker.min.js',
   });
+
+  ...
+  
+})();
 ```
 
 If you installed the package locally, for example from npm, then its simply:
@@ -39,6 +43,6 @@ import { parseISO } from 'date-fns';
   });
 
   ...
-  
+
 })();
 ```
