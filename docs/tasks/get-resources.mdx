@@ -1,0 +1,49 @@
+---
+id: get-resources
+title: Getting resources from a manifest
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import JSGetResources from './includes/_js-get-resources.md';
+import PythonGetResources from './includes/_python-get-resources.md';
+import NodeGetResources from './includes/_node-get-resources.md';
+import CppGetResources from './includes/_cpp-get-resources.md';
+import RustGetResources from './includes/_rust-get-resources.md';
+
+Manifest data can include binary resources such as thumbnail and icon images which are referenced by JUMBF URIs in manifest data.
+
+<Tabs groupId="programming-lang" queryString="lang">
+
+<TabItem value="js" label="JavaScript" default>
+
+<JSGetResources name="js-read" />
+
+</TabItem>
+
+<TabItem value="python" label="Python" default>
+
+<PythonGetResources name="python-read" />
+
+</TabItem>
+
+<TabItem value="node" label="Node.js">
+
+<NodeGetResources name="node-read" />
+
+</TabItem>
+
+<TabItem value="cpp" label="C++">
+
+<CppGetResources name="cpp-read" />
+
+</TabItem>
+
+<TabItem value="rust" label="Rust">
+
+  <RustGetResources name="rust-read" />
+  
+</TabItem>
+
+</Tabs>
