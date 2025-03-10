@@ -1,3 +1,7 @@
+:::note
+That JavaScript library is being extensively revised so the APIs used here may change in the near future.
+:::
+
 The example below shows how to get resources from manifest data using the JavaScript library.
 
 ```js

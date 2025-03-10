@@ -1,3 +1,7 @@
+:::note
+That JavaScript library is being extensively revised so the APIs used here may change in the near future.
+:::
+
 This is how to set up your code to use the JavaScript library:
 
 ```js
@@ -20,7 +24,7 @@ import { createC2pa } from 'https://cdn.jsdelivr.net/npm/c2pa@${version}/+esm';
 })();
 ```
 
-If you installed the package locally, for example from npm, then its simply:
+If you installed the package locally, for example from npm, then it's simply:
 
 ```js
 import { createC2pa } from 'c2pa';
