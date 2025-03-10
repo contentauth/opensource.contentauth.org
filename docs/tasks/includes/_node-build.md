@@ -29,13 +29,11 @@ const manifest = new ManifestBuilder({
 });
 ```
 
-FROM SIGNING:
-
 Use the `c2pa.sign()` method to sign an ingredient, either locally if you have a signing certificate and key available, or by using a remote signing API.
 
 ## Signing a stream
 
-If you have an asset file's data loaded into memory, you can sign the the asset using the loaded stream (buffer).
+If you have an asset file's data loaded into a stream, you can use it to sign the asset
 
 **NOTE**: Signing using a stream is currently supported only for `image/jpeg` and `image/png` data. For all other file types, use the [file-based approach](#signing-files) .
 

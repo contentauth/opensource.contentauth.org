@@ -20,3 +20,7 @@ try:
 except Exception as err:
     print(err)
 ```
+
+<!--
+May want to add that the `path` param needs to be a valid path (since we don't revalidate in the example), and `mimeType` a valid and supported mimetype (again because in the example we don't revalidate and/or check for undefined/null).
+-->
