@@ -10,10 +10,6 @@ try:
   # Create a reader from a file path.
   reader = c2pa.Reader.from_file("path/to/media_file.jpg")
 
-  # Alternatively, create a reader from a stream.
-  stream = open("path/to/media_file.jpg", "rb")
-  reader = c2pa.Reader("image/jpeg", stream)
-
   # Print the JSON for a manifest.
   print("manifest store:", reader.json())
 
