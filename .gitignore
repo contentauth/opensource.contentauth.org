@@ -26,6 +26,7 @@
 /docs/rust-sdk/docs/*.md
 /docs/**/readme.md
 /static/sb-alg-list.json
+/docs/trustmark/*.md
 
 # Misc
 .DS_Store

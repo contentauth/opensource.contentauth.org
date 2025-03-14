@@ -194,6 +194,32 @@ const readmes = [
     repo: 'c2pa-org/softbinding-algorithm-list',
     path: 'softbinding-algorithm-list.json',
   },
+  // TrustMark
+  {
+    dest: resolve(__dirname, '../docs/trustmark/readme.md'),
+    repo: 'adobe/trustmark',
+    path: 'README.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/trustmark/config.md'),
+    repo: 'adobe/trustmark',
+    path: 'CONFIG.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/trustmark/faq.md'),
+    repo: 'adobe/trustmark',
+    path: 'FAQ.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/trustmark/python-readme.md'),
+    repo: 'adobe/trustmark',
+    path: 'python/README.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/trustmark/js-readme.md'),
+    repo: 'adobe/trustmark',
+    path: 'js/README.md',
+  },
 ];
 
 function resolveMarkdownLinks(linkBase, content) {

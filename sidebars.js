@@ -269,6 +269,39 @@ const sidebars = {
           label: 'Watermarking and fingerprinting',
           id: 'sb-algs',
         },
+        {
+          type: 'category',
+          label: 'TrustMark watermarking',
+          link: { type: 'doc', id: 'trustmark-intro' },
+          collapsed: true,
+          items: [
+            {
+              type: 'doc',
+              id: 'trustmark/readme',
+              label: 'Overview',
+            },
+            {
+              type: 'doc',
+              id: 'trustmark/config',
+              label: 'Configuration',
+            },
+            {
+              type: 'doc',
+              id: 'tm-faq',
+              label: 'FAQ',
+            },
+            {
+              type: 'doc',
+              id: 'trustmark/js-readme',
+              label: 'JavaScript example',
+            },
+            {
+              type: 'link',
+              label: 'GitHub',
+              href: 'https://github.com/adobe/trustmark/',
+            },
+          ],
+        },
       ],
     },
     {

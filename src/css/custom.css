@@ -418,3 +418,9 @@ body:not(.is-scrolling) .navbar {
 .trust-table th:nth-child(1) {
   width: 170px;
 }
+
+/* For content to be displayed only in GitHub. Typically this will be used in imported markdown files. */
+
+.github-only {
+  display: none;
+}
