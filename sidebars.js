@@ -51,13 +51,20 @@ const sidebars = {
           label: 'Examples',
         },
         {
-          type: 'doc',
-          id: 'manifest/manifest-ref',
-        },
-        {
-          type: 'doc',
-          id: 'manifest/manifest-json-schema',
-          label: 'JSON schema',
+          type: 'category',
+          label: 'JSON reference',
+          link: { type: 'doc', id: 'manifest/json-ref/index' },
+          collapsed: true,
+          items: [
+            {
+              type: 'doc',
+              id: 'manifest/json-ref/manifest-def',
+            },
+            {
+              type: 'doc',
+              id: 'manifest/json-ref/reader',
+            },
+          ],
         },
       ],
     },
