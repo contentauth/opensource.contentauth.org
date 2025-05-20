@@ -1,0 +1,77 @@
+.container {
+  margin: 2rem 0;
+  padding: 1rem;
+}
+
+.description {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.propertyTableContainer {
+  margin-bottom: 2rem;
+}
+
+.propertyTableContainer h4 {
+  margin-bottom: 1rem;
+  /*color: var(--ifm-color-primary);*/
+}
+
+.propertyTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.propertyTable th,
+.propertyTable td {
+  padding: 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  text-align: left;
+}
+
+.propertyTable th {
+  background-color: var(--ifm-color-emphasis-100);
+  font-weight: 600;
+}
+
+.propertyTable tr:nth-child(even) {
+  background-color: var(--ifm-color-emphasis-50);
+}
+
+.propertyTable code {
+  background-color: var(--ifm-code-background);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+  color: var(--ifm-code-color);
+}
+
+.note {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--ifm-color-emphasis-100);
+  border-radius: 0.5rem;
+  border-left: 4px solid var(--ifm-color-primary);
+}
+
+.note p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+@media screen and (max-width: 996px) {
+  .propertyTable {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .propertyTable th,
+  .propertyTable td {
+    padding: 0.5rem;
+  }
+}

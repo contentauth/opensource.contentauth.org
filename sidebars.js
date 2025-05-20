@@ -355,6 +355,11 @@ const sidebars = {
           label: 'Task planning & roadmap',
           id: 'roadmap',
         },
+        {
+          type: 'doc',
+          label: 'Conformance',
+          id: 'conformance',
+        },
       ],
     },
   ],

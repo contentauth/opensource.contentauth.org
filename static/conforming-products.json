@@ -1,0 +1,544 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://c2pa.org/conformance/conforming-products-list.schema.json",
+  "title": "C2PA Conforming Products List Schema",
+  "description": "Schema for the C2PA Conforming Products List",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "recordNumber": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+        "description": "An RFC 9562 Version 7 UUID identifying this record on the CPL"
+      },
+      "vendor": {
+        "type": "string",
+        "description": "Legal name of the vendor organization"
+      },
+      "product": {
+        "type": "object",
+        "description": "Product details as described here and below",
+        "properties": {
+          "productType": {
+            "type": "string",
+            "description": "Whether the product is software, hardware, or library object of a product. Library products do not have associated assurance levels.",
+            "enum": ["application", "device", "library"]
+          },
+          "DN": {
+            "type": "object",
+            "description": "The name that uniquely identifies the product, as defined by the fields below",
+            "properties": {
+              "CN": {
+                "type": "string",
+                "description": "The user-facing marketing name and/or model of the device, application, or service"
+              },
+              "O": {
+                "type": "string",
+                "description": "Legal name of the vendor organization"
+              },
+              "OU": {
+                "type": "string",
+                "description": "Department or subdivision within the vendor's organization that created this product"
+              },
+              "C": {
+                "type": "string",
+                "description": "Country where the vendor organization is registered to do business"
+              }
+            },
+            "required": ["CN", "O", "C"]
+          },
+          "minVersion": {
+            "type": "string",
+            "description": "The minimum software version of this product (for example, in SemVer format) that is eligible for certificates under this record. If the product is a device, then this is the minimum firmware version."
+          },
+          "if": {
+            "properties": {
+              "productType": {
+                "const": "library"
+              }
+            }
+          },
+          "then": {},
+          "else": {
+            "properties": {
+              "integrates": {
+                "description": "If the product described in this record includes one or more existing libraries on the CPL, the record numbers of the integrated libraries are listed in this array",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                }
+              },
+              "assurance": {
+                "type": "object",
+                "description": "Attributes which further define levels of relied confidence into the security of this product's implementation",
+                "properties": {
+                  "maxAssuranceLevel": {
+                    "type": "integer",
+                    "description": "The level of implementation security assurance, as defined by the C2PA Conformance Program",
+                    "minimum": 0,
+                    "maximum": 2
+                  },
+                  "attestationMethods": {
+                    "type": "array",
+                    "description": "Methods of integrity assurance that the product supports, and that Certification Authorities can validate at certificate issuance (if required by the desired assurance level)",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "Android_KeyAttestation",
+                        "Google_PlayIntegrity",
+                        "Apple_DCAppAttest",
+                        "Qualcomm_QWES",
+                        "Intel_SGX",
+                        "TPM2.0",
+                        "IETF_RATS"
+                      ]
+                    }
+                  }
+                },
+                "required": ["maxAssuranceLevel", "attestationMethods"]
+              }
+            },
+            "required": ["assurance"]
+          }
+        },
+        "required": ["productType", "DN"]
+      },
+      "specVersion": {
+        "type": "array",
+        "description": "The version(s) of the C2PA Content Credentials specification that is supported by this product",
+        "items": {
+          "type": "string",
+          "enum": ["2.1"]
+        }
+      },
+      "roles": {
+        "type": "object",
+        "description": "Whether the product in this record is a C2PA Claim Generator or a C2PA Claim Validator, or both",
+        "properties": {
+          "generator": {
+            "type": "boolean"
+          },
+          "validator": {
+            "type": "boolean"
+          }
+        },
+        "required": ["generator", "validator"]
+      },
+      "containers": {
+        "type": "object",
+        "description": "The file types supported by the product for both C2PA claim generation and/or validation",
+        "properties": {
+          "generate": {
+            "type": "object",
+            "description": "The file types for which the product can support C2PA claim generation",
+            "properties": {
+              "image": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Supported image file MIME type",
+                  "enum": [
+                    "image/jpeg",
+                    "image/jxl",
+                    "image/png",
+                    "image/svg+xml",
+                    "image/gif",
+                    "image/x-adobe-dng",
+                    "image/tiff",
+                    "image/webp",
+                    "image/heic",
+                    "image/heic-sequence",
+                    "image/heif",
+                    "image/heif-sequence",
+                    "image/avif"
+                  ]
+                }
+              },
+              "video": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Supported video file MIME type",
+                  "enum": ["video/x-msvideo", "video/mp4", "video/quicktime"]
+                }
+              },
+              "audio": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Supported audio file MIME type",
+                  "enum": [
+                    "audio/flac",
+                    "audio/MPA",
+                    "audio/mpeg",
+                    "audio/wav",
+                    "audio/aac",
+                    "audio/mp4"
+                  ]
+                }
+              },
+              "documents": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Supported document file MIME type",
+                  "enum": [
+                    "application/pdf",
+                    "application/epub+zip",
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "application/vnd.oasis.opendocument.text",
+                    "application/oxps"
+                  ]
+                }
+              },
+              "fonts": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Supported font file MIME type",
+                  "enum": ["font/otf"]
+                }
+              },
+              "mlModel": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Supported ML model type",
+                  "enum": [
+                    "jax",
+                    "keras",
+                    "ml_net",
+                    "mxnet",
+                    "onnx",
+                    "openvivo.parameter",
+                    "openvivo.topology",
+                    "pytorch",
+                    "tensorflow",
+                    "numpy",
+                    "protobuf",
+                    "pickle",
+                    "savedmodel"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "image",
+              "video",
+              "audio",
+              "documents",
+              "mlModel",
+              "fonts"
+            ]
+          },
+          "validate": {
+            "type": "object",
+            "description": "The file types for which the product can support C2PA claim validation",
+            "properties": {
+              "image": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Supported image file MIME type",
+                  "enum": [
+                    "image/jpeg",
+                    "image/jxl",
+                    "image/png",
+                    "image/svg+xml",
+                    "image/gif",
+                    "image/x-adobe-dng",
+                    "image/tiff",
+                    "image/webp",
+                    "image/heic",
+                    "image/heic-sequence",
+                    "image/heif",
+                    "image/heif-sequence",
+                    "image/avif"
+                  ]
+                }
+              },
+              "video": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Supported video file MIME type",
+                  "enum": ["video/x-msvideo", "video/mp4", "video/quicktime"]
+                }
+              },
+              "audio": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Supported audio file MIME type",
+                  "enum": [
+                    "audio/flac",
+                    "audio/MPA",
+                    "audio/mpeg",
+                    "audio/wav",
+                    "audio/aac",
+                    "audio/mp4"
+                  ]
+                }
+              },
+              "documents": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Supported document file MIME type",
+                  "enum": [
+                    "application/pdf",
+                    "application/epub+zip",
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "application/vnd.oasis.opendocument.text",
+                    "application/oxps"
+                  ]
+                }
+              },
+              "fonts": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Supported font file MIME type",
+                  "enum": ["font/otf"]
+                }
+              },
+              "mlModel": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Supported ML model type",
+                  "enum": [
+                    "jax",
+                    "keras",
+                    "ml_net",
+                    "mxnet",
+                    "onnx",
+                    "openvivo.parameter",
+                    "openvivo.topology",
+                    "pytorch",
+                    "tensorflow",
+                    "numpy",
+                    "protobuf",
+                    "pickle",
+                    "savedmodel"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "image",
+              "video",
+              "audio",
+              "documents",
+              "fonts",
+              "mlModel"
+            ]
+          }
+        },
+        "required": ["generate", "validate"]
+      },
+      "sbom": {
+        "type": "object",
+        "description": "Software bill of materials for the product",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "A publicly addressable location of the SBOM",
+            "format": "uri"
+          }
+        },
+        "required": ["url"]
+      },
+      "status": {
+        "type": "string",
+        "description": "Status of the product's standing in the C2PA Conformance Program. Approved products are eligible for C2PA claim signing certificates from Certification Authorities on the C2PA Trust List.",
+        "enum": [
+          "approved",
+          "revoked_eol",
+          "revoked_expired",
+          "revoked_vulnerability"
+        ]
+      },
+      "dateCreated": {
+        "type": "string",
+        "description": "[Constant] The date that the product record was created on the CPL. This value shall not be changed from its original value.",
+        "format": "date"
+      },
+      "dateModified": {
+        "type": "string",
+        "description": "The date that this product record on the CPL was last modified",
+        "format": "date"
+      }
+    },
+    "required": [
+      "recordNumber",
+      "vendor",
+      "product",
+      "specVersion",
+      "roles",
+      "containers",
+      "status",
+      "dateCreated",
+      "dateModified"
+    ],
+    "additionalProperties": false
+  },
+  "examples": [
+    [
+      {
+        "recordNumber": "0194513b-edff-73ae-a621-8455de3a065d",
+        "vendor": "Pragmata Inc.",
+        "product": {
+          "productType": "library",
+          "DN": {
+            "CN": "Pragmata C2PA SDK",
+            "O": "Pragmata Inc."
+          },
+          "minVersion": "0.5.0"
+        },
+        "specVersion": ["2.1"],
+        "roles": {
+          "generator": true,
+          "validator": true
+        },
+        "containers": {
+          "generate": {
+            "image": [
+              "image/jpeg",
+              "image/png",
+              "image/x-adobe-dng",
+              "image/tiff",
+              "image/webp",
+              "image/heic",
+              "image/heif",
+              "image/avif"
+            ],
+            "video": ["video/mp4"],
+            "audio": [],
+            "documents": [],
+            "mlModel": [],
+            "fonts": []
+          },
+          "validate": {
+            "image": [
+              "image/jpeg",
+              "image/jxl",
+              "image/png",
+              "image/svg+xml",
+              "image/gif",
+              "image/x-adobe-dng",
+              "image/tiff",
+              "image/webp",
+              "image/heic",
+              "image/heic-sequence",
+              "image/heif",
+              "image/heif-sequence",
+              "image/avif"
+            ],
+            "video": ["video/x-msvideo", "video/mp4", "video/quicktime"],
+            "audio": [],
+            "documents": [],
+            "fonts": [],
+            "mlModel": []
+          }
+        },
+        "sbom": {
+          "url": "https://pragmata.com/sbom/c2pa-sdk-v0.5.0.sbom"
+        },
+        "status": "approved",
+        "dateCreated": "2025-01-30",
+        "dateModified": "2025-01-30"
+      },
+      {
+        "recordNumber": "01945130-1bf6-7bf7-94c2-6cb30206eaed",
+        "vendor": "Acme Corp.",
+        "product": {
+          "productType": "application",
+          "DN": {
+            "CN": "Awesome Camera App for Android",
+            "O": "Acme Corp.",
+            "OU": "Android"
+          },
+          "minVersion": "2.3.0",
+          "assurance": {
+            "maxAssuranceLevel": 2,
+            "attestationMethods": ["Android_KeyAttestation"]
+          },
+          "integrates": ["0194513b-edff-73ae-a621-8455de3a065d"]
+        },
+        "specVersion": ["2.1"],
+        "roles": {
+          "generator": true,
+          "validator": true
+        },
+        "containers": {
+          "generate": {
+            "image": ["image/jpeg", "image/heic"],
+            "video": [],
+            "audio": [],
+            "documents": [],
+            "fonts": [],
+            "mlModel": []
+          },
+          "validate": {
+            "image": ["image/jpeg", "image/heic"],
+            "video": [],
+            "audio": [],
+            "documents": [],
+            "fonts": [],
+            "mlModel": []
+          }
+        },
+        "status": "revoked_eol",
+        "dateCreated": "2025-02-15",
+        "dateModified": "2025-09-30"
+      },
+      {
+        "recordNumber": "0194513c-bc37-7208-8108-6d3971bcc283",
+        "vendor": "Acme Corp.",
+        "product": {
+          "productType": "application",
+          "DN": {
+            "CN": "Awesome Camera App for Android",
+            "O": "Acme Corp.",
+            "OU": "Android"
+          },
+          "minVersion": "3.0.0",
+          "assurance": {
+            "maxAssuranceLevel": 2,
+            "attestationMethods": ["Android_KeyAttestation"]
+          },
+          "integrates": ["0194513b-edff-73ae-a621-8455de3a065d"]
+        },
+        "specVersion": ["2.1"],
+        "roles": {
+          "generator": true,
+          "validator": true
+        },
+        "containers": {
+          "generate": {
+            "image": ["image/jpeg", "image/heic"],
+            "video": ["video/mp4"],
+            "audio": [],
+            "documents": [],
+            "mlModel": [],
+            "fonts": []
+          },
+          "validate": {
+            "image": ["image/jpeg", "image/heic"],
+            "video": ["video/mp4"],
+            "audio": [],
+            "documents": [],
+            "mlModel": [],
+            "fonts": []
+          }
+        },
+        "status": "approved",
+        "dateCreated": "2025-08-15",
+        "dateModified": "2024-08-15"
+      }
+    ]
+  ]
+}
