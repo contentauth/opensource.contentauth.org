@@ -1,6 +1,23 @@
 import React from 'react';
 import styles from './ConformingProductsSchema.module.css';
 
+const MimeTypeList = ({ mimeTypes, title }) => {
+  if (!mimeTypes || mimeTypes.length === 0) return null;
+
+  return (
+    <div className={styles.mimeTypeList}>
+      <h5>{title}</h5>
+      <ul>
+        {mimeTypes.map((type, index) => (
+          <li key={index}>
+            <code>{type}</code>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 const PropertyTable = ({ properties, title, required = [] }) => {
   if (!properties) return null;
 
@@ -235,24 +252,128 @@ const ConformingProductsSchema = () => {
     rolesProperties: {
       generator: {
         type: 'boolean',
-        description: 'Whether the product can generate C2PA claims',
+        description: 'Whether the product can generate C2PA claims.',
       },
       validator: {
         type: 'boolean',
-        description: 'Whether the product can validate C2PA claims',
+        description: 'Whether the product can validate C2PA claims.',
       },
     },
     // Containers properties
     containersProperties: {
       generate: {
         type: 'object',
-        description:
-          'The file types for which the product can support C2PA claim generation',
+        description: (
+          <span>
+            The file types for which the product can support C2PA claim
+            generation. See{' '}
+            <a href="#generate-properties">Generate properties</a> for supported
+            MIME types.
+          </span>
+        ),
+        mimeTypes: {
+          image: [
+            'image/jpeg',
+            'image/jxl',
+            'image/png',
+            'image/svg+xml',
+            'image/gif',
+            'image/x-adobe-dng',
+            'image/tiff',
+            'image/webp',
+            'image/heic',
+            'image/heic-sequence',
+            'image/heif',
+            'image/heif-sequence',
+            'image/avif',
+          ],
+          video: ['video/x-msvideo', 'video/mp4', 'video/quicktime'],
+          audio: [
+            'audio/flac',
+            'audio/MPA',
+            'audio/mpeg',
+            'audio/wav',
+            'audio/aac',
+            'audio/mp4',
+          ],
+          documents: [
+            'application/pdf',
+            'application/epub+zip',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.oasis.opendocument.text',
+            'application/oxps',
+          ],
+          fonts: ['font/otf'],
+          mlModel: [
+            'jax',
+            'keras',
+            'ml_net',
+            'mxnet',
+            'onnx',
+            'openvivo.parameter',
+            'openvivo.topology',
+            'pytorch',
+            'tensorflow',
+            'numpy',
+            'protobuf',
+            'pickle',
+            'savedmodel',
+          ],
+        },
       },
       validate: {
         type: 'object',
         description:
           'The file types for which the product can support C2PA claim validation',
+        mimeTypes: {
+          image: [
+            'image/jpeg',
+            'image/jxl',
+            'image/png',
+            'image/svg+xml',
+            'image/gif',
+            'image/x-adobe-dng',
+            'image/tiff',
+            'image/webp',
+            'image/heic',
+            'image/heic-sequence',
+            'image/heif',
+            'image/heif-sequence',
+            'image/avif',
+          ],
+          video: ['video/x-msvideo', 'video/mp4', 'video/quicktime'],
+          audio: [
+            'audio/flac',
+            'audio/MPA',
+            'audio/mpeg',
+            'audio/wav',
+            'audio/aac',
+            'audio/mp4',
+          ],
+          documents: [
+            'application/pdf',
+            'application/epub+zip',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.oasis.opendocument.text',
+            'application/oxps',
+          ],
+          fonts: ['font/otf'],
+          mlModel: [
+            'jax',
+            'keras',
+            'ml_net',
+            'mxnet',
+            'onnx',
+            'openvivo.parameter',
+            'openvivo.topology',
+            'pytorch',
+            'tensorflow',
+            'numpy',
+            'protobuf',
+            'pickle',
+            'savedmodel',
+          ],
+        },
       },
     },
     // SBOM properties
@@ -313,27 +434,73 @@ const ConformingProductsSchema = () => {
         required={['generator', 'validator']}
       />
 
-      <PropertyTable
-        properties={schema.containersProperties}
-        title="Containers properties"
-        required={['generate', 'validate']}
-      />
+      <div className={styles.containersSection}>
+        <h2 id="containers-properties">Containers Properties</h2>
+
+        <div className={styles.containerSubsection}>
+          <h3 id="generate-properties">Generate properties</h3>
+          <p>Supported MIME types for claim generation:</p>
+          <MimeTypeList
+            mimeTypes={schema.containersProperties.generate.mimeTypes.image}
+            title="Image Types"
+          />
+          <MimeTypeList
+            mimeTypes={schema.containersProperties.generate.mimeTypes.video}
+            title="Video Types"
+          />
+          <MimeTypeList
+            mimeTypes={schema.containersProperties.generate.mimeTypes.audio}
+            title="Audio Types"
+          />
+          <MimeTypeList
+            mimeTypes={schema.containersProperties.generate.mimeTypes.documents}
+            title="Document Types"
+          />
+          <MimeTypeList
+            mimeTypes={schema.containersProperties.generate.mimeTypes.fonts}
+            title="Font Types"
+          />
+          <MimeTypeList
+            mimeTypes={schema.containersProperties.generate.mimeTypes.mlModel}
+            title="ML Model Types"
+          />
+        </div>
+
+        <div className={styles.containerSubsection}>
+          <h3 id="validate-properties">Validate properties</h3>
+          <p>Supported MIME types for claim validation:</p>
+          <MimeTypeList
+            mimeTypes={schema.containersProperties.validate.mimeTypes.image}
+            title="Image Types"
+          />
+          <MimeTypeList
+            mimeTypes={schema.containersProperties.validate.mimeTypes.video}
+            title="Video Types"
+          />
+          <MimeTypeList
+            mimeTypes={schema.containersProperties.validate.mimeTypes.audio}
+            title="Audio Types"
+          />
+          <MimeTypeList
+            mimeTypes={schema.containersProperties.validate.mimeTypes.documents}
+            title="Document Types"
+          />
+          <MimeTypeList
+            mimeTypes={schema.containersProperties.validate.mimeTypes.fonts}
+            title="Font Types"
+          />
+          <MimeTypeList
+            mimeTypes={schema.containersProperties.validate.mimeTypes.mlModel}
+            title="ML Model Types"
+          />
+        </div>
+      </div>
 
       <PropertyTable
         properties={schema.sbomProperties}
         title="SBOM properties"
         required={['url']}
       />
-
-      <div className={styles.note}>
-        <p>
-          <strong>Note:</strong> The containers.generate and containers.validate
-          objects each contain arrays of supported MIME types for different
-          content categories (image, video, audio, documents, fonts, and
-          mlModel). For a complete list of supported MIME types, please refer to
-          the schema definition.
-        </p>
-      </div>
     </div>
   );
 };
