@@ -4,9 +4,26 @@ import styles from './ConformingProductsSchema.module.css';
 const PropertyTable = ({ properties, title, required = [] }) => {
   if (!properties) return null;
 
+  const getObjectTableId = (propName) => {
+    // Map property names to their corresponding table titles
+    const tableMap = {
+      product: 'Product properties',
+      roles: 'Roles properties',
+      containers: 'Containers properties',
+      sbom: 'SBOM properties',
+      DN: 'DN (Distinguished Name) properties',
+      assurance: 'Assurance properties',
+      generate: 'Containers properties',
+      validate: 'Containers properties',
+    };
+
+    const tableTitle = tableMap[propName];
+    return tableTitle ? tableTitle.toLowerCase().replace(/\s+/g, '-') : null;
+  };
+
   return (
     <div className={styles.propertyTableContainer}>
-      <h4>{title}</h4>
+      <h2 id={title.toLowerCase().replace(/\s+/g, '-')}>{title}</h2>
       <table className={styles.propertyTable}>
         <thead>
           <tr>
@@ -20,6 +37,7 @@ const PropertyTable = ({ properties, title, required = [] }) => {
           {Object.entries(properties).map(([propName, propDetails]) => {
             const isRequired = required.includes(propName);
             let type = propDetails.type;
+            const objectTableId = getObjectTableId(propName);
 
             // Handle array types
             if (type === 'array' && propDetails.items) {
@@ -27,7 +45,17 @@ const PropertyTable = ({ properties, title, required = [] }) => {
                 propDetails.items.type === 'string' &&
                 propDetails.items.enum
               ) {
-                type = `array of: ${propDetails.items.enum.join(' | ')}`;
+                type = (
+                  <span>
+                    Array containing any of:
+                    {propDetails.items.enum.map((value, index) => (
+                      <React.Fragment key={index}>
+                        <br />
+                        {value}
+                      </React.Fragment>
+                    ))}
+                  </span>
+                );
               } else {
                 type = `array of ${propDetails.items.type}`;
               }
@@ -38,12 +66,20 @@ const PropertyTable = ({ properties, title, required = [] }) => {
               type = propDetails.enum.join(' or ');
             }
 
+            // Add link for object types
+            if (type === 'object' && objectTableId) {
+              type = <a href={`#${objectTableId}`}>Object</a>;
+            } else if (typeof type === 'string') {
+              // Capitalize primitive types
+              type = type.charAt(0).toUpperCase() + type.slice(1);
+            }
+
             return (
               <tr key={propName}>
                 <td>
                   <code>{propName}</code>
                 </td>
-                <td>{type.charAt(0).toUpperCase() + type.slice(1)}</td>
+                <td>{type}</td>
                 <td>{propDetails.description}</td>
                 <td>{isRequired ? 'Yes' : 'No'}</td>
               </tr>
@@ -59,6 +95,28 @@ const ConformingProductsSchema = () => {
   const schema = {
     // Main array item properties
     mainProperties: {
+      containers: {
+        type: 'object',
+        description:
+          'The file types supported by the product for both C2PA claim generation and/or validation',
+      },
+      dateCreated: {
+        type: 'string',
+        description:
+          '[Constant] The date that the product record was created on the CPL',
+        format: 'date',
+      },
+      dateModified: {
+        type: 'string',
+        description:
+          'The date that this product record on the CPL was last modified',
+        format: 'date',
+      },
+      product: {
+        type: 'object',
+        description:
+          'Product details as described in the product properties table',
+      },
       recordNumber: {
         type: 'string',
         description:
@@ -66,30 +124,16 @@ const ConformingProductsSchema = () => {
         pattern:
           '^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$',
       },
-      vendor: {
-        type: 'string',
-        description: 'Legal name of the vendor organization',
-      },
-      product: {
+      roles: {
         type: 'object',
         description:
-          'Product details as described in the product properties table',
+          'Whether the product is a C2PA Claim Generator or a C2PA Claim Validator, or both',
       },
       specVersion: {
         type: 'array',
         description:
           'The version(s) of the C2PA Content Credentials specification that is supported by this product',
         items: { type: 'string', enum: ['2.1'] },
-      },
-      roles: {
-        type: 'object',
-        description:
-          'Whether the product is a C2PA Claim Generator or a C2PA Claim Validator, or both',
-      },
-      containers: {
-        type: 'object',
-        description:
-          'The file types supported by the product for both C2PA claim generation and/or validation',
       },
       sbom: {
         type: 'object',
@@ -106,17 +150,9 @@ const ConformingProductsSchema = () => {
           'revoked_vulnerability',
         ],
       },
-      dateCreated: {
+      vendor: {
         type: 'string',
-        description:
-          '[Constant] The date that the product record was created on the CPL',
-        format: 'date',
-      },
-      dateModified: {
-        type: 'string',
-        description:
-          'The date that this product record on the CPL was last modified',
-        format: 'date',
+        description: 'Legal name of the vendor organization',
       },
     },
     // Product properties
@@ -239,7 +275,7 @@ const ConformingProductsSchema = () => {
 
       <PropertyTable
         properties={schema.mainProperties}
-        title="Main Record Properties"
+        title=""
         required={[
           'recordNumber',
           'vendor',
