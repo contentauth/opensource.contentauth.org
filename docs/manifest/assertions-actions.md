@@ -381,7 +381,7 @@ The `parameters` property can contain any data that provide more details on the 
 ]
 ```
 
-When creating an actions assertion that has an associated ingredient, the `parameters` object must include a `org.cai.ingredientIds` property with an array of one or more [`instanceID` values](#the-instanceid-property) from ingredients. This is how you associate an action with one or more ingredients. 
+When creating an actions assertion that has an associated ingredient, the `parameters` object must include a `org.cai.ingredientIds` property with an array of one or more [`instance_id` values](#the-instance_id-property) from ingredients. This is how you associate an action with one or more ingredients.
 
 :::info
 The [C2PA specification](https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_parameters) requires that a `c2pa.transcoded`, `c2pa.repackaged`, `c2pa.opened`, or a `c2pa.placed` action have one or more associated ingredients, so it is very important to add the `org.cai.ingredientIds` parameter with a matching ingredient.
@@ -402,76 +402,67 @@ For example:
   ...
 ```
 
-The SDK supports the older `ingredientId` field, but it is deprecated and will at some point not be supported.
+:::note
+The old `ingredientId` field is deprecated.
+:::
 
 For more information on action parameters, see the [C2PA Technical Specification](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_parameters).
 
-### The instanceId property
+### The instance_id property
 
-The `instanceId` property identifies an ingredient (with a matching value of `instance_id`) used in an action and is only used when defining/writing a manifest, not reading one.
+When defining/writing a manifest, the `instance_id` property identifies an ingredient used in an action.
 
-```json 
+Any `c2pa.opened` or `c2pa.placed` action must have an associated ingredient identified by the `org.cai.ingredientIds` parameters field of the action with an array of ingredient `instance_id` values.
+
+```json
 "ingredients": [
   {
     ...
     "instance_id": "<String-instance-ID-of-ingredient>",
-    ...
+    "relationship": "parentOf",
+    "label": "c2pa.ingredient.v3"
   },
-...
+  ...
+],
 "actions": [
   {
     "action": "c2pa.*",
-    "instanceId": "<String-instance-ID-of-ingredient>",
     "parameters": {
-      "ingredient": {
-        "hash": "tTBD4/E0R0AjLUdJFpsVz3lE/KJUq22Vz0UGqzhEpVs=",
-        "url": "self#jumbf=c2pa.assertions/c2pa.ingredient"
-      }
+      "org.cai.ingredientIds": [
+        "<String-instance-ID-of-ingredient>"
+      ],
     }
   },
   ...
 ]
 ```
 
-For example, the following action identifies that the `c2pa.opened` action was performed on the ingredient with ID `xmp.did:813ee422-9736-4cdc-9be6-4e35ed8e41cb`:
+For example, the following action identifies that the `c2pa.opened` action was performed on the ingredient with ID `xmp.iid:3250038a-22ca-459b-8392-de275f8b155c`:
 
 ```json
 "ingredients": [
   {
-    "title": "A.jpg",
+    "title": "test.jpeg",
     "format": "image/jpeg",
-    "document_id": "xmp.did:813ee422-9736-4cdc-9be6-4e35ed8e41cb",
-    "instance_id": "xmp.iid:813ee422-9736-4cdc-9be6-4e35ed8e41cb",
-    "thumbnail": {
-      "format": "image/jpeg",
-      "identifier": "xmp.iid-813ee422-9736-4cdc-9be6-4e35ed8e41cb.jpg"
-    },
-    "relationship": "parentOf"
-  },
-  ...
+    "instance_id": "xmp.iid:3250038a-22ca-459b-8392-de275f8b155c",
+    "relationship": "parentOf",
+    "label": "c2pa.ingredient.v3"
+  }
 ],
 "assertions": [
-  ...
   {
     "label": "c2pa.actions",
     "data": {
       "actions": [
         {
           "action": "c2pa.opened",
-          "instanceId": "xmp.iid:813ee422-9736-4cdc-9be6-4e35ed8e41cb",
           "parameters": {
-            "ingredient": {
-              "hash": "tTBD4/E0R0AjLUdJFpsVz3lE/KJUq22Vz0UGqzhEpVs=",
-              "url": "self#jumbf=c2pa.assertions/c2pa.ingredient"
-            }
+            "org.cai.ingredientIds": [
+              "xmp.iid:3250038a-22ca-459b-8392-de275f8b155c"
+            ],
           }
         },
         ...
-      ]
-    }
-  }
-],
-...
 ```
 
 ### V2 actions
