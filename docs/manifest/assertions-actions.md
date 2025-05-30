@@ -3,11 +3,11 @@ id: assertions-actions
 title: Assertions and actions
 ---
 
-## Assertions
+## Overview
 
-Assertions provide information about when, where, and how an asset was created or transformed. 
+Assertions provide information about when, where, and how an asset was created or transformed.
 
-In the JSON manifest, each assertion is specified by a [ManifestAssertion](../manifest/manifest-ref.mdx#manifestassertion) object.  All the assertions in the manifest are in the `assertions` array. A ManifestAssertion object has two required properties, `label`, a string, and `data`, which can contain arbitrary information; and two optional properties, `kind` and `instance`. 
+In the JSON manifest, each assertion is specified by a [AssertionDefinition](./json-ref/manifest-def.mdx#assertiondefinition) object.  All the assertions in the manifest are in the `assertions` array. A ManifestAssertion object has two required properties, `label`, a string, and `data`, which can contain arbitrary information; and two optional properties, `kind` and `instance`.
 
 The standard form of an assertion in a JSON manifest is:
 
@@ -26,75 +26,18 @@ The standard form of an assertion in a JSON manifest is:
 ]
 ```
 
-**Metadata assertions**
+## CAWG metadata assertions
 
-_Metadata assertions_ include
-- [Creative work](#creative-work-assertion)
-- [Exchangeable image file (Exif) information](#exif-assertion)
-- [IPTC photo and video metadata](#iptc-metadata-assertion)
+Use _CAWG metadata assertions_ to include metadata from metadata standards such as XMP, IPTC, and Exif in a manifest.
 
 Metadata assertions must include one or more `@context` properties in the `data` object, as explained in the [JSON-LD](https://www.w3.org/TR/json-ld/#the-context) specification.  Follow the examples shown in each section.
 
-### C2PA standard assertions
-
-The C2PA Technical Specification defines a [set of standard assertions](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_standard_c2pa_assertion_summary) and their corresponding labels.  In addition, you can define [custom assertions](#custom-assertions) for your specific application.
-
-The following table summarizes some of the most important standard assertions.
-
 | Assertion | Label | Description |
 |-----------|-------|-------------|
-| [Actions](#actions) |  `c2pa.actions` | Creation, edits, and other actions on an asset, such as cropping, color or contrast adjustment, and so on. |
-| ["Do not train"](#do-not-train-assertion) | `c2pa.training-mining` | Whether the creator/owner of an asset grants permission to use it for data mining or AI/ML training.  |
 | [Creative work](#creative-work-assertion) | `stds.schema-org.CreativeWork`  | Indicates the asset is the product of creative effort.   |
 | [Exif information](#exif-assertion) | `stds.exif` | Camera information such as maker, lens stored in Exchangeable image file format (Exif). |
-| [Content bindings](#content-bindings) | `c2pa.hash.*`, `c2pa.soft-binding`, etc. | Uniquely identify portions of an asset and bind the assertion to it, for example using cryptographic hashes. |
 | [IPTC photo and video metadata](#iptc-metadata) | `stds.iptc` | Properties from the IPTC Photo and Video Metadata Standards, describing for example ownership, rights, and other metadata about a image or video asset. |
-
-:::note
-The CAI SDK handles assertions for thumbnails, content bindings, and ingredients, so normally you don't need to think about them.
-:::
-
-### Do not train assertion
-
-Assertions with the `c2pa.training-mining` label indicate whether permission is granted to use an asset in data mining, machine learning (ML) training, or inference.   The latter is sometimes referred to as the "do not infer" assertion.
-
-| Entry Key | Whether permission is granted...  | Possible values of `use` property |
-|-----------|-------------|-------------|
-| `c2pa.data_mining` | To extract text or data from the asset for purposes of determining "patterns, trends and correlations," including images containing text, where the text could be extracted via OCR. | `allowed`,<br/>  `notAllowed`,<br/>or `constrained` |
-| `c2pa.ai_training` |To use the asset to train non-generative AI/ML models, such as those used for classification, object detection, and so on. | `allowed`,<br/>  `notAllowed`,<br/>or `constrained` |
-| `c2pa.ai_generative_training`  | To use the asset as training data for a generative AI/ML model that could produce derivative assets. | `allowed`,<br/>  `notAllowed`,<br/>or `constrained`  |
-| `c2pa.ai_inference` | To use the asset as input to a trained AI/ML model for the purposes of inferring a result. Sometimes referred to as the "do not infer" assertion. | `allowed`,<br/>  `notAllowed`,<br/>or `constrained` |
-
-The value of each of these properties is an object with a `use` property that can have one of these values:
-
-- `allowed`: Permission is granted for this type of use.
-- `notAllowed`: Permission is NOT granted for this type of use.
-- `constrained`: Permission is not unconditionally granted for this use.  You can provide more details (such as contact information) in the `constraints_info` text property.
-
-For more information, see the [C2PA Technical Specification](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_training_and_data_mining).
-
-For example:
-
-```json
-"assertions": [
-  ...
-  {
-    "label": "c2pa.training-mining",
-    "data": {
-      "entries": {
-        "c2pa.ai_generative_training": { "use": "notAllowed" },
-        "c2pa.ai_inference": { "use": "notAllowed" },
-        "c2pa.ai_training": { "use": "notAllowed" },
-        "c2pa.data_mining": { 
-          "use": "constrained",
-          "constraint_info" : "Contact foo@bar.com for more information."
-        } 
-      }
-    }
-  }
-  ...
-]
-```
+| [Training and data mining](#do-not-train-assertion) | `cawg.training-mining` | Whether the creator/owner of an asset grants permission to use it for data mining or AI/ML training.  NOTE: Previously, this assertion's label was `c2pa.training-mining`. |
 
 ### Creative work assertion
 
@@ -215,6 +158,63 @@ For example:
 ]
 ```
 
+### Training and data mining assertion
+
+Assertions with the `cawg.training-mining` label provide information about whether an asset with C2PA metadata may be used as part of a data mining or AI/ML (artificial intelligence / machine learning) workflows, including whether permission is granted to use an asset in ML training or inference.
+
+| Entry Key | Whether permission is granted...  | Possible values of `use` property |
+|-----------|-------------|-------------|
+| `cawg.data_mining` | To extract text or data from the asset for purposes of determining "patterns, trends and correlations," including images containing text, where the text could be extracted via OCR. | `allowed`,<br/>  `notAllowed`,<br/>or `constrained` |
+| `cawg.ai_inference` | To use the asset as input to a trained AI/ML model for the purposes of inferring a result. Sometimes referred to as the "do not infer" assertion. | `allowed`,<br/>  `notAllowed`,<br/>or `constrained` |
+| `cawg.ai_generative_training`  | To use the asset as training data for a generative AI/ML model that could produce derivative assets. Sometimes referred to as the "do not train" assertion. | `allowed`,<br/>  `notAllowed`,<br/>or `constrained`  |
+| `cawg.ai_training` |To use the asset to train non-generative AI/ML models, such as those used for classification, object detection, and so on. | `allowed`,<br/>  `notAllowed`,<br/>or `constrained` |
+
+The value of each of these properties is an object with a `use` property that can have one of these values:
+
+- `allowed`: Permission is granted for this type of use.
+- `notAllowed`: Permission is NOT granted for this type of use.
+- `constrained`: Permission is not unconditionally granted for this use.  You can provide more details (such as contact information) in the `constraints_info` text property.
+
+For more information, see the [C2PA Technical Specification](https://cawg.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_training_and_data_mining).
+
+For example:
+
+```json
+"assertions": [
+  ...
+  {
+    "label": "cawg.training-mining",
+    "data": {
+      "entries": {
+        "cawg.ai_generative_training": { "use": "notAllowed" },
+        "cawg.ai_inference": { "use": "notAllowed" },
+        "cawg.ai_training": { "use": "notAllowed" },
+        "cawg.data_mining": { 
+          "use": "constrained",
+          "constraint_info" : "Contact foo@bar.com for more information."
+        } 
+      }
+    }
+  }
+  ...
+]
+```
+
+## C2PA standard assertions
+
+The C2PA Technical Specification defines a [set of standard assertions](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_standard_c2pa_assertion_summary) and their corresponding labels.  In addition, you can define [custom assertions](#custom-assertions) for your specific application.
+
+The following table summarizes some of the most important standard assertions.
+
+| Assertion | Label | Description |
+|-----------|-------|-------------|
+| [Content bindings](#content-bindings) | `c2pa.hash.*`, `c2pa.soft-binding`, etc. | Uniquely identify portions of an asset and bind the assertion to it, for example using cryptographic hashes. |
+| [Actions](#actions) |  `c2pa.actions` | Creation, edits, and other actions on an asset, such as cropping, color or contrast adjustment, and so on. |
+
+:::note
+The CAI SDK handles assertions for thumbnails, content bindings, and ingredients, so normally you don't need to think about them.
+:::
+
 ### Content bindings
 
 Content bindings are standard assertions such as `c2pa.hash.boxes` and `c2pa.hash.data` that uniquely identify portions of an asset.  For more information on content bindings, see the [C2PA Technical Specification](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_binding_to_content).
@@ -244,32 +244,9 @@ For example, the `c2pa.hash.data` assertion shown in the [detailed manifest exam
 ]
 ```
 
-### Custom assertions
-
-In addition to the C2PA standard assertions, you can also define custom assertions if the standard assertions don't cover your specific needs.  A custom assertion has a label string with [reverse domain name notation](https://en.wikipedia.org/wiki/Reverse_domain_name_notation) syntax, for example `com.adobe.product-foo.bar`.
-
-For example:
-
-```json
-"assertions": [
-  ...
-  {
-    "label": "com.mycompany.myproduct",
-    "data": {
-      "git_hash": "023bb51",
-      "lib_name": "Our C2PA C++ Library",
-      "lib_version": "2.5.1",
-      "target_spec_version": "1.2"
-    },
-    "kind": "Json"
-  },
-  ...
-]
-```
-
 ## Actions
 
-An action is an assertion that provides information about creation, edits, and other things that have occurred to an asset. In the manifest, an `actions` assertion is an array of [ManifestAssertion](manifest-ref.mdx#manifestassertion) objects.   For example:
+An action is an assertion that provides information about creation, edits, and other things that have occurred to an asset. In the manifest, an `actions` assertion is an array of [AssertionDefinition](json-ref/manifest-def.mdx#assertiondefinition) objects.   For example:
 
 ```json
 ...
@@ -301,18 +278,17 @@ Each object in the `actions` array has the following standard properties.
 
 ### Action names
 
-The value of the `action` property must be either one of the pre-defined [standard C2PA action strings](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_actions) of the form `c2pa.*` or a custom action name. The set of standard C2PA actions includes fundamental ones as `c2pa.created` for when an asset is first created, and others (`c2pa.cropped`, `c2pa.resized`, and so on) for when an asset's content is modified in some way.  
+The value of the `action` property must be either one of the pre-defined [standard C2PA action strings](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_actions) of the form `c2pa.*` or a custom action name. The set of standard C2PA actions includes fundamental ones as `c2pa.created` for when an asset is first created, and others (`c2pa.cropped`, `c2pa.resized`, and so on) for when an asset's content is modified in some way.  
 
-For the complete list of standard actions, see the [C2PA Technical Specification](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_actions).
-
+For the complete list of standard actions, see the [C2PA Technical Specification](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_actions).
 
 ### Digital source type
 
 Use the `digitalSourceType` property to specify how an asset was created or modified, for example "digital capture", "digitized from negative," or "trained algorithmic media." 
 
-The value of `digitalSourceType` is one of the URLs specified by the International Press Telecommunications Council (IPTC) [NewsCodes Digital Source Type scheme](https://cv.iptc.org/newscodes/digitalsourcetype/) of the form `http://cv.iptc.org/newscodes/digitalsourcetype/negativeFilm/<CODE>`, where `<CODE>` is one of the codes shown in the following table.
+The value of `digitalSourceType` is one of the URLs specified by the International Press Telecommunications Council (IPTC) [NewsCodes Digital Source Type scheme](https://cv.iptc.org/newscodes/digitalsourcetype/) of the form `http://cv.iptc.org/newscodes/digitalsourcetype/<CODE>`, where `<CODE>` is one of the codes shown in the following table.
 
-| Code | Description |
+| Code | Description |`
 |---|---|
 | algorithmicallyEnhanced | Minor augmentation or correction by algorithm. |
 | algorithmicMedia | Media created purely by an algorithm not based on any sampled training data, e.g. an image created by software using a mathematical formula. |
@@ -321,7 +297,7 @@ The value of `digitalSourceType` is one of the URLs specified by the Internation
 | compositeSynthetic | Mix or composite of several elements, at least one of which is synthetic. |
 | compositeWithTrainedAlgorithmicMedia | The compositing of trained algorithmic media with some other media, such as with inpainting or outpainting operations. |
 | dataDrivenMedia | Digital media representation of data via human programming or creativity. |
-| digitalCreation | Media created by a human using non-generative tools. Use instead of retired digitalArt code. | 
+| digitalCreation | Media created by a human using non-generative tools. Use instead of retired digitalArt code. |
 | digitalCapture | The digital media is captured from a real-life source using a digital camera or digital recording device. |
 | humanEdits | Augmentation, correction or enhancement by one or more humans using non-generative tools.  Use instead of retired minorHumanEdits code. | 
 | negativeFilm | The digital image was digitized from a negative on film or any other transparent medium. |
@@ -468,4 +444,27 @@ For example, the following action identifies that the `c2pa.opened` action was p
 
 This documentation covers C2PA v1 actions.  The [C2PA Technical Specification](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_actions) also describes expanded v2 actions.  V1 actions are fully specified in the actions array. However, a v2 action may either be specified by an element of the actions array or from an element in the templates array with the same action name.
 
-There are some additional differences between v1 and v2 actions, for example in v2, `softwareAgent` is a [ClaimGeneratorInfo](../manifest/manifest-ref.mdx#claimgeneratorinfo) structure instead of a string. The CAI APIs can read all v2 actions and write most v2 actions.
+There are some additional differences between v1 and v2 actions, for example in v2, `softwareAgent` is a [ClaimGeneratorInfo](json-ref/manifest-def.mdx#claimgeneratorinfo) structure instead of a string. The CAI APIs can read all v2 actions and write most v2 actions.
+
+## Custom assertions
+
+In addition to the C2PA standard assertions, you can also define custom assertions if the standard assertions don't cover your specific needs.  A custom assertion has a label string with [reverse domain name notation](https://en.wikipedia.org/wiki/Reverse_domain_name_notation) syntax, for example `com.adobe.product-foo.bar`.
+
+For example:
+
+```json
+"assertions": [
+  ...
+  {
+    "label": "com.mycompany.myproduct",
+    "data": {
+      "git_hash": "023bb51",
+      "lib_name": "Our C2PA C++ Library",
+      "lib_version": "2.5.1",
+      "target_spec_version": "1.2"
+    },
+    "kind": "Json"
+  },
+  ...
+]
+```
