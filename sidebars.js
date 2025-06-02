@@ -51,6 +51,10 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'manifest/legacy-manifests',
+        },
+        {
+          type: 'doc',
           id: 'manifest/manifest-examples',
           label: 'Examples',
         },
