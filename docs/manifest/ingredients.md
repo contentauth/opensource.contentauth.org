@@ -3,9 +3,19 @@ id: ingredients
 title: Ingredients
 ---
 
+<div class="review-comment">
+
+`digitalSourceType` is now required on every ingredient, previously it was not.
+
+</div>
+
 ## Overview 
 
 Digital assets are often not created entirely from scratch, but instead created from one or more existing assets, for example placing an image into a layer in Photoshop.  Such constituent assets are called _ingredients_. 
+
+<div class="review-comment">
+This should now cover v2 ingredients, right?
+</div>
 
 This documentation covers C2PA v1 ingredients.  The [C2PA Technical Specification](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_ingredient) also describes improved v2 ingredients.
 
@@ -15,9 +25,9 @@ The C2PA Technical Specification describes _ingredient assertions_ but the CAI S
 
 ## Ingredient objects
 
-Each ingredient used to create an asset is listed in the [JSON manifest](manifest-ref.mdx) `ingredients` array.  When an ingredient itself has Content Credentials, those manifests are included in the composed asset's manifest store to keep the provenance data intact. 
+The `ingredients` array contains an element for each ingredient used to create an asset.  When an ingredient itself has Content Credentials, those manifests are included in the composed asset's manifest store to keep the provenance data intact.
 
-The `ingredients` array contains an [ingredient object](manifest-ref.mdx#ingredient) for each ingredient.  The only required property of the `ingredient` object is the `title` property, which usually is the source file name.
+The `ingredients` array contains an [ingredient object](json-ref/manifest-def.mdx#ingredient) for each ingredient.  The only required property of the `ingredient` object is the `title` property, which usually is the source file name.
 
 Other important properties of the ingredient object include:
 - `format`: MIME type of the source file.
