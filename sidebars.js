@@ -29,46 +29,58 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Understanding manifests',
+      label: 'Working with manifests',
       link: { type: 'doc', id: 'manifest/understanding-manifest' },
       collapsed: true,
       items: [
         {
-          type: 'doc',
-          id: 'manifest/assertions-actions',
-        },
-        {
-          type: 'doc',
-          id: 'manifest/ingredients',
-        },
-        {
-          type: 'doc',
-          id: 'manifest/manifest-validation',
-        },
-        {
-          type: 'doc',
-          id: 'manifest/cawg-id',
-        },
-        {
-          type: 'doc',
-          id: 'manifest/manifest-examples',
-          label: 'Examples',
-        },
-        {
           type: 'category',
-          label: 'JSON reference',
-          link: { type: 'doc', id: 'manifest/json-ref/index' },
+          label: 'Reading manifest data',
+          link: { type: 'doc', id: 'manifest/reading' },
           collapsed: true,
           items: [
             {
               type: 'doc',
-              id: 'manifest/json-ref/manifest-def',
+              id: 'manifest/ingredients',
+            },
+            {
+              type: 'doc',
+              id: 'manifest/cawg-id',
+            },
+            {
+              type: 'doc',
+              id: 'manifest/legacy-manifests',
+            },
+            {
+              type: 'doc',
+              id: 'manifest/manifest-validation',
             },
             {
               type: 'doc',
               id: 'manifest/json-ref/reader',
             },
           ],
+        },
+        {
+          type: 'category',
+          label: 'Writing manifest data',
+          link: { type: 'doc', id: 'manifest/writing' },
+          collapsed: true,
+          items: [
+            {
+              type: 'doc',
+              id: 'manifest/assertions-actions',
+            },
+            {
+              type: 'doc',
+              id: 'manifest/json-ref/manifest-def',
+            },
+          ],
+        },
+        {
+          type: 'doc',
+          id: 'manifest/manifest-examples',
+          label: 'Examples',
         },
       ],
     },
