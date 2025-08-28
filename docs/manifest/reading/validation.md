@@ -3,11 +3,11 @@ id: manifest-validation
 title: Validating manifests
 ---
 
-Processing an asset includes [validating the manifests](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_validation) in the associated manifest store. During validation, errors can occur in the active manifest and in ingredients.
+Processing an asset includes [validating the manifests](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_validation) in the associated manifest store. During validation, errors can occur in the active manifest and in ingredients.
 
 ## Validation errors in manifests
 
-When you load an asset, all the manifests in the manifest store are validated and any [failure codes](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_failure_codes) are assigned to the `validation_status` array. Inspect the array to find the validation errors. 
+When you load an asset, all the manifests in the manifest store are validated and any [failure codes](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_failure_codes) are assigned to the `validation_status` array. Inspect the array to find the validation errors. 
 
 :::tip
 Validation returns ONLY error codes; success is not explicitly indicated. If there are no validation errors, then the manifest won't have the `validation_status` element.
@@ -27,11 +27,11 @@ Don't assume that just because you didn't get an error from the function return 
 
 Ingredients are validated when they are imported into an asset and the result is stored in the ingredient's `validation_status` array.
 
-Only errors that are not already recorded in the `validation_status` of an ingredient are reported. See [ValidationStatus](./manifest-ref.mdx#validationstatus) object in Manifest store reference.
+Only errors that are not already recorded in the `validation_status` of an ingredient are reported. See [ValidationStatus](../json-ref/manifest-def.mdx#validationstatus) object in Manifest store reference.
 
 ## Error status codes
 
-The following table describes some common validation error status codes. Refer to the [C2PA Technical Specification](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_failure_codes) for the full list.
+The following table describes some common validation error status codes. Refer to the [C2PA Technical Specification](https://c2pa.org/specifications/specification2.2/specs/C2PA_Specification.html#_failure_codes) for the full list.
 
 | Validation Status Code| Description  | Type of URI |
 | --------------------- | ------------ | ----------- |
@@ -51,7 +51,7 @@ Validation error status codes can contain JUMBF URIs that reference assertions o
 - **Assertion URI**: A URI like `self#jumbf=c2pa.assertions/<ASSERTION>` where `<ASSERTION>` is either `stds.schema-org.*` or `c2pa.*`.
 - **Signature Box URI**: A URI like `self#jumbf=c2pa.signature`.
 
-For more information, see the [C2PA Technical Specification](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_uri_references).
+For more information, see the [C2PA Technical Specification](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_uri_references).
 
 <!--
 Actions and assertions:
@@ -72,8 +72,6 @@ Assertions
 - CreativeWork assertion
 - DNT - Special assertion
 - EXIF
-
-Verify has a URL - how do I put it in?
 
 User-defined assertion
 -->
