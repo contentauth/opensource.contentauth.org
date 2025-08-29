@@ -1,9 +1,13 @@
 ---
 id: verify-known-cert-list
-title: Verify tool known certificate list
+title: The interim trust list
 ---
 
 import verify_unknown_source from '../static/img/verify-cc-unknown-source.png';
+
+:::warning Warning
+The process described on this page is deprecated. The C2PA has released its official trust lists, and Verify will be updated to use them soon. See [C2PA conformance program](conformance.mdx) for more information.
+:::
 
 The C2PA **[Verify tool](https://contentcredentials.org/verify)** uses a list of _known certificates_ (sometimes referred to as a "trust list") to determine whether a Content Credential was issued by a known source. If an asset's Content Credential was not signed by a known certificate, the Verify tool will display this message:
 
@@ -15,10 +19,14 @@ The C2PA **[Verify tool](https://contentcredentials.org/verify)** uses a list of
 Conversely, if the Content Credential was signed by a known certificate, the Verify tool will display the [name of the certificate owner and time of the claim signature](verify.mdx#title-and-signing-information).
 
 :::note
-The C2PA intends to publish an official public list of known certificates. Until then, **[Verify](https://contentcredentials.org/verify)** uses a temporary list. The list is subject to change and will be deprecated when C2PA publishes the official list.
+Currently, **[Verify](https://contentcredentials.org/verify)** uses the temporary trust list described here, but in 2025 the C2PA released its official trust lists, and Verify will be updated to use them soon.
 :::
 
 ## Temporary known certificate list
+
+The temporary known certificate list (also known as the _interim trust list_) will remain operational **through December 31, 2025**. During this time, C2PA will continue to accept new certificates following the process described below. At some point, the Verify site will distinguish between Content Credentials from conforming products on the official C2PA trust list and those relying on the interim trust list.
+
+On **January 1, 2026**, the temporary trust list will be frozen: CAI will not add any new entries or make updates. Existing certificates will remain valid, and the Verify site will distinguish Content Credentials signed using those certificates. Eventually, those certificates will expire and no longer be usable for signing. However, if content was signed during the certificate's validity period, the content will always be considered valid against the interim trust list.
 
 The [contentcredentials.org](https://contentcredentials.org/) site hosts the following files that it uses to [validate signing certificates](https://c2pa.org/specifications/specifications/2.0/specs/C2PA_Specification.html#_c2pa_signers). Together, these files form the _temporary known certificate list_:
 

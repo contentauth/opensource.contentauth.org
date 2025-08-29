@@ -296,6 +296,11 @@ const sidebars = {
       ],
     },
     {
+      type: 'doc',
+      label: 'C2PA conformance program',
+      id: 'conformance',
+    },
+    {
       type: 'category',
       label: 'Durable Content Credentials',
       link: { type: 'doc', id: 'durable-cr/index' },

@@ -1,0 +1,53 @@
+---
+id: conformance
+title: C2PA conformance program
+---
+
+In mid-2025, C2PA launched its [conformance program](https://c2pa.org/conformance) for:
+
+- Products that read and validate Content Credentials, referred to as _validator products_.
+- Products that generate Content Credentials, referred to as _generator products_.
+- Certificate authorities (CAs)
+
+## Validator products
+
+A _validator product_ can read and validate a manifest store for a digital asset.
+A conforming validator product is accountable for producing correct validation results that conform to the C2PA Content Credentials specification.
+
+For more details, see [C2PA conformance program](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Conformance%20Program.pdf).
+
+## Generator products
+
+A _generator product_ can generate a manifest store for a digital asset that conforms to the C2PA Content Credentials specification. A generator product creates assertions in the asset's active manifest and signs a claim using a valid X.509 certificate on the C2PA trust list.
+
+A conforming generator product is accountable for producing correct manifests and claims that conform to the C2PA Content Credentials specification.
+
+For more details, see [C2PA conformance program](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Conformance%20Program.pdf).
+
+## Certificate authorities
+
+The C2PA certificate policy sets requirements for a Certificate Authority (CA) that issues claim signing certificates to developers of generator products, and the requirements that those developers have to meet in the use of the certificates.
+
+The policy requires that CAs only issue claim signing certificates to generator products that are on the conforming products list.
+
+CAs that comply with the certificate policy and want to issue certificates under the C2PA conformance program must apply to the C2PA governing authority for inclusion on the
+C2PA trust list.
+
+## C2PA trust lists
+
+The new [C2PA trust lists](https://github.com/c2pa-org/conformance-public/tree/main/trust-list), governed under the C2PA conformance program, introduces key enhancements:
+
+- A new [public certificate policy](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Certificate%20Policy.pdf) that specifies C2PA requirements for certificate authorities (CAs).
+- Higher security and interoperability.
+- Stronger accountability and governance.
+- Alignment with the C2PA 2.x technical specification.
+- A robust governance framework.
+
+C2PA maintains two trust lists:
+
+- **C2PA trust list**: A list of X.509 certificate trust anchors (either root or subordinate certification authorities) that issue certificates to conforming generator products under the C2PA Certificate Policy.
+- **C2PA time-stamping authority (TSA) trust list**: A list of X.509 certificate trust anchors (either root or subordinate certification authorities) that issue time-stamp signing certificates to TSAs.
+
+### Interim trust list
+
+With the introduction of the C2PA trust list, the existing [temporary (interim) trust list](trust-list.mdx) is being retired. It provided critical support during the early adoption phase of C2PA and enabled the [C2PA Verify website](https://contentcredentials.org/verify) to determine which certificates were valid and prevent unknown signers from appearing as valid.
