@@ -29,7 +29,7 @@ Supported asset file types include:
 - **Document**: PDF.
 
 :::tip
-Verify shows the complete current list of supported file types (when no asset is displayed on the page).
+When you first load the site and no asset is displayed on the page, Verify shows the complete current list of supported file types.
 :::
 
 ### Uploading an asset
@@ -46,7 +46,7 @@ https://contentcredentials.org/verify?source=<ASSET_URL>
 
 where `<ASSET_URL>` is the URL of the asset.
 
-For example: https://contentcredentials.org/verify?source=https://c2pa.org/public-testfiles/image/jpeg/adobe-20220124-CICA.jpg
+For example: https://contentcredentials.org/verify?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-CICA.jpg
 
 :::note
 To use Verify on an asset URL, the URL must not require any authentication and the hosting server must allow cross-origin resource sharing (CORS) in the `Access-Control-Allow-Origin` HTTP response header.
@@ -54,9 +54,9 @@ To use Verify on an asset URL, the URL must not require any authentication and t
 
 ### C2PA test files
 
-The [C2PA public-testfiles](https://c2pa.org/public-testfiles/image/) repository contains image files that demonstrate Content Credentials, including multiple ingredients, Exif metadata, and various error conditions, along with links to inspect the assets using Verify and to view the corresponding manifest reports from the [C2PA Tool](c2patool).
+The [C2PA public-testfiles](https://spec.c2pa.org/public-testfiles/image/) repository contains image files that demonstrate Content Credentials, including multiple ingredients, Exif metadata, and various error conditions, along with links to inspect the assets using Verify and to view the corresponding manifest reports from the [C2PA Tool](c2patool).
 
-Currently, most of the asset files in the repository are JPEG images, but a few [PDF](https://c2pa.org/public-testfiles/pdf/) and [video](https://c2pa.org/public-testfiles/video/) test files are also available.
+Currently, most of the asset files in the repository are JPEG images, but a few [PDF](https://spec.c2pa.org/public-testfiles/pdf/) and [video](https://spec.c2pa.org/public-testfiles/video/) test files are also available.
 
 ## Information displayed
 
@@ -166,9 +166,9 @@ For example, suppose you downloaded a file from Adobe Stock and renamed it `my_s
  }
 ```
 
-**Signing information**
+#### Signing information
 
-If the Content Credential was signed by a certificate that is NOT on the [known certificate list](verify-known-cert-list), such as the CAI test certificate in the SDK, then Verify displays "Unrecognized" at the top of this section with this notice:
+If the Content Credential was signed by a certificate that is NOT on the [known certificate list](verify-known-cert-list), such as one of the SDK's [test certificates](signing/test-certs.md), then Verify displays "Unrecognized" at the top of this section with this notice:
 
 import verify_unknown_source from '../static/img/verify-cc-unknown-source.png';
 
@@ -177,7 +177,11 @@ import verify_unknown_source from '../static/img/verify-cc-unknown-source.png';
   style={{ width: '283px', display: 'block', margin: '10px auto' }}
 />
 
-However, if the Content Credential was signed by a certificate on the [known certificate list](verify-known-cert-list), then this section displays the name of the issuer of the claim signature from the `signature_info.issuer` property in the active manifest, as shown in the example snippet below. It shows the organization name only if the signing certificate includes the "O" or [Organization Name attribute](https://www.alvestrand.no/objectid/2.5.4.10.html) (OID value 2.5.4.10) in the certificate's distinguished name information.
+However, if the Content Credential was signed by a certificate on the [known certificate list](verify-known-cert-list), then this section displays the name of the issuer of the claim signature from the `signature_info.issuer` property in the active manifest, as shown in the example snippet below.
+
+:::note
+This section shows the organization name only if the signing certificate includes the "O" or [Organization Name attribute](https://www.alvestrand.no/objectid/2.5.4.10.html) (OID value 2.5.4.10) in the certificate's distinguished name information.
+:::
 
 For signers on the known certificate list, this section also displays the time of the claim signature from the `signature_info.time` property in the active manifest, as shown in the example snippet below. The date is converted from UTC to the local time zone.
 
@@ -202,7 +206,7 @@ import verify_validation_error from '../static/img/verify-validation-error.png';
   style={{ width: '300px', display: 'block', margin: '10px auto' }}
 />
 
-Verify displays this warning if the `validation_status` array contains any elements. For example, a [this image](https://contentcredentials.org/verify?source=https://c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-dat-CA.jpg) with a hard binding hash mismatch error, as shown in [this manifest store](https://c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-dat-CA/manifest_store.json):
+Verify displays this warning if the `validation_status` array contains any elements. For example, a [this image](https://contentcredentials.org/verify?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-dat-CA.jpg) with a hard binding hash mismatch error, as shown in [this manifest store](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-dat-CA/manifest_store.json):
 
 ```
 "validation_status": [
@@ -214,7 +218,7 @@ Verify displays this warning if the `validation_status` array contains any eleme
   ]
 ```
 
-Another example that can result in this message is shown in [this image](https://contentcredentials.org/verify?source=https://c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-clm-CAICAI.jpg) with a missing referenced claim, as shown in [this manifest store](https://c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-clm-CAICAI/manifest_store.json):
+Another example that can result in this message is shown in [this image](https://contentcredentials.org/verify?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-clm-CAICAI.jpg) with a missing referenced claim, as shown in [this manifest store](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-clm-CAICAI/manifest_store.json):
 
 ```
 "validation_status": [
@@ -230,136 +234,6 @@ Another example that can result in this message is shown in [this image](https:/
     }
   ]
 ```
-
-### Credit and usage
-
-The **Credit and usage** section displays information about the asset's author and usage rights, divided into these subsections:
-
-- [Produced by](#produced-by)
-- [Social media accounts](#social-media-accounts)
-- [AI model usage](#ai-model-usage) (if the active manifest contains a [do not train assertion](manifest/assertions-actions#do-not-train-assertion))
-
-#### Produced by
-
-The **Produced by** subsection shows information derived from the [CreativeWork assertion](manifest/assertions-actions#creative-work-assertion) in the active manifest.
-If the associated `data` object has an `author` property, then the `name` property is shown under **Produced by**. If there is a `url` or `license` property, then it says **Website** with a link to the site. For example:
-
-import verify_credit from '../static/img/verify-credit.png';
-
-<img src={verify_credit} style={{ width: '250px' }} />
-
-The above example shows the following CreativeWork assertion from the active manifest. The `url` property is the URL of the asset on the Adobe Stock site:
-
-```json
-"assertions": [
-  {
-    "label": "stds.schema-org.CreativeWork",
-    "data": {
-      "@context": "https://schema.org",
-      "@type": "CreativeWork",
-      "url": "https://stock.adobe.com/135017891"
-    },
-    "kind": "Json"
-  },
-...]
-```
-
-#### Social media accounts
-
-If the asset was created with Adobe Photoshop or Adobe Lightroom and the asset's creator has [connected social media accounts](https://connected-accounts.adobe.com/), then the **Credit and usage** section shows the information added for any connected accounts, which can include Behance, Instagram, LinkedIn, and X (Twitter).
-
-For more information, see:
-
-- [Content Credentials (Beta) in Photoshop - Connect accounts for creative attribution](https://helpx.adobe.com/photoshop/using/connect-accounts.html)
-- [Content Credentials (Beta) in Lightroom](https://helpx.adobe.com/lightroom-cc/using/content-credentials-lightroom.html)
-
-For example:
-
-import verify_social from '../static/img/verify-social.png';
-
-<img src={verify_social} style={{ width: '250px' }} />
-
-<!--
-The `identifier` property is the decentralized identifier (DID) of the social media account, and the `name` property is the handle. The `credential` property is a [Credential](https://www.w3.org/TR/vc-data-model/#credentials) that contains a hash of the DID and the URL of the Credential itself.
--->
-
-The CreativeWork assertion from the JSON manifest for the above example is shown below.
-
-<details style={{backgroundColor: 'transparent'}}>
-<summary class="code_summary">Show manifest code</summary>
-
-```json
-{
-  "label": "stds.schema-org.CreativeWork",
-  "data": {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    "author": [
-      {
-        "@type": "Person",
-        "credential": [
-          {
-            "alg": "sha256",
-            "hash": "IcZeS318070nuvDYmPqfQdZmOI7jGumMjHTxNshA2ao=",
-            "url": "self#jumbf=/c2pa/adobe:urn:uuid:4fd5a284-6fe9-479c-a8af-9bcbbf851d92/c2pa.credentials/did:adobe:ff76b2edfcdb600facacd7a165172c2aecc07718233798ed61bd3a9f4eba0969e"
-          }
-        ],
-        "identifier": "did:adobe:ff76b2edfcdb600facacd7a165172c2aecc07718233798ed61bd3a9f4eba0969e",
-        "name": "obidigbo nzeribe"
-      },
-      {
-        "@id": "https://www.instagram.com/obidinzeribe",
-        "@type": "Person",
-        "credential": [
-          {
-            "alg": "sha256",
-            "hash": "IcZeS318070nuvDYmPqfQdZmOI7jGumMjHTxNshA2ao=",
-            "url": "self#jumbf=/c2pa/adobe:urn:uuid:4fd5a284-6fe9-479c-a8af-9bcbbf851d92/c2pa.credentials/did:adobe:ff76b2edfcdb600facacd7a165172c2aecc07718233798ed61bd3a9f4eba0969e"
-          }
-        ],
-        "identifier": "did:adobe:ff76b2edfcdb600facacd7a165172c2aecc07718233798ed61bd3a9f4eba0969e",
-        "name": "obidinzeribe"
-      },
-      {
-        "@id": "https://www.behance.net/obidigbonzeribe",
-        "@type": "Person",
-        "credential": [
-          {
-            "alg": "sha256",
-            "hash": "IcZeS318070nuvDYmPqfQdZmOI7jGumMjHTxNshA2ao=",
-            "url": "self#jumbf=/c2pa/adobe:urn:uuid:4fd5a284-6fe9-479c-a8af-9bcbbf851d92/c2pa.credentials/did:adobe:ff76b2edfcdb600facacd7a165172c2aecc07718233798ed61bd3a9f4eba0969e"
-          }
-        ],
-        "identifier": "did:adobe:ff76b2edfcdb600facacd7a165172c2aecc07718233798ed61bd3a9f4eba0969e",
-        "name": "obidigbo nzeribe"
-      }
-    ]
-  },
-  "kind": "Json"
-}
-```
-
-</details>
-
-#### AI model usage
-
-If the active manifest contains a [do not train assertion](manifest/assertions-actions#do-not-train-assertion), then the **Credit and usage** section displays the following message:
-
-<div
-  style={{
-    width: '200px',
-    border: '1px solid #ccc',
-    backgroundColor: '#fff',
-    padding: '7px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    fontSize: '80%',
-  }}
->
-  <b>AI model usage</b>
-  <br />
-  Do not use my content to train AI models
-</div>
 
 ### Process
 
@@ -378,8 +252,8 @@ import verify_process from '../static/img/verify-process.png';
 
 See the above example yourself, based on a C2PA test image:
 
-- [Inspect using Verify](https://contentcredentials.org/verify?source=https://c2pa.org/public-testfiles/image/jpeg/adobe-20220124-CAICAI.jpg)
-- [View the corresponding manifest report from C2PA Tool](https://c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-CAICAI/manifest_store.json)
+- [Inspect using Verify](https://contentcredentials.org/verify?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-CAICAI.jpg)
+- [View the corresponding manifest report from C2PA Tool](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-CAICAI/manifest_store.json)
 
 #### App or device used
 
@@ -529,10 +403,5 @@ The Exif metadata assertions from the JSON manifest for the above example is sho
 
 See the above example yourself, based on a C2PA test image:
 
-- [Inspect using Verify](https://contentcredentials.org/verify?source=https://c2pa.org/public-testfiles/image/jpeg/truepic-20230212-camera.jpg)
-- [View the corresponding manifest report from C2PA Tool](https://c2pa.org/public-testfiles/image/jpeg/manifests/truepic-20230212-camera/manifest_store.json)
-
-## Searching for matching Content Credentials
-
-Adobe products can save manifest stores in the [Adobe Content Credentials Cloud](getting-started#storing-a-manifest-in-the-cloud).
-Click **Search for possible matches** to search the Adobe Content Credentials Cloud for content similar to the asset's ingredients, as described in the [Ingredients](#ingredients) section above.
+- [Inspect using Verify](https://contentcredentials.org/verify?source=https://spec.c2pa.org/public-testfiles/image/jpeg/truepic-20230212-camera.jpg)
+- [View the corresponding manifest report from C2PA Tool](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/truepic-20230212-camera/manifest_store.json)

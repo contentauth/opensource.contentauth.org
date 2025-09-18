@@ -1,7 +1,11 @@
 ---
-id: overview
-title: JavaScript library
+id: old-js-overview
+title: Legacy JavaScript library
 ---
+
+import Deprecation from '../deprecation-notice.md';
+
+<Deprecation name="deprecation" />
 
 The CAI JavaScript library (sometimes referred to as the "JavaScript SDK") enables client JavaScript applications to view and verify [C2PA](https://c2pa.org/) data. It performs only **read** operations on C2PA manifests, unlike the [Rust library](../../rust-sdk/), and the [prerelease libraries](../../other-langs) which can both read and write manifests.
 
@@ -43,8 +47,8 @@ Key features of the JavaScript library include:
 - **Developer friendly**: Full TypeScript support and robust debugging support using the [debug](https://github.com/debug-js/debug) library make integration easy.
 - **Performance**: The processing code of the library uses a high-performance [WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly) binary. Additionally, the library offloads processing tasks to a configurable Web Worker pool to enable parallelization and avoid blocking a web application's main thread.
 - **Lazy loading and processing**: Since images can be quite large, the library inspects the start of an asset file for C2PA manifest data before requesting the entire file, [if the server supports it](../guides/hosting#range-requests). The library will download the rest of the asset only if it finds the metadata marker. Additionally, it delays loading the WebAssembly binary until it makes the first processing request.
-- **Adherence to the C2PA specification**: The library strives to maintain compliance with the [C2PA specification](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html) as much as possible, and the web components follow the [C2PA user experience guidance](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html) recommendations.
-- **Security and encryption**: The library handles all [validation](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_validation) via the [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) and passes any validation errors back to the client. It supports all ECDSA and RSASSA-PSS algorithms listed in the [C2PA specification](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_digital_signatures).
+- **Adherence to the C2PA specification**: The library strives to maintain compliance with the [C2PA specification](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html) as much as possible, and the web components follow the [C2PA user experience guidance](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html) recommendations.
+- **Security and encryption**: The library handles all [validation](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_validation) via the [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) and passes any validation errors back to the client. It supports all ECDSA and RSASSA-PSS algorithms listed in the [C2PA specification](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_digital_signatures).
   :::caution
   The JavaScript library does not currently support Ed25519 signatures.
   :::caution
@@ -58,7 +62,7 @@ Because of these requirements, **the library is not supported on any version of 
 ![CAI JavaScript library browser support](../../../static/img/caniuse.png)
 
 :::info
-This chart is accurate as of December, 2024. For the most up-to-date browser support information, see [caniuse.com](https://caniuse.com/wasm,webworkers,cryptography,typedarrays,fetch).
+This chart is accurate as of July, 2025. For the most up-to-date browser support information, see [caniuse.com](https://caniuse.com/wasm,webworkers,cryptography,typedarrays,fetch).
 :::
 
 ## Debugging

@@ -10,34 +10,30 @@ import TOCInline from '@theme/TOCInline';
 
 ### Are Content Credentials alone sufficient to prevent the spread of misinformation?
 
-The most effective approach to content provenance is a combination of technologies and practices, including Content Credentials' secure metadata, undetectable watermarks, and content fingerprinting. Using these three technologies together in concert can make content provenance more robust than using just one.
+Content provenance is most effective when combining three key technologies:
 
-This "three-pronged" approach includes using:
+- **Content Credentials**, that provides verifiable, tamper-evident metadata about how content was created and modified.
+- **Watermarking**, that embeds invisible information that survives content modifications like cropping, rotation, or screen capture.
+- **Fingerprinting**, that creates unique content identifiers based on the media itself, enabling matching against databases without requiring embedded data.
 
-- **Secure metadata** (Content Credentials): Verifiable information about how content was made that cannot be altered without leaving evidence of alteration. This metadata can indicate the provenance of a digital media asset and indicate how it was created. The CAI open-source SDK enables applications to create and securely attach this metadata to assets and display it to end-users.
+Using these technologies together creates a more robust content provenance system than any single approach alone.
 
-- **Watermarking**: Hidden information undetectable by humans but that can be decoded using a specialized watermark detector. State-of-the-art watermarks can be impervious to alterations such as cropping or rotating or the addition of noise to video and audio. Importantly, a watermark can survive rebroadcasting efforts like screen-shotting, pictures of pictures, or re-recording of media, which can remove secure metadata.
-
-- **Fingerprinting**: A way to create a unique code based on pixels, frames, or audio waveforms that can be computed and matched against other instances of the same content, even if there has been some alteration. The fingerprint can be stored separately from the content, re-computed on the fly, and matched against a database of Content Credentials and associated stored fingerprints. This technique does not require embedding of information in the media itself and is immune to information removal because there is no information to remove.
-
-Combining these three approaches provides a unified solution that is robust and secure enough to ensure reliable provenance information.
-
-For more information, see the blog post from April 8, 2024, [Durable Content Credentials](https://contentauthenticity.org/blog/durable-content-credentials).
+For more details, see [Durable Content Credentials](https://contentauthenticity.org/blog/durable-content-credentials) (April 8, 2024).
 
 ### Are Content Credentials a blockchain system?
 
-While Content Credentials are compatible with blockchain, they do not require or use blockchain directly.
+No. While Content Credentials can work with blockchain systems, they don't require or directly use blockchain technology.
 
-Examples:
+Notable implementations using blockchain:
 
-- [Starling Lab case study](https://www.starlinglab.org/78days/) that uses blockchain for distributed storage.
-- [Numbers Protocol](https://www.numbersprotocol.io/) is also using blockchain to store Content Credentials; See [Numbers Blockchain](https://docs.numbersprotocol.io/developers/numbers-blockchain).
+- [Starling Lab](https://www.starlinglab.org/78days/) - Uses blockchain for distributed storage
+- [Numbers Protocol](https://www.numbersprotocol.io/) - Stores Content Credentials on their [Numbers Blockchain](https://docs.numbersprotocol.io/developers/numbers-blockchain)
 
 ### Are Content Credentials about digital rights management?
 
 No; Content Credentials do not enforce permissions for access to content. In many cases, the name displayed on the [Verify website](https://contentcredentials.org/verify) is the name of the exporter of the content, not the rights owner.
 
-The [“Produced by” section](verify.mdx#produced-by) in Verify refers to the name of the exporter. If the image was created with an Adobe Product such as Photoshop with Content Credentials (Beta) enabled, the “Produced by” section shows the name of the Adobe ID associated with the user who exported the image.
+The ["Produced by" section](verify.mdx#produced-by) in Verify refers to the name of the exporter. If the image was created with an Adobe Product such as Photoshop with Content Credentials (Beta) enabled, the "Produced by" section shows the name of the Adobe ID associated with the user who exported the image.
 
 ### Do Content Credentials indicate if an image is fake or altered?
 

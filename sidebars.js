@@ -14,6 +14,11 @@ const sidebars = {
       items: [
         {
           type: 'doc',
+          label: 'FAQs',
+          id: 'faqs',
+        },
+        {
+          type: 'doc',
           id: 'verify',
         },
         {
@@ -24,43 +29,65 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Understanding manifests',
+      label: 'Working with manifests',
       link: { type: 'doc', id: 'manifest/understanding-manifest' },
       collapsed: true,
       items: [
         {
-          type: 'doc',
-          id: 'manifest/assertions-actions',
+          type: 'category',
+          label: 'Reading manifest data',
+          link: { type: 'doc', id: 'manifest/reading/reading-index' },
+          collapsed: true,
+          items: [
+            {
+              type: 'doc',
+              id: 'manifest/reading/reading-ingredients',
+            },
+            {
+              type: 'doc',
+              id: 'manifest/reading/reading-cawg-id',
+            },
+            {
+              type: 'doc',
+              id: 'manifest/reading/legacy-manifests',
+            },
+            {
+              type: 'doc',
+              id: 'manifest/reading/manifest-validation',
+            },
+            {
+              type: 'doc',
+              id: 'manifest/json-ref/reader',
+            },
+          ],
         },
         {
-          type: 'doc',
-          id: 'manifest/ingredients',
-        },
-        {
-          type: 'doc',
-          id: 'manifest/manifest-validation',
-        },
-        {
-          type: 'doc',
-          id: 'manifest/signing-manifests',
+          type: 'category',
+          label: 'Writing manifest data',
+          link: { type: 'doc', id: 'manifest/writing/writing-index' },
+          collapsed: true,
+          items: [
+            {
+              type: 'doc',
+              id: 'manifest/writing/ingredients',
+            },
+            {
+              type: 'doc',
+              id: 'manifest/writing/assertions-actions',
+            },
+            {
+              type: 'doc',
+              id: 'manifest/json-ref/manifest-def',
+            },
+          ],
         },
         {
           type: 'doc',
           id: 'manifest/manifest-examples',
           label: 'Examples',
         },
-        {
-          type: 'doc',
-          id: 'manifest/manifest-ref',
-        },
-        {
-          type: 'doc',
-          id: 'manifest/manifest-json-schema',
-          label: 'JSON schema',
-        },
       ],
     },
-
     {
       type: 'category',
       label: 'Working with manifests',
@@ -114,8 +141,13 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'c2patool/docs/release-notes',
-          label: 'Release notes',
+          id: 'c2patool/docs/cawg_x509_signing',
+          label: 'Using a certificate for CAWG signing',
+        },
+        {
+          type: 'doc',
+          id: 'c2patool/docs/changelog',
+          label: 'Change log',
         },
         {
           type: 'doc',
@@ -132,11 +164,10 @@ const sidebars = {
     {
       type: 'category',
       label: 'JavaScript library',
-      link: { type: 'doc', id: 'js-sdk/getting-started/overview' },
+      link: { type: 'doc', id: 'js-sdk/js-landing' },
       collapsed: true,
       items: jsSdkSidebar.docs,
     },
-
     {
       type: 'category',
       label: 'Prerelease libraries',
@@ -194,6 +225,11 @@ const sidebars = {
             },
             {
               type: 'doc',
+              id: 'c2pa-python/docs/examples',
+              label: 'Python example code',
+            },
+            {
+              type: 'doc',
               id: 'c2pa-python/docs/release-notes',
               label: 'Release notes',
             },
@@ -234,7 +270,6 @@ const sidebars = {
         },
       ],
     },
-
     {
       type: 'category',
       label: 'Rust library',
@@ -250,6 +285,11 @@ const sidebars = {
           type: 'doc',
           id: 'rust-sdk/docs/supported-formats',
           label: 'Supported media formats',
+        },
+        {
+          type: 'doc',
+          id: 'rust-sdk/docs/cawg-id',
+          label: 'Using CAWG identity assertions',
         },
         {
           type: 'doc',
@@ -274,23 +314,116 @@ const sidebars = {
       ],
     },
     {
-      type: 'doc',
-      label: 'Getting and using a certificate',
-      id: 'prod-cert',
+      type: 'category',
+      label: 'Signing and certificates',
+      link: { type: 'doc', id: 'signing/signing-and-certs' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          label: 'Using test certificates',
+          id: 'signing/test-certs',
+        },
+        {
+          type: 'doc',
+          label: 'Getting a certificate',
+          id: 'signing/get-cert',
+        },
+        {
+          type: 'doc',
+          label: 'Signing with local credentials',
+          id: 'signing/local-signing',
+        },
+        {
+          type: 'doc',
+          label: 'Using a certificate in production',
+          id: 'signing/prod-cert',
+        },
+      ],
     },
     {
       type: 'doc',
-      label: 'FAQs',
-      id: 'faqs',
+      label: 'C2PA conformance program',
+      id: 'conformance',
     },
     {
-      type: 'doc',
-      id: 'community-resources',
+      type: 'category',
+      label: 'Durable Content Credentials',
+      link: { type: 'doc', id: 'durable-cr/index' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          label: 'Watermarking and fingerprinting',
+          id: 'durable-cr/sb-algs',
+        },
+        {
+          type: 'category',
+          label: 'TrustMark watermarking',
+          link: { type: 'doc', id: 'durable-cr/trustmark-intro' },
+          collapsed: true,
+          items: [
+            {
+              type: 'doc',
+              id: 'trustmark/README',
+              label: 'Overview',
+            },
+            {
+              type: 'doc',
+              id: 'trustmark/python/CONFIG',
+              label: 'Configuration',
+            },
+            {
+              type: 'doc',
+              id: 'trustmark/c2pa/README',
+              label: 'Using with C2PA',
+            },
+            {
+              type: 'doc',
+              id: 'trustmark/js/README',
+              label: 'JavaScript example',
+            },
+            {
+              type: 'doc',
+              id: 'trustmark/rust/README',
+              label: 'Rust implementation',
+            },
+            {
+              type: 'doc',
+              id: 'trustmark/rust/crates/trustmark-cli/README',
+              label: 'Rust CLI',
+            },
+            {
+              type: 'link',
+              label: 'TrustMark Rust API docs',
+              href: 'https://docs.rs/trustmark',
+            },
+            {
+              type: 'doc',
+              id: 'durable-cr/tm-faq',
+              label: 'FAQ',
+            },
+            {
+              type: 'link',
+              label: 'GitHub',
+              href: 'https://github.com/adobe/trustmark/',
+            },
+          ],
+        },
+      ],
     },
     {
-      type: 'doc',
-      label: 'Task planning & roadmap',
-      id: 'roadmap',
+      type: 'category',
+      label: 'Community resources',
+      link: { type: 'doc', id: 'community-resources' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          label: 'Task planning & roadmap',
+          id: 'roadmap',
+        },
+      ],
     },
   ],
 };

@@ -13,6 +13,32 @@ const copyright = `
 </div>
 `;
 
+// Map of external repositories to their GitHub repository names, paths, and organizations
+const externalRepos = {
+  'c2pa-c': { repo: 'c2pa-c', path: '', org: 'contentauth' },
+  'c2pa-min': { repo: 'c2pa-min', path: '', org: 'contentauth' },
+  'c2pa-node': { repo: 'c2pa-node', path: '', org: 'contentauth' },
+  'c2pa-node-example': {
+    repo: 'c2pa-node-example',
+    path: '',
+    org: 'contentauth',
+  },
+  'c2pa-python': { repo: 'c2pa-python', path: '', org: 'contentauth' },
+  'c2pa-python-example': {
+    repo: 'c2pa-python-example',
+    path: '',
+    org: 'contentauth',
+  },
+  'c2pa-service-example': {
+    repo: 'c2pa-service-example',
+    path: '',
+    org: 'contentauth',
+  },
+  c2patool: { repo: 'c2pa-rs', path: 'cli/', org: 'contentauth' },
+  'rust-sdk': { repo: 'c2pa-rs', path: '', org: 'contentauth' },
+  trustmark: { repo: 'trustmark', path: '', org: 'adobe' },
+};
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Open-source tools for content authenticity and provenance',
@@ -49,6 +75,38 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: ({ docPath }) => {
+            // Don't show edit link for dynamically generated API docs
+            if (docPath.startsWith('js-sdk/api/')) {
+              return null;
+            }
+
+            // Special case for supported-formats.md files
+            if (docPath.endsWith('supported-formats.md')) {
+              return 'https://github.com/contentauth/c2pa-rs/edit/main/docs/supported-formats.md';
+            }
+
+            // Check if the doc is from an external repository
+            const externalRepo = Object.keys(externalRepos).find((repo) =>
+              docPath.startsWith(`${repo}/`),
+            );
+
+            if (externalRepo) {
+              // Get the GitHub repository info for this external repo
+              const repoInfo = externalRepos[externalRepo];
+              // Remove the repo prefix from the path to get the relative path in the repo
+              let repoPath = docPath.replace(`${externalRepo}/`, '');
+              // Convert readme.md to README.md in the path
+              repoPath = repoPath.replace(/readme\.md$/i, 'README.md');
+              return `https://github.com/${repoInfo.org}/${repoInfo.repo}/edit/main/${repoInfo.path}${repoPath}`;
+            }
+
+            // Add edit link for main docs
+            let mainPath = docPath;
+            // Convert readme.md to README.md in the path
+            mainPath = mainPath.replace(/readme\.md$/i, 'README.md');
+            return `https://github.com/contentauth/opensource.contentauth.org/edit/main/docs/${mainPath}`;
+          },
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -92,7 +150,6 @@ const config = {
           content: 'Open-source tools for content authenticity and provenance',
         },
       ],
-
       // Relative to your site's 'static' directory.
       // Cannot be SVGs. Can be external URLs too.
       colorMode: {

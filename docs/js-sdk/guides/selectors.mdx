@@ -3,6 +3,10 @@ id: selectors
 title: Selectors
 ---
 
+import Deprecation from '../deprecation-notice.md';
+
+<Deprecation name="deprecation" />
+
 [Selectors](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa/src/selectors) are convenience functions that return useful data from manifest objects. The selector functions are:
 
 - [`selectEditsAndActivity`](../../js-sdk/api/c2pa.selecteditsandactivity) - Returns a formatted list of manifest edits and activity.
@@ -42,19 +46,19 @@ The result is an `editsAndActivity` object such as this:
     id: 'COLOR_ADJUSTMENTS',
     icon: 'https://cai-assertions.adobe.com/icons/color-palette-dark.svg',
     label: 'Color adjustments',
-    description: 'Changed tone, saturation, etc.'
+    description: 'Changed tone, saturation, etc.',
   },
   {
     id: 'IMPORT',
     icon: 'https://cai-assertions.adobe.com/icons/import-dark.svg',
     label: 'Imported assets',
-    description: 'Added images, videos, etc.'
+    description: 'Added images, videos, etc.',
   },
   {
     id: 'TRANSFORM',
     icon: 'https://cai-assertions.adobe.com/icons/group-dark.svg',
     label: 'Size and position adjustments',
-    description: 'Changed size, orientation, direction, or position'
-  }
-]
+    description: 'Changed size, orientation, direction, or position',
+  },
+];
 ```

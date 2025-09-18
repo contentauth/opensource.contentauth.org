@@ -1,0 +1,5329 @@
+<h2 class="scroll-target" id="reader">Reader</h2>
+
+<div class="prop_desc"><p>A reader for the manifest store.</p></div>
+
+<h3 class="scroll-target" id="properties">Properties</h3>
+
+<table class="manifest-ref-table">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">active_manifest</td>
+      <!-- Type -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p>A label for the active (most recent) manifest in the store</p>
+      </td>
+
+      <td class="manifest-ref-table">
+        <!-- Required? -->
+        <!--  LOOP --><!-- x = manifests include.prop = active_manifest -->NO
+      </td>
+
+      <td class="manifest-ref-table">
+        <!-- Default Value -->
+
+        N/A
+      </td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">manifests</td>
+      <!-- Type -->
+      <td class="manifest-ref-table">Object</td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p>A HashMap of Manifests</p>
+
+        <br />See
+        <a href="#manifest">Manifest</a>
+      </td>
+
+      <td class="manifest-ref-table">
+        <!-- Required? -->
+        <!--  LOOP --><!-- x = manifests include.prop = manifests -->YES
+      </td>
+
+      <td class="manifest-ref-table">
+        <!-- Default Value -->
+
+        N/A
+      </td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">validation_results</td>
+      <!-- Type -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#validationresults">ValidationResults</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p>
+          ValidationStatus generated when loading the ManifestStore from an
+          asset
+        </p>
+      </td>
+
+      <td class="manifest-ref-table">
+        <!-- Required? -->
+        <!--  LOOP --><!-- x = manifests include.prop = validation_results -->NO
+      </td>
+
+      <td class="manifest-ref-table">
+        <!-- Default Value -->
+
+        N/A
+      </td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">validation_state</td>
+      <!-- Type -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#validationstate">ValidationState</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p>The validation state of the manifest store</p>
+      </td>
+
+      <td class="manifest-ref-table">
+        <!-- Required? -->
+        <!--  LOOP --><!-- x = manifests include.prop = validation_state -->NO
+      </td>
+
+      <td class="manifest-ref-table">
+        <!-- Default Value -->
+
+        N/A
+      </td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">validation_status</td>
+      <!-- Type -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of
+
+        <a href="#validationstatus">ValidationStatus</a>
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p>
+          ValidationStatus generated when loading the ManifestStore from an
+          asset
+        </p>
+      </td>
+
+      <td class="manifest-ref-table">
+        <!-- Required? -->
+        <!--  LOOP --><!-- x = manifests include.prop = validation_status -->NO
+      </td>
+
+      <td class="manifest-ref-table">
+        <!-- Default Value -->
+
+        N/A
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!---------------------------------------------------------------------->
+
+<h2 class="scroll-target" id="definitions">Definitions</h2>
+
+<!-- TOC-like links -->
+<table style="border: 0" width="900">
+  <tbody>
+    <tr>
+      <td style="border: 0; vertical-align: top">
+        <a href="#actor">Actor</a> <br />
+
+        <a href="#assettype">AssetType</a> <br />
+
+        <a href="#claimgeneratorinfo">ClaimGeneratorInfo</a> <br />
+
+        <a href="#coordinate">Coordinate</a> <br />
+
+        <a href="#datasource">DataSource</a> <br />
+
+        <a href="#datet">DateT</a> <br />
+
+        <a href="#frame">Frame</a> <br />
+
+        <a href="#hasheduri">HashedUri</a> <br />
+      </td>
+      <td style="border: 0; vertical-align: top">
+        <a href="#ingredient">Ingredient</a> <br />
+
+        <a href="#ingredientdeltavalidationresult"
+          >IngredientDeltaValidationResult</a
+        >
+        <br />
+
+        <a href="#item">Item</a> <br />
+
+        <a href="#manifest">Manifest</a> <br />
+
+        <a href="#manifestassertion">ManifestAssertion</a> <br />
+
+        <a href="#manifestassertionkind">ManifestAssertionKind</a> <br />
+
+        <a href="#manifestdata">ManifestData</a> <br />
+
+        <a href="#metadata">Metadata</a> <br />
+      </td>
+      <td style="border: 0; vertical-align: top">
+        <a href="#range">Range</a> <br />
+
+        <a href="#rangetype">RangeType</a> <br />
+
+        <a href="#regionofinterest">RegionOfInterest</a> <br />
+
+        <a href="#relationship">Relationship</a> <br />
+
+        <a href="#resourceref">ResourceRef</a> <br />
+
+        <a href="#resourcestore">ResourceStore</a> <br />
+
+        <a href="#reviewrating">ReviewRating</a> <br />
+
+        <a href="#role">Role</a> <br />
+      </td>
+      <td style="border: 0; vertical-align: top">
+        <a href="#shape">Shape</a> <br />
+
+        <a href="#shapetype">ShapeType</a> <br />
+
+        <a href="#signatureinfo">SignatureInfo</a> <br />
+
+        <a href="#signingalg">SigningAlg</a> <br />
+
+        <a href="#statuscodes">StatusCodes</a> <br />
+
+        <a href="#text">Text</a> <br />
+
+        <a href="#textselector">TextSelector</a> <br />
+
+        <a href="#textselectorrange">TextSelectorRange</a> <br />
+      </td>
+      <td style="border: 0; vertical-align: top">
+        <a href="#time">Time</a> <br />
+
+        <a href="#timetype">TimeType</a> <br />
+
+        <a href="#unittype">UnitType</a> <br />
+
+        <a href="#uriorresource">UriOrResource</a> <br />
+
+        <a href="#validationresults">ValidationResults</a> <br />
+
+        <a href="#validationstate">ValidationState</a> <br />
+
+        <a href="#validationstatus">ValidationStatus</a> <br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Definitions reference -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="actor">Actor</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">Identifies a person responsible for an action.</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">credentials</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of
+
+        <a href="#hasheduri">HashedUri</a>
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>List of references to W3C Verifiable Credentials.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">identifier</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            An identifier for a human actor, used when the “type” is
+            <code class="language-plaintext highlighter-rouge"
+              >humanEntry.identified</code
+            >.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="assettype">AssetType</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc"></p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">type</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = type include.prop = type -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">version</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = type include.prop = version -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="claimgeneratorinfo">ClaimGeneratorInfo</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  Description of the claim generator, or the software used in generating the
+  claim. This structure is also used for actions softwareAgent
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">icon</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#uriorresource">UriOrResource</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>hashed URI to the icon (either embedded or remote)</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = name include.prop = icon -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">name</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>A human readable string naming the claim_generator</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = name include.prop = name -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">operating_system</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A human readable string of the OS the claim generator is running on
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = name include.prop = operating_system -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">version</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>A human readable string of the product’s version</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = name include.prop = version -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  NOTE: This object can have any number of additional user-defined properties.
+</p>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="coordinate">Coordinate</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  An x, y coordinate used for specifying vertices in polygons.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">x</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        Number / double
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>The coordinate along the x-axis.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = x include.prop = x --><!-- x = y include.prop = x -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">y</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        Number / double
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>The coordinate along the y-axis.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = x include.prop = y --><!-- x = y include.prop = y -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="datasource">DataSource</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">A description of the source for assertion data</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">actors</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of
+
+        <a href="#actor">Actor</a>
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A list of [<code class="language-plaintext highlighter-rouge"
+              >Actor</code
+            >]s associated with this source.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = type include.prop = actors -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">details</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A human-readable string giving details about the source of the
+            assertion data.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = type include.prop = details -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">type</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A value from among the enumerated list indicating the source of the
+            assertion.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = type include.prop = type -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="datet">DateT</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p>A string.</p>
+
+<!-- Not an object, enum, or string, but 'anyOf' -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="frame">Frame</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A frame range representing starting and ending frames or pages. If both
+  <code class="language-plaintext highlighter-rouge">start</code> and
+  <code class="language-plaintext highlighter-rouge">end</code> are missing, the
+  frame will span the entire asset.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">end</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Integer
+        <!--  -->
+        (int32)
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            The end of the frame inclusive or the end of the asset if not
+            present.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">start</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Integer
+        <!--  -->
+        (int32)
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The start of the frame or the end of the asset if not present.</p>
+
+          <p>The first frame/page starts at 0.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="hasheduri">HashedUri</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A <code class="language-plaintext highlighter-rouge">HashedUri</code> provides
+  a reference to content available within the same manifest store. This is
+  described in [§8.3, URI References], of the C2PA Technical Specification.
+  [§8.3, URI References]:
+  https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_uri_references
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">alg</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A string identifying the cryptographic hash algorithm used to
+            compute the hash
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = hash include.prop = alg --><!-- x = url include.prop = alg -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">hash</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        <!--  -->
+        An array of
+        <a href="#integer">integer</a>
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>Byte string containing the hash value</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = hash include.prop = hash --><!-- x = url include.prop = hash -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">url</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>JUMBF URI reference</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = hash include.prop = url --><!-- x = url include.prop = url -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="ingredient">Ingredient</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  An <code class="language-plaintext highlighter-rouge">Ingredient</code> is any
+  external asset that has been used in the creation of an asset.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">active_manifest</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The active manifest label (if one exists).</p>
+
+          <p>
+            If this ingredient has a [<code
+              class="language-plaintext highlighter-rouge"
+              >ManifestStore</code
+            >], this will hold the label of the active
+            <a href="crate::Manifest [`ManifestStore`]: crate::ManifestStore"
+              ><code class="language-plaintext highlighter-rouge"
+                >Manifest</code
+              ></a
+            >.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">data</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#resourceref">ResourceRef</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>A reference to the actual data of the ingredient.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">data_types</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of
+
+        <a href="#assettype">AssetType</a>
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            Additional information about the data’s type to the ingredient V2
+            structure.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">description</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>Additional description of the ingredient.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">document_id</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            Document ID from
+            <code class="language-plaintext highlighter-rouge"
+              >xmpMM:DocumentID</code
+            >
+            in XMP metadata.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">format</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The format of the source file as a MIME type.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">hash</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>An optional hash of the asset to prevent duplicates.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">informational_URI</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>URI to an informational page about the ingredient or its data.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">instance_id</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            Instance ID from
+            <code class="language-plaintext highlighter-rouge"
+              >xmpMM:InstanceID</code
+            >
+            in XMP metadata.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">label</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The ingredient’s label as assigned in the manifest.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">manifest_data</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#resourceref">ResourceRef</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A
+            <a href="crate::ManifestStore"
+              ><code class="language-plaintext highlighter-rouge"
+                >ManifestStore</code
+              ></a
+            >
+            from the source asset extracted as a binary C2PA blob.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">metadata</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#metadata">Metadata</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            Any additional
+            <a href="crate::Metadata"
+              ><code class="language-plaintext highlighter-rouge"
+                >Metadata</code
+              ></a
+            >
+            as defined in the C2PA spec.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">provenance</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            URI from
+            <code class="language-plaintext highlighter-rouge"
+              >dcterms:provenance</code
+            >
+            in XMP metadata.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">relationship</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#relationship">Relationship</a>
+
+        <!-- obj.type is an array of possible types-->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            Set to
+            <code class="language-plaintext highlighter-rouge">ParentOf</code>
+            if this is the parent ingredient.
+          </p>
+
+          <p>There can only be one parent ingredient in the ingredients.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">componentOf</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">resources</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#resourcestore">ResourceStore</a>
+
+        <!-- obj.type is an array of possible types-->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">thumbnail</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#resourceref">ResourceRef</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A thumbnail image capturing the visual state at the time of import.
+          </p>
+
+          <p>
+            A tuple of thumbnail MIME format (for example
+            <code class="language-plaintext highlighter-rouge">image/jpeg</code
+            >) and binary bits of the image.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">title</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>A human-readable title, generally source filename.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">validation_results</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#validationresults">ValidationResults</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>Validation results (Ingredient.V3)</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">validation_status</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of
+
+        <a href="#validationstatus">ValidationStatus</a>
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>Validation status (Ingredient v1 &amp; v2)</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="ingredientdeltavalidationresult">
+  IngredientDeltaValidationResult
+</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  Represents any changes or deltas between the current and previous validation
+  results for an ingredient’s manifest.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">ingredientAssertionURI</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>JUMBF URI reference to the ingredient assertion</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = ingredientAssertionURI include.prop = ingredientAssertionURI --><!-- x = validationDeltas include.prop = ingredientAssertionURI -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">validationDeltas</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#statuscodes">StatusCodes</a>
+
+        <!-- obj.type is an array of possible types-->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>Validation results for the ingredient’s active manifest</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = ingredientAssertionURI include.prop = validationDeltas --><!-- x = validationDeltas include.prop = validationDeltas -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="item">Item</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">Description of the boundaries of an identified range.</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">identifier</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            The container-specific term used to identify items, such as
+            “track_id” for MP4 or “item_ID” for HEIF.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = identifier include.prop = identifier --><!-- x = value include.prop = identifier -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">value</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            The value of the identifier, e.g. a value of “2” for an identifier
+            of “track_id” would imply track 2 of the asset.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = identifier include.prop = value --><!-- x = value include.prop = value -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="manifest">Manifest</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A Manifest represents all the information in a c2pa manifest
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">assertions</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        <!--  -->
+        An array of
+        <a href="#manifestassertion">ManifestAssertion</a>
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>A list of assertions</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">Empty array</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">claim_generator</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A User Agent formatted string identifying the
+            software/hardware/system produced this claim Spaces are not allowed
+            in names, versions can be specified with product/1.0 syntax
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">claim_generator_info</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of
+
+        <a href="#claimgeneratorinfo">ClaimGeneratorInfo</a>
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A list of claim generator info data identifying the
+            software/hardware/system produced this claim
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">credentials</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of true
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>A List of verified credentials</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">format</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The format of the source file as a MIME type.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">ingredients</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        <!--  -->
+        An array of
+        <a href="#ingredient">Ingredient</a>
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>A List of ingredients</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">Empty array</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">instance_id</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            Instance ID from
+            <code class="language-plaintext highlighter-rouge"
+              >xmpMM:InstanceID</code
+            >
+            in XMP metadata.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">
+        xmp:iid:424afed8-279d-4793-a279-b80a00b8c32b
+      </td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">label</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">metadata</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of
+
+        <a href="#metadata">Metadata</a>
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>A list of user metadata for this claim</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">redactions</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of string
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>A list of redactions - URIs to a redacted assertions</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">resources</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#resourcestore">ResourceStore</a>
+
+        <!-- obj.type is an array of possible types-->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>container for binary assets (like thumbnails)</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">signature_info</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#signatureinfo">SignatureInfo</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>Signature data (only used for reporting)</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">thumbnail</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#resourceref">ResourceRef</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">title</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>A human-readable title, generally source filename.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">vendor</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            Optional prefix added to the generated Manifest Label This is
+            typically Internet domain name for the vendor (i.e.
+            <code class="language-plaintext highlighter-rouge">adobe</code>)
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="manifestassertion">ManifestAssertion</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A labeled container for an Assertion value in a Manifest
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">data</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#manifestdata">ManifestData</a>
+
+        <!-- obj.type is an array of possible types-->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>The data of the assertion as Value</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = data include.prop = data --><!-- x = label include.prop = data -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">instance</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Integer
+        <!--  -->
+        (uint) <br />Minimum: 0.0
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>There can be more than one assertion for any label</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = data include.prop = instance --><!-- x = label include.prop = instance -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">kind</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#manifestassertionkind">ManifestAssertionKind</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            The [ManifestAssertionKind] for this assertion (as stored in c2pa
+            content)
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = data include.prop = kind --><!-- x = label include.prop = kind -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">label</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>An assertion label in reverse domain format</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = data include.prop = label --><!-- x = label include.prop = label -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="manifestassertionkind">ManifestAssertionKind</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p>A string that is one of the following:</p>
+
+<ul>
+  <li>“Cbor”</li>
+  <li>“Json”</li>
+  <li>“Binary”</li>
+  <li>“Uri”<!-- Not an object or enum, but a string --></li>
+</ul>
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="manifestdata">ManifestData</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="comment">Description TBD.</p>
+<p>Any of the following:</p>
+
+<ul>
+  <!-- i is a simple type -->
+  <li>true</li>
+
+  <!-- i is an object or array -->
+  <li>type: integer, format: uint8, minimum: 0.0</li>
+</ul>
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="metadata">Metadata</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  The Metadata structure can be used as part of other assertions or on its own
+  to reference others
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">dataSource</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#datasource">DataSource</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">dateTime</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#datet">DateT</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">reference</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#hasheduri">HashedUri</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">regionOfInterest</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#regionofinterest">RegionOfInterest</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">reviewRatings</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of
+
+        <a href="#reviewrating">ReviewRating</a>
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  NOTE: This object can have any number of additional user-defined properties.
+</p>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="range">Range</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A spatial, temporal, frame, or textual range describing the region of
+  interest.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">frame</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#frame">Frame</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>A frame range.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = type include.prop = frame -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">item</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#item">Item</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>A item identifier.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = type include.prop = item -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">shape</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#shape">Shape</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>A spatial range.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = type include.prop = shape -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">text</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#text">Text</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>A textual range.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = type include.prop = text -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">time</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#time">Time</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>A temporal range.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = type include.prop = time -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">type</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#rangetype">RangeType</a>
+
+        <!-- obj.type is an array of possible types-->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>The type of range of interest.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = type include.prop = type -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="rangetype">RangeType</h3>
+
+<p>The type of range for the region of interest.</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">RangeType</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">spatial</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A spatial range, see [<code
+              class="language-plaintext highlighter-rouge"
+              >Shape</code
+            >] for more details.
+          </p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">temporal</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A temporal range, see [<code
+              class="language-plaintext highlighter-rouge"
+              >Time</code
+            >] for more details.
+          </p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">frame</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A spatial range, see [<code
+              class="language-plaintext highlighter-rouge"
+              >Frame</code
+            >] for more details.
+          </p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">textual</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A textual range, see [<code
+              class="language-plaintext highlighter-rouge"
+              >Text</code
+            >] for more details.
+          </p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">identified</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A range identified by a specific identifier and value, see [<code
+              class="language-plaintext highlighter-rouge"
+              >Item</code
+            >] for more details.
+          </p>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><!-- end of oneOf entity --></p>
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="regionofinterest">RegionOfInterest</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A region of interest within an asset describing the change. This struct can be
+  used from [<code class="language-plaintext highlighter-rouge"
+    >Action::changes</code
+  >][crate::assertions::Action::changes] or [<code
+    class="language-plaintext highlighter-rouge"
+    >Metadata::region_of_interest</code
+  >][crate::assertions::Metadata::region_of_interest].
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">description</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>A free-text string.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = region include.prop = description -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">identifier</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A free-text string representing a machine-readable, unique to this
+            assertion, identifier for the region.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = region include.prop = identifier -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">metadata</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#metadata">Metadata</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>Additional information about the asset.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = region include.prop = metadata -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">name</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A free-text string representing a human-readable name for the region
+            which might be used in a user interface.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = region include.prop = name -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">region</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        <!--  -->
+        An array of
+        <a href="#range">Range</a>
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A range describing the region of interest for the specific asset.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = region include.prop = region -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">role</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#role">Role</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A value from our controlled vocabulary or an entity-specific value
+            (e.g., com.litware.coolArea) that represents the role of a region
+            among other regions.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = region include.prop = role -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">type</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A value from a controlled vocabulary such as
+            <a href="https://cv.iptc.org/newscodes/imageregiontype/"
+              >https://cv.iptc.org/newscodes/imageregiontype/</a
+            >
+            or an entity-specific value (e.g., com.litware.newType) that
+            represents the type of thing(s) depicted by a region.
+          </p>
+
+          <p>
+            Note this field serializes/deserializes into the name
+            <code class="language-plaintext highlighter-rouge">type</code>.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = region include.prop = type -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="relationship">Relationship</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p>A string that is one of the following:</p>
+
+<ul>
+  <li>“parentOf”</li>
+  <li>“componentOf”</li>
+  <li>“inputTo”<!-- Not an object or enum, but a string --></li>
+</ul>
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="resourceref">ResourceRef</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A reference to a resource to be used in JSON serialization. The underlying
+  data can be read as a stream via [<code
+    class="language-plaintext highlighter-rouge"
+    >Reader::resource_to_stream</code
+  >][crate::Reader::resource_to_stream].
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">alg</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The algorithm used to hash the resource (if applicable).</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = format include.prop = alg --><!-- x = identifier include.prop = alg -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">data_types</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of
+
+        <a href="#assettype">AssetType</a>
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>More detailed data types as defined in the C2PA spec.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = format include.prop = data_types --><!-- x = identifier include.prop = data_types -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">format</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The mime type of the referenced resource.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = format include.prop = format --><!-- x = identifier include.prop = format -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">hash</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The hash of the resource (if applicable).</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = format include.prop = hash --><!-- x = identifier include.prop = hash -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">identifier</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            A URI that identifies the resource as referenced from the manifest.
+          </p>
+
+          <p>
+            This may be a JUMBF URI, a file path, a URL or any other string.
+            Relative JUMBF URIs will be resolved with the manifest label.
+            Relative file paths will be resolved with the base path if provided.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = format include.prop = identifier --><!-- x = identifier include.prop = identifier -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="resourcestore">ResourceStore</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  Resource store to contain binary objects referenced from JSON serializable
+  structures
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">base_path</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = resources include.prop = base_path -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">label</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = resources include.prop = label -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">resources</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        (Object)
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = resources include.prop = resources -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="reviewrating">ReviewRating</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A rating on an Assertion. See
+  <a
+    href="https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_claim_review"
+    >https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_claim_review</a
+  >.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">code</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = explanation include.prop = code --><!-- x = value include.prop = code -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">explanation</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = explanation include.prop = explanation --><!-- x = value include.prop = explanation -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">value</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        Integer (uint8)
+        <br />Minimum: 0.0
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = explanation include.prop = value --><!-- x = value include.prop = value -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="role">Role</h3>
+
+<p>A role describing the region.</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Role</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">c2pa.areaOfInterest</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>Arbitrary area worth identifying.</p></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">c2pa.cropped</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>This area is all that is left after a crop action.</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">c2pa.edited</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>This area has had edits applied to it.</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">c2pa.placed</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The area where an ingredient was placed/added.</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">c2pa.redacted</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>Something in this area was redacted.</p></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">c2pa.subjectArea</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>Area specific to a subject (human or not).</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">c2pa.deleted</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>A range of information was removed/deleted.</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">c2pa.styled</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>Styling was applied to this area.</p></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">c2pa.watermarked</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            Invisible watermarking was applied to this area for the purpose of
+            soft binding.
+          </p>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><!-- end of oneOf entity --></p>
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="shape">Shape</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A spatial range representing rectangle, circle, or a polygon.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">height</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Number
+        <!--  -->
+        (double)
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The height of a rectnagle.</p>
+
+          <p>This field can be ignored for circles and polygons.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = origin include.prop = height --><!-- x = type include.prop = height --><!-- x = unit include.prop = height -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">inside</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Boolean
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>If the range is inside the shape.</p>
+
+          <p>The default value is true.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = origin include.prop = inside --><!-- x = type include.prop = inside --><!-- x = unit include.prop = inside -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">origin</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#coordinate">Coordinate</a>
+
+        <!-- obj.type is an array of possible types-->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>THe origin of the coordinate in the shape.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = origin include.prop = origin --><!-- x = type include.prop = origin --><!-- x = unit include.prop = origin -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">type</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#shapetype">ShapeType</a>
+
+        <!-- obj.type is an array of possible types-->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>The type of shape.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = origin include.prop = type --><!-- x = type include.prop = type --><!-- x = unit include.prop = type -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">unit</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#unittype">UnitType</a>
+
+        <!-- obj.type is an array of possible types-->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The type of unit for the shape range.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = origin include.prop = unit --><!-- x = type include.prop = unit --><!-- x = unit include.prop = unit -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">vertices</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of
+
+        <a href="#coordinate">Coordinate</a>
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The vertices of the polygon.</p>
+
+          <p>This field can be ignored for rectangles and circles.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = origin include.prop = vertices --><!-- x = type include.prop = vertices --><!-- x = unit include.prop = vertices -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">width</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Number
+        <!--  -->
+        (double)
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The width for rectangles or diameter for circles.</p>
+
+          <p>This field can be ignored for polygons.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = origin include.prop = width --><!-- x = type include.prop = width --><!-- x = unit include.prop = width -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="shapetype">ShapeType</h3>
+
+<p>The type of shape for the range.</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">ShapeType</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">rectangle</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>A rectangle.</p></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">circle</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>A circle.</p></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">polygon</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>A polygon.</p></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><!-- end of oneOf entity --></p>
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="signatureinfo">SignatureInfo</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">Holds information about a signature</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">alg</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#signingalg">SigningAlg</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>Human-readable issuing authority for this signature.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">cert_serial_number</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The serial number of the certificate.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">issuer</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>Human-readable issuing authority for this signature.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">revocation_status</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Boolean
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>Revocation status of the certificate.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">time</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>The time the signature was created.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="signingalg">SigningAlg</h3>
+
+<p>Describes the digital signature algorithms allowed by the C2PA spec.</p>
+
+<p>
+  Per
+  <a
+    href="https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_digital_signatures"
+    >§13.2, “Digital Signatures”</a
+  >:
+</p>
+
+<blockquote>
+  <p>
+    All digital signatures applied as per the technical requirements of this
+    &gt; specification shall be generated using one of the digital signature
+    &gt; algorithms and key types listed as described in this section.
+  </p>
+</blockquote>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">SigningAlg</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">Es256</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>ECDSA with SHA-256</p></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">Es384</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>ECDSA with SHA-384</p></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">Es512</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>ECDSA with SHA-512</p></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">Ps256</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>RSASSA-PSS using SHA-256 and MGF1 with SHA-256</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">Ps384</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>RSASSA-PSS using SHA-384 and MGF1 with SHA-384</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">Ps512</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>RSASSA-PSS using SHA-512 and MGF1 with SHA-512</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">Ed25519</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>Edwards-Curve DSA (Ed25519 instance only)</p>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><!-- end of oneOf entity --></p>
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="statuscodes">StatusCodes</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  Contains a set of success, informational, and failure validation status codes.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">failure</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        <!--  -->
+        An array of
+        <a href="#validationstatus">ValidationStatus</a>
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = failure include.prop = failure --><!-- x = informational include.prop = failure --><!-- x = success include.prop = failure -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">informational</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        <!--  -->
+        An array of
+        <a href="#validationstatus">ValidationStatus</a>
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = failure include.prop = informational --><!-- x = informational include.prop = informational --><!-- x = success include.prop = informational -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">success</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        <!--  -->
+        An array of
+        <a href="#validationstatus">ValidationStatus</a>
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = failure include.prop = success --><!-- x = informational include.prop = success --><!-- x = success include.prop = success -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="text">Text</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A textual range representing multiple (possibly discontinuous) ranges of text.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">selectors</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        <!--  -->
+        An array of
+        <a href="#textselectorrange">TextSelectorRange</a>
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>The ranges of text to select.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = selectors include.prop = selectors -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="textselector">TextSelector</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  Selects a range of text via a fragment identifier. This is modeled after the
+  W3C Web Annotation selector model.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">end</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Integer
+        <!--  -->
+        (int32)
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            The end character offset or the end of the fragment if not present.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = fragment include.prop = end -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">fragment</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            Fragment identifier as per RFC3023 (XML) or ISO 32000-2 (PDF), Annex
+            O.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = fragment include.prop = fragment -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">start</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Integer
+        <!--  -->
+        (int32)
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            The start character offset or the start of the fragment if not
+            present.
+          </p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = fragment include.prop = start -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="textselectorrange">TextSelectorRange</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  One or two [<code class="language-plaintext highlighter-rouge"
+    >TextSelector</code
+  >][TextSelector] identifiying the range to select.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">end</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#textselector">TextSelector</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>The end of the text range.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = selector include.prop = end -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">selector</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#textselector">TextSelector</a>
+
+        <!-- obj.type is an array of possible types-->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>The start (or entire) text range.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = selector include.prop = selector -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="time">Time</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A temporal range representing a starting time to an ending time.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">end</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The end time or the end of the asset if not present.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">start</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>The start time or the start of the asset if not present.</p>
+        </div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">type</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#timetype">TimeType</a>
+
+        <!-- obj.type is an array of possible types-->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>The type of time.</p></div>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">npt</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="timetype">TimeType</h3>
+
+<p>The type of time.</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">TimeType</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">npt</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            Times are described using Normal Play Time (npt) as described in RFC
+            2326.
+          </p>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><!-- end of oneOf entity --></p>
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="unittype">UnitType</h3>
+
+<p>The type of unit for the range.</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">UnitType</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">pixel</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>Use pixels.</p></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">percent</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc"><p>Use percentage.</p></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><!-- end of oneOf entity --></p>
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="uriorresource">UriOrResource</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="comment">Description TBD.</p>
+<p>Any of the following:</p>
+
+<ul>
+  <!-- i is a simple type -->
+  <li>
+    <a href="#resourceref">ResourceRef</a>
+  </li>
+
+  <!-- i is a simple type -->
+  <li>
+    <a href="#hasheduri">HashedUri</a>
+  </li>
+</ul>
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="validationresults">ValidationResults</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A map of validation results for a manifest store. The map contains the
+  validation results for the active manifest and any ingredient deltas. It is
+  normal for there to be many
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">activeManifest</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <a href="#statuscodes">StatusCodes</a>
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">ingredientDeltas</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Array of
+
+        <a href="#ingredientdeltavalidationresult"
+          >IngredientDeltaValidationResult</a
+        >
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">NO</td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="validationstate">ValidationState</h3>
+
+<p>Indicates if the manifest store is valid and trusted.</p>
+
+<p>
+  The Trusted state implies the manifest store is valid and the active signature
+  is trusted.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">ValidationState</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">Invalid</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>Errors were found in the manifest store.</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">Valid</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            No errors were found in validation, but the active signature is not
+            trusted.
+          </p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="manifest-ref-table">Trusted</td>
+      <td class="manifest-ref-table">string</td>
+      <td class="manifest-ref-table">
+        <div class="prop_desc">
+          <p>
+            The manifest store is valid and the active signature is trusted.
+          </p>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><!-- end of oneOf entity --></p>
+
+<p>
+  <a class="top-scroll-btn" title="Go to Definitions" href="#definitions"
+    >Definitions</a
+  >
+</p>
+
+<h3 class="scroll-target" id="validationstatus">ValidationStatus</h3>
+
+<p><!-- end of oneOf entity --></p>
+
+<p class="prop_desc">
+  A
+  <code class="language-plaintext highlighter-rouge">ValidationStatus</code>
+  struct describes the validation status of a specific part of a manifest. See
+  <a
+    href="https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_existing_manifests"
+    >https://c2pa.org/specifications/specifications/1.0/specs/C2PA_Specification.html#_existing_manifests</a
+  >.
+</p>
+
+<table class="manifest-ref-table" style="margin-top: 10px">
+  <thead>
+    <tr>
+      <th class="manifest-ref-table">Property</th>
+      <th class="manifest-ref-table">Type</th>
+      <th class="manifest-ref-table">Description</th>
+      <th class="manifest-ref-table">Required?</th>
+      <th class="manifest-ref-table">Default Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td class="manifest-ref-table">code</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!--   -->
+
+        String
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = code include.prop = code -->YES
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">explanation</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = code include.prop = explanation -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">success</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        Boolean
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = code include.prop = success -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+
+    <tr>
+      <td class="manifest-ref-table">url</td>
+
+      <!-- Type  -->
+      <td class="manifest-ref-table">
+        <!--  -->
+
+        <!-- Either -->
+
+        String
+        <!--  -->
+
+        <!--  or  -->
+
+        <!--  -->
+      </td>
+
+      <!-- Description -->
+      <td class="manifest-ref-table">
+        <p class="comment">Description TBD.</p>
+      </td>
+
+      <!-- Required?  -->
+      <td class="manifest-ref-table">
+        <!--  LOOP --><!-- x = code include.prop = url -->NO
+      </td>
+
+      <!-- Default Value -->
+      <td class="manifest-ref-table">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Not an object but an enum -->
+
+<p>
+  <!-- end iteration over site.data.ManifestStore_schema.definitions obj -->
+</p>

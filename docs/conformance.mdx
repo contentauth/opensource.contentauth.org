@@ -1,0 +1,96 @@
+---
+id: conformance
+title: C2PA conformance program
+---
+
+The [C2PA conformance program](https://c2pa.org/conformance) was launched in mid-2025 to help ensure that products that read and create Content Credentials are compliant with the C2PA Content Credentials specification.
+
+The C2PA conformance program covers:
+
+- [Validator products](#validator-products) that read and validate Content Credentials.
+- [Generator products](#generator-products) that create Content Credentials and add them to a digital asset.
+- [Certificate authorities (CAs)](#certificate-authorities).
+
+:::info
+If you're developing a product that reads or creates Content Credentials, you can apply for the C2PA conformance program. If accepted, the product is added to the [conforming products list](https://github.com/c2pa-org/conformance-public/blob/main/conforming-products/conforming-products-list.json#L302), which indicates it is compliant with the C2PA Content Credentials specification.
+
+**To start the process, fill out C2PA's [expression of interest form](https://docs.google.com/forms/d/e/1FAIpQLScERZH5rKfoeSu3y6gGbkllkyeAhmF0G-kXS0eXpb2vR238Rg/viewform).**
+:::
+
+When you apply to the conformance program, you will:
+
+- Sign a legal agreement with the C2PA.
+- Provide evidence supporting your application such as diagrams and documentation.
+- Work with the conformance program staff to resolve any questions.
+
+## Products
+
+### Validator products
+
+A _validator product_ can read and validate a manifest store for a digital asset.
+A conforming validator product produces correct validation results according to the C2PA Content Credentials specification.
+
+For more information, see [C2PA Conformance Program Documents](https://github.com/c2pa-org/conformance-public/tree/main/docs/current), specifically
+[C2PA conformance program - section 6.1.1, Validator Product Specification Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Conformance%20Program.pdf).
+
+### Generator products
+
+A _generator product_ can generate manifest data for a digital asset. A conforming generator product produces manifest data that conforms to the C2PA Content Credentials specification, creates assertions in the asset's active manifest and signs a claim using a valid X.509 certificate on the C2PA trust list.
+
+For more information, see [C2PA Conformance Program Documents](https://github.com/c2pa-org/conformance-public/tree/main/docs/current), specifically:
+
+- [C2PA conformance program - section 6.1.1, Generator Product Specification Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Conformance%20Program.pdf)
+- [C2PA Generator Product Security
+  Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Generator%20Product%20Security%20Requirements.pdf)
+
+#### Preliminary certificate check
+
+To confirm all the settings in your signing certificate, you can follow the [preliminary certificate check](trust-list.mdx#checking-your-certificate) for the interim trust list to help ensure everything is as expected.
+
+#### Security requirements
+
+When you apply to the conformance program, you must fill out the information required in the **product security architecture template** in Appendix C of the [C2PA Generator Product Security
+Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Generator%20Product%20Security%20Requirements.pdf), providing details on:
+
+- The organization submitting the application.
+- The product, its capabilities, and the systems it uses or relies upon.
+- The product's security architecture, including methods for key generation and storage, and protections against various kinds of misconfiguration, abuse, and exploitations.
+
+### Assurance levels
+
+A conforming product's _assurance level_ indicates the level of confidence that claims it signs reflect its intended behavior. A higher assurance level indicates a greater level of confidence. Currently, the conformance program has two assurance levels: level 1 and level 2:
+
+- [C2PA Generator Product Security
+  Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Generator%20Product%20Security%20Requirements.pdf) details the security requirements for each assurance level.
+- [C2PA certificate policy - Appendix A](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Certificate%20Policy.pdf) details the requirements for claim signing certificates for each assurance level.
+
+The assurance level is encoded as the value of a custom X.509 v3 certificate extension in the product's claim signing certificate. The C2PA defines the _max assurance level_ of a generator product based on the security attributes of its overall implementation architecture. The assurance level in the certificate issued to a particular instance of a conforming generator product may be lower than the max assurance level.
+
+## Certificate authorities
+
+The [C2PA certificate policy](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Certificate%20Policy.pdf) specifies requirements for certificate authorities (CAs) that issue claim signing certificates for use by generator products, and the requirements that those products have to meet when using the certificates.
+
+CAs on the C2PA trust list can issue certificates to conforming generator products under the C2PA conformance program.
+
+## C2PA trust lists
+
+C2PA maintains two trust lists:
+
+- [**C2PA trust list**](https://github.com/c2pa-org/conformance-public/blob/main/trust-list/C2PA-TRUST-LIST.pem): A list of X.509 certificate trust anchors (either root or subordinate certification authorities) that issue certificates to conforming generator products under the C2PA Certificate Policy.
+- [**C2PA time-stamping authority (TSA) trust list**](https://github.com/c2pa-org/conformance-public/blob/main/trust-list/C2PA-TSA-TRUST-LIST.pem): A list of X.509 certificate trust anchors (either root or subordinate certification authorities) that issue time-stamp signing certificates to TSAs.
+
+### Interim trust list retirement
+
+With the introduction of the C2PA trust list, the existing [interim (temporary) trust list](trust-list.mdx) is being retired on the following timeline:
+
+- **Through December 31, 2025**: The [interim trust list](trust-list.mdx) will remain operational. During this time:
+  - The [Verify site](https://contentcredentials.org/verify) will continue to display manifests signed by certificates on the interim trust list as trusted, but with a disclaimer that the manifests were made with an older version of the trust model.
+  - New certificates will continue to be added to the interim trust list when requested.
+  - Product developers are strongly encouraged to apply to the C2PA conformance program and use the official C2PA trust list.
+- **On January 1, 2026**: The interim trust list will be frozen:
+  - No new certificates will be added to the list, and no updates will be made.
+  - Existing certificates will remain valid for legacy support.
+
+Eventually, the certificates on the interim trust list will expire and will not be usable for signing. However, if content was signed during the certificate's validity period, the content will always be considered valid against the legacy trust model.
+
+Validator products are encouraged to begin distinguishing between Content Credentials signed with certificates on the interim trust list (typically tied to Content Credentials specification version version 1.4) and those from conforming products using the official C2PA trust list.

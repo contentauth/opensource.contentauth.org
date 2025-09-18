@@ -1,0 +1,31 @@
+---
+id: prod-cert
+title: Using a signing certificate in production
+---
+
+Accessing a private key and certificate [directly from the local file system](local-signing.md) is fine during development, but doing so in production is not secure. Instead use one or both of:
+
+- A **key management service** (KMS), to securely store and manage cryptographic keys, including generation, storage, rotation, and revocation. Popular KMS providers include [Amazon KMS](https://aws.amazon.com/kms/), [Google Cloud Key Management](https://cloud.google.com/security/products/security-key-management), and [Azure Key Vault](https://azure.microsoft.com/en-us/products/key-vault).
+- A **hardware security module** (HSM), a physical device that attaches directly to a server to securely manage and perform operations on cryptographic keys.
+
+## Best practices
+
+:::note
+Best practices for handling keys and certificates are beyond the scope of this documentation. Always protect your private keys with the highest level of security; for example, never share them through insecure channels such as email.
+:::
+
+Some useful references for handling keys and certificates include:
+
+- [Key Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html#storage) from the Open Worldwide Application Security Project (OWASP).
+- [Key Management Guidelines](https://csrc.nist.gov/Projects/Key-Management/Key-Management-Guidelines) from the National Institute of Standards and Technology, US Department of Commerce.
+- [Protect your private keys](https://www.ncsc.gov.uk/collection/in-house-public-key-infrastructure/pki-principles/protect-your-private-keys) from the UK National Cyber Security Centre.
+
+## Pre-production steps
+
+Because using a KMS can be complex, you may want to start by using a local "mock" service (such as LocalStack for Amazon KMS) as illustrated in the [c2pa-python-example](c2pa-python-example/readme.md#using-localstack). Doing this enables you to test your code before you set up a production KMS.
+
+You can also create a self-signed certificate for development purposes. The resulting manifests signed with this certificate won't be trusted, but you can use it to run the application to see how it works before purchasing a real certificate from a CA.
+
+## The C2PA Python example
+
+The [c2pa-python-example](c2pa-python-example/readme.md) app provides an example of constructing a certificate signing request (CSR) and of using [Amazon KMS](https://aws.amazon.com/kms/).

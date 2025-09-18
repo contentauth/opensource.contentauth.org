@@ -25,18 +25,18 @@ const readmes = [
       __dirname,
       '../docs/js-sdk/examples/view-manifest/index.html',
     ),
-    repo: 'contentauth/c2pa-js',
+    repo: 'contentauth/c2pa-js-legacy',
     path: 'examples/minimal-ts-vite/examples/active-manifest/index.html',
   },
   {
     dest: resolve(__dirname, '../docs/js-sdk/examples/view-manifest/main.ts'),
-    repo: 'contentauth/c2pa-js',
+    repo: 'contentauth/c2pa-js-legacy',
     path: 'examples/minimal-ts-vite/examples/active-manifest/main.ts',
   },
   // Vite Quickstart
   {
     dest: resolve(__dirname, '../docs/js-sdk/examples/quickstart/vite-main.ts'),
-    repo: 'contentauth/c2pa-js',
+    repo: 'contentauth/c2pa-js-legacy',
     path: 'examples/minimal-ts-vite/examples/cdn/main.ts',
   },
   // Rollup Quickstart
@@ -45,7 +45,7 @@ const readmes = [
       __dirname,
       '../docs/js-sdk/examples/quickstart/rollup-main.ts',
     ),
-    repo: 'contentauth/c2pa-js',
+    repo: 'contentauth/c2pa-js-legacy',
     path: 'examples/minimal-ts-rollup/src/main.ts',
   },
   // WebPack Quickstart
@@ -54,10 +54,15 @@ const readmes = [
       __dirname,
       '../docs/js-sdk/examples/quickstart/webpack-main.ts',
     ),
-    repo: 'contentauth/c2pa-js',
+    repo: 'contentauth/c2pa-js-legacy',
     path: 'examples/minimal-ts-webpack/src/index.ts',
   },
-
+  // New JavaScript SDK (9/16/2025)
+  {
+    dest: resolve(__dirname, '../docs/c2pa-js/readme.md'),
+    repo: 'contentauth/c2pa-js',
+    path: 'packages/c2pa-web/README.md',
+  },
   // c2patool
   {
     dest: resolve(__dirname, '../docs/c2patool/readme.md'),
@@ -75,14 +80,19 @@ const readmes = [
     path: 'cli/docs/x_509.md',
   },
   {
-    dest: resolve(__dirname, '../docs/c2patool/docs/release-notes.md'),
+    dest: resolve(__dirname, '../docs/c2patool/docs/changelog.md'),
     repo: 'contentauth/c2pa-rs',
-    path: 'cli/docs/release-notes.md',
+    path: 'cli/CHANGELOG.md',
   },
   {
     dest: resolve(__dirname, '../docs/c2patool/docs/usage.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'cli/docs/usage.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/c2patool/docs/cawg_x509_signing.md'),
+    repo: 'contentauth/c2pa-rs',
+    path: 'cli/docs/cawg_x509_signing.md',
   },
   {
     dest: resolve(__dirname, '../docs/c2patool/docs/supported-formats.md'),
@@ -143,6 +153,11 @@ const readmes = [
     path: 'docs/release-notes.md',
   },
   {
+    dest: resolve(__dirname, '../docs/c2pa-python/docs/examples.md'),
+    repo: 'contentauth/c2pa-python',
+    path: 'examples/README.md',
+  },
+  {
     dest: resolve(__dirname, '../docs/c2pa-python-example/readme.md'),
     repo: 'contentauth/c2pa-python-example',
     path: 'README.md',
@@ -180,6 +195,11 @@ const readmes = [
     path: 'docs/usage.md',
   },
   {
+    dest: resolve(__dirname, '../docs/rust-sdk/docs/cawg-id.md'),
+    repo: 'contentauth/c2pa-rs',
+    path: 'docs/cawg-identity.md',
+  },
+  {
     dest: resolve(__dirname, '../docs/rust-sdk/docs/release-notes.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'docs/release-notes.md',
@@ -188,6 +208,50 @@ const readmes = [
     dest: resolve(__dirname, '../docs/c2pa-min/readme.md'),
     repo: 'contentauth/c2pa-min',
     path: 'README.md',
+  },
+  {
+    dest: resolve(__dirname, '../static/sb-alg-list.json'),
+    repo: 'c2pa-org/softbinding-algorithm-list',
+    path: 'softbinding-algorithm-list.json',
+  },
+  // TrustMark
+  {
+    dest: resolve(__dirname, '../docs/trustmark/README.md'),
+    repo: 'adobe/trustmark',
+    path: 'README.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/trustmark/python/CONFIG.md'),
+    repo: 'adobe/trustmark',
+    path: 'python/CONFIG.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/trustmark/FAQ.md'),
+    repo: 'adobe/trustmark',
+    path: 'FAQ.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/trustmark/c2pa/README.md'),
+    repo: 'adobe/trustmark',
+    path: 'c2pa/README.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/trustmark/js/README.md'),
+    repo: 'adobe/trustmark',
+    path: 'js/README.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/trustmark/rust/README.md'),
+    repo: 'adobe/trustmark',
+    path: 'rust/README.md',
+  },
+  {
+    dest: resolve(
+      __dirname,
+      '../docs/trustmark/rust/crates/trustmark-cli/README.md',
+    ),
+    repo: 'adobe/trustmark',
+    path: 'rust/crates/trustmark-cli/README.md',
   },
 ];
 
