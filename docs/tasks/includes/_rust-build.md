@@ -3,9 +3,18 @@ This is an example of how to assign a manifest to an asset and sign the claim us
 This example is from [`c2pa-rs/sdk/examples/v2api.rs`](https://github.com/contentauth/c2pa-rs/blob/main/sdk/examples/v2api.rs#L88C5-L134C1):
 
 ```rust
-let json = manifest_def(title, format);
+use std::io::{Cursor, Seek};
 
+use anyhow::Result;
+use c2pa::{
+    crypto::raw_signature::SigningAlg, settings::Settings, validation_results::ValidationState,
+    Builder, CallbackSigner, Reader,
+};
+use serde_json::json;
+
+let json = manifest_def(title, format);
 let mut builder = Builder::from_json(&json)?;
+
 builder.add_ingredient_from_stream(
     json!({
         "title": parent_name,

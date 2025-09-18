@@ -4,6 +4,16 @@ This is an example of how to assign a manifest to an asset and sign the claim us
 Use a `Builder` object to add a manifest to an asset.
 
 ```python
+# Import the C2PA Python package.
+from c2pa import *
+
+# Import standard general-purpose packages.
+import os
+import io
+import logging
+import json
+import base64
+
 try:
   # Define a function to sign the claim bytes.
   # In this case we are using a pre-defined sign_ps256 method, passing in our private cert.

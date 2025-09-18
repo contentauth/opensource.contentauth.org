@@ -1,6 +1,24 @@
 This is how to get resources from a manifest using C++.
 
 ```cpp
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <stdexcept>
+#include <openssl/evp.h>
+#include <openssl/pem.h>
+#include <openssl/err.h>
+#include "c2pa.hpp"
+#include "test_signer.hpp"
+#include <nlohmann/json.hpp>
+
+// this example uses nlohmann json for parsing the manifest
+using json = nlohmann::json;
+using namespace std;
+namespace fs = std::filesystem;
+using namespace c2pa;
+
 string read_text_file(const fs::path &path)
 {
     ifstream file(path);
@@ -23,19 +41,6 @@ int main()
 
   try
       {
-          // load the manifest, certs, and private key
-      /* Commenting out, because not part of resource reading
-          string manifest_json = read_text_file(manifest_path).data();
-
-          string certs = read_text_file(certs_path).data();
-
-          // create a signer
-          Signer signer = Signer(&test_signer, Es256, certs, "http://timestamp.digicert.com");
-
-          auto builder = Builder(manifest_json);
-          auto manifest_data = builder.sign(image_path, output_path, signer);
-      */
-
           // read the new manifest and display the JSON
           auto reader = Reader(output_path);
 
@@ -56,14 +61,17 @@ int main()
               cout << "thumbnail written to" << thumbnail_path << endl;
           }
       }
+      
       catch (c2pa::Exception const &e)
       {
           cout << "C2PA Error: " << e.what() << endl;
       }
+
       catch (runtime_error const &e)
       {
           cout << "setup error" << e.what() << endl;
       }
+
       catch (json::parse_error const &e)
       {
           cout << "parse error " << e.what() << endl;

@@ -1,23 +1,38 @@
 This is an example of how to assign a manifest to an asset and sign the claim using C++:
 
 ```cpp
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <stdexcept>
+#include <openssl/evp.h>
+#include <openssl/pem.h>
+#include <openssl/err.h>
+#include "c2pa.hpp"
+#include "test_signer.hpp"
+
+using namespace std;
+namespace fs = std::filesystem;
+using namespace c2pa;
+
 const std::string manifest_json = R"{
     "claim_generator": "c2pa_c_test/0.1",
     "claim_generator_info": [
       {
-        "name": "c2pa-c test",
+        "name": "c2pa-c example",
         "version": "0.1"
       }
     ],
     "assertions": [
     {
-      "label": "c2pa.training-mining",
+      "label": "cawg.training-mining",
       "data": {
         "entries": {
-          "c2pa.ai_generative_training": { "use": "notAllowed" },
-          "c2pa.ai_inference": { "use": "notAllowed" },
-          "c2pa.ai_training": { "use": "notAllowed" },
-          "c2pa.data_mining": { "use": "notAllowed" }
+          "cawg.ai_generative_training": { "use": "notAllowed" },
+          "cawg.ai_inference": { "use": "notAllowed" },
+          "cawg.ai_training": { "use": "notAllowed" },
+          "cawg.data_mining": { "use": "notAllowed" }
         }
       }
     }
@@ -25,5 +40,4 @@ const std::string manifest_json = R"{
  };
 
 auto builder = Builder(manifest_json);
-
 ```

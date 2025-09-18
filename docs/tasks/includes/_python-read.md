@@ -6,6 +6,15 @@ Use the `json()` method to return a JSON manifest report; If there are validatio
 An asset file may contain many manifests in a manifest store. The most recent manifest is identified by the value of the `active_manifest` field in the manifests map.
 
 ```py
+# Import the C2PA Python package.
+from c2pa import *
+
+# Import standard general-purpose packages.
+import os
+import io
+import logging
+import json
+
 try:
   # Create a reader from a file path.
   reader = c2pa.Reader.from_file("path/to/media_file.jpg")
