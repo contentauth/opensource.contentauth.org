@@ -258,6 +258,24 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Mobile libraries',
+      link: { type: 'doc', id: 'mobile' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'c2pa-ios/README',
+          label: 'iOS',
+        },
+        {
+          type: 'doc',
+          id: 'c2pa-android/README',
+          label: 'Android',
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Rust library',
       link: { type: 'doc', id: 'rust-sdk/readme' },
       collapsed: true,

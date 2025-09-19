@@ -244,6 +244,17 @@ const readmes = [
     repo: 'adobe/trustmark',
     path: 'rust/crates/trustmark-cli/README.md',
   },
+  // Mobile libraries
+  {
+    dest: resolve(__dirname, '../docs/c2pa-ios/README.md'),
+    repo: 'contentauth/c2pa-ios',
+    path: 'README.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/c2pa-android/README.md'),
+    repo: 'contentauth/c2pa-android',
+    path: 'README.md',
+  },
 ];
 
 function resolveMarkdownLinks(linkBase, content) {
