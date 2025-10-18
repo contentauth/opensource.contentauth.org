@@ -10,11 +10,8 @@
 
 # External files loaded by fetch-readmes script
 /docs/js-sdk/api
-/docs/js-sdk/examples/quickstart/*.ts
-/docs/js-sdk/examples/view-manifest/*.ts
-/docs/js-sdk/examples/view-manifest/*.html
-/docs/c2pa-js/*.md
-/docs/c2pa-js/docs/*.md
+/docs/js-sdk/examples/*
+/docs/js-sdk/examples/*
 /docs/c2patool/*.md
 /docs/c2patool/docs/*.md
 /docs/c2pa-node/*.md
