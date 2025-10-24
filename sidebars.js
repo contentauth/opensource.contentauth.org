@@ -247,6 +247,11 @@ const sidebars = {
         },
         {
           type: 'link',
+          label: 'API documentation',
+          href: 'https://contentauth.github.io/c2pa-c/annotated.html',
+        },
+        {
+          type: 'link',
           label: 'GitHub',
           href: 'https://github.com/contentauth/c2pa-c',
         },
