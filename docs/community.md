@@ -42,6 +42,10 @@ These related projects may be of interest, but the CAI team doesn't maintain or 
 
 The CAI maintains a [Discord server](https://discord.gg/CAI) for open technical discussions within the developer community, with channels focused on different projects and topics.
 
+## C2PA Foundations videos
+
+For a series of educational videos, see [C2PA Foundations](http://learn.contentauthenticity.org/).
+
 ## Other resources
 
 - **Read the [CAI blog](https://contentauthenticity.org/blog)** to get the latest news and updates about CAI.
