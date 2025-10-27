@@ -40,7 +40,7 @@ These related projects may be of interest, but the CAI team doesn't maintain or 
 
 ## C2PA Foundations video course
 
-For a series of educational videos, see [C2PA Foundations](http://learn.contentauthenticity.org/).
+For a series of educational videos, see [C2PA Foundations: A Course for Implementers](http://learn.contentauthenticity.org/).
 
 ## Discussions on Discord
 
