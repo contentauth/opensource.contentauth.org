@@ -13,7 +13,7 @@ Trust lists connect the end-entity certificate that signed a manifest back to th
 
 The simplest way to add a C2PA manifest to an asset file and sign it is by using C2PA Tool (`c2patool`). You can run C2PA Tool manually from the command line (for example, during development) and more generally from any executable program that can call out to the shell, such as a Node.js application as shown in the [c2patool Node.js service example](../c2pa-node-example).
 
-Similarly, using the Rust SDK, you can [add a manifest to an asset file](https://docs.rs/c2pa/latest/c2pa/#example-adding-a-manifest-to-a-file), referencing the certificate and private key file. The prerelease libraries for [Node.js](../c2pa-node), [Python](../c2pa-python), and [C++/C](../c2pa-c) can also add and sign a manifest.
+Similarly, using the Rust SDK, you can [add a manifest to an asset file](https://docs.rs/c2pa/latest/c2pa/#example-adding-a-manifest-to-a-file), referencing the certificate and private key file. The [Node.js](../c2pa-node), [Python](../c2pa-python), and [C++/C](../c2pa-c) libraries can also add and sign a manifest.
 
 :::warning Warning
 Accessing a private key and certificate directly from the file system is fine during development, but doing so in production is not secure. Instead use a Key Management Service (KMS) or a hardware security module (HSM) to access the certificate and key; For more information, see [Using a certificate in production](prod-cert.mdx). 

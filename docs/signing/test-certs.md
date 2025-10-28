@@ -7,7 +7,7 @@ The CAI SDK does not allow you to use a self-signed certificate to sign a manife
 
 For initial development and testing, the SDK provides example *test certificates* and private keys:
 - The [Rust library `sdk/tests/fixtures/certs/` folder](https://github.com/contentauth/c2pa-rs/tree/main/sdk/tests/fixtures/certs) contains certificates and signing keys for many of the supported [signature types](get-cert.md#signature-types).
-- The prerelease libraries (Node.js, Python, and C++) provide a subset of test certificates in each repository's `tests/fixtures` folder. The Node.js library even provides a [`CreateTestSigner()`](https://github.com/contentauth/c2pa-node/blob/main/docs/README.md#createtestsigner) convenience function to create a local signer instance using the test certificate.
+- The Node.js, Python, and C++ libraries provide a subset of test certificates in each repository's `tests/fixtures` folder. The Node.js library even provides a [`CreateTestSigner()`](https://github.com/contentauth/c2pa-node/blob/main/docs/README.md#createtestsigner) convenience function to create a local signer instance using the test certificate.
 
 :::warning Warning
 While these test credentials are useful during development, you must [get your own certificate](get-cert.md) and use your own private key for production deployment.  

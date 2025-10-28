@@ -106,50 +106,7 @@ The [Creator Assertions Working Group (CAWG)](https://creator-assertions.github.
 
 In addition, Adobe tools can use the [Connected Accounts service](https://connected-accounts.adobe.com/) to connect social media accounts such as Behance, Instagram, or Twitter to an identity in a manifest. This service uses OAuth, so a user must be able to log in to an Adobe account to connect it.
 
-## How to use the SDK
-
-The CAI open-source SDK consist of:
-
-- [**C2PA Tool**](c2patool/readme.md), a command-line tool for working with manifests and media. This tool is a wrapper around the Rust SDK and provides most of the same capabilities that it does.
-- [**JavaScript library**](c2pa-js) that enables web pages to verify and read manifest data using client JavaScript.
-- **[C/C++](c2pa-c/readme.md), [Python](c2pa-python/readme.md), [Node.js](c2pa-node/readme.md) libraries** that enable applications to read and validate manifest data, create and sign manifest data and embed it supported asset files.
-- [**Mobile libraries**](mobile.md) that enable mobile applications for iOS and Android to to read and generate manifest data.
-- [**The Rust library**](rust-sdk/readme.md) that generates the other language bindings and can also be used directly to read and generate manifest data.
-
-C2PA Tool and language-specific libraries are built using the Rust library to ensure consistency.
-
-The following diagram provides a high-level view of how to use the open-source CAI SDK.
-
-<img src={cai_open_source} width="800" />
-
-Applications can use the CAI SDK in several different ways:
-
-- Web pages can use the JavaScript library to display Content Credentials.
-- Applications can "shell out" to call C2PA Tool directly, though doing so is not highly scalable.
-- Applications written in C++, Python, or Node.js can use the corresponding language libraries to:
-  - Create, modify, and sign manifests.
-  - Embed manifests into media files.
-  - Parse and validate manifests.
-- Mobile apps can use the iOS and Android libraries do all the above.
-
-Alternatively, native applications can use Rust's _Foreign Function Interface_ (FFI) to call functions in the Rust library. The FFI enables interoperability between Rust and code written in other languages. For example, a Windows application can use the FFI to call Rust functions from languages such as C++ or C#. For an example, see the [c2c2pa repository](https://github.com/contentauth/c2c2pa).
-
-### Websites
-
-A website can serve web pages that use the JavaScript library to display manifest data using client JavaScript.
-A server-side web application can create, modify, and sign claims (and view them) by:
-
-- Executing a shell command to invoke C2PA Tool. For an example, see the [c2patool Node.js service example](c2pa-service-example). While this approach works, it is not highly scalable.
-- Use the [Node.js](c2pa-node), [Python](c2pa-python), or [C++/C](c2pa-c) libraries.
-- Bind to the Rust library and use it, similarly to native applications.
-
-### Embedded applications
-
-An embedded application can use the Rust FFI (foreign function interface) to call Rust functions from languages such as C or C++, similarly to a native application.
-
-Embedded applications have unique constraints tied to the devices on which they run, including small memory footprint, low-powered hardware, intermittent network access, unique operating systems, or the lack of an operating system OS (running on bare metal). For these reasons, if you want to develop a CAI-enabled embedded application, please contact the CAI team directly.
-
-## Attaching and storing the manifest
+## Attaching and storing manifest data
 
 Once you've generated a manifest, you must attach it to the asset for it to be useful.
 
