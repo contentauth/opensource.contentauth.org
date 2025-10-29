@@ -7,6 +7,11 @@ const sidebars = {
       id: 'introduction',
     },
     {
+      type: 'doc',
+      label: 'Schema doc PoC',
+      id: 'schemas/schemas-poc',
+    },
+    {
       type: 'category',
       label: 'Getting started',
       link: { type: 'doc', id: 'getting-started' },
