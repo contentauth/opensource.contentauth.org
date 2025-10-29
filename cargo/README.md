@@ -1,4 +1,4 @@
-# Cargo <-> Dependabot integration
+# Cargo / Dependabot integration
 
 This directory exists so that we can have a Cargo.toml file that Dependabot can track for updates to our Rust projects:
 

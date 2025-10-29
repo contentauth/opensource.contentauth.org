@@ -18,11 +18,6 @@ const externalRepos = {
   'c2pa-c': { repo: 'c2pa-c', path: '', org: 'contentauth' },
   'c2pa-min': { repo: 'c2pa-min', path: '', org: 'contentauth' },
   'c2pa-node': { repo: 'c2pa-node', path: '', org: 'contentauth' },
-  'c2pa-node-example': {
-    repo: 'c2pa-node-example',
-    path: '',
-    org: 'contentauth',
-  },
   'c2pa-python': { repo: 'c2pa-python', path: '', org: 'contentauth' },
   'c2pa-python-example': {
     repo: 'c2pa-python-example',
