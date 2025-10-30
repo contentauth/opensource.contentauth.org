@@ -298,15 +298,6 @@ function DefinitionsTOC({ defs }) {
           </tr>
         </tbody>
       </table>
-      <p>
-        <a
-          className="top-scroll-btn"
-          title="Go to Definitions"
-          href="#definitions"
-        >
-          Definitions
-        </a>
-      </p>
     </>
   );
 }
