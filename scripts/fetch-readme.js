@@ -99,10 +99,10 @@ const readmes = [
     repo: 'contentauth/c2pa-rs',
     path: 'docs/supported-formats.md',
   },
-  // c2pa-service-example
+  // c2patool-service-example (renamed from c2pa-service-example)
   {
     dest: resolve(__dirname, '../docs/c2pa-service-example/readme.md'),
-    repo: 'contentauth/c2pa-service-example',
+    repo: 'contentauth/c2patool-service-example',
     path: 'README.md',
   },
   // Old Node.js lib
