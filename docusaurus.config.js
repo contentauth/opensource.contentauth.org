@@ -27,8 +27,8 @@ const externalRepos = {
     path: '',
     org: 'contentauth',
   },
-  'c2pa-service-example': {
-    repo: 'c2pa-service-example',
+  'c2patool-service-example': {
+    repo: 'c2patool-service-example',
     path: '',
     org: 'contentauth',
   },
