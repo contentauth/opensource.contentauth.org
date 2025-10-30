@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+		<title>Settings JSON reference - Manifest Reference</title>
+		<link rel="stylesheet" href="https://contentauth.github.io/json-manifest-reference/css/style.css">
+		<!-- link rel="stylesheet" href="https://contentauth.github.io/json-manifest-reference/css/tooltip.css" -->
+		<link rel="shortcut icon" type="image/png" href="https://contentauth.github.io/json-manifest-reference/images/favicon.png">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://contentauth.github.io/json-manifest-reference/js/main.js"></script>
+		<script src="https://contentauth.github.io/json-manifest-reference/js/toc.js"></script>
+		<script src="https://contentauth.github.io/json-manifest-reference/js/jquery.stickytableheaders.js"></script>
+		<script src="https://contentauth.github.io/json-manifest-reference/js/customscripts.js"></script>
+		<script src="https://contentauth.github.io/json-manifest-reference/js/cai-customscripts.js"></script>
+	</head>
+	<body>
+
+		<header id="full-sidebar">
+			<h1>
+				<a href="https://contentauth.github.io/json-manifest-reference"><img src="https://contentauth.github.io/json-manifest-reference/images/CAI_white.png" style="width: 100px; height: 30px;" alt="manifest-schema-reference"></a>
+				<a href="https://contentauth.github.io/json-manifest-reference"><div id="site-title">Manifest Reference</div></a>
+			</h1>
+
+			<!-- form action="https://contentauth.github.io/json-manifest-reference/search/" method="get">
+				<input type="text" name="q" id="search-input" placeholder="Search the docs">
+				<input type="submit" value="Search" style="display: none;">
+			</form -->
+
+			
+<div id="sidebar" class="sidebar">
+    <ul id="sidebar-list" class="nav-list">
+      
+
+
+  <li class="tree-parent "> <a class="show-hide" href="#"></a> 
+    <a class="page-link" href="https://contentauth.github.io/json-manifest-reference/manifest-def-ref">Manifest Definition</a>
+      
+      <ul class="nav-list">
+          
+
+
+  <li class="leaf-node">
+    <a class="page-link" href="https://contentauth.github.io/json-manifest-reference/manifest-def-cai">Manifest def - CAI stylng</a>
+      
+  </li>
+
+
+      </ul>
+      
+  </li>
+
+
+
+  <li class="tree-parent "> <a class="show-hide" href="#"></a> 
+    <a class="page-link" href="https://contentauth.github.io/json-manifest-reference/reader-ref">Reader</a>
+      
+      <ul class="nav-list">
+          
+
+
+  <li class="leaf-node">
+    <a class="page-link" href="https://contentauth.github.io/json-manifest-reference/reader-cai">Reader - CAI styling</a>
+      
+  </li>
+
+
+      </ul>
+      
+  </li>
+
+
+
+  <li class="tree-parent  active"> <a class="show-hide" href="#"></a> 
+    <a class="page-link" href="https://contentauth.github.io/json-manifest-reference/settings">Settings</a>
+      
+      <ul class="nav-list">
+          
+
+
+  <li class="leaf-node">
+    <a class="page-link" href="https://contentauth.github.io/json-manifest-reference/settings-cai">Settings - CAI styling</a>
+      
+  </li>
+
+
+      </ul>
+      
+  </li>
+
+
+
+  <li class="tree-parent "> <a class="show-hide" href="#"></a> 
+    <a class="page-link" href="https://contentauth.github.io/json-manifest-reference/json-schema-index">JSON schemas</a>
+      
+      <ul class="nav-list">
+          
+
+
+  <li class="leaf-node">
+    <a class="page-link" href="https://contentauth.github.io/json-manifest-reference/md-schema">Manifest Def. JSON schema</a>
+      
+  </li>
+
+
+
+  <li class="leaf-node">
+    <a class="page-link" href="https://contentauth.github.io/json-manifest-reference/reader-schema">Reader JSON schema</a>
+      
+  </li>
+
+
+
+  <li class="leaf-node">
+    <a class="page-link" href="https://contentauth.github.io/json-manifest-reference/settings-schema">Settings JSON schema</a>
+      
+  </li>
+
+
+      </ul>
+      
+  </li>
+
+
+    </ul>
+</div>
+
+
+		</header>
+		<div id="main-div" class="main">
+			<section class="doc-content">
+				<section class="left-docs">
+					<div class="topic-title">Settings JSON reference </div>
+					<div id="sidebar-btns">
+					  <a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a>
+					</div>
+					
+
+					
+
+					<button id="top-scroll-btn" title="Go to top">Scroll To Top</button>
+					
+<h2 id="settings">Settings</h2>
+
+<div class="prop_desc"><p>Settings for configuring all aspects of c2pa-rs.</p>
+
+<p>[Settings::default] will be set thread-locally by default. Any settings set via
+[Settings::from_toml] or [Settings::from_file] will also be thread-local.</p>
+</div>
+
+<h3 id="properties">Properties</h3>
+
+<table class="manifest-ref-table">
+<thead><tr>
+<th class="manifest-ref-table">Property</th>
+<th class="manifest-ref-table">Type</th>
+<th class="manifest-ref-table">Description</th>
+<th class="manifest-ref-table">Required?</th>
+<th class="manifest-ref-table">Default Value</th>
+</tr></thead>
+
+<tbody>
+
+
+<tr>
+<td class="manifest-ref-table">version</td>
+<!-- Type -->
+<td class="manifest-ref-table">
+
+  <!--  -->
+
+
+
+ <!--   -->
+
+  
+    
+  Integer
+   (uint32) 
+   <br />Minimum: 0 
+
+
+
+
+
+
+  
+
+
+
+
+</td>
+
+<!-- Description -->
+<td class="manifest-ref-table"><p>Version of the configuration.</p>
+
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Required? -->
+<!--  LOOP --><!-- x = version include.prop = version --><!-- x = trust include.prop = version --><!-- x = cawg_trust include.prop = version --><!-- x = core include.prop = version --><!-- x = verify include.prop = version --><!-- x = builder include.prop = version -->YES
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Default Value -->
+
+ 
+  N/A 
+
+</td>
+
+</tr>
+
+
+<tr>
+<td class="manifest-ref-table">trust</td>
+<!-- Type -->
+<td class="manifest-ref-table">
+
+  <!--  -->
+
+
+
+ <!--   -->
+
+  
+    
+  
+  
+<a href="#settings-for-configuring-the-c2pa-trust-lists">Settings for configuring the C2PA trust lists.</a>
+
+
+
+
+
+
+
+  
+
+
+
+
+</td>
+
+<!-- Description -->
+<td class="manifest-ref-table"><p>Settings for configuring the C2PA trust lists.</p>
+
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Required? -->
+<!--  LOOP --><!-- x = version include.prop = trust --><!-- x = trust include.prop = trust --><!-- x = cawg_trust include.prop = trust --><!-- x = core include.prop = trust --><!-- x = verify include.prop = trust --><!-- x = builder include.prop = trust -->YES
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Default Value -->
+
+ 
+  N/A 
+
+</td>
+
+</tr>
+
+
+<tr>
+<td class="manifest-ref-table">cawg_trust</td>
+<!-- Type -->
+<td class="manifest-ref-table">
+
+  <!--  -->
+
+
+
+ <!--   -->
+
+  
+    
+  
+  
+<a href="#settings-for-configuring-the-cawg-trust-lists">Settings for configuring the CAWG trust lists.</a>
+
+
+
+
+
+
+
+  
+
+
+
+
+</td>
+
+<!-- Description -->
+<td class="manifest-ref-table"><p>Settings for configuring the CAWG trust lists.</p>
+
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Required? -->
+<!--  LOOP --><!-- x = version include.prop = cawg_trust --><!-- x = trust include.prop = cawg_trust --><!-- x = cawg_trust include.prop = cawg_trust --><!-- x = core include.prop = cawg_trust --><!-- x = verify include.prop = cawg_trust --><!-- x = builder include.prop = cawg_trust -->YES
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Default Value -->
+
+ 
+  N/A 
+
+</td>
+
+</tr>
+
+
+<tr>
+<td class="manifest-ref-table">core</td>
+<!-- Type -->
+<td class="manifest-ref-table">
+
+  <!--  -->
+
+
+
+ <!--   -->
+
+  
+    
+  
+  
+<a href="#settings-for-configuring-core-features">Settings for configuring core features.</a>
+
+
+
+
+
+
+
+  
+
+
+
+
+</td>
+
+<!-- Description -->
+<td class="manifest-ref-table"><p>Settings for configuring core features.</p>
+
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Required? -->
+<!--  LOOP --><!-- x = version include.prop = core --><!-- x = trust include.prop = core --><!-- x = cawg_trust include.prop = core --><!-- x = core include.prop = core --><!-- x = verify include.prop = core --><!-- x = builder include.prop = core -->YES
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Default Value -->
+
+ 
+  N/A 
+
+</td>
+
+</tr>
+
+
+<tr>
+<td class="manifest-ref-table">verify</td>
+<!-- Type -->
+<td class="manifest-ref-table">
+
+  <!--  -->
+
+
+
+ <!--   -->
+
+  
+    
+  
+  
+<a href="#settings-for-configuring-verification">Settings for configuring verification.</a>
+
+
+
+
+
+
+
+  
+
+
+
+
+</td>
+
+<!-- Description -->
+<td class="manifest-ref-table"><p>Settings for configuring verification.</p>
+
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Required? -->
+<!--  LOOP --><!-- x = version include.prop = verify --><!-- x = trust include.prop = verify --><!-- x = cawg_trust include.prop = verify --><!-- x = core include.prop = verify --><!-- x = verify include.prop = verify --><!-- x = builder include.prop = verify -->YES
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Default Value -->
+
+ 
+  N/A 
+
+</td>
+
+</tr>
+
+
+<tr>
+<td class="manifest-ref-table">builder</td>
+<!-- Type -->
+<td class="manifest-ref-table">
+
+  <!--  -->
+
+
+
+ <!--   -->
+
+  
+    
+  
+  
+<a href="#settings-for-configuring-the-builder-builder-crate-builder">Settings for configuring the [`Builder`].
+
+[`Builder`]: crate::Builder</a>
+
+
+
+
+
+
+
+  
+
+
+
+
+</td>
+
+<!-- Description -->
+<td class="manifest-ref-table"><p>Settings for configuring the <a href="crate::Builder"><code class="language-plaintext highlighter-rouge">Builder</code></a>.</p>
+
+
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Required? -->
+<!--  LOOP --><!-- x = version include.prop = builder --><!-- x = trust include.prop = builder --><!-- x = cawg_trust include.prop = builder --><!-- x = core include.prop = builder --><!-- x = verify include.prop = builder --><!-- x = builder include.prop = builder -->YES
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Default Value -->
+
+ 
+  N/A 
+
+</td>
+
+</tr>
+
+
+<tr>
+<td class="manifest-ref-table">signer</td>
+<!-- Type -->
+<td class="manifest-ref-table">
+
+  <!--  -->
+
+
+
+
+  
+  
+    
+    
+<a href="#defs-signersettings">#/$defs/SignerSettings</a>
+ 
+  
+
+  
+
+<!--  -->
+
+
+
+
+</td>
+
+<!-- Description -->
+<td class="manifest-ref-table"><p>Settings for configuring the base C2PA signer, accessible via [<code class="language-plaintext highlighter-rouge">Settings::signer</code>].</p>
+
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Required? -->
+<!--  LOOP --><!-- x = version include.prop = signer --><!-- x = trust include.prop = signer --><!-- x = cawg_trust include.prop = signer --><!-- x = core include.prop = signer --><!-- x = verify include.prop = signer --><!-- x = builder include.prop = signer -->NO
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Default Value -->
+
+ 
+  N/A 
+
+</td>
+
+</tr>
+
+
+<tr>
+<td class="manifest-ref-table">cawg_x509_signer</td>
+<!-- Type -->
+<td class="manifest-ref-table">
+
+  <!--  -->
+
+
+
+
+  
+  
+    
+    
+<a href="#defs-signersettings">#/$defs/SignerSettings</a>
+ 
+  
+
+  
+
+<!--  -->
+
+
+
+
+</td>
+
+<!-- Description -->
+<td class="manifest-ref-table"><p>Settings for configuring the CAWG x509 signer, accessible via [<code class="language-plaintext highlighter-rouge">Settings::signer</code>].</p>
+
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Required? -->
+<!--  LOOP --><!-- x = version include.prop = cawg_x509_signer --><!-- x = trust include.prop = cawg_x509_signer --><!-- x = cawg_trust include.prop = cawg_x509_signer --><!-- x = core include.prop = cawg_x509_signer --><!-- x = verify include.prop = cawg_x509_signer --><!-- x = builder include.prop = cawg_x509_signer -->NO
+
+</td>
+
+<td class="manifest-ref-table"> <!-- Default Value -->
+
+ 
+  N/A 
+
+</td>
+
+</tr>
+
+
+</tbody></table>
+
+<!---------------------------------------------------------------------->
+
+<h2 id="definitions">Definitions</h2>
+
+<!-- TOC-like links -->
+<table style="border: 0;" width="900">
+<tbody>
+<tr>
+<td style="border: 0; vertical-align: top;">
+</td>
+</tr></tbody></table>
+
+<!-- Definitions reference -->
+<p><!-- end iteration over site.data.ManifestStore_schema.definitions obj --></p>
+
+
+				</section>
+			</section>
+		</div>
+		<script>
+			$(function() {
+				$("table").stickyTableHeaders();
+			});
+		</script>
+  </body>
+</html>
