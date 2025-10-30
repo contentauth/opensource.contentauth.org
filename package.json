@@ -46,13 +46,10 @@
     ]
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "^7.19.14",
-    "@microsoft/api-extractor-model": "^7.17.3",
     "commander": "^9.3.0",
-    "docusaurus-plugin-api-extractor": "^2.0.4",
     "ejs": "^3.1.8",
     "fs-extra": "^10.1.0",
-    "glob": "^8.0.3",
+    "glob": "^9.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
     "node-fetch": "^2.6.7",
