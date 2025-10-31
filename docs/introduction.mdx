@@ -4,7 +4,7 @@ title: CAI open source SDK
 ---
 
 import cr_pin from '../static/img/cr-pin.png';
-import cai_open_source_red from '../static/img/cai-open-source-red.jpg';
+import cai_open_source from '../static/img/cai-open-source.jpg';
 
 You're strongly encouraged to read this introduction and [Getting started](getting-started.mdx) to give you some basic background and context, before you dive right into development. [Working with manifests](manifest/understanding.md) also has some crucial information, regardless of which language and library you use.
 
@@ -16,52 +16,38 @@ For a series of educational videos on using the CAI open source SDK, see [**C2PA
 
 ## What's in the SDK
 
-The CAI open-source SDK (software development kit) is a set of tools and libraries that enable developers to create, verify, and display Content Credentials based on C2PA standards.
+The CAI open-source SDK consist of:
 
-<img src={cai_open_source_red} width="800" />
-
-The CAI open-source SDK consists of:
-
-- [C2PA Tool](#c2pa-tool): a command-line tool for working with C2PA manifests and media assets.
-- [The JavaScript library](#javascript-library) (also known as the JavaScript SDK): Client JavaScript library for code that runs, for example, in a web browser.
-- [Prerelease libraries](#prerelease-libraries) for Node.js, Python, and C++/C.
-- [The Rust library](#rust-library), which is the code that underlies everything else. It's the "source of truth" that all the other libraries use.
+- [**C2PA Tool**](c2patool/readme.md), a command-line tool for working with manifests and media. This tool is a wrapper around the Rust SDK and provides most of the same capabilities that it does. C2PA Tool can:
+  - Read a JSON report of manifest data.
+  - Attach a manifest store to an asset, if it doesn't already have an associated manifest store.
+  - Add a manifest to to the associated manifest store if the asset does have an associated manifest store.
+- [**JavaScript library**](c2pa-js) that enables web pages to verify and read manifest data using client JavaScript. Use it to add user interface elements to your website that display manifest data while following the [C2PA user experience recommendations](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html).
+- **[C/C++](c2pa-c/readme.md), [Python](c2pa-python/readme.md), [Node.js](c2pa-node/readme.md) libraries** that enable applications to read and validate manifest data, create and sign manifest data and embed it supported asset files.
+- [**Mobile libraries**](mobile.md) that enable mobile applications for iOS and Android to to read and generate manifest data.
+- [**The Rust library**](rust-sdk/readme.md) that generates the other language bindings and can also be used directly to read and generate manifest data. The Rust library is the fundamental system underlying everything else.
 
 To see a summary of what each tool and library can do, see [Which tool is right for you?](#which-tool-is-right-for-you).
 
-### C2PA Tool
+The following diagram provides a high-level view of the SDK.
 
-[C2PA Tool](c2patool/readme.md), is a **command-line utility for working with C2PA manifest data**. Use this tool to work with assets in a supported file format to:
+<img src={cai_open_source} width="800" />
 
-- Read a JSON report of manifest data.
-- Attach a manifest store to an asset, if it doesn't already have an associated manifest store.
-- Add a manifest to to the associated manifest store if the asset does have an associated manifest store.
+## How to use the SDK
 
-### JavaScript library
+Applications can use the CAI SDK in several different ways:
 
-The client [JavaScript library](js-sdk/getting-started/overview.mdx) enables **working with manifest data in the browser**. Use this library to:
+- Web pages can use the JavaScript library to display Content Credentials.
+- Applications can "shell out" to call C2PA Tool directly, though doing so is not highly scalable.
+- Applications written in C++, Python, or Node.js can use the corresponding language libraries to:
+  - Create, modify, and sign manifests.
+  - Embed manifests into media files.
+  - Parse and validate manifests.
+- Mobile apps can use the iOS and Android libraries do all the above.
 
-- Verify and display manifest data on a website or web application.
-- Link manifest data displayed on your site to [Verify](https://verify.contentauthenticity.org/).
-- Easily add user interface elements to your website that display manifest data while following the [C2PA user experience recommendations](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html).
+Native applications can also use Rust's _Foreign Function Interface_ (FFI) to call functions in the Rust library. The FFI enables interoperability between Rust and code written in other languages. For example, a Windows application can use the FFI to call Rust functions from languages such as C++ or C#. For an example, see the [c2c2pa repository](https://github.com/contentauth/c2c2pa).
 
-### Prerelease libraries
-
-The [C++/C](c2pa-c/readme.md), [Python](c2pa-python/readme.md), and [Node.js](c2pa-node/readme.md) libraries enable applications written in those languages to **create, verify, and display Content Credentials**.
-
-:::warning Warning
-These libraries are all early prerelease versions. They may have bugs and unimplemented features, and their APIs are subject to change.
-:::
-
-### Rust library
-
-The [Rust library](rust-sdk/readme.md) enables **adding C2PA capabilities to a desktop, mobile, or embedded application**. The Rust library is the fundamental system underlying everything else. C2PA Tool uses it "under the hood" and language-specific APIs are generated from it.
-
-You can use the Rust library via the Foreign Function Interface (FFI) to:
-
-- Create and sign C2PA claims and manifests.
-- Embed a manifest store into certain asset file formats.
-- Parse and validate manifests found in certain asset file formats.
+An embedded application can use the Rust FFI (foreign function interface) to call Rust functions from languages such as C or C++, similarly to a native application. Embedded applications have unique constraints tied to the devices on which they run, including small memory footprint, low-powered hardware, intermittent network access, unique operating systems, or the lack of an operating system OS (running on bare metal). For these reasons, if you want to develop a CAI-enabled embedded application, please contact the CAI team directly.
 
 ## Which tool is right for you?
 
@@ -73,7 +59,7 @@ import green_check from '../static/img/green_check.png';
       <th style={{ textAlign: 'left' }}>Use To...</th>
       <th style={{ textAlign: 'left' }}>JavaScript Library </th>
       <th style={{ textAlign: 'left' }}>C2PA Tool</th>
-      <th style={{ textAlign: 'left' }}>Prerelease Libraries </th>
+      <th style={{ textAlign: 'left' }}>Python, C++, and Node.js Libraries </th>
       <th style={{ textAlign: 'left' }}>Rust Library</th>
     </tr>
   </thead>
