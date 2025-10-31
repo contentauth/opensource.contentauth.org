@@ -431,3 +431,15 @@ body:not(.is-scrolling) .navbar {
 .scroll-target {
   scroll-margin-top: 130px; /* Slightly more than title bar */
 }
+
+.warning {
+  background-color: rgb(250, 56, 62, 0.15);
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px solid rgb(122, 2, 2);
+}
+
+.warning::before {
+  content: '⚠️ WARNING: ';
+  margin-right: 10px;
+}
