@@ -269,7 +269,13 @@ function PropertiesTable({ title, description, properties, required }) {
 }
 
 function DefinitionsTOC({ defs }) {
-  const names = useMemo(() => Object.keys(defs || {}), [defs]);
+  const names = useMemo(
+    () =>
+      Object.keys(defs || {}).sort((a, b) =>
+        a.localeCompare(b, undefined, { sensitivity: 'base' }),
+      ),
+    [defs],
+  );
   if (names.length === 0) return null;
 
   const colCount = 4;
@@ -302,11 +308,74 @@ function DefinitionsTOC({ defs }) {
   );
 }
 
+function getUnionOptions(schema) {
+  if (!schema) return [];
+  const union = Array.isArray(schema.oneOf)
+    ? schema.oneOf
+    : Array.isArray(schema.anyOf)
+    ? schema.anyOf
+    : null;
+  if (!Array.isArray(union)) return [];
+  return union.filter((opt) => opt && typeof opt === 'object');
+}
+
+function UnionOptionsTable({ options }) {
+  if (!options || options.length === 0) return null;
+
+  const getTypeLabel = (opt) => {
+    if (!opt) return 'N/A';
+    if (typeof opt.type === 'string') return capitalizeType(opt.type);
+    if (Array.isArray(opt.type))
+      return opt.type.map(capitalizeType).join(' or ');
+    if (opt.$ref) {
+      const name = opt.$ref.startsWith('#/$defs/')
+        ? opt.$ref.replace('#/$defs/', '')
+        : opt.$ref;
+      return name;
+    }
+    return 'N/A';
+  };
+
+  return (
+    <table className="manifest-ref-table" style={{ marginTop: 10 }}>
+      <thead>
+        <tr>
+          <th className="manifest-ref-table">Type</th>
+          <th className="manifest-ref-table">Description</th>
+          <th className="manifest-ref-table">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {options.map((opt, idx) => (
+          <tr key={idx}>
+            <td className="manifest-ref-table">{getTypeLabel(opt)}</td>
+            <td className="manifest-ref-table">
+              {opt.description ? (
+                <div className="prop_desc">
+                  <Markdown text={opt.description} />
+                </div>
+              ) : (
+                'N/A'
+              )}
+            </td>
+            <td className="manifest-ref-table">
+              {Object.prototype.hasOwnProperty.call(opt, 'const')
+                ? String(opt.const)
+                : 'N/A'}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 function DefinitionSection({ name, schema }) {
   const titleId = slugify(name);
   const isObjectType =
     (schema && schema.type === 'object') ||
     (schema && isObject(schema.properties));
+  const unionOptions = getUnionOptions(schema);
 
   return (
     <>
@@ -320,7 +389,9 @@ function DefinitionSection({ name, schema }) {
         </div>
       ) : null}
 
-      {isObjectType ? (
+      {unionOptions.length > 0 ? (
+        <UnionOptionsTable options={unionOptions} />
+      ) : isObjectType ? (
         <PropertiesTable
           properties={schema.properties || {}}
           required={schema.required || []}
