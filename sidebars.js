@@ -277,7 +277,7 @@ const sidebars = {
             {
               type: 'link',
               label: 'API documentation',
-              href: 'https://github.com/contentauth/c2pa-node-v2/blob/main/docs/README.md',
+              href: 'https://contentauth.github.io/c2pa-node-v2/',
             },
             {
               type: 'link',
