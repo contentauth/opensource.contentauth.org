@@ -1,0 +1,101 @@
+name: Update schemas to latest
+on:
+  repository_dispatch:
+    types: [c2pa-rs-release]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-schemas:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Checkout json-manifest-reference repository
+        uses: actions/checkout@v5
+        with:
+          repository: contentauth/json-manifest-reference
+          path: ./json-manifest-reference
+
+      - name: Checkout c2pa-rs repository
+        uses: actions/checkout@v5
+        with:
+          repository: contentauth/c2pa-rs
+          path: ./c2pa-rs
+          fetch-depth: 0
+
+      - name: Get latest c2pa-rs version
+        working-directory: ./c2pa-rs
+        run: |
+          latest_tag=$(git tag -l "c2pa-v*" --sort=-v:refname | head -n 1)
+          echo "latest_tag=$latest_tag" >> $GITHUB_ENV
+          echo "$latest_tag"
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+
+      - name: Build schemas
+        working-directory: ./c2pa-rs
+        run: cargo run --bin export_schema
+
+      - name: Move new schemas into ./json-manifest-reference/_data
+        run: |
+          # We also rename the schemas to have an underscore in the filename instead of a dot to fix
+          # compatibility issues with Ruby/Jekyll.
+          for path in ./c2pa-rs/target/schema/*.schema.json; do
+            name=$(basename "$path")
+            new=${name/.schema/_schema}
+            cp "$path" "./json-manifest-reference/_data/$new"
+          done
+
+      - name: Check schemas for diff
+        id: diffs
+        working-directory: ./json-manifest-reference
+        run: |
+          if [ -n "$(git status --porcelain -- ./_data/)" ]; then
+            echo "diff=true" >> "$GITHUB_OUTPUT"
+            echo "true"
+          else
+            echo "diff=false" >> "$GITHUB_OUTPUT"
+            echo "false"
+          fi
+
+      - name: Install Ruby and build and cache dependencies
+        if: steps.diffs.outputs.diff == 'true'
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7.4'
+          bundler-cache: true
+          working-directory: ./json-manifest-reference
+
+      - name: Build Jekyll
+        if: steps.diffs.outputs.diff == 'true'
+        working-directory: ./json-manifest-reference
+        run: bundle exec jekyll build
+
+      - name: Move new built schemas into ./docs/manifest/json-ref
+        if: steps.diffs.outputs.diff == 'true'
+        # TODO: ideally we don't hardcode these paths, but we need to sort out a fix in the docs
+        run: |
+          cp ./json-manifest-reference/_site/manifest-def.html ./docs/manifest/json-ref
+          cp ./json-manifest-reference/_site/reader.html ./docs/manifest/json-ref
+          cp ./json-manifest-reference/_site/settings.html ./docs/manifest/json-ref
+
+      - name: Send schema PR
+        if: steps.diffs.outputs.diff == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          title: 'docs(schema): update schemas to ${{ env.latest_tag }}'
+          body: 'Updates schemas to ${{ env.latest_tag }}.'
+          commit-message: 'docs(schema): update schemas to ${{ env.latest_tag }}'
+          branch: 'schema-${{ env.latest_tag }}'
+          add-paths: ./docs/manifest/json-ref/*
+          base: ${{ github.event.repository.default_branch }}

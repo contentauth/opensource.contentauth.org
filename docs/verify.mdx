@@ -56,6 +56,14 @@ To use Verify on an asset URL, the URL must not require any authentication and t
 
 The [example-assets](https://contentauth.github.io/example-assets/) repository contains some sample assets that demonstrate Content Credentials, including links to view the corresponding manifest reports from the [C2PA Tool](c2patool) and to inspect the assets using Verify. See [the README as rendered in GitHub Pages](https://contentauth.github.io/example-assets/).
 
+### Source code
+
+The code for the Verify site is open source and is available at https://github.com/contentauth/verify-site/.
+
+:::warning Warning
+Verify uses the [legacy JavaScript library](js-sdk/getting-started/overview.mdx), which is deprecated and unsupported. For new projects, use the [new JavaScript library](c2pa-js/readme.md) instead.
+:::
+
 ## Information displayed
 
 Once you've uploaded an asset or entered an asset URL, if the asset:
@@ -195,7 +203,7 @@ If the issuer string is too long, then the date might be truncated or not shown 
 
 ### Validation status
 
-If the manifest has [validation errors](manifest/validation.md), then Verify displays this notice:
+If the manifest has [validation errors](manifest/reading/validation.md), then Verify displays this notice:
 
 import verify_validation_error from '../static/img/verify-validation-error.png';
 
