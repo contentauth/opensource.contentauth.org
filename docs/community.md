@@ -38,9 +38,9 @@ These related projects may be of interest, but the CAI team doesn't maintain or 
 - [**TrustMark**](https://github.com/adobe/trustmark): Open-source Python implementation of watermarking for encoding, decoding and removing image watermarks. You can use TrustMark as part of providing [durable content credentials](durable-cr/index.md).
 - [**C2PA Security Testing Tool**](https://github.com/contentauth/c2pa-attacks): A CLI tool derived from [c2patool](https://github.com/contentauth/c2patool) that performs security testing on a Content Credentials application.  This tool is intended for use by software security professionals.
 
-## C2PA Foundations video course
+## Content Credentials Foundations video course
 
-For a series of educational videos, see [C2PA Foundations: A Course for Implementers](http://learn.contentauthenticity.org/).
+For a series of educational videos, see [Content Credentials Foundations: A Course for Implementers](http://learn.contentauthenticity.org/).
 
 ## Discussions on Discord
 
