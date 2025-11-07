@@ -16,12 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Checkout json-manifest-reference repository
-        uses: actions/checkout@v5
-        with:
-          repository: contentauth/json-manifest-reference
-          path: ./json-manifest-reference
-
       - name: Checkout c2pa-rs repository
         uses: actions/checkout@v5
         with:
@@ -46,48 +40,19 @@ jobs:
         working-directory: ./c2pa-rs
         run: cargo run --bin export_schema
 
-      - name: Move new schemas into ./json-manifest-reference/_data
-        run: |
-          # We also rename the schemas to have an underscore in the filename instead of a dot to fix
-          # compatibility issues with Ruby/Jekyll.
-          for path in ./c2pa-rs/target/schema/*.schema.json; do
-            name=$(basename "$path")
-            new=${name/.schema/_schema}
-            cp "$path" "./json-manifest-reference/_data/$new"
-          done
+      - name: Move new schemas into ./static/schemas
+        run: cp ./c2pa-rs/target/schema/* ./static/schemas/
 
       - name: Check schemas for diff
         id: diffs
-        working-directory: ./json-manifest-reference
         run: |
-          if [ -n "$(git status --porcelain -- ./_data/)" ]; then
+          if [ -n "$(git status --porcelain -- ./static/schemas/)" ]; then
             echo "diff=true" >> "$GITHUB_OUTPUT"
             echo "true"
           else
             echo "diff=false" >> "$GITHUB_OUTPUT"
             echo "false"
           fi
-
-      - name: Install Ruby and build and cache dependencies
-        if: steps.diffs.outputs.diff == 'true'
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '2.7.4'
-          bundler-cache: true
-          working-directory: ./json-manifest-reference
-
-      - name: Build Jekyll
-        if: steps.diffs.outputs.diff == 'true'
-        working-directory: ./json-manifest-reference
-        run: bundle exec jekyll build
-
-      - name: Move new built schemas into ./docs/manifest/json-ref
-        if: steps.diffs.outputs.diff == 'true'
-        # TODO: ideally we don't hardcode these paths, but we need to sort out a fix in the docs
-        run: |
-          cp ./json-manifest-reference/_site/manifest-def.html ./docs/manifest/json-ref
-          cp ./json-manifest-reference/_site/reader.html ./docs/manifest/json-ref
-          cp ./json-manifest-reference/_site/settings.html ./docs/manifest/json-ref
 
       - name: Send schema PR
         if: steps.diffs.outputs.diff == 'true'
@@ -97,5 +62,5 @@ jobs:
           body: 'Updates schemas to ${{ env.latest_tag }}.'
           commit-message: 'docs(schema): update schemas to ${{ env.latest_tag }}'
           branch: 'schema-${{ env.latest_tag }}'
-          add-paths: ./docs/manifest/json-ref/*
+          add-paths: ./static/schemas/*
           base: ${{ github.event.repository.default_branch }}
