@@ -103,6 +103,9 @@ function markdownToHtml(text) {
   // Also remove any remaining single-line reference definitions
   html = html.replace(/^\s*\[[^\]]+\]:\s*[^\n]+$/gm, '');
 
+  // Remove Markdown heading lines (e.g., "# Foo", "## Bar") anywhere in the text
+  html = html.replace(/^\s*#{1,6}\s+.*$/gm, '');
+
   // Resolve Rust doc-style code references like [`Type`] or [`Type::member`]
   const TYPE_MODULE_HINTS = {
     Verify: 'settings',
@@ -178,6 +181,9 @@ function markdownToHtml(text) {
     return `<a href="${safeUrl}">${url}</a>`;
   });
 
+  // Remove leftover crate references like "[crate::foo]" (not code-linked)
+  html = html.replace(/\[crate::[^\]]+\]/g, '');
+
   // Bold and italics
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
   html = html.replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, '$1<em>$2</em>');
@@ -189,10 +195,11 @@ function markdownToHtml(text) {
   html = html.replace(/^\s*\[`[^`]+`\]:\s*[^\n]+$/gm, '');
 
   // Paragraphs: split on double newlines, single newline -> <br/>
-  const parts = html
-    .split(/\n\n+/)
-    .map((para) => `<p>${para.replace(/\n/g, '<br />')}</p>`);
+  const parts = html.split(/\n\n+/).map((para) => `<p>${para}</p>`);
+  //    .map((para) => `<p>${para.replace(/\n/g, '<br />')}</p>`);
+
   return parts.join('');
+  //return html;
 }
 
 function Markdown({ text }) {
