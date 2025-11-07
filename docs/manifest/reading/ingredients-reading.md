@@ -20,7 +20,7 @@ The C2PA Technical Specification describes _ingredient assertions_ but the CAI S
 
 The `ingredients` array contains an element for each ingredient used to create an asset.  When an ingredient itself has Content Credentials, those manifests are included in the composed asset's manifest store to keep the provenance data intact.
 
-The `ingredients` array contains an [ingredient object](manifest/json-ref/reader.mdx#ingredient) for each ingredient.  The `ingredient` object's `title` property  (usually is the source file name) is required for v1 and v2 ingredients, but optional for v3 ingredients.
+The `ingredients` array contains an [ingredient object](manifest/json-ref/reader-ref.mdx#ingredient) for each ingredient.  The `ingredient` object's `title` property  (usually is the source file name) is required for v1 and v2 ingredients, but optional for v3 ingredients.
 
 ### The label property
 
