@@ -53,7 +53,14 @@
       ]
     }
   },
-  "required": ["version", "trust", "cawg_trust", "core", "verify", "builder"],
+  "required": [
+    "version",
+    "trust",
+    "cawg_trust",
+    "core",
+    "verify",
+    "builder"
+  ],
   "$defs": {
     "Trust": {
       "description": "Settings to configure the trust list.",
@@ -65,22 +72,36 @@
         },
         "user_anchors": {
           "description": "List of additional user-provided trust anchor root certificates as a PEM bundle.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "trust_anchors": {
           "description": "List of default trust anchor root certificates as a PEM bundle.\n\nNormally this option contains the official C2PA-recognized trust anchors found here:\n<https://github.com/c2pa-org/conformance-public/tree/main/trust-list>",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "trust_config": {
           "description": "List of allowed extended key usage (EKU) object identifiers (OID) that\ncertificates must have.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "allowed_list": {
           "description": "List of explicitly allowed certificates as a PEM bundle.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["verify_trust_list"]
+      "required": [
+        "verify_trust_list"
+      ]
     },
     "Core": {
       "description": "Settings to configure core features.",
@@ -88,7 +109,10 @@
       "properties": {
         "merkle_tree_chunk_size_in_kb": {
           "description": "Size of the [`BmffHash`] merkle tree chunks in kilobytes.\n\nThis option is associated with the [`MerkleMap::fixed_block_size`] field.\n\nSee more information in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_bmff_based_hash>\n\n[`MerkleMap::fixed_block_size`]: crate::assertions::MerkleMap::fixed_block_size\n[`BmffHash`]: crate::assertions::BmffHash",
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "uint",
           "minimum": 0
         },
@@ -136,7 +160,7 @@
           "type": "boolean"
         },
         "ocsp_fetch": {
-          "description": "Whether to fetch the certificates OCSP status during validation.\n\nRevocation status is checked in the following order:\n1. The OCSP staple stored in the COSE claim of the manifest\n2. Otherwise if `ocsp_fetch` is enabled, it fetches a new OCSP status\n3. Otherwise if `ocsp_fetch` is disabled, it checks [`CertificateStatus`] assertions\n\nThe default value is false.\n\n[`CertificateStatus`]: crate::assertions::CertificateStatus",
+          "description": "Whether to fetch the certificates OCSP status during validation.\n\nRevocation status is checked in the following order:\n1. The OCSP staple stored in the COSE claim of the manifest\n2. Otherwise if `ocsp_fetch` is enabled, it fetches a new OCSP status\n3. Otherwise if `ocsp_fetch` is disabled, it checks `CertificateStatus` assertions\n\nThe default value is false.",
           "type": "boolean"
         },
         "remote_manifest_fetch": {
@@ -204,7 +228,10 @@
         },
         "certificate_status_should_override": {
           "description": "Whether to only use [`CertificateStatus`] assertions to check certificate revocation status. If there\nis a stapled OCSP in the COSE claim of the manifest, it will be ignored. If [`Verify::ocsp_fetch`] is\nenabled, it will also be ignored.\n\nThe default value is false.\n\n[`CertificateStatus`]: crate::assertions::CertificateStatus\n[`Verify::ocsp_fetch`]: crate::settings::Verify::ocsp_fetch",
-          "type": ["boolean", "null"]
+          "type": [
+            "boolean",
+            "null"
+          ]
         },
         "intent": {
           "description": "The default [`BuilderIntent`] for the [`Builder`].\n\nSee [`BuilderIntent`] for more information.\n\n[`BuilderIntent`]: crate::BuilderIntent\n[`Builder`]: crate::Builder",
@@ -219,17 +246,26 @@
         },
         "created_assertion_labels": {
           "description": "Assertions with a base label included in this list will be automatically marked as a created assertion.\nAssertions not in this list will be automatically marked as gathered.\n\nNote that the label should be a **base label**, not including the assertion version nor instance.\n\nSee more information on the difference between created vs gathered assertions in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_fields>",
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "type": "string"
           }
         },
         "generate_c2pa_archive": {
           "description": "Whether to generate a C2PA archive (instead of zip) when writing the manifest builder.\nThis will eventually become the default behavior.",
-          "type": ["boolean", "null"]
+          "type": [
+            "boolean",
+            "null"
+          ]
         }
       },
-      "required": ["thumbnail", "actions"]
+      "required": [
+        "thumbnail",
+        "actions"
+      ]
     },
     "ClaimGeneratorInfoSettings": {
       "description": "Settings for the claim generator info.",
@@ -241,7 +277,10 @@
         },
         "version": {
           "description": "A human readable string of the product's version.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "icon": {
           "description": "Reference to an icon.",
@@ -266,7 +305,9 @@
           ]
         }
       },
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "additionalProperties": true
     },
     "ResourceRef": {
@@ -283,21 +324,33 @@
         },
         "data_types": {
           "description": "More detailed data types as defined in the C2PA spec.",
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/$defs/AssetType"
           }
         },
         "alg": {
           "description": "The algorithm used to hash the resource (if applicable).",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "hash": {
           "description": "The hash of the resource (if applicable).",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["format", "identifier"]
+      "required": [
+        "format",
+        "identifier"
+      ]
     },
     "AssetType": {
       "type": "object",
@@ -306,10 +359,15 @@
           "type": "string"
         },
         "version": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "ClaimGeneratorInfoOperatingSystem": {
       "anyOf": [
@@ -425,11 +483,17 @@
       "properties": {
         "all_actions_included": {
           "description": "Whether or not to set the [Actions::all_actions_included][crate::assertions::Actions::all_actions_included]\nfield.",
-          "type": ["boolean", "null"]
+          "type": [
+            "boolean",
+            "null"
+          ]
         },
         "templates": {
           "description": "Templates to be added to the [Actions::templates][crate::assertions::Actions::templates] field.",
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/$defs/ActionTemplateSettings"
           }
@@ -474,7 +538,10 @@
         },
         "software_agent_index": {
           "description": "0-based index into the softwareAgents array",
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "uint",
           "minimum": 0
         },
@@ -502,15 +569,23 @@
         },
         "description": {
           "description": "Description of the template.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "template_parameters": {
           "description": "Additional parameters for the template",
-          "type": ["object", "null"],
+          "type": [
+            "object",
+            "null"
+          ],
           "additionalProperties": true
         }
       },
-      "required": ["action"]
+      "required": [
+        "action"
+      ]
     },
     "DigitalSourceType": {
       "description": "Description of the source of an asset.\n\nThe full list of possible digital source types are found below:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_digital_source_type>\n<https://cv.iptc.org/newscodes/digitalsourcetype>",
@@ -654,7 +729,9 @@
           ]
         }
       },
-      "required": ["enabled"]
+      "required": [
+        "enabled"
+      ]
     },
     "OcspFetchScope": {
       "description": "The scope of which manifests to fetch for OCSP.",
@@ -682,7 +759,9 @@
               "$ref": "#/$defs/DigitalSourceType"
             }
           },
-          "required": ["create"],
+          "required": [
+            "create"
+          ],
           "additionalProperties": false
         },
         {
@@ -717,13 +796,22 @@
                   "type": "string"
                 },
                 "tsa_url": {
-                  "type": ["string", "null"]
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
-              "required": ["alg", "sign_cert", "private_key"]
+              "required": [
+                "alg",
+                "sign_cert",
+                "private_key"
+              ]
             }
           },
-          "required": ["local"],
+          "required": [
+            "local"
+          ],
           "additionalProperties": false
         },
         {
@@ -743,13 +831,22 @@
                   "type": "string"
                 },
                 "tsa_url": {
-                  "type": ["string", "null"]
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
-              "required": ["url", "alg", "sign_cert"]
+              "required": [
+                "url",
+                "alg",
+                "sign_cert"
+              ]
             }
           },
-          "required": ["remote"],
+          "required": [
+            "remote"
+          ],
           "additionalProperties": false
         }
       ]
