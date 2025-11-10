@@ -10,13 +10,12 @@
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
-    "postinstall": "run-p docs:*",
+    "postinstall": "npm run docs:fetch-readme",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "prepare": "husky install",
     "prettier": "prettier --ignore-unknown --write .",
-    "docs:fetch-readme": "node scripts/fetch-readme.js",
-    "docs:generate-api-docs": "node scripts/generate-api-docs/index.js"
+    "docs:fetch-readme": "node scripts/fetch-readme.js"
   },
   "dependencies": {
     "@contentauth/react": "^0.2.38",
@@ -46,17 +45,11 @@
     ]
   },
   "devDependencies": {
-    "commander": "^9.3.0",
-    "ejs": "^3.1.8",
-    "fs-extra": "^10.1.0",
-    "glob": "^9.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
     "node-fetch": "^2.6.7",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.6.2",
-    "raw-loader": "^4.0.2",
-    "standard-markdown-documenter": "^0.2.2"
+    "prettier": "^2.6.2"
   },
   "lint-staged": {
     "**/*": "prettier --ignore-unknown --write"

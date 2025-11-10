@@ -1,5 +1,3 @@
-// const api = require('./api/api-sidebar');
-
 const sidebars = {
   docs: [
     {
