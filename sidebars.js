@@ -333,18 +333,43 @@ const sidebars = {
       collapsed: true,
       items: [
         {
-          type: 'doc',
-          id: 'c2pa-ios/README',
+          type: 'category',
           label: 'iOS',
+          link: { type: 'doc', id: 'c2pa-ios/README' },
+          collapsed: true,
+          items: [
+            {
+              type: 'link',
+              label: 'API documentation',
+              href: 'https://contentauth.github.io/c2pa-node-v2/',
+            },
+            {
+              type: 'link',
+              label: 'GitHub',
+              href: 'https://github.com/contentauth/c2pa-node-v2/tree/main',
+            },
+          ],
         },
         {
-          type: 'doc',
-          id: 'c2pa-android/README',
+          type: 'category',
           label: 'Android',
+          link: { type: 'doc', id: 'c2pa-android/README' },
+          collapsed: true,
+          items: [
+            {
+              type: 'link',
+              label: 'API documentation',
+              href: 'https://contentauth.github.io/c2pa-android/c2pa-android/org.contentauth.c2pa/',
+            },
+            {
+              type: 'link',
+              label: 'GitHub',
+              href: 'https://github.com/contentauth/c2pa-ios',
+            },
+          ],
         },
       ],
     },
-
     {
       type: 'category',
       label: 'Signing and certificates',
