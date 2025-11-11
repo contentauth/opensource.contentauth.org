@@ -6,6 +6,9 @@
 
 const lightCodeTheme = require('prism-react-renderer').themes.github;
 const darkCodeTheme = require('prism-react-renderer').themes.dracula;
+const remarkGithubAdmonitionsToDirectives =
+  require('remark-github-admonitions-to-directives').default ||
+  require('remark-github-admonitions-to-directives');
 
 const copyright = `
 <div style="font-size: 0.75rem;">
@@ -78,6 +81,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          remarkPlugins: [remarkGithubAdmonitionsToDirectives],
           editUrl: ({ docPath }) => {
             // Don't show edit link for dynamically generated API docs
             if (docPath.startsWith('js-sdk/api/')) {
@@ -110,6 +114,9 @@ const config = {
             mainPath = mainPath.replace(/readme\.md$/i, 'README.md');
             return `https://github.com/contentauth/opensource.contentauth.org/edit/main/docs/${mainPath}`;
           },
+        },
+        pages: {
+          remarkPlugins: [remarkGithubAdmonitionsToDirectives],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
