@@ -341,12 +341,12 @@ const sidebars = {
             {
               type: 'link',
               label: 'API documentation',
-              href: 'https://contentauth.github.io/c2pa-node-v2/',
+              href: 'https://contentauth.github.io/c2pa-ios/documentation/c2pa/',
             },
             {
               type: 'link',
               label: 'GitHub',
-              href: 'https://github.com/contentauth/c2pa-node-v2/tree/main',
+              href: 'https://github.com/contentauth/c2pa-ios',
             },
           ],
         },
@@ -364,7 +364,7 @@ const sidebars = {
             {
               type: 'link',
               label: 'GitHub',
-              href: 'https://github.com/contentauth/c2pa-ios',
+              href: 'https://github.com/contentauth/c2pa-android',
             },
           ],
         },
