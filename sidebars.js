@@ -359,7 +359,7 @@ const sidebars = {
             {
               type: 'link',
               label: 'API documentation',
-              href: 'https://contentauth.github.io/c2pa-android/c2pa-android/org.contentauth.c2pa/',
+              href: 'https://contentauth.github.io/c2pa-android/',
             },
             {
               type: 'link',
