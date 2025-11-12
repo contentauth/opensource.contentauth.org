@@ -29,7 +29,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Working with manifests',
+      label: 'Understanding manifests',
       link: { type: 'doc', id: 'manifest/understanding-manifest' },
       collapsed: true,
       items: [
@@ -108,6 +108,27 @@ const sidebars = {
         },
       ],
     },
+    {
+      type: 'category',
+      label: 'Working with manifests',
+      link: { type: 'doc', id: 'tasks/working-manifests' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'tasks/read',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/get-resources',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/build',
+        },
+      ],
+    },
+
     {
       type: 'category',
       label: 'C2PA Tool',
