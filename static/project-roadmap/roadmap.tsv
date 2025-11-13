@@ -1,0 +1,174 @@
+Title	URL	Assignees	Status
+Add support for new data hash exclusions when update manifests are present	https://github.com/contentauth/c2pa-rs/issues/1479	mauricefisher64	Released
+Support BoxHash for TIFF, GIF and other formats	https://github.com/contentauth/c2pa-rs/issues/394	mauricefisher64	In Progress
+Bring compressed manifest work forward to the current branch	https://github.com/contentauth/c2pa-rs/issues/1417	mauricefisher64	Todo
+Add support to asset handlers to report capabilities	https://github.com/contentauth/c2pa-rs/issues/1416	mauricefisher64	Released
+Fix signature check for OCSP responses	https://github.com/contentauth/c2pa-rs/issues/1368	mauricefisher64	In Progress
+Update TIFF support to be compatibile with latest spec	https://github.com/contentauth/c2pa-rs/issues/1363	mauricefisher64	In Progress
+Support for C2PA 2.2 changes to Box Hash	https://github.com/contentauth/c2pa-rs/issues/1286	mauricefisher64	Released
+Support C2PA 2.2 changes to Data Hash assertions	https://github.com/contentauth/c2pa-rs/issues/1285	mauricefisher64	Released
+Support C2PA 2.2 BMFF Update Manifest	https://github.com/contentauth/c2pa-rs/issues/1205	mauricefisher64	Released
+Support 2.2 TimeStamp logging & timestamp trust support	https://github.com/contentauth/c2pa-rs/issues/1206	mauricefisher64	Released
+Fix regression in signature validation	https://github.com/contentauth/c2pa-rs/issues/1015	mauricefisher64	Released
+Support remote URLs in 2024 API.	https://github.com/contentauth/c2pa-rs/issues/456	gpeacock	Released
+C2PA-rs returns wrong validation code for box hash failure	https://github.com/contentauth/c2pa-rs/issues/328	mauricefisher64	Released
+Update openssl create, verify compatibility with OpenSSL 3.x	https://github.com/contentauth/c2pa-rs/issues/350	mauricefisher64	Released
+Add support for ARW and NEF	https://github.com/contentauth/c2pa-rs/pull/355	mauricefisher64	Released
+Python API 2024 first release	https://github.com/contentauth/c2pa-python/issues/13	gpeacock	Released
+Rust API 2024 first release	https://github.com/contentauth/c2pa-rs/issues/384	gpeacock	Released
+Review C2PA 2.1 Specification		gpeacock, mauricefisher64	Released
+Publish Python API fixes for DVIDS and others	https://github.com/contentauth/c2pa-python/issues/38	gpeacock	Released
+Define new Adobe no Gen AI assertion for Fresco.		gpeacock	Released
+C/C++ API 2024 first release	https://github.com/contentauth/c2pa-c/issues/11	gpeacock	Released
+Complete 1.3 validation	https://github.com/contentauth/c2pa-rs/issues/376	mauricefisher64	Released
+C2patool updates to expose new features	https://github.com/contentauth/c2pa-rs/issues/741	gpeacock, mauricefisher64	Released
+Add place embeddable manifest support.	https://github.com/contentauth/c2pa-rs/issues/422	mauricefisher64	Released
+BMFF Streaming	https://github.com/contentauth/c2pa-rs/issues/389	mauricefisher64	Released
+Validate timestamp signature	https://github.com/contentauth/c2pa-rs/issues/477	mauricefisher64	Released
+Trust list to SDK	https://github.com/contentauth/c2pa-rs/issues/377	mauricefisher64	Released
+OCSP enablement SDK	https://github.com/contentauth/c2pa-rs/issues/378	gpeacock	Released
+V2 Remote signing	https://github.com/contentauth/c2pa-rs/issues/374	gpeacock	Released
+Compressed Manifests (1.4)	https://github.com/contentauth/c2pa-rs/issues/382	mauricefisher64	Code Complete
+Claim_V2 support	https://github.com/contentauth/c2pa-rs/issues/486	gpeacock, mauricefisher64	Released
+Standard method to reference ingredients from Actions	https://github.com/contentauth/c2pa-rs/issues/626	gpeacock	Released
+C2PA spec 2.1 support	https://github.com/contentauth/c2pa-rs/issues/383	gpeacock, mauricefisher64	Released
+Enable BoxHash generation (1.4)	https://github.com/contentauth/c2pa-rs/issues/475	mauricefisher64	Released
+Add GIF support	https://github.com/contentauth/c2pa-rs/issues/476	ok-nick	Released
+MP3 support	https://github.com/contentauth/c2pa-rs/issues/367	mauricefisher64	Released
+Enable 2.x validation path for claims.v2	https://github.com/contentauth/c2pa-rs/issues/931	mauricefisher64	Released
+support signed OCSP responses	https://github.com/contentauth/c2pa-rs/issues/952	mauricefisher64	Released
+Fix Reader.resource_from_stream so that we can access resources in all manifests.	https://github.com/contentauth/c2pa-rs/issues/604		Released
+Support for Collections Assertion	https://github.com/contentauth/c2pa-rs/issues/487	ok-nick	Released
+Read only mode for specific formats	https://github.com/contentauth/c2pa-rs/issues/381	cdmurph32, mauricefisher64	Released
+OCSP solution for Verify	https://github.com/contentauth/c2pa-rs/issues/380	mauricefisher64	Released
+New signing protocol	https://github.com/contentauth/c2pa-rs/issues/399	gpeacock, mauricefisher64	Released
+XMP Read/Write for BMFF and other types	https://github.com/contentauth/c2pa-rs/issues/391	mauricefisher64	Released
+Separate crypto  into its own crate	https://github.com/contentauth/c2pa-rs/issues/502	scouten-adobe	Released
+Update c2patool to 24 API	https://github.com/contentauth/c2pa-rs/issues/745	gpeacock	Released
+API 2024 errors review	https://github.com/contentauth/c2pa-rs/issues/452	gpeacock, mauricefisher64	In Progress
+Update manifest enablement	https://github.com/contentauth/c2pa-rs/issues/379	mauricefisher64	Released
+Regions of interest support	https://github.com/contentauth/c2pa-rs/issues/397	ok-nick	Released
+Figure out how to represent 2.1 manifests and ingredients compatibly in the SDK.	https://github.com/contentauth/c2pa-rs/issues/912	gpeacock	Released
+Figure out if embeddable manifests can be used everywhere	https://github.com/contentauth/c2pa-rs/issues/503	mauricefisher64	Released
+Embeddable Manifest support in V2	https://github.com/contentauth/c2pa-rs/issues/534	gpeacock	Released
+BMFF Hash V3 support to enable Merkle generation for BMFF	https://github.com/contentauth/c2pa-rs/issues/550	mauricefisher64	Released
+Merkle generation for all BMFF support	https://github.com/contentauth/c2pa-rs/issues/388	mauricefisher64	Released
+Support the certificate status Assertion	https://github.com/contentauth/c2pa-rs/issues/1207	alextrnnn, gpeacock	Released
+Support UUID Content Boxes for redaction	https://github.com/contentauth/c2pa-rs/issues/1013	mauricefisher64	Released
+DASH Completion	https://github.com/contentauth/c2pa-rs/issues/387	mauricefisher64	Released
+Redaction	https://github.com/contentauth/c2pa-rs/issues/375	gpeacock	Todo
+Investigate build size reductions by selective feature compilation	https://github.com/contentauth/c2pa-rs/issues/1219		In Review / Triage
+Support user exclusions for DataHash	https://github.com/contentauth/c2pa-rs/issues/560		Released
+iOS Support	https://github.com/contentauth/c2pa-rs/issues/392		Released
+Android Support	https://github.com/contentauth/c2pa-rs/issues/393		Released
+OpenSource Test Image repo		gpeacock	Released
+PDF Objects			In Review / Triage
+Regions of Interest support	https://github.com/contentauth/c2pa-rs/issues/395		Released
+Integration Testing (what platforms)			In Review / Triage
+Automated builds for all platforms, including mobile			In Review / Triage
+Detailed Support matrix documentation			In Review / Triage
+Separating Asset_IO to support third party contributions	https://github.com/contentauth/c2pa-rs/issues/398	gpeacock	Released
+Make_test_images validation tests	https://github.com/contentauth/c2pa-rs/issues/412	gpeacock	Released
+Add support for SDK configuration settings	https://github.com/contentauth/c2pa-rs/issues/413	mauricefisher64	Released
+Support streaming writes for TIFF format	https://github.com/contentauth/c2pa-rs/issues/414	mauricefisher64	Released
+Add `no_openssl` feature to allow builds on systems without OpenSSL		gpeacock	Released
+Add functionality to get the signing certificate chain without OpenSSL	https://github.com/contentauth/c2pa-rs/issues/447	gpeacock	Released
+Create a build that only exposes 2024 APIs	https://github.com/contentauth/c2pa-rs/issues/454	gpeacock	Released
+2024 APIs		mauricefisher64	Released
+C++ istream/ostream support	https://github.com/contentauth/c2pa-c/issues/12	gpeacock	Released
+Add native XMP write support for PNG	https://github.com/contentauth/c2pa-rs/issues/432	mauricefisher64	Released
+Zip format support	https://github.com/contentauth/c2pa-rs/issues/406	mauricefisher64, ok-nick	Code Complete
+Test tool for API 2024, create and compare manifests	https://github.com/contentauth/c2pa-rs/issues/451	gpeacock, ok-nick	Released
+API 2024 documentation review	https://github.com/contentauth/c2pa-rs/issues/455	crandmck	Released
+Support RemoteSigner API via AsyncSigner	https://github.com/contentauth/c2pa-rs/issues/449	gpeacock	Released
+Add Region of Interest Assertion helper	https://github.com/contentauth/c2pa-js-legacy/issues/167	emensch	In Review / Triage
+Cloud URLs in Manifests (icons & etc...)	https://github.com/contentauth/c2pa-rs/issues/390	gpeacock, mauricefisher64	Released
+AIFF support			In Review / Triage
+Support timestamp assertions	https://github.com/contentauth/c2pa-rs/issues/548	mauricefisher64	Released
+Support for timestamp V2	https://github.com/contentauth/c2pa-rs/issues/547	mauricefisher64	Released
+Read support for c2md (JUMBF data) manifests	https://github.com/contentauth/c2pa-rs/issues/549	mauricefisher64	In Review / Triage
+Remove VC support/generation when writing Claim V2 manifests	https://github.com/contentauth/c2pa-rs/issues/553		Released
+Implement Mandatory Created and Opened Actions	https://github.com/contentauth/c2pa-rs/issues/586	gpeacock, ok-nick	Released
+Add redactions for databoxes	https://github.com/contentauth/c2pa-rs/issues/554	mauricefisher64	Released
+New structures to support 1.x and 2.x namespaces	https://github.com/contentauth/c2pa-rs/issues/555		Released
+Change ValidationLogs to support standardized 2.x logging	https://github.com/contentauth/c2pa-rs/issues/556	gpeacock, mauricefisher64	Released
+Custom serializer/deserialize that can read 1.4-2.x. Claims	https://github.com/contentauth/c2pa-rs/issues/557	mauricefisher64	Released
+Change Claim Signature URI to be full path	https://github.com/contentauth/c2pa-rs/issues/558		Released
+Update ClaimAssertion to map assertions to correct assertion list	https://github.com/contentauth/c2pa-rs/issues/559		Released
+During standard Claim validation validate Claim icon if present	https://github.com/contentauth/c2pa-rs/issues/561		Released
+Remove writing of native camera RAW formats from SDK.	https://github.com/contentauth/c2pa-rs/issues/567	cdmurph32	Released
+Update c2patool for 2.1 spec support	https://github.com/contentauth/c2pa-rs/issues/746	gpeacock	Released
+Integrate Dynamic Assertion via Signer for CAWG	https://github.com/contentauth/c2pa-rs/issues/585	gpeacock	Released
+Testing infrastructure	https://github.com/contentauth/c2pa-rs/issues/396	gpeacock	Released
+Generate SDK v1.0 documentation	https://github.com/contentauth/c2pa-rs/issues/453	gpeacock	In Review / Triage
+Convert c2patool to use settings config	https://github.com/contentauth/c2pa-rs/issues/747	ok-nick	Released
+CAWG signing integration for c2patool	https://github.com/contentauth/c2pa-rs/issues/748	ok-nick	Released
+Option to automatically add parent in Builder API	https://github.com/contentauth/c2pa-rs/issues/590	gpeacock	Released
+c2patool Ingredients use trust list and warn for errors.	https://github.com/contentauth/c2pa-rs/issues/1213		Released
+Manifest schema documentation update	https://github.com/contentauth/c2pa-rs/issues/634	gpeacock	Todo
+Complete '24 API Deprecations	https://github.com/contentauth/c2pa-rs/issues/637	gpeacock	Released
+Add validation_state API	https://github.com/contentauth/c2pa-rs/issues/638	gpeacock	Released
+Bring C++ API up to date with Python API.	https://github.com/contentauth/c2pa-c/issues/26	gpeacock	Released
+Add support for c2pa.icon	https://github.com/contentauth/c2pa-rs/issues/709		Released
+Add XMP support for SVG	https://github.com/contentauth/c2pa-rs/issues/764	mauricefisher64	Released
+Update claim signer API to support V2 claims	https://github.com/contentauth/c2pa-rs/issues/847	mauricefisher64	Released
+ValidationResults support & Ingredients v3	https://github.com/contentauth/c2pa-rs/issues/851	gpeacock	Released
+V2 claims in C++ SDK	https://github.com/contentauth/c2pa-c/issues/38	gpeacock	Released
+V2 Claims in Python SDK	https://github.com/contentauth/c2pa-python/issues/80	gpeacock	Released
+Rust API modifications for v2 claims	https://github.com/contentauth/c2pa-rs/issues/852	gpeacock	Released
+Remove openssl feature	https://github.com/contentauth/c2pa-rs/issues/868	gpeacock	Released
+change Settings to be thread safe	https://github.com/contentauth/c2pa-rs/issues/1019	mauricefisher64	Released
+Support 2.x ingredient conflict resolution	https://github.com/contentauth/c2pa-rs/issues/1055	mauricefisher64	Released
+Support 2.x Actions validation	https://github.com/contentauth/c2pa-rs/issues/1056	mauricefisher64	Released
+New 2.2 Informational Code	https://github.com/contentauth/c2pa-rs/issues/1068	mauricefisher64	Released
+Auto parent generation linking actions to ingredients	https://github.com/contentauth/c2pa-rs/issues/1069		Released
+c2pa.metadata Assertion support	https://github.com/contentauth/c2pa-rs/issues/1070	alextrnnn	Released
+Validation of CBOR and JSON conformance for assertions	https://github.com/contentauth/c2pa-rs/issues/1071	mauricefisher64	Released
+Remove VC support	https://github.com/contentauth/c2pa-rs/issues/1072	mauricefisher64	Released
+Validate manifest label names for conformance	https://github.com/contentauth/c2pa-rs/issues/1073	mauricefisher64	Released
+Support 2.2 ingredient conflict resolutions	https://github.com/contentauth/c2pa-rs/issues/1074	mauricefisher64	Released
+Settings support in API	https://github.com/contentauth/c2pa-rs/issues/1075	gpeacock	Released
+Support LogoType for X509 certificates	https://github.com/contentauth/c2pa-rs/issues/1076		In Review / Triage
+OCSP Validation states	https://github.com/contentauth/c2pa-rs/issues/1077	mauricefisher64	Released
+Support LinkHeader for remote manifest fetch	https://github.com/contentauth/c2pa-rs/issues/1078		In Review / Triage
+Sidecar support for language bindings	https://github.com/contentauth/c2pa-rs/issues/1079		In Review / Triage
+Create unit test for interop between 1.x and 2.x Claims	https://github.com/contentauth/c2pa-rs/issues/1080	mauricefisher64	Released
+SDK support to allow creation of Update Manifests	https://github.com/contentauth/c2pa-rs/issues/1081	gpeacock	Released
+Ingredient Claim Signature validation for 2.2	https://github.com/contentauth/c2pa-rs/issues/1082		Released
+API Support for gathered assertions	https://github.com/contentauth/c2pa-rs/issues/1084	gpeacock	Released
+c2pa-rs published libraries	https://github.com/contentauth/c2pa-rs/issues/1085	gpeacock	Released
+Building improvement	https://github.com/contentauth/c2pa-rs/issues/1086	gpeacock	Released
+Write assertions for thumbnails and icons (no databoxes)	https://github.com/contentauth/c2pa-rs/issues/1087	gpeacock	Released
+2.2 thumbnail name change	https://github.com/contentauth/c2pa-rs/issues/1088	gpeacock	Released
+Support Icon Assertion	https://github.com/contentauth/c2pa-rs/issues/1209	gpeacock	Released
+Timestamp Assertion	https://github.com/contentauth/c2pa-rs/issues/1210	gpeacock	Todo
+Soft Binding Implementation	https://github.com/contentauth/c2pa-rs/issues/1211	ok-nick	Released
+Asset Reference Assertion support	https://github.com/contentauth/c2pa-rs/issues/1212	alextrnnn	Released
+Ingredients use trust list and warn for errors.	https://github.com/contentauth/c2pa-rs/issues/1214	gpeacock	Released
+AllActionsIncluded default to true	https://github.com/contentauth/c2pa-rs/issues/1215	ok-nick	Released
+Signer from Settings	https://github.com/contentauth/c2pa-rs/issues/1216	ok-nick	Released
+Remove v1_api feature code	https://github.com/contentauth/c2pa-rs/issues/1217	gpeacock	Released
+Enable v2 claims by default	https://github.com/contentauth/c2pa-rs/issues/1218	gpeacock	Released
+Add M4V to list of supported BMFF types	https://github.com/contentauth/c2pa-rs/issues/1224	mauricefisher64	Released
+Add builder.set_resource_path	https://github.com/contentauth/c2pa-rs/issues/1231	alextrnnn	Released
+Implement ResourceResolver	https://github.com/contentauth/c2pa-rs/issues/1256	ok-nick	In Review / Triage
+Support for c2pa.removed	https://github.com/contentauth/c2pa-rs/issues/1262		In Review / Triage
+Claim instanceID field handling	https://github.com/contentauth/c2pa-rs/issues/1263		In Review / Triage
+Figure out why verify_after_sign won't work with make_test_images	https://github.com/contentauth/c2pa-rs/issues/1267	gpeacock	Released
+Fix the unresolvable_did unit test that was timing out [CAI-9157]	https://github.com/contentauth/c2pa-rs/issues/1277	scouten-adobe	Released
+Expose claim version correctly in public API	https://github.com/contentauth/c2pa-rs/issues/1279	gpeacock	Todo
+Use more consistent formatting in Rust docs	https://github.com/contentauth/c2pa-rs/issues/1280	scouten-adobe	In Review / Triage
+Support sidecars for unsupported formats	https://github.com/contentauth/c2pa-rs/issues/1320		In Review / Triage
+Harden the c_ffi_api	https://github.com/contentauth/c2pa-rs/issues/1334		In Review / Triage
+Support for feedback/progress monitor in SDK.	https://github.com/contentauth/c2pa-rs/issues/1405	gpeacock, mauricefisher64	In Review / Triage
+Investigate solution for embeddable manifests for BMFF based assets	https://github.com/contentauth/c2pa-rs/issues/1407	mauricefisher64	In Review / Triage
+Investigate performance issues on Mac	https://github.com/contentauth/c2pa-rs/issues/1362	mauricefisher64	Released
+Update OpenSSL validation to enforce RSA-PSS salt len	https://github.com/contentauth/c2pa-rs/issues/1365	mauricefisher64	Released
+CA 942 work	https://github.com/contentauth/c2pa-rs/issues/1400	gpeacock	In Progress
+Update ValidationState and add AssetState	https://github.com/contentauth/c2pa-rs/issues/1408	gpeacock, ok-nick	In Progress
+Allow v1 claims to have a CBOR Metadata assertion	https://github.com/contentauth/c2pa-rs/issues/1409	gpeacock	Released
+Add c2patool option to validate a local .c2pa file with a stream.	https://github.com/contentauth/c2pa-rs/issues/1410	gpeacock, ok-nick	Released
+Create solution to pass restored Reader state to Builder	https://github.com/contentauth/c2pa-rs/issues/1411	gpeacock, mauricefisher64	Released
+Support multi-rendition fragmented streams.	https://github.com/contentauth/c2pa-rs/issues/1415	mauricefisher64	In Review / Triage
+Ocsp check should not create redundant success status	https://github.com/contentauth/c2pa-rs/issues/1429	gpeacock	Released
+Decode CAWG Identity assertion inside Reader	https://github.com/contentauth/c2pa-rs/issues/1430	gpeacock	Released
