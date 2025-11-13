@@ -44,6 +44,10 @@ These related projects may be of interest, but the CAI team doesn't maintain or 
 
 The free [browser extension for Google Chrome](https://chromewebstore.google.com/detail/c2pa-content-credentials/mjkaocdlpjmphfkjndocehcdhbigaafp?hl=en) enables you to verify and display manifests for images, audio and videos which have C2PA Content Credentials.
 
+## Content Credentials Foundations video course
+
+For a series of educational videos, see [Content Credentials Foundations: A Course for Implementers](http://learn.contentauthenticity.org/).
+
 ## Discussions on Discord
 
 The CAI maintains a [Discord server](https://discord.gg/CAI) for open technical discussions within the developer community, with channels focused on different projects and topics.

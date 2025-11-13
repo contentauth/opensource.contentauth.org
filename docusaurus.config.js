@@ -177,13 +177,11 @@ const config = {
             position: 'right',
             className: 'header-logo header-github-link',
           },
-          /*
           {
-            href: 'https://twitter.com/ContentAuth',
+            href: 'http://learn.contentauthenticity.org/',
             position: 'right',
-            className: 'header-logo header-twitter-link',
+            className: 'header-logo header-learn-link',
           },
-          */
         ],
       },
       footer: {
