@@ -92,6 +92,7 @@ export default function Roadmap({ src = '/project-roadmap/roadmap.tsv' }) {
   const [rows, setRows] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState({});
 
   useEffect(() => {
     let cancelled = false;
@@ -141,81 +142,115 @@ export default function Roadmap({ src = '/project-roadmap/roadmap.tsv' }) {
     <div>
       {STATUS_SECTIONS.map((section) => {
         const items = grouped[section.key] || [];
+        const isOpen = !!expanded[section.key];
+        const sectionId = section.key.toLowerCase().replace(/\s+/g, '-');
+        const contentId = `${sectionId}-content`;
         return (
           <div key={section.key} style={{ marginBottom: '32px' }}>
-            <h3 id={section.key.toLowerCase().replace(/\s+/g, '-')}>
-              {section.heading}
+            <h3 id={sectionId} style={{ marginBottom: '8px' }}>
+              <button
+                onClick={() =>
+                  setExpanded((prev) => ({
+                    ...prev,
+                    [section.key]: !prev[section.key],
+                  }))
+                }
+                aria-expanded={isOpen}
+                aria-controls={contentId}
+                style={{
+                  all: 'unset',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  style={{ display: 'inline-block', width: '1em' }}
+                >
+                  {isOpen ? '▾' : '▸'}
+                </span>
+                <span>{section.heading}</span>
+                <span style={{ color: '#666', fontWeight: 400 }}>
+                  ({items.length})
+                </span>
+              </button>
             </h3>
-            <p>{section.description}</p>
-            {items.length === 0 ? (
-              section.key === 'Merged to Main' ? (
-                <p>
-                  <em>There are currently no items with this status.</em>
-                </p>
-              ) : null
-            ) : (
-              <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-                <thead>
-                  <tr>
-                    <th
-                      style={{
-                        textAlign: 'left',
-                        borderBottom: '1px solid #ddd',
-                        padding: '8px',
-                      }}
-                    >
-                      Task
-                    </th>
-                    <th
-                      style={{
-                        textAlign: 'left',
-                        borderBottom: '1px solid #ddd',
-                        padding: '8px',
-                        width: '200px',
-                      }}
-                    >
-                      Repository
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {items.map((item, idx) => {
-                    const titleCell =
-                      item.url && item.url.length ? (
-                        <a
-                          href={item.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {item.title || '(untitled)'}
-                        </a>
-                      ) : (
-                        item.title || '(untitled)'
-                      );
-                    return (
-                      <tr key={`${section.key}-${idx}`}>
-                        <td
+            {isOpen ? (
+              <div id={contentId}>
+                <p>{section.description}</p>
+                {items.length === 0 ? (
+                  section.key === 'Merged to Main' ? (
+                    <p>
+                      <em>There are currently no items with this status.</em>
+                    </p>
+                  ) : null
+                ) : (
+                  <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+                    <thead>
+                      <tr>
+                        <th
                           style={{
-                            borderBottom: '1px solid #eee',
+                            textAlign: 'left',
+                            borderBottom: '1px solid #ddd',
                             padding: '8px',
                           }}
                         >
-                          {titleCell}
-                        </td>
-                        <td
+                          Task
+                        </th>
+                        <th
                           style={{
-                            borderBottom: '1px solid #eee',
+                            textAlign: 'left',
+                            borderBottom: '1px solid #ddd',
                             padding: '8px',
+                            width: '200px',
                           }}
                         >
-                          {item.repository || ''}
-                        </td>
+                          Repository
+                        </th>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            )}
+                    </thead>
+                    <tbody>
+                      {items.map((item, idx) => {
+                        const titleCell =
+                          item.url && item.url.length ? (
+                            <a
+                              href={item.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {item.title || '(untitled)'}
+                            </a>
+                          ) : (
+                            item.title || '(untitled)'
+                          );
+                        return (
+                          <tr key={`${section.key}-${idx}`}>
+                            <td
+                              style={{
+                                borderBottom: '1px solid #eee',
+                                padding: '8px',
+                              }}
+                            >
+                              {titleCell}
+                            </td>
+                            <td
+                              style={{
+                                borderBottom: '1px solid #eee',
+                                padding: '8px',
+                              }}
+                            >
+                              {item.repository || ''}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+            ) : null}
           </div>
         );
       })}
