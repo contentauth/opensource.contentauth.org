@@ -91,7 +91,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'C2PA Tool',
-      link: { type: 'doc', id: 'c2patool/readme' },
+      link: { type: 'doc', id: 'c2patool/c2patool-index' },
       collapsed: true,
       items: [
         {

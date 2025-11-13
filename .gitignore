@@ -15,7 +15,7 @@
 /docs/js-sdk/examples/view-manifest/*.html
 /docs/c2pa-js/*.md
 /docs/c2pa-js/docs/*.md
-/docs/c2patool/*.md
+/docs/c2patool/readme*.md
 /docs/c2patool/docs/*.md
 /docs/c2pa-node/*.md
 /docs/c2pa-node-v2/*.md
