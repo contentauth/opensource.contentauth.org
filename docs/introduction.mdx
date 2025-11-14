@@ -19,10 +19,10 @@ For a series of educational videos on using the CAI open source SDK, see [**Cont
 The CAI open-source SDK consist of:
 
 - [**C2PA Tool**](c2patool/readme.md), a command-line tool for working with manifests and media. This tool is a wrapper around the Rust SDK and provides most of the same capabilities that it does. C2PA Tool can:
-  - Read a JSON report of manifest data.
-  - Attach a manifest store to an asset, if it doesn't already have an associated manifest store.
-  - Add a manifest to to the associated manifest store if the asset does have an associated manifest store.
-- [**JavaScript library**](c2pa-js) that enables web pages to verify and read manifest data using client JavaScript. Use it to add user interface elements to your website that display manifest data while following the [C2PA user experience recommendations](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html).
+  - Display a report of JSON manifest data attached to an asset.
+  - Attach a manifest data to an asset.
+  - Add a manifest to to the associated manifest store if the asset already has an associated manifest data.
+- [**JavaScript library**](c2pa-js/readme.md) that enables web pages to verify and read manifest data using client JavaScript. Use it to add user interface elements to your website that display manifest data while following the [C2PA user experience recommendations](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html).
 - **[C/C++](c2pa-c/readme.md), [Python](c2pa-python/readme.md), [Node.js](c2pa-node/readme.md) libraries** that enable applications to read and validate manifest data, create and sign manifest data and embed it supported asset files.
 - [**Mobile libraries**](mobile.md) that enable mobile applications for iOS and Android to to read and generate manifest data.
 - [**The Rust library**](rust-sdk/readme.md) that generates the other language bindings and can also be used directly to read and generate manifest data. The Rust library is the fundamental system underlying everything else.
@@ -38,11 +38,11 @@ The following diagram provides a high-level view of the SDK.
 Applications can use the CAI SDK in several different ways:
 
 - Web pages can use the JavaScript library to display Content Credentials.
-- Applications can "shell out" to call C2PA Tool directly, though doing so is not highly scalable.
 - Applications written in C++, Python, or Node.js can use the corresponding language libraries to:
   - Create, modify, and sign manifests.
   - Embed manifests into media files.
   - Parse and validate manifests.
+- Applications can "shell out" to call C2PA Tool directly, though doing so is not highly scalable.
 - Mobile apps can use the iOS and Android libraries do all the above.
 
 Native applications can also use Rust's _Foreign Function Interface_ (FFI) to call functions in the Rust library. The FFI enables interoperability between Rust and code written in other languages. For example, a Windows application can use the FFI to call Rust functions from languages such as C++ or C#. For an example, see the [c2c2pa repository](https://github.com/contentauth/c2c2pa).
