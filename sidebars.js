@@ -143,11 +143,6 @@ const sidebars = {
           label: 'Change log',
         },
         {
-          type: 'doc',
-          id: 'c2pa-service-example/readme',
-          label: 'C2PA Tool service example',
-        },
-        {
           type: 'link',
           label: 'GitHub',
           href: 'https://github.com/contentauth/c2pa-rs/tree/main/cli',
@@ -189,11 +184,6 @@ const sidebars = {
           type: 'link',
           label: 'API documentation',
           href: 'https://docs.rs/c2pa',
-        },
-        {
-          type: 'doc',
-          id: 'c2pa-min/readme',
-          label: 'C2PA Rust example application',
         },
         {
           type: 'link',

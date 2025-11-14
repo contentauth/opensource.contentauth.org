@@ -99,12 +99,6 @@ const readmes = [
     repo: 'contentauth/c2pa-rs',
     path: 'docs/supported-formats.md',
   },
-  // c2patool-service-example (renamed from c2pa-service-example)
-  {
-    dest: resolve(__dirname, '../docs/c2pa-service-example/readme.md'),
-    repo: 'contentauth/c2patool-service-example',
-    path: 'README.md',
-  },
   // Old Node.js lib
   {
     dest: resolve(__dirname, '../docs/c2pa-node/readme.md'),
@@ -199,11 +193,6 @@ const readmes = [
     dest: resolve(__dirname, '../docs/rust-sdk/docs/release-notes.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'docs/release-notes.md',
-  },
-  {
-    dest: resolve(__dirname, '../docs/c2pa-min/readme.md'),
-    repo: 'contentauth/c2pa-min',
-    path: 'README.md',
   },
   {
     dest: resolve(__dirname, '../static/sb-alg-list.json'),
