@@ -19,7 +19,7 @@ $ touch .gitkeep
 */
 
 const readmes = [
-  // js-sdk examples - View manifest
+  /* Old js-sdk examples - Removed 
   {
     dest: resolve(
       __dirname,
@@ -57,6 +57,7 @@ const readmes = [
     repo: 'contentauth/c2pa-js-legacy',
     path: 'examples/minimal-ts-webpack/src/index.ts',
   },
+*/
   // New JavaScript SDK (9/16/2025)
   {
     dest: resolve(__dirname, '../docs/c2pa-js/readme.md'),
