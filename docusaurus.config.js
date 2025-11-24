@@ -204,7 +204,7 @@ const config = {
         appId: 'XOI00ZGSIB',
 
         // Public API key: it is safe to commit it
-        apiKey: '8c42f1b6cc4394334d572acc5d216069',
+        apiKey: '5b5b38fb40adb6dfa25b6bccb03815a5',
 
         indexName: 'contentauthenticity',
 
