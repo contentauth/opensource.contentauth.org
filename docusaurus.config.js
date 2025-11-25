@@ -50,6 +50,7 @@ const config = {
   baseUrl: '/',
   staticDirectories: ['static'],
   onBrokenLinks: 'warn',
+  onBrokenAnchors: 'log',
   markdown: {
     hooks: {
       onBrokenMarkdownLinks: 'warn',
