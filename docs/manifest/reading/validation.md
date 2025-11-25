@@ -39,7 +39,7 @@ Manifest validation errors can occur, for example, when:
 
 ## Validation errors in ingredients
 
-Ingredients are validated when they are imported into an asset and the result is stored in the [ValidationResults](./manifest/json-ref/reader#validationresults) object.
+Ingredients are validated when they are imported into an asset and the result is stored in the [ValidationResults](../json-ref/reader-ref.mdx#validationresults) object. 
 
 ## Error status codes
 

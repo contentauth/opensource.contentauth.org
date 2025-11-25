@@ -50,7 +50,12 @@ const config = {
   baseUrl: '/',
   staticDirectories: ['static'],
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenAnchors: 'log',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
   favicon: '/favicon.png',
   organizationName: 'contentauth',
   projectName: 'opensource.contentauth.org',

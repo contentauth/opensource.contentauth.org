@@ -7,21 +7,21 @@ const sidebars = {
     {
       type: 'category',
       label: 'Getting started',
-      link: { type: 'doc', id: 'getting-started' },
+      link: { type: 'doc', id: 'getting-started/index' },
       collapsed: true,
       items: [
         {
           type: 'doc',
           label: 'FAQs',
-          id: 'faqs',
+          id: 'getting-started/faqs',
         },
         {
           type: 'doc',
-          id: 'verify',
+          id: 'getting-started/verify',
         },
         {
           type: 'doc',
-          id: 'verify-known-cert-list',
+          id: 'getting-started/verify-known-cert-list',
         },
       ],
     },

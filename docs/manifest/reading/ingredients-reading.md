@@ -74,7 +74,7 @@ The ingredient object's `relationship` property describes its relationship to th
 
 ## Validation results
 
-The [ValidationResults](/docs/manifest/json-ref/reader#validationresults) object contains the the validation results for the active manifest and any changes to ingredients.
+The [ValidationResults](../json-ref/reader-ref.mdx#validationresults) object contains the the validation results for the active manifest and any changes to ingredients.
 
 When ingredients are added, the SDK validates their Content Credentials (if any).  However, the validation status of an ingredient does not imply anything about the validation status of the composed asset containing the ingredient. In other words:
 

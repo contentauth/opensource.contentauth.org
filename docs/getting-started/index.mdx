@@ -1,13 +1,10 @@
 ---
-id: getting-started
 title: Getting started with Content Credentials
 ---
 
-import c2pa_terms from '../static/img/c2pa-terms.png';
-import cai_open_source from '../static/img/cai-open-source.jpg';
-import cai_os_tools_table from '../static/img/cai-os-tools-table.png';
-import cai_levels from '../static/img/cai-levels.png';
-import cr_pin from '../static/img/cr-pin.png';
+import c2pa_terms from '@site/static/img/c2pa-terms.png';
+import cai_levels from '@site/static/img/cai-levels.png';
+import cr_pin from '@site/static/img/cr-pin.png';
 
 This is a technical introduction to the Content Authenticity Initiative (CAI) open-source SDK that provides initial context and an overview of the technical aspects of implementing CAI solutions.
 
@@ -29,7 +26,7 @@ Now, let's drill down a bit to clarify some of these terms.
 
 **Actor**: A human or hardware or software product. For example, a camera, image editing software, cloud service, or the person using such tools.
 
-**Asset**: A digital media file or stream of data of [certain specific image, video, or audio formats](rust-sdk/#supported-file-formats). In the future, the types of supported assets will expand. A _composed asset_ generalizes this concept, for example an image superimposed on top of another image.
+**Asset**: A digital media file or stream of data of [certain specific image, video, or audio formats](../rust-sdk/docs/supported-formats.md). A _composed asset_ generalizes this concept, for example an image superimposed on top of another image.
 
 **Action**: An operation that an _actor_ performs on an _asset._ For example, "create," "embed," or "change contrast."
 
@@ -90,9 +87,9 @@ In practice, to use a certificate with the CAI SDK, follow this process:
 For more information on getting and using certificates, see [Signing and certificates](signing/index.md).
 :::
 
-### Verify trust list
+### Interim trust list
 
-import verify_unknown_source from '../static/img/verify-cc-unknown-source.png';
+import verify_unknown_source from '@site/static/img/verify-cc-unknown-source.png';
 
 The C2PA [Verify tool](https://verify.contentauthenticity.org) uses a list of _known certificates_ (sometimes referred to as a "trust list") to determine whether a Content Credential was issued by a known source. Currently, it uses the [interim trust list](verify-known-cert-list) but it will be updated soon to use the official [C2PA trust list](conformance.mdx#c2pa-trust-lists).
 
