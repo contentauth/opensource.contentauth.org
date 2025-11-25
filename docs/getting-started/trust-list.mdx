@@ -3,7 +3,7 @@ id: verify-known-cert-list
 title: The interim trust list
 ---
 
-import verify_unknown_source from '../static/img/verify-cc-unknown-source.png';
+import verify_unknown_source from '../../static/img/verify-cc-unknown-source.png';
 
 :::warning Warning
 The process described on this page is deprecated. The C2PA has released its official trust lists, and Verify will be updated to use them soon. See [Deprecation timeline](#deprecation-timeline) for more information.
@@ -37,7 +37,7 @@ For more information about conformance, see [C2PA conformance program](conforman
 The Verify site hosts the following files that it uses to [validate signing certificates](https://c2pa.org/specifications/specifications/2.0/specs/C2PA_Specification.html#_c2pa_signers). Together, these files form the _interim known certificate list_:
 
 - [**The interim end-entity certificate list**](https://github.com/contentauth/verify-site/blob/main/static/trust/allowed.pem) consists of end-entity certificates. If the certificate is on this list, it is considered "known." To reduce bandwidth consumption, a version with SHA-256 hashes of the certificates is also available.
-- [**The interim known anchor list**](https://github.com/contentauth/verify-site/blob/main/static/trust/anchors.pem) contains the list of known anchor certificates. If an end-entity [certificate's chain](getting-started.mdx#signing-and-certificates) can be traced back to an anchor certificate on this list, the certificate is considered "known."
+- [**The interim known anchor list**](https://github.com/contentauth/verify-site/blob/main/static/trust/anchors.pem) contains the list of known anchor certificates. If an end-entity [certificate's chain](index.mdx#signing-and-certificates) can be traced back to an anchor certificate on this list, the certificate is considered "known."
 - [**The configuration file**](https://github.com/contentauth/verify-site/blob/main/static/trust/store.cfg) specifies the [Extended Key Usage (EKU)](https://datatracker.ietf.org/doc/html/rfc9336) values accepted for end-entity certificates. An end-entity certificate must have at least one of the EKUs in this list to be valid.
 
 ## Checking your certificate

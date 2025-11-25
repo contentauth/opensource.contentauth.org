@@ -11,7 +11,7 @@ Trust lists connect the end-entity certificate that signed a manifest back to th
 
 ## Signing a manifest
 
-The simplest way to add a C2PA manifest to an asset file and sign it is by using C2PA Tool (`c2patool`). You can run C2PA Tool manually from the command line (for example, during development) and more generally from any executable program that can call out to the shell, such as a Node.js application as shown in the [c2patool Node.js service example](../c2pa-node-example).
+The simplest way to add a C2PA manifest to an asset file and sign it is by using C2PA Tool (`c2patool`). You can run C2PA Tool manually from the command line (for example, during development) and more generally from any executable program that can call out to the shell.
 
 Similarly, using the Rust SDK, you can [add a manifest to an asset file](https://docs.rs/c2pa/latest/c2pa/#example-adding-a-manifest-to-a-file), referencing the certificate and private key file. The [Node.js](../c2pa-node), [Python](../c2pa-python), and [C++/C](../c2pa-c) libraries can also add and sign a manifest.
 
@@ -157,5 +157,5 @@ This command displays the manifest attached to `signed_image.jpg` and should inc
 ```
 
 :::info
-You can also use [Verify](https://verify.contentauthenticity.org) to confirm that your image was signed, but if you used a personal certificate (not an organization certificate) then [Verify won't show the organization name](get-cert.md#organization-name) and if your certificate is not on the [known certificate list](../trust-list.mdx), Verify [displays the message](../verify.mdx#title-and-signing-information) "The Content Credential issuer couldn't be recognized...."
+You can also use [Verify](https://verify.contentauthenticity.org) to confirm that your image was signed, but if you used a personal certificate (not an organization certificate) then [Verify won't show the organization name](get-cert.md#organization-name) and if your certificate is not on the [known certificate list](../getting-started/trust-list.mdx), Verify [displays the message](../getting-started/verify.mdx#title-and-signing-information) "The Content Credential issuer couldn't be recognized...."
 :::

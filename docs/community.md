@@ -29,7 +29,7 @@ Participants are required to follow the [Adobe Code of Conduct](https://github.c
 
 ### Verify
 
-The code for the [C2PA Verify website](https://verify.contentauthenticity.org/) is open source.  For general information on using it, see [Using the Verify tool](verify.mdx).
+The code for the [C2PA Verify website](https://verify.contentauthenticity.org/) is open source.  For general information on using it, see [Using the Verify tool](getting-started/verify.mdx).
 
 ### Related projects
 
@@ -55,8 +55,8 @@ The CAI maintains a [Discord server](https://discord.gg/CAI) for open technical 
 ## Other resources
 
 - **Read the [CAI blog](https://contentauthenticity.org/blog)** to get the latest news and updates about CAI.
-- **Follow [CAI on Twitter](https://twitter.com/ContentAuth)** for the latest general announcements and information.
-- **[The FAQ](./faqs)** address a number of high-level questions.
+- **Follow [CAI on X](https://twitter.com/ContentAuth)** for the latest general announcements and information.
+- **[The FAQs](getting-started/faqs.mdx)** address a number of high-level questions.
 
 ## Developer survey
 
