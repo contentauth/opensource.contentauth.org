@@ -7,7 +7,7 @@ title: Writing assertions and actions
 
 Assertions provide information about when, where, and how an asset was created or transformed.
 
-The JSON manifest contains an `assertions` array, whose elements are [AssertionDefinition](./json-ref/manifest-def/#assertiondefinition) objects. An AssertionDefinition object has two required properties: `label`, a string, and `data`, which can contain arbitrary information. When [reading an assertion](../json-ref/reader#manifestassertion), there are two optional properties, `kind` and `instance`.
+The JSON manifest contains an `assertions` array, whose elements are [AssertionDefinition](../json-ref/manifest-def.mdx#assertiondefinition) objects. An AssertionDefinition object has two required properties: `label`, a string, and `data`, which can contain arbitrary information. When [reading an assertion](../json-ref/reader-ref.mdx#manifestassertion), there are two optional properties, `kind` and `instance`.
 
 The standard form of an assertion in a JSON manifest is:
 
@@ -60,7 +60,7 @@ Content bindings are standard assertions such as `c2pa.hash.boxes` and `c2pa.has
 The CAI SDK writes content bindings assertions, so normally you don't need to write them, just read them.
 :::
 
-For example, the `c2pa.hash.data` assertion shown in the [detailed manifest example](../examples.mdx/#detailed-manifest) specifies an exclusion hash:
+For example, the `c2pa.hash.data` assertion shown in the [detailed manifest example](../examples.mdx#detailed-manifest) specifies an exclusion hash:
 
 ```json
 "assertions": [
@@ -331,8 +331,8 @@ Metadata assertions must include one or more `@context` properties in the `data`
 | Assertion | Label | Description |
 |-----------|-------|-------------|
 | [Exif information](#exif-assertion) | `stds.exif` | Camera information such as maker, lens stored in Exchangeable image file format (Exif). |
-| [IPTC photo and video metadata](#iptc-metadata) | `stds.iptc` | Properties from the IPTC Photo and Video Metadata Standards, describing for example ownership, rights, and other metadata about a image or video asset. |
-| [Training and data mining](#do-not-train-assertion) | `cawg.training-mining` | Whether the creator/owner of an asset grants permission to use it for data mining or AI/ML training.  NOTE: Previously, this assertion's label was `c2pa.training-mining`. |
+| [IPTC photo and video metadata](#iptc-metadata-assertion) | `stds.iptc` | Properties from the IPTC Photo and Video Metadata Standards, describing for example ownership, rights, and other metadata about a image or video asset. |
+| [CAWG training and data mining](#cawg-training-and-data-mining-assertion) | `cawg.training-mining` | Whether the creator/owner of an asset grants permission to use it for data mining or AI/ML training.  NOTE: Previously, this assertion's label was `c2pa.training-mining`. |
 
 ### Exif assertion
 
@@ -375,11 +375,7 @@ Earlier versions of the C2PA specification defined the `stds.iptc.photo-metadata
 Do not use the IPTC `plus:DataMining` property to indicate whether permission is granted to use an asset in data mining or AI/ML training. Instead use the [CAWG training and data mining assertion](#cawg-training-and-data-mining-assertion).
 :::
 
-For a summary reference to IPTC metadata properties, see [IPTC properties](iptc-properties).
-
-See also:
-- [Exploring c2patool and IPTC Photo Metadata](https://iptc.atlassian.net/wiki/spaces/PMD/pages/613613569/Exploring+c2patool+and+IPTC+Photo+Metadata) (Aug 2022).
-- [IPTC Photo Metadata User Guide](https://www.iptc.org/std/photometadata/documentation/userguide/)
+See also: [IPTC Photo Metadata User Guide](https://www.iptc.org/std/photometadata/documentation/userguide/).
 
 For example:
 

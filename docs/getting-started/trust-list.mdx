@@ -3,13 +3,13 @@ id: verify-known-cert-list
 title: The interim trust list
 ---
 
-import verify_unknown_source from '../static/img/verify-cc-unknown-source.png';
+import verify_unknown_source from '@site/static/img/verify-cc-unknown-source.png';
 
 :::warning Warning
 The process described on this page is deprecated. The C2PA has released its official trust lists, and Verify will be updated to use them soon. See [Deprecation timeline](#deprecation-timeline) for more information.
 :::
 
-The C2PA **[Verify tool](https://contentcredentials.org/verify)** uses a list of _known certificates_ (sometimes referred to as a "trust list") to determine whether a Content Credential was issued by a known source. If an asset's Content Credential was not signed by a known certificate, the Verify tool will display this message:
+The C2PA **[Verify tool](https://verify.contentauthenticity.org)** uses a list of _known certificates_ (sometimes referred to as a "trust list") to determine whether a Content Credential was issued by a known source. If an asset's Content Credential was not signed by a known certificate, the Verify tool will display this message:
 
 <img
   src={verify_unknown_source}
@@ -21,7 +21,7 @@ Conversely, if the Content Credential was signed by a known certificate, the Ver
 ## Deprecation timeline
 
 :::note
-Currently, **[Verify](https://contentcredentials.org/verify)** uses the interim trust list described here (also referred to as the _temporary trust list_), but Verify will be updated soon to use the official [C2PA trust list](conformance.mdx#c2pa-trust-lists).
+Currently, **[Verify](https://verify.contentauthenticity.org)** uses the interim trust list described here (also referred to as the _temporary trust list_), but Verify will be updated soon to use the official [C2PA trust list](conformance.mdx#c2pa-trust-lists).
 :::
 
 The interim trust list (also known as the _temporary trust list_) will remain operational **through December 31, 2025**. During this time, C2PA will continue to accept new certificates following the process described below. At some point, the Verify site will distinguish between Content Credentials from conforming products and those signed using certificates on the interim trust list.
@@ -37,7 +37,7 @@ For more information about conformance, see [C2PA conformance program](conforman
 The Verify site hosts the following files that it uses to [validate signing certificates](https://c2pa.org/specifications/specifications/2.0/specs/C2PA_Specification.html#_c2pa_signers). Together, these files form the _interim known certificate list_:
 
 - [**The interim end-entity certificate list**](https://github.com/contentauth/verify-site/blob/main/static/trust/allowed.pem) consists of end-entity certificates. If the certificate is on this list, it is considered "known." To reduce bandwidth consumption, a version with SHA-256 hashes of the certificates is also available.
-- [**The interim known anchor list**](https://github.com/contentauth/verify-site/blob/main/static/trust/anchors.pem) contains the list of known anchor certificates. If an end-entity [certificate's chain](getting-started.mdx#signing-and-certificates) can be traced back to an anchor certificate on this list, the certificate is considered "known."
+- [**The interim known anchor list**](https://github.com/contentauth/verify-site/blob/main/static/trust/anchors.pem) contains the list of known anchor certificates. If an end-entity [certificate's chain](index.mdx#signing-and-certificates) can be traced back to an anchor certificate on this list, the certificate is considered "known."
 - [**The configuration file**](https://github.com/contentauth/verify-site/blob/main/static/trust/store.cfg) specifies the [Extended Key Usage (EKU)](https://datatracker.ietf.org/doc/html/rfc9336) values accepted for end-entity certificates. An end-entity certificate must have at least one of the EKUs in this list to be valid.
 
 ## Checking your certificate

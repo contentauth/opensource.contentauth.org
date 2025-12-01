@@ -1,8 +1,11 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+//const lightCodeTheme = require('prism-react-renderer/themes/github');
+//const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+
+const lightCodeTheme = require('prism-react-renderer').themes.github;
+const darkCodeTheme = require('prism-react-renderer').themes.dracula;
 
 const copyright = `
 <div style="font-size: 0.75rem;">
@@ -47,7 +50,12 @@ const config = {
   baseUrl: '/',
   staticDirectories: ['static'],
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenAnchors: 'log',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
   favicon: '/favicon.png',
   organizationName: 'contentauth',
   projectName: 'opensource.contentauth.org',
@@ -174,13 +182,11 @@ const config = {
             position: 'right',
             className: 'header-logo header-github-link',
           },
-          /*
           {
-            href: 'https://twitter.com/ContentAuth',
+            href: 'http://learn.contentauthenticity.org/',
             position: 'right',
-            className: 'header-logo header-twitter-link',
+            className: 'header-logo header-learn-link',
           },
-          */
         ],
       },
       footer: {
@@ -204,7 +210,7 @@ const config = {
         appId: 'XOI00ZGSIB',
 
         // Public API key: it is safe to commit it
-        apiKey: '8c42f1b6cc4394334d572acc5d216069',
+        apiKey: '5b5b38fb40adb6dfa25b6bccb03815a5',
 
         indexName: 'contentauthenticity',
 

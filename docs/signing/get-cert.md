@@ -13,7 +13,7 @@ To sign manifest claims, you must have an X.509 v3 security certificate and key 
 ## Purchasing a certificate
 
 :::note
-The [C2PA conformance program](https://c2pa.org/conformance/) establishes the requirements governing the issuance of C2PA claim signing certificates for use by product developers.  Through the end of 2025 you can still purchase a certificate from any CA and request to add it to the [interim trust list](trust-list.mdx), but starting in 2026 conforming generator products must use a certificate from a CA on the C2PA trust list.  See [C2PA conformance program](conformance.mdx) for more information.
+The [C2PA conformance program](https://c2pa.org/conformance/) establishes the requirements governing the issuance of C2PA claim signing certificates for use by product developers.  Through the end of 2025 you can still purchase a certificate from any CA and request to add it to the [interim trust list](../getting-started/trust-list.mdx), but starting in 2026 conforming generator products must use a certificate from a CA on the C2PA trust list.  See [C2PA conformance program](../conformance.mdx) for more information.
 :::
 
 The process to purchase a certificate and key is different for each CA: You might be able to simply click a "Buy" button on the CA's website. Or your can make your own key and use it to create a certificate signing request (CSR) that you send to the CA. Regardless of the process, what you get back is a signed certificate that you use to create a certificate chain.

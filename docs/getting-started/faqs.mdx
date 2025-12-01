@@ -31,13 +31,13 @@ Notable implementations using blockchain:
 
 ### Are Content Credentials about digital rights management?
 
-No; Content Credentials do not enforce permissions for access to content. In many cases, the name displayed on the [Verify website](https://contentcredentials.org/verify) is the name of the exporter of the content, not the rights owner.
+No; Content Credentials do not enforce permissions for access to content. In many cases, the name displayed on the [Verify website](https://verify.contentauthenticity.org) is the name of the exporter of the content, not the rights owner.
 
-The ["Produced by" section](verify.mdx#produced-by) in Verify refers to the name of the exporter. If the image was created with an Adobe Product such as Photoshop with Content Credentials (Beta) enabled, the "Produced by" section shows the name of the Adobe ID associated with the user who exported the image.
+The [Title and signgin information](verify.mdx#title-and-signing-information) in Verify refers to the name of the exporter. If the image was created with an Adobe Product such as Photoshop with Content Credentials (Beta) enabled, the "Produced by" section shows the name of the Adobe ID associated with the user who exported the image.
 
 ### Do Content Credentials indicate if an image is fake or altered?
 
-Content Credentials don't indicate if an image is fake. They can provide information on the origin of an image and how it was edited: For example, if an AI tool supports Content Credentials, then they indicate if [an image was generated with AI](manifest/assertions-actions.md#generative-ai-action). If an image was taken with a C2PA-enabled camera, the Content Credentials would show that, along with any subsequent edits, if they were made with C2PA-enabled software tools.
+Content Credentials don't indicate if an image is fake. They can provide information on the origin of an image and how it was edited: For example, if an AI tool supports Content Credentials, then they indicate if [an image was generated with AI](manifest/writing/assertions-actions.md#generative-ai-action). If an image was taken with a C2PA-enabled camera, the Content Credentials would show that, along with any subsequent edits, if they were made with C2PA-enabled software tools.
 
 :::info
 Content Credentials provide a **positive signal** about the origin and history of an image, but they don't provide a **negative signal** about the authenticity of an image.
@@ -60,16 +60,6 @@ The [manifest](manifest/understanding.md) that defines the Content Credentials
 can include various assertions about the image, including the ingredients, the
 date and time, the location, and the device that created the image.
 
-### How can I prove time and place an image was created without revealing my identity?
-
-Content Credentials can specify identity by using the [Schema.org CreativeWork assertion](manifest/assertions-actions.md#creative-work-assertion), but it is _entirely optional_.
-
-For example, using Photoshop you
-can add Content Credentials that indicate what edits were made without saying who
-did it. You would know Adobe signed the Content Credentials and that's it. Regardless
-of the "who", the cryptographically-signed manifest ensures you know the date and
-time. A camera could also include Exif metadata with location information.
-
 ### How do you prevent faking GPS location metadata?
 
-The location data included in [Exif metadata](manifest/assertions-actions.md#exif-assertion) is based on the implementor. People would trust the data based on the various "trust signals" they are given in the manifest, such as who signed it and when.
+The location data included in [Exif metadata](manifest/writing/assertions-actions.md#exif-assertion) is based on the implementor. People would trust the data based on the various "trust signals" they are given in the manifest, such as who signed it and when.

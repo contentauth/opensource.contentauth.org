@@ -3,9 +3,9 @@ id: verify
 title: Using the Verify tool
 ---
 
-import verify_site from '../static/img/verify.png';
+import verify_site from '@site/static/img/verify.png';
 
-The C2PA **[Verify tool](https://contentcredentials.org/verify)** (often referred to as simply "Verify") is useful both for consumers and for CAI application developers.
+The C2PA **[Verify tool](https://verify.contentauthenticity.org)** (often referred to as simply "Verify") is useful both for consumers and for CAI application developers.
 
 <img
   src={verify_site}
@@ -41,22 +41,28 @@ Click **Select a file from your device** then use the native picker or drag and 
 You can also display Content Credentials for an asset with a publicly-visible URL by using a URL with the following format:
 
 ```
-https://contentcredentials.org/verify?source=<ASSET_URL>
+https://verify.contentauthenticity.org?source=<ASSET_URL>
 ```
 
 where `<ASSET_URL>` is the URL of the asset.
 
-For example: https://contentcredentials.org/verify?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-CICA.jpg
+For example: https://verify.contentauthenticity.org/?source=https://contentauth.github.io/example-assets/images/car-es-Ps-Cr.jpg
 
 :::note
 To use Verify on an asset URL, the URL must not require any authentication and the hosting server must allow cross-origin resource sharing (CORS) in the `Access-Control-Allow-Origin` HTTP response header.
 :::
 
-### C2PA test files
+### Example assets
 
-The [C2PA public-testfiles](https://spec.c2pa.org/public-testfiles/image/) repository contains image files that demonstrate Content Credentials, including multiple ingredients, Exif metadata, and various error conditions, along with links to inspect the assets using Verify and to view the corresponding manifest reports from the [C2PA Tool](c2patool).
+The [example-assets](https://contentauth.github.io/example-assets/) repository contains some sample assets that demonstrate Content Credentials, including links to view the corresponding manifest reports from the [C2PA Tool](../c2patool/readme.md) and to inspect the assets using Verify. See [the README as rendered in GitHub Pages](https://contentauth.github.io/example-assets/).
 
-Currently, most of the asset files in the repository are JPEG images, but a few [PDF](https://spec.c2pa.org/public-testfiles/pdf/) and [video](https://spec.c2pa.org/public-testfiles/video/) test files are also available.
+### Source code
+
+The code for the Verify site is open source and is available at https://github.com/contentauth/verify-site/.
+
+:::warning Warning
+Verify uses the [legacy JavaScript library](js-sdk/getting-started/overview.mdx), which is deprecated and unsupported. For new projects, use the [new JavaScript library](c2pa-js/readme.md) instead.
+:::
 
 ## Information displayed
 
@@ -65,7 +71,7 @@ Once you've uploaded an asset or entered an asset URL, if the asset:
 - Does not have an associated manifest store, Verify displays the message **No Content Credential**.
 - Does have an associated manifest store, Verify displays information from it in the three vertical panels, for example as shown below.
 
-import verify_sections from '../static/img/verify-sections.png';
+import verify_sections from '@site/static/img/verify-sections.png';
 
 <img src={verify_sections} style={{ width: '800px', marginBottom: '20px' }} />
 
@@ -143,7 +149,7 @@ import verify_sections from '../static/img/verify-sections.png';
 
 ### Title and signing information
 
-import verify_title_date from '../static/img/verify-title-date.png';
+import verify_title_date from '@site/static/img/verify-title-date.png';
 
 <img
   src={verify_title_date}
@@ -170,7 +176,7 @@ For example, suppose you downloaded a file from Adobe Stock and renamed it `my_s
 
 If the Content Credential was signed by a certificate that is NOT on the [known certificate list](verify-known-cert-list), such as one of the SDK's [test certificates](signing/test-certs.md), then Verify displays "Unrecognized" at the top of this section with this notice:
 
-import verify_unknown_source from '../static/img/verify-cc-unknown-source.png';
+import verify_unknown_source from '@site/static/img/verify-cc-unknown-source.png';
 
 <img
   src={verify_unknown_source}
@@ -197,16 +203,21 @@ If the issuer string is too long, then the date might be truncated or not shown 
 
 ### Validation status
 
-If the manifest has [validation errors](manifest/validation.md), then Verify displays this notice:
+If the manifest has [validation errors](manifest/reading/validation.md), then Verify displays this notice:
 
-import verify_validation_error from '../static/img/verify-validation-error.png';
+import verify_validation_error from '@site/static/img/verify-validation-error.png';
 
 <img
   src={verify_validation_error}
   style={{ width: '300px', display: 'block', margin: '10px auto' }}
 />
 
-Verify displays this warning if the `validation_status` array contains any elements. For example, a [this image](https://contentcredentials.org/verify?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-dat-CA.jpg) with a hard binding hash mismatch error, as shown in [this manifest store](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-dat-CA/manifest_store.json):
+Verify displays this warning if the `validation_status` array contains any elements. For example, here is an snippet from the manifest of an image with a hard binding hash mismatch error,
+
+<!--
+For example, a [this image](https://verify.contentauthenticity.org?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-dat-CA.jpg) with a hard binding hash mismatch error, as shown in [this manifest store](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-dat-CA/manifest_store.json):
+
+-->
 
 ```
 "validation_status": [
@@ -218,7 +229,13 @@ Verify displays this warning if the `validation_status` array contains any eleme
   ]
 ```
 
-Another example that can result in this message is shown in [this image](https://contentcredentials.org/verify?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-clm-CAICAI.jpg) with a missing referenced claim, as shown in [this manifest store](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-clm-CAICAI/manifest_store.json):
+<!--
+
+Another example that can result in this message is shown in [this image](https://verify.contentauthenticity.org?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-clm-CAICAI.jpg) with a missing referenced claim, as shown in [this manifest store](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-clm-CAICAI/manifest_store.json):
+
+-->
+
+Another example that can result in this message is a missing referenced claim, as shown in snippet of manifest data:
 
 ```
 "validation_status": [
@@ -242,18 +259,22 @@ The **Process** section displays information about the process used to create th
 - [App or device used](#app-or-device-used)
 - [Actions](#actions)
 - [Ingredients](#ingredients)
-- [AI-generated content](#ai-generated-content) (if the active manifest includes a [generative AI action](manifest/assertions-actions#generative-ai-action))
+- [AI-generated content](#ai-generated-content) (if the active manifest includes a [generative AI action](../manifest/writing/assertions-actions.md#generative-ai-action))
 
 For example:
 
-import verify_process from '../static/img/verify-process.png';
+import verify_process from '@site/static/img/verify-process.png';
 
 <img src={verify_process} style={{ width: '600px' }} />
 
+<!--
+
 See the above example yourself, based on a C2PA test image:
 
-- [Inspect using Verify](https://contentcredentials.org/verify?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-CAICAI.jpg)
+- [Inspect using Verify](https://verify.contentauthenticity.org?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-CAICAI.jpg)
 - [View the corresponding manifest report from C2PA Tool](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-CAICAI/manifest_store.json)
+
+-->
 
 #### App or device used
 
@@ -308,11 +329,11 @@ The **Actions** subsection lists [actions](https://opensource.contentauthenticit
 
 #### AI-generated content
 
-import verify_process_ai from '../static/img/verify-process-ai.png';
+import verify_process_ai from '@site/static/img/verify-process-ai.png';
 
 <img src={verify_process_ai} style={{ width: '250px' }} />
 
-If one or more of the asset's ingredients was generated by artificial intelligence, as specified by the [generative AI action](manifest/assertions-actions#generative-ai-action), then a **Content summary** is shown and the **Process** section will also show the **AI tool used**, as shown in the example above.
+If one or more of the asset's ingredients was generated by artificial intelligence, as specified by the [generative AI action](../manifest/writing/assertions-actions.md#generative-ai-action), then a **Content summary** is shown and the **Process** section will also show the **AI tool used**, as shown in the example above.
 
 ### About this Content Credential
 
@@ -320,9 +341,9 @@ This section displays the same information as described in [Title and singing in
 
 ### Camera capture details
 
-If the active manifest includes [Exif metadata assertions](manifest/assertions-actions#exif-assertion), then an additional **Camera capture details** section shows information about the device used to create the asset, as illustrated below:
+If the active manifest includes [Exif metadata assertions](../manifest/writing/assertions-actions.md#cawg-metadata-assertions), then an additional **Camera capture details** section shows information about the device used to create the asset, as illustrated below:
 
-import verify_exif from '../static/img/verify-exif.png';
+import verify_exif from '@site/static/img/verify-exif.png';
 
 <img src={verify_exif} style={{ width: '500px' }} />
 
@@ -401,7 +422,10 @@ The Exif metadata assertions from the JSON manifest for the above example is sho
 
 </details>
 
+<!--
+
 See the above example yourself, based on a C2PA test image:
 
-- [Inspect using Verify](https://contentcredentials.org/verify?source=https://spec.c2pa.org/public-testfiles/image/jpeg/truepic-20230212-camera.jpg)
+- [Inspect using Verify](https://verify.contentauthenticity.org?source=https://spec.c2pa.org/public-testfiles/image/jpeg/truepic-20230212-camera.jpg)
 - [View the corresponding manifest report from C2PA Tool](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/truepic-20230212-camera/manifest_store.json)
+-->
