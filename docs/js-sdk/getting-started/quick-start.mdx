@@ -36,7 +36,7 @@ You can bring in the JavaScript library by using a content delivery network (CDN
 
 The quickest way to get up and running is to use a CDN such as [jsDelivr](https://www.jsdelivr.com/). One of the big advantages of using a CDN is that it provides all the required static assets, so you don't have to host them. The CDN also delivers the files at the edge, which enables faster downloads to your users.
 
-Static assets include the following, as seen in the config passed to [`createC2pa`](../../js-sdk/api/c2pa.createc2pa):
+For example:
 
 ```js
 const version = '0.24.2';
@@ -68,33 +68,3 @@ When loading via a package manager, the library needs access to two externally-h
 :::note
 Be sure to configure your server to send proper `Content-Type` headers for these files. For more information, see [Hosting](../guides/hosting).
 :::
-
-Examples for common build systems are shown below. They are also available in the [c2pa-js-examples repository](https://github.com/contentauth/c2pa-js-examples).
-
-import CodeBlock from '@theme/CodeBlock';
-import ViteExample from '!!raw-loader!../examples/quickstart/vite-main.ts';
-import RollupExample from '!!raw-loader!../examples/quickstart/rollup-main.ts';
-import WebPackExample from '!!raw-loader!../examples/quickstart/webpack-main.ts';
-
-<Tabs lazy>
-<TabItem value="vite" label="Vite" default>
-
-This example is from [c2pa-js-examples/minimal-ts-vite/](https://github.com/contentauth/c2pa-js-examples/blob/main/minimal-ts-vite/). To view and execute this example in a live [code sandbox](https://codesandbox.io/docs/learn/legacy-sandboxes/overview), see [Code Sandbox: Vite example](../guides/sandbox-qs-vite.mdx).
-
-<CodeBlock language="ts">{ViteExample}</CodeBlock>
-</TabItem>
-
-<TabItem value="rollup" label="Rollup">
-
-This example is from [c2pa-js-examples/minimal-ts-rollup/](https://github.com/contentauth/c2pa-js-examples/blob/main/minimal-ts-rollup/). To view and execute this example in a live [code sandbox](https://codesandbox.io/docs/learn/legacy-sandboxes/overview), see [Code Sandbox: Rollup example](../guides/sandbox-qs-rollup.mdx).
-
-<CodeBlock language="ts">{RollupExample}</CodeBlock>
-</TabItem>
-
-<TabItem value="webpack" label="Webpack">
-
-This example is from [c2pa-js-examples/minimal-ts-webpack/](https://github.com/contentauth/c2pa-js-examples/blob/main/minimal-ts-webpack/). To view and execute this example in a live [code sandbox](https://codesandbox.io/docs/learn/legacy-sandboxes/overview), see [Code Sandbox: Webpack example](../guides/sandbox-qs-webpack.mdx).
-
-<CodeBlock language="ts">{WebPackExample}</CodeBlock>
-</TabItem>
-</Tabs>

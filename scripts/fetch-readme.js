@@ -19,7 +19,7 @@ $ touch .gitkeep
 */
 
 const readmes = [
-  // js-sdk examples - View manifest
+  /* Old js-sdk examples - Removed 
   {
     dest: resolve(
       __dirname,
@@ -57,6 +57,7 @@ const readmes = [
     repo: 'contentauth/c2pa-js-legacy',
     path: 'examples/minimal-ts-webpack/src/index.ts',
   },
+*/
   // New JavaScript SDK (9/16/2025)
   {
     dest: resolve(__dirname, '../docs/c2pa-js/readme.md'),
@@ -99,37 +100,22 @@ const readmes = [
     repo: 'contentauth/c2pa-rs',
     path: 'docs/supported-formats.md',
   },
-  // c2pa-service-example
-  {
-    dest: resolve(__dirname, '../docs/c2pa-service-example/readme.md'),
-    repo: 'contentauth/c2pa-service-example',
-    path: 'README.md',
-  },
-  // Node.js lib
+  // Old Node.js lib
   {
     dest: resolve(__dirname, '../docs/c2pa-node/readme.md'),
     repo: 'contentauth/c2pa-node',
     path: 'README.md',
   },
+  // Node.js lib
   {
-    dest: resolve(__dirname, '../docs/c2pa-node/docs/usage.md'),
-    repo: 'contentauth/c2pa-node',
-    path: 'docs/usage.md',
+    dest: resolve(__dirname, '../docs/c2pa-node-v2/readme.md'),
+    repo: 'contentauth/c2pa-node-v2',
+    path: 'README.md',
   },
   {
-    dest: resolve(__dirname, '../docs/c2pa-node/docs/supported-formats.md'),
+    dest: resolve(__dirname, '../docs/c2pa-node-v2/supported-formats.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'docs/supported-formats.md',
-  },
-  {
-    dest: resolve(__dirname, '../docs/c2pa-node/docs/release-notes.md'),
-    repo: 'contentauth/c2pa-node',
-    path: 'docs/release-notes.md',
-  },
-  {
-    dest: resolve(__dirname, '../docs/c2pa-node-example/readme.md'),
-    repo: 'contentauth/c2pa-node-example',
-    path: 'README.md',
   },
   // Python lib
   {
@@ -200,14 +186,14 @@ const readmes = [
     path: 'docs/cawg-identity.md',
   },
   {
+    dest: resolve(__dirname, '../docs/rust-sdk/docs/settings.md'),
+    repo: 'contentauth/c2pa-rs',
+    path: 'docs/settings.md',
+  },
+  {
     dest: resolve(__dirname, '../docs/rust-sdk/docs/release-notes.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'docs/release-notes.md',
-  },
-  {
-    dest: resolve(__dirname, '../docs/c2pa-min/readme.md'),
-    repo: 'contentauth/c2pa-min',
-    path: 'README.md',
   },
   {
     dest: resolve(__dirname, '../static/sb-alg-list.json'),
@@ -252,6 +238,17 @@ const readmes = [
     ),
     repo: 'adobe/trustmark',
     path: 'rust/crates/trustmark-cli/README.md',
+  },
+  // Mobile libraries
+  {
+    dest: resolve(__dirname, '../docs/c2pa-ios/README.md'),
+    repo: 'contentauth/c2pa-ios',
+    path: 'README.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/c2pa-android/README.md'),
+    repo: 'contentauth/c2pa-android',
+    path: 'README.md',
   },
 ];
 

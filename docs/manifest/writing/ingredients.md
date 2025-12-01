@@ -61,8 +61,6 @@ Note that `parentOf` ingredients must have a matching `c2pa.opened` action as th
 
 ## Validation results
 
-See [Validation results](json-ref/reader#validationresults) in the manifest JSON reference.
-
 When ingredients are added, the SDK validates their Content Credentials (if any).  However, the validation status of an ingredient does not imply anything about the validation status of the composed asset containing the ingredient. In other words:
 
 - A composed asset's Content Credentials may be valid, but one or more of its ingredients may have invalid Content Credentials. 
@@ -71,3 +69,5 @@ When ingredients are added, the SDK validates their Content Credentials (if any)
 :::note
 Ingredient certificates are validated when they are added to the manifest store, NOT during validation of the composed asset.
 :::
+
+

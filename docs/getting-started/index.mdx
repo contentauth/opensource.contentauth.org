@@ -1,13 +1,10 @@
 ---
-id: getting-started
 title: Getting started with Content Credentials
 ---
 
-import c2pa_terms from '../static/img/c2pa-terms.png';
-import cai_open_source from '../static/img/cai-open-source.jpg';
-import cai_os_tools_table from '../static/img/cai-os-tools-table.png';
-import cai_levels from '../static/img/cai-levels.png';
-import cr_pin from '../static/img/cr-pin.png';
+import c2pa_terms from '@site/static/img/c2pa-terms.png';
+import cai_levels from '@site/static/img/cai-levels.png';
+import cr_pin from '@site/static/img/cr-pin.png';
 
 This is a technical introduction to the Content Authenticity Initiative (CAI) open-source SDK that provides initial context and an overview of the technical aspects of implementing CAI solutions.
 
@@ -29,7 +26,7 @@ Now, let's drill down a bit to clarify some of these terms.
 
 **Actor**: A human or hardware or software product. For example, a camera, image editing software, cloud service, or the person using such tools.
 
-**Asset**: A digital media file or stream of data of [certain specific image, video, or audio formats](rust-sdk/#supported-file-formats). In the future, the types of supported assets will expand. A _composed asset_ generalizes this concept, for example an image superimposed on top of another image.
+**Asset**: A digital media file or stream of data of [certain specific image, video, or audio formats](../rust-sdk/docs/supported-formats.md). A _composed asset_ generalizes this concept, for example an image superimposed on top of another image.
 
 **Action**: An operation that an _actor_ performs on an _asset._ For example, "create," "embed," or "change contrast."
 
@@ -90,80 +87,23 @@ In practice, to use a certificate with the CAI SDK, follow this process:
 For more information on getting and using certificates, see [Signing and certificates](signing/index.md).
 :::
 
-### Verify known certificate list
+### Interim trust list
 
-import verify_unknown_source from '../static/img/verify-cc-unknown-source.png';
+import verify_unknown_source from '@site/static/img/verify-cc-unknown-source.png';
 
-The C2PA [Verify tool](https://contentcredentials.org/verify) uses a list of _known certificates_ (sometimes referred to as a "trust list") to determine whether a Content Credential was issued by a known source. The known certificate list applies only to [Verify ](https://contentcredentials.org/verify). For more information, see [Verify tool known certificate list](verify-known-cert-list)
+The C2PA [Verify tool](https://verify.contentauthenticity.org) uses a list of _known certificates_ (sometimes referred to as a "trust list") to determine whether a Content Credential was issued by a known source. Currently, it uses the [interim trust list](verify-known-cert-list) but it will be updated soon to use the official [C2PA trust list](conformance.mdx#c2pa-trust-lists).
 
 ## Identity
 
-To identify who created or modified an asset, identity needs to be verifiable and bound to an asset and its manifest store. The CAI SDK supports the [W3C verifiable credentials](https://c2pa.org/specifications/specifications/1.4/specs/C2PA_Specification.html#_w3c_verifiable_credentials) standard recommendation (part of the C2PA v1.4 specification), but doesn't currently have a way to validate these credentials or ensure that they properly reflect authorship of the content. An actor can add one or more identities to a manifest using the W3C verifiable credentials data model. Currently, a verifier must trust the manifest signer to properly authenticate the identity.
-
-Identity can be bolstered with other kinds of evidence such as _Adobe connected accounts_. In the future, the identity credentials will be separately verifiable. In the future, these verifiable credentials will be strongly bound to the manifest and media and be independently verifiable.
-
-In addition to simply adding a name and organization, Adobe tools can use the [Connected Accounts service](https://connected-accounts.adobe.com/) to connect social media accounts such as Behance, Instagram, or Twitter to an identity in a manifest. This service uses OAuth, so a user must be able to log in to the account to connect it.
+To identify who created or modified an asset, identity needs to be verifiable and bound to an asset and its manifest store.
 
 :::info
-The [Creator Assertions Working Group (CAWG)](https://creator-assertions.github.io/) is developing a technical specification for an identity assertion for use in the C2PA ecosystem. CAI expects to adopt and implement this specification in the SDK at some point in the future.
+The [Creator Assertions Working Group (CAWG)](https://creator-assertions.github.io/) provides a technical specification for an identity assertion for use in the C2PA ecosystem. For more information, see [Reading CAWG identity assertions](manifest/reading/reading-cawg-id.md).
 :::
 
-## How to use the SDK
+In addition, Adobe tools can use the [Connected Accounts service](https://connected-accounts.adobe.com/) to connect social media accounts such as Behance, Instagram, or Twitter to an identity in a manifest. This service uses OAuth, so a user must be able to log in to an Adobe account to connect it.
 
-The CAI open-source SDK consist of:
-
-- **C2PA Tool**, a command-line tool for working with manifests and media. This tool is a wrapper around the Rust SDK and provides most of the same capabilities that it does.
-- **Language-specific libraries** in C/C++, Python, Node.js and client JavaScript. NOTE: The C/C++, Python, Node.js libraries are prerelease versions whose APIs are subject to change.
-- **The Rust library** enables a desktop, mobile, or embedded application to create and sign manifests, embed manifests in certain file formats, and parse and validate manifests.
-
-Behind the scenes, C2PA Tool and language-specific libraries are built using the Rust library to ensure consistency.
-
-The following diagram provides a high-level view of how to use the open-source CAI SDK.
-
-<img src={cai_open_source} width="800" />
-
-Applications can use the CAI SDK in several different ways:
-
-- Web pages can use the JavaScript library to display Content Credentials.
-- Applications can "shell out" to call C2PA Tool directly.
-- Applications written in C++, Python, or Node.js can use the APIs of the corresponding language libraries to:
-  - Create, modify, and sign manifests.
-  - Embed manifests into media files.
-  - Parse and validate manifests.
-
-Similarly, applications written in many programming languages can use the Rust Foreign Function Interface to call the Rust API and perform those same functions.
-
-### Native desktop or mobile applications
-
-Applications written in C++, Python, or Node.js can use the corresponding prerelease library APIs. Applications written in any language call C2PA Tool directly, though doing so is not highly scalable.
-
-Alternatively, native applications can use Rust's _Foreign Function Interface_ (FFI) to call functions in the Rust library. The FFI enables interoperability between Rust and code written in other languages.
-
-Although the underlying technology of the Rust library supports all major programming languages, the bindings and APIs to make all of them workable and easy to use are still in development.
-
-A Windows application can use the FFI to call Rust functions from languages such as C++ or C#. For an example, see the [c2c2pa repository](https://github.com/contentauth/c2c2pa).
-
-An Android application can use JNI (Java Native Interface) to call Rust functions from Java or Kotlin code. This requires creating a shared library (a .so file) with Rust code that exposes functions with `#[no_mangle]` attribute and an `extern "C"` keyword. Java and Kotlin code can load and invoke the shared library using `System.loadLibrary()` and native methods.
-
-An iOS application can use the C-ABI (C Application Binary Interface) to call Rust functions from Swift or Objective-C code. This also requires creating a shared library (a .dylib file) with Rust code that exposes functions with `#[no_mangle]` attribute and `extern "C"` keyword. For a simple example, see [`lib.rs` in the c2c2pa repository](https://github.com/contentauth/c2c2pa/blob/main/src/lib.rs). Swift or Objective-C code can link and invoke the shared library using the `@_silgen_name` attribute and unsafe blocks.
-
-### Websites
-
-A website can serve web pages that use the JavaScript library to display manifest data using client JavaScript. The ability to create and sign manifests from JavaScript via [WebAssembly](https://webassembly.org/) is under consideration and may be released in the future.
-
-A server-side web application can create, modify, and sign claims (and view them) by:
-
-- Executing a shell command to invoke C2PA Tool. For an example, see the [c2patool Node.js service example](c2pa-service-example). While this approach works, it is not highly scalable.
-- Use the prerelease [Node.js](c2pa-node), [Python](c2pa-python), or [C++/C](c2pa-c) libraries.
-- Bind to the Rust library and use it, similarly to native applications.
-
-### Embedded applications
-
-An embedded application can use the Rust FFI (foreign function interface) to call Rust functions from languages such as C or C++, similarly to a native application.
-
-Embedded applications have unique constraints tied to the devices on which they run, including small memory footprint, low-powered hardware, intermittent network access, unique operating systems, or the lack of an operating system OS (running on bare metal). For these reasons, if you want to develop a CAI-enabled embedded application, please contact the CAI team directly.
-
-## Attaching and storing the manifest
+## Attaching and storing manifest data
 
 Once you've generated a manifest, you must attach it to the asset for it to be useful.
 

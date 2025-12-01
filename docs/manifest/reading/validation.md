@@ -10,15 +10,16 @@ In the latest version of the SDK:
 - Builder performs validation by default, so you can't create an invalid manifest.  Previously, the SDK was permissive in this regard.
 - Validation is much stricter.
 
-::: note
+:::note
 There is a setting to disable full validation when signing.
 :::
 
-<div class="review-comment">
+<!-- 
 Need a high-level summary of full validation, what we're looking for, etc.
-</div>
+--->
 
 `Reader` has these validation methods:
+
 - `validation_state()` returns `ValidationState` object (`validation_state` in JSON), which can be `Invalid`, `Valid` or `Trusted`.
 - `validation_results()` returns `ValidationResults` (`validation_results` in JSON), which can be `success`, `informational`, and `failure` codes for the active manifest and ingredients.
 
@@ -38,9 +39,7 @@ Manifest validation errors can occur, for example, when:
 
 ## Validation errors in ingredients
 
-Ingredients are validated when they are imported into an asset and the result is stored in the ingredient's `validation_results` object.
-
-Only errors that are not already recorded in the `validation_status` of an ingredient are reported. See [ValidationStatus](./json-ref/manifest-def.mdx#validationstatus) object in Manifest store reference.
+Ingredients are validated when they are imported into an asset and the result is stored in the [ValidationResults](../json-ref/reader-ref.mdx#validationresults) object. 
 
 ## Error status codes
 

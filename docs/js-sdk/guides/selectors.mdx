@@ -9,11 +9,11 @@ import Deprecation from '../deprecation-notice.md';
 
 [Selectors](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa/src/selectors) are convenience functions that return useful data from manifest objects. The selector functions are:
 
-- [`selectEditsAndActivity`](../../js-sdk/api/c2pa.selecteditsandactivity) - Returns a formatted list of manifest edits and activity.
-- [`selectProducer`](../../js-sdk/api/c2pa.selectproducer) - Returns information on the producer of an asset.
-- [`selectSocialAccounts`](../../js-sdk/api/c2pa.selectsocialaccounts) - Returns social accounts associated with the producer of a manifest, if available.
+- `selectEditsAndActivity` - Returns a formatted list of manifest edits and activity.
+- `selectProducer` - Returns information on the producer of an asset.
+- `selectSocialAccounts` - Returns social accounts associated with the producer of a manifest, if available.
 
-For instance, you can use [`selectProducer`](../../js-sdk/api/c2pa.selectproducer) to get information on the producer of an asset as follows:
+For instance, you can use `selectProducer` to get information on the producer of an asset as follows:
 
 ```typescript
 import { selectProducer } from 'c2pa';
@@ -30,7 +30,7 @@ function selectProducer(manifest) {
 }
 ```
 
-Some selectors may involve complex, possibly asynchronous operations. For example, [`selectEditsAndActivity`](../../js-sdk/api/c2pa.selecteditsandactivity) abstracts a complex operation involving multiple manifest assertions and remote resources to return a formatted list of edits and activity described within a manifest:
+Some selectors may involve complex, possibly asynchronous operations. For example, `selectEditsAndActivity` abstracts a complex operation involving multiple manifest assertions and remote resources to return a formatted list of edits and activity described within a manifest:
 
 ```typescript
 import { selectEditsAndActivity } from 'c2pa';

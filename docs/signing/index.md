@@ -4,7 +4,7 @@ title: Signing and certificates
 ---
 
 :::tip
-Be sure to read [Getting started](getting-started.mdx#signing-and-certificates) for some basic background on public-key infrastructure (PKI) technology, certificates, and signing manifests.
+Be sure to read [Getting started](getting-started/index.mdx#signing-and-certificates) for some basic background on public-key infrastructure (PKI) technology, certificates, and signing manifests.
 :::
 
 As you're developing an application that uses the CAI SDK, there are three ways to sign manifest claims, depending on where you are in your development process:
