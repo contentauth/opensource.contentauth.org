@@ -22,12 +22,10 @@ The CAI open-source SDK consist of:
   - Display a report of JSON manifest data attached to an asset.
   - Attach a manifest data to an asset.
   - Add a manifest to to the associated manifest store if the asset already has an associated manifest data.
-- [**JavaScript library**](c2pa-js/readme.md) that enables web pages to verify and read manifest data using client JavaScript. Use it to add user interface elements to your website that display manifest data while following the [C2PA user experience recommendations](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html).
-- **[C/C++](c2pa-c/readme.md), [Python](c2pa-python/readme.md), [Node.js](c2pa-node/readme.md) libraries** that enable applications to read and validate manifest data, create and sign manifest data and embed it supported asset files.
+- [**JavaScript library**](c2pa-js/readme.md) that enables web pages to to read, validate, create, and sign manifest data, and embed it in supported asset files using client JavaScript. Use it to add user interface elements to your website that display manifest data while following the [C2PA user experience recommendations](https://c2pa.org/specifications/specifications/1.0/ux/UX_Recommendations.html).
+- **[C/C++](c2pa-c/readme.md), [Python](c2pa-python/readme.md), [Node.js](c2pa-node/readme.md) libraries** that enable applications to read and validate manifest data, create and sign manifest data, and embed it supported asset files.
 - [**Mobile libraries**](mobile.md) that enable mobile applications for iOS and Android to to read and generate manifest data.
 - [**The Rust library**](rust-sdk/readme.md) that generates the other language bindings and can also be used directly to read and generate manifest data. The Rust library is the fundamental system underlying everything else.
-
-To see a summary of what each tool and library can do, see [Which tool is right for you?](#which-tool-is-right-for-you).
 
 The following diagram provides a high-level view of the SDK.
 
@@ -37,8 +35,7 @@ The following diagram provides a high-level view of the SDK.
 
 Applications can use the CAI SDK in several different ways:
 
-- Web pages can use the JavaScript library to display Content Credentials.
-- Applications written in C++, Python, or Node.js can use the corresponding language libraries to:
+- Applications written in C++, Python, Node.js, or client JavaScript can use the corresponding language libraries to:
   - Create, modify, and sign manifests.
   - Embed manifests into media files.
   - Parse and validate manifests.
@@ -47,111 +44,7 @@ Applications can use the CAI SDK in several different ways:
 
 Native applications can also use Rust's _Foreign Function Interface_ (FFI) to call functions in the Rust library. The FFI enables interoperability between Rust and code written in other languages. For example, a Windows application can use the FFI to call Rust functions from languages such as C++ or C#. For an example, see the [c2c2pa repository](https://github.com/contentauth/c2c2pa).
 
-An embedded application can use the Rust FFI (foreign function interface) to call Rust functions from languages such as C or C++, similarly to a native application. Embedded applications have unique constraints tied to the devices on which they run, including small memory footprint, low-powered hardware, intermittent network access, unique operating systems, or the lack of an operating system OS (running on bare metal). For these reasons, if you want to develop a CAI-enabled embedded application, please contact the CAI team directly.
-
-## Which tool is right for you?
-
-import green_check from '@site/static/img/green_check.png';
-
-<table>
-  <thead>
-    <tr>
-      <th style={{ textAlign: 'left' }}>Use To...</th>
-      <th style={{ textAlign: 'left' }}>JavaScript Library </th>
-      <th style={{ textAlign: 'left' }}>C2PA Tool</th>
-      <th style={{ textAlign: 'left' }}>Python, C++, and Node.js Libraries </th>
-      <th style={{ textAlign: 'left' }}>Rust Library</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style={{ textAlign: 'left' }}>
-        Display C2PA data on your site or app
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-    </tr>
-    <tr>
-      <td style={{ textAlign: 'left' }}>
-        Link C2PA data displayed on your site to Verify
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-    </tr>
-    <tr>
-      <td style={{ textAlign: 'left' }}>Write C2PA data into files</td>
-      <td style={{ textAlign: 'center' }}></td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-    </tr>
-    <tr>
-      <td style={{ textAlign: 'left' }}>
-        Quickly create and inspect C2PA data
-      </td>
-      <td style={{ textAlign: 'center' }}></td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-    </tr>
-    <tr>
-      <td style={{ textAlign: 'left' }}>
-        Customize displaying and creating C2PA data
-      </td>
-      <td style={{ textAlign: 'center' }}></td>
-      <td style={{ textAlign: 'center' }}></td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-    </tr>
-    <tr>
-      <td style={{ textAlign: 'left' }}>Deploy on web, mobile, and desktop</td>
-      <td style={{ textAlign: 'center' }}></td>
-      <td style={{ textAlign: 'center' }}></td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-      <td style={{ textAlign: 'center' }}>
-        <img src={green_check} width="30" />
-      </td>
-    </tr>
-  </tbody>
-</table>
+An embedded application can use the Rust FFI (foreign function interface) to call Rust functions from languages such as C or C++, similarly to a native application. Embedded applications have unique constraints tied to the devices on which they run, including small memory footprint, low-powered hardware, intermittent network access, unique operating systems, or the lack of an operating system OS (running on bare metal). For these reasons, if you want to develop an embedded application, please contact the CAI team directly.
 
 ## More information
 
