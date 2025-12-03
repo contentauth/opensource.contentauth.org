@@ -303,40 +303,19 @@ const sidebars = {
       collapsed: true,
       items: [
         {
-          type: 'category',
-          label: 'New Node.js library',
-          link: { type: 'doc', id: 'c2pa-node-v2/readme' },
-          collapsed: true,
-          items: [
-            {
-              type: 'doc',
-              id: 'c2pa-node-v2/supported-formats',
-              label: 'Supported media formats',
-            },
-            {
-              type: 'link',
-              label: 'API documentation',
-              href: 'https://contentauth.github.io/c2pa-node-v2/',
-            },
-            {
-              type: 'link',
-              label: 'GitHub',
-              href: 'https://github.com/contentauth/c2pa-node-v2/tree/main',
-            },
-          ],
+          type: 'doc',
+          id: 'c2pa-node-v2/supported-formats',
+          label: 'Supported media formats',
         },
         {
-          type: 'category',
-          label: 'Legacy Node.js library',
-          link: { type: 'doc', id: 'c2pa-node/readme' },
-          collapsed: true,
-          items: [
-            {
-              type: 'link',
-              label: 'GitHub',
-              href: 'https://github.com/contentauth/c2pa-node',
-            },
-          ],
+          type: 'link',
+          label: 'API documentation',
+          href: 'https://contentauth.github.io/c2pa-node-v2/',
+        },
+        {
+          type: 'link',
+          label: 'GitHub',
+          href: 'https://github.com/contentauth/c2pa-node-v2/tree/main',
         },
       ],
     },
