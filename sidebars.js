@@ -108,25 +108,32 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Working with the SDK',
-      link: { type: 'doc', id: 'tasks/working-manifests' },
+      label: 'Signing and certificates',
+      link: { type: 'doc', id: 'signing/signing-and-certs' },
       collapsed: true,
       items: [
         {
           type: 'doc',
-          id: 'tasks/read',
+          label: 'Using test certificates',
+          id: 'signing/test-certs',
         },
         {
           type: 'doc',
-          id: 'tasks/get-resources',
+          label: 'Getting a certificate',
+          id: 'signing/get-cert',
         },
         {
           type: 'doc',
-          id: 'tasks/build',
+          label: 'Signing with local credentials',
+          id: 'signing/local-signing',
+        },
+        {
+          type: 'doc',
+          label: 'Using a certificate in production',
+          id: 'signing/prod-cert',
         },
       ],
     },
-
     {
       type: 'category',
       label: 'C2PA Tool',
@@ -215,71 +222,6 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'JavaScript library',
-      link: { type: 'doc', id: 'js-sdk/js-landing' },
-      collapsed: true,
-      items: [
-        {
-          type: 'category',
-          label: 'New JavaScript library',
-          link: { type: 'doc', id: 'c2pa-js/readme' },
-          items: [
-            {
-              type: 'link',
-              label: 'API documentation',
-              href: 'https://contentauth.github.io/c2pa-js/',
-            },
-            {
-              type: 'link',
-              label: 'GitHub',
-              href: 'https://github.com/contentauth/c2pa-js',
-            },
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Legacy JavaScript library',
-          link: { type: 'doc', id: 'js-sdk/getting-started/old-js-overview' },
-          collapsed: true,
-          items: [
-            {
-              type: 'doc',
-              label: 'Quick start',
-              id: 'js-sdk/getting-started/quick-start',
-            },
-            {
-              type: 'doc',
-              label: 'Examples',
-              id: 'js-sdk/guides/examples',
-            },
-            {
-              type: 'doc',
-              label: 'Architecture',
-              id: 'js-sdk/getting-started/architecture',
-            },
-            {
-              type: 'doc',
-              label: 'Hosting assets',
-              id: 'js-sdk/guides/hosting',
-            },
-            {
-              type: 'category',
-              label: 'Viewing manifest data',
-              link: { type: 'doc', id: 'js-sdk/guides/viewing-manifest-data' },
-              items: ['js-sdk/guides/selectors', 'js-sdk/guides/validation'],
-              collapsed: true,
-            },
-            {
-              type: 'link',
-              label: 'GitHub',
-              href: 'https://github.com/contentauth/c2pa-js-legacy',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: 'category',
       label: 'Python library',
       link: { type: 'doc', id: 'c2pa-python/readme' },
       collapsed: true,
@@ -351,45 +293,57 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'JavaScript library',
+      link: { type: 'doc', id: 'js-sdk/js-landing' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          label: 'c2pa-web',
+          id: 'c2pa-js/c2pa-web-readme',
+        },
+        {
+          type: 'doc',
+          label: 'c2pa-wasm',
+          id: 'c2pa-js/c2pa-wasm-readme',
+        },
+        {
+          type: 'doc',
+          label: 'c2pa-types',
+          id: 'c2pa-js/c2pa-types-readme',
+        },
+        {
+          type: 'link',
+          label: 'API documentation',
+          href: 'https://contentauth.github.io/c2pa-js/',
+        },
+        {
+          type: 'link',
+          label: 'GitHub',
+          href: 'https://github.com/contentauth/c2pa-js',
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Node.js library',
       link: { type: 'doc', id: 'node-landing' },
       collapsed: true,
       items: [
         {
-          type: 'category',
-          label: 'New Node.js library',
-          link: { type: 'doc', id: 'c2pa-node-v2/readme' },
-          collapsed: true,
-          items: [
-            {
-              type: 'doc',
-              id: 'c2pa-node-v2/supported-formats',
-              label: 'Supported media formats',
-            },
-            {
-              type: 'link',
-              label: 'API documentation',
-              href: 'https://contentauth.github.io/c2pa-node-v2/',
-            },
-            {
-              type: 'link',
-              label: 'GitHub',
-              href: 'https://github.com/contentauth/c2pa-node-v2/tree/main',
-            },
-          ],
+          type: 'doc',
+          id: 'c2pa-node-v2/supported-formats',
+          label: 'Supported media formats',
         },
         {
-          type: 'category',
-          label: 'Legacy Node.js library',
-          link: { type: 'doc', id: 'c2pa-node/readme' },
-          collapsed: true,
-          items: [
-            {
-              type: 'link',
-              label: 'GitHub',
-              href: 'https://github.com/contentauth/c2pa-node',
-            },
-          ],
+          type: 'link',
+          label: 'API documentation',
+          href: 'https://contentauth.github.io/c2pa-node-v2/',
+        },
+        {
+          type: 'link',
+          label: 'GitHub',
+          href: 'https://github.com/contentauth/c2pa-node-v2/tree/main',
         },
       ],
     },
@@ -434,34 +388,6 @@ const sidebars = {
               href: 'https://github.com/contentauth/c2pa-android',
             },
           ],
-        },
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Signing and certificates',
-      link: { type: 'doc', id: 'signing/signing-and-certs' },
-      collapsed: true,
-      items: [
-        {
-          type: 'doc',
-          label: 'Using test certificates',
-          id: 'signing/test-certs',
-        },
-        {
-          type: 'doc',
-          label: 'Getting a certificate',
-          id: 'signing/get-cert',
-        },
-        {
-          type: 'doc',
-          label: 'Signing with local credentials',
-          id: 'signing/local-signing',
-        },
-        {
-          type: 'doc',
-          label: 'Using a certificate in production',
-          id: 'signing/prod-cert',
         },
       ],
     },

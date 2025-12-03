@@ -62,7 +62,22 @@ const readmes = [
   {
     dest: resolve(__dirname, '../docs/c2pa-js/readme.md'),
     repo: 'contentauth/c2pa-js',
+    path: 'README.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/c2pa-js/c2pa-web-readme.md'),
+    repo: 'contentauth/c2pa-js',
     path: 'packages/c2pa-web/README.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/c2pa-js/c2pa-types-readme.md'),
+    repo: 'contentauth/c2pa-js',
+    path: 'packages/c2pa-types/README.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/c2pa-js/c2pa-wasm-readme.md'),
+    repo: 'contentauth/c2pa-js',
+    path: 'packages/c2pa-wasm/README.md',
   },
   // c2patool
   {
