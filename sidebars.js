@@ -194,39 +194,6 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'JavaScript library',
-      link: { type: 'doc', id: 'js-sdk/js-landing' },
-      collapsed: true,
-      items: [
-        {
-          type: 'doc',
-          label: 'c2pa-web',
-          id: 'c2pa-js/c2pa-web-readme',
-        },
-        {
-          type: 'doc',
-          label: 'c2pa-wasm',
-          id: 'c2pa-js/c2pa-wasm-readme',
-        },
-        {
-          type: 'doc',
-          label: 'c2pa-types',
-          id: 'c2pa-js/c2pa-types-readme',
-        },
-        {
-          type: 'link',
-          label: 'API documentation',
-          href: 'https://contentauth.github.io/c2pa-js/',
-        },
-        {
-          type: 'link',
-          label: 'GitHub',
-          href: 'https://github.com/contentauth/c2pa-js',
-        },
-      ],
-    },
-    {
-      type: 'category',
       label: 'Python library',
       link: { type: 'doc', id: 'c2pa-python/readme' },
       collapsed: true,
@@ -293,6 +260,39 @@ const sidebars = {
           type: 'link',
           label: 'GitHub',
           href: 'https://github.com/contentauth/c2pa-c',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'JavaScript library',
+      link: { type: 'doc', id: 'js-sdk/js-landing' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          label: 'c2pa-web',
+          id: 'c2pa-js/c2pa-web-readme',
+        },
+        {
+          type: 'doc',
+          label: 'c2pa-wasm',
+          id: 'c2pa-js/c2pa-wasm-readme',
+        },
+        {
+          type: 'doc',
+          label: 'c2pa-types',
+          id: 'c2pa-js/c2pa-types-readme',
+        },
+        {
+          type: 'link',
+          label: 'API documentation',
+          href: 'https://contentauth.github.io/c2pa-js/',
+        },
+        {
+          type: 'link',
+          label: 'GitHub',
+          href: 'https://github.com/contentauth/c2pa-js',
         },
       ],
     },
