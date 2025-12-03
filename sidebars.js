@@ -108,6 +108,34 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Signing and certificates',
+      link: { type: 'doc', id: 'signing/signing-and-certs' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          label: 'Using test certificates',
+          id: 'signing/test-certs',
+        },
+        {
+          type: 'doc',
+          label: 'Getting a certificate',
+          id: 'signing/get-cert',
+        },
+        {
+          type: 'doc',
+          label: 'Signing with local credentials',
+          id: 'signing/local-signing',
+        },
+        {
+          type: 'doc',
+          label: 'Using a certificate in production',
+          id: 'signing/prod-cert',
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'C2PA Tool',
       link: { type: 'doc', id: 'c2patool/c2patool-index' },
       collapsed: true,
@@ -360,34 +388,6 @@ const sidebars = {
               href: 'https://github.com/contentauth/c2pa-android',
             },
           ],
-        },
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Signing and certificates',
-      link: { type: 'doc', id: 'signing/signing-and-certs' },
-      collapsed: true,
-      items: [
-        {
-          type: 'doc',
-          label: 'Using test certificates',
-          id: 'signing/test-certs',
-        },
-        {
-          type: 'doc',
-          label: 'Getting a certificate',
-          id: 'signing/get-cert',
-        },
-        {
-          type: 'doc',
-          label: 'Signing with local credentials',
-          id: 'signing/local-signing',
-        },
-        {
-          type: 'doc',
-          label: 'Using a certificate in production',
-          id: 'signing/prod-cert',
         },
       ],
     },
