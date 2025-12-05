@@ -17,11 +17,8 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'getting-started/verify',
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/verify-known-cert-list',
+          label: 'Using ACA Inspect',
+          id: 'getting-started/inspect',
         },
       ],
     },
@@ -392,10 +389,18 @@ const sidebars = {
       ],
     },
     {
-      type: 'doc',
+      type: 'category',
       label: 'C2PA conformance program',
-      id: 'conformance',
+      link: { type: 'doc', id: 'conformance' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'getting-started/verify-known-cert-list',
+        },
+      ],
     },
+
     {
       type: 'category',
       label: 'Durable Content Credentials',
