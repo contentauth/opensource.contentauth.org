@@ -27,7 +27,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Working with manifests',
+      label: 'Understanding manifests',
       link: { type: 'doc', id: 'manifest/understanding-manifest' },
       collapsed: true,
       items: [
@@ -131,6 +131,26 @@ const sidebars = {
           type: 'doc',
           label: 'Using a certificate in production',
           id: 'signing/prod-cert',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Working with the SDK',
+      link: { type: 'doc', id: 'tasks/working-manifests' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'tasks/read',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/get-resources',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/build',
         },
       ],
     },
