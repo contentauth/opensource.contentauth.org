@@ -17,7 +17,7 @@ const sidebars = {
         },
         {
           type: 'doc',
-          label: 'Using ACA Inspect',
+          label: 'Inspecting assets using ACA',
           id: 'getting-started/inspect',
         },
       ],
