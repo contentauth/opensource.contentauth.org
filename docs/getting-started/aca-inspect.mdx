@@ -12,7 +12,7 @@ import MarkdownCell from '@site/src/components/MarkdownCell';
 <img
   src={aca_inspect}
   style={{
-    width: '600px',
+    width: '500px',
     border: '1px solid #ccc',
   }}
 />
@@ -43,12 +43,12 @@ Click **Select a file from your device** then use the native picker or drag and 
 You can also display Content Credentials for an asset with a publicly-visible URL by using a URL with the following format:
 
 ```
-https://contentauthenticity.adobe.com/inspect?source=<ASSET_URL>
+https://inspect.cr?source=<ASSET_URL>
 ```
 
 where `<ASSET_URL>` is the URL of the asset.
 
-For example: https://contentauthenticity.adobe.com/inspect?source=https://contentauth.github.io/example-assets/images/car-es-Ps-Cr.jpg
+For example: https://inspect.cr?source=https://contentauth.github.io/example-assets/images/car-es-Ps-Cr.jpg
 
 :::note
 To use Inspect on an asset URL, the URL must not require any authentication and the hosting server must allow cross-origin resource sharing (CORS) in the `Access-Control-Allow-Origin` HTTP response header.
@@ -237,7 +237,16 @@ The organization, device, or individual that signed the Content Credentials, bas
 
 #### Actions
 
-The **Actions** subsection lists [actions](https://opensource.contentauthenticity.org/docs/manifest/assertions-actions#actions) in the active manifest. For example:
+<img
+  src={inspect_actions}
+  style={{ width: '400px', float: 'right', border: '1px solid #ddd' }}
+/>
+
+The **Actions** subsection lists [actions](https://opensource.contentauthenticity.org/docs/manifest/assertions-actions#actions) in the active manifest, for example, as shown at right.
+
+The corresponding `actions` array in the manifest is shown below.
+
+<div style={{ clear: 'both', marginBottom: '20px' }} />
 
 <details style={{backgroundColor: 'transparent'}}>
 <summary class="code_summary">Show manifest code</summary>
@@ -279,10 +288,6 @@ The **Actions** subsection lists [actions](https://opensource.contentauthenticit
 ```
 
 </details>
-
-Inspect shows these actions as follows:
-
-<img src={inspect_actions} style={{ width: '500px' }} />
 
 #### Ingredients
 
