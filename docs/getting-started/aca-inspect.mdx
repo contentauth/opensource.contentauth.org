@@ -1,9 +1,10 @@
 ---
 id: inspect
-title: Inspecting assets using Adobe Content Authenticity
+title: Inspecting Content Credentials using Adobe Content Authenticity
 ---
 
 import aca_inspect from '@site/static/img/aca-inspect.png';
+import inspect_actions from '@site/static/img/inspect_actions.png';
 import MarkdownCell from '@site/src/components/MarkdownCell';
 
 [**Adobe Content Authenticity - Inspect**](https://verify.contentauthenticity.org) (often referred to as "ACA Inspect" or simply "Inspect") is a [C2PA conforming validator product](../conformance.mdx#validator-products) that validates and displays Content Credentials for various asset types.
@@ -121,7 +122,7 @@ Shows information from the asset's manifest store, as described below:
 
 The top of the right panel displays a thumbnail of the image along with the same title and signing information as shown in the left panel.
 
-If the Content Credential was signed by a certificate that is NOT on the [known certificate list](verify-known-cert-list), such as one of the SDK's [test certificates](signing/test-certs.md), then Inspect displays "Unrecognized" at the top of this section with this notice:
+If the Content Credential was signed by a certificate that is NOT on the [C2PA trust list](conformance.mdx#c2pa-trust-lists), such as one of the SDK's [test certificates](signing/test-certs.md), then Inspect displays "Unrecognized" at the top of this section with this notice:
 
 import verify_unknown_source from '@site/static/img/unknown-source.png';
 
@@ -130,13 +131,13 @@ import verify_unknown_source from '@site/static/img/unknown-source.png';
   style={{ width: '283px', display: 'block', margin: '10px auto' }}
 />
 
-However, if the Content Credential was signed by a certificate on the [known certificate list](verify-known-cert-list), then this section displays the name of the issuer of the claim signature from the `signature_info.issuer` property in the active manifest, as shown in the example snippet below.
+However, if the Content Credential was signed by a certificate on the [C2PA trust list list](conformance.mdx#c2pa-trust-lists), then this section displays the name of the issuer of the claim signature from the `signature_info.issuer` property in the active manifest, as shown in the example snippet below.
 
 :::note
 This section shows the organization name only if the signing certificate includes the "O" or [Organization Name attribute](https://www.alvestrand.no/objectid/2.5.4.10.html) (OID value 2.5.4.10) in the certificate's distinguished name information.
 :::
 
-For signers on the known certificate list, this section also displays the time of the claim signature from the `signature_info.time` property in the active manifest, as shown in the example snippet below. The date is converted from UTC to the local time zone.
+For signers on the C2PA trust list, this section also displays the time of the claim signature from the `signature_info.time` property in the active manifest, as shown in the example snippet below. The date is converted from UTC to the local time zone.
 
 ```json
 "signature_info": {
@@ -178,7 +179,6 @@ For example, a [this image](https://verify.contentauthenticity.org?source=https:
     }
   ]
 ```
-
 
 Another example that can result in this message is shown in [this image](https://verify.contentauthenticity.org?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-clm-CAICAI.jpg) with a missing referenced claim, as shown in [this manifest store](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-clm-CAICAI/manifest_store.json):
 
@@ -243,54 +243,46 @@ The **Actions** subsection lists [actions](https://opensource.contentauthenticit
 <summary class="code_summary">Show manifest code</summary>
 
 ```json
-"actions": [
-  {
-    "action": "c2pa.opened",
-    "instanceId": "xmp.iid:813ee422-9736-4cdc-9be6-4e35ed8e41cb",
-    "parameters": {
-      "ingredient": {
-        "hash": "tTBD4/E0R0AjLUdJFpsVz3lE/KJUq22Vz0UGqzhEpVs=",
-        "url": "self#jumbf=c2pa.assertions/c2pa.ingredient"
+{
+  "label": "c2pa.actions.v2",
+  "data": {
+    "actions": [
+      {
+        "action": "c2pa.opened",
+        "parameters": {
+          "description": "Opened a pre-existing file",
+          "com.adobe.tool": "open",
+          "com.adobe.icon": "https://cai-assertions.adobe.com/icons/import-dark.svg",
+          "instanceId": "xmp:iid:73f1d577-2d17-46ec-908a-09f2380df77c"
+        }
+      },
+      {
+        "action": "c2pa.cropped",
+        "parameters": {
+          "com.adobe.tool": "crop",
+          "com.adobe.icon": "https://cai-assertions.adobe.com/icons/crop-dark.svg",
+          "description": "Used cropping tools, reducing or expanding visible content area"
+        }
+      },
+      {
+        "action": "c2pa.resized",
+        "parameters": {
+          "com.adobe.tool": "image_size",
+          "description": "Changed dimensions or file size",
+          "com.adobe.icon": "https://cai-assertions.adobe.com/icons/resize-dark.svg"
+        }
       }
-    }
-  },
-  {
-    "action": "c2pa.color_adjustments",
-    "parameters": {
-      "name": "brightnesscontrast"
-    }
-  },
-  {
-    "action": "c2pa.placed",
-    "instanceId": "xmp.iid:8a00de7a-e694-43b2-a7e6-ed950421a21a",
-    "parameters": {
-      "ingredient": {
-        "hash": "EMeeY5a+lvy1msl+9i5DOcOoeQowrqD7NyV0d8fwAX0=",
-        "url": "self#jumbf=c2pa.assertions/c2pa.ingredient__1"
-      }
-    }
-  },
-  {
-    "action": "c2pa.resized"
+    ],
+    ...
   }
-]
+}
 ```
 
 </details>
 
-<!--
-For example:
+Inspect shows these actions as follows:
 
-import verify_process from '@site/static/img/verify-process.png';
-
-<img src={verify_process} style={{ width: '600px' }} />
-
-
-See the above example yourself, based on a C2PA test image:
-
-- [Inspect using Inspect](https://verify.contentauthenticity.org?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-CAICAI.jpg)
-- [View the corresponding manifest report from C2PA Tool](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-CAICAI/manifest_store.json)
--->
+<img src={inspect_actions} style={{ width: '500px' }} />
 
 #### Ingredients
 

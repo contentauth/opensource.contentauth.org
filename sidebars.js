@@ -17,7 +17,7 @@ const sidebars = {
         },
         {
           type: 'doc',
-          label: 'Inspecting assets using ACA',
+          label: 'Inspecting Content Credentials',
           id: 'getting-started/inspect',
         },
       ],
