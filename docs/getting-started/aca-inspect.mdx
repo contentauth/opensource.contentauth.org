@@ -1,13 +1,13 @@
 ---
 id: inspect
-title: Inspecting Content Credentials using Adobe Content Authenticity
+title: Using the inspect tool on Adobe Content Authenticity (Beta)
 ---
 
 import aca_inspect from '@site/static/img/aca-inspect.png';
 import inspect_actions from '@site/static/img/inspect_actions.png';
 import MarkdownCell from '@site/src/components/MarkdownCell';
 
-[**Adobe Content Authenticity - Inspect**](https://verify.contentauthenticity.org) (often referred to as "ACA Inspect" or simply "Inspect") is a [C2PA conforming validator product](../conformance.mdx#validator-products) that validates and displays Content Credentials for various asset types.
+The [**Inspect tool on Adobe Content Authenticity (Beta)**](https://verify.contentauthenticity.org) (often referred to as "ACA Inspect" or simply "Inspect") is a [C2PA conforming validator product](../conformance.mdx#validator-products) that validates and displays Content Credentials for various asset types.
 
 <img
   src={aca_inspect}
@@ -16,6 +16,8 @@ import MarkdownCell from '@site/src/components/MarkdownCell';
     border: '1px solid #ccc',
   }}
 />
+
+For more information, see [Inspect Content Credentials](https://helpx.adobe.com/creative-cloud/apps/adobe-content-authenticity/inspect/inspect-tool.html) on Adobe HelpX.
 
 ## How to use Inspect
 
@@ -239,12 +241,17 @@ The organization, device, or individual that signed the Content Credentials, bas
 
 <img
   src={inspect_actions}
-  style={{ width: '400px', float: 'right', border: '1px solid #ddd' }}
+  style={{
+    width: '400px',
+    float: 'right',
+    border: '1px solid #ddd',
+    margin: '10px',
+  }}
 />
 
 The **Actions** subsection lists [actions](https://opensource.contentauthenticity.org/docs/manifest/assertions-actions#actions) in the active manifest, for example, as shown at right.
 
-The corresponding `actions` array in the manifest is shown below.
+The corresponding `actions` array in the asset's manifest is shown below.
 
 <div style={{ clear: 'both', marginBottom: '20px' }} />
 
@@ -291,7 +298,7 @@ The corresponding `actions` array in the manifest is shown below.
 
 #### Ingredients
 
-The **Ingredients** section shows the resources used to create the asset, derived from the `ingredients` array in the active manifest. A thumbnail image is shown for each ingredient, if applicable. If an ingredient itself had Content Credentials, the "cr" icon is shown next to the thumbnail. In the above example, the asset was created by combining two ingredients, `CAI.jpg` and `A.jpg`, the first of which had Content Credentials.
+The **Ingredients** section shows the resources used to create the asset, derived from the `ingredients` array in the active manifest. A thumbnail image is shown for each ingredient, if applicable. If an ingredient itself had Content Credentials, the "cr" icon is shown next to the thumbnail.
 
 <!--
 
