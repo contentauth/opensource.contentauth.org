@@ -91,9 +91,11 @@ For more information on getting and using certificates, see [Signing and certifi
 
 import verify_unknown_source from '@site/static/img/verify-cc-unknown-source.png';
 
-The _C2PA trust list_ is a curated list of certification authorities (CAs) that are authorized to issue signing certificates for conforming generator products. Conforming validator products such as the [Inspect tool on Adobe Content Authenticity (Beta)](https://verify.contentauthenticity.org) use the C2PA trust list to determine whether a Content Credential was issued using a certificate that can be traced back to an authorized CA.
+The _C2PA trust list_ is a curated list of certification authorities (CAs) that are authorized to issue signing certificates for conforming generator products.
 
-Before the introduction of the C2PA trust list, the interim trust list provided critical support during the early adoption phase of C2PA. The C2PA [Verify tool](https://verify.contentauthenticity.org) used it to determine which certificates were considered valid and to prevent unknown signers from appearing as valid. Verify will be updated to use the official [C2PA trust list](conformance.mdx#c2pa-trust-lists).
+Conforming validator products such as the [Inspect tool on Adobe Content Authenticity (Beta)](https://verify.contentauthenticity.org) use the C2PA trust list to determine whether a Content Credential was issued using a certificate that can be traced back to a CA on the C2PA trust list.
+
+Before the introduction of the C2PA trust list, during the early adoption phase of C2PA the C2PA [Verify tool](https://verify.contentauthenticity.org) used [the interim trust list](trust-list.mdx) to determine which certificates were considered valid and prevent unknown signers from appearing as valid. Verify will be updated to use the official [C2PA trust list](conformance.mdx#c2pa-trust-lists).
 
 ## Identity
 
