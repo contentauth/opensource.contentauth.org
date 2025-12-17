@@ -87,11 +87,13 @@ In practice, to use a certificate with the CAI SDK, follow this process:
 For more information on getting and using certificates, see [Signing and certificates](signing/index.md).
 :::
 
-### Interim trust list
+### Trust lists
 
 import verify_unknown_source from '@site/static/img/verify-cc-unknown-source.png';
 
-The C2PA [Verify tool](https://verify.contentauthenticity.org) uses a list of _known certificates_ (sometimes referred to as a "trust list") to determine whether a Content Credential was issued by a known source. Currently, it uses the [interim trust list](verify-known-cert-list) but it will be updated soon to use the official [C2PA trust list](conformance.mdx#c2pa-trust-lists).
+The _C2PA trust list_ is a curated list of certification authorities (CAs) that are authorized to issue signing certificates for Generator Products. Conforming validator products such as the [Inspect tool on Adobe Content Authenticity (Beta)](https://verify.contentauthenticity.org) use the C2PA trust list to determine whether a Content Credential was issued using a certificate that can be traced back to an authorized CA.
+
+The interim trust list provided critical support during the early adoption phase of C2PA. The C2PA [Verify tool](https://verify.contentauthenticity.org) used it to determine which certificates were considered valid and to prevent unknown signers from appearing as valid. Verify will be updated soon to use the official [C2PA trust list](conformance.mdx#c2pa-trust-lists).
 
 ## Identity
 
@@ -143,12 +145,13 @@ The example shown below illustrates one way to implement levels of disclosure:
 
 Numerous Adobe tools and products implement Content Credentials. You can optionally attach credentials to images you create or modify using [Photoshop](https://helpx.adobe.com/photoshop/using/content-credentials.html) and [Lightroom](https://helpx.adobe.com/lightroom-cc/using/content-credentials-lightroom.html). Additionally, all images created using the [Firefly](https://blog.adobe.com/en/publish/2023/03/21/bringing-gen-ai-to-creative-cloud-adobe-firefly) generative AI tool automatically have attached Content Credentials. [Behance displays Content Credentials](https://www.behance.net/blog/cai-on-behance) if they are attached to media shared on the site, and still images provided through [Adobe Stock](https://stock.adobe.com/) automatically have Content Credentials attached.
 
-The C2PA's [Verify website](https://verify.contentauthenticity.org/) inspects image files and displays their Content Credentials if they exist. See [Using the Verify tool](verify/) for more information.
+The [Inspect tool on Adobe Content Authenticity (Beta)](https://verify.contentauthenticity.org) inspects image files and displays their Content Credentials if they exist. See [Using ACA Inspect](aca-inspect.mdx) for more information.
 
 Additionally, several other organizations have implemented CAI solutions, including:
 
-- [**PixelStream**](https://contentauthenticity.org/eyes-on-provenance-pixelstream): A version-controlled sharing platform for authentic media. It's kind of like GitHub for authentic media assets, but it's built on top of C2PA tooling instead of Git.
+- [**PixelStream**](https://pixelstream.com/): Provides a complete end-to-end C2PA Content Credentials based authenticity platform that encapsulates the entire authenticity lifecycle of an asset from capture/creation, through editing, distribution via CDN, and finally to display.
+- [**ProofMode**](https://proofmode.org/): Provides an ecosystem of open-source tools and systems, including CAPTURE, a camera app with built-in provenance and authentication for chain-of-custody and VERIFY, a multi-purpose tool to inspect metadata and detect AI in images, audio, and video.
 - [**SmartFrame Technologies**](https://smartframe.io/blog/smartframe-and-cai-working-together-to-validate-provenance-and-improve-image-protection/): Validating provenance with secure capture to enhance innovative image streaming delivery.
 - [**The New York Times R&D**](https://rd.nytimes.com/projects/using-secure-sourcing-to-combat-misinformation): Using secure sourcing to combat misinformation in news publishing.
 
-For more case studies, see [https://contentauthenticity.org/case-studies](https://contentauthenticity.org/case-studies).
+For more case studies, see [CAI Blog](https://contentauthenticity.org/blog).
