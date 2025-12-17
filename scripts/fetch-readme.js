@@ -265,6 +265,16 @@ const readmes = [
     repo: 'contentauth/c2pa-android',
     path: 'README.md',
   },
+  {
+    dest: resolve(__dirname, '../docs/c2pa-ios-example/README.md'),
+    repo: 'contentauth/c2pa-ios-example',
+    path: 'README.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/c2pa-android-example/README.md'),
+    repo: 'contentauth/c2pa-android-example',
+    path: 'README.md',
+  },
 ];
 
 function resolveMarkdownLinks(linkBase, content) {

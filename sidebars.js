@@ -357,6 +357,11 @@ const sidebars = {
           collapsed: true,
           items: [
             {
+              type: 'doc',
+              id: 'c2pa-ios-example/README',
+              label: 'Example iOS app',
+            },
+            {
               type: 'link',
               label: 'API documentation',
               href: 'https://contentauth.github.io/c2pa-ios/documentation/c2pa/',
@@ -374,6 +379,11 @@ const sidebars = {
           link: { type: 'doc', id: 'c2pa-android/README' },
           collapsed: true,
           items: [
+            {
+              type: 'doc',
+              id: 'c2pa-android-example/README',
+              label: 'Example Android app',
+            },
             {
               type: 'link',
               label: 'API documentation',
