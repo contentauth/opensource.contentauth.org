@@ -15,6 +15,6 @@ While these test credentials are useful during development, you must [get your o
 
 Although not recommended due to complexity and difficulty, you can create your own certificates for development and testing. Follow the requirements in the C2PA Technical Specification [X.509 Certificates](https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#x509_certificates) and [Digital Signatures](https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_digital_signatures) sections.
 
-For manifest claims signed with one of the test certificates, the [Inspect tool on Adobe Content Authenticity (Beta)](https://verify.contentauthenticity.org) will display the message "The Content Credential issuer couldn't be recognized."  See [Using ACA Inspect](../getting-started/aca-inspect.mdx#signing-information) for more information.
+For manifest claims signed with one of the test certificates, the [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) will display the message "The Content Credential issuer couldn't be recognized."  See [Using ACA Inspect](../getting-started/aca-inspect.mdx#signing-information) for more information.
 
 
