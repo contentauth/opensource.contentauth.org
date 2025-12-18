@@ -7,12 +7,12 @@ import aca_inspect from '@site/static/img/aca-inspect.png';
 import inspect_actions from '@site/static/img/inspect_actions.png';
 import MarkdownCell from '@site/src/components/MarkdownCell';
 
-The [**Inspect tool on Adobe Content Authenticity (Beta)**](https://verify.contentauthenticity.org) (often referred to as "ACA Inspect" or simply "Inspect") is a [C2PA conforming validator product](../conformance.mdx#validator-products) that validates and displays Content Credentials for various asset types.
+The [**Inspect tool on Adobe Content Authenticity (Beta)**](https://inspect.cr) (often referred to as "ACA Inspect" or simply "Inspect") is a [C2PA conforming validator product](../conformance.mdx#validator-products) that validates and displays Content Credentials for various asset types.
 
 <img
   src={aca_inspect}
   style={{
-    width: '500px',
+    width: '600px',
     border: '1px solid #ccc',
   }}
 />
@@ -21,12 +21,7 @@ For more information, see [Inspect Content Credentials](https://helpx.adobe.com/
 
 ## How to use Inspect
 
-You can use Inspect to view Content Credentials for an asset in two ways:
-
-- [Upload an asset file](#uploading-an-asset) from your local computer.
-- [Use an asset URL](#using-an-asset-url).
-
-Supported asset file types include:
+You can use Inspect to view Content Credentials for the following asset file types:
 
 - **Image**: AVIF, DNG, GIF, HEIC, HEIF, JPEG, PNG, SVG, TIFF, and WebP.
 - **Video and audio**: AVI, M4A, MOV, MP3, MP4, and WAV.
@@ -35,6 +30,11 @@ Supported asset file types include:
 :::tip
 When you first load the site and no asset is displayed on the page, Inspect shows the complete current list of supported file types.
 :::
+
+You can use Inspect in two ways:
+
+- [Upload an asset file](#uploading-an-asset) from your local computer.
+- [Use an asset URL](#using-an-asset-url).
 
 ### Uploading an asset
 
@@ -169,7 +169,7 @@ import verify_validation_error from '@site/static/img/verify-validation-error.pn
 Inspect displays this warning if the `validation_status` array contains any elements. For example, here is an snippet from the manifest of an image with a hard binding hash mismatch error,
 
 
-For example, a [this image](https://verify.contentauthenticity.org?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-dat-CA.jpg) with a hard binding hash mismatch error, as shown in [this manifest store](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-dat-CA/manifest_store.json):
+For example, a [this image](https://inspect.cr?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-dat-CA.jpg) with a hard binding hash mismatch error, as shown in [this manifest store](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-dat-CA/manifest_store.json):
 
 
 ```
@@ -182,7 +182,7 @@ For example, a [this image](https://verify.contentauthenticity.org?source=https:
   ]
 ```
 
-Another example that can result in this message is shown in [this image](https://verify.contentauthenticity.org?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-clm-CAICAI.jpg) with a missing referenced claim, as shown in [this manifest store](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-clm-CAICAI/manifest_store.json):
+Another example that can result in this message is shown in [this image](https://inspect.cr?source=https://spec.c2pa.org/public-testfiles/image/jpeg/adobe-20220124-E-clm-CAICAI.jpg) with a missing referenced claim, as shown in [this manifest store](https://spec.c2pa.org/public-testfiles/image/jpeg/manifests/adobe-20220124-E-clm-CAICAI/manifest_store.json):
 
 
 Another example that can result in this message is a missing referenced claim, as shown in snippet of manifest data:

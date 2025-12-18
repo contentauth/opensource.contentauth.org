@@ -93,9 +93,9 @@ import verify_unknown_source from '@site/static/img/verify-cc-unknown-source.png
 
 The _C2PA trust list_ is a curated list of certification authorities (CAs) that are authorized to issue signing certificates for conforming generator products.
 
-Conforming validator products such as the [Inspect tool on Adobe Content Authenticity (Beta)](https://verify.contentauthenticity.org) use the C2PA trust list to determine whether a Content Credential was issued using a certificate that can be traced back to a CA on the C2PA trust list.
+Conforming validator products such as the [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) use the C2PA trust list to determine whether a Content Credential was issued using a certificate that can be traced back to a CA on the C2PA trust list.
 
-Before the introduction of the C2PA trust list, during the early adoption phase of C2PA the C2PA [Verify tool](https://verify.contentauthenticity.org) used [the interim trust list](trust-list.mdx) to determine which certificates were considered valid and prevent unknown signers from appearing as valid. Verify will be updated to use the official [C2PA trust list](conformance.mdx#c2pa-trust-lists).
+Before the introduction of the C2PA trust list, during the early adoption phase of C2PA, the [Verify tool](https://verify.contentauthenticity.org) used [the interim trust list](trust-list.mdx) to determine which certificates were considered valid and prevent unknown signers from appearing as valid. Verify will be updated to use the official [C2PA trust list](conformance.mdx#c2pa-trust-lists).
 
 ## Identity
 
@@ -122,7 +122,7 @@ Embedding a manifest in an asset usually increases the size of the file. Two thi
 
 ### Storing a manifest in the cloud
 
-In addition to storing the manifest with the asset, Adobe tools use the _Adobe Content Credentials Cloud_, a public, persistent storage option for attribution and history data. Publishing to this cloud keeps files smaller and makes Content Credentials more resilient, because if stripped from an asset they can be recovered by searching with the [C2PA Verify tool](https://verify.contentauthenticity.org/). On the other hand, embedding the manifest keeps the file self-contained and means no web access is required to validate.
+In addition to storing the manifest with the asset, Adobe tools use the _Adobe Content Credentials Cloud_, a public, persistent storage option for attribution and history data. Publishing to this cloud keeps files smaller and makes Content Credentials more resilient, because if stripped from an asset someone can find them by searching with the [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr). On the other hand, embedding the manifest keeps the file self-contained and means no web access is required to validate.
 
 Currently, Adobe Content Credentials Cloud (ACCC) is only available to Adobe tools, though in the future other credentials clouds may become available if other organizations want to host a credential service. Currently, most manifests will be embedded in assets since ACCC is specific to Adobe.
 
@@ -139,7 +139,7 @@ The example shown below illustrates one way to implement levels of disclosure:
 
 - The Content Credentials pin <img src={cr_pin} width="25" /> shown over the image indicates that the image has Content Credentials (level 1).
 - Clicking on the pin displays level 2 information, and an **Inspect** button.
-- Clicking the **Inspect** button opens the image on the [Verify site](https://verify.contentauthenticity.org/) that provides level 3 information.
+- Clicking the **Inspect** button opens the image on [ACA Inpsect](https://inspect.cr/) that provides level 3 information.
 
 <img src={cai_levels} width="800" />
 
@@ -147,7 +147,7 @@ The example shown below illustrates one way to implement levels of disclosure:
 
 Numerous Adobe tools and products implement Content Credentials. For example, you can optionally attach credentials to images you create or modify using [Photoshop](https://helpx.adobe.com/photoshop/using/content-credentials.html) and [Lightroom](https://helpx.adobe.com/lightroom-cc/using/content-credentials-lightroom.html). Additionally, all images created using the [Firefly](https://blog.adobe.com/en/publish/2023/03/21/bringing-gen-ai-to-creative-cloud-adobe-firefly) generative AI tool automatically have attached Content Credentials. [Behance displays Content Credentials](https://www.behance.net/blog/cai-on-behance) if they are attached to media shared on the site, and still images provided through [Adobe Stock](https://stock.adobe.com/) automatically have Content Credentials attached. Other Adobe products also support Content Credentials.
 
-The [Inspect tool on Adobe Content Authenticity (Beta)](https://verify.contentauthenticity.org) inspects image files and displays their Content Credentials if they exist. See [Using ACA Inspect](aca-inspect.mdx) for more information.
+The [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) inspects image files and displays their Content Credentials if they exist. See [Using ACA Inspect](aca-inspect.mdx) for more information.
 
 Additionally, several other organizations have implemented CAI solutions, including:
 

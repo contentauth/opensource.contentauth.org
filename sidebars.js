@@ -198,7 +198,7 @@ const sidebars = {
         {
           type: 'doc',
           id: 'rust-sdk/docs/settings',
-          label: 'Configuring the SDK',
+          label: 'Configuring SDK settings',
         },
         {
           type: 'doc',

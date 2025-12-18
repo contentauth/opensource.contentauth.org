@@ -48,7 +48,7 @@ A CSR is just an unsigned certificate that's a template for the certificate that
 A CSR comprises a public key, as well as ["distinguished name" information](https://knowledge.digicert.com/general-information/what-is-a-distinguished-name) that identifies the individual or organization requesting the certificate. The distinguished name includes a common name, organization, city, state, country, and e-mail address. Not all of these fields are required and will vary depending with the assurance level of the desired certificate.
 
 :::tip
-For the [Inspect tool on Adobe Content Authenticity (Beta)](https://verify.contentauthenticity.org) to display your organization name in the Content Credentials, your CSR must include the "O" or Organization Name attribute in the distinguished name information. 
+For the [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) to display your organization name in the Content Credentials, your CSR must include the "O" or Organization Name attribute in the distinguished name information. 
 :::
 
 You sign the CSR with your private key; this proves to the CA that you have control of the private key that corresponds to the public key included in the CSR. Once the requested information in a CSR passes a vetting process and domain control is established, the CA may sign the public key to indicate that it can be publicly trusted.
@@ -74,7 +74,7 @@ You must select at least one of the extended key usage (EKU) fields that specify
 
 ### Organization name
 
-If you want the [Inspect tool on Adobe Content Authenticity (Beta)](https://verify.contentauthenticity.org) to display your organization name in the Content Credentials, your certificate must include the "O" or [Organization Name attribute](https://www.alvestrand.no/objectid/2.5.4.10.html) (OID value 2.5.4.10) in the distinguished name information. The CA may require some validation steps to prove you are part of that organization (details vary by CA).
+If you want the [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) to display your organization name in the Content Credentials, your certificate must include the "O" or [Organization Name attribute](https://www.alvestrand.no/objectid/2.5.4.10.html) (OID value 2.5.4.10) in the distinguished name information. The CA may require some validation steps to prove you are part of that organization (details vary by CA).
 
 ### Signature types
 
