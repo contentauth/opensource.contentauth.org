@@ -70,4 +70,68 @@ When ingredients are added, the SDK validates their Content Credentials (if any)
 Ingredient certificates are validated when they are added to the manifest store, NOT during validation of the composed asset.
 :::
 
+## Linking actions and ingredients
+
+To link an action and an ingredient, reuse the ingredient ID in the action's `ingredientsId` array when building the manifest.  The examples given here are for Python, but the same technique works in any language.
+
+This example and others are in the Python library:
+
+- [An ingredient with a `c2pa.opened` action](https://github.com/contentauth/c2pa-python/blob/main/tests/test_unit_tests.py#L2927).
+- [An ingredient with one `c2pa.opened` and one `c2pa.placed` action](https://github.com/contentauth/c2pa-python/blob/main/tests/test_unit_tests.py#L3011).
+- [Multiple ingredients with `c2pa.placed` action](https://github.com/contentauth/c2pa-python/blob/main/tests/test_unit_tests.py#L3117).
+
+First, get an ID for the ingredient; [for example](https://github.com/contentauth/c2pa-python/blob/main/tests/test_unit_tests.py#L2934):
+
+```python
+parent_ingredient_id = "xmp:iid:a965983b-36fb-445a-aa80-a2d911dcc53c"
+```
+
+Use that ID when the manifest gets defined in an `ingredientsId` array; [for example](https://github.com/contentauth/c2pa-python/blob/main/tests/test_unit_tests.py#L2958):
+
+```json
+...
+"assertions": [
+  {
+    "label": "c2pa.actions.v2",
+    "data": {
+      "actions": [
+        {
+          "action": "c2pa.opened",
+          "softwareAgent": {
+              "name": "Opened asset",
+          },
+          "parameters": {
+            "ingredientIds": [
+              parent_ingredient_id
+            ]
+          },
+          ...
+```
+
+Then the SDK then links the ingrdient with the action. 
+
+This also works with an ingredient JSON with the "add ingredient" function; [for example](https://github.com/contentauth/c2pa-python/blob/main/tests/test_unit_tests.py#L2971-L2985):
+
+```python
+ingredient_json = {
+    "relationship": "parentOf",
+    "instance_id": parent_ingredient_id
+}
+# An opened ingredient is always a parent--exactly one parent ingredient is allowed.
+
+# Read the input file (A.jpg will be signed)
+with open(self.testPath2, "rb") as test_file:
+    file_content = test_file.read()
+
+builder = Builder.from_json(manifestDefinition)
+
+# Add C.jpg as the parent "opened" ingredient
+with open(self.testPath, 'rb') as f:
+    builder.add_ingredient(ingredient_json, "image/jpeg", f)
+    ...
+```
+
+
+
+
 
