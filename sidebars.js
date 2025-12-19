@@ -133,6 +133,18 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'C2PA conformance program',
+      link: { type: 'doc', id: 'conformance/index' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'conformance/trust-lists',
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'C2PA Tool',
       link: { type: 'doc', id: 'c2patool/c2patool-index' },
       collapsed: true,
@@ -398,19 +410,6 @@ const sidebars = {
         },
       ],
     },
-    {
-      type: 'category',
-      label: 'C2PA conformance program',
-      link: { type: 'doc', id: 'conformance' },
-      collapsed: true,
-      items: [
-        {
-          type: 'doc',
-          id: 'getting-started/verify-known-cert-list',
-        },
-      ],
-    },
-
     {
       type: 'category',
       label: 'Durable Content Credentials',

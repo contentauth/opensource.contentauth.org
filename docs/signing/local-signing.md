@@ -157,5 +157,5 @@ This command displays the manifest attached to `signed_image.jpg` and should inc
 ```
 
 :::info
-You can also use the [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) to confirm that your image was signed, but if you used a personal certificate (not an organization certificate) then it won't show [the organization name](get-cert.md#organization-name) and if your certificate is not on the [known certificate list](../getting-started/trust-list.mdx), it [displays the message](../getting-started/aca-inspect.mdx#title-and-signing-information) "The Content Credential issuer couldn't be recognized...."
+You can also use the [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) to confirm that your image was signed, but if you used a personal certificate (not an organization certificate) then it won't show [the organization name](get-cert.md#organization-name) and if your certificate is not on the [known certificate list](../conformance/itl.mdx), it [displays the message](../getting-started/aca-inspect.mdx#title-and-signing-information) "The Content Credential issuer couldn't be recognized...."
 :::
