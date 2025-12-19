@@ -1,0 +1,200 @@
+---
+title: C2PA conformance program
+---
+
+The [C2PA conformance program](https://c2pa.org/conformance) was launched in mid-2025 to help ensure that products that read and create Content Credentials are compliant with the C2PA Content Credentials specification.
+
+The C2PA conformance program covers:
+
+- [Validator products](#validator-products) that read and validate Content Credentials.
+- [Generator products](#generator-products) that create Content Credentials and add them to a digital asset.
+- [Certificate authorities (CAs)](#certificate-authorities).
+
+:::info
+If you're developing a product that reads or creates Content Credentials, you can apply for the C2PA conformance program. If accepted, the product is added to the [conforming products list](https://github.com/c2pa-org/conformance-public/blob/main/conforming-products/conforming-products-list.json), which indicates it is compliant with the C2PA Content Credentials specification.
+
+**To start the process, fill out C2PA's [expression of interest form](https://docs.google.com/forms/d/e/1FAIpQLScERZH5rKfoeSu3y6gGbkllkyeAhmF0G-kXS0eXpb2vR238Rg/viewform).**
+:::
+
+When you apply to the conformance program, you will:
+
+- Sign a legal agreement with the C2PA.
+- Provide evidence supporting your application such as diagrams and documentation.
+- Work with the conformance program staff to resolve any questions.
+
+:::tip
+Use the [**Conformance Explorer**](https://spec.c2pa.org/conformance-explorer/) to browse and search live versions of the C2PA [Conforming Products List](#products) and [trust lists](#c2pa-trust-lists).
+:::
+
+## Products
+
+### Validator products
+
+A _validator product_ can read and validate a manifest store for a digital asset.
+A conforming validator product produces correct validation results according to the C2PA Content Credentials specification.
+
+For more information, see [C2PA Conformance Program Documents](https://github.com/c2pa-org/conformance-public/tree/main/docs/current), specifically
+[C2PA conformance program - section 6.1.1, Validator Product Specification Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Conformance%20Program.pdf).
+
+### Generator products
+
+A _generator product_ can generate manifest data for a digital asset. A conforming generator product produces manifest data that conforms to the C2PA Content Credentials specification, creates assertions in the asset's active manifest and signs a claim using a valid X.509 certificate on the C2PA trust list.
+
+For more information, see [C2PA Conformance Program Documents](https://github.com/c2pa-org/conformance-public/tree/main/docs/current), specifically:
+
+- [C2PA conformance program - section 6.1.1, Generator Product Specification Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Conformance%20Program.pdf)
+- [C2PA Generator Product Security
+  Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Generator%20Product%20Security%20Requirements.pdf)
+
+#### Preliminary certificate check
+
+To confirm all the settings in your signing certificate, you can follow the [preliminary certificate check](conformance/itl.mdx#checking-your-certificate) for the interim trust list to help ensure everything is as expected.
+
+#### Security requirements
+
+When you apply to the conformance program, you must fill out the information required in the **product security architecture template** in Appendix C of the [C2PA Generator Product Security
+Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Generator%20Product%20Security%20Requirements.pdf), providing details on:
+
+- The organization submitting the application.
+- The product, its capabilities, and the systems it uses or relies upon.
+- The product's security architecture, including methods for key generation and storage, and protections against various kinds of misconfiguration, abuse, and exploitations.
+
+### Assurance levels
+
+A conforming product's _assurance level_ indicates the level of confidence that claims it signs reflect its intended behavior. A higher assurance level indicates a greater level of confidence. Currently, the conformance program has two assurance levels: level 1 and level 2:
+
+- [C2PA Generator Product Security
+  Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Generator%20Product%20Security%20Requirements.pdf) details the security requirements for each assurance level.
+- [C2PA certificate policy - Appendix A](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Certificate%20Policy.pdf) details the requirements for claim signing certificates for each assurance level.
+
+The assurance level is encoded as the value of a custom X.509 v3 certificate extension in the product's claim signing certificate. The C2PA defines the _max assurance level_ of a generator product based on the security attributes of its overall implementation architecture. The assurance level in the certificate issued to a particular instance of a conforming generator product may be lower than the max assurance level.
+
+## Certificate authorities
+
+The [C2PA certificate policy](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Certificate%20Policy.pdf) specifies requirements for certificate authorities (CAs) that issue claim signing certificates for use by generator products, and the requirements that those products have to meet when using the certificates.
+
+CAs that meet the certificate policy can be on the C2PA trust list, and can issue certificates to conforming generator products under the C2PA conformance program.
+
+## Checking your certificate
+
+Before requesting to [add your signing certificate to the interim known certificate list](#how-to-add-a-certificate-to-the-list), perform a preliminary check to ensure the certificate is configured properly.
+
+### Prerequisites
+
+The preliminary certificate check procedure below requires the following tools. You must install them if you haven't done so already:
+
+- [jq](https://jqlang.org/), a lightweight and flexible command-line JSON processor. On macOS, if you have [Homebrew](https://brew.sh/), you can install jq by entering `brew install jq`.
+- [OpenSSL](https://www.openssl.org/), a cryptographic software library and CLI. It's installed on many systems such as macOS (but make sure you have a recent version). If OpenSSL is not installed on your system, see the [list of unofficial binary distributions](https://wiki.openssl.org/index.php/Binaries).
+- [C2PA Tool](c2patool/readme.md), the command line tool for working with C2PA manifests and media assets.
+
+### Procedure
+
+:::note
+In the example commands given below, `cert.pem` is your certificate file.
+:::
+
+Check your certificate by following these steps:
+
+1. **Ensure that signing with the certificate doesn't have any validation errors** by using a C2PA Tool command like this:
+
+   ```
+   c2patool ./image.jpg trust --allowed_list ./cert.pem
+   ```
+
+   Confirm that the result does not contain a `validation_status` field, which indicates an error.
+
+1. **Confirm that the `signature_info.issuer` field in the manifest is correct**. This field determines what [Verify displays for the organization name](verify.mdx#title-and-signing-information) after "Issued by ...". Use a C2PA Tool command like this:
+
+   ```
+   c2patool ./image.jpg trust --allowed_list ./cert.pem \
+   | jq --args '.manifests[].signature_info.issuer'
+   ```
+
+   The response should be something like this:
+
+   ```
+   "XYZ Inc."
+   ```
+
+   Where "XYZ Inc." is the name of your organization.
+
+1. **Use `openssl` to perform basic verification of the certificate** you're submitting; for example:
+
+   ```
+   openssl x509 -noout -text -in 'cert.pem' | grep 'Subject:'
+   ```
+
+   Example response:
+
+   ```
+   Subject: organizationIdentifier=XYZ-7155227, C=US, ST=Delaware, L=Dover, O=Whatever Inc., SN=xxx, GN=xxx, CN=xxx
+   ```
+
+## Using the interim known certificate list
+
+You can use the C2PA Tool or the CAI JavaScript library to determine whether a certificate is on the interim known certificate list.
+
+### Using with C2PA Tool
+
+The [C2PA Tool documentation](c2patool/docs/usage.md#configuring-trust-support) explains how to use the interim known certificate list with the tool.
+
+### Using with the JavaScript library
+
+To load and use these lists with the JavaScript library (`c2pa-js`), pass them to the `read` function as shown in the following TypeScript example:
+
+```ts
+import { createC2pa, type ToolkitSettings } from 'c2pa';
+import wasmSrc from 'c2pa/dist/assets/wasm/toolkit_bg.wasm?url';
+import workerSrc from 'c2pa/dist/c2pa.worker.min.js?url';
+
+async function loadTrustResource(file: string): Promise<string> {
+  const res = await fetch(`https://contentcredentials.org/trust/${file}`);
+
+  return res.text();
+}
+
+async function getToolkitSettings(): Promise<ToolkitSettings> {
+  const [trustAnchors, allowedList, trustConfig] = await Promise.all(
+    ['anchors.pem', 'allowed.sha256.txt', 'store.cfg'].map(loadTrustResource),
+  );
+
+  return {
+    trust: {
+      trustConfig,
+      trustAnchors,
+      allowedList,
+    },
+    verify: {
+      verifyTrust: true,
+    },
+  };
+}
+
+async function readFile(asset: File) {
+  const c2pa = await createC2pa({
+    wasmSrc,
+    workerSrc,
+  });
+
+  return c2pa.read(asset, {
+    settings: await getToolkitSettings(),
+  });
+}
+```
+
+:::note
+This code is for illustration purposes only. To ensure acceptable performance, production code should reuse the `c2pa` object and cache the output of `getToolkitSettings()` to avoid making unnecessary network calls.
+:::
+
+## How to add a certificate to the list
+
+If you have an application that is in production and publicly available, you can request to add its signing certificate to the interim known certificate list.
+
+:::warning Warning
+The interim trust list is being deprecated. While you can still request to add your certificate to the list (through the end of 2025), you are strongly encouraged to apply to the C2PA conformance program and use the official C2PA trust list. See [C2PA conformance program](conformance/index.mdx) for more information.
+:::
+
+Follow these steps:
+
+1. [**Do a preliminary check of your certificate**](#checking-your-certificate) to ensure it meets the requirements for C2PA signing certificates and to be in the Verify interim certificate list.
+1. **Submit your request** by emailing `verify-tl@c2pa.org`. We will review your request, and if it is approved, we'll ask for more details. Once we receive them and deploy the update to the trust list, you will receive a confirmation email.

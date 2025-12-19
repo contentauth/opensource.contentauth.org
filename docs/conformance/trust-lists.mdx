@@ -1,0 +1,66 @@
+---
+id: trust-lists
+title: Trust lists
+---
+
+import verify_unknown_source from '@site/static/img/verify-cc-unknown-source.png';
+
+## C2PA trust lists
+
+C2PA maintains two trust lists:
+
+- [**C2PA trust list**](https://github.com/c2pa-org/conformance-public/blob/main/trust-list/C2PA-TRUST-LIST.pem): A list of X.509 certificate trust anchors (either root or subordinate certification authorities) that issue certificates to conforming generator products under the C2PA Certificate Policy.
+- [**C2PA time-stamping authority (TSA) trust list**](https://github.com/c2pa-org/conformance-public/blob/main/trust-list/C2PA-TSA-TRUST-LIST.pem): A list of X.509 certificate trust anchors (either root or subordinate certification authorities) that issue time-stamp signing certificates to TSAs.
+
+### Interim trust list retirement
+
+With the introduction of the C2PA trust list, the existing [interim (temporary) trust list](conformance/itl.mdx) is being retired on the following timeline:
+
+- **Through December 31, 2025**: The [interim trust list](conformance/itl.mdx) will remain operational. During this time:
+  - The [Verify site](https://verify.contentauthenticity.org) will continue to display manifests signed by certificates on the interim trust list as trusted, but with a disclaimer that the manifests were made with an older version of the trust model.
+  - New certificates will continue to be added to the interim trust list when requested.
+  - Product developers are strongly encouraged to apply to the C2PA conformance program and use the official C2PA trust list.
+- **On January 1, 2026**: The interim trust list will be frozen:
+  - No new certificates will be added to the list, and no updates will be made.
+  - Existing certificates will remain valid for legacy support.
+
+Eventually, the certificates on the interim trust list will expire and will not be usable for signing. However, if content was signed during the certificate's validity period, the content will always be considered valid against the legacy trust model.
+
+Validator products are encouraged to begin distinguishing between Content Credentials signed with certificates on the interim trust list (typically tied to Content Credentials specification version version 1.4) and those from conforming products using the official C2PA trust list.
+
+## The interim trust list
+
+:::warning Warning
+The process described on this page is deprecated. The C2PA has released its official trust lists, and Verify will be updated to use them soon. See [Deprecation timeline](#deprecation-timeline) for more information.
+:::
+
+The C2PA **[Verify tool](https://verify.contentauthenticity.org)** uses a list of _known certificates_ (sometimes referred to as a "trust list") to determine whether a Content Credential was issued by a known source. If an asset's Content Credential was not signed by a known certificate, the Verify tool will display this message:
+
+<img
+  src={verify_unknown_source}
+  style={{ width: '300px', display: 'block', margin: '10px auto' }}
+/>
+
+Conversely, if the Content Credential was signed by a known certificate, the Verify tool will display the [name of the certificate owner and time of the claim signature](verify.mdx#title-and-signing-information).
+
+## Deprecation timeline
+
+:::note
+Currently, **[Verify](https://verify.contentauthenticity.org)** uses the interim trust list described here (also referred to as the _temporary trust list_), but Verify will be updated soon to use the official [C2PA trust list](conformance/index.mdx#c2pa-trust-lists).
+:::
+
+The interim trust list (also known as the _temporary trust list_) will remain operational **through December 31, 2025**. During this time, C2PA will continue to accept new certificates following the process described below. At some point, the Verify site will distinguish between Content Credentials from conforming products and those signed using certificates on the interim trust list.
+
+On **January 1, 2026**, the interim trust list will be frozen: C2PA will not add any new entries or make updates. Existing certificates will remain valid, but eventually, those certificates will expire and no longer be usable for signing. However, if content was signed during the certificate's validity period, the content will always be considered valid against the interim trust list.
+
+:::tip
+For more information about conformance, see [C2PA conformance program](conformance/index.mdx).
+:::
+
+## Interim known certificate list
+
+The Verify site hosts the following files that it uses to [validate signing certificates](https://c2pa.org/specifications/specifications/2.0/specs/C2PA_Specification.html#_c2pa_signers). Together, these files form the _interim known certificate list_:
+
+- [**The interim end-entity certificate list**](https://github.com/contentauth/verify-site/blob/main/static/trust/allowed.pem) consists of end-entity certificates. If the certificate is on this list, it is considered "known." To reduce bandwidth consumption, a version with SHA-256 hashes of the certificates is also available.
+- [**The interim known anchor list**](https://github.com/contentauth/verify-site/blob/main/static/trust/anchors.pem) contains the list of known anchor certificates. If an end-entity [certificate's chain](index.mdx#signing-and-certificates) can be traced back to an anchor certificate on this list, the certificate is considered "known."
+- [**The configuration file**](https://github.com/contentauth/verify-site/blob/main/static/trust/store.cfg) specifies the [Extended Key Usage (EKU)](https://datatracker.ietf.org/doc/html/rfc9336) values accepted for end-entity certificates. An end-entity certificate must have at least one of the EKUs in this list to be valid.
