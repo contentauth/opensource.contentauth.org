@@ -108,7 +108,7 @@ Use that ID when the manifest gets defined in an `ingredientsId` array; [for exa
           ...
 ```
 
-Then the SDK then links the ingrdient with the action. 
+Then the SDK links the ingredient with the action. 
 
 This also works with an ingredient JSON with the "add ingredient" function; [for example](https://github.com/contentauth/c2pa-python/blob/main/tests/test_unit_tests.py#L2971-L2985):
 
