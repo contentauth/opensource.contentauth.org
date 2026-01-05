@@ -124,7 +124,7 @@ Shows information from the asset's manifest store, as described below:
 
 The top of the right panel displays a thumbnail of the image along with the same title and signing information as shown in the left panel.
 
-If the Content Credential was signed by a certificate that is NOT on the [C2PA trust list](conformance/index.mdx#c2pa-trust-lists), such as one of the SDK's [test certificates](signing/test-certs.md), then Inspect displays "Unrecognized" at the top of this section with this notice:
+If the Content Credential was signed by a certificate that is NOT on the [C2PA trust list](conformance/trust-lists.mdx#c2pa-trust-list), such as one of the SDK's [test certificates](signing/test-certs.md), then Inspect displays "Unrecognized" at the top of this section with this notice:
 
 import verify_unknown_source from '@site/static/img/unknown-source.png';
 
@@ -133,7 +133,7 @@ import verify_unknown_source from '@site/static/img/unknown-source.png';
   style={{ width: '283px', display: 'block', margin: '10px auto' }}
 />
 
-However, if the Content Credential was signed by a certificate on the [C2PA trust list list](conformance/index.mdx#c2pa-trust-lists), then this section displays the name of the issuer of the claim signature from the `signature_info.issuer` property in the active manifest, as shown in the example snippet below.
+However, if the Content Credential was signed by a certificate on the [C2PA trust list ](conformance/trust-lists.mdx#c2pa-trust-list), then this section displays the name of the issuer of the claim signature from the `signature_info.issuer` property in the active manifest, as shown in the example snippet below.
 
 :::note
 This section shows the organization name only if the signing certificate includes the "O" or [Organization Name attribute](https://www.alvestrand.no/objectid/2.5.4.10.html) (OID value 2.5.4.10) in the certificate's distinguished name information.
