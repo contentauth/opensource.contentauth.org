@@ -40,7 +40,9 @@ The interim trust list (ITL) provided critical support during the early adoption
 
 Eventually, the certificates on the ITL will expire and will not be usable for signing. However, if content was signed during the certificate's validity period, the content will always be considered valid against the legacy trust model.
 
-Validator products are encouraged to begin distinguishing between Content Credentials signed with certificates on the ITL (typically tied to Content Credentials specification version version 1.4) and those from conforming products using the official C2PA trust list.
+:::note
+Validator products can still refer to the ITL, but are encouraged to move to the official C2PA trust list. During the transition period, validator products may consult both the frozen ITL and the C2PA trust list, but must distinguish between Content Credentials signed with certificates on the ITL and those from conforming products using the official C2PA trust list.
+:::
 
 ### Verify tool
 

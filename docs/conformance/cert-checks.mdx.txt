@@ -114,15 +114,7 @@ async function readFile(asset: File) {
 This code is for illustration purposes only. To ensure acceptable performance, production code should reuse the `c2pa` object and cache the output of `getToolkitSettings()` to avoid making unnecessary network calls.
 :::
 
-## How to add a certificate to the list
-
-If you have an application that is in production and publicly available, you can request to add its signing certificate to the interim known certificate list.
-
-:::warning Warning
-The interim trust list is being deprecated. While you can still request to add your certificate to the list (through the end of 2025), you are strongly encouraged to apply to the C2PA conformance program and use the official C2PA trust list. See [C2PA conformance program](conformance/index.mdx) for more information.
-:::
-
 Follow these steps:
 
 1. [**Do a preliminary check of your certificate**](#checking-your-certificate) to ensure it meets the requirements for C2PA signing certificates and to be in the Verify interim certificate list.
-1. **Submit your request** by emailing `verify-tl@c2pa.org`. We will review your request, and if it is approved, we'll ask for more details. Once we receive them and deploy the update to the trust list, you will receive a confirmation email.
+1. **Submit your request** by ....
