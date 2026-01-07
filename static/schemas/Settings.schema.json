@@ -133,7 +133,7 @@
           "type": "boolean"
         },
         "allowed_network_hosts": {
-          "description": "<div class=\"warning\">\nThe CAWG identity assertion does not currently respect this setting.\nSee <a href=\"https://github.com/contentauth/c2pa-rs/issues/1645\">issue #1645</a>.\n</div>\n\nList of host patterns that are allowed for network requests.\n\nEach pattern may include:\n- A scheme (e.g. `https://` or `http://`)\n- A hostname or IP address (e.g. `contentauthenticity.org` or `192.0.2.1`)\n    - The hostname may contain a single leading wildcard (e.g. `*.contentauthenticity.org`)\n- An optional port (e.g. `contentauthenticity.org:443` or `192.0.2.1:8080`)\n\nMatching is case-insensitive. A wildcard pattern such as `*.contentauthenticity.org` matches\n`sub.contentauthenticity.org`, but does not match `contentauthenticity.org` or `fakecontentauthenticity.org`.\nIf a scheme is present in the pattern, only URIs using the same scheme are considered a match. If the scheme\nis omitted, any scheme is allowed as long as the host matches.\n\nThe behavior is as follows:\n- `None` (default) no filtering enabled.\n- `Some(vec)` where `vec` is empty, all traffic is blocked.\n- `Some(vec)` with at least one pattern, filtering enabled for only those patterns.\n\n# Examples\n\nPattern: `*.contentauthenticity.org`\n- Does match:\n  - `https://sub.contentauthenticity.org`\n  - `http://api.contentauthenticity.org`\n- Does **not** match:\n  - `https://contentauthenticity.org` (no subdomain)\n  - `https://sub.fakecontentauthenticity.org` (different host)\n\nPattern: `http://192.0.2.1:8080`\n- Does match:\n  - `http://192.0.2.1:8080`\n- Does **not** match:\n  - `https://192.0.2.1:8080` (scheme mismatch)\n  - `http://192.0.2.1` (port omitted)\n  - `http://192.0.2.2:8080` (different IP address)\n\nThese settings are consumed by [`RestrictedResolver`]. For information on when the SDK might perform a\nnetwork requests, see [\"When do network requests occur?\"]\n\n[\"When do network requests occur?\"]: crate::http#when-do-network-requests-occur\n[`HostPattern`]: crate::http::restricted::HostPattern\n[`RestrictedResolver`]: crate::http::restricted::RestrictedResolver",
+          "description": "<div class=\"warning\">\nThe CAWG identity assertion does not currently respect this setting.\nSee <a href=\"https://github.com/contentauth/c2pa-rs/issues/1645\">issue #1645</a>.\n</div>\n\nList of host patterns that are allowed for network requests.\n\nEach pattern may include:\n- A scheme (e.g. `https://` or `http://`)\n- A hostname or IP address (e.g. `contentauthenticity.org` or `192.0.2.1`)\n    - The hostname may contain a single leading wildcard (e.g. `*.contentauthenticity.org`)\n- An optional port (e.g. `contentauthenticity.org:443` or `192.0.2.1:8080`)\n\nMatching is case-insensitive. A wildcard pattern such as `*.contentauthenticity.org` matches\n`sub.contentauthenticity.org`, but does not match `contentauthenticity.org` or `fakecontentauthenticity.org`.\nIf a scheme is present in the pattern, only URIs using the same scheme are considered a match. If the scheme\nis omitted, any scheme is allowed as long as the host matches.\n\nThe behavior is as follows:\n- `None` (default) no filtering enabled.\n- `Some(vec)` where `vec` is empty, all traffic is blocked.\n- `Some(vec)` with at least one pattern, filtering enabled for only those patterns.\n\n# Examples\n\nPattern: `*.contentauthenticity.org`\n- Does match:\n  - `https://sub.contentauthenticity.org`\n  - `http://api.contentauthenticity.org`\n- Does **not** match:\n  - `https://contentauthenticity.org` (no subdomain)\n  - `https://sub.fakecontentauthenticity.org` (different host)\n\nPattern: `http://192.0.2.1:8080`\n- Does match:\n  - `http://192.0.2.1:8080`\n- Does **not** match:\n  - `https://192.0.2.1:8080` (scheme mismatch)\n  - `http://192.0.2.1` (port omitted)\n  - `http://192.0.2.2:8080` (different IP address)\n\nThese settings are applied by the SDK's HTTP resolvers to restrict network requests.\nWhen network requests occur depends on the operations being performed (reading manifests,\nvalidating credentials, timestamping, etc.).",
           "type": [
             "array",
             "null"
@@ -178,7 +178,7 @@
           "type": "boolean"
         },
         "remote_manifest_fetch": {
-          "description": "Whether to fetch remote manifests in the following scenarios:\n- Constructing a [`Reader`]\n- Constructing an [`Ingredient`]\n- Adding an [`Ingredient`] to the [`Builder`]\n\nThe default value is true.\n\n<div class=\"warning\">\nThis setting is only applicable if the crate is compiled with the `fetch_remote_manifests` feature.\n</div>\n\n[`Reader`]: crate::Reader\n[`Ingredient`]: crate::Ingredient\n[`Builder`]: crate::Builder",
+          "description": "Whether to fetch remote manifests in the following scenarios:\n- Constructing a [`Reader`]\n- Adding an [`Ingredient`] to the [`Builder`]\n\nThe default value is true.\n\n<div class=\"warning\">\nThis setting is only applicable if the crate is compiled with the `fetch_remote_manifests` feature.\n</div>\n\n[`Reader`]: crate::Reader\n[`Ingredient`]: crate::Ingredient\n[`Builder`]: crate::Builder",
           "type": "boolean"
         },
         "skip_ingredient_conflict_resolution": {
@@ -205,6 +205,13 @@
       "description": "Settings for the [Builder][crate::Builder].",
       "type": "object",
       "properties": {
+        "vendor": {
+          "description": "The name of the vendor creating the content credential.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "claim_generator_info": {
           "description": "Claim generator info that is automatically added to the builder.\n\nNote that this information will prepend any claim generator info\nprovided explicitly to the builder.",
           "anyOf": [
@@ -818,6 +825,15 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "roles": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
                 }
               },
               "required": [
@@ -855,6 +871,15 @@
                   ]
                 },
                 "referenced_assertions": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "roles": {
                   "type": [
                     "array",
                     "null"
