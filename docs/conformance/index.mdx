@@ -1,9 +1,8 @@
 ---
-id: conformance
 title: C2PA conformance program
 ---
 
-The [C2PA conformance program](https://c2pa.org/conformance) was launched in mid-2025 to help ensure that products that read and create Content Credentials are compliant with the C2PA Content Credentials specification.
+The [C2PA conformance program](https://c2pa.org/conformance) helps to ensure that products that read and create Content Credentials are compliant with the C2PA Content Credentials specification.
 
 The C2PA conformance program covers:
 
@@ -24,7 +23,7 @@ When you apply to the conformance program, you will:
 - Work with the conformance program staff to resolve any questions.
 
 :::tip
-Use the [**Conformance Explorer**](https://spec.c2pa.org/conformance-explorer/) to browse and search live versions of the C2PA [Conforming Products List](#products) and [trust lists](#c2pa-trust-lists).
+Use the [**Conformance Explorer**](https://spec.c2pa.org/conformance-explorer/) to browse and search live versions of the C2PA [conforming products list](#products) and [trust lists](trust-lists.mdx).
 :::
 
 ## Products
@@ -47,9 +46,12 @@ For more information, see [C2PA Conformance Program Documents](https://github.co
 - [C2PA Generator Product Security
   Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Generator%20Product%20Security%20Requirements.pdf)
 
+<!--
 #### Preliminary certificate check
 
-To confirm all the settings in your signing certificate, you can follow the [preliminary certificate check](getting-started/trust-list.mdx#checking-your-certificate) for the interim trust list to help ensure everything is as expected.
+To confirm all the settings in your signing certificate, you can follow the preliminary certificate check to help ensure everything is as expected.
+
+-->
 
 #### Security requirements
 
@@ -74,27 +76,4 @@ The assurance level is encoded as the value of a custom X.509 v3 certificate ext
 
 The [C2PA certificate policy](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Certificate%20Policy.pdf) specifies requirements for certificate authorities (CAs) that issue claim signing certificates for use by generator products, and the requirements that those products have to meet when using the certificates.
 
-CAs on the C2PA trust list can issue certificates to conforming generator products under the C2PA conformance program.
-
-## C2PA trust lists
-
-C2PA maintains two trust lists:
-
-- [**C2PA trust list**](https://github.com/c2pa-org/conformance-public/blob/main/trust-list/C2PA-TRUST-LIST.pem): A list of X.509 certificate trust anchors (either root or subordinate certification authorities) that issue certificates to conforming generator products under the C2PA Certificate Policy.
-- [**C2PA time-stamping authority (TSA) trust list**](https://github.com/c2pa-org/conformance-public/blob/main/trust-list/C2PA-TSA-TRUST-LIST.pem): A list of X.509 certificate trust anchors (either root or subordinate certification authorities) that issue time-stamp signing certificates to TSAs.
-
-### Interim trust list retirement
-
-With the introduction of the C2PA trust list, the existing [interim (temporary) trust list](getting-started/trust-list.mdx) is being retired on the following timeline:
-
-- **Through December 31, 2025**: The [interim trust list](getting-started/trust-list.mdx) will remain operational. During this time:
-  - The [Verify site](https://verify.contentauthenticity.org) will continue to display manifests signed by certificates on the interim trust list as trusted, but with a disclaimer that the manifests were made with an older version of the trust model.
-  - New certificates will continue to be added to the interim trust list when requested.
-  - Product developers are strongly encouraged to apply to the C2PA conformance program and use the official C2PA trust list.
-- **On January 1, 2026**: The interim trust list will be frozen:
-  - No new certificates will be added to the list, and no updates will be made.
-  - Existing certificates will remain valid for legacy support.
-
-Eventually, the certificates on the interim trust list will expire and will not be usable for signing. However, if content was signed during the certificate's validity period, the content will always be considered valid against the legacy trust model.
-
-Validator products are encouraged to begin distinguishing between Content Credentials signed with certificates on the interim trust list (typically tied to Content Credentials specification version version 1.4) and those from conforming products using the official C2PA trust list.
+CAs that meet the certificate policy can be on the C2PA trust list, and can issue certificates to conforming generator products under the C2PA conformance program.

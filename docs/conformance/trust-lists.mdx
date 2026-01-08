@@ -1,0 +1,60 @@
+---
+id: trust-lists
+title: Trust lists
+---
+
+import verify_unknown_source from '@site/static/img/verify-cc-unknown-source.png';
+
+C2PA maintains two [trust lists](https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_trust_lists): the C2PA _trust list_ and the C2PA _time-stamping authority (TSA) trust list_.
+
+## C2PA trust list
+
+The [**C2PA trust list**](https://github.com/c2pa-org/conformance-public/blob/main/trust-list/C2PA-TRUST-LIST.pem) is a list of X.509 certificate trust anchors (either root or subordinate certification authorities) that issue certificates to conforming generator products under the C2PA Certificate Policy.
+
+Conforming generator products must use a certificate that can be traced back to a certificate on the C2PA trust list. Conforming validator products must refer to the C2PA trust list to determine whether Content Credentials were signed with a valid certificate.
+
+:::tip
+For a readable view of the C2PA trust list, see the [C2PA Conformance Explorer](https://spec.c2pa.org/conformance-explorer/), and click **C2PA Trust List**.
+:::
+
+## C2PA time-stamping authority trust list
+
+The [**C2PA time-stamping authority (TSA) trust list**](https://github.com/c2pa-org/conformance-public/blob/main/trust-list/C2PA-TSA-TRUST-LIST.pem) is a list of X.509 certificate trust anchors (either root or subordinate certification authorities) that issue time-stamp signing certificates to TSAs.
+
+A TSA acts as a trusted third-party "notary service" for data. When a C2PA claim generator signs a manifest, it can send a hash of the data to a C2PA-conformant TSA, which then returns a cryptographically signed timestamp.
+
+Time-stamps enable a validator to confirm that a manifest's signature was created while the signing certificate was valid, even if that certificate has since expired or been revoked. This means validators do not need to query online services for revocation status at the time of consumption, enabling long-term signature validation.
+
+:::tip
+For a readable view of the C2PA time-stamping authority trust list, see the [C2PA Conformance Explorer](https://spec.c2pa.org/conformance-explorer/), and click **C2PA TSA Trust List**.
+:::
+
+## Interim trust list
+
+The interim trust list (ITL) provided critical support during the early adoption phase of C2PA, but it has been superceded by the C2PA trust lists.
+
+**As of January 1, 2026, the ITL has been frozen**:
+
+- No new certificates will be added to the list, and no updates will be made.
+- Existing certificates will remain valid for legacy support.
+
+Eventually, the certificates on the ITL will expire and will not be usable for signing. However, if content was signed during the certificate's validity period, the content will always be considered valid against the legacy trust model.
+
+:::note
+Validator products can still refer to the ITL, but are encouraged to move to the official C2PA trust list. During the transition period, validator products may consult both the frozen ITL and the C2PA trust list, but must distinguish between Content Credentials signed with certificates on the ITL and those from conforming products using the official C2PA trust list.
+:::
+
+### Verify tool
+
+The C2PA **[Verify tool](https://verify.contentauthenticity.org)** currently uses the ITL to validate that Content Credentials were signed using a "known certificate".
+
+If an asset's Content Credentials were not signed by a certificate on the [interim end-entity certificate list](https://github.com/contentauth/verify-site/blob/main/static/trust/allowed.pem) or a certificate whose chain can be traced back to a certificate on the [interim known anchor list](https://github.com/contentauth/verify-site/blob/main/static/trust/anchors.pem), then Verify displays this message:
+
+<img
+  src={verify_unknown_source}
+  style={{ width: '300px', display: 'block', margin: '10px auto' }}
+/>
+
+Conversely, if the Content Credential was signed by a known certificate, the Verify tool will display the name of the certificate owner and time of the claim signature.
+
+At some point Verify will be updated to use the C2PA trust lists instead of the ITL.
