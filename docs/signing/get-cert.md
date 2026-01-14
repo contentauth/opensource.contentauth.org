@@ -7,7 +7,7 @@ title: Getting a signing certificate
 Best practices for handling keys and certificates are beyond the scope of this documentation.  Always protect your private keys with the highest level of security; for example, never share them through insecure channels such as email.
 :::
 
-To sign manifest claims, you must have an X.509 v3 security certificate and key that conform to the requirements laid out in the [C2PA specification](https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#x509_certificates). Additionally, the C2PA program provides a [Certificate Policy](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Certificate%20Policy.pdf) containing the requirements for a certification authority (CA) to follow when issuing C2PA claim signing certificates and the requirements for the use of such certificates.
+To sign manifest claims, you must have an X.509 v3 security certificate and key that conform to the requirements laid out in the [C2PA specification](https://c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#x509_certificates). Additionally, the C2PA program provides a [Certificate Policy](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Certificate%20Policy.pdf) containing the requirements for a certification authority (CA) to follow when issuing C2PA claim signing certificates and the requirements for the use of such certificates.
 
 
 ## Purchasing a certificate
@@ -59,7 +59,7 @@ If you want the [Inspect tool on Adobe Content Authenticity (Beta)](https://insp
 
 The following table describes the signature algorithms and types that the CAI SDK supports. You must supply credentials (certificates and keys) that correspond to the signing algorithm (`signatureAlgorithm`). Signing/validation will fail if the the supplied credentials don't support the signature type.
 
-This table is provided for convenience, and is based on information in the [C2PA specification](https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#x509_certificates). The specification is authoritative; refer to it for more details.  The C2PA specification also covers two other certificates for timestamp responses and OCSP certificate revocation, which are not covered here.
+This table is provided for convenience, and is based on information in the [C2PA specification](https://c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#x509_certificates). The specification is authoritative; refer to it for more details.  The C2PA specification also covers two other certificates for timestamp responses and OCSP certificate revocation, which are not covered here.
 
 | Certificate `signatureAlgorithm` | Description  | Recommended signature type | RFC Reference |
 | -------------------------------- | ------------ | -------------------------- | ------------- |
