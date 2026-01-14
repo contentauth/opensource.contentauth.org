@@ -105,6 +105,29 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Working with the SDK',
+      link: { type: 'doc', id: 'tasks/index' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'tasks/read',
+          label: 'Reading manifest data',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/get-resources',
+          label: 'Getting manifest resources',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/build',
+          label: 'Adding and signing amanifest',
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Signing and certificates',
       link: { type: 'doc', id: 'signing/signing-and-certs' },
       collapsed: true,
@@ -135,8 +158,6 @@ const sidebars = {
       type: 'category',
       label: 'C2PA conformance program',
       link: { type: 'doc', id: 'conformance/index' },
-      label: 'Working with the SDK',
-      link: { type: 'doc', id: 'tasks/index' },
       collapsed: true,
       items: [
         {
