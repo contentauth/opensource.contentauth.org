@@ -28,6 +28,7 @@
 /docs/rust-sdk/*.md
 /docs/rust-sdk/docs/*.md
 /docs/**/readme.md
+/docs/**/README.md
 /static/sb-alg-list.json
 /docs/trustmark/*.md
 /docs/trustmark/c2pa/*.md

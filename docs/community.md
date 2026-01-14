@@ -29,7 +29,7 @@ Participants are required to follow the [Adobe Code of Conduct](https://github.c
 
 ### Verify
 
-The code for the [C2PA Verify website](https://verify.contentauthenticity.org/) is open source.  For general information on using it, see [Using the Verify tool](getting-started/verify.mdx).
+The code for the [C2PA Verify website](https://verify.contentauthenticity.org/) is open source.  However, it currently uses the deprecated [Legacy JavaScript library](https://github.com/contentauth/c2pa-js-legacy).
 
 ### Related projects
 
