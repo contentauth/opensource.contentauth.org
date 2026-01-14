@@ -137,7 +137,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Working with the SDK',
-      link: { type: 'doc', id: 'tasks/working-manifests' },
+      link: { type: 'doc', id: 'tasks/index' },
       collapsed: true,
       items: [
         {

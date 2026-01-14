@@ -1,5 +1,4 @@
 ---
-id: working-manifests
 title: Working with the SDK
 ---
 
