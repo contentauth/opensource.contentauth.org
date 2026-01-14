@@ -23,7 +23,7 @@ Accessing a private key and certificate directly from the file system is fine du
 
 [Getting a certificate](get-cert.md) provides a general overview of getting a signing certificate from a certificate authority (CA). 
 
-Here is an example of getting signing credentials using [GlobalSign](http://globalsign.com/) certificate authority (CA) and then using them with C2PA Tool.  GlobalSign is just one of many CAs. For a list of some others, see [Getting a security certificate](get-cert.md#certificate-authorities-cas).
+Here is an example of getting signing credentials and then using them with C2PA Tool. 
 
 :::note 
 This example uses an inexpensive personal certificate, which is fine for development and testing, but in production, an enterprise certificate is strongly recommended. An enterprise certificate is required for [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) to display your organization name when for signed assets.
