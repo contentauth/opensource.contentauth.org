@@ -110,7 +110,7 @@
         "instance_id": {
           "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
           "type": "string",
-          "default": "xmp:iid:5b3a16fa-7fb7-4d70-9332-ff5b8731e21e"
+          "default": "xmp:iid:2d002383-257e-4832-91bd-425e94213e66"
         },
         "thumbnail": {
           "anyOf": [
