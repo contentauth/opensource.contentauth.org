@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Builder",
-  "description": "Use a Builder to add a signed manifest to an asset.\n\n# Example: Building and signing a manifest\n\n```ignore-wasm32\nuse c2pa::Result;\nuse std::path::PathBuf;\n\nuse c2pa::{create_signer, Builder, SigningAlg};\nuse serde::Serialize;\nuse serde_json::json;\nuse tempfile::tempdir;\n\n#[derive(Serialize)]\nstruct Test {\n    my_tag: usize,\n}\n\n# fn main() -> Result<()> {\n#[cfg(feature = \"file_io\")]\n{\n    let manifest_json = json!({\n       \"claim_generator_info\": [\n          {\n              \"name\": \"c2pa_test\",\n              \"version\": \"1.0.0\"\n          }\n       ],\n       \"title\": \"Test_Manifest\"\n    }).to_string();\n\n    let mut builder = Builder::from_json(&manifest_json)?;\n    builder.add_assertion(\"org.contentauth.test\", &Test { my_tag: 42 })?;\n\n    let source = PathBuf::from(\"tests/fixtures/C.jpg\");\n    let dir = tempdir()?;\n    let dest = dir.path().join(\"test_file.jpg\");\n\n    // Create a ps256 signer using certs and key files. TO DO: Update example.\n    let signcert_path = \"tests/fixtures/certs/ps256.pub\";\n    let pkey_path = \"tests/fixtures/certs/ps256.pem\";\n    let signer = create_signer::from_files(signcert_path, pkey_path, SigningAlg::Ps256, None)?;\n\n    // embed a manifest using the signer\n    builder.sign_file(\n        signer.as_ref(),\n        &source,\n        &dest)?;\n    }\n# Ok(())\n# }\n```",
+  "description": "Use a Builder to add a signed manifest to an asset.\n\n## Example: Adding a signed manifest to an asset\n\n```\n# use c2pa::Result;\nuse std::io::Cursor;\n\nuse c2pa::{settings::Settings, Builder, SigningAlg};\nuse serde::Serialize;\n\n#[derive(Serialize)]\nstruct Test {\n    my_tag: usize,\n}\n\n# fn main() -> Result<()> {\n{\n    Settings::from_toml(include_str!(\"../tests/fixtures/test_settings.toml\"))?;\n    let mut builder = Builder::from_json(r#\"{\"title\": \"Test\"}\"#)?;\n    builder.add_assertion(\"org.contentauth.test\", &Test { my_tag: 42 })?;\n\n    // embed a manifest using the signer\n    let mut source = std::fs::File::open(\"tests/fixtures/C.jpg\")?;\n    let mut dest = Cursor::new(Vec::new());\n    let signer = Settings::signer()?;\n    let _c2pa_data = builder.sign(&signer, \"image/jpeg\", &mut source, &mut dest)?;\n}\n# Ok(())\n# }\n```",
   "type": "object",
   "properties": {
     "claim_version": {
@@ -30,7 +30,7 @@
       "default": [
         {
           "name": "c2pa-rs",
-          "version": "0.71.0"
+          "version": "0.74.0"
         }
       ]
     },
@@ -59,7 +59,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:39eca742-ca60-4688-bb43-825b0b208632"
+      "default": "xmp:iid:9ef776b1-e266-4872-8e21-1e98d1a6e26c"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -133,7 +133,8 @@
         {
           "type": "null"
         }
-      ]
+      ],
+      "deprecated": true
     }
   },
   "required": [

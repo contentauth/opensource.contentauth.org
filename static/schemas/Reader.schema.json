@@ -110,7 +110,7 @@
         "instance_id": {
           "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
           "type": "string",
-          "default": "xmp:iid:06e3ef15-797a-48b5-af91-4cb9f9a307a7"
+          "default": "xmp:iid:5b3a16fa-7fb7-4d70-9332-ff5b8731e21e"
         },
         "thumbnail": {
           "anyOf": [
@@ -127,8 +127,7 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/Ingredient"
-          },
-          "default": []
+          }
         },
         "credentials": {
           "description": "A List of verified credentials",
@@ -1388,7 +1387,7 @@
       "description": "Represents the levels of assurance a manifest store achives when evaluated against the C2PA\nspecifications structural, cryptographic, and trust requirements.\n\nSee [§14.3. Validation states].\n\n[§14.3. Validation states]: https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_validation_states",
       "oneOf": [
         {
-          "description": "The manifest store fails to meet [ValidationState::WellFormed] requirements, meaning it cannot\neven be parsed or its basic structure is non-compliant.\n\nThis case may also occur if validation is disabled in the SDK.",
+          "description": "The manifest store fails to meet ValidationState::WellFormed requirements, meaning it cannot\neven be parsed or its basic structure is non-compliant.\n\nThis case may also occur if validation is disabled in the SDK.",
           "type": "string",
           "const": "Invalid"
         },

@@ -17,11 +17,8 @@ const sidebars = {
         },
         {
           type: 'doc',
-          id: 'getting-started/verify',
-        },
-        {
-          type: 'doc',
-          id: 'getting-started/verify-known-cert-list',
+          label: 'Using ACA Inspect',
+          id: 'getting-started/inspect',
         },
       ],
     },
@@ -136,21 +133,13 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Working with the SDK',
-      link: { type: 'doc', id: 'tasks/working-manifests' },
+      label: 'C2PA conformance program',
+      link: { type: 'doc', id: 'conformance/index' },
       collapsed: true,
       items: [
         {
           type: 'doc',
-          id: 'tasks/read',
-        },
-        {
-          type: 'doc',
-          id: 'tasks/get-resources',
-        },
-        {
-          type: 'doc',
-          id: 'tasks/build',
+          id: 'conformance/trust-lists',
         },
       ],
     },
@@ -221,7 +210,7 @@ const sidebars = {
         {
           type: 'doc',
           id: 'rust-sdk/docs/settings',
-          label: 'Configuring the SDK',
+          label: 'Configuring SDK settings',
         },
         {
           type: 'doc',
@@ -380,6 +369,11 @@ const sidebars = {
           collapsed: true,
           items: [
             {
+              type: 'doc',
+              id: 'c2pa-ios-example/README',
+              label: 'Example iOS app',
+            },
+            {
               type: 'link',
               label: 'API documentation',
               href: 'https://contentauth.github.io/c2pa-ios/documentation/c2pa/',
@@ -398,6 +392,11 @@ const sidebars = {
           collapsed: true,
           items: [
             {
+              type: 'doc',
+              id: 'c2pa-android-example/README',
+              label: 'Example Android app',
+            },
+            {
               type: 'link',
               label: 'API documentation',
               href: 'https://contentauth.github.io/c2pa-android/',
@@ -410,11 +409,6 @@ const sidebars = {
           ],
         },
       ],
-    },
-    {
-      type: 'doc',
-      label: 'C2PA conformance program',
-      id: 'conformance',
     },
     {
       type: 'category',

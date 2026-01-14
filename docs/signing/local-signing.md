@@ -26,7 +26,7 @@ Accessing a private key and certificate directly from the file system is fine du
 Here is an example of getting signing credentials using [GlobalSign](http://globalsign.com/) certificate authority (CA) and then using them with C2PA Tool.  GlobalSign is just one of many CAs. For a list of some others, see [Getting a security certificate](get-cert.md#certificate-authorities-cas).
 
 :::note 
-This example uses an inexpensive personal certificate, which is fine for development and testing, but in production, an enterprise certificate is strongly recommended. An enterprise certificate is required for [Verify](https://verify.contentauthenticity.org/) to display your organization name when for signed assets.
+This example uses an inexpensive personal certificate, which is fine for development and testing, but in production, an enterprise certificate is strongly recommended. An enterprise certificate is required for [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) to display your organization name when for signed assets.
 :::
 
 ### 1. Purchase credentials 
@@ -157,5 +157,5 @@ This command displays the manifest attached to `signed_image.jpg` and should inc
 ```
 
 :::info
-You can also use [Verify](https://verify.contentauthenticity.org) to confirm that your image was signed, but if you used a personal certificate (not an organization certificate) then [Verify won't show the organization name](get-cert.md#organization-name) and if your certificate is not on the [known certificate list](../getting-started/trust-list.mdx), Verify [displays the message](../getting-started/verify.mdx#title-and-signing-information) "The Content Credential issuer couldn't be recognized...."
+You can also use the [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) to confirm that your image was signed, but if you used a personal certificate (not an organization certificate) then it won't show [the organization name](get-cert.md#organization-name) and if your certificate can't be traced back to a certificate on the [C2PA trust list](../conformance/trust-lists.mdx), it [displays the message](../getting-started/aca-inspect.mdx#title-and-signing-information) "The Content Credential issuer couldn't be recognized...."
 :::

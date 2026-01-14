@@ -6,6 +6,10 @@ hide_table_of_contents: true
 
 import TOCInline from '@theme/TOCInline';
 
+:::tip See also
+[C2PA FAQs](https://c2pa.org/faqs/).
+:::
+
 <TOCInline toc={toc} />
 
 ### Are Content Credentials alone sufficient to prevent the spread of misinformation?
@@ -18,7 +22,7 @@ Content provenance is most effective when combining three key technologies:
 
 Using these technologies together creates a more robust content provenance system than any single approach alone.
 
-For more details, see [Durable Content Credentials](https://contentauthenticity.org/blog/durable-content-credentials) (April 8, 2024).
+For more details, see [Durable Content Credentials](../durable-cr/index.md).
 
 ### Are Content Credentials a blockchain system?
 
@@ -31,9 +35,9 @@ Notable implementations using blockchain:
 
 ### Are Content Credentials about digital rights management?
 
-No; Content Credentials do not enforce permissions for access to content. In many cases, the name displayed on the [Verify website](https://verify.contentauthenticity.org) is the name of the exporter of the content, not the rights owner.
+No; Content Credentials do not enforce permissions for access to content. In many cases, the name displayed by validator products such as the [**Inspect tool on Adobe Content Authenticity (Beta)**](https://inspect.cr) (ACA Inpsect) is the name of the exporter of the content, not the rights owner.
 
-The [Title and signgin information](verify.mdx#title-and-signing-information) in Verify refers to the name of the exporter. If the image was created with an Adobe Product such as Photoshop with Content Credentials (Beta) enabled, the "Produced by" section shows the name of the Adobe ID associated with the user who exported the image.
+The [Title and signing information](aca-inspect.mdx#title-and-signing-information) in ACA Inspect refers to the name of the exporter. If the image was created with an Adobe Product such as Photoshop with Content Credentials (Beta) enabled, the "Produced by" section shows the name of the Adobe ID associated with the user who exported the image.
 
 ### Do Content Credentials indicate if an image is fake or altered?
 
@@ -52,6 +56,8 @@ Content Credentials don't prevent anyone from taking a screenshot or photo of an
 Conversely, if you use a C2PA-enabled camera to take a photo of an image, the camera will sign the image, but since it has no way of detecting what it is, the Content Credentials won't reflect that. For example, if the original image was generated with AI, the camera won't flag it as such. In general, the camera will indicate the device, when and where the image was taken in metadata, but it is not capable of analyzing the content of the image.
 
 The C2PA specification allows for recovery of metadata stripped from an asset through a lookup process using either a watermarked ID or a perceptual content-aware hash, also referred to as a [fingerprint](https://c2pa.org/specifications/specifications/2.0/specs/C2PA_Specification.html#_fingerprint).
+
+Durable Content Credentials helps content provenance to persist across content platforms by using C2PA manifest data. For more information, see [Durable Content Credentials](../durable-cr/index.md).
 
 ### What information is embedded in Content Credentials?
 

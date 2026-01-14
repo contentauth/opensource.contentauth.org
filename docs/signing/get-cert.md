@@ -13,7 +13,7 @@ To sign manifest claims, you must have an X.509 v3 security certificate and key 
 ## Purchasing a certificate
 
 :::note
-The [C2PA conformance program](https://c2pa.org/conformance/) establishes the requirements governing the issuance of C2PA claim signing certificates for use by product developers.  Through the end of 2025 you can still purchase a certificate from any CA and request to add it to the [interim trust list](../getting-started/trust-list.mdx), but starting in 2026 conforming generator products must use a certificate from a CA on the C2PA trust list.  See [C2PA conformance program](../conformance.mdx) for more information.
+The [C2PA conformance program](https://c2pa.org/conformance/) establishes the requirements governing the issuance of C2PA claim signing certificates for use by product developers.  Conforming generator products must use a certificate from a CA on the C2PA trust list.  See [C2PA conformance program](../conformance/index.mdx) for more information.
 :::
 
 The process to purchase a certificate and key is different for each CA: You might be able to simply click a "Buy" button on the CA's website. Or your can make your own key and use it to create a certificate signing request (CSR) that you send to the CA. Regardless of the process, what you get back is a signed certificate that you use to create a certificate chain.
@@ -48,7 +48,7 @@ A CSR is just an unsigned certificate that's a template for the certificate that
 A CSR comprises a public key, as well as ["distinguished name" information](https://knowledge.digicert.com/general-information/what-is-a-distinguished-name) that identifies the individual or organization requesting the certificate. The distinguished name includes a common name, organization, city, state, country, and e-mail address. Not all of these fields are required and will vary depending with the assurance level of the desired certificate.
 
 :::tip
-For the C2PA [Verify tool](https://verify.contentauthenticity.org/) to display your organization name in the Content Credentials, your CSR must include the "O" or Organization Name attribute in the distinguished name information. 
+For the [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) to display your organization name in the Content Credentials, your CSR must include the "O" or Organization Name attribute in the distinguished name information. 
 :::
 
 You sign the CSR with your private key; this proves to the CA that you have control of the private key that corresponds to the public key included in the CSR. Once the requested information in a CSR passes a vetting process and domain control is established, the CA may sign the public key to indicate that it can be publicly trusted.
@@ -74,7 +74,7 @@ You must select at least one of the extended key usage (EKU) fields that specify
 
 ### Organization name
 
-If you want the C2PA [Verify tool](https://verify.contentauthenticity.org/) to display your organization name in the Content Credentials, your certificate must include the "O" or [Organization Name attribute](https://www.alvestrand.no/objectid/2.5.4.10.html) (OID value 2.5.4.10) in the distinguished name information. The CA may require some validation steps to prove you are part of that organization (details vary by CA).
+If you want the [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) to display your organization name in the Content Credentials, your certificate must include the "O" or [Organization Name attribute](https://www.alvestrand.no/objectid/2.5.4.10.html) (OID value 2.5.4.10) in the distinguished name information. The CA may require some validation steps to prove you are part of that organization (details vary by CA).
 
 ### Signature types
 
