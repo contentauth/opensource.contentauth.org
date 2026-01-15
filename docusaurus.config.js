@@ -203,6 +203,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['rust'],
       },
       algolia: {
         // The application ID provided by Algolia
