@@ -111,6 +111,11 @@ const sidebars = {
       items: [
         {
           type: 'doc',
+          id: 'tasks/settings',
+          label: 'Configuring settings',
+        },
+        {
+          type: 'doc',
           id: 'tasks/read',
           label: 'Reading manifest data',
         },
@@ -122,7 +127,7 @@ const sidebars = {
         {
           type: 'doc',
           id: 'tasks/build',
-          label: 'Adding and signing amanifest',
+          label: 'Adding and signing a manifest',
         },
       ],
     },

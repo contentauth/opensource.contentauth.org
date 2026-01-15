@@ -1,31 +1,48 @@
 
-Use the `Reader` object to read manifest data from a file or stream and perform validation on the manifest store. 
+Use the `c2pa.Reader` object to read manifest data from a file or stream and perform validation on the manifest store. 
 
-Use the `json()` method to return a JSON manifest report; If there are validation errors, the report includes a `validation_status` field.
-
-An asset file may contain many manifests in a manifest store. The most recent manifest is identified by the value of the `active_manifest` field in the manifests map.
+This example shows how to read a C2PA manifest embedded in a media file, and validate that it is trusted according to the official trust anchor certificate list. The output is printed as prettified JSON.
 
 ```py
-# Import the C2PA Python package.
-from c2pa import *
+import sys
+import c2pa
+import urllib.request
 
-# Import standard general-purpose packages.
-import os
-import io
-import logging
-import json
+TRUST_ANCHORS_URL = "https://contentcredentials.org/trust/anchors.pem"
 
-try:
-  # Create a reader from a file path.
-  reader = c2pa.Reader.from_file("path/to/media_file.jpg")
+def load_trust_anchors():
+    try:
+        with urllib.request.urlopen(TRUST_ANCHORS_URL) as response:
+            anchors = response.read().decode('utf-8')
+        settings = {
+            "verify": {
+                "verify_cert_anchors": True
+            },
+            "trust": {
+                "trust_anchors": anchors
+            }
+        }
+        c2pa.load_settings(settings)
+    except Exception as e:
+        print(f"Warning: Could not load trust anchors from {TRUST_ANCHORS_URL}: {e}")
 
-  # Print the JSON for a manifest.
-  print("manifest store:", reader.json())
 
-except Exception as err:
-    print(err)
+def read_c2pa_data(media_path: str):
+    print(f"Reading {media_path}")
+    try:
+        with c2pa.Reader(media_path) as reader:
+            print(reader.detailed_json())
+    except Exception as e:
+        print(f"Error reading C2PA data from {media_path}: {e}")
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        media_path = "tests/fixtures/cloud.jpg"
+    else:
+        media_path = sys.argv[1]
+
+    load_trust_anchors()
+    read_c2pa_data(media_path)
 ```
-
-<!--
-May want to add that the `path` param needs to be a valid path (since we don't revalidate in the example), and `mimeType` a valid and supported mimetype (again because in the example we don't revalidate and/or check for undefined/null).
--->

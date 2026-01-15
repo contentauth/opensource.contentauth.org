@@ -1,32 +1,33 @@
 This is an example of how to assign a manifest to an asset and sign the claim using Node.js:
 
 ```ts
-import { ManifestBuilder } from 'c2pa-node';
+import { Builder } from '@contentauth/c2pa-node';
 
-const manifest = new ManifestBuilder({
-  claim_generator: 'my-app/1.0.0',
-  format: 'image/jpeg',
-  title: 'node_test_local_signer.jpg',
-  assertions: [
-    {
-      label: 'c2pa.actions',
-      data: {
-        actions: [
-          {
-            action: 'c2pa.created',
-          },
-        ],
-      },
-    },
-    {
-      label: 'com.custom.my-assertion',
-      data: {
-        description: 'My custom test assertion',
-        version: '1.0.0',
-      },
-    },
-  ],
-});
+// Create a new builder
+const builder = Builder.new();
+
+// Create with custom settings
+const settings = {
+  builder: {
+    generate_c2pa_archive: true
+  }
+};
+const builder = Builder.new(settings);
+
+// Or create from an existing manifest definition
+const builder = Builder.withJson(manifestDefinition);
+
+// Or create with both manifest and settings
+const builder = Builder.withJson(manifestDefinition, settings);
+
+// Add assertions to the manifest
+builder.addAssertion('c2pa.actions', actionsAssertion);
+
+// Add resources
+await builder.addResource('resource://example', resourceAsset);
+
+// Sign the manifest
+const manifest = builder.sign(signer, inputAsset, outputAsset);
 ```
 
 Use the `c2pa.sign()` method to sign an ingredient, either locally if you have a signing certificate and key available, or by using a remote signing API.
