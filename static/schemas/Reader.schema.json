@@ -110,7 +110,7 @@
         "instance_id": {
           "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
           "type": "string",
-          "default": "xmp:iid:5b3a16fa-7fb7-4d70-9332-ff5b8731e21e"
+          "default": "xmp:iid:e0345d18-693c-46e5-8319-da09f926d0fa"
         },
         "thumbnail": {
           "anyOf": [
@@ -171,6 +171,16 @@
             "string",
             "null"
           ]
+        },
+        "claim_version": {
+          "description": "The version of the claim, parsed from the claim label.\n\nFor example:\n- `c2pa.claim.v2` -> 2\n- `c2pa.claim` -> 1",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint8",
+          "minimum": 0,
+          "maximum": 255
         }
       }
     },
