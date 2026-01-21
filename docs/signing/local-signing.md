@@ -23,15 +23,13 @@ Accessing a private key and certificate directly from the file system is fine du
 
 [Getting a certificate](get-cert.md) provides a general overview of getting a signing certificate from a certificate authority (CA). 
 
-Here is an example of getting signing credentials using [GlobalSign](http://globalsign.com/) certificate authority (CA) and then using them with C2PA Tool.  GlobalSign is just one of many CAs. For a list of some others, see [Getting a security certificate](get-cert.md#certificate-authorities-cas).
+Here is an example of getting signing credentials and then using them with C2PA Tool. 
 
 :::note 
 This example uses an inexpensive personal certificate, which is fine for development and testing, but in production, an enterprise certificate is strongly recommended. An enterprise certificate is required for [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) to display your organization name when for signed assets.
 :::
 
 ### 1. Purchase credentials 
-
-The following is an example of using a [PersonSign1](https://shop.globalsign.com/en/secure-email) certificate from GlobalSign that contains KU and EKU values required to sign C2PA manifests.  
 
 Follow the CA's instructions to purchase and download your `.pfx` file. This file is a PKCS12 container that holds your certificate chain and private signing key.  Other certificate providers may have alternate ways of providing your private key and certificate and may include only the end-entity certificate and so you must manually download the rest of the certificate chain.
 
@@ -65,7 +63,7 @@ openssl pkcs12 -in mycertfile.pfx -nocerts -out mykey.pem -nodes
 ```
 
 :::tip
-Check to make sure the above command generated a `.pem` file and it's not an empty file.  For more information, see [Troubleshooting errors](#troubleshooting-errors) above.
+Check to make sure the above command generated a `.pem` file and it's not an empty file.  
 :::
 
 #### Extract certificate chain
@@ -92,7 +90,7 @@ Where `mycerts.pub` is the file containing the certificate chain from signing ce
 
 This command produces a text summary of the certificate properties, as shown in the example below. Look for a line containing `Public Key Algorithm` since the public key indicates the signature algorithm used. See the table in [Getting a certificate](get-cert.md#signature-types) to determine the corresponding signature type.
 
-For this example with a certificate issued by GlobalSign, `Public Key Algorithm: rsassaPss` corresponds to the "RSASSA-PSS with SHA-256" or `sha256WithRSAEncryption` signature algorithm.  A example snippet of this output looks something like this:
+In this example, `Public Key Algorithm: rsassaPss` corresponds to the "RSASSA-PSS with SHA-256" or `sha256WithRSAEncryption` signature algorithm.  A example snippet of this output looks something like this:
 
 ```
 Validity
@@ -133,7 +131,7 @@ c2patool -m my_manifest.json -o signed_image.jpg my_image.jpg
 The example above uses the information in `my_manifest.json` to add a new manifest to output `signed_image.jpg` using source `my_image.jpg`. The manifest will be signed using the PS256 signature algorithm with private key `mykey.pem`. The manifest will contain the trust chain specified in `mycerts.pub`.
 
 :::warning
-This example accesses the private key and certificate directly from the file system, which is fine during development, but is not secure for production use.  For more information, see [Using a certificate in production](prod-cert.mdx). 
+This example accesses the private key and certificate directly from the file system, which is handy during development, but is not secure for production use.  For more information, see [Using a certificate in production](prod-cert.mdx). 
 :::
 
 ### 4. Confirm it worked
@@ -157,5 +155,5 @@ This command displays the manifest attached to `signed_image.jpg` and should inc
 ```
 
 :::info
-You can also use the [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) to confirm that your image was signed, but if you used a personal certificate (not an organization certificate) then it won't show [the organization name](get-cert.md#organization-name) and if your certificate can't be traced back to a certificate on the [C2PA trust list](../conformance/trust-lists.mdx), it [displays the message](../getting-started/aca-inspect.mdx#title-and-signing-information) "The Content Credential issuer couldn't be recognized...."
+You can also use the [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) to confirm that your image was signed. If your certificate can't be traced back to a certificate on the [C2PA trust list](../conformance/trust-lists.mdx), it [displays the message](../getting-started/aca-inspect.mdx#title-and-signing-information) "The Content Credential issuer couldn't be recognized...."
 :::
