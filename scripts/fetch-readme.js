@@ -84,26 +84,30 @@ const readmes = [
     dest: resolve(__dirname, '../docs/c2patool/readme.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'cli/README.md',
-  },
-  {
-    dest: resolve(__dirname, '../docs/c2patool/docs/manifest.md'),
-    repo: 'contentauth/c2pa-rs',
-    path: 'cli/docs/manifest.md',
-  },
-  {
-    dest: resolve(__dirname, '../docs/c2patool/docs/x_509.md'),
-    repo: 'contentauth/c2pa-rs',
-    path: 'cli/docs/x_509.md',
-  },
-  {
-    dest: resolve(__dirname, '../docs/c2patool/docs/changelog.md'),
-    repo: 'contentauth/c2pa-rs',
-    path: 'cli/CHANGELOG.md',
+    branch: 'cli-cleanup',
   },
   {
     dest: resolve(__dirname, '../docs/c2patool/docs/usage.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'cli/docs/usage.md',
+    branch: 'cli-cleanup',
+  },
+  {
+    dest: resolve(__dirname, '../docs/c2patool/docs/manifest.md'),
+    repo: 'contentauth/c2pa-rs',
+    path: 'cli/docs/manifest.md',
+    branch: 'cli-cleanup',
+  },
+  {
+    dest: resolve(__dirname, '../docs/c2patool/docs/x_509.md'),
+    repo: 'contentauth/c2pa-rs',
+    path: 'cli/docs/x_509.md',
+    branch: 'cli-cleanup',
+  },
+  {
+    dest: resolve(__dirname, '../docs/c2patool/docs/changelog.md'),
+    repo: 'contentauth/c2pa-rs',
+    path: 'cli/CHANGELOG.md',
   },
   {
     dest: resolve(__dirname, '../docs/c2patool/docs/cawg_x509_signing.md'),
