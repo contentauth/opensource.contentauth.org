@@ -30,7 +30,7 @@
       "default": [
         {
           "name": "c2pa-rs",
-          "version": "0.75.8"
+          "version": "0.75.9"
         }
       ]
     },
@@ -59,7 +59,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:575ed9c8-f96a-41ed-b4fd-ab5b16901b81"
+      "default": "xmp:iid:0762c91b-038e-4097-aef3-9bd9dd836f6c"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -135,10 +135,19 @@
         }
       ],
       "deprecated": true
+    },
+    "timestamp_manifest_labels": {
+      "description": "Manifest labels to fetch timestamps for.\n\nExamples of a manifest label may include:\n- `contentauth:urn:uuid:c2677d4b-0a93-4444-876f-ed2f2d40b8cf`\n- `urn:c2pa:fa479510-2a7d-c165-7b26-488a267f4c6a`",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
     }
   },
   "required": [
-    "no_embed"
+    "no_embed",
+    "timestamp_manifest_labels"
   ],
   "$defs": {
     "ClaimGeneratorInfo": {
@@ -348,7 +357,8 @@
             }
           ]
         }
-      }
+      },
+      "additionalProperties": true
     },
     "ReviewRating": {
       "description": "A rating on an Assertion.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_review_ratings>.",

@@ -110,7 +110,7 @@
         "instance_id": {
           "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
           "type": "string",
-          "default": "xmp:iid:f28df072-2337-47b2-8699-5cbe5643dae9"
+          "default": "xmp:iid:b846ee8b-0d07-468d-af1a-a5729fb2ce23"
         },
         "thumbnail": {
           "anyOf": [
@@ -391,7 +391,8 @@
             }
           ]
         }
-      }
+      },
+      "additionalProperties": true
     },
     "ReviewRating": {
       "description": "A rating on an Assertion.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_review_ratings>.",
