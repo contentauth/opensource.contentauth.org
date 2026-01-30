@@ -276,11 +276,16 @@
             "boolean",
             "null"
           ]
+        },
+        "auto_timestamp_assertion": {
+          "description": "Settings for configuring auto-generation of the [`TimeStamp`] assertion.\n\n[`TimeStamp`]: crate::assertions::TimeStamp",
+          "$ref": "#/$defs/TimeStampSettings"
         }
       },
       "required": [
         "thumbnail",
-        "actions"
+        "actions",
+        "auto_timestamp_assertion"
       ]
     },
     "ClaimGeneratorInfoSettings": {
@@ -789,6 +794,44 @@
           "description": "A restricted version of Edit for non-editorial changes.\n\nThere must be only one ingredient, as a parent.\nNo changes can be made to the hashed content of the parent.\nThere are additional restrictions on the types of changes that can be made.",
           "type": "string",
           "const": "update"
+        }
+      ]
+    },
+    "TimeStampSettings": {
+      "description": "Settings for configuring auto-generation of the [`TimeStamp`] assertion.\n\nUseful when a manifest was signed offline and you want to attach a trusted timestamp to it later.\n\n[`TimeStamp`]: crate::assertions::TimeStamp",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Whether to auto-generate a [`TimeStamp`] assertion for the [`TimeStampSettings::fetch_scope`].\n\nNote that for this setting to take effect, a timestamping authority URL must be set in the\n[`Signer::time_authority_url`]. If the signer is acquired from settings via [`Settings::signer`],\nthe URL can be set in [`SignerSettings`].\n\nThe default value is false.\n\n[`TimeStamp`]: crate::assertions::TimeStamp\n[`Signer::time_authority_url`]: crate::Signer::time_authority_url\n[`Settings::signer`]: crate::settings::signer\n[`SignerSettings`]: crate::settings::signer::SignerSettings",
+          "type": "boolean"
+        },
+        "skip_existing": {
+          "description": "Whether to skip fetching timestamps for manifests that already have one.\n\nThis setting will account for both existing [`TimeStamp`] assertions and timestamps embedded\nin the claim.\n\nThe default value is true.\n\n[`TimeStamp`]: crate::assertions::TimeStamp",
+          "type": "boolean"
+        },
+        "fetch_scope": {
+          "description": "Which manifests to fetch timestamps for.\n\nThe default value is [`TimeStampFetchScope::All`].",
+          "$ref": "#/$defs/TimeStampFetchScope"
+        }
+      },
+      "required": [
+        "enabled",
+        "skip_existing",
+        "fetch_scope"
+      ]
+    },
+    "TimeStampFetchScope": {
+      "description": "The scope of manifests to fetch timestamps for.\n\nSee [`TimeStampSettings`] for more information.",
+      "oneOf": [
+        {
+          "description": "Fetch timestamps for only the parent manifest.",
+          "type": "string",
+          "const": "parent"
+        },
+        {
+          "description": "Fetch timestmaps for all manifests in the manifest store.",
+          "type": "string",
+          "const": "all"
         }
       ]
     },

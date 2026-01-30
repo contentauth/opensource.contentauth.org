@@ -30,7 +30,7 @@
       "default": [
         {
           "name": "c2pa-rs",
-          "version": "0.75.8"
+          "version": "0.75.9"
         }
       ]
     },
@@ -59,7 +59,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:bea76ec8-aa5d-4f4d-8996-2e0c684cadd7"
+      "default": "xmp:iid:3e1b4037-d8ef-495d-a0ec-f16fbf016fbe"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -314,7 +314,8 @@
             }
           ]
         }
-      }
+      },
+      "additionalProperties": true
     },
     "ReviewRating": {
       "description": "A rating on an Assertion.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_review_ratings>.",
