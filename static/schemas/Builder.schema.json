@@ -121,10 +121,7 @@
       }
     }
   },
-  "required": [
-    "no_embed",
-    "timestamp_manifest_labels"
-  ],
+  "required": ["no_embed", "timestamp_manifest_labels"],
   "$defs": {
     "ClaimGeneratorInfo": {
       "description": "Description of the claim generator, or the software used in generating the claim.\n\nThis structure is also used for actions softwareAgent",
