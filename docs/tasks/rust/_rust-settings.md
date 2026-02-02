@@ -1,4 +1,4 @@
-```rs
+```rust
 use c2pa::{Context, Builder, Result};
 
 fn main() -> Result<()> {
