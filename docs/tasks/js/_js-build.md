@@ -1,6 +1,17 @@
-Notes:
-- You provide the `Signer`. In production, this object wraps a service/HSM that returns a proper signature for your algorithm (`es256`, `ps256`, `ed25519`, etc.). Set `reserveSize` to a value large enough for timestamps/countersignatures your signer adds.
-- To attach a remote manifest instead of embedding, use `builder.setRemoteUrl(url)` and `builder.setNoEmbed(true)` before signing.
+Using client-side JavaScript, you can:
+- Create and compose manifests using the JavaScript library manifest `builder` API.
+- Perform signing in the browser if you have a private key available to the client (using WebCrypto, an imported key, or an ephemeral/test key). The web library provides a `Signer` interface you can implement to call into whatever signing capability you have in the browser.
+- Produce a manifest store or sidecar (`.c2pa`) file entirely in the browser (so you can download a signed sidecar next to the asset). 
+
+Signing Content Credentials requires an end-entity X.509 certificate that fits the C2PA trust model to produce publicly verifiable signatures. Getting and protecting that certificate/private key in a browser is risky and should not be done in production. 
+
+::: warning
+Never put production private keys into client code!
+:::
+
+Embedding into binaries: While you can build and sign manifests client-side, embedding a signed manifest properly into binary file formats (JPEG/PNG/MP4, etc.) is functionality that server-side libraries (Node.js, Python, C/C++, and Rust) explicitly provide. 
+
+Security & auditability: Browser-stored keys (or keys entered by users) are exposed to theft, malware, or cross-site scripting (XSS) attacks. For production signing, best practice is to use a remote signer (KMS/HSM) or server-side signing where keys are protected and signing operations are auditable.
 
 ```js
 import { createC2pa, type Signer } from '@contentauth/c2pa-web';
@@ -78,3 +89,7 @@ const { asset, manifest } = await builder.signAndGetManifestBytes(
 // asset -> signed asset bytes
 // manifest -> embedded manifest bytes
 ```
+
+Notes:
+- You provide the `Signer` used in the example above. In production, this object wraps a service/HSM that returns a proper signature for your algorithm (`es256`, `ps256`, `ed25519`, etc.). Set `reserveSize` to a value large enough for timestamps/countersignatures your signer adds.
+- To attach a remote manifest instead of embedding, use `builder.setRemoteUrl(url)` and `builder.setNoEmbed(true)` before signing.
