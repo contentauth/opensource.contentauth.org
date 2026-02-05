@@ -108,7 +108,7 @@
       "type": "object",
       "properties": {
         "merkle_tree_chunk_size_in_kb": {
-          "description": "Size of the [`BmffHash`] merkle tree chunks in kilobytes.\n\nThis option is associated with the [`MerkleMap::fixed_block_size`] field.\n\nSee more information in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_bmff_based_hash>\n\n[`MerkleMap::fixed_block_size`]: crate::assertions::MerkleMap::fixed_block_size\n[`BmffHash`]: crate::assertions::BmffHash",
+          "description": "Size of the [`BmffHash`] merkle tree chunks in kilobytes.\n\nThis option is associated with the [`MerkleMap::fixed_block_size`] field.\n\nSee more information in the spec here:\n[bmff_based_hash - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_bmff_based_hash)\n\n[`MerkleMap::fixed_block_size`]: crate::assertions::MerkleMap::fixed_block_size\n[`BmffHash`]: crate::assertions::BmffHash",
           "type": [
             "integer",
             "null"
@@ -117,7 +117,7 @@
           "minimum": 0
         },
         "merkle_tree_max_proofs": {
-          "description": "Maximum number of proofs when validating or writing a [`BmffHash`] merkle tree.\n\nThis option defaults to 5.\n\nSee more information in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_bmff_based_hash>\n\n[`BmffHash`]: crate::assertions::BmffHash",
+          "description": "Maximum number of proofs when validating or writing a [`BmffHash`] merkle tree.\n\nThis option defaults to 5.\n\nSee more information in the spec here:\n[bmff_based_hash - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_bmff_based_hash)\n\n[`BmffHash`]: crate::assertions::BmffHash",
           "type": "integer",
           "format": "uint",
           "minimum": 0
@@ -133,7 +133,7 @@
           "type": "boolean"
         },
         "allowed_network_hosts": {
-          "description": "<div class=\"warning\">\nThe CAWG identity assertion does not currently respect this setting.\nSee <a href=\"https://github.com/contentauth/c2pa-rs/issues/1645\">issue #1645</a>.\n</div>\n\nList of host patterns that are allowed for network requests.\n\nEach pattern may include:\n- A scheme (e.g. `https://` or `http://`)\n- A hostname or IP address (e.g. `contentauthenticity.org` or `192.0.2.1`)\n    - The hostname may contain a single leading wildcard (e.g. `*.contentauthenticity.org`)\n- An optional port (e.g. `contentauthenticity.org:443` or `192.0.2.1:8080`)\n\nMatching is case-insensitive. A wildcard pattern such as `*.contentauthenticity.org` matches\n`sub.contentauthenticity.org`, but does not match `contentauthenticity.org` or `fakecontentauthenticity.org`.\nIf a scheme is present in the pattern, only URIs using the same scheme are considered a match. If the scheme\nis omitted, any scheme is allowed as long as the host matches.\n\nThe behavior is as follows:\n- `None` (default) no filtering enabled.\n- `Some(vec)` where `vec` is empty, all traffic is blocked.\n- `Some(vec)` with at least one pattern, filtering enabled for only those patterns.\n\n# Examples\n\nPattern: `*.contentauthenticity.org`\n- Does match:\n  - `https://sub.contentauthenticity.org`\n  - `http://api.contentauthenticity.org`\n- Does **not** match:\n  - `https://contentauthenticity.org` (no subdomain)\n  - `https://sub.fakecontentauthenticity.org` (different host)\n\nPattern: `http://192.0.2.1:8080`\n- Does match:\n  - `http://192.0.2.1:8080`\n- Does **not** match:\n  - `https://192.0.2.1:8080` (scheme mismatch)\n  - `http://192.0.2.1` (port omitted)\n  - `http://192.0.2.2:8080` (different IP address)\n\nThese settings are applied by the SDK's HTTP resolvers to restrict network requests.\nWhen network requests occur depends on the operations being performed (reading manifests,\nvalidating credentials, timestamping, etc.).",
+          "description": "<div class=\"warning\">\nThe CAWG identity assertion does not currently respect this setting.\nSee [Issue #1645](https://github.com/contentauth/c2pa-rs/issues/1645).\n</div>\n\nList of host patterns that are allowed for network requests.\n\nEach pattern may include:\n- A scheme (e.g. `https://` or `http://`)\n- A hostname or IP address (e.g. `contentauthenticity.org` or `192.0.2.1`)\n    - The hostname may contain a single leading wildcard (e.g. `*.contentauthenticity.org`)\n- An optional port (e.g. `contentauthenticity.org:443` or `192.0.2.1:8080`)\n\nMatching is case-insensitive. A wildcard pattern such as `*.contentauthenticity.org` matches\n`sub.contentauthenticity.org`, but does not match `contentauthenticity.org` or `fakecontentauthenticity.org`.\nIf a scheme is present in the pattern, only URIs using the same scheme are considered a match. If the scheme\nis omitted, any scheme is allowed as long as the host matches.\n\nThe behavior is as follows:\n- `None` (default) no filtering enabled.\n- `Some(vec)` where `vec` is empty, all traffic is blocked.\n- `Some(vec)` with at least one pattern, filtering enabled for only those patterns.\n\n# Examples\n\nPattern: `*.contentauthenticity.org`\n- Does match:\n  - `https://sub.contentauthenticity.org`\n  - `http://api.contentauthenticity.org`\n- Does **not** match:\n  - `https://contentauthenticity.org` (no subdomain)\n  - `https://sub.fakecontentauthenticity.org` (different host)\n\nPattern: `http://192.0.2.1:8080`\n- Does match:\n  - `http://192.0.2.1:8080`\n- Does **not** match:\n  - `https://192.0.2.1:8080` (scheme mismatch)\n  - `http://192.0.2.1` (port omitted)\n  - `http://192.0.2.2:8080` (different IP address)\n\nThese settings are applied by the SDK's HTTP resolvers to restrict network requests.\nWhen network requests occur depends on the operations being performed (reading manifests,\nvalidating credentials, timestamping, etc.).",
           "type": [
             "array",
             "null"
@@ -182,7 +182,7 @@
           "type": "boolean"
         },
         "skip_ingredient_conflict_resolution": {
-          "description": "Whether to skip ingredient conflict resolution when multiple ingredients have the same\nmanifest identifier. This settings is only applicable for C2PA v2 validation.\n\nThe default value is false.\n\nSee more information in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_versioning_manifests_due_to_conflicts>",
+          "description": "Whether to skip ingredient conflict resolution when multiple ingredients have the same\nmanifest identifier. This settings is only applicable for C2PA v2 validation.\n\nThe default value is false.\n\nSee more information in the spec here:\n[versioning_manifests_due_to_conflicts - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_versioning_manifests_due_to_conflicts)",
           "type": "boolean"
         },
         "strict_v1_validation": {
@@ -232,7 +232,7 @@
           "$ref": "#/$defs/ActionsSettings"
         },
         "certificate_status_fetch": {
-          "description": "Whether to create [`CertificateStatus`] assertions for manifests to store certificate revocation\nstatus. The assertion can be fetched for the active manifest or for all manifests (including\ningredients).\n\nThe default is to not fetch them at all.\n\nSee more information in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#certificate_status_assertion>\n\n[`CertificateStatus`]: crate::assertions::CertificateStatus",
+          "description": "Whether to create [`CertificateStatus`] assertions for manifests to store certificate revocation\nstatus. The assertion can be fetched for the active manifest or for all manifests (including\ningredients).\n\nThe default is to not fetch them at all.\n\nFor more information, see [Certificate status assertion - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#certificate_status_assertion).\n\n[`CertificateStatus`]: crate::assertions::CertificateStatus",
           "anyOf": [
             {
               "$ref": "#/$defs/OcspFetchScope"
@@ -261,7 +261,7 @@
           ]
         },
         "created_assertion_labels": {
-          "description": "Assertions with a base label included in this list will be automatically marked as a created assertion.\nAssertions not in this list will be automatically marked as gathered.\n\nNote that the label should be a **base label**, not including the assertion version nor instance.\n\nSee more information on the difference between created vs gathered assertions in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_fields>",
+          "description": "Assertions with a base label included in this list will be automatically marked as a created assertion.\nAssertions not in this list will be automatically marked as gathered.\n\nNote that the label should be a **base label**, not including the assertion version nor instance.\n\nSee more information on the difference between created vs gathered assertions in the spec here:\n[fields - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_fields)",
           "type": [
             "array",
             "null"
@@ -520,15 +520,15 @@
           }
         },
         "auto_created_action": {
-          "description": "Whether to automatically generate a c2pa.created [Action] assertion or error that it doesn't already exist.\n\nFor more information about the mandatory conditions for a c2pa.created action assertion, see here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_mandatory_presence_of_at_least_one_actions_assertion>",
+          "description": "Whether to automatically generate a c2pa.created [Action] assertion or error that it doesn't already exist.\n\nFor more information about the mandatory conditions for a c2pa.created action assertion, see the\n[C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_mandatory_presence_of_at_least_one_actions_assertion).",
           "$ref": "#/$defs/AutoActionSettings"
         },
         "auto_opened_action": {
-          "description": "Whether to automatically generate a c2pa.opened [Action] assertion or error that it doesn't already exist.\n\nFor more information about the mandatory conditions for a c2pa.opened action assertion, see here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_mandatory_presence_of_at_least_one_actions_assertion>",
+          "description": "Whether to automatically generate a c2pa.opened [Action] assertion or error that it doesn't already exist.\n\nFor more information about the mandatory conditions for a c2pa.opened action assertion, see the\n[C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_mandatory_presence_of_at_least_one_actions_assertion).",
           "$ref": "#/$defs/AutoActionSettings"
         },
         "auto_placed_action": {
-          "description": "Whether to automatically generate a c2pa.placed [Action] assertion or error that it doesn't already exist.\n\nFor more information about the mandatory conditions for a c2pa.placed action assertion, see:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_relationship>",
+          "description": "Whether to automatically generate a c2pa.placed [Action] assertion or error that it doesn't already exist.\n\nFor more information about the mandatory conditions for a c2pa.placed action assertion, see\n[Relationship - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_relationship)",
           "$ref": "#/$defs/AutoActionSettings"
         }
       },
@@ -609,7 +609,7 @@
       ]
     },
     "DigitalSourceType": {
-      "description": "Description of the source of an asset.\n\nThe full list of possible digital source types are found below:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_digital_source_type>\n<https://cv.iptc.org/newscodes/digitalsourcetype>",
+      "description": "Description of the source of an asset.\n\nThe digital source type must be either a value from the [IPTC Digital Source Types](https://cv.iptc.org/newscodes/digitalsourcetype) or a C2PA-specific value as given in [the C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_digital_source_type).",
       "anyOf": [
         {
           "description": "Media whose digital content is effectively empty, such as a blank canvas or zero-length video.",
@@ -617,7 +617,7 @@
           "const": "http://c2pa.org/digitalsourcetype/empty"
         },
         {
-          "description": "Data that is the result of algorithmically using a model derived from sampled content and data.\nDiffers from <http://cv.iptc.org/newscodes/digitalsourcetype/>trainedAlgorithmicMedia in that\nthe result isn’t a media type (e.g., image or video) but is a data format (e.g., CSV, pickle).",
+          "description": "Data that is the result of algorithmically using a model derived from sampled content and data.\nDiffers from [IPTC Digital Source Type](http://cv.iptc.org/newscodes/digitalsourcetype/) `trainedAlgorithmicMedia` in that\nthe result isn’t a media type (e.g., image or video) but is a data format (e.g., CSV, pickle).",
           "type": "string",
           "const": "http://c2pa.org/digitalsourcetype/trainedAlgorithmicData"
         },
@@ -947,7 +947,7 @@
       ]
     },
     "SigningAlg": {
-      "description": "Describes the digital signature algorithms allowed by the C2PA spec.\n\nPer [§13.2, “Digital Signatures”]:\n\n> All digital signatures applied as per the technical requirements of this\n> specification shall be generated using one of the digital signature\n> algorithms and key types listed as described in this section.\n\n[§13.2, “Digital Signatures”]: https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_digital_signatures",
+      "description": "Describes the digital signature algorithms allowed by the C2PA spec.\n\nPer [§13.2, “Digital Signatures”]:\n\n> All digital signatures applied as per the technical requirements of this\n> specification shall be generated using one of the digital signature\n> algorithms and key types listed as described in this section.\n\n[§13.2, “Digital Signatures”]: https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_digital_signatures",
       "oneOf": [
         {
           "description": "ECDSA with SHA-256",

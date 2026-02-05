@@ -30,7 +30,7 @@
       "default": [
         {
           "name": "c2pa-rs",
-          "version": "0.75.15"
+          "version": "0.75.16"
         }
       ]
     },
@@ -59,7 +59,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:55342f80-b6a5-429b-add0-c654da11dee6"
+      "default": "xmp:iid:d2103b05-8305-4216-98e1-6264e33d16df"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -106,14 +106,14 @@
       ]
     },
     "remote_url": {
-      "description": "Optional remote URL for the manifest",
+      "description": "Optional remote URL for the manifest.",
       "type": [
         "string",
         "null"
       ]
     },
     "no_embed": {
-      "description": "If true, the manifest store will not be embedded in the asset on sign",
+      "description": "If true, the manifest store will not be embedded in the asset on sign.",
       "type": "boolean"
     },
     "base_path": {
@@ -259,7 +259,7 @@
       ]
     },
     "HashedUri": {
-      "description": "A `HashedUri` provides a reference to content available within the same\nmanifest store.\n\nThis is described in [§8.3, URI References], of the C2PA Technical\nSpecification.\n\n[§8.3, URI References]: https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_uri_references",
+      "description": "A `HashedUri` provides a reference to content available within the same\nmanifest store.\n\nThis is described in [URI References in the C2PA Technical\nSpecification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_uri_references).",
       "type": "object",
       "properties": {
         "url": {
@@ -361,7 +361,7 @@
       "additionalProperties": true
     },
     "ReviewRating": {
-      "description": "A rating on an Assertion.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_review_ratings>.",
+      "description": "A rating on an Assertion.\n\nSee [C2PA Specification - Review Ratings](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_review_ratings).",
       "type": "object",
       "properties": {
         "explanation": {
@@ -1096,7 +1096,7 @@
       ]
     },
     "ValidationStatus": {
-      "description": "A `ValidationStatus` struct describes the validation status of a\nspecific part of a manifest.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_existing_manifests>.",
+      "description": "A `ValidationStatus` struct describes the validation status of a\nspecific part of a manifest.\n\nSee [Existing Manifests - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_existing_manifests).",
       "type": "object",
       "properties": {
         "code": {
@@ -1280,7 +1280,7 @@
       ]
     },
     "DigitalSourceType": {
-      "description": "Description of the source of an asset.\n\nThe full list of possible digital source types are found below:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_digital_source_type>\n<https://cv.iptc.org/newscodes/digitalsourcetype>",
+      "description": "Description of the source of an asset.\n\nThe digital source type must be either a value from the [IPTC Digital Source Types](https://cv.iptc.org/newscodes/digitalsourcetype) or a C2PA-specific value as given in [the C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_digital_source_type).",
       "anyOf": [
         {
           "description": "Media whose digital content is effectively empty, such as a blank canvas or zero-length video.",
@@ -1288,7 +1288,7 @@
           "const": "http://c2pa.org/digitalsourcetype/empty"
         },
         {
-          "description": "Data that is the result of algorithmically using a model derived from sampled content and data.\nDiffers from <http://cv.iptc.org/newscodes/digitalsourcetype/>trainedAlgorithmicMedia in that\nthe result isn’t a media type (e.g., image or video) but is a data format (e.g., CSV, pickle).",
+          "description": "Data that is the result of algorithmically using a model derived from sampled content and data.\nDiffers from [IPTC Digital Source Type](http://cv.iptc.org/newscodes/digitalsourcetype/) `trainedAlgorithmicMedia` in that\nthe result isn’t a media type (e.g., image or video) but is a data format (e.g., CSV, pickle).",
           "type": "string",
           "const": "http://c2pa.org/digitalsourcetype/trainedAlgorithmicData"
         },

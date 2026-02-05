@@ -30,7 +30,7 @@
       "default": [
         {
           "name": "c2pa-rs",
-          "version": "0.75.15"
+          "version": "0.75.16"
         }
       ]
     },
@@ -59,7 +59,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:2a9e3d82-9b83-4560-b5a3-09f61ce98cb4"
+      "default": "xmp:iid:1fbb2aef-0c5d-42b7-bdd9-bd3765fb00ce"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -216,7 +216,7 @@
       ]
     },
     "HashedUri": {
-      "description": "A `HashedUri` provides a reference to content available within the same\nmanifest store.\n\nThis is described in [§8.3, URI References], of the C2PA Technical\nSpecification.\n\n[§8.3, URI References]: https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_uri_references",
+      "description": "A `HashedUri` provides a reference to content available within the same\nmanifest store.\n\nThis is described in [URI References in the C2PA Technical\nSpecification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_uri_references).",
       "type": "object",
       "properties": {
         "url": {
@@ -318,7 +318,7 @@
       "additionalProperties": true
     },
     "ReviewRating": {
-      "description": "A rating on an Assertion.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_review_ratings>.",
+      "description": "A rating on an Assertion.\n\nSee [C2PA Specification - Review Ratings](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_review_ratings).",
       "type": "object",
       "properties": {
         "explanation": {
@@ -1053,7 +1053,7 @@
       ]
     },
     "ValidationStatus": {
-      "description": "A `ValidationStatus` struct describes the validation status of a\nspecific part of a manifest.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_existing_manifests>.",
+      "description": "A `ValidationStatus` struct describes the validation status of a\nspecific part of a manifest.\n\nSee [Existing Manifests - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_existing_manifests).",
       "type": "object",
       "properties": {
         "code": {
