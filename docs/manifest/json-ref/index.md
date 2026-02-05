@@ -1,10 +1,10 @@
 ---
 id: index
-title: JSON manifest reference
+title: SDK object reference
 hide_table_of_contents: true
 ---
 
-:::danger Warning
+:::note
 This is a beta release of these references. It is a work in progress and may have issues or errors. 
 :::
 
