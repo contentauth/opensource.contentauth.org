@@ -1,0 +1,49 @@
+---
+id: settings
+title: Configuring settings
+hide_table_of_contents: true
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import JSRead from './js/_js-settings.md';
+import PythonRead from './python/_python-settings.md';
+import NodeSettings from './node/_node-settings.md';
+import CppRead from './cpp/_cpp-settings.md';
+import RustRead from './rust/_rust-settings.md';
+
+<Tabs groupId="programming-lang" queryString="lang">
+
+<TabItem value="js" label="JavaScript" default>
+Settings supports: `trust`, `cawgTrust`, `verify`, and `builder`.
+
+<JSRead name="js-settings" />
+
+</TabItem>
+
+<TabItem value="python" label="Python" default>
+
+<PythonRead name="python-settings" />
+
+</TabItem>
+
+<TabItem value="node" label="Node.js">
+
+<NodeSettings name="node-settings" />
+
+</TabItem>
+
+<TabItem value="cpp" label="C++">
+
+<CppRead name="cpp-settings" />
+
+</TabItem>
+
+<TabItem value="rust" label="Rust">
+
+  <RustRead name="rust-settings" />
+  
+</TabItem>
+
+</Tabs>
