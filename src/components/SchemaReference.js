@@ -8,6 +8,14 @@ const slugify = (text) =>
 
 const isObject = (v) => v && typeof v === 'object' && !Array.isArray(v);
 
+const refToDefName = (ref) => {
+  if (typeof ref !== 'string') return null;
+  if (ref.startsWith('#/$defs/')) return ref.slice('#/$defs/'.length);
+  if (ref.startsWith('#/definitions/'))
+    return ref.slice('#/definitions/'.length);
+  return null;
+};
+
 function formatType(cellSchema) {
   if (!cellSchema) return 'N/A';
 
@@ -206,7 +214,13 @@ function Markdown({ text }) {
   return <span dangerouslySetInnerHTML={{ __html: markdownToHtml(text) }} />;
 }
 
-function PropertiesTable({ title, description, properties, required }) {
+function PropertiesTable({
+  title,
+  description,
+  properties,
+  required,
+  defaults,
+}) {
   if (!properties || Object.keys(properties).length === 0) return null;
 
   return (
@@ -242,10 +256,42 @@ function PropertiesTable({ title, description, properties, required }) {
             const isRequired = Array.isArray(required)
               ? required.includes(name)
               : false;
-            const defaultValue =
+            const explicitDefault =
               schema && Object.prototype.hasOwnProperty.call(schema, 'default')
-                ? JSON.stringify(schema.default)
-                : 'N/A';
+                ? schema.default
+                : undefined;
+            const inferredDefault =
+              defaults && Object.prototype.hasOwnProperty.call(defaults, name)
+                ? defaults[name]
+                : undefined;
+            const chosenDefault =
+              explicitDefault !== undefined
+                ? explicitDefault
+                : inferredDefault !== undefined
+                ? inferredDefault
+                : undefined;
+
+            // Link to the referenced definition for non-primitive defaults (objects/arrays) when possible
+            let defaultCell;
+            if (chosenDefault === undefined) {
+              defaultCell = 'N/A';
+            } else if (
+              typeof chosenDefault === 'object' &&
+              chosenDefault !== null
+            ) {
+              const defName = schema ? refToDefName(schema.$ref) : null;
+              if (defName) {
+                defaultCell = (
+                  <>
+                    See <a href={`#${slugify(defName)}`}>{defName}</a>
+                  </>
+                );
+              } else {
+                defaultCell = JSON.stringify(chosenDefault);
+              }
+            } else {
+              defaultCell = JSON.stringify(chosenDefault);
+            }
 
             return (
               <tr key={name}>
@@ -265,7 +311,7 @@ function PropertiesTable({ title, description, properties, required }) {
                 <td className="manifest-ref-table">
                   {isRequired ? 'YES' : 'NO'}
                 </td>
-                <td className="manifest-ref-table">{defaultValue}</td>
+                <td className="manifest-ref-table">{defaultCell}</td>
               </tr>
             );
           })}
@@ -402,6 +448,7 @@ function DefinitionSection({ name, schema }) {
         <PropertiesTable
           properties={schema.properties || {}}
           required={schema.required || []}
+          defaults={schema.__inferredDefaults || undefined}
         />
       ) : (
         // Fallback simple table for non-object schemas
@@ -445,6 +492,54 @@ export default function SchemaReference({ schemaUrl }) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const buildDefDefaults = (root) => {
+    if (!root || !isObject(root)) return {};
+    const defs = root.$defs || root.definitions || {};
+    const defDefaults = {};
+
+    const feed = (defName, defSchema, value) => {
+      if (!defName || !defSchema) return;
+      if (!isObject(value)) {
+        // Record scalar/array as the default value of the referenced node when used as a property.
+        // For nested object defaults we handle below.
+        return;
+      }
+      const props = (defSchema && defSchema.properties) || {};
+      if (!isObject(props)) return;
+      if (!defDefaults[defName]) defDefaults[defName] = {};
+      for (const [propName, propSchema] of Object.entries(props)) {
+        if (!Object.prototype.hasOwnProperty.call(value, propName)) continue;
+        const propValue = value[propName];
+        // Always record the value for the property at this level for display
+        defDefaults[defName][propName] = propValue;
+        // If the property itself references another definition and the default value is an object,
+        // propagate deeper so nested definition sections can show their own inferred defaults.
+        const subRefName = propSchema && refToDefName(propSchema.$ref);
+        if (subRefName) {
+          const subDefSchema = defs[subRefName];
+          if (subDefSchema) feed(subRefName, subDefSchema, propValue);
+        }
+      }
+    };
+
+    const rootProps = (root && root.properties) || {};
+    for (const [, propSchema] of Object.entries(rootProps)) {
+      const defName = propSchema && refToDefName(propSchema.$ref);
+      if (!defName) continue;
+      const defSchema = defs[defName];
+      if (!defSchema) continue;
+      if (
+        propSchema &&
+        Object.prototype.hasOwnProperty.call(propSchema, 'default')
+      ) {
+        const defaultValue = propSchema.default;
+        feed(defName, defSchema, defaultValue);
+      }
+    }
+
+    return defDefaults;
+  };
+
   useEffect(() => {
     let cancelled = false;
     async function run() {
@@ -466,6 +561,11 @@ export default function SchemaReference({ schemaUrl }) {
       cancelled = true;
     };
   }, [schemaUrl]);
+
+  const inferredDefaults = useMemo(
+    () => buildDefDefaults(schema || {}),
+    [schema],
+  );
 
   if (loading) return <p>Loading schema…</p>;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
@@ -496,9 +596,21 @@ export default function SchemaReference({ schemaUrl }) {
 
       <DefinitionsTOC defs={defs} />
 
-      {Object.entries(defs).map(([name, defSchema]) => (
-        <DefinitionSection key={name} name={name} schema={defSchema} />
-      ))}
+      {Object.entries(defs).map(([name, defSchema]) => {
+        const schemaWithDefaults =
+          (defSchema && {
+            ...defSchema,
+            __inferredDefaults: inferredDefaults[name],
+          }) ||
+          defSchema;
+        return (
+          <DefinitionSection
+            key={name}
+            name={name}
+            schema={schemaWithDefaults}
+          />
+        );
+      })}
     </div>
   );
 }

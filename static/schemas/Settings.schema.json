@@ -8,27 +8,91 @@
       "description": "Version of the configuration.",
       "type": "integer",
       "format": "uint32",
-      "minimum": 0
+      "minimum": 0,
+      "default": 1
     },
     "trust": {
       "description": "Settings for configuring the C2PA trust lists.",
-      "$ref": "#/$defs/Trust"
+      "$ref": "#/$defs/Trust",
+      "default": {
+        "verify_trust_list": true,
+        "user_anchors": null,
+        "trust_anchors": null,
+        "trust_config": null,
+        "allowed_list": null
+      }
     },
     "cawg_trust": {
       "description": "Settings for configuring the CAWG trust lists.",
-      "$ref": "#/$defs/Trust"
+      "$ref": "#/$defs/Trust",
+      "default": {
+        "verify_trust_list": true,
+        "user_anchors": null,
+        "trust_anchors": null,
+        "trust_config": null,
+        "allowed_list": null
+      }
     },
     "core": {
       "description": "Settings for configuring core features.",
-      "$ref": "#/$defs/Core"
+      "$ref": "#/$defs/Core",
+      "default": {
+        "merkle_tree_chunk_size_in_kb": null,
+        "merkle_tree_max_proofs": 5,
+        "backing_store_memory_threshold_in_mb": 512,
+        "decode_identity_assertions": true,
+        "allowed_network_hosts": null
+      }
     },
     "verify": {
       "description": "Settings for configuring verification.",
-      "$ref": "#/$defs/Verify"
+      "$ref": "#/$defs/Verify",
+      "default": {
+        "verify_after_reading": true,
+        "verify_after_sign": false,
+        "verify_trust": true,
+        "verify_timestamp_trust": true,
+        "ocsp_fetch": false,
+        "remote_manifest_fetch": true,
+        "skip_ingredient_conflict_resolution": false,
+        "strict_v1_validation": false
+      }
     },
     "builder": {
       "description": "Settings for configuring the [`Builder`].\n\n[`Builder`]: crate::Builder",
-      "$ref": "#/$defs/BuilderSettings"
+      "$ref": "#/$defs/BuilderSettings",
+      "default": {
+        "vendor": null,
+        "thumbnail": {
+          "enabled": true,
+          "ignore_errors": true,
+          "long_edge": 1024,
+          "prefer_smallest_format": true,
+          "quality": "medium"
+        },
+        "actions": {
+          "actions": null,
+          "auto_created_action": {
+            "enabled": false
+          },
+          "auto_opened_action": {
+            "enabled": false
+          },
+          "auto_placed_action": {
+            "enabled": false
+          }
+        },
+        "certificate_status_fetch": null,
+        "certificate_status_should_override": null,
+        "intent": null,
+        "created_assertion_labels": null,
+        "generate_c2pa_archive": true,
+        "auto_timestamp_assertion": {
+          "enabled": false,
+          "skip_existing": true,
+          "fetch_scope": "all"
+        }
+      }
     },
     "signer": {
       "description": "Settings for configuring the base C2PA signer, accessible via [`Settings::signer`].",
@@ -53,14 +117,6 @@
       ]
     }
   },
-  "required": [
-    "version",
-    "trust",
-    "cawg_trust",
-    "core",
-    "verify",
-    "builder"
-  ],
   "$defs": {
     "Trust": {
       "description": "Settings to configure the trust list.",
@@ -68,40 +124,30 @@
       "properties": {
         "verify_trust_list": {
           "description": "Whether to verify certificates against the trust lists specified in [`Trust`]. This\noption is ONLY applicable to CAWG.\n\nThe default value is true.\n\n<div class=\"warning\">\nVerifying trust is REQUIRED by the CAWG spec. This option should only be used for development or testing.\n</div>",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "user_anchors": {
           "description": "List of additional user-provided trust anchor root certificates as a PEM bundle.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"],
+          "default": null
         },
         "trust_anchors": {
           "description": "List of default trust anchor root certificates as a PEM bundle.\n\nNormally this option contains the official C2PA-recognized trust anchors found here:\n<https://github.com/c2pa-org/conformance-public/tree/main/trust-list>",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"],
+          "default": null
         },
         "trust_config": {
           "description": "List of allowed extended key usage (EKU) object identifiers (OID) that\ncertificates must have.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"],
+          "default": null
         },
         "allowed_list": {
           "description": "List of explicitly allowed certificates as a PEM bundle.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"],
+          "default": null
         }
-      },
-      "required": [
-        "verify_trust_list"
-      ]
+      }
     },
     "Core": {
       "description": "Settings to configure core features.",
@@ -109,45 +155,39 @@
       "properties": {
         "merkle_tree_chunk_size_in_kb": {
           "description": "Size of the [`BmffHash`] merkle tree chunks in kilobytes.\n\nThis option is associated with the [`MerkleMap::fixed_block_size`] field.\n\nSee more information in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_bmff_based_hash>\n\n[`MerkleMap::fixed_block_size`]: crate::assertions::MerkleMap::fixed_block_size\n[`BmffHash`]: crate::assertions::BmffHash",
-          "type": [
-            "integer",
-            "null"
-          ],
+          "type": ["integer", "null"],
           "format": "uint",
-          "minimum": 0
+          "minimum": 0,
+          "default": null
         },
         "merkle_tree_max_proofs": {
           "description": "Maximum number of proofs when validating or writing a [`BmffHash`] merkle tree.\n\nThis option defaults to 5.\n\nSee more information in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_bmff_based_hash>\n\n[`BmffHash`]: crate::assertions::BmffHash",
           "type": "integer",
           "format": "uint",
-          "minimum": 0
+          "minimum": 0,
+          "default": 5
         },
         "backing_store_memory_threshold_in_mb": {
           "description": "Maximum amount of data in megabytes that will be loaded into memory before\nbeing stored in temporary files on the disk.\n\nThis option defaults to 512MB and can result in noticeable performance improvements.",
           "type": "integer",
           "format": "uint",
-          "minimum": 0
+          "minimum": 0,
+          "default": 512
         },
         "decode_identity_assertions": {
           "description": "Whether to decode CAWG [`IdentityAssertion`]s during reading in the [`Reader`].\n\nThis option defaults to true.\n\n[`IdentityAssertion`]: crate::identity::IdentityAssertion\n[`Reader`]: crate::Reader",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "allowed_network_hosts": {
           "description": "<div class=\"warning\">\nThe CAWG identity assertion does not currently respect this setting.\nSee <a href=\"https://github.com/contentauth/c2pa-rs/issues/1645\">issue #1645</a>.\n</div>\n\nList of host patterns that are allowed for network requests.\n\nEach pattern may include:\n- A scheme (e.g. `https://` or `http://`)\n- A hostname or IP address (e.g. `contentauthenticity.org` or `192.0.2.1`)\n    - The hostname may contain a single leading wildcard (e.g. `*.contentauthenticity.org`)\n- An optional port (e.g. `contentauthenticity.org:443` or `192.0.2.1:8080`)\n\nMatching is case-insensitive. A wildcard pattern such as `*.contentauthenticity.org` matches\n`sub.contentauthenticity.org`, but does not match `contentauthenticity.org` or `fakecontentauthenticity.org`.\nIf a scheme is present in the pattern, only URIs using the same scheme are considered a match. If the scheme\nis omitted, any scheme is allowed as long as the host matches.\n\nThe behavior is as follows:\n- `None` (default) no filtering enabled.\n- `Some(vec)` where `vec` is empty, all traffic is blocked.\n- `Some(vec)` with at least one pattern, filtering enabled for only those patterns.\n\n# Examples\n\nPattern: `*.contentauthenticity.org`\n- Does match:\n  - `https://sub.contentauthenticity.org`\n  - `http://api.contentauthenticity.org`\n- Does **not** match:\n  - `https://contentauthenticity.org` (no subdomain)\n  - `https://sub.fakecontentauthenticity.org` (different host)\n\nPattern: `http://192.0.2.1:8080`\n- Does match:\n  - `http://192.0.2.1:8080`\n- Does **not** match:\n  - `https://192.0.2.1:8080` (scheme mismatch)\n  - `http://192.0.2.1` (port omitted)\n  - `http://192.0.2.2:8080` (different IP address)\n\nThese settings are applied by the SDK's HTTP resolvers to restrict network requests.\nWhen network requests occur depends on the operations being performed (reading manifests,\nvalidating credentials, timestamping, etc.).",
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/HostPattern"
-          }
+          },
+          "default": null
         }
-      },
-      "required": [
-        "merkle_tree_max_proofs",
-        "backing_store_memory_threshold_in_mb",
-        "decode_identity_assertions"
-      ]
+      }
     },
     "HostPattern": {
       "description": "A host/scheme pattern used to restrict network requests.\n\nEach pattern may include:\n- A scheme (e.g. `https://` or `http://`)\n- A hostname or IP address (e.g. `contentauthenticity.org` or `192.0.2.1`)\n    - The hostname may contain a single leading wildcard (e.g. `*.contentauthenticity.org`)\n- An optional port (e.g. `contentauthenticity.org:443` or `192.0.2.1:8080`)\n\nMatching is case-insensitive. A wildcard pattern such as `*.contentauthenticity.org` matches\n`sub.contentauthenticity.org`, but does not match `contentauthenticity.org` or `fakecontentauthenticity.org`.\nIf a scheme is present in the pattern, only URIs using the same scheme are considered a match. If the scheme\nis omitted, any scheme is allowed as long as the host matches.\n\n# Examples\n\nPattern: `*.contentauthenticity.org`\n- Does match:\n  - `https://sub.contentauthenticity.org`\n  - `http://api.contentauthenticity.org`\n- Does **not** match:\n  - `https://contentauthenticity.org` (no subdomain)\n  - `https://sub.fakecontentauthenticity.org` (different host)\n\nPattern: `http://192.0.2.1:8080`\n- Does match:\n  - `http://192.0.2.1:8080`\n- Does **not** match:\n  - `https://192.0.2.1:8080` (scheme mismatch)\n  - `http://192.0.2.1` (port omitted)\n  - `http://192.0.2.2:8080` (different IP address)",
@@ -159,47 +199,45 @@
       "properties": {
         "verify_after_reading": {
           "description": "Whether to verify the manifest after reading in the [`Reader`].\n\nThe default value is true.\n\n<div class=\"warning\">\nDisabling validation can improve reading performance, BUT it carries the risk of reading an invalid\nmanifest.\n</div>\n\n[`Reader`]: crate::Reader",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "verify_after_sign": {
           "description": "Whether to verify the manifest after signing in the [`Builder`].\n\nThe default value is true.\n\n<div class=\"warning\">\nDisabling validation can improve signing performance, BUT it carries the risk of signing an invalid\nmanifest.\n</div>\n\n[`Builder`]: crate::Builder",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "verify_trust": {
           "description": "Whether to verify certificates against the trust lists specified in [`Trust`]. To configure\ntimestamp certificate verification, see [`Verify::verify_timestamp_trust`].\n\nThe default value is true.\n\n<div class=\"warning\">\nVerifying trust is REQUIRED by the C2PA spec. This option should only be used for development or testing.\n</div>",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "verify_timestamp_trust": {
           "description": "Whether to verify the timestamp certificates against the trust lists specified in [`Trust`].\n\nThe default value is true.\n\n<div class=\"warning\">\nVerifying timestamp trust is REQUIRED by the C2PA spec. This option should only be used for development or testing.\n</div>",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "ocsp_fetch": {
           "description": "Whether to fetch the certificates OCSP status during validation.\n\nRevocation status is checked in the following order:\n1. The OCSP staple stored in the COSE claim of the manifest\n2. Otherwise if `ocsp_fetch` is enabled, it fetches a new OCSP status\n3. Otherwise if `ocsp_fetch` is disabled, it checks `CertificateStatus` assertions\n\nThe default value is false.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "remote_manifest_fetch": {
           "description": "Whether to fetch remote manifests in the following scenarios:\n- Constructing a [`Reader`]\n- Adding an [`Ingredient`] to the [`Builder`]\n\nThe default value is true.\n\n<div class=\"warning\">\nThis setting is only applicable if the crate is compiled with the `fetch_remote_manifests` feature.\n</div>\n\n[`Reader`]: crate::Reader\n[`Ingredient`]: crate::Ingredient\n[`Builder`]: crate::Builder",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "skip_ingredient_conflict_resolution": {
           "description": "Whether to skip ingredient conflict resolution when multiple ingredients have the same\nmanifest identifier. This settings is only applicable for C2PA v2 validation.\n\nThe default value is false.\n\nSee more information in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_versioning_manifests_due_to_conflicts>",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "strict_v1_validation": {
           "description": "Whether to do strictly C2PA v1 validation or otherwise the latest validation.\n\nThe default value is false.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
-      },
-      "required": [
-        "verify_after_reading",
-        "verify_after_sign",
-        "verify_trust",
-        "verify_timestamp_trust",
-        "ocsp_fetch",
-        "remote_manifest_fetch",
-        "skip_ingredient_conflict_resolution",
-        "strict_v1_validation"
-      ]
+      }
     },
     "BuilderSettings": {
       "description": "Settings for the [Builder][crate::Builder].",
@@ -207,10 +245,7 @@
       "properties": {
         "vendor": {
           "description": "The name of the vendor creating the content credential.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "claim_generator_info": {
           "description": "Claim generator info that is automatically added to the builder.\n\nNote that this information will prepend any claim generator info\nprovided explicitly to the builder.",
@@ -244,10 +279,7 @@
         },
         "certificate_status_should_override": {
           "description": "Whether to only use [`CertificateStatus`] assertions to check certificate revocation status. If there\nis a stapled OCSP in the COSE claim of the manifest, it will be ignored. If [`Verify::ocsp_fetch`] is\nenabled, it will also be ignored.\n\nThe default value is false.\n\n[`CertificateStatus`]: crate::assertions::CertificateStatus\n[`Verify::ocsp_fetch`]: crate::settings::Verify::ocsp_fetch",
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": ["boolean", "null"]
         },
         "intent": {
           "description": "The default [`BuilderIntent`] for the [`Builder`].\n\nSee [`BuilderIntent`] for more information.\n\n[`BuilderIntent`]: crate::BuilderIntent\n[`Builder`]: crate::Builder",
@@ -262,31 +294,21 @@
         },
         "created_assertion_labels": {
           "description": "Assertions with a base label included in this list will be automatically marked as a created assertion.\nAssertions not in this list will be automatically marked as gathered.\n\nNote that the label should be a **base label**, not including the assertion version nor instance.\n\nSee more information on the difference between created vs gathered assertions in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_fields>",
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "string"
           }
         },
         "generate_c2pa_archive": {
           "description": "Whether to generate a C2PA archive (instead of zip) when writing the manifest builder.\nNow always defaults to true - the ability to disable it will be removed in the future.",
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": ["boolean", "null"]
         },
         "auto_timestamp_assertion": {
           "description": "Settings for configuring auto-generation of the [`TimeStamp`] assertion.\n\n[`TimeStamp`]: crate::assertions::TimeStamp",
           "$ref": "#/$defs/TimeStampSettings"
         }
       },
-      "required": [
-        "thumbnail",
-        "actions",
-        "auto_timestamp_assertion"
-      ]
+      "required": ["thumbnail", "actions", "auto_timestamp_assertion"]
     },
     "ClaimGeneratorInfoSettings": {
       "description": "Settings for the claim generator info.",
@@ -298,10 +320,7 @@
         },
         "version": {
           "description": "A human readable string of the product's version.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "icon": {
           "description": "Reference to an icon.",
@@ -326,9 +345,7 @@
           ]
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "additionalProperties": true
     },
     "ResourceRef": {
@@ -345,33 +362,21 @@
         },
         "data_types": {
           "description": "More detailed data types as defined in the C2PA spec.",
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/AssetType"
           }
         },
         "alg": {
           "description": "The algorithm used to hash the resource (if applicable).",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "hash": {
           "description": "The hash of the resource (if applicable).",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "format",
-        "identifier"
-      ]
+      "required": ["format", "identifier"]
     },
     "AssetType": {
       "type": "object",
@@ -380,15 +385,10 @@
           "type": "string"
         },
         "version": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
-      "required": [
-        "type"
-      ]
+      "required": ["type"]
     },
     "ClaimGeneratorInfoOperatingSystem": {
       "anyOf": [
@@ -504,17 +504,11 @@
       "properties": {
         "all_actions_included": {
           "description": "Whether or not to set the [Actions::all_actions_included][crate::assertions::Actions::all_actions_included]\nfield.",
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": ["boolean", "null"]
         },
         "templates": {
           "description": "Templates to be added to the [Actions::templates][crate::assertions::Actions::templates] field.",
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/ActionTemplateSettings"
           }
@@ -559,10 +553,7 @@
         },
         "software_agent_index": {
           "description": "0-based index into the softwareAgents array",
-          "type": [
-            "integer",
-            "null"
-          ],
+          "type": ["integer", "null"],
           "format": "uint",
           "minimum": 0
         },
@@ -590,23 +581,15 @@
         },
         "description": {
           "description": "Description of the template.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "template_parameters": {
           "description": "Additional parameters for the template",
-          "type": [
-            "object",
-            "null"
-          ],
+          "type": ["object", "null"],
           "additionalProperties": true
         }
       },
-      "required": [
-        "action"
-      ]
+      "required": ["action"]
     },
     "DigitalSourceType": {
       "description": "Description of the source of an asset.\n\nThe full list of possible digital source types are found below:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_digital_source_type>\n<https://cv.iptc.org/newscodes/digitalsourcetype>",
@@ -750,9 +733,7 @@
           ]
         }
       },
-      "required": [
-        "enabled"
-      ]
+      "required": ["enabled"]
     },
     "OcspFetchScope": {
       "description": "The scope of which manifests to fetch for OCSP.",
@@ -780,9 +761,7 @@
               "$ref": "#/$defs/DigitalSourceType"
             }
           },
-          "required": [
-            "create"
-          ],
+          "required": ["create"],
           "additionalProperties": false
         },
         {
@@ -814,11 +793,7 @@
           "$ref": "#/$defs/TimeStampFetchScope"
         }
       },
-      "required": [
-        "enabled",
-        "skip_existing",
-        "fetch_scope"
-      ]
+      "required": ["enabled", "skip_existing", "fetch_scope"]
     },
     "TimeStampFetchScope": {
       "description": "The scope of manifests to fetch timestamps for.\n\nSee [`TimeStampSettings`] for more information.",
@@ -855,40 +830,25 @@
                   "type": "string"
                 },
                 "tsa_url": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": ["string", "null"]
                 },
                 "referenced_assertions": {
-                  "type": [
-                    "array",
-                    "null"
-                  ],
+                  "type": ["array", "null"],
                   "items": {
                     "type": "string"
                   }
                 },
                 "roles": {
-                  "type": [
-                    "array",
-                    "null"
-                  ],
+                  "type": ["array", "null"],
                   "items": {
                     "type": "string"
                   }
                 }
               },
-              "required": [
-                "alg",
-                "sign_cert",
-                "private_key"
-              ]
+              "required": ["alg", "sign_cert", "private_key"]
             }
           },
-          "required": [
-            "local"
-          ],
+          "required": ["local"],
           "additionalProperties": false
         },
         {
@@ -908,40 +868,25 @@
                   "type": "string"
                 },
                 "tsa_url": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": ["string", "null"]
                 },
                 "referenced_assertions": {
-                  "type": [
-                    "array",
-                    "null"
-                  ],
+                  "type": ["array", "null"],
                   "items": {
                     "type": "string"
                   }
                 },
                 "roles": {
-                  "type": [
-                    "array",
-                    "null"
-                  ],
+                  "type": ["array", "null"],
                   "items": {
                     "type": "string"
                   }
                 }
               },
-              "required": [
-                "url",
-                "alg",
-                "sign_cert"
-              ]
+              "required": ["url", "alg", "sign_cert"]
             }
           },
-          "required": [
-            "remote"
-          ],
+          "required": ["remote"],
           "additionalProperties": false
         }
       ]
