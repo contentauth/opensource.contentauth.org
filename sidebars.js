@@ -69,34 +69,6 @@ const sidebars = {
           ],
         },
         {
-          type: 'category',
-          label: 'JSON manifest reference',
-          link: { type: 'doc', id: 'manifest/json-ref/index' },
-          collapsed: true,
-          items: [
-            {
-              type: 'doc',
-              id: 'manifest/json-ref/reader-schema',
-              label: 'Reader',
-            },
-            {
-              type: 'doc',
-              id: 'manifest/json-ref/builder-schema',
-              label: 'Builder',
-            },
-            {
-              type: 'doc',
-              id: 'manifest/json-ref/manifest-definition-schema',
-              label: 'ManifestDefinition',
-            },
-            {
-              type: 'doc',
-              id: 'manifest/json-ref/settings-schema',
-              label: 'Settings',
-            },
-          ],
-        },
-        {
           type: 'doc',
           id: 'manifest/manifest-examples',
           label: 'Examples',
@@ -226,6 +198,34 @@ const sidebars = {
           type: 'link',
           label: 'GitHub',
           href: 'https://github.com/contentauth/c2pa-rs',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'SDK object reference',
+      link: { type: 'doc', id: 'manifest/json-ref/index' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'manifest/json-ref/reader-schema',
+          label: 'Reader',
+        },
+        {
+          type: 'doc',
+          id: 'manifest/json-ref/builder-schema',
+          label: 'Builder',
+        },
+        {
+          type: 'doc',
+          id: 'manifest/json-ref/manifest-definition-schema',
+          label: 'ManifestDefinition',
+        },
+        {
+          type: 'doc',
+          id: 'manifest/json-ref/settings-schema',
+          label: 'Settings',
         },
       ],
     },
