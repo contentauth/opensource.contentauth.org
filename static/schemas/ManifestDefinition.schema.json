@@ -6,14 +6,20 @@
   "properties": {
     "claim_version": {
       "description": "The version of the claim.  Defaults to 2.",
-      "type": ["integer", "null"],
+      "type": [
+        "integer",
+        "null"
+      ],
       "format": "uint8",
       "minimum": 0,
       "maximum": 255
     },
     "vendor": {
       "description": "Optional prefix added to the generated Manifest Label\nThis is typically a reverse domain name.",
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "claim_generator_info": {
       "description": "Claim Generator Info is always required with an entry",
@@ -24,20 +30,26 @@
       "default": [
         {
           "name": "c2pa-rs",
-          "version": "0.75.15"
+          "version": "0.75.17"
         }
       ]
     },
     "metadata": {
       "description": "Optional manifest metadata. This will be deprecated in the future; not recommended to use.",
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "$ref": "#/$defs/AssertionMetadata"
       }
     },
     "title": {
       "description": "A human-readable title, generally source filename.",
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "format": {
       "description": "The format of the source file as a MIME type.",
@@ -47,7 +59,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:2a9e3d82-9b83-4560-b5a3-09f61ce98cb4"
+      "default": "xmp:iid:078a6e06-f597-443d-9a99-fefffb3ef343"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -78,14 +90,20 @@
     },
     "redactions": {
       "description": "A list of redactions - URIs to redacted assertions.",
-      "type": ["array", "null"],
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
         "type": "string"
       }
     },
     "label": {
       "description": "Allows you to pre-define the manifest label, which must be unique.\nNot intended for general use.  If not set, it will be assigned automatically.",
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "$defs": {
@@ -99,7 +117,10 @@
         },
         "version": {
           "description": "A human readable string of the product's version",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "icon": {
           "description": "hashed URI to the icon (either embedded or remote)",
@@ -114,10 +135,15 @@
         },
         "operating_system": {
           "description": "A human readable string of the OS the claim generator is running on",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "additionalProperties": true
     },
     "UriOrResource": {
@@ -144,21 +170,33 @@
         },
         "data_types": {
           "description": "More detailed data types as defined in the C2PA spec.",
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/$defs/AssetType"
           }
         },
         "alg": {
           "description": "The algorithm used to hash the resource (if applicable).",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "hash": {
           "description": "The hash of the resource (if applicable).",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["format", "identifier"]
+      "required": [
+        "format",
+        "identifier"
+      ]
     },
     "AssetType": {
       "type": "object",
@@ -167,13 +205,18 @@
           "type": "string"
         },
         "version": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "HashedUri": {
-      "description": "A `HashedUri` provides a reference to content available within the same\nmanifest store.\n\nThis is described in [§8.3, URI References], of the C2PA Technical\nSpecification.\n\n[§8.3, URI References]: https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_uri_references",
+      "description": "A `HashedUri` provides a reference to content available within the same\nmanifest store.\n\nThis is described in [URI References in the C2PA Technical\nSpecification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_uri_references).",
       "type": "object",
       "properties": {
         "url": {
@@ -182,7 +225,10 @@
         },
         "alg": {
           "description": "A string identifying the cryptographic hash algorithm used to compute\nthe hash",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "hash": {
           "description": "Byte string containing the hash value",
@@ -195,14 +241,20 @@
           }
         }
       },
-      "required": ["url", "hash"]
+      "required": [
+        "url",
+        "hash"
+      ]
     },
     "AssertionMetadata": {
       "description": "The AssertionMetadata structure can be used as part of other assertions or on its own to reference others",
       "type": "object",
       "properties": {
         "reviewRatings": {
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/$defs/ReviewRating"
           }
@@ -238,7 +290,10 @@
           ]
         },
         "localizations": {
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "type": "object",
             "additionalProperties": {
@@ -263,14 +318,17 @@
       "additionalProperties": true
     },
     "ReviewRating": {
-      "description": "A rating on an Assertion.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_review_ratings>.",
+      "description": "A rating on an Assertion.\n\nSee [C2PA Specification - Review Ratings](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_review_ratings).",
       "type": "object",
       "properties": {
         "explanation": {
           "type": "string"
         },
         "code": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "value": {
           "type": "integer",
@@ -279,7 +337,10 @@
           "maximum": 255
         }
       },
-      "required": ["explanation", "value"]
+      "required": [
+        "explanation",
+        "value"
+      ]
     },
     "DateT": {
       "type": "string"
@@ -294,17 +355,25 @@
         },
         "details": {
           "description": "A human-readable string giving details about the source of the assertion data.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "actors": {
           "description": "A list of [`Actor`]s associated with this source.",
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/$defs/Actor"
           }
         }
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "Actor": {
       "description": "Identifies a person responsible for an action.",
@@ -312,11 +381,17 @@
       "properties": {
         "identifier": {
           "description": "An identifier for a human actor, used when the \"type\" is `humanEntry.identified`.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "credentials": {
           "description": "List of references to W3C Verifiable Credentials.",
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/$defs/HashedUri"
           }
@@ -336,15 +411,24 @@
         },
         "name": {
           "description": "A free-text string representing a human-readable name for the region which might be used in a user interface.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "identifier": {
           "description": "A free-text string representing a machine-readable, unique to this assertion, identifier for the region.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "type": {
           "description": "A value from a controlled vocabulary such as <https://cv.iptc.org/newscodes/imageregiontype/> or an entity-specific\nvalue (e.g., com.litware.newType) that represents the type of thing(s) depicted by a region.\n\nNote this field serializes/deserializes into the name `type`.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "role": {
           "description": "A value from our controlled vocabulary or an entity-specific value (e.g., com.litware.coolArea) that represents\nthe role of a region among other regions.",
@@ -359,7 +443,10 @@
         },
         "description": {
           "description": "A free-text string.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "metadata": {
           "description": "Additional information about the asset.",
@@ -373,7 +460,9 @@
           ]
         }
       },
-      "required": ["region"]
+      "required": [
+        "region"
+      ]
     },
     "Range": {
       "description": "A spatial, temporal, frame, or textual range describing the region of interest.",
@@ -439,7 +528,9 @@
           ]
         }
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "RangeType": {
       "description": "The type of range for the region of interest.",
@@ -489,27 +580,43 @@
         },
         "width": {
           "description": "The width for rectangles or diameter for circles.\n\nThis field can be ignored for polygons.",
-          "type": ["number", "null"],
+          "type": [
+            "number",
+            "null"
+          ],
           "format": "double"
         },
         "height": {
           "description": "The height of a rectnagle.\n\nThis field can be ignored for circles and polygons.",
-          "type": ["number", "null"],
+          "type": [
+            "number",
+            "null"
+          ],
           "format": "double"
         },
         "inside": {
           "description": "If the range is inside the shape.\n\nThe default value is true.",
-          "type": ["boolean", "null"]
+          "type": [
+            "boolean",
+            "null"
+          ]
         },
         "vertices": {
           "description": "The vertices of the polygon.\n\nThis field can be ignored for rectangles and circles.",
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/$defs/Coordinate"
           }
         }
       },
-      "required": ["type", "unit", "origin"]
+      "required": [
+        "type",
+        "unit",
+        "origin"
+      ]
     },
     "ShapeType": {
       "description": "The type of shape for the range.",
@@ -561,7 +668,10 @@
           "format": "double"
         }
       },
-      "required": ["x", "y"]
+      "required": [
+        "x",
+        "y"
+      ]
     },
     "Time": {
       "description": "A temporal range representing a starting time to an ending time.",
@@ -574,11 +684,17 @@
         },
         "start": {
           "description": "The start time or the start of the asset if not present.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "end": {
           "description": "The end time or the end of the asset if not present.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
@@ -598,12 +714,18 @@
       "properties": {
         "start": {
           "description": "The start of the frame or the end of the asset if not present.\n\nThe first frame/page starts at 0.",
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "int32"
         },
         "end": {
           "description": "The end of the frame inclusive or the end of the asset if not present.",
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "int32"
         }
       }
@@ -620,7 +742,9 @@
           }
         }
       },
-      "required": ["selectors"]
+      "required": [
+        "selectors"
+      ]
     },
     "TextSelectorRange": {
       "description": "One or two [`TextSelector`][TextSelector] identifiying the range to select.",
@@ -642,7 +766,9 @@
           ]
         }
       },
-      "required": ["selector"]
+      "required": [
+        "selector"
+      ]
     },
     "TextSelector": {
       "description": "Selects a range of text via a fragment identifier.\n\nThis is modeled after the W3C Web Annotation selector model.",
@@ -654,16 +780,24 @@
         },
         "start": {
           "description": "The start character offset or the start of the fragment if not present.",
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "int32"
         },
         "end": {
           "description": "The end character offset or the end of the fragment if not present.",
-          "type": ["integer", "null"],
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "int32"
         }
       },
-      "required": ["fragment"]
+      "required": [
+        "fragment"
+      ]
     },
     "Item": {
       "description": "Description of the boundaries of an identified range.",
@@ -678,7 +812,10 @@
           "type": "string"
         }
       },
-      "required": ["identifier", "value"]
+      "required": [
+        "identifier",
+        "value"
+      ]
     },
     "Role": {
       "description": "A role describing the region.",
@@ -736,23 +873,38 @@
       "properties": {
         "title": {
           "description": "A human-readable title, generally source filename.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "format": {
           "description": "The format of the source file as a MIME type.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "document_id": {
           "description": "Document ID from `xmpMM:DocumentID` in XMP metadata.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "instance_id": {
           "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "provenance": {
           "description": "URI from `dcterms:provenance` in XMP metadata.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "thumbnail": {
           "description": "A thumbnail image capturing the visual state at the time of import.\n\nA tuple of thumbnail MIME format (for example `image/jpeg`) and binary bits of the image.",
@@ -767,7 +919,10 @@
         },
         "hash": {
           "description": "An optional hash of the asset to prevent duplicates.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "relationship": {
           "description": "Set to `ParentOf` if this is the parent ingredient.\n\nThere can only be one parent ingredient in the ingredients.",
@@ -776,11 +931,17 @@
         },
         "active_manifest": {
           "description": "The active manifest label (if one exists).\n\nIf this ingredient has a [`ManifestStore`],\nthis will hold the label of the active [`Manifest`].\n\n[`Manifest`]: crate::Manifest\n[`ManifestStore`]: crate::ManifestStore",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "validation_status": {
           "description": "Validation status (Ingredient v1 & v2)",
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/$defs/ValidationStatus"
           }
@@ -809,11 +970,17 @@
         },
         "description": {
           "description": "Additional description of the ingredient.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "informational_URI": {
           "description": "URI to an informational page about the ingredient or its data.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "metadata": {
           "description": "Any additional [`Metadata`] as defined in the C2PA spec.\n\n[`Metadata`]: crate::Metadata",
@@ -828,7 +995,10 @@
         },
         "data_types": {
           "description": "Additional information about the data's type to the ingredient V2 structure.",
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/$defs/AssetType"
           }
@@ -846,10 +1016,16 @@
         },
         "label": {
           "description": "The ingredient's label as assigned in the manifest.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "ocsp_responses": {
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/$defs/ResourceRef"
           }
@@ -877,24 +1053,35 @@
       ]
     },
     "ValidationStatus": {
-      "description": "A `ValidationStatus` struct describes the validation status of a\nspecific part of a manifest.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_existing_manifests>.",
+      "description": "A `ValidationStatus` struct describes the validation status of a\nspecific part of a manifest.\n\nSee [Existing Manifests - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_existing_manifests).",
       "type": "object",
       "properties": {
         "code": {
           "type": "string"
         },
         "url": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "explanation": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "success": {
-          "type": ["boolean", "null"],
+          "type": [
+            "boolean",
+            "null"
+          ],
           "writeOnly": true
         }
       },
-      "required": ["code"]
+      "required": [
+        "code"
+      ]
     },
     "ValidationResults": {
       "description": "A map of validation results for a manifest store.\n\nThe map contains the validation results for the active manifest and any ingredient deltas.\nIt is normal for there to be many",
@@ -913,7 +1100,10 @@
         },
         "ingredientDeltas": {
           "description": "List of any changes/deltas between the current and previous validation results for each ingredient's\nmanifest. Present if the the ingredient is a C2PA asset.",
-          "type": ["array", "null"],
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/$defs/IngredientDeltaValidationResult"
           }
@@ -945,7 +1135,11 @@
           }
         }
       },
-      "required": ["success", "informational", "failure"]
+      "required": [
+        "success",
+        "informational",
+        "failure"
+      ]
     },
     "IngredientDeltaValidationResult": {
       "description": "Represents any changes or deltas between the current and previous validation results for an ingredient's manifest.",
@@ -960,7 +1154,10 @@
           "$ref": "#/$defs/StatusCodes"
         }
       },
-      "required": ["ingredientAssertionURI", "validationDeltas"]
+      "required": [
+        "ingredientAssertionURI",
+        "validationDeltas"
+      ]
     },
     "AssertionDefinition": {
       "description": "Defines an assertion that consists of a label that can be either\na C2PA-defined assertion label or a custom label in reverse domain format.",
@@ -990,16 +1187,26 @@
           "type": "boolean"
         }
       },
-      "required": ["label", "data"]
+      "required": [
+        "label",
+        "data"
+      ]
     },
     "AssertionData": {
       "description": "This allows the assertion to be expressed as CBOR or JSON.\nThe default is CBOR unless you specify that an assertion should be JSON.",
-      "anyOf": [true]
+      "anyOf": [
+        true
+      ]
     },
     "ManifestAssertionKind": {
       "description": "Assertions in C2PA can be stored in several formats",
       "type": "string",
-      "enum": ["Cbor", "Json", "Binary", "Uri"]
+      "enum": [
+        "Cbor",
+        "Json",
+        "Binary",
+        "Uri"
+      ]
     }
   }
 }
