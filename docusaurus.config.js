@@ -130,29 +130,11 @@ const config = {
       metadata: [
         //  { property: 'twitter:card', content: 'summary_large_image' },
         { property: 'og:card', content: 'summary_large_image' },
-        /*  
-      {
-          property: 'twitter:image',
-          content:
-            'https://opensource.contentauthenticity.org/img/open-source@2x.png?v=1',
-        },
-        {
-          property: 'twitter:description',
-          content:
-            'Integrate secure provenance signals into your site, app, or service using open-source tools developed by the Content Authenticity Initiative.',
-        },
-        */
         {
           property: 'og:description',
           content:
             'Integrate secure provenance signals into your site, app, or service using open-source tools developed by the Content Authenticity Initiative.',
         },
-        /*
-        {
-          property: 'twitter:title',
-          content: 'Open-source tools for content authenticity and provenance',
-        },
-        */
         {
           property: 'og:title',
           content: 'Open-source tools for content authenticity and provenance',
@@ -162,6 +144,12 @@ const config = {
       // Cannot be SVGs. Can be external URLs too.
       colorMode: {
         disableSwitch: true,
+      },
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        },
       },
       navbar: {
         logo: {
