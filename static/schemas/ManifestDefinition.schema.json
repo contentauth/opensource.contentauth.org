@@ -30,7 +30,7 @@
       "default": [
         {
           "name": "c2pa-rs",
-          "version": "0.75.17"
+          "version": "0.75.19"
         }
       ]
     },
@@ -59,7 +59,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:078a6e06-f597-443d-9a99-fefffb3ef343"
+      "default": "xmp:iid:6feafa00-b728-44d9-bfc9-e7cec65ede68"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
