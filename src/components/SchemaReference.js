@@ -251,70 +251,78 @@ function PropertiesTable({
           </tr>
         </thead>
         <tbody>
-          {Object.entries(properties).map(([name, schema]) => {
-            const typeHtml = formatType(schema);
-            const isRequired = Array.isArray(required)
-              ? required.includes(name)
-              : false;
-            const explicitDefault =
-              schema && Object.prototype.hasOwnProperty.call(schema, 'default')
-                ? schema.default
-                : undefined;
-            const inferredDefault =
-              defaults && Object.prototype.hasOwnProperty.call(defaults, name)
-                ? defaults[name]
-                : undefined;
-            const chosenDefault =
-              explicitDefault !== undefined
-                ? explicitDefault
-                : inferredDefault !== undefined
-                ? inferredDefault
-                : undefined;
+          {Object.entries(properties)
+            .sort(([aName], [bName]) =>
+              String(aName).localeCompare(String(bName), undefined, {
+                sensitivity: 'base',
+                numeric: true,
+              }),
+            )
+            .map(([name, schema]) => {
+              const typeHtml = formatType(schema);
+              const isRequired = Array.isArray(required)
+                ? required.includes(name)
+                : false;
+              const explicitDefault =
+                schema &&
+                Object.prototype.hasOwnProperty.call(schema, 'default')
+                  ? schema.default
+                  : undefined;
+              const inferredDefault =
+                defaults && Object.prototype.hasOwnProperty.call(defaults, name)
+                  ? defaults[name]
+                  : undefined;
+              const chosenDefault =
+                explicitDefault !== undefined
+                  ? explicitDefault
+                  : inferredDefault !== undefined
+                  ? inferredDefault
+                  : undefined;
 
-            // Link to the referenced definition for non-primitive defaults (objects/arrays) when possible
-            let defaultCell;
-            if (chosenDefault === undefined) {
-              defaultCell = 'N/A';
-            } else if (
-              typeof chosenDefault === 'object' &&
-              chosenDefault !== null
-            ) {
-              const defName = schema ? refToDefName(schema.$ref) : null;
-              if (defName) {
-                defaultCell = (
-                  <>
-                    See <a href={`#${slugify(defName)}`}>{defName}</a>
-                  </>
-                );
+              // Link to the referenced definition for non-primitive defaults (objects/arrays) when possible
+              let defaultCell;
+              if (chosenDefault === undefined) {
+                defaultCell = 'N/A';
+              } else if (
+                typeof chosenDefault === 'object' &&
+                chosenDefault !== null
+              ) {
+                const defName = schema ? refToDefName(schema.$ref) : null;
+                if (defName) {
+                  defaultCell = (
+                    <>
+                      See <a href={`#${slugify(defName)}`}>{defName}</a>
+                    </>
+                  );
+                } else {
+                  defaultCell = JSON.stringify(chosenDefault);
+                }
               } else {
                 defaultCell = JSON.stringify(chosenDefault);
               }
-            } else {
-              defaultCell = JSON.stringify(chosenDefault);
-            }
 
-            return (
-              <tr key={name}>
-                <td className="manifest-ref-table">{name}</td>
-                <td className="manifest-ref-table">
-                  <HTML html={typeHtml} />
-                </td>
-                <td className="manifest-ref-table">
-                  {schema && schema.description ? (
-                    <div className="prop_desc">
-                      <Markdown text={schema.description} />
-                    </div>
-                  ) : (
-                    <span>N/A</span>
-                  )}
-                </td>
-                <td className="manifest-ref-table">
-                  {isRequired ? 'YES' : 'NO'}
-                </td>
-                <td className="manifest-ref-table">{defaultCell}</td>
-              </tr>
-            );
-          })}
+              return (
+                <tr key={name}>
+                  <td className="manifest-ref-table">{name}</td>
+                  <td className="manifest-ref-table">
+                    <HTML html={typeHtml} />
+                  </td>
+                  <td className="manifest-ref-table">
+                    {schema && schema.description ? (
+                      <div className="prop_desc">
+                        <Markdown text={schema.description} />
+                      </div>
+                    ) : (
+                      <span>N/A</span>
+                    )}
+                  </td>
+                  <td className="manifest-ref-table">
+                    {isRequired ? 'YES' : 'NO'}
+                  </td>
+                  <td className="manifest-ref-table">{defaultCell}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </>
@@ -596,21 +604,28 @@ export default function SchemaReference({ schemaUrl }) {
 
       <DefinitionsTOC defs={defs} />
 
-      {Object.entries(defs).map(([name, defSchema]) => {
-        const schemaWithDefaults =
-          (defSchema && {
-            ...defSchema,
-            __inferredDefaults: inferredDefaults[name],
-          }) ||
-          defSchema;
-        return (
-          <DefinitionSection
-            key={name}
-            name={name}
-            schema={schemaWithDefaults}
-          />
-        );
-      })}
+      {Object.entries(defs)
+        .sort(([aName], [bName]) =>
+          String(aName).localeCompare(String(bName), undefined, {
+            sensitivity: 'base',
+            numeric: true,
+          }),
+        )
+        .map(([name, defSchema]) => {
+          const schemaWithDefaults =
+            (defSchema && {
+              ...defSchema,
+              __inferredDefaults: inferredDefaults[name],
+            }) ||
+            defSchema;
+          return (
+            <DefinitionSection
+              key={name}
+              name={name}
+              schema={schemaWithDefaults}
+            />
+          );
+        })}
     </div>
   );
 }
