@@ -93,6 +93,25 @@ function markdownToHtml(text) {
   if (!text) return '';
   let html = String(text);
 
+  // Parse reference-style link definitions like:
+  // [`Builder`]: crate::Builder
+  // [Actions]: crate::assertions::Actions
+  const refDefs = (() => {
+    const map = {};
+    const defRe = /^\s*\[([^\]]+)\]:\s*(\S+)\s*$/gm;
+    let m;
+    while ((m = defRe.exec(html)) !== null) {
+      const rawLabel = m[1];
+      const target = m[2];
+      map[rawLabel] = target;
+      const normalized = rawLabel.replace(/`/g, '');
+      if (!Object.prototype.hasOwnProperty.call(map, normalized)) {
+        map[normalized] = target;
+      }
+    }
+    return map;
+  })();
+
   const escapeHtml = (s) =>
     String(s)
       .replace(/&/g, '&amp;')
@@ -121,8 +140,25 @@ function markdownToHtml(text) {
     BmffHash: 'assertions',
     Builder: '',
   };
+  // Known struct field names for better anchor selection (fields vs methods)
+  const TYPE_FIELD_HINTS = {
+    Settings: new Set([
+      'builder',
+      'cawg_trust',
+      'cawg_x509_signer',
+      'core',
+      'signer',
+      'trust',
+      'verify',
+      'version',
+    ]),
+  };
+  // Known type kinds to choose docs page prefix (struct vs trait)
+  const TYPE_KIND_HINTS = {
+    Signer: 'trait',
+  };
   const resolveDocsUrl = (codeRef) => {
-    let refStr = codeRef.replace(/^crate::/, '');
+    let refStr = codeRef.replace(/^(?:crate|c2pa)::/, '');
 
     const parts = refStr.split('::');
     let moduleParts = [];
@@ -158,24 +194,63 @@ function markdownToHtml(text) {
     }
 
     const modulePath = moduleParts.length ? moduleParts.join('/') + '/' : '';
-    let url = `https://docs.rs/c2pa/latest/c2pa/${modulePath}struct.${typeName}.html`;
+    const kind = TYPE_KIND_HINTS[typeName] || 'struct';
+    let url = `https://docs.rs/c2pa/latest/c2pa/${modulePath}${kind}.${typeName}.html`;
 
     if (member) {
-      const anchor = /_/.test(member)
-        ? `structfield.${member}`
-        : `method.${member}`;
+      const isField =
+        TYPE_FIELD_HINTS[typeName] && TYPE_FIELD_HINTS[typeName].has(member);
+      const anchor = isField ? `structfield.${member}` : `method.${member}`;
       url += `#${anchor}`;
     }
     return url;
   };
 
   // Convert [`CodeRef`] to links to docs.rs, preserving code formatting
-  html = html.replace(/\[`([^`]+)`\]/g, (m, codeRef) => {
-    const url = resolveDocsUrl(codeRef);
+  html = html.replace(/\[`([^`]+)`\](?!\(|:)/g, (m, codeRef) => {
+    const mapped =
+      (Object.prototype.hasOwnProperty.call(refDefs, '`' + codeRef + '`') &&
+        refDefs['`' + codeRef + '`']) ||
+      (Object.prototype.hasOwnProperty.call(refDefs, codeRef) &&
+        refDefs[codeRef]) ||
+      null;
+    const url =
+      mapped && /^https?:\/\//.test(mapped)
+        ? mapped
+        : resolveDocsUrl(mapped || codeRef);
     return `<a href="${escapeHtml(url)}"><code>${escapeHtml(
       codeRef,
     )}</code></a>`;
   });
+
+  // Convert reference-style links: [Label][CodeRef] into docs.rs links
+  // Keep the label as the link text, resolve the second bracket as a Rust code ref.
+  html = html.replace(
+    /\[([^\]]+)\]\s*\[\s*((?:crate::|c2pa::)?[A-Za-z][A-Za-z0-9_]*(?:::[A-Za-z0-9_]+)*)\s*\]/g,
+    (m, label, codeRef) => {
+      const url = resolveDocsUrl(codeRef);
+      return `<a href="${escapeHtml(url)}">${escapeHtml(label)}</a>`;
+    },
+  );
+
+  // Convert [CodeRef] (non-markdown-link, no backticks) to docs.rs links.
+  // Avoid interfering with [text](url) by ensuring no '(' follows the ']'.
+  // Also avoid reference definition lines (followed by ':').
+  // Accept optional crate:: prefix and Type paths with ::member.
+  html = html.replace(
+    /\[((?:crate::|c2pa::)?[A-Z][A-Za-z0-9_]*(?:::[A-Za-z0-9_]+)*)\](?!\(|:)/g,
+    (m, labelOrCodeRef) => {
+      const mapped =
+        (Object.prototype.hasOwnProperty.call(refDefs, labelOrCodeRef) &&
+          refDefs[labelOrCodeRef]) ||
+        null;
+      const url =
+        mapped && /^https?:\/\//.test(mapped)
+          ? mapped
+          : resolveDocsUrl(mapped || labelOrCodeRef);
+      return `<a href="${escapeHtml(url)}">${escapeHtml(labelOrCodeRef)}</a>`;
+    },
+  );
 
   // Links: [text](url)
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, url) => {
@@ -251,70 +326,78 @@ function PropertiesTable({
           </tr>
         </thead>
         <tbody>
-          {Object.entries(properties).map(([name, schema]) => {
-            const typeHtml = formatType(schema);
-            const isRequired = Array.isArray(required)
-              ? required.includes(name)
-              : false;
-            const explicitDefault =
-              schema && Object.prototype.hasOwnProperty.call(schema, 'default')
-                ? schema.default
-                : undefined;
-            const inferredDefault =
-              defaults && Object.prototype.hasOwnProperty.call(defaults, name)
-                ? defaults[name]
-                : undefined;
-            const chosenDefault =
-              explicitDefault !== undefined
-                ? explicitDefault
-                : inferredDefault !== undefined
-                ? inferredDefault
-                : undefined;
+          {Object.entries(properties)
+            .sort(([aName], [bName]) =>
+              String(aName).localeCompare(String(bName), undefined, {
+                sensitivity: 'base',
+                numeric: true,
+              }),
+            )
+            .map(([name, schema]) => {
+              const typeHtml = formatType(schema);
+              const isRequired = Array.isArray(required)
+                ? required.includes(name)
+                : false;
+              const explicitDefault =
+                schema &&
+                Object.prototype.hasOwnProperty.call(schema, 'default')
+                  ? schema.default
+                  : undefined;
+              const inferredDefault =
+                defaults && Object.prototype.hasOwnProperty.call(defaults, name)
+                  ? defaults[name]
+                  : undefined;
+              const chosenDefault =
+                explicitDefault !== undefined
+                  ? explicitDefault
+                  : inferredDefault !== undefined
+                  ? inferredDefault
+                  : undefined;
 
-            // Link to the referenced definition for non-primitive defaults (objects/arrays) when possible
-            let defaultCell;
-            if (chosenDefault === undefined) {
-              defaultCell = 'N/A';
-            } else if (
-              typeof chosenDefault === 'object' &&
-              chosenDefault !== null
-            ) {
-              const defName = schema ? refToDefName(schema.$ref) : null;
-              if (defName) {
-                defaultCell = (
-                  <>
-                    See <a href={`#${slugify(defName)}`}>{defName}</a>
-                  </>
-                );
+              // Link to the referenced definition for non-primitive defaults (objects/arrays) when possible
+              let defaultCell;
+              if (chosenDefault === undefined) {
+                defaultCell = 'N/A';
+              } else if (
+                typeof chosenDefault === 'object' &&
+                chosenDefault !== null
+              ) {
+                const defName = schema ? refToDefName(schema.$ref) : null;
+                if (defName) {
+                  defaultCell = (
+                    <>
+                      See <a href={`#${slugify(defName)}`}>{defName}</a>
+                    </>
+                  );
+                } else {
+                  defaultCell = JSON.stringify(chosenDefault);
+                }
               } else {
                 defaultCell = JSON.stringify(chosenDefault);
               }
-            } else {
-              defaultCell = JSON.stringify(chosenDefault);
-            }
 
-            return (
-              <tr key={name}>
-                <td className="manifest-ref-table">{name}</td>
-                <td className="manifest-ref-table">
-                  <HTML html={typeHtml} />
-                </td>
-                <td className="manifest-ref-table">
-                  {schema && schema.description ? (
-                    <div className="prop_desc">
-                      <Markdown text={schema.description} />
-                    </div>
-                  ) : (
-                    <span>N/A</span>
-                  )}
-                </td>
-                <td className="manifest-ref-table">
-                  {isRequired ? 'YES' : 'NO'}
-                </td>
-                <td className="manifest-ref-table">{defaultCell}</td>
-              </tr>
-            );
-          })}
+              return (
+                <tr key={name}>
+                  <td className="manifest-ref-table">{name}</td>
+                  <td className="manifest-ref-table">
+                    <HTML html={typeHtml} />
+                  </td>
+                  <td className="manifest-ref-table">
+                    {schema && schema.description ? (
+                      <div className="prop_desc">
+                        <Markdown text={schema.description} />
+                      </div>
+                    ) : (
+                      <span>N/A</span>
+                    )}
+                  </td>
+                  <td className="manifest-ref-table">
+                    {isRequired ? 'YES' : 'NO'}
+                  </td>
+                  <td className="manifest-ref-table">{defaultCell}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </>
@@ -596,21 +679,28 @@ export default function SchemaReference({ schemaUrl }) {
 
       <DefinitionsTOC defs={defs} />
 
-      {Object.entries(defs).map(([name, defSchema]) => {
-        const schemaWithDefaults =
-          (defSchema && {
-            ...defSchema,
-            __inferredDefaults: inferredDefaults[name],
-          }) ||
-          defSchema;
-        return (
-          <DefinitionSection
-            key={name}
-            name={name}
-            schema={schemaWithDefaults}
-          />
-        );
-      })}
+      {Object.entries(defs)
+        .sort(([aName], [bName]) =>
+          String(aName).localeCompare(String(bName), undefined, {
+            sensitivity: 'base',
+            numeric: true,
+          }),
+        )
+        .map(([name, defSchema]) => {
+          const schemaWithDefaults =
+            (defSchema && {
+              ...defSchema,
+              __inferredDefaults: inferredDefaults[name],
+            }) ||
+            defSchema;
+          return (
+            <DefinitionSection
+              key={name}
+              name={name}
+              schema={schemaWithDefaults}
+            />
+          );
+        })}
     </div>
   );
 }

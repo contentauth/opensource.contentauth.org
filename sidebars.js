@@ -105,18 +105,6 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'C2PA conformance program',
-      link: { type: 'doc', id: 'conformance/index' },
-      collapsed: true,
-      items: [
-        {
-          type: 'doc',
-          id: 'conformance/trust-lists',
-        },
-      ],
-    },
-    {
-      type: 'category',
       label: 'C2PA Tool',
       link: { type: 'doc', id: 'c2patool/c2patool-index' },
       collapsed: true,
@@ -407,6 +395,18 @@ const sidebars = {
               href: 'https://github.com/contentauth/c2pa-android',
             },
           ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'C2PA conformance program',
+      link: { type: 'doc', id: 'conformance/index' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'conformance/trust-lists',
         },
       ],
     },

@@ -5,7 +5,7 @@ hide_table_of_contents: true
 ---
 
 :::note
-This is a beta release of these references. It is a work in progress and may have issues or errors. 
+These references are generated from the Rust library but apply to all the language bindings (libraries).  But note that not all languages may be up-to-date with the latest changes in the Rust library.
 :::
 
 The [C2PA specification](https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_manifests) describes a manifest with a binary structure in JPEG universal metadata box format ([JUMBF](https://www.iso.org/standard/84635.html)) that includes JSON as well as binary data for things like encryption keys and thumbnail images. Because the binary structure is hard to understand and program to, the SDK defines a JSON manifest structure that's a declarative language for representing and creating a binary manifest.
