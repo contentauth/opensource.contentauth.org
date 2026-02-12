@@ -136,9 +136,9 @@ The [C2PA Technical Specification](https://c2pa.org/specifications/specification
 
 V1 actions are fully specified in the `actions` array. However, a v2 action may either be fully specified in an element of the `actions` array or it may be derived from an element in the `templates` array with the same action name.
 
-<div class="review-comment">
+<div style={{display: 'none'}}>
 The CAI APIs can read all v2 actions and write **most** v2 actions.  
-What v2 actions can it NOT write?  We should document that.
+We should document v2 actions that can it NOT write.
 </div>
 
 ### Action names
@@ -153,7 +153,7 @@ Use the `digitalSourceType` property to specify how an asset was created or modi
 
 The value of `digitalSourceType` is one of the URLs specified by the International Press Telecommunications Council (IPTC) [NewsCodes Digital Source Type scheme](https://cv.iptc.org/newscodes/digitalsourcetype/) of the form `http://cv.iptc.org/newscodes/digitalsourcetype/<CODE>`, where `<CODE>` is one of the codes shown in the following table.
 
-| Code | Description |`
+| Code | Description |
 |---|---|
 | algorithmicallyEnhanced | Minor augmentation or correction by algorithm. |
 | algorithmicMedia | Media created purely by an algorithm not based on any sampled training data, e.g. an image created by software using a mathematical formula. |
