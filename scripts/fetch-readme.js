@@ -223,6 +223,7 @@ const readmes = [
     dest: resolve(__dirname, '../docs/rust-sdk/docs/settings.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'docs/settings.md',
+    branch: 'doc-cleanup',
   },
   {
     dest: resolve(__dirname, '../docs/rust-sdk/docs/release-notes.md'),
