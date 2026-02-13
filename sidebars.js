@@ -180,7 +180,7 @@ const sidebars = {
         {
           type: 'doc',
           id: 'rust-sdk/docs/working-stores',
-          label: 'Archives and working stores',
+          label: 'Working stores and archives',
         },
         {
           type: 'doc',
