@@ -455,7 +455,7 @@ function getUnionOptions(schema) {
   return union.filter((opt) => opt && typeof opt === 'object');
 }
 
-function UnionOptionsTable({ options }) {
+function UnionOptionsTable({ options, contextName }) {
   if (!options || options.length === 0) return null;
 
   const getTypeLabel = (opt) => {
@@ -468,6 +468,26 @@ function UnionOptionsTable({ options }) {
         ? opt.$ref.replace('#/$defs/', '')
         : opt.$ref;
       return name;
+    }
+    return 'N/A';
+  };
+
+  const getValueLabel = (opt) => {
+    if (!opt) return 'N/A';
+    if (Object.prototype.hasOwnProperty.call(opt, 'const')) {
+      return String(opt.const);
+    }
+    // If the union option is an object with a single top-level property (e.g., { local: { ... } })
+    // use that property key as the value label.
+    if (opt && isObject(opt.properties)) {
+      const keys = Object.keys(opt.properties);
+      if (keys.length === 1) {
+        // Special-case: For BuilderIntent, don't show the key name; show Object (see below)
+        if (contextName === 'BuilderIntent') {
+          return 'Object (see below)';
+        }
+        return keys[0];
+      }
     }
     return 'N/A';
   };
@@ -494,11 +514,7 @@ function UnionOptionsTable({ options }) {
                 'N/A'
               )}
             </td>
-            <td className="manifest-ref-table">
-              {Object.prototype.hasOwnProperty.call(opt, 'const')
-                ? String(opt.const)
-                : 'N/A'}
-            </td>
+            <td className="manifest-ref-table">{getValueLabel(opt)}</td>
           </tr>
         ))}
       </tbody>
@@ -513,6 +529,26 @@ function DefinitionSection({ name, schema }) {
     (schema && isObject(schema.properties));
   const unionOptions = getUnionOptions(schema);
 
+  const getInnerObjectForOption = (opt) => {
+    if (!opt || !isObject(opt)) return null;
+    // If option is an object with a single named property that itself is an object,
+    // prefer showing that inner object's properties (e.g., { local: { ... } }).
+    if (isObject(opt.properties)) {
+      const keys = Object.keys(opt.properties);
+      if (keys.length === 1) {
+        const sole = opt.properties[keys[0]];
+        if (sole && (sole.type === 'object' || isObject(sole.properties))) {
+          return { title: keys[0], node: sole };
+        }
+      }
+      // Otherwise, fall back to the option's own properties if it's an object type
+      if (opt.type === 'object') {
+        return { title: null, node: opt };
+      }
+    }
+    return null;
+  };
+
   return (
     <>
       <h3 className="scroll-target" id={titleId}>
@@ -526,7 +562,31 @@ function DefinitionSection({ name, schema }) {
       ) : null}
 
       {unionOptions.length > 0 ? (
-        <UnionOptionsTable options={unionOptions} />
+        <>
+          <UnionOptionsTable options={unionOptions} contextName={name} />
+          {unionOptions.map((opt, idx) => {
+            const inner = getInnerObjectForOption(opt);
+            if (inner && inner.node && isObject(inner.node.properties)) {
+              let optTitle = null;
+              if (name === 'SignerSettings' && inner.title) {
+                optTitle = `signer.${inner.title}`;
+              } else if (inner.title) {
+                optTitle = `${capitalizeType('object')}: ${inner.title}`;
+              }
+              return (
+                <PropertiesTable
+                  key={`opt-${idx}`}
+                  title={optTitle || undefined}
+                  description={undefined}
+                  properties={inner.node.properties || {}}
+                  required={inner.node.required || []}
+                  defaults={schema.__inferredDefaults || undefined}
+                />
+              );
+            }
+            return null;
+          })}
+        </>
       ) : isObjectType ? (
         <PropertiesTable
           properties={schema.properties || {}}
