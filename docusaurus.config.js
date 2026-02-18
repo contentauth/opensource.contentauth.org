@@ -52,6 +52,7 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenAnchors: 'log',
   markdown: {
+    mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: 'warn',
     },
@@ -205,7 +206,7 @@ const config = {
         contextualSearch: true,
       },
     }),
-  themes: ['docusaurus-json-schema-plugin'],
+  themes: ['docusaurus-json-schema-plugin', '@docusaurus/theme-mermaid'],
 };
 
 module.exports = config;

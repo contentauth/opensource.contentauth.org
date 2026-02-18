@@ -196,6 +196,21 @@ const readmes = [
     path: 'docs/usage.md',
   },
   {
+    dest: resolve(__dirname, '../docs/rust-sdk/docs/context.md'),
+    repo: 'contentauth/c2pa-rs',
+    path: 'docs/context.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/rust-sdk/docs/intents-and-archives.md'),
+    repo: 'contentauth/c2pa-rs',
+    path: 'docs/intents-and-archives.md',
+  },
+  {
+    dest: resolve(__dirname, '../docs/rust-sdk/docs/working-stores.md'),
+    repo: 'contentauth/c2pa-rs',
+    path: 'docs/working-stores.md',
+  },
+  {
     dest: resolve(__dirname, '../docs/rust-sdk/docs/cawg-id.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'docs/cawg-identity.md',

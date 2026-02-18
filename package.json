@@ -21,6 +21,7 @@
     "@contentauth/react": "^0.2.38",
     "@docusaurus/core": "^3.0.0",
     "@docusaurus/preset-classic": "^3.0.0",
+    "@docusaurus/theme-mermaid": "^3.9.2",
     "@mdx-js/react": "^3.0.0",
     "@stackblitz/sdk": "^1.6.0",
     "c2pa": "^0.30.16",

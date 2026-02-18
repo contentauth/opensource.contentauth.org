@@ -3,7 +3,7 @@ id: community-resources
 title: Community resources
 ---
 
-The Content Authenticity Initiative has an active and growing community of developers collaborating on the ecosystem of open-source tools and libraries for working with digital content provenance creation and validation.
+The Content Authenticity Initiative has an active and growing community of developers collaborating on the ecosystem of open-source for content provenance creation and validation.
 
 ## GitHub
 

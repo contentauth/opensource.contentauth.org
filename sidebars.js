@@ -174,6 +174,21 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'rust-sdk/docs/context',
+          label: 'Configuring the SDK using Context',
+        },
+        {
+          type: 'doc',
+          id: 'rust-sdk/docs/working-stores',
+          label: 'Working stores and archives',
+        },
+        {
+          type: 'doc',
+          id: 'rust-sdk/docs/intents-and-archives',
+          label: 'Intents and archives',
+        },
+        {
+          type: 'doc',
           id: 'rust-sdk/docs/release-notes',
           label: 'Release notes',
         },
