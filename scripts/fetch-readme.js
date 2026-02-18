@@ -194,25 +194,21 @@ const readmes = [
     dest: resolve(__dirname, '../docs/rust-sdk/docs/usage.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'docs/usage.md',
-    branch: 'doc-cleanup',
   },
   {
     dest: resolve(__dirname, '../docs/rust-sdk/docs/context.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'docs/context.md',
-    branch: 'doc-cleanup',
   },
   {
     dest: resolve(__dirname, '../docs/rust-sdk/docs/intents-and-archives.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'docs/intents-and-archives.md',
-    branch: 'doc-cleanup',
   },
   {
     dest: resolve(__dirname, '../docs/rust-sdk/docs/working-stores.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'docs/working-stores.md',
-    branch: 'doc-cleanup',
   },
   {
     dest: resolve(__dirname, '../docs/rust-sdk/docs/cawg-id.md'),
@@ -223,7 +219,6 @@ const readmes = [
     dest: resolve(__dirname, '../docs/rust-sdk/docs/settings.md'),
     repo: 'contentauth/c2pa-rs',
     path: 'docs/settings.md',
-    branch: 'doc-cleanup',
   },
   {
     dest: resolve(__dirname, '../docs/rust-sdk/docs/release-notes.md'),
