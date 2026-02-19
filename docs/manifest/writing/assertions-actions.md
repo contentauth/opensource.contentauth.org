@@ -93,14 +93,16 @@ Update assertions
 
 ## Created versus gathered assertions
 
-In v2 claims, assertions are split into *created assertions* and *gathered assertions* and you can configure the assertion type by using SDK settings. By default, the hard binding is a created assertion and everything else defaults to a gathered assertion.  Configure assertions that are attributed to the signer as created assertions, such as actions performed, ingredients included, or thumbnails included.  
+In v2 claims, assertions are split into *created assertions* and *gathered assertions* and you can configure the assertion type by using SDK settings. By default, the hard binding is a created assertion and everything else defaults to a gathered assertion.  
+
+Configure assertions that are attributed to the signer as created assertions, such as actions performed, ingredients included, or thumbnails included.  
 Leave assertions that are based on human input or part of an external workflow as gathered assertions.
 
 :::tip
 For a video explanation with an example of how to configure created/gathered assertions using a settings file, see [Content Credentials Foundations - Configuring C2PA Tool Settings](https://learn.contentauthenticity.org/configuring-c2pa-tool-settings) (around the 6 min. mark). 
 :::
 
-The difference between a **created assertion** and a **gathered assertion** comes down to **who originates the information and how it gets into the manifest**.
+The difference between a created assertion and a gathered assertion comes down to who originates the information and how it gets into the manifest.
 
 At a high level:
 
@@ -123,10 +125,10 @@ For example:
 * Actions like `c2pa.actions.edit`, `c2pa.actions.crop`, and so on.
 
 :::note
-All `created_assertions` are attributed to the signer as the trust model is rooted in the trust of the signer.
+All created assertions are attributed to the signer as the trust model is rooted in the trust of the signer.
 :::
 
-This will always include the hard binding e.g. `c2pa.hash.data`.  It is common to see assertions like `c2pa.thumbnail.claim`, `c2pa.ingredient.v3`, and `c2pa.actions.v2` configured as created assertions, but there could be more.
+Created assertions always include the hard binding, for example `c2pa.hash.data`.  It is common to see assertions like `c2pa.thumbnail.claim`, `c2pa.ingredient.v3`, and `c2pa.actions.v2` configured as created assertions, but there could be more.
 
 From the [C2PA specification](https://spec.c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_fields):
 
@@ -151,7 +153,7 @@ From the [C2PA specification](https://spec.c2pa.org/specifications/specification
 > When present, the `gathered_assertions` field shall contain one or more URI references to assertions that have been provided to the claim generator by other components in the workflow.
 
 :::note
-By putting an assertion into this list, the claim generator is declaring that the assertion is part of the claim, but it was not sourced from the claim generator and is not attributed to the signer. For example, assertions containing information entered by a human actor would be listed in `gathered_assertions`.
+By making an assertion gathered, the claim generator is declaring that the assertion is part of the claim, but it was not sourced from the claim generator and is not attributed to the signer. For example, assertions containing information entered by a human actor would be a gathered assertion.
 It is common to see assertions like `cawg.training-mining` and `cawg.metadata` configured as gathered assertions.
 :::
 
