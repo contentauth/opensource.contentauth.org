@@ -635,6 +635,50 @@ export default function SchemaReference({ schemaUrl }) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Ensure hash anchors (e.g., #buildersettings) scroll into view after
+  // the dynamically generated content renders, and on subsequent hash changes.
+  useEffect(() => {
+    const scrollToHash = () => {
+      if (typeof window === 'undefined') return;
+      const hash = window.location && window.location.hash;
+      if (!hash) return;
+      const id = decodeURIComponent(hash.replace(/^#/, ''));
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (el && typeof el.scrollIntoView === 'function') {
+        // Rely on CSS (e.g., scroll-margin-top) for fixed-header offset handling.
+        el.scrollIntoView();
+      }
+    };
+    // After schema loads and the DOM updates, attempt to scroll to the hash.
+    if (schema) {
+      // Use a micro-delay to ensure elements are in the DOM.
+      const t = setTimeout(scrollToHash, 0);
+      return () => clearTimeout(t);
+    }
+  }, [schema]);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      // Ensure scroll happens after DOM paint.
+      setTimeout(() => {
+        if (typeof window === 'undefined') return;
+        const hash = window.location && window.location.hash;
+        const id = hash ? decodeURIComponent(hash.replace(/^#/, '')) : '';
+        if (!id) return;
+        const el = document.getElementById(id);
+        if (el && typeof el.scrollIntoView === 'function') {
+          el.scrollIntoView();
+        }
+      }, 0);
+    };
+    if (typeof window !== 'undefined') {
+      window.addEventListener('hashchange', onHashChange);
+      return () => window.removeEventListener('hashchange', onHashChange);
+    }
+    return undefined;
+  }, []);
+
   const buildDefDefaults = (root) => {
     if (!root || !isObject(root)) return {};
     const defs = root.$defs || root.definitions || {};
