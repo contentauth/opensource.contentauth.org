@@ -98,9 +98,7 @@ In v2 claims, assertions are split into *created assertions* and *gathered asser
 Configure assertions that are attributed to the signer as created assertions, such as actions performed, ingredients included, or thumbnails included.  
 Leave assertions that are based on human input or part of an external workflow as gathered assertions.
 
-:::tip
-For a video explanation with an example of how to configure created/gathered assertions using a settings file, see [Content Credentials Foundations - Configuring C2PA Tool Settings](https://learn.contentauthenticity.org/configuring-c2pa-tool-settings) (around the 6 min. mark). 
-:::
+Configure created and gathered assertions intentionally and be sure that they reflect the actual claim generating environment. Some assertions may be commonly be created, but that doesn't mean it will be true for all claim generators.
 
 The difference between a created assertion and a gathered assertion comes down to who originates the information and how it gets into the manifest.
 
@@ -108,6 +106,14 @@ At a high level:
 
 - **Created assertion** means “I created this or made this modification.”
 - **Gathered assertion** means “This was already present; I preserved it.”
+
+:::tip
+For a video explanation with an example of how to configure created/gathered assertions using a settings file, see [Content Credentials Foundations - Configuring C2PA Tool Settings](https://learn.contentauthenticity.org/configuring-c2pa-tool-settings) (around the 6 min. mark). 
+:::
+
+You can indicate whether a particular assertion is created or gathered in two ways:
+- [Using settings](#configuration-in-sdk-settings)
+- [In the manifest definition](#configuration-in-sdk-settings)
 
 ### Created assertion
 
@@ -121,7 +127,6 @@ For example:
 
 * “This image was generated using Adobe Firefly”
 * “This video was edited in Premiere Pro”
-* Custom metadata like author name, title, or usage rights
 * Actions like `c2pa.actions.edit`, `c2pa.actions.crop`, and so on.
 
 :::note
@@ -159,7 +164,8 @@ It is common to see assertions like `cawg.training-mining` and `cawg.metadata` c
 
 ### Configuration in SDK settings
 
-Configure the settings file with the created assertions like this:
+Configure the settings file with the created assertions as shown in the example below.
+These settings indicate that the assertions with those labels are "created" assertions. 
 
 ```toml
 [builder]
@@ -184,6 +190,10 @@ Or in JSON:
 ...
 },
 ```
+
+:::note
+The `created_assertion_labels` must specify the _base label_, not including the assertion version nor instance.
+:::
 
 ### Configuring in manifest
 
