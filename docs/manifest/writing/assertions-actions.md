@@ -91,6 +91,148 @@ Update assertions
 
 -->
 
+## Created versus gathered assertions
+
+In v2 claims, assertions are split into *created assertions* and *gathered assertions* and you can configure the assertion type by using SDK settings. By default, the hard binding is a created assertion and everything else defaults to a gathered assertion.  
+
+Configure assertions that are attributed to the signer as created assertions, such as actions performed, ingredients included, or thumbnails included.  
+Leave assertions that are based on human input or part of an external workflow as gathered assertions.
+
+Configure created and gathered assertions intentionally and be sure that they reflect the actual claim generating environment. Some assertions may be commonly be created, but that doesn't mean it will be true for all claim generators.
+
+The difference between a created assertion and a gathered assertion comes down to who originates the information and how it gets into the manifest.
+
+At a high level:
+
+- **Created assertion** means “I created this or made this modification.”
+- **Gathered assertion** means “This was already present; I preserved it.”
+
+:::tip
+For a video explanation with an example of how to configure created/gathered assertions using a settings file, see [Content Credentials Foundations - Configuring C2PA Tool Settings](https://learn.contentauthenticity.org/configuring-c2pa-tool-settings) (around the 6 min. mark). 
+:::
+
+You can indicate whether a particular assertion is created or gathered in two ways:
+- [Using settings](#configuration-in-sdk-settings)
+- [In the manifest definition](#configuration-in-sdk-settings)
+
+### Created assertion
+
+A *created assertion* is:
+
+* **Authored directly by the claim generator**.
+* Explicitly written into the manifest by the actor.
+* Intentionally asserted as part of the Content Credentials.
+
+For example:
+
+* “This image was generated using Adobe Firefly”
+* “This video was edited in Premiere Pro”
+* Actions like `c2pa.actions.edit`, `c2pa.actions.crop`, and so on.
+
+:::note
+All created assertions are attributed to the signer as the trust model is rooted in the trust of the signer.
+:::
+
+Created assertions always include the hard binding, for example `c2pa.hash.data`.  It is common to see assertions like `c2pa.thumbnail.claim`, `c2pa.ingredient.v3`, and `c2pa.actions.v2` configured as created assertions, but there could be more.
+
+From the [C2PA specification](https://spec.c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_fields):
+
+> The `created_assertions` field shall be present and it shall contain one or more URI references to assertions being made by this claim. In a standard manifest, it shall contain, at minimum, a reference to an assertion that represents a hard binding.
+
+### Gathered assertion
+
+A *gathered assertion* is:
+
+* **Collected from existing metadata or embedded information**.
+* Not newly authored by the claim generator.
+* Carried forward into the manifest for transparency.
+
+For example:
+
+* Camera make/model pulled from EXIF metadata
+* Original capture timestamp in XMP metadata
+* GPS data extracted from file metadata
+
+From the [C2PA specification](https://spec.c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_fields):
+
+> When present, the `gathered_assertions` field shall contain one or more URI references to assertions that have been provided to the claim generator by other components in the workflow.
+
+:::note
+By making an assertion gathered, the claim generator is declaring that the assertion is part of the claim, but it was not sourced from the claim generator and is not attributed to the signer. For example, assertions containing information entered by a human actor would be a gathered assertion.
+It is common to see assertions like `cawg.training-mining` and `cawg.metadata` configured as gathered assertions.
+:::
+
+### Configuration in SDK settings
+
+Configure the settings file with the created assertions as shown in the example below.
+These settings indicate that the assertions with those labels are "created" assertions. 
+
+```toml
+[builder]
+created_assertion_labels = [
+  "c2pa.actions", 
+  "c2pa.thumbnail.claim",
+  "c2pa.thumbnail.ingredient", 
+  "c2pa.ingredient"
+]
+```
+
+Or in JSON:
+
+```json
+"builder": {
+  "created_assertion_labels": [
+    "c2pa.actions", 
+    "c2pa.thumbnail.claim",
+    "c2pa.thumbnail.ingredient", 
+    "c2pa.ingredient"
+  ],
+...
+},
+```
+
+:::note
+The `created_assertion_labels` must specify the _base label_, not including the assertion version nor instance.
+:::
+
+### Configuring in manifest
+
+You can configure created assertions in a manifest definition with the `created` property of an [assertion](https://opensource.contentauthenticity.org/docs/manifest/json-ref/builder-schema#assertiondefinition) that is `true` if the assertion is created or `false` (the default) if it's derived from the asset or an ingredient.
+
+For example:
+
+```json
+"assertions": [
+  {
+    "created": true 
+    "label": "c2pa.actions.v2",
+    "data": {
+      "actions": [
+        {
+          "action": "c2pa.resized"
+        }
+      ]
+    },
+  }
+]
+```
+
+For a gathered assertion:
+
+```json
+{
+  "label": "c2pa.capture.metadata",
+  "created": false,
+  "data": {
+    "captureTime": "2026-02-10T14:22:31Z",
+    "device": {
+      "manufacturer": "Canon",
+      "model": "EOS R5"
+    }
+  }
+}
+```
+
 ## Actions
 
 An action is an assertion that provides information about creation, edits, and other things that have occurred to an asset. In the manifest, an `actions` assertion is an array of [AssertionDefinition](../json-ref/manifest-def.mdx#assertiondefinition) objects.   
