@@ -221,7 +221,7 @@
           "default": true
         },
         "verify_after_sign": {
-          "description": "Whether to verify the manifest after signing in the [`Builder`].\n\nThe default value is true.\n\n<div class=\"warning\">\nDisabling validation can improve signing performance, BUT it carries the risk of signing an invalid\nmanifest.\n</div>\n\n[`Builder`]: crate::Builder",
+          "description": "Whether to verify the manifest after signing in the [`Builder`].\n\nThe default value is false.\nThere is a known bug related to this setting: [#1875](https://github.com/contentauth/c2pa-rs/issues/1875).\nWhen the bug is fixed, the default value should be true.\n\n<div class=\"warning\">\nDisabling validation can improve signing performance, BUT it carries the risk of signing an invalid\nmanifest.\n</div>\n\n[`Builder`]: crate::Builder",
           "type": "boolean",
           "default": false
         },
@@ -902,21 +902,26 @@
               "type": "object",
               "properties": {
                 "alg": {
+                  "description": "Algorithm to use for signing.",
                   "$ref": "#/$defs/SigningAlg"
                 },
                 "sign_cert": {
+                  "description": "Certificate used for signing (PEM format).",
                   "type": "string"
                 },
                 "private_key": {
+                  "description": "Private key used for signing (PEM format).",
                   "type": "string"
                 },
                 "tsa_url": {
+                  "description": "Time stamp authority URL for signing.",
                   "type": [
                     "string",
                     "null"
                   ]
                 },
                 "referenced_assertions": {
+                  "description": "Referenced assertions for CAWG identity signing (optional).",
                   "type": [
                     "array",
                     "null"
@@ -926,6 +931,7 @@
                   }
                 },
                 "roles": {
+                  "description": "Roles for CAWG identity signing (optional).",
                   "type": [
                     "array",
                     "null"
@@ -955,21 +961,26 @@
               "type": "object",
               "properties": {
                 "url": {
+                  "description": "URL that the signer will use for signing.\nA POST request with a byte-stream will be sent to this URL.",
                   "type": "string"
                 },
                 "alg": {
+                  "description": "Algorithm to use for signing.",
                   "$ref": "#/$defs/SigningAlg"
                 },
                 "sign_cert": {
+                  "description": "Certificate used for signing (PEM format).",
                   "type": "string"
                 },
                 "tsa_url": {
+                  "description": "Time stamp authority URL for signing.",
                   "type": [
                     "string",
                     "null"
                   ]
                 },
                 "referenced_assertions": {
+                  "description": "Referenced assertions for CAWG identity signing (optional).",
                   "type": [
                     "array",
                     "null"
@@ -979,6 +990,7 @@
                   }
                 },
                 "roles": {
+                  "description": "Roles for CAWG identity signing (optional).",
                   "type": [
                     "array",
                     "null"
