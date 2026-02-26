@@ -1,0 +1,370 @@
+{
+  "sources": [
+    {
+      "repo": "contentauth/c2pa-js",
+      "path": "README.md",
+      "dest": "docs/c2pa-js/readme.md"
+    },
+    {
+      "repo": "contentauth/c2pa-js",
+      "path": "packages/c2pa-web/README.md",
+      "dest": "docs/c2pa-js/c2pa-web-readme.md",
+      "sidebar": { "category": "c2pa-js", "label": "c2pa-web", "order": 1 }
+    },
+    {
+      "repo": "contentauth/c2pa-js",
+      "path": "packages/c2pa-types/README.md",
+      "dest": "docs/c2pa-js/c2pa-types-readme.md",
+      "sidebar": { "category": "c2pa-js", "label": "c2pa-types", "order": 2 }
+    },
+    {
+      "repo": "contentauth/c2pa-js",
+      "path": "packages/c2pa-wasm/README.md",
+      "dest": "docs/c2pa-js/c2pa-wasm-readme.md",
+      "sidebar": { "category": "c2pa-js", "label": "c2pa-wasm", "order": 3 }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "cli/README.md",
+      "dest": "docs/c2patool/readme.md"
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "cli/docs/manifest.md",
+      "dest": "docs/c2patool/docs/manifest.md",
+      "sidebar": {
+        "category": "c2patool",
+        "label": "Using a manifest file",
+        "order": 3
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "cli/docs/x_509.md",
+      "dest": "docs/c2patool/docs/x_509.md",
+      "sidebar": {
+        "category": "c2patool",
+        "label": "Using a certificate",
+        "order": 4
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "cli/CHANGELOG.md",
+      "dest": "docs/c2patool/docs/changelog.md",
+      "sidebar": { "category": "c2patool", "label": "Change log", "order": 6 }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "cli/docs/usage.md",
+      "dest": "docs/c2patool/docs/usage.md",
+      "sidebar": {
+        "category": "c2patool",
+        "label": "Using C2PA Tool",
+        "order": 1
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "cli/docs/cawg_x509_signing.md",
+      "dest": "docs/c2patool/docs/cawg_x509_signing.md",
+      "sidebar": {
+        "category": "c2patool",
+        "label": "Using a certificate for CAWG signing",
+        "order": 5
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/supported-formats.md",
+      "dest": "docs/c2patool/docs/supported-formats.md",
+      "sidebar": {
+        "category": "c2patool",
+        "label": "Supported media formats",
+        "order": 2
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-node",
+      "path": "README.md",
+      "dest": "docs/c2pa-node/readme.md"
+    },
+    {
+      "repo": "contentauth/c2pa-node-v2",
+      "path": "README.md",
+      "dest": "docs/c2pa-node-v2/readme.md"
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/supported-formats.md",
+      "dest": "docs/c2pa-node-v2/supported-formats.md",
+      "sidebar": {
+        "category": "c2pa-node-v2",
+        "label": "Supported media formats",
+        "order": 1
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-python",
+      "path": "README.md",
+      "dest": "docs/c2pa-python/readme.md",
+      "sidebar": { "category": "c2pa-python", "label": "Overview", "order": 0 }
+    },
+    {
+      "repo": "contentauth/c2pa-python",
+      "path": "docs/usage.md",
+      "dest": "docs/c2pa-python/docs/usage.md",
+      "sidebar": {
+        "category": "c2pa-python",
+        "label": "Using the Python library",
+        "order": 1
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/supported-formats.md",
+      "dest": "docs/c2pa-python/docs/supported-formats.md",
+      "sidebar": {
+        "category": "c2pa-python",
+        "label": "Supported media formats",
+        "order": 2
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-python",
+      "path": "docs/release-notes.md",
+      "dest": "docs/c2pa-python/docs/release-notes.md",
+      "sidebar": {
+        "category": "c2pa-python",
+        "label": "Release notes",
+        "order": 4
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-python",
+      "path": "examples/README.md",
+      "dest": "docs/c2pa-python/docs/examples.md",
+      "sidebar": {
+        "category": "c2pa-python",
+        "label": "Python example code",
+        "order": 3
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-python-example",
+      "path": "README.md",
+      "dest": "docs/c2pa-python-example/readme.md",
+      "sidebar": {
+        "category": "c2pa-python",
+        "label": "C2PA Python example",
+        "order": 5
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-c",
+      "path": "README.md",
+      "dest": "docs/c2pa-c/readme.md",
+      "sidebar": { "category": "c2pa-c", "label": "Overview", "order": 0 }
+    },
+    {
+      "repo": "contentauth/c2pa-c",
+      "path": "docs/usage.md",
+      "dest": "docs/c2pa-c/docs/usage.md",
+      "sidebar": {
+        "category": "c2pa-c",
+        "label": "Using the C++ library",
+        "order": 1
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/supported-formats.md",
+      "dest": "docs/c2pa-c/docs/supported-formats.md",
+      "sidebar": {
+        "category": "c2pa-c",
+        "label": "Supported media formats",
+        "order": 2
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "README.md",
+      "dest": "docs/rust-sdk/readme.md",
+      "sidebar": { "category": "rust-sdk", "label": "Overview", "order": 0 }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/supported-formats.md",
+      "dest": "docs/rust-sdk/docs/supported-formats.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Supported media formats",
+        "order": 2
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/usage.md",
+      "dest": "docs/rust-sdk/docs/usage.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Using the Rust library",
+        "order": 1
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/context.md",
+      "dest": "docs/rust-sdk/docs/context.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Configuring the SDK using Context",
+        "order": 5
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/intents-and-archives.md",
+      "dest": "docs/rust-sdk/docs/intents-and-archives.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Intents and archives",
+        "order": 7
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/working-stores.md",
+      "dest": "docs/rust-sdk/docs/working-stores.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Working stores and archives",
+        "order": 6
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/cawg-identity.md",
+      "dest": "docs/rust-sdk/docs/cawg-id.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Using CAWG identity assertions",
+        "order": 3
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/settings.md",
+      "dest": "docs/rust-sdk/docs/settings.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Configuring SDK settings",
+        "order": 4
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/release-notes.md",
+      "dest": "docs/rust-sdk/docs/release-notes.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Release notes",
+        "order": 8
+      }
+    },
+    {
+      "repo": "c2pa-org/softbinding-algorithm-list",
+      "path": "softbinding-algorithm-list.json",
+      "dest": "static/sb-alg-list.json"
+    },
+    {
+      "repo": "adobe/trustmark",
+      "path": "README.md",
+      "dest": "docs/trustmark/README.md",
+      "sidebar": { "category": "trustmark", "label": "Overview", "order": 1 }
+    },
+    {
+      "repo": "adobe/trustmark",
+      "path": "python/CONFIG.md",
+      "dest": "docs/trustmark/python/CONFIG.md",
+      "sidebar": {
+        "category": "trustmark",
+        "label": "Configuration",
+        "order": 2
+      }
+    },
+    {
+      "repo": "adobe/trustmark",
+      "path": "FAQ.md",
+      "dest": "docs/trustmark/FAQ.md"
+    },
+    {
+      "repo": "adobe/trustmark",
+      "path": "c2pa/README.md",
+      "dest": "docs/trustmark/c2pa/README.md",
+      "sidebar": {
+        "category": "trustmark",
+        "label": "Using with C2PA",
+        "order": 3
+      }
+    },
+    {
+      "repo": "adobe/trustmark",
+      "path": "js/README.md",
+      "dest": "docs/trustmark/js/README.md",
+      "sidebar": {
+        "category": "trustmark",
+        "label": "JavaScript example",
+        "order": 4
+      }
+    },
+    {
+      "repo": "adobe/trustmark",
+      "path": "rust/README.md",
+      "dest": "docs/trustmark/rust/README.md",
+      "sidebar": {
+        "category": "trustmark",
+        "label": "Rust implementation",
+        "order": 5
+      }
+    },
+    {
+      "repo": "adobe/trustmark",
+      "path": "rust/crates/trustmark-cli/README.md",
+      "dest": "docs/trustmark/rust/crates/trustmark-cli/README.md",
+      "sidebar": { "category": "trustmark", "label": "Rust CLI", "order": 6 }
+    },
+    {
+      "repo": "contentauth/c2pa-ios",
+      "path": "README.md",
+      "dest": "docs/c2pa-ios/README.md",
+      "sidebar": { "category": "c2pa-ios", "label": "Overview", "order": 0 }
+    },
+    {
+      "repo": "contentauth/c2pa-android",
+      "path": "README.md",
+      "dest": "docs/c2pa-android/README.md",
+      "sidebar": { "category": "c2pa-android", "label": "Overview", "order": 0 }
+    },
+    {
+      "repo": "contentauth/c2pa-ios-example",
+      "path": "README.md",
+      "dest": "docs/c2pa-ios-example/README.md",
+      "sidebar": {
+        "category": "c2pa-ios",
+        "label": "Example iOS app",
+        "order": 1
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-android-example",
+      "path": "README.md",
+      "dest": "docs/c2pa-android-example/README.md",
+      "sidebar": {
+        "category": "c2pa-android",
+        "label": "Example Android app",
+        "order": 1
+      }
+    }
+  ]
+}

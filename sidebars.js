@@ -1,3 +1,22 @@
+const remoteDocs = require('./remote-docs.json');
+
+function getDocId(dest) {
+  if (!dest.startsWith('docs/')) return null;
+  return dest.replace(/^docs\//, '').replace(/\.(md|mdx|json)$/i, '');
+}
+
+function getRemoteSidebarItems(category, excludeIds = []) {
+  return remoteDocs.sources
+    .filter((s) => s.sidebar?.category === category)
+    .sort((a, b) => (a.sidebar.order ?? 0) - (b.sidebar.order ?? 0))
+    .map((s) => ({
+      type: 'doc',
+      id: getDocId(s.dest),
+      label: s.sidebar.label,
+    }))
+    .filter((item) => item.id && !excludeIds.includes(item.id));
+}
+
 const sidebars = {
   docs: [
     {
@@ -109,36 +128,7 @@ const sidebars = {
       link: { type: 'doc', id: 'c2patool/c2patool-index' },
       collapsed: true,
       items: [
-        {
-          type: 'doc',
-          id: 'c2patool/docs/usage',
-          label: 'Using C2PA Tool',
-        },
-        {
-          type: 'doc',
-          id: 'c2patool/docs/supported-formats',
-          label: 'Supported media formats',
-        },
-        {
-          type: 'doc',
-          id: 'c2patool/docs/manifest',
-          label: 'Using a manifest file',
-        },
-        {
-          type: 'doc',
-          id: 'c2patool/docs/x_509',
-          label: 'Using a certificate',
-        },
-        {
-          type: 'doc',
-          id: 'c2patool/docs/cawg_x509_signing',
-          label: 'Using a certificate for CAWG signing',
-        },
-        {
-          type: 'doc',
-          id: 'c2patool/docs/changelog',
-          label: 'Change log',
-        },
+        ...getRemoteSidebarItems('c2patool'),
         {
           type: 'link',
           label: 'GitHub',
@@ -152,46 +142,7 @@ const sidebars = {
       link: { type: 'doc', id: 'rust-sdk/readme' },
       collapsed: true,
       items: [
-        {
-          type: 'doc',
-          id: 'rust-sdk/docs/usage',
-          label: 'Using the Rust library',
-        },
-        {
-          type: 'doc',
-          id: 'rust-sdk/docs/supported-formats',
-          label: 'Supported media formats',
-        },
-        {
-          type: 'doc',
-          id: 'rust-sdk/docs/cawg-id',
-          label: 'Using CAWG identity assertions',
-        },
-        {
-          type: 'doc',
-          id: 'rust-sdk/docs/settings',
-          label: 'Configuring SDK settings',
-        },
-        {
-          type: 'doc',
-          id: 'rust-sdk/docs/context',
-          label: 'Configuring the SDK using Context',
-        },
-        {
-          type: 'doc',
-          id: 'rust-sdk/docs/working-stores',
-          label: 'Working stores and archives',
-        },
-        {
-          type: 'doc',
-          id: 'rust-sdk/docs/intents-and-archives',
-          label: 'Intents and archives',
-        },
-        {
-          type: 'doc',
-          id: 'rust-sdk/docs/release-notes',
-          label: 'Release notes',
-        },
+        ...getRemoteSidebarItems('rust-sdk', ['rust-sdk/readme']),
         {
           type: 'link',
           label: 'API documentation',
@@ -238,35 +189,11 @@ const sidebars = {
       link: { type: 'doc', id: 'c2pa-python/readme' },
       collapsed: true,
       items: [
-        {
-          type: 'doc',
-          id: 'c2pa-python/docs/usage',
-          label: 'Using the Python library',
-        },
-        {
-          type: 'doc',
-          id: 'c2pa-python/docs/supported-formats',
-          label: 'Supported media formats',
-        },
-        {
-          type: 'doc',
-          id: 'c2pa-python/docs/examples',
-          label: 'Python example code',
-        },
-        {
-          type: 'doc',
-          id: 'c2pa-python/docs/release-notes',
-          label: 'Release notes',
-        },
+        ...getRemoteSidebarItems('c2pa-python', ['c2pa-python/readme']),
         {
           type: 'link',
           label: 'API documentation',
           href: 'https://contentauth.github.io/c2pa-python/api/c2pa/index.html',
-        },
-        {
-          type: 'doc',
-          id: 'c2pa-python-example/readme',
-          label: 'C2PA Python example',
         },
         {
           type: 'link',
@@ -281,16 +208,7 @@ const sidebars = {
       link: { type: 'doc', id: 'c2pa-c/readme' },
       collapsed: true,
       items: [
-        {
-          type: 'doc',
-          id: 'c2pa-c/docs/usage',
-          label: 'Using the C++ library',
-        },
-        {
-          type: 'doc',
-          id: 'c2pa-c/docs/supported-formats',
-          label: 'Supported media formats',
-        },
+        ...getRemoteSidebarItems('c2pa-c', ['c2pa-c/readme']),
         {
           type: 'link',
           label: 'API documentation',
@@ -309,21 +227,7 @@ const sidebars = {
       link: { type: 'doc', id: 'js-sdk/js-landing' },
       collapsed: true,
       items: [
-        {
-          type: 'doc',
-          label: 'c2pa-web',
-          id: 'c2pa-js/c2pa-web-readme',
-        },
-        {
-          type: 'doc',
-          label: 'c2pa-wasm',
-          id: 'c2pa-js/c2pa-wasm-readme',
-        },
-        {
-          type: 'doc',
-          label: 'c2pa-types',
-          id: 'c2pa-js/c2pa-types-readme',
-        },
+        ...getRemoteSidebarItems('c2pa-js'),
         {
           type: 'link',
           label: 'API documentation',
@@ -342,11 +246,7 @@ const sidebars = {
       link: { type: 'doc', id: 'node-landing' },
       collapsed: true,
       items: [
-        {
-          type: 'doc',
-          id: 'c2pa-node-v2/supported-formats',
-          label: 'Supported media formats',
-        },
+        ...getRemoteSidebarItems('c2pa-node-v2'),
         {
           type: 'link',
           label: 'API documentation',
@@ -371,11 +271,9 @@ const sidebars = {
           link: { type: 'doc', id: 'c2pa-ios/README' },
           collapsed: true,
           items: [
-            {
-              type: 'doc',
-              id: 'c2pa-ios-example/README',
-              label: 'Example iOS app',
-            },
+            ...getRemoteSidebarItems('c2pa-ios').filter(
+              (i) => i.id !== 'c2pa-ios/README',
+            ),
             {
               type: 'link',
               label: 'API documentation',
@@ -394,11 +292,9 @@ const sidebars = {
           link: { type: 'doc', id: 'c2pa-android/README' },
           collapsed: true,
           items: [
-            {
-              type: 'doc',
-              id: 'c2pa-android-example/README',
-              label: 'Example Android app',
-            },
+            ...getRemoteSidebarItems('c2pa-android').filter(
+              (i) => i.id !== 'c2pa-android/README',
+            ),
             {
               type: 'link',
               label: 'API documentation',
@@ -442,36 +338,7 @@ const sidebars = {
           link: { type: 'doc', id: 'durable-cr/trustmark-intro' },
           collapsed: true,
           items: [
-            {
-              type: 'doc',
-              id: 'trustmark/README',
-              label: 'Overview',
-            },
-            {
-              type: 'doc',
-              id: 'trustmark/python/CONFIG',
-              label: 'Configuration',
-            },
-            {
-              type: 'doc',
-              id: 'trustmark/c2pa/README',
-              label: 'Using with C2PA',
-            },
-            {
-              type: 'doc',
-              id: 'trustmark/js/README',
-              label: 'JavaScript example',
-            },
-            {
-              type: 'doc',
-              id: 'trustmark/rust/README',
-              label: 'Rust implementation',
-            },
-            {
-              type: 'doc',
-              id: 'trustmark/rust/crates/trustmark-cli/README',
-              label: 'Rust CLI',
-            },
+            ...getRemoteSidebarItems('trustmark'),
             {
               type: 'link',
               label: 'TrustMark Rust API docs',
