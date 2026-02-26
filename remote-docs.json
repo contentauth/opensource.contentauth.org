@@ -132,12 +132,24 @@
     },
     {
       "repo": "contentauth/c2pa-rs",
-      "path": "docs/intents-and-archives.md",
-      "dest": "docs/rust-sdk/docs/intents-and-archives.md",
+      "path": "docs/archives.md",
+      "branch": "docs/intent-archive",
+      "dest": "docs/rust-sdk/docs/archives.md",
       "sidebar": {
         "category": "rust-sdk",
-        "label": "Intents and archives",
+        "label": "Using archives",
         "order": 7
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/intents.md",
+      "branch": "docs/intent-archive",
+      "dest": "docs/rust-sdk/docs/intents.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Using intents",
+        "order": 8
       }
     },
     {
@@ -147,7 +159,7 @@
       "sidebar": {
         "category": "rust-sdk",
         "label": "Release notes",
-        "order": 8
+        "order": 9
       }
     },
 
