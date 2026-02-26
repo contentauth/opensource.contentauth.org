@@ -64,6 +64,35 @@ npm run docs:fetch-readme
 
 NOTE: If you need to get markdown files from a **new** repo that you added, then you need to manually add the sub-directory, add a `.gitkeep` file to it, and then commit it to this repository.
 
+### Configuring remote docs (remote-docs.json)
+
+The [remote-docs.json](./remote-docs.json) file is the single source of truth for markdown and other files that are fetched from external GitHub repositories and incorporated into the site. Both the fetch script and the Docusaurus sidebar navigation read from this file.
+
+**To add a new remote doc:**
+
+1. Add an entry to the `sources` array in `remote-docs.json`. Each entry has:
+   - `repo` — GitHub repo in `org/repo` format (e.g. `contentauth/c2pa-rs`)
+   - `path` — Path to the file in the source repo
+   - `dest` — Local path where the file will be saved (e.g. `docs/c2patool/readme.md` or `static/sb-alg-list.json`)
+   - `branch` — (optional) Git branch to fetch from; defaults to `main`
+   - `sidebar` — (optional) Include this to add the doc to the sidebar navigation:
+     - `category` — Sidebar category (e.g. `c2patool`, `rust-sdk`, `c2pa-python`)
+     - `label` — Display label in the sidebar
+     - `order` — Sort order within the category (lower numbers appear first)
+
+2. If the destination directory does not exist, create it and add an empty `.gitkeep` file:
+   ```
+   $ mkdir -p docs/your-section
+   $ touch docs/your-section/.gitkeep
+   ```
+
+3. Run the fetch script to download the file:
+   ```
+   npm run docs:fetch-readme
+   ```
+
+Entries with `{ "_comment": "Section name" }` are section headers only—they are ignored by the scripts and help organize the file for readability.
+
 ### Building
 
 ```
