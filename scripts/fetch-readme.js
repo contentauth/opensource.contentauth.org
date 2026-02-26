@@ -21,14 +21,14 @@ const mdLinkRegex =
  */
 
 const remoteDocs = require('../remote-docs.json');
-const readmes = remoteDocs.sources.map(
-  ({ repo, path, dest, branch = 'main' }) => ({
+const readmes = remoteDocs.sources
+  .filter((s) => s.dest)
+  .map(({ repo, path, dest, branch = 'main' }) => ({
     repo,
     path,
     dest: resolve(__dirname, '..', dest),
     branch,
-  }),
-);
+  }));
 
 function resolveMarkdownLinks(linkBase, content) {
   return content.replaceAll(mdLinkRegex, (match, label, href) => {
