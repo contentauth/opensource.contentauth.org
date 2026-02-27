@@ -51,7 +51,8 @@
     "node-fetch": "^2.6.7",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.6.2",
-    "raw-loader": "^4.0.2"
+    "raw-loader": "^4.0.2",
+    "remark-github-admonitions-to-directives": "^2.1.0"
   },
   "lint-staged": {
     "**/*": "prettier --ignore-unknown --write"

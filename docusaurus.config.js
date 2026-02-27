@@ -43,170 +43,178 @@ const externalRepos = {
 };
 
 /** @type {import('@docusaurus/types').Config} */
-const config = {
-  title: 'Open-source tools for content authenticity and provenance',
-  tagline: 'Open-source tools for content authenticity and provenance',
-  url: 'https://contentauth.netlify.com',
-  baseUrl: '/',
-  staticDirectories: ['static'],
-  onBrokenLinks: 'warn',
-  onBrokenAnchors: 'log',
-  markdown: {
-    mermaid: true,
-    hooks: {
-      onBrokenMarkdownLinks: 'warn',
+async function createConfig() {
+  const { default: remarkGithubAdmonitionsToDirectives } = await import(
+    'remark-github-admonitions-to-directives'
+  );
+
+  return {
+    title: 'Open-source tools for content authenticity and provenance',
+    tagline: 'Open-source tools for content authenticity and provenance',
+    url: 'https://contentauth.netlify.com',
+    baseUrl: '/',
+    staticDirectories: ['static'],
+    onBrokenLinks: 'warn',
+    onBrokenAnchors: 'log',
+    markdown: {
+      mermaid: true,
+      hooks: {
+        onBrokenMarkdownLinks: 'warn',
+      },
     },
-  },
-  favicon: '/favicon.png',
-  organizationName: 'contentauth',
-  projectName: 'opensource.contentauth.org',
-  clientModules: [require.resolve('./src/assets/scripts/ui.js')],
-  scripts: [
-    // TODO: Re-enable analytics once we solve flicker problem
-    // '/scripts/analytics.js',
-    // 'https://www.adobe.com/marketingtech/main.min.js',
-    {
-      src: 'https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js',
-      'data-domain-script': '20e82cdb-918a-4036-93c6-c356dc13a801',
-    },
-    '/scripts/cookie-pro.js',
-  ],
-  stylesheets: [
-    // Acumin Pro
-    'https://use.typekit.net/wgs7uns.css',
-    // Adobe Clean
-    'https://use.typekit.net/dnb4eqs.css',
-  ],
-  presets: [
-    [
-      'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
-        docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: ({ docPath }) => {
-            // Don't show edit link for dynamically generated API docs
-            if (docPath.startsWith('js-sdk/api/')) {
-              return null;
-            }
-
-            // Special case for supported-formats.md files
-            if (docPath.endsWith('supported-formats.md')) {
-              return 'https://github.com/contentauth/c2pa-rs/edit/main/docs/supported-formats.md';
-            }
-
-            // Check if the doc is from an external repository
-            const externalRepo = Object.keys(externalRepos).find((repo) =>
-              docPath.startsWith(`${repo}/`),
-            );
-
-            if (externalRepo) {
-              // Get the GitHub repository info for this external repo
-              const repoInfo = externalRepos[externalRepo];
-              // Remove the repo prefix from the path to get the relative path in the repo
-              let repoPath = docPath.replace(`${externalRepo}/`, '');
-              // Convert readme.md to README.md in the path
-              repoPath = repoPath.replace(/readme\.md$/i, 'README.md');
-              return `https://github.com/${repoInfo.org}/${repoInfo.repo}/edit/main/${repoInfo.path}${repoPath}`;
-            }
-
-            // Add edit link for main docs
-            let mainPath = docPath;
-            // Convert readme.md to README.md in the path
-            mainPath = mainPath.replace(/readme\.md$/i, 'README.md');
-            return `https://github.com/contentauth/opensource.contentauth.org/edit/main/docs/${mainPath}`;
-          },
-        },
-        theme: {
-          customCss: require.resolve('./src/css/custom.css'),
-        },
-      }),
+    favicon: '/favicon.png',
+    organizationName: 'contentauth',
+    projectName: 'opensource.contentauth.org',
+    clientModules: [require.resolve('./src/assets/scripts/ui.js')],
+    scripts: [
+      // TODO: Re-enable analytics once we solve flicker problem
+      // '/scripts/analytics.js',
+      // 'https://www.adobe.com/marketingtech/main.min.js',
+      {
+        src: 'https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js',
+        'data-domain-script': '20e82cdb-918a-4036-93c6-c356dc13a801',
+      },
+      '/scripts/cookie-pro.js',
     ],
-  ],
-  // See here for configuration options:
-  // https://docusaurus.io/docs/api/themes/configuration
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      metadata: [
-        //  { property: 'twitter:card', content: 'summary_large_image' },
-        { property: 'og:card', content: 'summary_large_image' },
-        {
-          property: 'og:description',
-          content:
-            'Integrate secure provenance signals into your site, app, or service using open-source tools developed by the Content Authenticity Initiative.',
-        },
-        {
-          property: 'og:title',
-          content: 'Open-source tools for content authenticity and provenance',
-        },
+    stylesheets: [
+      // Acumin Pro
+      'https://use.typekit.net/wgs7uns.css',
+      // Adobe Clean
+      'https://use.typekit.net/dnb4eqs.css',
+    ],
+    presets: [
+      [
+        'classic',
+        /** @type {import('@docusaurus/preset-classic').Options} */
+        ({
+          docs: {
+            beforeDefaultRemarkPlugins: [remarkGithubAdmonitionsToDirectives],
+            sidebarPath: require.resolve('./sidebars.js'),
+            editUrl: ({ docPath }) => {
+              // Don't show edit link for dynamically generated API docs
+              if (docPath.startsWith('js-sdk/api/')) {
+                return null;
+              }
+
+              // Special case for supported-formats.md files
+              if (docPath.endsWith('supported-formats.md')) {
+                return 'https://github.com/contentauth/c2pa-rs/edit/main/docs/supported-formats.md';
+              }
+
+              // Check if the doc is from an external repository
+              const externalRepo = Object.keys(externalRepos).find((repo) =>
+                docPath.startsWith(`${repo}/`),
+              );
+
+              if (externalRepo) {
+                // Get the GitHub repository info for this external repo
+                const repoInfo = externalRepos[externalRepo];
+                // Remove the repo prefix from the path to get the relative path in the repo
+                let repoPath = docPath.replace(`${externalRepo}/`, '');
+                // Convert readme.md to README.md in the path
+                repoPath = repoPath.replace(/readme\.md$/i, 'README.md');
+                return `https://github.com/${repoInfo.org}/${repoInfo.repo}/edit/main/${repoInfo.path}${repoPath}`;
+              }
+
+              // Add edit link for main docs
+              let mainPath = docPath;
+              // Convert readme.md to README.md in the path
+              mainPath = mainPath.replace(/readme\.md$/i, 'README.md');
+              return `https://github.com/contentauth/opensource.contentauth.org/edit/main/docs/${mainPath}`;
+            },
+          },
+          theme: {
+            customCss: require.resolve('./src/css/custom.css'),
+          },
+        }),
       ],
-      // Relative to your site's 'static' directory.
-      // Cannot be SVGs. Can be external URLs too.
-      colorMode: {
-        disableSwitch: true,
-      },
-      docs: {
-        sidebar: {
-          hideable: true,
-          autoCollapseCategories: true,
-        },
-      },
-      navbar: {
-        logo: {
-          alt: 'Content Authenticity Initiative',
-          src: 'img/logo-cai.svg',
-          width: 180,
-          height: 54,
-          href: 'https://contentauthenticity.org',
-        },
-        items: [
+    ],
+    // See here for configuration options:
+    // https://docusaurus.io/docs/api/themes/configuration
+    themeConfig:
+      /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+      ({
+        metadata: [
+          //  { property: 'twitter:card', content: 'summary_large_image' },
+          { property: 'og:card', content: 'summary_large_image' },
           {
-            href: 'https://discord.gg/CAI',
-            position: 'right',
-            className: 'header-logo header-discord-link',
+            property: 'og:description',
+            content:
+              'Integrate secure provenance signals into your site, app, or service using open-source tools developed by the Content Authenticity Initiative.',
           },
           {
-            href: 'https://github.com/contentauth',
-            position: 'right',
-            className: 'header-logo header-github-link',
-          },
-          {
-            href: 'http://learn.contentauthenticity.org/',
-            position: 'right',
-            className: 'header-logo header-learn-link',
+            property: 'og:title',
+            content:
+              'Open-source tools for content authenticity and provenance',
           },
         ],
-      },
-      footer: {
-        style: 'light',
-        /*
+        // Relative to your site's 'static' directory.
+        // Cannot be SVGs. Can be external URLs too.
+        colorMode: {
+          disableSwitch: true,
+        },
+        docs: {
+          sidebar: {
+            hideable: true,
+            autoCollapseCategories: true,
+          },
+        },
+        navbar: {
+          logo: {
+            alt: 'Content Authenticity Initiative',
+            src: 'img/logo-cai.svg',
+            width: 180,
+            height: 54,
+            href: 'https://contentauthenticity.org',
+          },
+          items: [
+            {
+              href: 'https://discord.gg/CAI',
+              position: 'right',
+              className: 'header-logo header-discord-link',
+            },
+            {
+              href: 'https://github.com/contentauth',
+              position: 'right',
+              className: 'header-logo header-github-link',
+            },
+            {
+              href: 'http://learn.contentauthenticity.org/',
+              position: 'right',
+              className: 'header-logo header-learn-link',
+            },
+          ],
+        },
+        footer: {
+          style: 'light',
+          /*
         logo: {
           src: '#', // stop warning.
           alt: 'Content Authenticity Initiative',
           href: 'https://contentauthenticity.org',
         },
         */
-        copyright,
-      },
-      prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
-      },
-      algolia: {
-        // The application ID provided by Algolia
-        appId: 'XOI00ZGSIB',
+          copyright,
+        },
+        prism: {
+          theme: lightCodeTheme,
+          darkTheme: darkCodeTheme,
+        },
+        algolia: {
+          // The application ID provided by Algolia
+          appId: 'XOI00ZGSIB',
 
-        // Public API key: it is safe to commit it
-        apiKey: '5b5b38fb40adb6dfa25b6bccb03815a5',
+          // Public API key: it is safe to commit it
+          apiKey: '5b5b38fb40adb6dfa25b6bccb03815a5',
 
-        indexName: 'contentauthenticity',
+          indexName: 'contentauthenticity',
 
-        // Optional: see doc section below
-        contextualSearch: true,
-      },
-    }),
-  themes: ['docusaurus-json-schema-plugin', '@docusaurus/theme-mermaid'],
-};
+          // Optional: see doc section below
+          contextualSearch: true,
+        },
+      }),
+    themes: ['docusaurus-json-schema-plugin', '@docusaurus/theme-mermaid'],
+  };
+}
 
-module.exports = config;
+module.exports = createConfig();
