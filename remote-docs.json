@@ -42,7 +42,7 @@
       "dest": "docs/c2patool/docs/x_509.md",
       "sidebar": {
         "category": "c2patool",
-        "label": "Using a certificate",
+        "label": "Using a certificate for C2PA signing",
         "order": 4
       }
     },
@@ -126,25 +126,13 @@
       "dest": "docs/rust-sdk/docs/working-stores.md",
       "sidebar": {
         "category": "rust-sdk",
-        "label": "Working stores and archives",
+        "label": "Using working stores and archives",
         "order": 6
       }
     },
     {
       "repo": "contentauth/c2pa-rs",
-      "path": "docs/archives.md",
-      "branch": "docs/intent-archive",
-      "dest": "docs/rust-sdk/docs/archives.md",
-      "sidebar": {
-        "category": "rust-sdk",
-        "label": "Using archives",
-        "order": 7
-      }
-    },
-    {
-      "repo": "contentauth/c2pa-rs",
       "path": "docs/intents.md",
-      "branch": "docs/intent-archive",
       "dest": "docs/rust-sdk/docs/intents.md",
       "sidebar": {
         "category": "rust-sdk",
