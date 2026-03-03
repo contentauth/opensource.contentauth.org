@@ -64,9 +64,9 @@
   --ifm-link-color: var(--cai-color-on-background);
   --ifm-footer-padding-vertical: 80px;
   --ifm-menu-color: var(--cai-color-on-background);
-  --ifm-menu-color-background-active: transparent;
+  --ifm-menu-color-background-active: var(--cai-color-primary-light);
   --ifm-menu-color-background-hover: transparent;
-  --ifm-menu-color-active: var(--cai-color-primary-dark);
+  --ifm-menu-color-active: var(--cai-color-on-background);
   --ifm-menu-link-padding-vertical: 0.75em;
   --ifm-menu-link-padding-horizontal: 2rem;
   --ifm-alert-border-radius: 4px;
@@ -94,6 +94,17 @@ h4,
 h5,
 h6 {
   letter-spacing: -0.025em;
+}
+
+/* Code in headings: scale to match heading size (default code font is too small) */
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+  font-size: 1em;
+  padding: 0.1em 0.3em;
 }
 
 .markdown a {
@@ -318,6 +329,12 @@ body:not(.is-scrolling) .navbar {
 
 .theme-doc-sidebar-menu .menu__link--sublist-caret::after {
   background: var(--ifm-menu-link-sublist-icon) 50% / 1.5rem 1.5rem;
+}
+
+/* Code in sidebar: scale down (monospace appears too large at default size) */
+.theme-doc-sidebar-menu .menu__link code {
+  font-size: 0.85em;
+  padding: 0.05em 0.2em;
 }
 
 .navbar-sidebar__brand {
