@@ -237,6 +237,67 @@
       }
     },
 
+    {
+      "repo": "contentauth/c2pa-c",
+      "path": "docs/context.md",
+      "dest": "docs/c2pa-c/docs/context.md",
+      "sidebar": {
+        "category": "c2pa-c",
+        "label": "Using Context",
+        "order": 3
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-c",
+      "path": "docs/settings.md",
+      "dest": "docs/c2pa-c/docs/settings.md",
+      "sidebar": {
+        "category": "c2pa-c",
+        "label": "Using Settings",
+        "order": 4
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-c",
+      "path": "docs/working-stores.md",
+      "dest": "docs/c2pa-c/docs/working-stores.md",
+      "sidebar": {
+        "category": "c2pa-c",
+        "label": "Using working stores and archives",
+        "order": 5
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-c",
+      "path": "docs/selective-manifests.md",
+      "dest": "docs/c2pa-c/docs/selective-manifests.md",
+      "sidebar": {
+        "category": "c2pa-c",
+        "label": "Selective manifest construction",
+        "order": 6
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-c",
+      "path": "docs/release-notes.md",
+      "dest": "docs/c2pa-c/docs/release-notes.md",
+      "sidebar": {
+        "category": "c2pa-c",
+        "label": "Release notes",
+        "order": 7
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-c",
+      "path": "docs/faqs.md",
+      "dest": "docs/c2pa-c/docs/faqs.md",
+      "sidebar": {
+        "category": "c2pa-c",
+        "label": "FAQs",
+        "order": 8
+      }
+    },
+
     { "_comment": "JavaScript library" },
     {
       "repo": "contentauth/c2pa-js",
