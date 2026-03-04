@@ -1,0 +1,598 @@
+---
+title: SDK Comparison Guide
+description: Choose the right C2PA SDK for your project
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SDK Comparison Guide
+
+The Content Authenticity Initiative provides multiple SDKs and tools for working with C2PA manifests. This guide helps you choose the right one for your project.
+
+## Quick Decision Tree
+
+Use this flowchart to quickly identify which SDK best fits your needs:
+
+```
+Are you building a CLI tool or script?
+├─ Yes → Use C2PA Tool
+└─ No → What platform are you targeting?
+    ├─ Web Browser
+    │   ├─ Read-only (verify manifests) → c2pa-web (JavaScript)
+    │   └─ Read + Write (create manifests) → c2pa-node (server-side)
+    ├─ Mobile
+    │   ├─ iOS → c2pa-ios
+    │   └─ Android → c2pa-android
+    ├─ Desktop/Server
+    │   ├─ Node.js → c2pa-node
+    │   ├─ Python → c2pa-python
+    │   ├─ Rust → c2pa-rs
+    │   └─ C/C++ → c2pa-c
+    └─ Multiple platforms → c2pa-rs (most comprehensive)
+```
+
+## Comparison Matrix
+
+| Feature                  | Rust SDK                  | Python                    | Node.js v2                | C/C++                     | JavaScript (Web) | iOS                       | Android                   | C2PA Tool       |
+| ------------------------ | ------------------------- | ------------------------- | ------------------------- | ------------------------- | ---------------- | ------------------------- | ------------------------- | --------------- |
+| **Platform**             |
+| Windows                  | ✅                        | ✅                        | ✅                        | ✅                        | ✅               | ❌                        | ❌                        | ✅              |
+| macOS                    | ✅                        | ✅                        | ✅                        | ✅                        | ✅               | ✅                        | ❌                        | ✅              |
+| Linux                    | ✅                        | ✅                        | ✅                        | ✅                        | ✅               | ❌                        | ❌                        | ✅              |
+| iOS                      | ❌                        | ❌                        | ❌                        | ❌                        | ❌               | ✅                        | ❌                        | ❌              |
+| Android                  | ❌                        | ❌                        | ❌                        | ❌                        | ❌               | ❌                        | ✅                        | ❌              |
+| Browser                  | ❌                        | ❌                        | ❌                        | ❌                        | ✅               | ❌                        | ❌                        | ❌              |
+| WebAssembly              | ✅                        | ❌                        | ❌                        | ❌                        | ✅               | ❌                        | ❌                        | ❌              |
+| **Capabilities**         |
+| Read Manifests           | ✅                        | ✅                        | ✅                        | ✅                        | ✅               | ✅                        | ✅                        | ✅              |
+| Create Manifests         | ✅                        | ✅                        | ✅                        | ✅                        | ❌               | ✅                        | ✅                        | ✅              |
+| Sign Manifests           | ✅                        | ✅                        | ✅                        | ✅                        | ❌               | ✅                        | ✅                        | ✅              |
+| Verify Manifests         | ✅                        | ✅                        | ✅                        | ✅                        | ✅               | ✅                        | ✅                        | ✅              |
+| CAWG Identity            | ✅                        | ✅                        | ✅                        | ✅                        | ✅               | ✅                        | ✅                        | ✅              |
+| Stream APIs              | ✅                        | ✅                        | ✅                        | ✅                        | ✅               | ✅                        | ✅                        | ❌              |
+| File-based APIs          | ✅                        | ✅                        | ✅                        | ✅                        | ✅               | ✅                        | ✅                        | ✅              |
+| Remote Manifests         | ✅                        | ✅                        | ✅                        | ✅                        | ✅               | ✅                        | ✅                        | ✅              |
+| Working Stores           | ✅                        | ❌                        | ❌                        | ✅                        | ❌               | ❌                        | ❌                        | ❌              |
+| Callback Signing         | ✅                        | ✅                        | ✅                        | ❌                        | ❌               | ✅                        | ✅                        | ❌              |
+| Hardware Signing         | ❌                        | ❌                        | ❌                        | ❌                        | ❌               | ✅ (Secure Enclave)       | ✅ (KeyStore/StrongBox)   | ❌              |
+| **Maturity**             |
+| Status                   | Stable (v0.x)             | Beta                      | Beta (v2.x)               | Beta                      | Stable           | Beta                      | Beta                      | Stable          |
+| API Stability            | Breaking changes possible | Breaking changes possible | Breaking changes possible | Breaking changes possible | Stable           | Breaking changes possible | Breaking changes possible | Stable          |
+| Production Ready         | ✅                        | ⚠️                        | ⚠️                        | ⚠️                        | ✅               | ⚠️                        | ⚠️                        | ✅              |
+| **Developer Experience** |
+| Documentation            | ⭐⭐⭐⭐⭐                | ⭐⭐                      | ⭐⭐⭐⭐⭐                | ⭐⭐⭐                    | ⭐⭐⭐⭐         | ⭐⭐                      | ⭐⭐                      | ⭐⭐⭐⭐        |
+| Examples                 | ⭐⭐⭐⭐                  | ⭐⭐⭐                    | ⭐⭐⭐⭐⭐                | ⭐⭐⭐                    | ⭐⭐⭐⭐         | ⭐⭐⭐                    | ⭐⭐⭐                    | ⭐⭐⭐⭐        |
+| API Reference            | ⭐⭐⭐⭐⭐                | ⭐⭐⭐                    | ⭐⭐⭐⭐                  | ⭐⭐⭐⭐                  | ⭐⭐⭐⭐         | ⭐⭐                      | ⭐⭐                      | ⭐⭐⭐          |
+| Learning Curve           | Medium                    | Easy                      | Easy                      | Medium                    | Easy             | Medium                    | Medium                    | Easy            |
+| **Package Info**         |
+| Package Manager          | Cargo                     | PyPI                      | npm                       | CMake                     | npm              | SPM                       | Gradle/Maven              | Homebrew/Binary |
+| Bundle Size              | N/A                       | ~10MB                     | ~10MB                     | ~10MB                     | ~2MB (gzipped)   | ~10MB                     | ~10MB                     | ~10MB           |
+| Min Version              | Rust 1.88+                | Python 3.10+              | Node 18+                  | C++17                     | Modern browsers  | iOS 15+/Swift 5.9+        | Android 9+ (API 28)       | N/A             |
+
+**Legend:**
+
+- ✅ Full support
+- ⚠️ Limited or experimental support
+- ❌ Not supported
+- ⭐ Rating (1-5 stars)
+
+## Detailed SDK Overview
+
+### C2PA Tool (Command Line)
+
+**Best for:** Scripts, automation, CI/CD pipelines, quick testing
+
+The C2PA Tool is a command-line utility for working with C2PA manifests without writing code.
+
+**Pros:**
+
+- No programming required
+- Easy to install (Homebrew on macOS, prebuilt binaries)
+- Perfect for automation and scripting
+- Fast and lightweight
+- Production-ready and stable
+
+**Cons:**
+
+- Limited to command-line usage
+- Cannot be embedded in applications
+- Less flexible than programmatic SDKs
+
+**Use cases:**
+
+- Batch processing of media files
+- CI/CD integration
+- Quick manifest inspection
+- Prototyping and testing
+- Shell scripts and automation
+
+**Get started:** [C2PA Tool Documentation](../c2patool/readme.md)
+
+---
+
+### Rust SDK (c2pa-rs)
+
+**Best for:** Performance-critical applications, systems programming, embedding in other languages
+
+The Rust SDK is the reference implementation and the most feature-complete C2PA library.
+
+**Pros:**
+
+- Most comprehensive feature set
+- Best performance
+- Foundation for other language bindings
+- Memory safe
+- Active development
+- Strong type system
+
+**Cons:**
+
+- Steeper learning curve if new to Rust
+- Longer compile times
+- Beta status (breaking changes possible)
+
+**Use cases:**
+
+- High-performance server applications
+- Desktop applications
+- Base layer for other language bindings
+- WebAssembly compilation
+- Systems integration
+
+**Package:** [`c2pa` on crates.io](https://crates.io/crates/c2pa)
+
+**Get started:** [Rust SDK Documentation](../rust-sdk/readme.md)
+
+---
+
+### Python SDK (c2pa-python)
+
+**Best for:** Data science, scripting, web backends (Django/Flask), rapid prototyping
+
+Python bindings to the Rust C2PA library, providing an easy-to-use API for Python developers.
+
+**Pros:**
+
+- Easy to learn and use
+- Great for scripting and automation
+- Integrates with Python ecosystem
+- Context manager support
+- File and stream-based operations
+
+**Cons:**
+
+- Less comprehensive documentation
+- Fewer examples compared to other SDKs
+- Beta status
+- Binary dependencies
+
+**Use cases:**
+
+- Web applications (Django, Flask, FastAPI)
+- Data processing pipelines
+- Media analysis tools
+- Research and prototyping
+- Integration with ML/AI workflows
+
+**Package:** [`c2pa-python` on PyPI](https://pypi.org/project/c2pa-python/)
+
+**Get started:** [Python SDK Documentation](../c2pa-python/readme.md)
+
+---
+
+### Node.js SDK v2 (c2pa-node)
+
+**Best for:** Node.js server applications, Express/Fastify backends, serverless functions
+
+Native Node.js bindings to the Rust C2PA library using Neon.
+
+**Pros:**
+
+- Excellent documentation
+- Comprehensive API with many examples
+- Native performance (compiled bindings)
+- TypeScript support
+- Both sync and async operations
+- Identity assertion support
+- Flexible signing options (local, callback, identity)
+
+**Cons:**
+
+- v2 is still in beta
+- Requires Rust toolchain for building from source
+- Larger binary size
+- Breaking changes possible
+
+**Use cases:**
+
+- REST APIs and web services
+- Serverless functions (AWS Lambda, etc.)
+- Media processing services
+- Content management systems
+- Integration with existing Node.js apps
+
+**Package:** [`@contentauth/c2pa-node` on npm](https://www.npmjs.com/package/@contentauth/c2pa-node)
+
+**Get started:** [Node.js SDK Documentation](../c2pa-node-v2/readme.md)
+
+---
+
+### JavaScript SDK (c2pa-web)
+
+**Best for:** Browser-based manifest verification, client-side validation, web viewers
+
+WebAssembly-compiled C2PA library for use in web browsers.
+
+**Pros:**
+
+- Runs entirely in the browser
+- No server required for verification
+- Good documentation
+- TypeScript support
+- Small bundle size
+- Production-ready
+
+**Cons:**
+
+- Read-only (verification only, cannot create/sign manifests)
+- Limited to browser environment
+- WASM limitations
+
+**Use cases:**
+
+- Content credential viewers
+- Media gallery with provenance display
+- Browser extensions
+- Client-side validation
+- Progressive web apps
+
+**Packages:**
+
+- [`c2pa-web` on npm](https://www.npmjs.com/package/c2pa-web)
+- [`c2pa-wasm` on npm](https://www.npmjs.com/package/c2pa-wasm) (lower-level)
+- [`c2pa-types` on npm](https://www.npmjs.com/package/c2pa-types) (TypeScript types)
+
+**Get started:** [JavaScript SDK Documentation](../c2pa-js/readme.md)
+
+---
+
+### C/C++ SDK (c2pa-c)
+
+**Best for:** Desktop applications, embedded systems, integration with C/C++ codebases
+
+C++ wrapper around the Rust C2PA library's C FFI.
+
+**Pros:**
+
+- Native C++ APIs
+- CMake integration
+- No Rust knowledge required
+- Cross-platform (Windows, macOS, Linux)
+- Pre-built binaries available
+- Context-based configuration
+
+**Cons:**
+
+- Manual memory management
+- More complex than higher-level languages
+- Beta status
+- Less comprehensive examples
+
+**Use cases:**
+
+- Desktop applications (Qt, wxWidgets, etc.)
+- Game engines
+- Video editing software
+- Existing C++ codebases
+- Performance-critical applications
+
+**Get started:** [C++ SDK Documentation](../c2pa-c/readme.md)
+
+---
+
+### iOS SDK (c2pa-ios)
+
+**Best for:** iOS and macOS applications
+
+Swift bindings to the Rust C2PA library for Apple platforms.
+
+**Pros:**
+
+- Native Swift APIs
+- Swift Package Manager support
+- Secure Enclave integration for signing
+- Stream-based APIs
+- Example app included
+- Memory-safe
+
+**Cons:**
+
+- iOS/macOS only
+- Limited documentation
+- Beta status
+- Requires Xcode
+
+**Use cases:**
+
+- iOS camera apps
+- Photo editing apps
+- Content creation tools
+- Media viewers
+- Social media apps
+
+**Get started:** [iOS SDK Documentation](../c2pa-ios/README.md)
+
+---
+
+### Android SDK (c2pa-android)
+
+**Best for:** Android applications
+
+Kotlin bindings to the Rust C2PA library for Android.
+
+**Pros:**
+
+- Native Kotlin APIs
+- Android Keystore integration
+- StrongBox hardware security support
+- Multiple signing methods
+- Example app included
+- Gradle/Maven distribution
+
+**Cons:**
+
+- Android only
+- Limited documentation
+- Beta status
+- Requires Android Studio
+
+**Use cases:**
+
+- Android camera apps
+- Photo editing apps
+- Content creation tools
+- Media galleries
+- Social media apps
+
+**Get started:** [Android SDK Documentation](../c2pa-android/README.md)
+
+---
+
+## Choosing by Use Case
+
+### Web Applications
+
+<Tabs>
+<TabItem value="frontend" label="Frontend Only">
+
+**Use:** JavaScript SDK (c2pa-web)
+
+Perfect for client-side verification and display. Cannot create or sign manifests (server required).
+
+```javascript
+import { createC2pa } from 'c2pa-web';
+
+const c2pa = await createC2pa();
+const result = await c2pa.read(imageBlob);
+console.log(result.manifestStore);
+```
+
+</TabItem>
+<TabItem value="fullstack" label="Full-Stack">
+
+**Use:** Node.js SDK (backend) + JavaScript SDK (frontend)
+
+Use Node.js for manifest creation/signing on the server, JavaScript for verification in the browser.
+
+**Backend (Node.js):**
+
+```javascript
+import { Builder, LocalSigner } from '@contentauth/c2pa-node';
+
+const builder = Builder.new();
+const signer = LocalSigner.newSigner(cert, key, 'es256', tsaUrl);
+await builder.sign(signer, inputAsset, outputAsset);
+```
+
+**Frontend (JavaScript):**
+
+```javascript
+const result = await c2pa.read(imageBlob);
+```
+
+</TabItem>
+</Tabs>
+
+### Mobile Applications
+
+<Tabs>
+<TabItem value="ios" label="iOS">
+
+**Use:** iOS SDK (c2pa-ios)
+
+```swift
+import C2PA
+
+let reader = try Reader(asset: imageData, format: "image/jpeg")
+let manifestStore = try reader.manifestStore()
+```
+
+</TabItem>
+<TabItem value="android" label="Android">
+
+**Use:** Android SDK (c2pa-android)
+
+```kotlin
+import org.contentauth.c2pa.Reader
+
+val reader = Reader(assetStream, "image/jpeg")
+val manifestStore = reader.manifestStoreJson()
+```
+
+</TabItem>
+</Tabs>
+
+### Desktop Applications
+
+<Tabs>
+<TabItem value="cross-platform" label="Cross-Platform">
+
+**Use:** Rust SDK
+
+Maximum portability and performance. Compile for Windows, macOS, and Linux.
+
+</TabItem>
+<TabItem value="native" label="Native Look & Feel">
+
+**Use:** C/C++ SDK
+
+Integrate with native UI frameworks like Qt, wxWidgets, or platform-specific APIs.
+
+</TabItem>
+</Tabs>
+
+### Server Applications
+
+<Tabs>
+<TabItem value="node" label="Node.js">
+
+**Use:** Node.js SDK
+
+```javascript
+import { Builder, Reader } from '@contentauth/c2pa-node';
+```
+
+</TabItem>
+<TabItem value="python" label="Python">
+
+**Use:** Python SDK
+
+```python
+from c2pa import Builder, Reader
+```
+
+</TabItem>
+<TabItem value="rust" label="Rust">
+
+**Use:** Rust SDK
+
+```rust
+use c2pa::{Builder, Reader};
+```
+
+</TabItem>
+</Tabs>
+
+### CLI & Automation
+
+**Use:** C2PA Tool
+
+```bash
+# Read manifest
+c2patool sample.jpg
+
+# Sign with manifest
+c2patool sample.jpg -m manifest.json -o signed.jpg
+```
+
+## Performance Considerations
+
+### Bundle/Binary Size
+
+| SDK                   | Size (approximate)    |
+| --------------------- | --------------------- |
+| JavaScript (c2pa-web) | ~2MB gzipped          |
+| Rust                  | Compiled into binary  |
+| Node.js               | ~10MB (native module) |
+| Python                | ~10MB (wheel)         |
+| C/C++                 | ~10MB (library)       |
+| iOS                   | ~10MB (framework)     |
+| Android               | ~10MB (AAR)           |
+| C2PA Tool             | ~10MB (binary)        |
+
+### Runtime Performance
+
+Ranked by typical performance (fastest to slowest):
+
+1. **Rust SDK** - Native compiled code, zero runtime overhead
+2. **C/C++ SDK** - Native wrapper over Rust, minimal overhead
+3. **Node.js SDK** - Native bindings, near-native performance
+4. **Python SDK** - Native bindings with Python overhead
+5. **Mobile SDKs** - Native bindings optimized for mobile
+6. **JavaScript (WASM)** - WebAssembly, good but not native speed
+
+**Note:** All SDKs use the same Rust core, so differences are primarily in language overhead and binding efficiency.
+
+## Migration Paths
+
+### From Legacy JavaScript SDK
+
+If you're using the old `c2pa-js` (now `c2pa-js-legacy`):
+
+**For browser usage:** Migrate to **c2pa-web**
+
+- API is similar but improved
+- Better TypeScript support
+- Smaller bundle size
+
+**For Node.js usage:** Migrate to **c2pa-node v2**
+
+- More comprehensive API
+- Better performance
+- Active development
+
+[Migration guide coming soon]
+
+### From c2pa-node v1 to v2
+
+The v2 API is significantly different. Key changes:
+
+- Builder pattern for manifest creation
+- Improved TypeScript support
+- More flexible signing options
+- Better settings management
+
+[Migration guide coming soon]
+
+## Support and Maturity
+
+### Production Readiness
+
+**Production-ready (use with confidence):**
+
+- C2PA Tool
+- JavaScript SDK (c2pa-web)
+- Rust SDK (with awareness of beta status)
+
+**Beta (use with caution, expect changes):**
+
+- Python SDK
+- Node.js SDK v2
+- C/C++ SDK
+- iOS SDK
+- Android SDK
+
+### Getting Help
+
+- **Documentation:** [opensource.contentauthenticity.org](https://opensource.contentauthenticity.org)
+- **Discord:** [Join CAI Discord](https://discord.com/invite/CAI)
+- **GitHub Issues:** Each SDK has its own repository
+- **Community:** [CAI Community](https://contentauthenticity.org/membership)
+
+## Next Steps
+
+1. **Choose your SDK** based on the guidance above
+2. **Review the getting started guide** for your chosen SDK
+3. **Explore examples** in the SDK's repository
+4. **Join the CAI Discord** for community support
+5. **Check the roadmap** for upcoming features
+
+---
+
+## Related Documentation
+
+- [Getting Started with Content Credentials](./index.mdx)
+- [Working with Manifests](../manifest/understanding-manifest)
+- [Signing and Certificates](../signing/signing-and-certs)
+- [Frequently Asked Questions](./faqs.mdx)

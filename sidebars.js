@@ -31,6 +31,11 @@ const sidebars = {
       items: [
         {
           type: 'doc',
+          label: 'SDK Comparison Guide',
+          id: 'getting-started/sdk-comparison',
+        },
+        {
+          type: 'doc',
           label: 'FAQs',
           id: 'getting-started/faqs',
         },
