@@ -86,6 +86,7 @@
         "certificate_status_should_override": null,
         "intent": null,
         "created_assertion_labels": null,
+        "prefer_box_hash": false,
         "generate_c2pa_archive": true,
         "auto_timestamp_assertion": {
           "enabled": false,
@@ -326,6 +327,10 @@
             "type": "string"
           }
         },
+        "prefer_box_hash": {
+          "description": "When `true`, use [`BoxHash`] instead of [`crate::assertions::DataHash`] for formats\nthat support it (JPEG, PNG, GIF, etc.) when no explicit hard binding assertion has\nbeen set.\n\nFormats that support `BoxHash` can embed the C2PA manifest as a new chunk/segment\nwithout shifting existing byte offsets, so a placeholder is never required.\nSetting this to `true` enables the direct workflow (`Builder::sign_embeddable`\nMode 2) for those formats and makes `Builder::needs_placeholder` return `false`.\n\nDefaults to `false` to preserve existing behaviour until `BoxHash` support is\nmore widely tested.  Set to `true` (or configure it per-[`Context`]) whenever\nyou are ready to prefer box-based hashing for supported formats.\n\n[`BoxHash`]: crate::assertions::BoxHash\n[`Context`]: crate::Context",
+          "type": "boolean"
+        },
         "generate_c2pa_archive": {
           "description": "Whether to generate a C2PA archive (instead of zip) when writing the manifest builder.\nNow always defaults to true - the ability to disable it will be removed in the future.",
           "type": [
@@ -341,6 +346,7 @@
       "required": [
         "thumbnail",
         "actions",
+        "prefer_box_hash",
         "auto_timestamp_assertion"
       ]
     },

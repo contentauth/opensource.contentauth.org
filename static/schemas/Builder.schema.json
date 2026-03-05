@@ -30,7 +30,7 @@
       "default": [
         {
           "name": "c2pa-rs",
-          "version": "0.76.1"
+          "version": "0.77.0"
         }
       ]
     },
@@ -59,7 +59,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:00bd48df-811d-4265-9a5b-5c56ea8975c0"
+      "default": "xmp:iid:7f23e4cd-3a4c-4991-9807-a11a1096849e"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -100,6 +100,13 @@
     },
     "label": {
       "description": "Allows you to pre-define the manifest label, which must be unique.\nNot intended for general use.  If not set, it will be assigned automatically.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hash_alg": {
+      "description": "Hash algorithm used for asset hashing (DataHash, BmffHash) and assertion hashing\nin the claim.  Defaults to `\"sha256\"` when not set.\n\nValid values: `\"sha256\"`, `\"sha384\"`, `\"sha512\"`.\n\nThis sets the claim-level `alg` field and is the default used by\n[`Builder::update_hash_from_stream`].  It can be overridden on individual\nhard binding assertions (e.g. a pre-constructed `DataHash`) by setting\nthe assertion's own `alg` field before adding it to the builder.\n\nNamed `hash_alg` (rather than `alg`) to avoid collision with the signer's\nsignature algorithm, which uses the same key in some combined JSON configurations.",
       "type": [
         "string",
         "null"
