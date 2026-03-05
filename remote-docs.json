@@ -112,16 +112,6 @@
     },
     {
       "repo": "contentauth/c2pa-rs",
-      "path": "docs/context.md",
-      "dest": "docs/rust-sdk/docs/context.md",
-      "sidebar": {
-        "category": "rust-sdk",
-        "label": "Configuring the SDK using Context",
-        "order": 5
-      }
-    },
-    {
-      "repo": "contentauth/c2pa-rs",
       "path": "docs/working-stores.md",
       "dest": "docs/rust-sdk/docs/working-stores.md",
       "sidebar": {
@@ -142,15 +132,24 @@
     },
     {
       "repo": "contentauth/c2pa-rs",
+      "path": "docs/embeddable-api.md",
+      "dest": "docs/rust-sdk/docs/embeddable-api.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Embeddable signing API",
+        "order": 9
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
       "path": "docs/release-notes.md",
       "dest": "docs/rust-sdk/docs/release-notes.md",
       "sidebar": {
         "category": "rust-sdk",
         "label": "Release notes",
-        "order": 9
+        "order": 10
       }
     },
-
     { "_comment": "Python library" },
     {
       "repo": "contentauth/c2pa-python",
