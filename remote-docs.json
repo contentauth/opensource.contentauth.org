@@ -102,8 +102,8 @@
     },
     {
       "repo": "contentauth/c2pa-rs",
-      "path": "docs/settings.md",
-      "dest": "docs/rust-sdk/docs/settings.md",
+      "path": "docs/context-settings.md",
+      "dest": "docs/rust-sdk/docs/context-settings.md",
       "sidebar": {
         "category": "rust-sdk",
         "label": "Configuring SDK settings",
@@ -117,7 +117,7 @@
       "sidebar": {
         "category": "rust-sdk",
         "label": "Using working stores and archives",
-        "order": 6
+        "order": 5
       }
     },
     {
@@ -127,7 +127,7 @@
       "sidebar": {
         "category": "rust-sdk",
         "label": "Using intents",
-        "order": 8
+        "order": 6
       }
     },
     {
@@ -137,7 +137,7 @@
       "sidebar": {
         "category": "rust-sdk",
         "label": "Embeddable signing API",
-        "order": 9
+        "order": 7
       }
     },
     {
@@ -147,7 +147,7 @@
       "sidebar": {
         "category": "rust-sdk",
         "label": "Release notes",
-        "order": 10
+        "order": 8
       }
     },
     { "_comment": "Python library" },
