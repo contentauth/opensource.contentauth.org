@@ -238,22 +238,12 @@
 
     {
       "repo": "contentauth/c2pa-c",
-      "path": "docs/context.md",
-      "dest": "docs/c2pa-c/docs/context.md",
+      "path": "docs/context-settings.md",
+      "dest": "docs/c2pa-c/docs/context-settings.md",
       "sidebar": {
         "category": "c2pa-c",
-        "label": "Using Context",
+        "label": "Configuring the SDK",
         "order": 3
-      }
-    },
-    {
-      "repo": "contentauth/c2pa-c",
-      "path": "docs/settings.md",
-      "dest": "docs/c2pa-c/docs/settings.md",
-      "sidebar": {
-        "category": "c2pa-c",
-        "label": "Using Settings",
-        "order": 4
       }
     },
     {
@@ -263,7 +253,7 @@
       "sidebar": {
         "category": "c2pa-c",
         "label": "Using working stores and archives",
-        "order": 5
+        "order": 4
       }
     },
     {
@@ -273,7 +263,7 @@
       "sidebar": {
         "category": "c2pa-c",
         "label": "Selective manifest construction",
-        "order": 6
+        "order": 5
       }
     },
     {
@@ -283,7 +273,7 @@
       "sidebar": {
         "category": "c2pa-c",
         "label": "Release notes",
-        "order": 7
+        "order": 6
       }
     },
     {
@@ -293,7 +283,7 @@
       "sidebar": {
         "category": "c2pa-c",
         "label": "FAQs",
-        "order": 8
+        "order": 7
       }
     },
 
