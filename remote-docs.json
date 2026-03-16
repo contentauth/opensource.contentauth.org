@@ -210,7 +210,7 @@
       }
     },
 
-    { "_comment": "C++ / C library" },
+    { "_comment": "C++ library" },
     {
       "repo": "contentauth/c2pa-c",
       "path": "README.md",
