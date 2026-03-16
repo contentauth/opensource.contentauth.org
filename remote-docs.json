@@ -90,16 +90,7 @@
         "order": 2
       }
     },
-    {
-      "repo": "contentauth/c2pa-rs",
-      "path": "docs/cawg-identity.md",
-      "dest": "docs/rust-sdk/docs/cawg-id.md",
-      "sidebar": {
-        "category": "rust-sdk",
-        "label": "Using CAWG identity assertions",
-        "order": 3
-      }
-    },
+
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/context-settings.md",
@@ -107,7 +98,7 @@
       "sidebar": {
         "category": "rust-sdk",
         "label": "Configuring SDK settings",
-        "order": 4
+        "order": 3
       }
     },
     {
@@ -117,7 +108,7 @@
       "sidebar": {
         "category": "rust-sdk",
         "label": "Using working stores and archives",
-        "order": 5
+        "order": 4
       }
     },
     {
@@ -126,7 +117,17 @@
       "dest": "docs/rust-sdk/docs/intents.md",
       "sidebar": {
         "category": "rust-sdk",
-        "label": "Using intents",
+        "label": "Using Builder intents",
+        "order": 5
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/cawg-identity.md",
+      "dest": "docs/rust-sdk/docs/cawg-id.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Using CAWG identity assertions",
         "order": 6
       }
     },
@@ -150,6 +151,7 @@
         "order": 8
       }
     },
+
     { "_comment": "Python library" },
     {
       "repo": "contentauth/c2pa-python",
@@ -208,7 +210,7 @@
       }
     },
 
-    { "_comment": "C++ / C library" },
+    { "_comment": "C++ library" },
     {
       "repo": "contentauth/c2pa-c",
       "path": "README.md",
@@ -235,7 +237,6 @@
         "order": 2
       }
     },
-
     {
       "repo": "contentauth/c2pa-c",
       "path": "docs/context-settings.md",
@@ -248,12 +249,22 @@
     },
     {
       "repo": "contentauth/c2pa-c",
+      "path": "docs/intents.md",
+      "dest": "docs/c2pa-c/docs/intents.md",
+      "sidebar": {
+        "category": "c2pa-c",
+        "label": "Using Builder intents",
+        "order": 4
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-c",
       "path": "docs/working-stores.md",
       "dest": "docs/c2pa-c/docs/working-stores.md",
       "sidebar": {
         "category": "c2pa-c",
         "label": "Using working stores and archives",
-        "order": 4
+        "order": 5
       }
     },
     {
@@ -263,7 +274,17 @@
       "sidebar": {
         "category": "c2pa-c",
         "label": "Selective manifest construction",
-        "order": 5
+        "order": 6
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-c",
+      "path": "docs/embeddable-api.md",
+      "dest": "docs/c2pa-c/docs/embeddable-api.md",
+      "sidebar": {
+        "category": "c2pa-c",
+        "label": "Embeddable signing API",
+        "order": 7
       }
     },
     {
@@ -273,7 +294,7 @@
       "sidebar": {
         "category": "c2pa-c",
         "label": "Release notes",
-        "order": 6
+        "order": 8
       }
     },
     {
@@ -283,7 +304,7 @@
       "sidebar": {
         "category": "c2pa-c",
         "label": "FAQs",
-        "order": 7
+        "order": 9
       }
     },
 
