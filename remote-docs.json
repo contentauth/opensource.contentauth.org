@@ -235,7 +235,6 @@
         "order": 2
       }
     },
-
     {
       "repo": "contentauth/c2pa-c",
       "path": "docs/context-settings.md",
@@ -248,12 +247,22 @@
     },
     {
       "repo": "contentauth/c2pa-c",
+      "path": "docs/intents.md",
+      "dest": "docs/c2pa-c/docs/intents.md",
+      "sidebar": {
+        "category": "c2pa-c",
+        "label": "Using Builder intents",
+        "order": 4
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-c",
       "path": "docs/working-stores.md",
       "dest": "docs/c2pa-c/docs/working-stores.md",
       "sidebar": {
         "category": "c2pa-c",
         "label": "Using working stores and archives",
-        "order": 4
+        "order": 5
       }
     },
     {
@@ -263,7 +272,17 @@
       "sidebar": {
         "category": "c2pa-c",
         "label": "Selective manifest construction",
-        "order": 5
+        "order": 6
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-c",
+      "path": "docs/embeddable-api.md",
+      "dest": "docs/c2pa-c/docs/embeddable-api.md",
+      "sidebar": {
+        "category": "c2pa-c",
+        "label": "Embeddable signing API",
+        "order": 7
       }
     },
     {
@@ -273,7 +292,7 @@
       "sidebar": {
         "category": "c2pa-c",
         "label": "Release notes",
-        "order": 6
+        "order": 8
       }
     },
     {
@@ -283,7 +302,7 @@
       "sidebar": {
         "category": "c2pa-c",
         "label": "FAQs",
-        "order": 7
+        "order": 9
       }
     },
 
