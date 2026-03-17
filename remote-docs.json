@@ -179,6 +179,47 @@
         "order": 2
       }
     },
+
+    {
+      "repo": "contentauth/c2pa-python",
+      "path": "docs/class-diagram.md",
+      "dest": "docs/c2pa-python/docs/class-diagram.md",
+      "sidebar": {
+        "category": "c2pa-python",
+        "label": "Class diagram",
+        "order": 3
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-python",
+      "path": "docs/context-settings.md",
+      "dest": "docs/c2pa-python/docs/context-settings.md",
+      "sidebar": {
+        "category": "c2pa-python",
+        "label": "Configuring SDK settings",
+        "order": 4
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-python",
+      "path": "docs/working-stores.md",
+      "dest": "docs/c2pa-python/docs/working-stores.md",
+      "sidebar": {
+        "category": "c2pa-python",
+        "label": "Manifests, working stores, and archives",
+        "order": 5
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-python",
+      "path": "docs/selective-manifests.md",
+      "dest": "docs/c2pa-python/docs/selective-manifests.md",
+      "sidebar": {
+        "category": "c2pa-python",
+        "label": "Selective manifest construction",
+        "order": 6
+      }
+    },
     {
       "repo": "contentauth/c2pa-python",
       "path": "examples/README.md",
@@ -186,7 +227,7 @@
       "sidebar": {
         "category": "c2pa-python",
         "label": "Python example code",
-        "order": 3
+        "order": 7
       }
     },
     {
@@ -196,7 +237,7 @@
       "sidebar": {
         "category": "c2pa-python",
         "label": "Release notes",
-        "order": 4
+        "order": 8
       }
     },
     {
@@ -206,7 +247,7 @@
       "sidebar": {
         "category": "c2pa-python",
         "label": "C2PA Python example",
-        "order": 5
+        "order": 9
       }
     },
 
