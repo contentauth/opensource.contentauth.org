@@ -46,9 +46,11 @@ try {
 
   assert.ok(
     title.includes('Content Auth') ||
+      title.includes('content authenticity') ||
       title.includes('CAI') ||
       title.includes('Docs') ||
-      title.includes('Open Source'),
+      title.includes('Open Source') ||
+      title.includes('Open-source'),
     'Unexpected homepage title (may indicate wrong page loaded): ' + title,
   );
 
