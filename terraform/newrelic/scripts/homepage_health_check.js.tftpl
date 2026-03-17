@@ -1,0 +1,80 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-console */
+
+// -------------------- CONSTANTS
+const SCRIPT_NAME = 'ContentAuth Docs — Homepage Health Check';
+const PAGE_LOAD_TIMEOUT = 30000; // 30 seconds
+const SCRIPT_TIMEOUT = 30000;    // 30 seconds
+const SITE_URL = ${TEST_FQDN};   // Terraform templatefile injects quoted URL
+
+// -------------------- DEPENDENCIES
+const assert = require('assert');
+
+// -------------------- CONFIGURATION
+await $webDriver.manage().setTimeouts({
+  pageLoad: PAGE_LOAD_TIMEOUT,
+  script: SCRIPT_TIMEOUT,
+});
+
+const By = $selenium.By;
+const until = $selenium.until;
+
+// -------------------- SCRIPT
+const startTime = new Date();
+console.log('Starting: ' + SCRIPT_NAME);
+console.log('Target: ' + SITE_URL);
+
+try {
+  await $webDriver.get(SITE_URL);
+
+  // Wait for page body to confirm the server responded
+  await $webDriver.wait(
+    until.elementLocated(By.tagName('body')),
+    10000,
+    'Page body not found — server may not have responded',
+  );
+
+  // Check page title: must not be a 404 / "Page Not Found"
+  const title = await $webDriver.getTitle();
+  console.log('Page title: ' + title);
+
+  assert.ok(
+    !title.toLowerCase().includes('page not found') &&
+      !title.includes('404'),
+    'Homepage returned a 404 page. Title: ' + title,
+  );
+
+  assert.ok(
+    title.includes('Content Auth') ||
+      title.includes('CAI') ||
+      title.includes('Docs') ||
+      title.includes('Open Source'),
+    'Unexpected homepage title (may indicate wrong page loaded): ' + title,
+  );
+
+  // Check navigation / header element exists and is visible
+  const navElement = await $webDriver.wait(
+    until.elementLocated(By.css('nav, [role="navigation"], header')),
+    5000,
+    'Navigation / header element not found',
+  );
+  const navVisible = await navElement.isDisplayed();
+  assert.equal(true, navVisible, 'Navigation element is not visible');
+  console.log('✓ Navigation element found and visible');
+
+  // Check main content wrapper (Docusaurus renders .main-wrapper)
+  await $webDriver.wait(
+    until.elementLocated(By.css('main, [role="main"], .main-wrapper')),
+    5000,
+    'Main content area not found — page may have rendered an error state',
+  );
+  console.log('✓ Main content area found');
+
+} catch (error) {
+  console.error('❌ Error in ' + SCRIPT_NAME + ': ' + error.message);
+  throw error; // Re-throw so New Relic records a FAILED result
+}
+
+const duration = (new Date() - startTime) / 1000;
+console.log('Duration: ' + duration + 's');
+console.log('✓ ' + SCRIPT_NAME + ' completed successfully');

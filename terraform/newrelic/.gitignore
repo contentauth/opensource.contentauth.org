@@ -1,0 +1,12 @@
+# Downloaded provider plugins — re-fetched by `tofu init`
+.terraform/
+
+# State files — contain sensitive resource IDs; use a remote backend for CI
+terraform.tfstate
+terraform.tfstate.backup
+*.tfstate
+*.tfstate.*
+
+# Local variable overrides
+*.tfvars
+*.tfvars.json

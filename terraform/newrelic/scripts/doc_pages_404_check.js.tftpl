@@ -1,0 +1,72 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-console */
+
+// -------------------- CONSTANTS
+const SCRIPT_NAME = 'ContentAuth Docs — Doc Pages 404 Check';
+const BASE_URL = ${TEST_FQDN}; // Terraform templatefile injects quoted URL
+
+// -------------------- DEPENDENCIES
+var assert = require('assert');
+
+// -------------------- PAGES TO CHECK
+// Add or remove paths here as documentation structure changes.
+// These were identified as likely to break when search results point to stale URLs.
+var pages = [
+  { path: '',                              label: 'Homepage' },
+  { path: 'docs/introduction',             label: 'Introduction' },
+  { path: 'docs/getting-started/',         label: 'Getting started' },
+  { path: 'docs/js-sdk/js-landing',        label: 'JS SDK overview' },
+  { path: 'docs/rust-sdk/',                label: 'Rust SDK overview' },
+  { path: 'docs/c2pa-python/',             label: 'Python SDK overview' },
+  { path: 'docs/node-landing',             label: 'Node.js SDK overview' },
+];
+
+var requestOptions = {
+  followAllRedirects: true,
+  timeout: 15000,
+  headers: {
+    'User-Agent': 'NewRelic-Synthetics/contentauth-docs-404-check',
+  },
+};
+
+function checkPage(page) {
+  var url = BASE_URL + page.path;
+  return new Promise(function (resolve, reject) {
+    $http.get(
+      Object.assign({ uri: url }, requestOptions),
+      function (err, response) {
+        if (err) {
+          reject(
+            new Error(
+              'Network error fetching "' + page.label + '" (' + url + '): ' + err.message,
+            ),
+          );
+          return;
+        }
+
+        if (response.statusCode !== 200) {
+          reject(
+            new Error(
+              '"' + page.label + '" returned HTTP ' + response.statusCode +
+              ' (expected 200). URL: ' + url,
+            ),
+          );
+          return;
+        }
+
+        console.log('[OK] ' + page.label + ' — HTTP ' + response.statusCode);
+        resolve();
+      },
+    );
+  });
+}
+
+// Check all pages; a single non-200 response fails the monitor
+Promise.all(pages.map(checkPage))
+  .then(function () {
+    console.log('✓ All ' + pages.length + ' pages returned HTTP 200');
+  })
+  .catch(function (err) {
+    console.error('❌ ' + err.message);
+    throw err;
+  });
