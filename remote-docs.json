@@ -183,7 +183,6 @@
     {
       "repo": "contentauth/c2pa-python",
       "path": "docs/class-diagram.md",
-      "branch": "vNext",
       "dest": "docs/c2pa-python/docs/class-diagram.md",
       "sidebar": {
         "category": "c2pa-python",
@@ -194,7 +193,6 @@
     {
       "repo": "contentauth/c2pa-python",
       "path": "docs/context-settings.md",
-      "branch": "vNext",
       "dest": "docs/c2pa-python/docs/context-settings.md",
       "sidebar": {
         "category": "c2pa-python",
@@ -205,7 +203,6 @@
     {
       "repo": "contentauth/c2pa-python",
       "path": "docs/working-stores.md",
-      "branch": "vNext",
       "dest": "docs/c2pa-python/docs/working-stores.md",
       "sidebar": {
         "category": "c2pa-python",
@@ -216,7 +213,6 @@
     {
       "repo": "contentauth/c2pa-python",
       "path": "docs/selective-manifests.md",
-      "branch": "vNext",
       "dest": "docs/c2pa-python/docs/selective-manifests.md",
       "sidebar": {
         "category": "c2pa-python",
