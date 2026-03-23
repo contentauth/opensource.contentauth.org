@@ -108,7 +108,7 @@
         "instance_id": {
           "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
           "type": "string",
-          "default": "xmp:iid:9c98f62a-615c-4832-b063-c91e78bfcfc3"
+          "default": "xmp:iid:b4e8783d-f1ef-41f5-bcd9-2237523c1ab1"
         },
         "thumbnail": {
           "anyOf": [
@@ -209,7 +209,7 @@
           ]
         },
         "operating_system": {
-          "description": "A human readable string of the OS the claim generator is running on",
+          "description": "A human readable string of the OS the claim generator is running on.\nCrJSON schema uses `operating_system`; C2PA CBOR may use `schema.org.SoftwareApplication.operatingSystem`.",
           "type": [
             "string",
             "null"
@@ -1182,6 +1182,14 @@
           "items": {
             "$ref": "#/$defs/IngredientDeltaValidationResult"
           }
+        },
+        "validationTime": {
+          "description": "Time when the validation was performed (RFC 3339 date-time). Used only for document-level validationInfo; not serialized in validationResults (e.g. ingredient assertions).",
+          "type": [
+            "string",
+            "null"
+          ],
+          "writeOnly": true
         }
       }
     },
@@ -1204,6 +1212,7 @@
           }
         },
         "failure": {
+          "description": "An array of validation failure codes. May be empty.",
           "type": "array",
           "items": {
             "$ref": "#/$defs/ValidationStatus"
@@ -1393,7 +1402,7 @@
       ]
     },
     "ValidationState": {
-      "description": "Represents the levels of assurance a manifest store achives when evaluated against the C2PA\nspecifications structural, cryptographic, and trust requirements.\n\nSee [Validation states - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_validation_states).",
+      "description": "Represents the levels of assurance a manifest store achieves when evaluated against the C2PA\nspecifications structural, cryptographic, and trust requirements.\n\nSee [Validation states - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_validation_states).",
       "oneOf": [
         {
           "description": "The manifest store fails to meet ValidationState::WellFormed requirements, meaning it cannot\neven be parsed or its basic structure is non-compliant.\n\nThis case may also occur if validation is disabled in the SDK.",
