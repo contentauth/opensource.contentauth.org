@@ -98,14 +98,15 @@ Use that ID when the manifest gets defined in an `ingredientsId` array; [for exa
         {
           "action": "c2pa.opened",
           "softwareAgent": {
-              "name": "Opened asset",
+              "name": "Tool XYZ",
           },
           "parameters": {
             "ingredientIds": [
-              parent_ingredient_id
+              "xmp:iid:a965983b-36fb-445a-aa80-a2d911dcc53c"
             ]
           },
-          ...
+        },
+        ...
 ```
 
 Then the SDK links the ingredient with the action. 
