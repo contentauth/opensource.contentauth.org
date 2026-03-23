@@ -253,7 +253,9 @@ For example:
         {
           "action": "c2pa.created",
           "digitalSourceType": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
-          "softwareAgent": "Adobe Firefly"
+          "softwareAgent": {
+              "name": "Tool XYZ",
+          },
         }
       ]
     }
@@ -268,7 +270,7 @@ Each object in the `actions` array has the following standard properties.
 |----------|-----------| ------------|---------|
 | `action` | Yes | The action name.  See [Action names](#action-names). | `c2pa.created` |
 | `digitalSourceType` | No | A URL identifying a [IPTC term](https://cv.iptc.org/newscodes/digitalsourcetype/). See [Digital source type](#digital-source-type). | `http://cv.iptc.org/newscodes/`<br/> `digitalsourcetype/digitalCapture` |
-| `softwareAgent` | No | The software or hardware used to perform the action.   | `"Adobe Firefly"` |
+| `softwareAgent` | No | Object with same properties as [ClaimGeneratorInfo](../json-ref/manifest-def.mdx#claimgeneratorinfo). | `"softwareAgent": { "name": "My Tool", },` |
 | `parameters` | No | Additional information describing the action; see [Parameters](#parameters) | Reference to ingredients in the `ingredientIds` array. |
 | `parameters` | No | Additional information describing the action; see [Parameters](#parameters) | Reference to ingredients in the `ingredientIds` array. |
 
@@ -336,7 +338,9 @@ For other possible values of `digitalSourceType`, see [Digital source type](#dig
         {
           "action": "c2pa.created",
           "digitalSourceType": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
-          "softwareAgent": "<TOOL_NAME>"
+          "softwareAgent": {
+            "name": "My GenAI Tool",
+          },
         }
       ]
     }
