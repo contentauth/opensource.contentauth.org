@@ -145,13 +145,12 @@ The example shown below illustrates one way to implement levels of disclosure:
 
 ## Example uses
 
-Numerous Adobe tools and products implement Content Credentials. For example, you can optionally attach credentials to images you create or modify using [Photoshop](https://helpx.adobe.com/photoshop/using/content-credentials.html) and [Lightroom](https://helpx.adobe.com/lightroom-cc/using/content-credentials-lightroom.html). Additionally, all images created using the [Firefly](https://blog.adobe.com/en/publish/2023/03/21/bringing-gen-ai-to-creative-cloud-adobe-firefly) generative AI tool automatically have attached Content Credentials. [Behance displays Content Credentials](https://www.behance.net/blog/cai-on-behance) if they are attached to media shared on the site, and still images provided through [Adobe Stock](https://stock.adobe.com/) automatically have Content Credentials attached. Other Adobe products also support Content Credentials.
+Numerous Adobe tools and products implement Content Credentials. For example, you can optionally attach credentials to images you create or modify using [Photoshop](https://helpx.adobe.com/photoshop/using/content-credentials.html) and [Lightroom](https://helpx.adobe.com/lightroom-cc/using/content-credentials-lightroom.html). Additionally, all images created using the [Firefly](https://blog.adobe.com/en/publish/2023/03/21/bringing-gen-ai-to-creative-cloud-adobe-firefly) generative AI tool automatically have attached Content Credentials. [Behance displays Content Credentials](https://www.behance.net/blog/cai-on-behance) if they are attached to media shared on the site, and still images provided through [Adobe Stock](https://stock.adobe.com/) automatically have Content Credentials attached. Many other Adobe products also support Content Credentials.
 
-The [Inspect tool on Adobe Content Authenticity (Beta)](https://inspect.cr) inspects image files and displays their Content Credentials if they exist. See [Using ACA Inspect](aca-inspect.mdx) for more information.
+The [**Inspect tool on Adobe Content Authenticity (Beta)**](https://inspect.cr) (often referred to as "ACA Inspect" or simply "Inspect") is a [C2PA conforming validator product](../conformance/index.mdx#validator-products) that can:
 
-Additionally, several other organizations have implemented CAI solutions, including:
+- [Validate and inspect](https://contentauthenticity.adobe.com/inspect) Content Credentials on various asset types.
+- [Apply](https://contentauthenticity.adobe.com/apply) Content Credentials to such assets.
+- [Manage Content Credentials](https://contentauthenticity.adobe.com/manage) for assets stored in the Adobe Content Credentials cloud.
 
-- [**PixelStream**](https://pixelstream.com/): Provides a complete end-to-end C2PA Content Credentials based authenticity platform that encapsulates the entire authenticity lifecycle of an asset from capture/creation, through editing, distribution via CDN, and finally to display.
-- [**ProofMode**](https://proofmode.org/): Provides an ecosystem of open-source tools and systems, including CAPTURE, a camera app with built-in provenance and authentication for chain-of-custody and VERIFY, a multi-purpose tool to inspect metadata and detect AI in images, audio, and video.
-
-For more case studies, see [CAI Blog](https://contentauthenticity.org/blog).
+For additional case studies and implementations, see [CAI Blog](https://contentauthenticity.org/blog).
