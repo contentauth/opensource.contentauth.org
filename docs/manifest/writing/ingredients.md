@@ -5,6 +5,10 @@ title: Writing ingredients
 
 ## Overview
 
+:::tip
+For a video walkthrough of signing an edited image and preserving its provenance chain, see [Signing an edited image and maintaining its provenance](https://learn.contentauthenticity.org/signing-an-edited-image) from the Content Credentials Foundations course.
+:::
+
 Digital assets are often not created entirely from scratch, but instead created from one or more existing assets, for example placing an image into a layer in Photoshop.  Such constituent assets are called _ingredients_. 
 
 [Old manifests](../reading/legacy.md) may contain deprecated v1 and v2 ingredients, but applications should only write v3 ingredients.
