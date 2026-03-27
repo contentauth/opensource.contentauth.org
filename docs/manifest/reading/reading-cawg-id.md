@@ -3,6 +3,10 @@ id: reading-cawg-id
 title: Reading CAWG identity assertions
 ---
 
+:::tip
+For a video walkthrough of adding a CAWG identity assertion when publishing an image, see [Signing an image at publish with a CAWG identity assertion](https://learn.contentauthenticity.org/publish-with-a-cawg-identity-assertion) from the Content Credentials Foundations course.
+:::
+
 The [Creator Assertions Working Group (CAWG)](https://cawg.io/) identity assertion enables a credential holder to prove control over a digital identity and to use that identity to document a content creator’s role(s) in a C2PA asset’s lifecycle.
 
 The SDK can read and validate CAWG identity assertions provided:
