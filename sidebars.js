@@ -117,6 +117,16 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'tasks/intents',
+          label: 'Using builder intents',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/archives',
+          label: 'Using working stores and archives',
+        },
+        {
+          type: 'doc',
           id: 'tasks/build',
           label: 'Adding and signing a manifest',
         },

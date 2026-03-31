@@ -1,26 +1,28 @@
 
-Use the `read_file` function to read C2PA data from the specified file. This function examines the specified asset file for C2PA data and returns a JSON report if it finds any; it throws exceptions on errors. If there are validation errors, the report includes a `validation_status` field.
+Use the `Reader` constructor to read C2PA data from a file or stream. Pass a `Context` as the first argument to configure SDK behavior; for the default configuration, use `c2pa::Context context;`.
+
+### Reading from a file
 
 ```cpp
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <stdexcept>
-#include <openssl/evp.h>
-#include <openssl/pem.h>
-#include <openssl/err.h>
 #include "c2pa.hpp"
-#include "test_signer.hpp"
+#include <iostream>
 
-using namespace std;
-namespace fs = std::filesystem;
-using namespace c2pa;
-
-auto json_store = C2pa::read_file("work/media_file.jpg", "output/data_dir")
+c2pa::Context context;
+auto reader = c2pa::Reader(context, "work/media_file.jpg");
+std::cout << reader.json() << std::endl;
 ```
 
-Where:
+### Reading from a stream
 
-- `work/media_file.jpg` is the asset file to read.
-- `output/data_dir` is the optional path to data output directory; If provided, the function extracts any binary resources, such as thumbnails, icons, and C2PA data into that directory. These files are referenced by the identifier fields in the manifest store report.
+```cpp
+#include "c2pa.hpp"
+#include <fstream>
+#include <iostream>
+
+c2pa::Context context;
+std::ifstream ifs("work/media_file.jpg", std::ios::binary);
+auto reader = c2pa::Reader(context, "image/jpeg", ifs);
+std::cout << reader.json() << std::endl;
+```
+
+If there are validation errors, the report includes a `validation_status` field.

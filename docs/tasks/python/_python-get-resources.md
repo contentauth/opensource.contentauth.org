@@ -1,31 +1,24 @@
 
 The example below shows how to get resources from manifest data using the Python library.
 
-Retrieve binary resources such as thumbnails from the manifest data, use the `resource_to_stream` or `resource_to_file` methods using the associated `identifier` field values and a `uri`.
-
-_NOTE: Need to add example of using `reader.resource_to_stream()`._
+To retrieve binary resources such as thumbnails from the manifest data, use the `resource_to_stream` method with the associated `identifier` field value as the URI.
 
 ```py
-# Import the C2PA Python package.
-from c2pa import *
-
-# Import standard general-purpose packages.
-import os
-import io
-import logging
 import json
+from c2pa import Context, Reader
 
 try:
-  # Create a reader from a file path.
-  reader = c2pa.Reader.from_file("path/to/media_file.jpg")
+    with Context() as ctx:
+        with Reader("path/to/media_file.jpg", context=ctx) as reader:
+            manifest_store = json.loads(reader.json())
+            active_manifest_label = manifest_store.get("active_manifest")
+            if active_manifest_label:
+                manifest = manifest_store["manifests"][active_manifest_label]
 
-  # Get the active manifest.
-  manifest = reader.get_active_manifest()
-  if manifest != None:
-
-    # get the uri to the manifest's thumbnail and write it to a file.
-    uri = manifest["thumbnail"]["identifier"]
-    reader.resource_to_file(uri, "thumbnail_v2.jpg") 
+                # Get the URI to the manifest's thumbnail and write it to a file.
+                uri = manifest["thumbnail"]["identifier"]
+                with open("thumbnail_v2.jpg", "w+b") as thumb_file:
+                    reader.resource_to_stream(uri, thumb_file)
 
 except Exception as err:
     print(err)

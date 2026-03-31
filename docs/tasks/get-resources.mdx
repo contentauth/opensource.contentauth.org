@@ -6,9 +6,7 @@ title: Getting resources from a manifest
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-import JSGetResources from './js/_js-get-resources.md';
 import PythonGetResources from './python/_python-get-resources.md';
-import NodeGetResources from './node/_node-get-resources.md';
 import CppGetResources from './cpp/_cpp-get-resources.md';
 import RustGetResources from './rust/_rust-get-resources.md';
 
@@ -16,34 +14,22 @@ Manifest data can include binary resources such as thumbnail and icon images whi
 
 <Tabs groupId="programming-lang" queryString="lang">
 
-<TabItem value="js" label="JavaScript" default>
+  <TabItem value="rust" label="Rust">
 
-<JSGetResources name="js-read" />
+    <RustGetResources name="rust-read" />
 
-</TabItem>
+  </TabItem>
 
-<TabItem value="python" label="Python" default>
+  <TabItem value="cpp" label="C++">
 
-<PythonGetResources name="python-read" />
+    <CppGetResources name="cpp-read" />
 
-</TabItem>
+  </TabItem>
 
-<TabItem value="node" label="Node.js">
+  <TabItem value="python" label="Python" default>
 
-<NodeGetResources name="node-read" />
+    <PythonGetResources name="python-read" />
 
-</TabItem>
-
-<TabItem value="cpp" label="C++">
-
-<CppGetResources name="cpp-read" />
-
-</TabItem>
-
-<TabItem value="rust" label="Rust">
-
-  <RustGetResources name="rust-read" />
-  
-</TabItem>
+  </TabItem>
 
 </Tabs>

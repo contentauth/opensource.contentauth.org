@@ -1,57 +1,42 @@
 This is an example of how to assign a manifest to an asset and sign the claim using Rust.
 
-This example is from [`c2pa-rs/sdk/examples/v2api.rs`](https://github.com/contentauth/c2pa-rs/blob/main/sdk/examples/v2api.rs#L88C5-L134C1):
+Configure a `Context` with signer settings and use `Builder::from_context` to create and sign a manifest:
 
 ```rust
-use std::io::{Cursor, Seek};
-
-use anyhow::Result;
-use c2pa::{
-    crypto::raw_signature::SigningAlg, settings::Settings, validation_results::ValidationState,
-    Builder, CallbackSigner, Reader,
-};
+use c2pa::{Context, Builder, Result};
 use serde_json::json;
+use std::io::Cursor;
 
-let json = manifest_def(title, format);
-let mut builder = Builder::from_json(&json)?;
+fn main() -> Result<()> {
+    let context = Context::new()
+        .with_settings(include_str!("config.json"))?;
 
-builder.add_ingredient_from_stream(
-    json!({
-        "title": parent_name,
-        "relationship": "parentOf"
-    })
-    .to_string(),
-    format,
-    &mut source,
-)?;
+    let mut builder = Builder::from_context(context)
+        .with_definition(json!({"title": "My Image"}))?;
 
-let thumb_uri = builder
-    .definition
-    .thumbnail
-    .as_ref()
-    .map(|t| t.identifier.clone());
+    let mut source = std::fs::File::open("source.jpg")?;
+    let mut dest = Cursor::new(Vec::new());
+    builder.save_to_stream("image/jpeg", &mut source, &mut dest)?;
 
-// add a manifest thumbnail ( just reuse the image for now )
-if let Some(uri) = thumb_uri {
-    if !uri.starts_with("self#jumbf") {
-        source.rewind()?;
-        builder.add_resource(&uri, &mut source)?;
-    }
+    Ok(())
 }
+```
 
-// write the manifest builder to a zipped stream
-let mut zipped = Cursor::new(Vec::new());
-builder.to_archive(&mut zipped)?;
+The `config.json` file specifies the signer and builder configuration. For example:
 
-// unzip the manifest builder from the zipped stream
-zipped.rewind()?;
-
-let ed_signer =
-    |_context: *const (), data: &[u8]| CallbackSigner::ed25519_sign(data, PRIVATE_KEY);
-let signer = CallbackSigner::new(ed_signer, SigningAlg::Ed25519, CERTS);
-
-let mut builder = Builder::from_archive(&mut zipped)?;
-// sign the ManifestStoreBuilder and write it to the output stream
-let mut dest = Cursor::new(Vec::new());
-builder.sign(&signer, format, &mut source, &mut dest)?;
+```json
+{
+  "signer": {
+    "local": {
+      "alg": "ps256",
+      "sign_cert": "path/to/cert.pem",
+      "private_key": "path/to/key.pem",
+      "tsa_url": "http://timestamp.digicert.com"
+    }
+  },
+  "builder": {
+    "claim_generator_info": {"name": "My App", "version": "1.0"},
+    "intent": {"Create": "digitalCapture"}
+  }
+}
 ```

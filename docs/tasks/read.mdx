@@ -1,48 +1,34 @@
 ---
 id: read
-title: Reading manifest data
+title: Reading and verifying manifest data
 hide_table_of_contents: true
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-import JSRead from './js/_js-read.md';
 import PythonRead from './python/_python-read.md';
-import NodeRead from './node/_node-read.md';
 import CppRead from './cpp/_cpp-read.md';
 import RustRead from './rust/_rust-read.md';
 
 <Tabs groupId="programming-lang" queryString="lang">
 
-<TabItem value="js" label="JavaScript" default>
+  <TabItem value="rust" label="Rust">
 
-<JSRead name="js-read" />
+    <RustRead name="rust-read" />
 
-</TabItem>
+  </TabItem>
 
-<TabItem value="python" label="Python" default>
+  <TabItem value="cpp" label="C++">
 
-<PythonRead name="python-read" />
+    <CppRead name="cpp-read" />
 
-</TabItem>
+  </TabItem>
 
-<TabItem value="node" label="Node.js">
+  <TabItem value="python" label="Python" default>
 
-<NodeRead name="node-read" />
+    <PythonRead name="python-read" />
 
-</TabItem>
-
-<TabItem value="cpp" label="C++">
-
-<CppRead name="cpp-read" />
-
-</TabItem>
-
-<TabItem value="rust" label="Rust">
-
-  <RustRead name="rust-read" />
-  
-</TabItem>
+  </TabItem>
 
 </Tabs>
