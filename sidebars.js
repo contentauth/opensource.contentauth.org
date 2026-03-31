@@ -205,19 +205,19 @@ const sidebars = {
     {
       type: 'category',
       label: 'C++ / C library',
-      link: { type: 'doc', id: 'c2pa-c/readme' },
+      link: { type: 'doc', id: 'c2pa-cpp/readme' },
       collapsed: true,
       items: [
-        ...getRemoteSidebarItems('c2pa-c', ['c2pa-c/readme']),
+        ...getRemoteSidebarItems('c2pa-cpp', ['c2pa-cpp/readme']),
         {
           type: 'link',
           label: 'API documentation',
-          href: 'https://contentauth.github.io/c2pa-c/annotated.html',
+          href: 'https://contentauth.github.io/c2pa-cpp/annotated.html',
         },
         {
           type: 'link',
           label: 'GitHub',
-          href: 'https://github.com/contentauth/c2pa-c',
+          href: 'https://github.com/contentauth/c2pa-cpp',
         },
       ],
     },

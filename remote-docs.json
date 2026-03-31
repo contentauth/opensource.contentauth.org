@@ -253,17 +253,17 @@
 
     { "_comment": "C++ library" },
     {
-      "repo": "contentauth/c2pa-c",
+      "repo": "contentauth/c2pa-cpp",
       "path": "README.md",
-      "dest": "docs/c2pa-c/readme.md",
-      "sidebar": { "category": "c2pa-c", "label": "Overview", "order": 0 }
+      "dest": "docs/c2pa-cpp/readme.md",
+      "sidebar": { "category": "c2pa-cpp", "label": "Overview", "order": 0 }
     },
     {
-      "repo": "contentauth/c2pa-c",
+      "repo": "contentauth/c2pa-cpp",
       "path": "docs/usage.md",
-      "dest": "docs/c2pa-c/docs/usage.md",
+      "dest": "docs/c2pa-cpp/docs/usage.md",
       "sidebar": {
-        "category": "c2pa-c",
+        "category": "c2pa-cpp",
         "label": "Using the C++ library",
         "order": 1
       }
@@ -271,79 +271,79 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/supported-formats.md",
-      "dest": "docs/c2pa-c/docs/supported-formats.md",
+      "dest": "docs/c2pa-cpp/docs/supported-formats.md",
       "sidebar": {
-        "category": "c2pa-c",
+        "category": "c2pa-cpp",
         "label": "Supported media formats",
         "order": 2
       }
     },
     {
-      "repo": "contentauth/c2pa-c",
+      "repo": "contentauth/c2pa-cpp",
       "path": "docs/context-settings.md",
-      "dest": "docs/c2pa-c/docs/context-settings.md",
+      "dest": "docs/c2pa-cpp/docs/context-settings.md",
       "sidebar": {
-        "category": "c2pa-c",
+        "category": "c2pa-cpp",
         "label": "Configuring the SDK",
         "order": 3
       }
     },
     {
-      "repo": "contentauth/c2pa-c",
+      "repo": "contentauth/c2pa-cpp",
       "path": "docs/intents.md",
-      "dest": "docs/c2pa-c/docs/intents.md",
+      "dest": "docs/c2pa-cpp/docs/intents.md",
       "sidebar": {
-        "category": "c2pa-c",
+        "category": "c2pa-cpp",
         "label": "Using Builder intents",
         "order": 4
       }
     },
     {
-      "repo": "contentauth/c2pa-c",
+      "repo": "contentauth/c2pa-cpp",
       "path": "docs/working-stores.md",
-      "dest": "docs/c2pa-c/docs/working-stores.md",
+      "dest": "docs/c2pa-cpp/docs/working-stores.md",
       "sidebar": {
-        "category": "c2pa-c",
+        "category": "c2pa-cpp",
         "label": "Using working stores and archives",
         "order": 5
       }
     },
     {
-      "repo": "contentauth/c2pa-c",
+      "repo": "contentauth/c2pa-cpp",
       "path": "docs/selective-manifests.md",
-      "dest": "docs/c2pa-c/docs/selective-manifests.md",
+      "dest": "docs/c2pa-cpp/docs/selective-manifests.md",
       "sidebar": {
-        "category": "c2pa-c",
+        "category": "c2pa-cpp",
         "label": "Selective manifest construction",
         "order": 6
       }
     },
     {
-      "repo": "contentauth/c2pa-c",
+      "repo": "contentauth/c2pa-cpp",
       "path": "docs/embeddable-api.md",
-      "dest": "docs/c2pa-c/docs/embeddable-api.md",
+      "dest": "docs/c2pa-cpp/docs/embeddable-api.md",
       "sidebar": {
-        "category": "c2pa-c",
+        "category": "c2pa-cpp",
         "label": "Embeddable signing API",
         "order": 7
       }
     },
     {
-      "repo": "contentauth/c2pa-c",
+      "repo": "contentauth/c2pa-cpp",
       "path": "docs/release-notes.md",
-      "dest": "docs/c2pa-c/docs/release-notes.md",
+      "dest": "docs/c2pa-cpp/docs/release-notes.md",
       "sidebar": {
-        "category": "c2pa-c",
+        "category": "c2pa-cpp",
         "label": "Release notes",
         "order": 8
       }
     },
     {
-      "repo": "contentauth/c2pa-c",
+      "repo": "contentauth/c2pa-cpp",
       "path": "docs/faqs.md",
-      "dest": "docs/c2pa-c/docs/faqs.md",
+      "dest": "docs/c2pa-cpp/docs/faqs.md",
       "sidebar": {
-        "category": "c2pa-c",
+        "category": "c2pa-cpp",
         "label": "FAQs",
         "order": 9
       }
