@@ -13,7 +13,8 @@
       "type": "object",
       "additionalProperties": {
         "$ref": "#/$defs/Manifest"
-      }
+      },
+      "default": {}
     },
     "validation_status": {
       "description": "ValidationStatus generated when loading the ManifestStore from an asset",
@@ -45,7 +46,6 @@
       ]
     }
   },
-  "required": ["manifests"],
   "$defs": {
     "Manifest": {
       "description": "A Manifest represents all the information in a c2pa manifest",
@@ -84,7 +84,7 @@
         "instance_id": {
           "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
           "type": "string",
-          "default": "xmp:iid:d8eb5f58-1807-4eb6-a5da-51dcc6ffa0dd"
+          "default": "xmp:iid:cd457287-1476-4344-b5dd-460d41402c83"
         },
         "thumbnail": {
           "anyOf": [
@@ -170,8 +170,11 @@
           ]
         },
         "operating_system": {
-          "description": "A human readable string of the OS the claim generator is running on",
-          "type": ["string", "null"]
+          "description": "A human readable string of the OS the claim generator is running on.\nCrJSON schema uses `operating_system`; C2PA CBOR may use `schema.org.SoftwareApplication.operatingSystem`.",
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": ["name"],
@@ -230,7 +233,7 @@
       "required": ["type"]
     },
     "HashedUri": {
-      "description": "A `HashedUri` provides a reference to content available within the same\nmanifest store.\n\nThis is described in [§8.3, URI References], of the C2PA Technical\nSpecification.\n\n[§8.3, URI References]: https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_uri_references",
+      "description": "A `HashedUri` provides a reference to content available within the same\nmanifest store.\n\nThis is described in [URI References in the C2PA Technical\nSpecification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_uri_references).",
       "type": "object",
       "properties": {
         "url": {
@@ -320,7 +323,7 @@
       "additionalProperties": true
     },
     "ReviewRating": {
-      "description": "A rating on an Assertion.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_review_ratings>.",
+      "description": "A rating on an Assertion.\n\nSee [C2PA Specification - Review Ratings](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_review_ratings).",
       "type": "object",
       "properties": {
         "explanation": {
@@ -934,7 +937,7 @@
       ]
     },
     "ValidationStatus": {
-      "description": "A `ValidationStatus` struct describes the validation status of a\nspecific part of a manifest.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_existing_manifests>.",
+      "description": "A `ValidationStatus` struct describes the validation status of a\nspecific part of a manifest.\n\nSee [Existing Manifests - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_existing_manifests).",
       "type": "object",
       "properties": {
         "code": {
@@ -974,6 +977,14 @@
           "items": {
             "$ref": "#/$defs/IngredientDeltaValidationResult"
           }
+        },
+        "validationTime": {
+          "description": "Time when the validation was performed (RFC 3339 date-time). Used only for document-level validationInfo; not serialized in validationResults (e.g. ingredient assertions).",
+          "type": [
+            "string",
+            "null"
+          ],
+          "writeOnly": true
         }
       }
     },
@@ -996,6 +1007,7 @@
           }
         },
         "failure": {
+          "description": "An array of validation failure codes. May be empty.",
           "type": "array",
           "items": {
             "$ref": "#/$defs/ValidationStatus"
@@ -1112,7 +1124,7 @@
       }
     },
     "SigningAlg": {
-      "description": "Describes the digital signature algorithms allowed by the C2PA spec.\n\nPer [§13.2, “Digital Signatures”]:\n\n> All digital signatures applied as per the technical requirements of this\n> specification shall be generated using one of the digital signature\n> algorithms and key types listed as described in this section.\n\n[§13.2, “Digital Signatures”]: https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_digital_signatures",
+      "description": "Describes the digital signature algorithms allowed by the C2PA spec.\n\nPer [§13.2, “Digital Signatures”]:\n\n> All digital signatures applied as per the technical requirements of this\n> specification shall be generated using one of the digital signature\n> algorithms and key types listed as described in this section.\n\n[§13.2, “Digital Signatures”]: https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_digital_signatures",
       "oneOf": [
         {
           "description": "ECDSA with SHA-256",
@@ -1152,7 +1164,7 @@
       ]
     },
     "ValidationState": {
-      "description": "Represents the levels of assurance a manifest store achives when evaluated against the C2PA\nspecifications structural, cryptographic, and trust requirements.\n\nSee [§14.3. Validation states].\n\n[§14.3. Validation states]: https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_validation_states",
+      "description": "Represents the levels of assurance a manifest store achieves when evaluated against the C2PA\nspecifications structural, cryptographic, and trust requirements.\n\nSee [Validation states - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_validation_states).",
       "oneOf": [
         {
           "description": "The manifest store fails to meet ValidationState::WellFormed requirements, meaning it cannot\neven be parsed or its basic structure is non-compliant.\n\nThis case may also occur if validation is disabled in the SDK.",
@@ -1160,12 +1172,12 @@
           "const": "Invalid"
         },
         {
-          "description": "The manifest store is well-formed and the cryptographic integrity checks succeed.\n\nSee [§14.3.5. Valid Manifest].\n\n[§14.3.5. Valid Manifest]: https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_valid_manifest",
+          "description": "The manifest store is well-formed and the cryptographic integrity checks succeed.\n\nSee [Valid Manifest - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_valid_manifest).",
           "type": "string",
           "const": "Valid"
         },
         {
-          "description": "The manifest store is valid and signed by a certificate that chains up to a trusted root or known\nauthority in the trust list.\n\nSee [§14.3.6. Trusted Manifest].\n\n[§14.3.6. Trusted Manifest]: https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_trusted_manifest",
+          "description": "The manifest store is valid and signed by a certificate that chains up to a trusted root or known\nauthority in the trust list.\n\nSee [Trusted Manifest - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_trusted_manifest).",
           "type": "string",
           "const": "Trusted"
         }

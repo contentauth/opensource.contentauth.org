@@ -8,27 +8,92 @@
       "description": "Version of the configuration.",
       "type": "integer",
       "format": "uint32",
-      "minimum": 0
+      "minimum": 0,
+      "default": 1
     },
     "trust": {
       "description": "Settings for configuring the C2PA trust lists.",
-      "$ref": "#/$defs/Trust"
+      "$ref": "#/$defs/Trust",
+      "default": {
+        "verify_trust_list": true,
+        "user_anchors": null,
+        "trust_anchors": null,
+        "trust_config": null,
+        "allowed_list": null
+      }
     },
     "cawg_trust": {
       "description": "Settings for configuring the CAWG trust lists.",
-      "$ref": "#/$defs/Trust"
+      "$ref": "#/$defs/Trust",
+      "default": {
+        "verify_trust_list": true,
+        "user_anchors": null,
+        "trust_anchors": null,
+        "trust_config": null,
+        "allowed_list": null
+      }
     },
     "core": {
       "description": "Settings for configuring core features.",
-      "$ref": "#/$defs/Core"
+      "$ref": "#/$defs/Core",
+      "default": {
+        "merkle_tree_chunk_size_in_kb": null,
+        "merkle_tree_max_proofs": 5,
+        "backing_store_memory_threshold_in_mb": 512,
+        "decode_identity_assertions": true,
+        "allowed_network_hosts": null
+      }
     },
     "verify": {
       "description": "Settings for configuring verification.",
-      "$ref": "#/$defs/Verify"
+      "$ref": "#/$defs/Verify",
+      "default": {
+        "verify_after_reading": true,
+        "verify_after_sign": false,
+        "verify_trust": true,
+        "verify_timestamp_trust": true,
+        "ocsp_fetch": false,
+        "remote_manifest_fetch": true,
+        "skip_ingredient_conflict_resolution": false,
+        "strict_v1_validation": false
+      }
     },
     "builder": {
       "description": "Settings for configuring the [`Builder`].\n\n[`Builder`]: crate::Builder",
-      "$ref": "#/$defs/BuilderSettings"
+      "$ref": "#/$defs/BuilderSettings",
+      "default": {
+        "vendor": null,
+        "thumbnail": {
+          "enabled": true,
+          "ignore_errors": true,
+          "long_edge": 1024,
+          "prefer_smallest_format": true,
+          "quality": "medium"
+        },
+        "actions": {
+          "actions": null,
+          "auto_created_action": {
+            "enabled": false
+          },
+          "auto_opened_action": {
+            "enabled": false
+          },
+          "auto_placed_action": {
+            "enabled": false
+          }
+        },
+        "certificate_status_fetch": null,
+        "certificate_status_should_override": null,
+        "intent": null,
+        "created_assertion_labels": null,
+        "prefer_box_hash": false,
+        "generate_c2pa_archive": true,
+        "auto_timestamp_assertion": {
+          "enabled": false,
+          "skip_existing": true,
+          "fetch_scope": "all"
+        }
+      }
     },
     "signer": {
       "description": "Settings for configuring the base C2PA signer, accessible via [`Settings::signer`].",
@@ -53,7 +118,6 @@
       ]
     }
   },
-  "required": ["version", "trust", "cawg_trust", "core", "verify", "builder"],
   "$defs": {
     "Trust": {
       "description": "Settings to configure the trust list.",
@@ -61,66 +125,88 @@
       "properties": {
         "verify_trust_list": {
           "description": "Whether to verify certificates against the trust lists specified in [`Trust`]. This\noption is ONLY applicable to CAWG.\n\nThe default value is true.\n\n<div class=\"warning\">\nVerifying trust is REQUIRED by the CAWG spec. This option should only be used for development or testing.\n</div>",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "user_anchors": {
           "description": "List of additional user-provided trust anchor root certificates as a PEM bundle.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
         },
         "trust_anchors": {
           "description": "List of default trust anchor root certificates as a PEM bundle.\n\nNormally this option contains the official C2PA-recognized trust anchors found here:\n<https://github.com/c2pa-org/conformance-public/tree/main/trust-list>",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
         },
         "trust_config": {
           "description": "List of allowed extended key usage (EKU) object identifiers (OID) that\ncertificates must have.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
         },
         "allowed_list": {
           "description": "List of explicitly allowed certificates as a PEM bundle.",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
         }
-      },
-      "required": ["verify_trust_list"]
+      }
     },
     "Core": {
       "description": "Settings to configure core features.",
       "type": "object",
       "properties": {
         "merkle_tree_chunk_size_in_kb": {
-          "description": "Size of the [`BmffHash`] merkle tree chunks in kilobytes.\n\nThis option is associated with the [`MerkleMap::fixed_block_size`] field.\n\nSee more information in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_bmff_based_hash>\n\n[`MerkleMap::fixed_block_size`]: crate::assertions::MerkleMap::fixed_block_size\n[`BmffHash`]: crate::assertions::BmffHash",
-          "type": ["integer", "null"],
+          "description": "Size of the [`BmffHash`] merkle tree chunks in kilobytes.\n\nThis option is associated with the [`MerkleMap::fixed_block_size`] field.\n\nSee more information in the spec here:\n[bmff_based_hash - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_bmff_based_hash)\n\n[`MerkleMap::fixed_block_size`]: crate::assertions::MerkleMap::fixed_block_size\n[`BmffHash`]: crate::assertions::BmffHash",
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "uint",
-          "minimum": 0
+          "minimum": 0,
+          "default": null
         },
         "merkle_tree_max_proofs": {
-          "description": "Maximum number of proofs when validating or writing a [`BmffHash`] merkle tree.\n\nThis option defaults to 5.\n\nSee more information in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_bmff_based_hash>\n\n[`BmffHash`]: crate::assertions::BmffHash",
+          "description": "Maximum number of proofs when validating or writing a [`BmffHash`] merkle tree.\n\nThis option defaults to 5.\n\nSee more information in the spec here:\n[bmff_based_hash - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_bmff_based_hash)\n\n[`BmffHash`]: crate::assertions::BmffHash",
           "type": "integer",
           "format": "uint",
-          "minimum": 0
+          "minimum": 0,
+          "default": 5
         },
         "backing_store_memory_threshold_in_mb": {
           "description": "Maximum amount of data in megabytes that will be loaded into memory before\nbeing stored in temporary files on the disk.\n\nThis option defaults to 512MB and can result in noticeable performance improvements.",
           "type": "integer",
           "format": "uint",
-          "minimum": 0
+          "minimum": 0,
+          "default": 512
         },
         "decode_identity_assertions": {
           "description": "Whether to decode CAWG [`IdentityAssertion`]s during reading in the [`Reader`].\n\nThis option defaults to true.\n\n[`IdentityAssertion`]: crate::identity::IdentityAssertion\n[`Reader`]: crate::Reader",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "allowed_network_hosts": {
-          "description": "<div class=\"warning\">\nThe CAWG identity assertion does not currently respect this setting.\nSee <a href=\"https://github.com/contentauth/c2pa-rs/issues/1645\">issue #1645</a>.\n</div>\n\nList of host patterns that are allowed for network requests.\n\nEach pattern may include:\n- A scheme (e.g. `https://` or `http://`)\n- A hostname or IP address (e.g. `contentauthenticity.org` or `192.0.2.1`)\n    - The hostname may contain a single leading wildcard (e.g. `*.contentauthenticity.org`)\n- An optional port (e.g. `contentauthenticity.org:443` or `192.0.2.1:8080`)\n\nMatching is case-insensitive. A wildcard pattern such as `*.contentauthenticity.org` matches\n`sub.contentauthenticity.org`, but does not match `contentauthenticity.org` or `fakecontentauthenticity.org`.\nIf a scheme is present in the pattern, only URIs using the same scheme are considered a match. If the scheme\nis omitted, any scheme is allowed as long as the host matches.\n\nThe behavior is as follows:\n- `None` (default) no filtering enabled.\n- `Some(vec)` where `vec` is empty, all traffic is blocked.\n- `Some(vec)` with at least one pattern, filtering enabled for only those patterns.\n\n# Examples\n\nPattern: `*.contentauthenticity.org`\n- Does match:\n  - `https://sub.contentauthenticity.org`\n  - `http://api.contentauthenticity.org`\n- Does **not** match:\n  - `https://contentauthenticity.org` (no subdomain)\n  - `https://sub.fakecontentauthenticity.org` (different host)\n\nPattern: `http://192.0.2.1:8080`\n- Does match:\n  - `http://192.0.2.1:8080`\n- Does **not** match:\n  - `https://192.0.2.1:8080` (scheme mismatch)\n  - `http://192.0.2.1` (port omitted)\n  - `http://192.0.2.2:8080` (different IP address)\n\nThese settings are applied by the SDK's HTTP resolvers to restrict network requests.\nWhen network requests occur depends on the operations being performed (reading manifests,\nvalidating credentials, timestamping, etc.).",
-          "type": ["array", "null"],
+          "description": "<div class=\"warning\">\nThe CAWG identity assertion does not currently respect this setting.\nSee [Issue #1645](https://github.com/contentauth/c2pa-rs/issues/1645).\n</div>\n\nList of host patterns that are allowed for network requests.\n\nEach pattern may include:\n- A scheme (e.g. `https://` or `http://`)\n- A hostname or IP address (e.g. `contentauthenticity.org` or `192.0.2.1`)\n    - The hostname may contain a single leading wildcard (e.g. `*.contentauthenticity.org`)\n- An optional port (e.g. `contentauthenticity.org:443` or `192.0.2.1:8080`)\n\nMatching is case-insensitive. A wildcard pattern such as `*.contentauthenticity.org` matches\n`sub.contentauthenticity.org`, but does not match `contentauthenticity.org` or `fakecontentauthenticity.org`.\nIf a scheme is present in the pattern, only URIs using the same scheme are considered a match. If the scheme\nis omitted, any scheme is allowed as long as the host matches.\n\nThe behavior is as follows:\n- `None` (default) no filtering enabled.\n- `Some(vec)` where `vec` is empty, all traffic is blocked.\n- `Some(vec)` with at least one pattern, filtering enabled for only those patterns.\n\n# Examples\n\nPattern: `*.contentauthenticity.org`\n- Does match:\n  - `https://sub.contentauthenticity.org`\n  - `http://api.contentauthenticity.org`\n- Does **not** match:\n  - `https://contentauthenticity.org` (no subdomain)\n  - `https://sub.fakecontentauthenticity.org` (different host)\n\nPattern: `http://192.0.2.1:8080`\n- Does match:\n  - `http://192.0.2.1:8080`\n- Does **not** match:\n  - `https://192.0.2.1:8080` (scheme mismatch)\n  - `http://192.0.2.1` (port omitted)\n  - `http://192.0.2.2:8080` (different IP address)\n\nThese settings are applied by the SDK's HTTP resolvers to restrict network requests.\nWhen network requests occur depends on the operations being performed (reading manifests,\nvalidating credentials, timestamping, etc.).",
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "$ref": "#/$defs/HostPattern"
-          }
+          },
+          "default": null
         }
-      },
-      "required": [
-        "merkle_tree_max_proofs",
-        "backing_store_memory_threshold_in_mb",
-        "decode_identity_assertions"
-      ]
+      }
     },
     "HostPattern": {
       "description": "A host/scheme pattern used to restrict network requests.\n\nEach pattern may include:\n- A scheme (e.g. `https://` or `http://`)\n- A hostname or IP address (e.g. `contentauthenticity.org` or `192.0.2.1`)\n    - The hostname may contain a single leading wildcard (e.g. `*.contentauthenticity.org`)\n- An optional port (e.g. `contentauthenticity.org:443` or `192.0.2.1:8080`)\n\nMatching is case-insensitive. A wildcard pattern such as `*.contentauthenticity.org` matches\n`sub.contentauthenticity.org`, but does not match `contentauthenticity.org` or `fakecontentauthenticity.org`.\nIf a scheme is present in the pattern, only URIs using the same scheme are considered a match. If the scheme\nis omitted, any scheme is allowed as long as the host matches.\n\n# Examples\n\nPattern: `*.contentauthenticity.org`\n- Does match:\n  - `https://sub.contentauthenticity.org`\n  - `http://api.contentauthenticity.org`\n- Does **not** match:\n  - `https://contentauthenticity.org` (no subdomain)\n  - `https://sub.fakecontentauthenticity.org` (different host)\n\nPattern: `http://192.0.2.1:8080`\n- Does match:\n  - `http://192.0.2.1:8080`\n- Does **not** match:\n  - `https://192.0.2.1:8080` (scheme mismatch)\n  - `http://192.0.2.1` (port omitted)\n  - `http://192.0.2.2:8080` (different IP address)",
@@ -132,47 +218,45 @@
       "properties": {
         "verify_after_reading": {
           "description": "Whether to verify the manifest after reading in the [`Reader`].\n\nThe default value is true.\n\n<div class=\"warning\">\nDisabling validation can improve reading performance, BUT it carries the risk of reading an invalid\nmanifest.\n</div>\n\n[`Reader`]: crate::Reader",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "verify_after_sign": {
-          "description": "Whether to verify the manifest after signing in the [`Builder`].\n\nThe default value is true.\n\n<div class=\"warning\">\nDisabling validation can improve signing performance, BUT it carries the risk of signing an invalid\nmanifest.\n</div>\n\n[`Builder`]: crate::Builder",
-          "type": "boolean"
+          "description": "Whether to verify the manifest after signing in the [`Builder`].\n\nThe default value is false.\nThere is a known bug related to this setting: [#1875](https://github.com/contentauth/c2pa-rs/issues/1875).\nWhen the bug is fixed, the default value should be true.\n\n<div class=\"warning\">\nDisabling validation can improve signing performance, BUT it carries the risk of signing an invalid\nmanifest.\n</div>\n\n[`Builder`]: crate::Builder",
+          "type": "boolean",
+          "default": false
         },
         "verify_trust": {
           "description": "Whether to verify certificates against the trust lists specified in [`Trust`]. To configure\ntimestamp certificate verification, see [`Verify::verify_timestamp_trust`].\n\nThe default value is true.\n\n<div class=\"warning\">\nVerifying trust is REQUIRED by the C2PA spec. This option should only be used for development or testing.\n</div>",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "verify_timestamp_trust": {
           "description": "Whether to verify the timestamp certificates against the trust lists specified in [`Trust`].\n\nThe default value is true.\n\n<div class=\"warning\">\nVerifying timestamp trust is REQUIRED by the C2PA spec. This option should only be used for development or testing.\n</div>",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "ocsp_fetch": {
           "description": "Whether to fetch the certificates OCSP status during validation.\n\nRevocation status is checked in the following order:\n1. The OCSP staple stored in the COSE claim of the manifest\n2. Otherwise if `ocsp_fetch` is enabled, it fetches a new OCSP status\n3. Otherwise if `ocsp_fetch` is disabled, it checks `CertificateStatus` assertions\n\nThe default value is false.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "remote_manifest_fetch": {
           "description": "Whether to fetch remote manifests in the following scenarios:\n- Constructing a [`Reader`]\n- Adding an [`Ingredient`] to the [`Builder`]\n\nThe default value is true.\n\n<div class=\"warning\">\nThis setting is only applicable if the crate is compiled with the `fetch_remote_manifests` feature.\n</div>\n\n[`Reader`]: crate::Reader\n[`Ingredient`]: crate::Ingredient\n[`Builder`]: crate::Builder",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "skip_ingredient_conflict_resolution": {
-          "description": "Whether to skip ingredient conflict resolution when multiple ingredients have the same\nmanifest identifier. This settings is only applicable for C2PA v2 validation.\n\nThe default value is false.\n\nSee more information in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_versioning_manifests_due_to_conflicts>",
-          "type": "boolean"
+          "description": "Whether to skip ingredient conflict resolution when multiple ingredients have the same\nmanifest identifier. This settings is only applicable for C2PA v2 validation.\n\nThe default value is false.\n\nSee more information in the spec here:\n[versioning_manifests_due_to_conflicts - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_versioning_manifests_due_to_conflicts)",
+          "type": "boolean",
+          "default": false
         },
         "strict_v1_validation": {
           "description": "Whether to do strictly C2PA v1 validation or otherwise the latest validation.\n\nThe default value is false.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
-      },
-      "required": [
-        "verify_after_reading",
-        "verify_after_sign",
-        "verify_trust",
-        "verify_timestamp_trust",
-        "ocsp_fetch",
-        "remote_manifest_fetch",
-        "skip_ingredient_conflict_resolution",
-        "strict_v1_validation"
-      ]
+      }
     },
     "BuilderSettings": {
       "description": "Settings for the [Builder][crate::Builder].",
@@ -202,7 +286,7 @@
           "$ref": "#/$defs/ActionsSettings"
         },
         "certificate_status_fetch": {
-          "description": "Whether to create [`CertificateStatus`] assertions for manifests to store certificate revocation\nstatus. The assertion can be fetched for the active manifest or for all manifests (including\ningredients).\n\nThe default is to not fetch them at all.\n\nSee more information in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#certificate_status_assertion>\n\n[`CertificateStatus`]: crate::assertions::CertificateStatus",
+          "description": "Whether to create [`CertificateStatus`] assertions for manifests to store certificate revocation\nstatus. The assertion can be fetched for the active manifest or for all manifests (including\ningredients).\n\nThe default is to not fetch them at all.\n\nFor more information, see [Certificate status assertion - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#certificate_status_assertion).\n\n[`CertificateStatus`]: crate::assertions::CertificateStatus",
           "anyOf": [
             {
               "$ref": "#/$defs/OcspFetchScope"
@@ -228,11 +312,18 @@
           ]
         },
         "created_assertion_labels": {
-          "description": "Assertions with a base label included in this list will be automatically marked as a created assertion.\nAssertions not in this list will be automatically marked as gathered.\n\nNote that the label should be a **base label**, not including the assertion version nor instance.\n\nSee more information on the difference between created vs gathered assertions in the spec here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_fields>",
-          "type": ["array", "null"],
+          "description": "Assertions with a base label included in this list will be automatically marked as a created assertion.\nAssertions not in this list will be automatically marked as gathered.\n\nNote that the label should be a **base label**, not including the assertion version nor instance.\n\nSee more information on the difference between created vs gathered assertions in the spec here:\n[fields - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_fields)",
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "type": "string"
           }
+        },
+        "prefer_box_hash": {
+          "description": "When `true`, use [`BoxHash`] instead of [`crate::assertions::DataHash`] for formats\nthat support it (JPEG, PNG, GIF, etc.) when no explicit hard binding assertion has\nbeen set.\n\nFormats that support `BoxHash` can embed the C2PA manifest as a new chunk/segment\nwithout shifting existing byte offsets, so a placeholder is never required.\nSetting this to `true` enables the direct workflow (`Builder::sign_embeddable`\nMode 2) for those formats and makes `Builder::needs_placeholder` return `false`.\n\nDefaults to `false` to preserve existing behaviour until `BoxHash` support is\nmore widely tested.  Set to `true` (or configure it per-[`Context`]) whenever\nyou are ready to prefer box-based hashing for supported formats.\n\n[`BoxHash`]: crate::assertions::BoxHash\n[`Context`]: crate::Context",
+          "type": "boolean"
         },
         "generate_c2pa_archive": {
           "description": "Whether to generate a C2PA archive (instead of zip) when writing the manifest builder.\nNow always defaults to true - the ability to disable it will be removed in the future.",
@@ -243,7 +334,12 @@
           "$ref": "#/$defs/TimeStampSettings"
         }
       },
-      "required": ["thumbnail", "actions", "auto_timestamp_assertion"]
+      "required": [
+        "thumbnail",
+        "actions",
+        "prefer_box_hash",
+        "auto_timestamp_assertion"
+      ]
     },
     "ClaimGeneratorInfoSettings": {
       "description": "Settings for the claim generator info.",
@@ -449,15 +545,15 @@
           }
         },
         "auto_created_action": {
-          "description": "Whether to automatically generate a c2pa.created [Action] assertion or error that it doesn't already exist.\n\nFor more information about the mandatory conditions for a c2pa.created action assertion, see here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_mandatory_presence_of_at_least_one_actions_assertion>",
+          "description": "Whether to automatically generate a c2pa.created [Action] assertion or error that it doesn't already exist.\n\nFor more information about the mandatory conditions for a c2pa.created action assertion, see the\n[C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_mandatory_presence_of_at_least_one_actions_assertion).",
           "$ref": "#/$defs/AutoActionSettings"
         },
         "auto_opened_action": {
-          "description": "Whether to automatically generate a c2pa.opened [Action] assertion or error that it doesn't already exist.\n\nFor more information about the mandatory conditions for a c2pa.opened action assertion, see here:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_mandatory_presence_of_at_least_one_actions_assertion>",
+          "description": "Whether to automatically generate a c2pa.opened [Action] assertion or error that it doesn't already exist.\n\nFor more information about the mandatory conditions for a c2pa.opened action assertion, see the\n[C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_mandatory_presence_of_at_least_one_actions_assertion).",
           "$ref": "#/$defs/AutoActionSettings"
         },
         "auto_placed_action": {
-          "description": "Whether to automatically generate a c2pa.placed [Action] assertion or error that it doesn't already exist.\n\nFor more information about the mandatory conditions for a c2pa.placed action assertion, see:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_relationship>",
+          "description": "Whether to automatically generate a c2pa.placed [Action] assertion or error that it doesn't already exist.\n\nFor more information about the mandatory conditions for a c2pa.placed action assertion, see\n[Relationship - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_relationship)",
           "$ref": "#/$defs/AutoActionSettings"
         }
       },
@@ -527,7 +623,7 @@
       "required": ["action"]
     },
     "DigitalSourceType": {
-      "description": "Description of the source of an asset.\n\nThe full list of possible digital source types are found below:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_digital_source_type>\n<https://cv.iptc.org/newscodes/digitalsourcetype>",
+      "description": "Description of the source of an asset.\n\nThe digital source type must be either a value from the [IPTC Digital Source Types](https://cv.iptc.org/newscodes/digitalsourcetype) or a C2PA-specific value as given in [the C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_digital_source_type).",
       "anyOf": [
         {
           "description": "Media whose digital content is effectively empty, such as a blank canvas or zero-length video.",
@@ -535,7 +631,7 @@
           "const": "http://c2pa.org/digitalsourcetype/empty"
         },
         {
-          "description": "Data that is the result of algorithmically using a model derived from sampled content and data.\nDiffers from <http://cv.iptc.org/newscodes/digitalsourcetype/>trainedAlgorithmicMedia in that\nthe result isn’t a media type (e.g., image or video) but is a data format (e.g., CSV, pickle).",
+          "description": "Data that is the result of algorithmically using a model derived from sampled content and data.\nDiffers from [IPTC Digital Source Type](http://cv.iptc.org/newscodes/digitalsourcetype/) `trainedAlgorithmicMedia` in that\nthe result isn’t a media type (e.g., image or video) but is a data format (e.g., CSV, pickle).",
           "type": "string",
           "const": "http://c2pa.org/digitalsourcetype/trainedAlgorithmicData"
         },
@@ -756,25 +852,40 @@
               "type": "object",
               "properties": {
                 "alg": {
+                  "description": "Algorithm to use for signing.",
                   "$ref": "#/$defs/SigningAlg"
                 },
                 "sign_cert": {
+                  "description": "Certificate used for signing (PEM format).",
                   "type": "string"
                 },
                 "private_key": {
+                  "description": "Private key used for signing (PEM format).",
                   "type": "string"
                 },
                 "tsa_url": {
-                  "type": ["string", "null"]
+                  "description": "Time stamp authority URL for signing.",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "referenced_assertions": {
-                  "type": ["array", "null"],
+                  "description": "Referenced assertions for CAWG identity signing (optional).",
+                  "type": [
+                    "array",
+                    "null"
+                  ],
                   "items": {
                     "type": "string"
                   }
                 },
                 "roles": {
-                  "type": ["array", "null"],
+                  "description": "Roles for CAWG identity signing (optional).",
+                  "type": [
+                    "array",
+                    "null"
+                  ],
                   "items": {
                     "type": "string"
                   }
@@ -794,25 +905,40 @@
               "type": "object",
               "properties": {
                 "url": {
+                  "description": "URL that the signer will use for signing.\nA POST request with a byte-stream will be sent to this URL.",
                   "type": "string"
                 },
                 "alg": {
+                  "description": "Algorithm to use for signing.",
                   "$ref": "#/$defs/SigningAlg"
                 },
                 "sign_cert": {
+                  "description": "Certificate used for signing (PEM format).",
                   "type": "string"
                 },
                 "tsa_url": {
-                  "type": ["string", "null"]
+                  "description": "Time stamp authority URL for signing.",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "referenced_assertions": {
-                  "type": ["array", "null"],
+                  "description": "Referenced assertions for CAWG identity signing (optional).",
+                  "type": [
+                    "array",
+                    "null"
+                  ],
                   "items": {
                     "type": "string"
                   }
                 },
                 "roles": {
-                  "type": ["array", "null"],
+                  "description": "Roles for CAWG identity signing (optional).",
+                  "type": [
+                    "array",
+                    "null"
+                  ],
                   "items": {
                     "type": "string"
                   }
@@ -827,7 +953,7 @@
       ]
     },
     "SigningAlg": {
-      "description": "Describes the digital signature algorithms allowed by the C2PA spec.\n\nPer [§13.2, “Digital Signatures”]:\n\n> All digital signatures applied as per the technical requirements of this\n> specification shall be generated using one of the digital signature\n> algorithms and key types listed as described in this section.\n\n[§13.2, “Digital Signatures”]: https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_digital_signatures",
+      "description": "Describes the digital signature algorithms allowed by the C2PA spec.\n\nPer [§13.2, “Digital Signatures”]:\n\n> All digital signatures applied as per the technical requirements of this\n> specification shall be generated using one of the digital signature\n> algorithms and key types listed as described in this section.\n\n[§13.2, “Digital Signatures”]: https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_digital_signatures",
       "oneOf": [
         {
           "description": "ECDSA with SHA-256",

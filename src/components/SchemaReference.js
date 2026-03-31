@@ -8,6 +8,14 @@ const slugify = (text) =>
 
 const isObject = (v) => v && typeof v === 'object' && !Array.isArray(v);
 
+const refToDefName = (ref) => {
+  if (typeof ref !== 'string') return null;
+  if (ref.startsWith('#/$defs/')) return ref.slice('#/$defs/'.length);
+  if (ref.startsWith('#/definitions/'))
+    return ref.slice('#/definitions/'.length);
+  return null;
+};
+
 function formatType(cellSchema) {
   if (!cellSchema) return 'N/A';
 
@@ -85,6 +93,25 @@ function markdownToHtml(text) {
   if (!text) return '';
   let html = String(text);
 
+  // Parse reference-style link definitions like:
+  // [`Builder`]: crate::Builder
+  // [Actions]: crate::assertions::Actions
+  const refDefs = (() => {
+    const map = {};
+    const defRe = /^\s*\[([^\]]+)\]:\s*(\S+)\s*$/gm;
+    let m;
+    while ((m = defRe.exec(html)) !== null) {
+      const rawLabel = m[1];
+      const target = m[2];
+      map[rawLabel] = target;
+      const normalized = rawLabel.replace(/`/g, '');
+      if (!Object.prototype.hasOwnProperty.call(map, normalized)) {
+        map[normalized] = target;
+      }
+    }
+    return map;
+  })();
+
   const escapeHtml = (s) =>
     String(s)
       .replace(/&/g, '&amp;')
@@ -113,8 +140,25 @@ function markdownToHtml(text) {
     BmffHash: 'assertions',
     Builder: '',
   };
+  // Known struct field names for better anchor selection (fields vs methods)
+  const TYPE_FIELD_HINTS = {
+    Settings: new Set([
+      'builder',
+      'cawg_trust',
+      'cawg_x509_signer',
+      'core',
+      'signer',
+      'trust',
+      'verify',
+      'version',
+    ]),
+  };
+  // Known type kinds to choose docs page prefix (struct vs trait)
+  const TYPE_KIND_HINTS = {
+    Signer: 'trait',
+  };
   const resolveDocsUrl = (codeRef) => {
-    let refStr = codeRef.replace(/^crate::/, '');
+    let refStr = codeRef.replace(/^(?:crate|c2pa)::/, '');
 
     const parts = refStr.split('::');
     let moduleParts = [];
@@ -150,24 +194,63 @@ function markdownToHtml(text) {
     }
 
     const modulePath = moduleParts.length ? moduleParts.join('/') + '/' : '';
-    let url = `https://docs.rs/c2pa/latest/c2pa/${modulePath}struct.${typeName}.html`;
+    const kind = TYPE_KIND_HINTS[typeName] || 'struct';
+    let url = `https://docs.rs/c2pa/latest/c2pa/${modulePath}${kind}.${typeName}.html`;
 
     if (member) {
-      const anchor = /_/.test(member)
-        ? `structfield.${member}`
-        : `method.${member}`;
+      const isField =
+        TYPE_FIELD_HINTS[typeName] && TYPE_FIELD_HINTS[typeName].has(member);
+      const anchor = isField ? `structfield.${member}` : `method.${member}`;
       url += `#${anchor}`;
     }
     return url;
   };
 
   // Convert [`CodeRef`] to links to docs.rs, preserving code formatting
-  html = html.replace(/\[`([^`]+)`\]/g, (m, codeRef) => {
-    const url = resolveDocsUrl(codeRef);
+  html = html.replace(/\[`([^`]+)`\](?!\(|:)/g, (m, codeRef) => {
+    const mapped =
+      (Object.prototype.hasOwnProperty.call(refDefs, '`' + codeRef + '`') &&
+        refDefs['`' + codeRef + '`']) ||
+      (Object.prototype.hasOwnProperty.call(refDefs, codeRef) &&
+        refDefs[codeRef]) ||
+      null;
+    const url =
+      mapped && /^https?:\/\//.test(mapped)
+        ? mapped
+        : resolveDocsUrl(mapped || codeRef);
     return `<a href="${escapeHtml(url)}"><code>${escapeHtml(
       codeRef,
     )}</code></a>`;
   });
+
+  // Convert reference-style links: [Label][CodeRef] into docs.rs links
+  // Keep the label as the link text, resolve the second bracket as a Rust code ref.
+  html = html.replace(
+    /\[([^\]]+)\]\s*\[\s*((?:crate::|c2pa::)?[A-Za-z][A-Za-z0-9_]*(?:::[A-Za-z0-9_]+)*)\s*\]/g,
+    (m, label, codeRef) => {
+      const url = resolveDocsUrl(codeRef);
+      return `<a href="${escapeHtml(url)}">${escapeHtml(label)}</a>`;
+    },
+  );
+
+  // Convert [CodeRef] (non-markdown-link, no backticks) to docs.rs links.
+  // Avoid interfering with [text](url) by ensuring no '(' follows the ']'.
+  // Also avoid reference definition lines (followed by ':').
+  // Accept optional crate:: prefix and Type paths with ::member.
+  html = html.replace(
+    /\[((?:crate::|c2pa::)?[A-Z][A-Za-z0-9_]*(?:::[A-Za-z0-9_]+)*)\](?!\(|:)/g,
+    (m, labelOrCodeRef) => {
+      const mapped =
+        (Object.prototype.hasOwnProperty.call(refDefs, labelOrCodeRef) &&
+          refDefs[labelOrCodeRef]) ||
+        null;
+      const url =
+        mapped && /^https?:\/\//.test(mapped)
+          ? mapped
+          : resolveDocsUrl(mapped || labelOrCodeRef);
+      return `<a href="${escapeHtml(url)}">${escapeHtml(labelOrCodeRef)}</a>`;
+    },
+  );
 
   // Links: [text](url)
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, url) => {
@@ -206,7 +289,13 @@ function Markdown({ text }) {
   return <span dangerouslySetInnerHTML={{ __html: markdownToHtml(text) }} />;
 }
 
-function PropertiesTable({ title, description, properties, required }) {
+function PropertiesTable({
+  title,
+  description,
+  properties,
+  required,
+  defaults,
+}) {
   if (!properties || Object.keys(properties).length === 0) return null;
 
   return (
@@ -237,38 +326,78 @@ function PropertiesTable({ title, description, properties, required }) {
           </tr>
         </thead>
         <tbody>
-          {Object.entries(properties).map(([name, schema]) => {
-            const typeHtml = formatType(schema);
-            const isRequired = Array.isArray(required)
-              ? required.includes(name)
-              : false;
-            const defaultValue =
-              schema && Object.prototype.hasOwnProperty.call(schema, 'default')
-                ? JSON.stringify(schema.default)
-                : 'N/A';
+          {Object.entries(properties)
+            .sort(([aName], [bName]) =>
+              String(aName).localeCompare(String(bName), undefined, {
+                sensitivity: 'base',
+                numeric: true,
+              }),
+            )
+            .map(([name, schema]) => {
+              const typeHtml = formatType(schema);
+              const isRequired = Array.isArray(required)
+                ? required.includes(name)
+                : false;
+              const explicitDefault =
+                schema &&
+                Object.prototype.hasOwnProperty.call(schema, 'default')
+                  ? schema.default
+                  : undefined;
+              const inferredDefault =
+                defaults && Object.prototype.hasOwnProperty.call(defaults, name)
+                  ? defaults[name]
+                  : undefined;
+              const chosenDefault =
+                explicitDefault !== undefined
+                  ? explicitDefault
+                  : inferredDefault !== undefined
+                  ? inferredDefault
+                  : undefined;
 
-            return (
-              <tr key={name}>
-                <td className="manifest-ref-table">{name}</td>
-                <td className="manifest-ref-table">
-                  <HTML html={typeHtml} />
-                </td>
-                <td className="manifest-ref-table">
-                  {schema && schema.description ? (
-                    <div className="prop_desc">
-                      <Markdown text={schema.description} />
-                    </div>
-                  ) : (
-                    <span>N/A</span>
-                  )}
-                </td>
-                <td className="manifest-ref-table">
-                  {isRequired ? 'YES' : 'NO'}
-                </td>
-                <td className="manifest-ref-table">{defaultValue}</td>
-              </tr>
-            );
-          })}
+              // Link to the referenced definition for non-primitive defaults (objects/arrays) when possible
+              let defaultCell;
+              if (chosenDefault === undefined) {
+                defaultCell = 'N/A';
+              } else if (
+                typeof chosenDefault === 'object' &&
+                chosenDefault !== null
+              ) {
+                const defName = schema ? refToDefName(schema.$ref) : null;
+                if (defName) {
+                  defaultCell = (
+                    <>
+                      See <a href={`#${slugify(defName)}`}>{defName}</a>
+                    </>
+                  );
+                } else {
+                  defaultCell = JSON.stringify(chosenDefault);
+                }
+              } else {
+                defaultCell = JSON.stringify(chosenDefault);
+              }
+
+              return (
+                <tr key={name}>
+                  <td className="manifest-ref-table">{name}</td>
+                  <td className="manifest-ref-table">
+                    <HTML html={typeHtml} />
+                  </td>
+                  <td className="manifest-ref-table">
+                    {schema && schema.description ? (
+                      <div className="prop_desc">
+                        <Markdown text={schema.description} />
+                      </div>
+                    ) : (
+                      <span>N/A</span>
+                    )}
+                  </td>
+                  <td className="manifest-ref-table">
+                    {isRequired ? 'YES' : 'NO'}
+                  </td>
+                  <td className="manifest-ref-table">{defaultCell}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </>
@@ -326,7 +455,7 @@ function getUnionOptions(schema) {
   return union.filter((opt) => opt && typeof opt === 'object');
 }
 
-function UnionOptionsTable({ options }) {
+function UnionOptionsTable({ options, contextName }) {
   if (!options || options.length === 0) return null;
 
   const getTypeLabel = (opt) => {
@@ -339,6 +468,26 @@ function UnionOptionsTable({ options }) {
         ? opt.$ref.replace('#/$defs/', '')
         : opt.$ref;
       return name;
+    }
+    return 'N/A';
+  };
+
+  const getValueLabel = (opt) => {
+    if (!opt) return 'N/A';
+    if (Object.prototype.hasOwnProperty.call(opt, 'const')) {
+      return String(opt.const);
+    }
+    // If the union option is an object with a single top-level property (e.g., { local: { ... } })
+    // use that property key as the value label.
+    if (opt && isObject(opt.properties)) {
+      const keys = Object.keys(opt.properties);
+      if (keys.length === 1) {
+        // Special-case: For BuilderIntent, don't show the key name; show Object (see below)
+        if (contextName === 'BuilderIntent') {
+          return 'Object (see below)';
+        }
+        return keys[0];
+      }
     }
     return 'N/A';
   };
@@ -365,11 +514,7 @@ function UnionOptionsTable({ options }) {
                 'N/A'
               )}
             </td>
-            <td className="manifest-ref-table">
-              {Object.prototype.hasOwnProperty.call(opt, 'const')
-                ? String(opt.const)
-                : 'N/A'}
-            </td>
+            <td className="manifest-ref-table">{getValueLabel(opt)}</td>
           </tr>
         ))}
       </tbody>
@@ -384,6 +529,26 @@ function DefinitionSection({ name, schema }) {
     (schema && isObject(schema.properties));
   const unionOptions = getUnionOptions(schema);
 
+  const getInnerObjectForOption = (opt) => {
+    if (!opt || !isObject(opt)) return null;
+    // If option is an object with a single named property that itself is an object,
+    // prefer showing that inner object's properties (e.g., { local: { ... } }).
+    if (isObject(opt.properties)) {
+      const keys = Object.keys(opt.properties);
+      if (keys.length === 1) {
+        const sole = opt.properties[keys[0]];
+        if (sole && (sole.type === 'object' || isObject(sole.properties))) {
+          return { title: keys[0], node: sole };
+        }
+      }
+      // Otherwise, fall back to the option's own properties if it's an object type
+      if (opt.type === 'object') {
+        return { title: null, node: opt };
+      }
+    }
+    return null;
+  };
+
   return (
     <>
       <h3 className="scroll-target" id={titleId}>
@@ -397,11 +562,36 @@ function DefinitionSection({ name, schema }) {
       ) : null}
 
       {unionOptions.length > 0 ? (
-        <UnionOptionsTable options={unionOptions} />
+        <>
+          <UnionOptionsTable options={unionOptions} contextName={name} />
+          {unionOptions.map((opt, idx) => {
+            const inner = getInnerObjectForOption(opt);
+            if (inner && inner.node && isObject(inner.node.properties)) {
+              let optTitle = null;
+              if (name === 'SignerSettings' && inner.title) {
+                optTitle = `signer.${inner.title}`;
+              } else if (inner.title) {
+                optTitle = `${capitalizeType('object')}: ${inner.title}`;
+              }
+              return (
+                <PropertiesTable
+                  key={`opt-${idx}`}
+                  title={optTitle || undefined}
+                  description={undefined}
+                  properties={inner.node.properties || {}}
+                  required={inner.node.required || []}
+                  defaults={schema.__inferredDefaults || undefined}
+                />
+              );
+            }
+            return null;
+          })}
+        </>
       ) : isObjectType ? (
         <PropertiesTable
           properties={schema.properties || {}}
           required={schema.required || []}
+          defaults={schema.__inferredDefaults || undefined}
         />
       ) : (
         // Fallback simple table for non-object schemas
@@ -445,6 +635,98 @@ export default function SchemaReference({ schemaUrl }) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Ensure hash anchors (e.g., #buildersettings) scroll into view after
+  // the dynamically generated content renders, and on subsequent hash changes.
+  useEffect(() => {
+    const scrollToHash = () => {
+      if (typeof window === 'undefined') return;
+      const hash = window.location && window.location.hash;
+      if (!hash) return;
+      const id = decodeURIComponent(hash.replace(/^#/, ''));
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (el && typeof el.scrollIntoView === 'function') {
+        // Rely on CSS (e.g., scroll-margin-top) for fixed-header offset handling.
+        el.scrollIntoView();
+      }
+    };
+    // After schema loads and the DOM updates, attempt to scroll to the hash.
+    if (schema) {
+      // Use a micro-delay to ensure elements are in the DOM.
+      const t = setTimeout(scrollToHash, 0);
+      return () => clearTimeout(t);
+    }
+  }, [schema]);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      // Ensure scroll happens after DOM paint.
+      setTimeout(() => {
+        if (typeof window === 'undefined') return;
+        const hash = window.location && window.location.hash;
+        const id = hash ? decodeURIComponent(hash.replace(/^#/, '')) : '';
+        if (!id) return;
+        const el = document.getElementById(id);
+        if (el && typeof el.scrollIntoView === 'function') {
+          el.scrollIntoView();
+        }
+      }, 0);
+    };
+    if (typeof window !== 'undefined') {
+      window.addEventListener('hashchange', onHashChange);
+      return () => window.removeEventListener('hashchange', onHashChange);
+    }
+    return undefined;
+  }, []);
+
+  const buildDefDefaults = (root) => {
+    if (!root || !isObject(root)) return {};
+    const defs = root.$defs || root.definitions || {};
+    const defDefaults = {};
+
+    const feed = (defName, defSchema, value) => {
+      if (!defName || !defSchema) return;
+      if (!isObject(value)) {
+        // Record scalar/array as the default value of the referenced node when used as a property.
+        // For nested object defaults we handle below.
+        return;
+      }
+      const props = (defSchema && defSchema.properties) || {};
+      if (!isObject(props)) return;
+      if (!defDefaults[defName]) defDefaults[defName] = {};
+      for (const [propName, propSchema] of Object.entries(props)) {
+        if (!Object.prototype.hasOwnProperty.call(value, propName)) continue;
+        const propValue = value[propName];
+        // Always record the value for the property at this level for display
+        defDefaults[defName][propName] = propValue;
+        // If the property itself references another definition and the default value is an object,
+        // propagate deeper so nested definition sections can show their own inferred defaults.
+        const subRefName = propSchema && refToDefName(propSchema.$ref);
+        if (subRefName) {
+          const subDefSchema = defs[subRefName];
+          if (subDefSchema) feed(subRefName, subDefSchema, propValue);
+        }
+      }
+    };
+
+    const rootProps = (root && root.properties) || {};
+    for (const [, propSchema] of Object.entries(rootProps)) {
+      const defName = propSchema && refToDefName(propSchema.$ref);
+      if (!defName) continue;
+      const defSchema = defs[defName];
+      if (!defSchema) continue;
+      if (
+        propSchema &&
+        Object.prototype.hasOwnProperty.call(propSchema, 'default')
+      ) {
+        const defaultValue = propSchema.default;
+        feed(defName, defSchema, defaultValue);
+      }
+    }
+
+    return defDefaults;
+  };
+
   useEffect(() => {
     let cancelled = false;
     async function run() {
@@ -466,6 +748,11 @@ export default function SchemaReference({ schemaUrl }) {
       cancelled = true;
     };
   }, [schemaUrl]);
+
+  const inferredDefaults = useMemo(
+    () => buildDefDefaults(schema || {}),
+    [schema],
+  );
 
   if (loading) return <p>Loading schema…</p>;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
@@ -496,9 +783,28 @@ export default function SchemaReference({ schemaUrl }) {
 
       <DefinitionsTOC defs={defs} />
 
-      {Object.entries(defs).map(([name, defSchema]) => (
-        <DefinitionSection key={name} name={name} schema={defSchema} />
-      ))}
+      {Object.entries(defs)
+        .sort(([aName], [bName]) =>
+          String(aName).localeCompare(String(bName), undefined, {
+            sensitivity: 'base',
+            numeric: true,
+          }),
+        )
+        .map(([name, defSchema]) => {
+          const schemaWithDefaults =
+            (defSchema && {
+              ...defSchema,
+              __inferredDefaults: inferredDefaults[name],
+            }) ||
+            defSchema;
+          return (
+            <DefinitionSection
+              key={name}
+              name={name}
+              schema={schemaWithDefaults}
+            />
+          );
+        })}
     </div>
   );
 }

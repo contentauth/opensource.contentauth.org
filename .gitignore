@@ -23,8 +23,8 @@
 /docs/c2pa-node/docs/*.md
 /docs/c2pa-python/*.md
 /docs/c2pa-python/docs/*.md
-/docs/c2pa-c/*.md
-/docs/c2pa-c/docs/*.md
+/docs/c2pa-cpp/*.md
+/docs/c2pa-cpp/docs/*.md
 /docs/rust-sdk/*.md
 /docs/rust-sdk/docs/*.md
 /docs/**/readme.md

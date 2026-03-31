@@ -24,7 +24,7 @@
       "default": [
         {
           "name": "c2pa-rs",
-          "version": "0.75.10"
+          "version": "0.78.7"
         }
       ]
     },
@@ -47,7 +47,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:7274537e-a27f-436a-b22d-0f87961b9910"
+      "default": "xmp:iid:e9fedf3e-eaec-4463-ae79-a749c35f006d"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -87,12 +87,22 @@
       "description": "Allows you to pre-define the manifest label, which must be unique.\nNot intended for general use.  If not set, it will be assigned automatically.",
       "type": ["string", "null"]
     },
+    "hash_alg": {
+      "description": "Hash algorithm used for asset hashing (DataHash, BmffHash) and assertion hashing\nin the claim.  Defaults to `\"sha256\"` when not set.\n\nValid values: `\"sha256\"`, `\"sha384\"`, `\"sha512\"`.\n\nThis sets the claim-level `alg` field and is the default used by\n[`Builder::update_hash_from_stream`].  It can be overridden on individual\nhard binding assertions (e.g. a pre-constructed `DataHash`) by setting\nthe assertion's own `alg` field before adding it to the builder.\n\nNamed `hash_alg` (rather than `alg`) to avoid collision with the signer's\nsignature algorithm, which uses the same key in some combined JSON configurations.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "remote_url": {
-      "description": "Optional remote URL for the manifest",
-      "type": ["string", "null"]
+      "description": "Optional remote URL for the manifest.",
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "no_embed": {
-      "description": "If true, the manifest store will not be embedded in the asset on sign",
+      "description": "If true, the manifest store will not be embedded in the asset on sign.",
       "type": "boolean"
     },
     "base_path": {
@@ -147,8 +157,11 @@
           ]
         },
         "operating_system": {
-          "description": "A human readable string of the OS the claim generator is running on",
-          "type": ["string", "null"]
+          "description": "A human readable string of the OS the claim generator is running on.\nCrJSON schema uses `operating_system`; C2PA CBOR may use `schema.org.SoftwareApplication.operatingSystem`.",
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "required": ["name"],
@@ -207,7 +220,7 @@
       "required": ["type"]
     },
     "HashedUri": {
-      "description": "A `HashedUri` provides a reference to content available within the same\nmanifest store.\n\nThis is described in [§8.3, URI References], of the C2PA Technical\nSpecification.\n\n[§8.3, URI References]: https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html#_uri_references",
+      "description": "A `HashedUri` provides a reference to content available within the same\nmanifest store.\n\nThis is described in [URI References in the C2PA Technical\nSpecification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_uri_references).",
       "type": "object",
       "properties": {
         "url": {
@@ -297,7 +310,7 @@
       "additionalProperties": true
     },
     "ReviewRating": {
-      "description": "A rating on an Assertion.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_review_ratings>.",
+      "description": "A rating on an Assertion.\n\nSee [C2PA Specification - Review Ratings](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_review_ratings).",
       "type": "object",
       "properties": {
         "explanation": {
@@ -911,7 +924,7 @@
       ]
     },
     "ValidationStatus": {
-      "description": "A `ValidationStatus` struct describes the validation status of a\nspecific part of a manifest.\n\nSee <https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_existing_manifests>.",
+      "description": "A `ValidationStatus` struct describes the validation status of a\nspecific part of a manifest.\n\nSee [Existing Manifests - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_existing_manifests).",
       "type": "object",
       "properties": {
         "code": {
@@ -951,6 +964,14 @@
           "items": {
             "$ref": "#/$defs/IngredientDeltaValidationResult"
           }
+        },
+        "validationTime": {
+          "description": "Time when the validation was performed (RFC 3339 date-time). Used only for document-level validationInfo; not serialized in validationResults (e.g. ingredient assertions).",
+          "type": [
+            "string",
+            "null"
+          ],
+          "writeOnly": true
         }
       }
     },
@@ -973,6 +994,7 @@
           }
         },
         "failure": {
+          "description": "An array of validation failure codes. May be empty.",
           "type": "array",
           "items": {
             "$ref": "#/$defs/ValidationStatus"
@@ -1062,7 +1084,7 @@
       ]
     },
     "DigitalSourceType": {
-      "description": "Description of the source of an asset.\n\nThe full list of possible digital source types are found below:\n<https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_digital_source_type>\n<https://cv.iptc.org/newscodes/digitalsourcetype>",
+      "description": "Description of the source of an asset.\n\nThe digital source type must be either a value from the [IPTC Digital Source Types](https://cv.iptc.org/newscodes/digitalsourcetype) or a C2PA-specific value as given in [the C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_digital_source_type).",
       "anyOf": [
         {
           "description": "Media whose digital content is effectively empty, such as a blank canvas or zero-length video.",
@@ -1070,7 +1092,7 @@
           "const": "http://c2pa.org/digitalsourcetype/empty"
         },
         {
-          "description": "Data that is the result of algorithmically using a model derived from sampled content and data.\nDiffers from <http://cv.iptc.org/newscodes/digitalsourcetype/>trainedAlgorithmicMedia in that\nthe result isn’t a media type (e.g., image or video) but is a data format (e.g., CSV, pickle).",
+          "description": "Data that is the result of algorithmically using a model derived from sampled content and data.\nDiffers from [IPTC Digital Source Type](http://cv.iptc.org/newscodes/digitalsourcetype/) `trainedAlgorithmicMedia` in that\nthe result isn’t a media type (e.g., image or video) but is a data format (e.g., CSV, pickle).",
           "type": "string",
           "const": "http://c2pa.org/digitalsourcetype/trainedAlgorithmicData"
         },

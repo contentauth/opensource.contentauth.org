@@ -21,6 +21,7 @@
     "@contentauth/react": "^0.2.38",
     "@docusaurus/core": "^3.0.0",
     "@docusaurus/preset-classic": "^3.0.0",
+    "@docusaurus/theme-mermaid": "^3.9.2",
     "@mdx-js/react": "^3.0.0",
     "@stackblitz/sdk": "^1.6.0",
     "c2pa": "^0.30.16",
@@ -50,7 +51,8 @@
     "node-fetch": "^2.6.7",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.6.2",
-    "raw-loader": "^4.0.2"
+    "raw-loader": "^4.0.2",
+    "remark-github-admonitions-to-directives": "^2.1.0"
   },
   "lint-staged": {
     "**/*": "prettier --ignore-unknown --write"
