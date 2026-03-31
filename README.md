@@ -21,7 +21,7 @@ This table summarizes the content that this script fetches from other repos.
 
 | Sub-directory | Content fetched from... | Description | 
 |-----------|-------------------------|-------------|
-| `c2pa-c` | [c2pa-c](https://github.com/contentauth/c2pa-c) | C library docs. |
+| `c2pa-cpp` | [c2pa-cpp](https://github.com/contentauth/c2pa-cpp) | C++ library docs. |
 | `c2pa-ios` | [c2pa-ios](https://github.com/contentauth/c2pa-ios) | Mobile iOS library docs. |
 | `c2pa-android` | [c2pa-android](https://github.com/contentauth/c2pa-android) | Android library docs. | 
 | `c2pa-node-v2` | [c2pa-node](https://github.com/contentauth/c2pa-node-v2) | Node library docs. |
