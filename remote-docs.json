@@ -202,12 +202,22 @@
     },
     {
       "repo": "contentauth/c2pa-python",
+      "path": "docs/intents.md",
+      "dest": "docs/c2pa-python/docs/intents.md",
+      "sidebar": {
+        "category": "c2pa-python",
+        "label": "Using Builder intents",
+        "order": 5
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-python",
       "path": "docs/working-stores.md",
       "dest": "docs/c2pa-python/docs/working-stores.md",
       "sidebar": {
         "category": "c2pa-python",
         "label": "Manifests, working stores, and archives",
-        "order": 5
+        "order": 6
       }
     },
     {
@@ -217,7 +227,7 @@
       "sidebar": {
         "category": "c2pa-python",
         "label": "Selective manifest construction",
-        "order": 6
+        "order": 7
       }
     },
     {
@@ -227,7 +237,7 @@
       "sidebar": {
         "category": "c2pa-python",
         "label": "Python example code",
-        "order": 7
+        "order": 8
       }
     },
     {
@@ -237,7 +247,7 @@
       "sidebar": {
         "category": "c2pa-python",
         "label": "Release notes",
-        "order": 8
+        "order": 9
       }
     },
     {
@@ -247,7 +257,7 @@
       "sidebar": {
         "category": "c2pa-python",
         "label": "C2PA Python example",
-        "order": 9
+        "order": 10
       }
     },
 
