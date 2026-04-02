@@ -293,6 +293,10 @@ For the complete list of standard actions, see the [C2PA Technical Specification
 
 ### Digital source type
 
+:::tip
+For a video walkthrough of signing an asset at creation with a digital source type, see [Signing an image at creation indicating its origin type](https://learn.contentauthenticity.org/signing-an-image-at-creation) from the Content Credentials Foundations course.
+:::
+
 Use the `digitalSourceType` property to specify how an asset was created or modified, for example "digital capture", "digitized from negative," or "trained algorithmic media." 
 
 The value of `digitalSourceType` is one of the URLs specified by the International Press Telecommunications Council (IPTC) [NewsCodes Digital Source Type scheme](https://cv.iptc.org/newscodes/digitalsourcetype/) of the form `http://cv.iptc.org/newscodes/digitalsourcetype/<CODE>`, where `<CODE>` is one of the codes shown in the following table.

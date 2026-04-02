@@ -62,6 +62,10 @@ The CAI uses _cryptographic asset hashing_ to provide verifiable, tamper-evident
 
 ## Introduction to public key infrastructure
 
+:::tip
+For a video introduction to certificates and key management in the C2PA ecosystem, see [A closer look at private keys and certificates](https://learn.contentauthenticity.org/private-keys-and-certificates) from the Content Credentials Foundations course.
+:::
+
 For authentication, C2PA uses _public key infrastructure_ (PKI) technology, a widely used international standard: The same technology used to secure websites using HTTPS, to secure email using S/MIME, and for many other digital security purposes. C2PA uses the international [X.509](https://en.wikipedia.org/wiki/X.509) standard, the most common format for public key certificates.
 
 A signed digital certificate verifies the authenticity of an entity, such as a server, a client, or an application. You typically purchase a certificate from a third-party certificate authority. A certificate can contain the following information to verify the identity of an entity:
@@ -127,6 +131,14 @@ In addition to storing the manifest with the asset, Adobe tools use the _Adobe C
 Currently, Adobe Content Credentials Cloud (ACCC) is only available to Adobe tools, though in the future other credentials clouds may become available if other organizations want to host a credential service. Currently, most manifests will be embedded in assets since ACCC is specific to Adobe.
 
 ## Displaying manifest data
+
+:::tip
+For video walkthroughs on displaying Content Credentials, see the following from the Content Credentials Foundations course:
+
+- [Progressive disclosure of Content Credentials](https://learn.contentauthenticity.org/progressive-disclosure-of-content-credentials)
+- [Reading and validating C2PA data with Javascript in the browser](https://learn.contentauthenticity.org/reading-and-validating-content-credentials)
+- [Formatting C2PA data for L1 - L3 disclosures](https://learn.contentauthenticity.org/formatting-c2pa-data-for-display)
+  :::
 
 The manifest is only useful to end users if it can be displayed meaningfully in a user interface. How a UI does that is of course up to the designer, but because the full set of manifest data for an asset can be very complex, there are four recommended _levels of disclosure_:
 
