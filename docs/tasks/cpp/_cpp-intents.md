@@ -1,5 +1,3 @@
-_Intents_ tell the `Builder` what kind of manifest you are creating. They enable validation, add required default actions, and help prevent invalid operations.
-
 ### Setting the intent
 
 Set the intent through `Context` settings or by calling `set_intent` on the `Builder`. Using `Context` keeps intent configuration alongside other builder settings:
@@ -27,14 +25,6 @@ c2pa::Builder builder(context, R"({})");
 builder.set_intent(Create, DigitalCapture);
 builder.sign(source_path, output_path, signer);
 ```
-
-### Intent types
-
-| Intent | Operation | Parent ingredient | Auto-generated action |
-|--------|-----------|-------------------|-----------------------|
-| `Create` | Brand-new content | Must NOT have one | `c2pa.created` |
-| `Edit` | Modifying existing content | Auto-created from source if not provided | `c2pa.opened` (linked to parent) |
-| `Update` | Metadata-only changes | Auto-created from source if not provided | `c2pa.opened` (linked to parent) |
 
 ### Create intent
 

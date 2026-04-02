@@ -1,5 +1,3 @@
-_Intents_ tell the `Builder` what kind of manifest you are creating. They enable validation, add required default actions, and help prevent invalid operations.
-
 ### Setting the intent
 
 Set the intent through `Context` settings. Using `Context` keeps intent configuration alongside other builder settings:
@@ -20,13 +18,17 @@ with open("source.jpg", "rb") as src, open("signed.jpg", "w+b") as dst:
     builder.sign(signer, "image/jpeg", src, dst)
 ```
 
-### Intent types
+Alternatively, you can call `set_intent` directly on a `Builder` instance for one-off operations or when the intent is determined at runtime. For example:
 
-| Intent | Operation | Parent ingredient | Auto-generated action |
-|--------|-----------|-------------------|-----------------------|
-| `Create` | Brand-new content | Must NOT have one | `c2pa.created` |
-| `Edit` | Modifying existing content | Auto-created from source if not provided | `c2pa.opened` (linked to parent) |
-| `Update` | Metadata-only changes | Auto-created from source if not provided | `c2pa.opened` (linked to parent) |
+```py
+with Builder({}) as builder:
+    builder.set_intent(
+        C2paBuilderIntent.CREATE,
+        C2paDigitalSourceType.TRAINED_ALGORITHMIC_MEDIA,
+    )
+    with open("source.jpg", "rb") as source, open("output.jpg", "wb") as dest:
+        builder.sign(signer, "image/jpeg", source, dest)
+```
 
 ### Create intent
 
