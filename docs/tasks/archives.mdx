@@ -1,0 +1,34 @@
+---
+id: archives
+title: Using working stores and archives
+hide_table_of_contents: true
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import Rustarchives from './rust/_rust-archives.md';
+import Cpparchives from './cpp/_cpp-archives.md';
+import Pythonarchives from './python/_python-archives.md';
+
+<Tabs groupId="programming-lang" queryString="lang">
+
+  <TabItem value="rust" label="Rust">
+
+    <Rustarchives name="rust-archives" />
+
+  </TabItem>
+
+  <TabItem value="cpp" label="C++">
+
+    <Cpparchives name="cpp-archives" />
+
+  </TabItem>
+
+  <TabItem value="python" label="Python" default>
+
+    <Pythonarchives name="python-archives" />
+
+  </TabItem>
+  
+</Tabs>

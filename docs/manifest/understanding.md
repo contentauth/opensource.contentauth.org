@@ -1,13 +1,11 @@
 ---
 id: understanding-manifest
-title: Working with manifests
+title: Understanding manifests
 ---
-
-## Understanding manifests
 
 The concept of a _manifest_ is central to how Content Credentials work.
 
-A collection of manifests (known as a _manifest store_) is attached to an asset. Each manifest contains information about the provenance of the asset. Creating or editing an asset using a C2PA-compliant device or tool (for example Adobe Photoshop) adds a new manifest to the manifest store.
+A collection of manifests (known as a _manifest store_) is attached to an asset. Each manifest contains information about the provenance of the asset. Creating or editing an asset using a C2PA-compliant device or tool (for example, Adobe Photoshop) adds a new manifest to the manifest store.
 
 The manifests in the manifest store are not ordered, but the most-recently added manifest is the _active manifest_. The active manifest has content bindings that can be validated with the asset&mdash;that is, it's hashed with the asset to ensure its validity.
 
@@ -21,6 +19,7 @@ A manifest store can be either:
 In addition, an asset can have a [external manifest store](https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_external_manifests), linked from the asset's metadata, as detailed in the [C2PA specification](https://spec.c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_embedding_a_reference_to_an_external_manifest).  This is sometimes referred to as a _remote manifest_. 
 
 To determine if an asset has Content Credentials, the SDK checks for the presence of a manifest store in this order:
+
 1. In the asset metadata
 1. In a sidebar file.
 1. In a remote manifest.
@@ -28,10 +27,10 @@ To determine if an asset has Content Credentials, the SDK checks for the presenc
 So, for example to see if `foo.jpg` has Content Credentials, the SDK first checks if there's a manifest store in the file itself, then looks for a sidecar file (`foo.c2pa` in the same directory), and finally looks in the asset's metadata for a reference to a remote manifest store.  
 
 :::info
-Currently, only Adobe has implemented a Content Credentials cloud service to provide access to remote manifest stores, but in theory anyone could do so to provide a publicly-accessible network location for manifests.   
+Currently, only Adobe has implemented a Content Credentials cloud service to provide access to remote manifest stores, but in theory anyone could do so to provide a publicly-accessible network location for manifests.
 :::
 
-## Binary versus JSON manifest formats
+## Binary versus JSON manifest
 
 The manifest as described in the C2PA specification is a binary structure in JPEG universal metadata box format ([JUMBF](https://www.iso.org/standard/84635.html)) that can include JSON and binary data for things like encryption keys and thumbnail images.
 

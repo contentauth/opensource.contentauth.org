@@ -1,0 +1,34 @@
+---
+id: build
+title: Adding and signing a manifest
+hide_table_of_contents: true
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import PythonBuild from './python/_python-build.md';
+import CppBuild from './cpp/_cpp-build.md';
+import RustBuild from './rust/_rust-build.md';
+
+<Tabs groupId="programming-lang" queryString="lang">
+
+  <TabItem value="rust" label="Rust">
+
+    <RustBuild name="rust-build" />
+
+  </TabItem>
+
+  <TabItem value="cpp" label="C++">
+
+    <CppBuild name="cpp-build" />
+
+  </TabItem>
+
+  <TabItem value="python" label="Python" default>
+
+    <PythonBuild name="python-build" />
+
+  </TabItem>
+  
+</Tabs>

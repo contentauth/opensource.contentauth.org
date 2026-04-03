@@ -1,0 +1,95 @@
+---
+id: settings
+title: Configuring SDK settings with Context
+hide_table_of_contents: true
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import PythonRead from './python/_python-settings.md';
+import CppRead from './cpp/_cpp-settings.md';
+import RustRead from './rust/_rust-settings.md';
+
+Regardless of which language you're working in, you use the `Context` and `Settings` classes to control SDK behavior including verification, trust anchors, thumbnails, signing, and more.
+
+## Overview of Context
+
+`Context` encapsulates SDK configuration that controls how `Reader`, `Builder`, and other components operate, including:
+
+- **Settings**: Trust configuration, builder behavior, thumbnails, and more.
+- **Signer configuration**: Optional signing credentials that can be stored for reuse.
+
+Using `Context` provides explicit, isolated configuration without thread-local state. It enables you to run different configurations simultaneously (for example for development with test certificates or production with strict validation), simplifies testing, and improves code clarity.
+
+`Context`:
+
+- Can be moved but not copied. After moving, `is_valid()` returns `false` on the source.
+- Is used at construction: `Reader` and `Builder` copy configuration from the `Context` at construction time. The `Context` doesn't need to outlive them.
+- Is reusable: Use the same `Context` to create multiple `Reader` and `Builder` instances.
+
+## Overview of Settings
+
+You can specify a declarative configuration for the SDK using `Settings`, that you can load from a JSON file or set programmatically.
+
+### Settings object structure
+
+> [!TIP]
+> For the complete reference to the Settings object, see [SDK object reference - Settings](https://opensource.contentauthenticity.org/docs/manifest/json-ref/settings-schema).
+
+Settings JSON has this top-level structure:
+
+```json
+{
+  "version": 1,
+  "trust": { ... },
+  "cawg_trust": { ... },
+  "core": { ... },
+  "verify": { ... },
+  "builder": { ... },
+  "signer": { ... },
+  "cawg_x509_signer": { ... }
+}
+```
+
+| Property                                                                    | Description                                                  |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `version`                                                                   | Settings format version (must be 1)                          |
+| [`trust`](../manifest/json-ref/settings-schema/#trust)                      | Certificate trust configuration for C2PA validation          |
+| [`cawg_trust`](../manifest/json-ref/settings-schema/#trust)                 | Certificate trust configuration for CAWG identity assertions |
+| [`core`](../manifest/json-ref/settings-schema/#core)                        | Core SDK behavior and performance tuning                     |
+| [`verify`](../manifest/json-ref/settings-schema/#verify)                    | Validation and verification behavior                         |
+| [`builder`](../manifest/json-ref/settings-schema/#builder)                  | Manifest creation and embedding behavior                     |
+| [`signer`](../manifest/json-ref/settings-schema/#signer-settings)           | C2PA signer configuration                                    |
+| [`cawg_x509_signer`](../manifest/json-ref/settings-schema/#signer-settings) | CAWG identity assertion signer configuration                 |
+
+The `version` property must be `1`. All other properties are optional.
+
+> [!IMPORTANT]
+> If you don't specify a property, the SDK uses the default value. If you specify `null`, the property is explicitly set to null (not the default). This distinction matters when overriding default behavior.
+
+For Boolean values, use JSON `true` and `false`, not the strings `"true"` and `"false"`.
+
+## Creating and using Context
+
+<Tabs groupId="programming-lang" queryString="lang">
+
+  <TabItem value="rust" label="Rust">
+
+    <RustRead name="rust-settings" />
+
+  </TabItem>
+
+  <TabItem value="cpp" label="C++">
+
+    <CppRead name="cpp-settings" />
+
+  </TabItem>
+
+  <TabItem value="python" label="Python" default>
+
+    <PythonRead name="python-settings" />
+
+  </TabItem>
+
+</Tabs>

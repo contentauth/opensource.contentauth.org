@@ -43,7 +43,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Working with manifests',
+      label: 'Understanding manifests',
       link: { type: 'doc', id: 'manifest/understanding-manifest' },
       collapsed: true,
       items: [
@@ -91,6 +91,44 @@ const sidebars = {
           type: 'doc',
           id: 'manifest/manifest-examples',
           label: 'Examples',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Working with the SDK',
+      link: { type: 'doc', id: 'tasks/index' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'tasks/settings',
+          label: 'Configuring settings',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/read',
+          label: 'Reading manifest data',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/get-resources',
+          label: 'Getting manifest resources',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/intents',
+          label: 'Using builder intents',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/archives',
+          label: 'Using working stores and archives',
+        },
+        {
+          type: 'doc',
+          id: 'tasks/build',
+          label: 'Adding and signing a manifest',
         },
       ],
     },
