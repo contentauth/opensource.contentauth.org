@@ -1,0 +1,221 @@
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+### Saving a working store to an archive
+
+Use `to_archive()` to save a `Builder` to a stream:
+
+```py
+import io
+import json
+from c2pa import Context, Builder
+
+ctx = Context.from_dict({
+    "builder": {
+        "claim_generator_info": {"name": "My App", "version": "0.1.0"}
+    }
+})
+
+builder = Builder(manifest_json, context=ctx)
+
+with open("thumbnail.jpg", "rb") as thumb:
+    builder.add_resource("thumbnail", thumb)
+
+ingredient_json = json.dumps({
+    "title": "Original asset",
+    "relationship": "parentOf"
+})
+with open("source.jpg", "rb") as ingredient:
+    builder.add_ingredient(ingredient_json, "image/jpeg", ingredient)
+
+# Save working store to archive
+archive = io.BytesIO()
+builder.to_archive(archive)
+
+# Write to a file
+with open("manifest.c2pa", "wb") as f:
+    archive.seek(0)
+    f.write(archive.read())
+```
+
+### Restoring a working store from an archive
+
+Use `with_archive()` to load an archive into a `Builder` while preserving its `Context`:
+
+```py
+from c2pa import Context, Builder
+
+ctx = Context.from_dict({
+    "builder": {
+        "thumbnail": {"enabled": False},
+        "claim_generator_info": {"name": "My App", "version": "0.1.0"}
+    }
+})
+
+# Create builder with context, then load archive into it
+with open("manifest.c2pa", "rb") as archive:
+    builder = Builder({}, context=ctx)
+    builder.with_archive(archive)
+
+# The builder has the archived manifest definition
+# but keeps the context settings
+with open("asset.jpg", "rb") as src, open("signed.jpg", "w+b") as dst:
+    builder.sign(signer, "image/jpeg", src, dst)
+```
+
+### Two-phase workflow
+
+Prepare a manifest in one step, sign it later:
+
+**Phase 1: Prepare**
+
+```py
+import io
+import json
+from c2pa import Context, Builder
+
+ctx = Context.from_dict({
+    "builder": {
+        "claim_generator_info": {"name": "My App", "version": "0.1.0"}
+    }
+})
+
+manifest_json = json.dumps({
+    "title": "Artwork draft",
+    "assertions": []
+})
+
+builder = Builder(manifest_json, context=ctx)
+
+with open("thumb.jpg", "rb") as thumb:
+    builder.add_resource("thumbnail", thumb)
+with open("sketch.png", "rb") as sketch:
+    builder.add_ingredient(
+        json.dumps({"title": "Sketch"}), "image/png", sketch
+    )
+
+with open("artwork_manifest.c2pa", "wb") as f:
+    builder.to_archive(f)
+```
+
+**Phase 2: Sign**
+
+```py
+from c2pa import Context, Builder
+
+ctx = Context.from_dict({
+    "builder": {"thumbnail": {"enabled": False}}
+})
+
+with open("artwork_manifest.c2pa", "rb") as archive:
+    builder = Builder({}, context=ctx)
+    builder.with_archive(archive)
+
+with open("artwork.jpg", "rb") as src, open("signed_artwork.jpg", "w+b") as dst:
+    builder.sign(signer, "image/jpeg", src, dst)
+```
+
+### Linking an ingredient archive to an action
+
+To link an ingredient archive to an action via `ingredientIds`, you must use a `label` set in the `add_ingredient()` call on the signing builder. Labels baked into the archive ingredient are not carried through, and `instance_id` does not work as a linking key for ingredient archives regardless of where it is set.
+
+**Step 1: Create the ingredient archive**
+
+```py
+import io, json
+
+archive_builder = Builder.from_json({
+    "claim_generator_info": [{"name": "an-application", "version": "0.1.0"}],
+    "assertions": [],
+})
+with open("photo.jpg", "rb") as f:
+    archive_builder.add_ingredient(
+        {"title": "photo.jpg", "relationship": "componentOf"},
+        "image/jpeg",
+        f,
+    )
+archive = io.BytesIO()
+archive_builder.to_archive(archive)
+archive.seek(0)
+```
+
+**Step 2: Build a manifest with an action that references the ingredient**
+
+```py
+manifest_json = {
+    "claim_generator_info": [{"name": "an-application", "version": "0.1.0"}],
+    "assertions": [
+        {
+            "label": "c2pa.actions.v2",
+            "data": {
+                "actions": [
+                    {
+                        "action": "c2pa.placed",
+                        "parameters": {
+                            "ingredientIds": ["my-ingredient"]
+                        },
+                    }
+                ]
+            },
+        }
+    ],
+}
+
+ctx = Context.from_dict({"signer": signer})
+builder = Builder(manifest_json, context=ctx)
+```
+
+**Step 3: Add the ingredient archive**
+
+The label must match the ingredientIds value and MUST be set here, on the signing builder's `add_ingredient()` call.
+
+```py
+builder.add_ingredient(
+    {"title": "photo.jpg", "relationship": "componentOf", "label": "my-ingredient"},
+    "application/c2pa",
+    archive,
+)
+
+with open("source.jpg", "rb") as src, open("signed.jpg", "w+b") as dst:
+    builder.sign("image/jpeg", src, dst)
+```
+
+When linking multiple ingredient archives, give each a distinct label and reference it in the appropriate action's `ingredientIds` array.
+
+If each ingredient has its own action (e.g., one `c2pa.opened` for the parent and one `c2pa.placed` for a composited element), set up two actions with separate `ingredientIds`:
+
+```py
+manifest_json = {
+    "claim_generator_info": [{"name": "an-application", "version": "0.1.0"}],
+    "assertions": [{
+        "label": "c2pa.actions.v2",
+        "data": {
+            "actions": [
+                {
+                    "action": "c2pa.opened",
+                    "digitalSourceType": "http://cv.iptc.org/newscodes/digitalsourcetype/digitalCreation",
+                    "parameters": {"ingredientIds": ["parent-photo"]},
+                },
+                {
+                    "action": "c2pa.placed",
+                    "parameters": {"ingredientIds": ["overlay-graphic"]},
+                },
+            ]
+        },
+    }],
+}
+
+builder = Builder(manifest_json, context=ctx)
+
+builder.add_ingredient(
+    {"title": "photo.jpg", "relationship": "parentOf", "label": "parent-photo"},
+    "application/c2pa",
+    photo_archive,
+)
+builder.add_ingredient(
+    {"title": "overlay.png", "relationship": "componentOf", "label": "overlay-graphic"},
+    "application/c2pa",
+    overlay_archive,
+)
+```

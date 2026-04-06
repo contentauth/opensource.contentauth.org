@@ -7,9 +7,14 @@ hide_table_of_contents: true
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-import Rustarchives from './rust/_rust-archives.md';
-import Cpparchives from './cpp/_cpp-archives.md';
-import Pythonarchives from './python/_python-archives.md';
+import Rustarchives from './rust/_rust-archives.mdx';
+import Cpparchives from './cpp/_cpp-archives.mdx';
+import Pythonarchives from './python/_python-archives.mdx';
+
+_Working stores_ and _archives_ provide a standard way to save and restore the state of a `Builder`:
+
+- A **working store** is the editable manifest state (including claims, ingredients, assertions) that has not yet been bound to a final asset.
+- An **archive** is a working store serialized to a file or stream (typically a `.c2pa` file) using the standard JUMBF `application/c2pa` format.
 
 <Tabs groupId="programming-lang" queryString="lang">
 

@@ -1,6 +1,6 @@
-_Working stores_ and _archives_ provide a standard way to save and restore the state of a `Builder`.
+import TOCInline from '@theme/TOCInline';
 
-A **working store** is the editable C2PA manifest state (claims, ingredients, assertions) that has not yet been bound to a final asset. An **archive** is a working store serialized to a file or stream (typically a `.c2pa` file) using the standard JUMBF `application/c2pa` format.
+<TOCInline toc={toc} />
 
 ### Saving a working store to an archive
 
@@ -95,35 +95,51 @@ fn sign() -> Result<()> {
 
 ### Capturing an ingredient as an archive
 
-Save validation results by capturing an ingredient into an archive, then reuse it later:
+Save validation results by capturing an ingredient into an archive, then reuse it later.
+
+Capture and sign an archive (no embedded asset):
 
 ```rust
-use c2pa::{Context, Builder, Result};
-use serde_json::json;
-use std::io::Cursor;
+let signer = context.signer()?;
+let ingredient_c2pa = builder.sign(
+    signer,
+    "application/c2pa",
+    &mut io::empty(),
+    &mut io::empty(),
+)?;
+```
 
-fn main() -> Result<()> {
-    let context = Context::new()
-        .with_settings(include_str!("config.json"))?;
+This returns the raw C2PA manifest store as `Vec<u8>`.
 
-    let mut builder = Builder::from_context(context)
-        .with_definition(json!({"title": "New Image"}))?;
+Later, you can add that archived ingredient to a new manifest as follows:
 
-    builder.add_ingredient_from_stream(
+```rust
+let mut builder = Builder::from_shared_context(&context)
+    .with_definition(
         json!({
-            "title": "Archived Ingredient",
-            "relationship": "componentOf",
-            "label": "ingredient_1"
-        }).to_string(),
-        "application/c2pa",
-        &mut Cursor::new(std::fs::read("ingredient.c2pa")?),
+            "title": "New Title",
+            "relationship": "componentOf"
+        })
     )?;
 
-    builder.add_action(json!({
-        "action": "c2pa.placed",
-        "parameters": { "ingredientIds": ["ingredient_1"] }
-    }))?;
-
-    Ok(())
-}
+builder.add_ingredient_from_stream(
+    json!({
+        "title": "Archived Ingredient",
+        "relationship": "componentOf",
+        "label": "ingredient_1"
+    })
+    .to_string(),
+    "application/c2pa",
+    &mut Cursor::new(ingredient_c2pa),
+)?;
+builder.add_action(json!({
+    "action": "c2pa.placed",
+    "parameters": { "ingredientIds": ["ingredient_1"] }
+}))?;
 ```
+
+Calling [`add_ingredient_from_stream()`](https://docs.rs/c2pa/latest/c2pa/struct.Builder.html#method.add_ingredient_from_stream) with format `"application/c2pa"`:
+
+1. Reads the archive.
+2. Extracts the first ingredient from the active manifest.
+3. Merges with provided JSON properties, but your overrides take precedence.
