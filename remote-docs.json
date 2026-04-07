@@ -123,12 +123,22 @@
     },
     {
       "repo": "contentauth/c2pa-rs",
+      "path": "docs/progress_callbacks.md",
+      "dest": "docs/rust-sdk/docs/progress_callbacks.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Progress callbacks",
+        "order": 6
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
       "path": "docs/cawg-identity.md",
       "dest": "docs/rust-sdk/docs/cawg-id.md",
       "sidebar": {
         "category": "rust-sdk",
         "label": "Using CAWG identity assertions",
-        "order": 6
+        "order": 7
       }
     },
     {
@@ -138,7 +148,7 @@
       "sidebar": {
         "category": "rust-sdk",
         "label": "Embeddable signing API",
-        "order": 7
+        "order": 8
       }
     },
     {
@@ -148,7 +158,7 @@
       "sidebar": {
         "category": "rust-sdk",
         "label": "Release notes",
-        "order": 8
+        "order": 9
       }
     },
 
