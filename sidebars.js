@@ -204,7 +204,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'C++ / C library',
+      label: 'C++ library',
       link: { type: 'doc', id: 'c2pa-cpp/readme' },
       collapsed: true,
       items: [
