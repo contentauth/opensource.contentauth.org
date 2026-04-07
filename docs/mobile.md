@@ -4,7 +4,7 @@ title: Mobile libraries
 ---
 
 :::warning Warning
-These projects have recently graduated from "incubator" status, but are still under active development. They may have bugs and missing features: Bug reports and feature requests are welcome in the GitHub repositories.
+These projects are still under active development. They may have bugs and missing features: Bug reports and feature requests are welcome in the GitHub repositories.
 :::
 
 These projects are available to enable developing apps for mobile devices:

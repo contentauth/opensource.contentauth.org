@@ -5,10 +5,8 @@ title: Node.js library
 
 import Readme from './c2pa-node-v2/readme.md';
 
-**Sept 2025**: A new Node.js library has been released.  We are working on adding documentation for the new library. Please bear with us!
-
 :::note
-You can continue to [install and use the old library](c2pa-node/readme.md) the same as before, but it will no longer be updated or supported.
+[The old c2pa-node library](c2pa-node/readme.md) is still available, but it's deprecated and will no longer be updated or supported.  Move to the new `c2pa-node-v2` library as soon as possible!
 :::
 
 <Readme components={{ h1: () => null }} />
