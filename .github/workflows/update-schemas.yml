@@ -56,6 +56,7 @@ jobs:
 
       - name: Send schema PR
         if: steps.diffs.outputs.diff == 'true'
+        id: create-pr
         uses: peter-evans/create-pull-request@v7
         with:
           title: 'docs(schema): update schemas to ${{ env.latest_tag }}'
@@ -64,3 +65,9 @@ jobs:
           branch: 'schema-${{ env.latest_tag }}'
           add-paths: ./static/schemas/*
           base: ${{ github.event.repository.default_branch }}
+
+      - name: Enable auto-merge
+        if: steps.diffs.outputs.diff == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr merge --auto --merge ${{ steps.create-pr.outputs.pull-request-number }}
