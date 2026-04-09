@@ -26,11 +26,12 @@ To develop a conforming generator product, you must purchase a signing certifica
 
 
 - [Digicert](https://www.digicert.com/solutions/c2pa-media-trust) 
-- [Trufo](https://trufo.ai/tca)
 - [SSL.com](https://www.ssl.com/article/c2pa-enterprise-content-authenticity-solutions/)
+- [Tauth Labs](https://tauth.io/blog/tauth-labs-becomes-c2pa-certification-authority)
+- [Trufo](https://trufo.ai/tca)
 
 :::note
-The above list of CAs was complete as of January, 2026. Other CAs may have been added subsequently. See the [**Conformance Explorer > C2PA Trust List**](https://spec.c2pa.org/conformance-explorer/) for the most up-to-date list.
+The above list of CAs was complete as of April, 2026. Other CAs may have been added subsequently. See the [**Conformance Explorer > C2PA Trust List**](https://spec.c2pa.org/conformance-explorer/) for the most up-to-date list.
 :::
 
 ### Certificate signing requests (CSRs)
