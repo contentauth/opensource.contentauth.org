@@ -1,0 +1,204 @@
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+### Saving a working store to an archive
+
+Use `to_archive()` to save a `Builder` to a file or stream:
+
+```cpp
+#include "c2pa.hpp"
+#include <fstream>
+
+c2pa::Context context;
+auto builder = c2pa::Builder(context, manifest_json);
+builder.add_resource("thumbnail", "thumbnail.jpg");
+builder.add_ingredient(ingredient_json, "source.jpg");
+
+// Save working store to archive file
+builder.to_archive("manifest.c2pa");
+
+// Or save to a stream
+std::ofstream archive_stream("manifest.c2pa", std::ios::binary);
+builder.to_archive(archive_stream);
+archive_stream.close();
+```
+
+### Restoring a working store from an archive
+
+Use `from_archive` to create a new `Builder` from an archive, or `with_archive` to load an archive into an existing `Builder` while preserving its `Context`:
+
+```cpp
+#include "c2pa.hpp"
+#include <fstream>
+
+// Restore from file (default context)
+auto builder = c2pa::Builder::from_archive("manifest.c2pa");
+
+// Or restore with a custom context (preserves settings)
+c2pa::Context context(R"({
+    "builder": {
+        "thumbnail": {"enabled": false}
+    }
+})");
+auto builder = c2pa::Builder(context);
+std::ifstream archive_stream("manifest.c2pa", std::ios::binary);
+builder.with_archive(archive_stream);
+archive_stream.close();
+
+// Sign with the restored working store
+builder.sign("asset.jpg", "signed.jpg", signer);
+```
+
+### Two-phase workflow
+
+Prepare a manifest in one step, and sign it later:
+
+**Phase 1: Prepare manifest**
+
+```cpp
+void prepare_manifest() {
+    const std::string manifest_json = R"({
+      "title": "Artwork draft",
+      "assertions": [ ... ]
+    })";
+
+    c2pa::Context context;
+    auto builder = c2pa::Builder(context, manifest_json);
+    builder.add_resource("thumbnail", "thumb.jpg");
+    builder.add_ingredient("{\"title\": \"Sketch\"}", "sketch.png");
+
+    // Save working store as archive (C2PA JUMBF format)
+    builder.to_archive("artwork_manifest.c2pa");
+
+    std::cout << "Working store saved to artwork_manifest.c2pa" << std::endl;
+}
+```
+
+**Phase 2: Sign the asset**
+
+```cpp
+void sign_asset() {
+    // Restore the working store
+    auto builder = c2pa::Builder::from_archive("artwork_manifest.c2pa");
+
+    // Create signer using HSM (not shown)
+    auto signer = create_hsm_signer();
+
+    // Sign
+    builder.sign("artwork.jpg", "signed_artwork.jpg", signer);
+
+    std::cout << "Asset signed with manifest store" << std::endl;
+}
+```
+
+### Linking an ingredient archive to an action
+
+To link an ingredient archive to an action via `ingredientIds`, you must use a `label` set in the `add_ingredient` call on the signing builder. Labels baked into the archive ingredient are not carried through, and `instance_id` does not work as a linking key for ingredient archives regardless of where it is set.
+
+```cpp
+c2pa::Context context;
+
+// Step 1: Create the ingredient archive.
+auto manifest_str = read_file("training.json");
+auto archive_builder = c2pa::Builder(context, manifest_str);
+archive_builder.add_ingredient(
+    R"({"title": "photo.jpg", "relationship": "componentOf"})",
+    "photo.jpg");
+archive_builder.to_archive("ingredient.c2pa");
+
+// Step 2: Build a manifest with an action that references the ingredient.
+auto manifest_json = R"({
+    "claim_generator_info": [{"name": "an-application", "version": "0.1.0"}],
+    "assertions": [{
+        "label": "c2pa.actions.v2",
+        "data": {
+            "actions": [{
+                "action": "c2pa.placed",
+                "parameters": {
+                    "ingredientIds": ["my-ingredient"]
+                }
+            }]
+        }
+    }]
+})";
+
+auto builder = c2pa::Builder(context, manifest_json);
+
+// Step 3: Add the ingredient archive with a label matching the ingredientIds value.
+// The label MUST be set here, on the signing builder's add_ingredient call.
+builder.add_ingredient(
+    R"({"title": "photo.jpg", "relationship": "componentOf", "label": "my-ingredient"})",
+    "ingredient.c2pa");
+
+builder.sign("source.jpg", "signed.jpg", signer);
+```
+
+When linking multiple ingredient archives, give each a distinct label and reference it in the appropriate action's `ingredientIds` array.
+
+If each ingredient has its own action (e.g., one `c2pa.opened` for the parent and one `c2pa.placed` for a composited element), set up two actions with separate `ingredientIds`:
+
+```cpp
+auto manifest_json = R"({
+    "claim_generator_info": [{"name": "an-application", "version": "0.1.0"}],
+    "assertions": [{
+        "label": "c2pa.actions.v2",
+        "data": {
+            "actions": [
+                {
+                    "action": "c2pa.opened",
+                    "digitalSourceType": "http://cv.iptc.org/newscodes/digitalsourcetype/digitalCreation",
+                    "parameters": { "ingredientIds": ["parent-photo"] }
+                },
+                {
+                    "action": "c2pa.placed",
+                    "parameters": { "ingredientIds": ["overlay-graphic"] }
+                }
+            ]
+        }
+    }]
+})";
+
+auto builder = c2pa::Builder(context, manifest_json);
+
+builder.add_ingredient(
+    R"({"title": "photo.jpg", "relationship": "parentOf", "label": "parent-photo"})",
+    "photo_archive.c2pa");
+builder.add_ingredient(
+    R"({"title": "overlay.png", "relationship": "componentOf", "label": "overlay-graphic"})",
+    "overlay_archive.c2pa");
+
+builder.sign("source.jpg", "signed.jpg", signer);
+```
+
+A single `c2pa.placed` action can also reference several `componentOf` ingredients composited together. List all labels in the `ingredientIds` array:
+
+```cpp
+auto manifest_json = R"({
+    "claim_generator_info": [{"name": "an-application", "version": "0.1.0"}],
+    "assertions": [{
+        "label": "c2pa.actions.v2",
+        "data": {
+            "actions": [{
+                "action": "c2pa.placed",
+                "parameters": {
+                    "ingredientIds": ["base-layer", "overlay-layer"]
+                }
+            }]
+        }
+    }]
+})";
+
+auto builder = c2pa::Builder(context, manifest_json);
+
+builder.add_ingredient(
+    R"({"title": "base.jpg", "relationship": "componentOf", "label": "base-layer"})",
+    "base_ingredient.c2pa");
+builder.add_ingredient(
+    R"({"title": "overlay.jpg", "relationship": "componentOf", "label": "overlay-layer"})",
+    "overlay_ingredient.c2pa");
+
+builder.sign("source.jpg", "signed.jpg", signer);
+```
+
+After signing, the action's `parameters.ingredients` array contains one resolved URL per ingredient.
