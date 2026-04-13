@@ -6,3 +6,4 @@ package-lock.json
 
 # Ignore all markdown files:
 **/*.md
+**/*.mdx

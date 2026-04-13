@@ -36,6 +36,11 @@ const sidebars = {
         },
         {
           type: 'doc',
+          label: 'Glossary',
+          id: 'getting-started/glossary',
+        },
+        {
+          type: 'doc',
           label: 'Using ACA Inspect',
           id: 'getting-started/inspect',
         },
