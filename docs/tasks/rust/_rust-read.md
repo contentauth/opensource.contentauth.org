@@ -19,6 +19,10 @@ fn main() -> Result<()> {
 }
 ```
 
+:::tip
+The `with_stream()` format parameter accepts either a MIME type or a file extension as an argument.
+:::
+
 ### Reading from a stream
 
 ```rust
@@ -35,4 +39,4 @@ fn main() -> Result<()> {
 }
 ```
 
-There is also an asynchronous version, [`from_stream_async`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html#method.from_stream_async).
+There is also a deprecated asynchronous version, [`from_stream_async`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html#method.from_stream_async).

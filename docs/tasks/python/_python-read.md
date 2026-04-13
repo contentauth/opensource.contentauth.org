@@ -7,7 +7,7 @@ This example shows how to read a C2PA manifest embedded in a media file, and val
 import sys
 import json
 import urllib.request
-from c2pa import Context, Reader, Settings
+from c2pa import Context, Reader
 
 TRUST_ANCHORS_URL = "https://contentcredentials.org/trust/anchors.pem"
 
