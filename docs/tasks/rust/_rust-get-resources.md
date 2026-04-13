@@ -4,23 +4,20 @@ Use [`Reader::from_context`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html
 
 ```rust
 use c2pa::{Context, Reader, Result};
-use std::io::Cursor;
+use std::{fs::File, io::Cursor};
 
 fn main() -> Result<()> {
     let context = Context::new();
-    let stream = std::fs::File::open("path/to/file.jpg")?;
+    let stream = File::open("path/to/file.jpg")?;
     let reader = Reader::from_context(context)
         .with_stream("image/jpeg", stream)?;
 
     let mut thumbnail = Cursor::new(Vec::new());
     if let Some(manifest) = reader.active_manifest() {
         if let Some(thumbnail_ref) = manifest.thumbnail_ref() {
-            reader.resource_to_stream(&thumbnail_ref.identifier, &mut thumbnail)?;
-            println!(
-                "wrote thumbnail {} of size {}",
-                thumbnail_ref.format,
-                thumbnail.get_ref().len()
-            );
+            let output_path = format!("thumbnail.{}", thumbnail_ref.format);
+            let mut output_file = File::create(output_path)?;
+            reader.resource_to_stream(&thumbnail_ref.identifier, &mut output_file)?;
         }
     }
     Ok(())

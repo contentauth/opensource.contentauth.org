@@ -8,8 +8,23 @@ use serde_json::json;
 use std::io::Cursor;
 
 fn main() -> Result<()> {
+    let settings = json!({
+        "signer": {
+            "local": {
+                "alg": "ps256",
+                "sign_cert": "path/to/cert.pem",
+                "private_key": "path/to/key.pem",
+                "tsa_url": "http://timestamp.digicert.com"
+            }
+        },
+        "builder": {
+            "claim_generator_info": { "name": "My App", "version": "1.0" },
+            "intent": { "Create": "digitalCapture" }
+        }
+    });
+    
     let context = Context::new()
-        .with_settings(include_str!("config.json"))?;
+        .with_settings(settings)?;
 
     let mut builder = Builder::from_context(context)
         .with_definition(json!({"title": "My Image"}))?;
