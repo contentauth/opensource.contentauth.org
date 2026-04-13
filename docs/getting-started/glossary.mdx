@@ -3,7 +3,10 @@ id: glossary
 title: Glossary
 ---
 
-This glossary defines key terms used throughout the Content Authenticity documentation. It does not qualify terms such as "manifest" or "manifest store" as "C2PA manifest" or "C2PA manifest store" since those are the only kinds of manifests and manifest stores to which it refers.
+:::info
+This glossary defines key terms used throughout the documentation and expands on the [Glossary in the C2PA Content Credentials specification](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_glossary).
+In case of a discrepancy, the C2PA specification takes precedence.
+:::
 
 <span id="action">**Action**</span>: An operation that an actor performs on an
 asset. For example, "create," "embed," or "change contrast" for an image. See
@@ -28,7 +31,7 @@ to restore a `Builder`. While "working store" emphasizes the editable state,
 contains information about an asset's creation, authorship, how it's been
 edited, and other relevant information. For a list of standard assertions, see
 the [C2PA technical
-specification](https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html).
+specification](https://c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html).
 See also [Assertions and actions](../manifest/writing/assertions-actions.md).
 
 <span id="asset">**Asset**</span>: A file or stream of data containing digital
@@ -120,12 +123,10 @@ and certificates](../signing/index.md).
 
 <span id="coalition-for-content-provenance-and-authenticity">
   **Coalition for Content Provenance and Authenticity (C2PA)**
-</span>
-: A formal coalition that drafts technical standards and specifications as a
-foundation for universal content provenance. The C2PA is a mutually governed
-standards development organization (SDO) under the structure of the Linux
-Foundation's Joint Development Foundation. For more information, see
-[c2pa.org](https://c2pa.org).
+</span> : A formal coalition that drafts technical standards and specifications as
+a foundation for universal content provenance. The C2PA is a mutually governed standards
+development organization (SDO) under the structure of the Linux Foundation's Joint
+Development Foundation. For more information, see [c2pa.org](https://c2pa.org).
 
 <span id="composed-asset">**Composed asset**</span>: An asset created from
 multiple parts or fragments of digital content (referred to as ingredients). For
@@ -217,11 +218,11 @@ of it. See [Watermarking and fingerprinting](../durable-cr/soft-bindings.mdx).
 <span id="hard-binding">**Hard binding**</span>: One or more cryptographic
 hashes that uniquely identifies an entire asset or a portion thereof.
 
-<span id="identity-assertion">**Identity assertion**</span>: An assertion that
-enables a credential holder to prove control over a digital identity and to use
-that identity to document the named actor's role(s) in an asset's lifecycle. See
-[Identity Assertion](https://cawg.io/identity/) and [Reading CAWG identity
-assertions](../manifest/reading/reading-cawg-id.md).
+<span id="identity-assertion">**Identity assertion**</span>: A CAWG assertion
+that enables a credential holder to prove control over a digital identity and to
+use that identity to document the named actor's role(s) in an asset's lifecycle.
+See [CAWG - Identity Assertion](https://cawg.io/identity/) and [Reading CAWG
+identity assertions](../manifest/reading/reading-cawg-id.md).
 
 <span id="identity-claims-aggregator">**Identity claims aggregator**</span>: An
 actor that collects CAWG identity claims (attestations) regarding a named actor
@@ -293,15 +294,12 @@ metadata fields may be included, so it supports a broader set of use cases. This
 makes it well-suited for use in gathered assertions in the C2PA claim schema,
 where the signer of the C2PA manifest does not attest to the accuracy of the
 provided metadata but still ensures the integrity of the C2PA manifest. See
-[Metadata Assertion](https://cawg.io/metadata/).
+[CAWG - Metadata Assertion](https://cawg.io/metadata/).
 
 <span id="ocsp">**Online Certificate Status Protocol (OCSP)**</span>: An
 internet protocol used for obtaining the revocation status of an X.509 digital
 certificate, that is, whether the certificate is still valid. See [IETF RFC
 6960](https://www.rfc-editor.org/rfc/rfc6960).
-
-<span id="origin">**Origin**</span>: The manifest in the provenance data that
-represents the software or device that initially created the asset.
 
 <span id="private-key">**Private key**</span>: In public key cryptography, a
 unique digital key (very long number) used to decode messages that were
@@ -331,7 +329,7 @@ reference](../manifest/json-ref/reader-ref.mdx).
 
 <span id="redaction">**Redaction**</span>: Removing an assertion from an asset's
 manifest when the asset is used as an ingredient. See the [C2PA technical
-specification](https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html).
+specification](https://c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html).
 
 <span id="resource">**Resource**</span>: Binary assets referenced by manifest
 assertions, such as thumbnails or ingredient thumbnails.
@@ -370,7 +368,8 @@ party that provides an [RFC
 </span>
 : A CAWG assertion that enables someone to provide information about whether an
 asset with C2PA metadata may be used for data mining or AI/ML training. See
-[Training and Data Mining Assertion](https://cawg.io/training-and-data-mining/).
+[CAWG - Training and Data Mining
+Assertion](https://cawg.io/training-and-data-mining/).
 
 <span id="trust-list">**Trust list**</span>: See [C2PA trust
 list](#c2pa-trust-list).
@@ -413,10 +412,9 @@ the credential. An example of a DID is `did:example:123456abcdef`.
 <span id="w3c-decentralized-identifier-document">
   **W3C decentralized identifier document**
 </span>
-: Also referred to as a DID document, this is a document that is accessible
-using a verifiable data registry and contains information related to a specific
-W3C decentralized identifier, such as the associated repository and public key
-information.
+: Also referred to as a DID document, this is a document that is accessible using
+a verifiable data registry and contains information related to a specific W3C decentralized
+identifier, such as the associated repository and public key information.
 
 <span id="w3c-verifiable-credential">**W3C verifiable credential**</span>: A
 tamper-evident credential that has authorship that can be cryptographically
