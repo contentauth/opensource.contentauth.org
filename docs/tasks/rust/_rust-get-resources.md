@@ -12,12 +12,15 @@ fn main() -> Result<()> {
     let reader = Reader::from_context(context)
         .with_stream("image/jpeg", stream)?;
 
-    let mut thumbnail = Cursor::new(Vec::new());
     if let Some(manifest) = reader.active_manifest() {
         if let Some(thumbnail_ref) = manifest.thumbnail_ref() {
-            let output_path = format!("thumbnail.{}", thumbnail_ref.format);
-            let mut output_file = File::create(output_path)?;
-            reader.resource_to_stream(&thumbnail_ref.identifier, &mut output_file)?;
+            let mut thumbnail = Cursor::new(Vec::new());
+            reader.resource_to_stream(&thumbnail_ref.identifier, &mut thumbnail)?;
+            println!(
+                "wrote thumbnail {} of size {}",
+                thumbnail_ref.format,
+                thumbnail.get_ref().len()
+            );
         }
     }
     Ok(())

@@ -36,22 +36,3 @@ fn main() -> Result<()> {
     Ok(())
 }
 ```
-
-The `config.json` file specifies the signer and builder configuration. For example:
-
-```json
-{
-  "signer": {
-    "local": {
-      "alg": "ps256",
-      "sign_cert": "path/to/cert.pem",
-      "private_key": "path/to/key.pem",
-      "tsa_url": "http://timestamp.digicert.com"
-    }
-  },
-  "builder": {
-    "claim_generator_info": {"name": "My App", "version": "1.0"},
-    "intent": {"Create": "digitalCapture"}
-  }
-}
-```
