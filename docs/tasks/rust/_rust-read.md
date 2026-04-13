@@ -25,18 +25,18 @@ The `with_stream()` format parameter accepts either a MIME type or a file extens
 
 ### Reading from a stream
 
+If you have image bytes from a non-file source such as an HTTP response or a database, wrap them in a `Cursor` to provide the seekable stream that `with_stream` requires:
+
 ```rust
 use c2pa::{Context, Reader, Result};
 use std::io::Cursor;
 
-fn main() -> Result<()> {
+fn read_manifest_from_bytes(image_bytes: Vec<u8>) -> Result<()> {
     let context = Context::new();
-    let image_data = include_bytes!("path/to/file.jpg");
     let reader = Reader::from_context(context)
-        .with_stream("image/jpeg", Cursor::new(image_data))?;
+        .with_stream("image/jpeg", Cursor::new(image_bytes))?;
     println!("{}", reader.json());
     Ok(())
 }
 ```
 
-There is also a deprecated asynchronous version, [`from_stream_async`](https://docs.rs/c2pa/latest/c2pa/struct.Reader.html#method.from_stream_async).
