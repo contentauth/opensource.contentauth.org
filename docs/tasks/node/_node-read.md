@@ -1,5 +1,5 @@
 
-Use the `c2pa.read()` function to read a manifest; for example:
+Use the `Reader` class to read C2PA manifest data from a file or buffer. For example:
 
 ```ts
 // read-manifest.ts
