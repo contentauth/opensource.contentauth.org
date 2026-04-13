@@ -1,0 +1,438 @@
+---
+id: glossary
+title: Glossary
+---
+
+This glossary defines key terms used throughout the Content Authenticity documentation. It does not qualify terms such as "manifest" or "manifest store" as "C2PA manifest" or "C2PA manifest store" since those are the only kinds of manifests and manifest stores to which it refers.
+
+<span id="action">**Action**</span>: An operation that an actor performs on an
+asset. For example, "create," "embed," or "change contrast" for an image. See
+[Assertions and actions](../manifest/writing/assertions-actions.md).
+
+<span id="active-manifest">**Active manifest**</span>: The last in the list of
+manifests inside of a manifest store. The active manifest has the set of content
+bindings that can be validated. See [Working with
+manifests](../manifest/understanding.md).
+
+<span id="actor">**Actor**</span>: A person, organization, device, or software
+product. For example, a camera, image editing software, cloud service, or the
+person using such tools.
+
+<span id="archive">**Archive**</span>: The serialized, portable representation
+of a working store saved to a file or stream (typically a `.c2pa` file). An
+archive uses the standard JUMBF `application/c2pa` format and can be read back
+to restore a `Builder`. While "working store" emphasizes the editable state,
+"archive" emphasizes the saved bytes.{' '}
+
+<span id="assertion">**Assertion**</span>: A data structure in the manifest that
+contains information about an asset's creation, authorship, how it's been
+edited, and other relevant information. For a list of standard assertions, see
+the [C2PA technical
+specification](https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html).
+See also [Assertions and actions](../manifest/writing/assertions-actions.md).
+
+<span id="asset">**Asset**</span>: A file or stream of data containing digital
+content. Currently, this means certain specific types of image, video, or audio
+files, but the types of supported assets will expand in the future. See also
+[composed asset](#composed-asset) and [derived asset](#derived-asset).
+
+<span id="asset-metadata">**Asset metadata**</span>: The portion of an asset
+that represents non-technical information about the asset and its digital
+content, as may be stored via standards such as Exif or XMP.
+
+<span id="asset-rendition">**Asset rendition**</span>: A representation of an
+asset (either as a part of an asset or a completely new asset) where the digital
+content has had a non-editorial transformation action (for example, re-encoding
+or scaling) applied but where the asset metadata has not been modified.
+
+<span id="authenticity">**Authenticity**</span>: A property of digital content
+comprising a set of facts (provenance data and hard bindings) that can be
+cryptographically verified as not having been tampered with.
+
+<span id="builder">**Builder**</span>: A class in the SDK that you use to create
+and add a signed manifest to an asset. See [Writing manifest
+data](../manifest/writing/writing.md) and [Builder
+reference](../manifest/json-ref/builder-ref.mdx).
+
+<span id="builder-intent">**Builder intent**</span>: See [intent](#intent).
+
+<span id="c2pa">**C2PA**</span>: See [Coalition for Content Provenance and
+Authenticity](#coalition-for-content-provenance-and-authenticity).
+
+<span id="c2pa-tool">**C2PA Tool**</span>: Command-line utility for working with
+C2PA manifest data, implemented in the [c2pa-rs
+repository](https://github.com/contentauth/c2pa-rs). The name of the utility is
+"C2PA Tool," while the command to run the utility is `c2patool`. See [C2PA Tool
+documentation](../c2patool/readme.md).
+
+<span id="c2pa-trust-list">**C2PA trust list**</span>: A C2PA-managed list of
+X.509 certificate trust anchors that issue certificates to hardware and software
+signers that use them to sign claims. See [Trust
+lists](../conformance/trust-lists.mdx).
+
+<span id="c2pa-tsa-trust-list">**C2PA TSA trust list**</span>: A C2PA-managed
+list of X.509 certificate trust anchors that issue certificates to time-stamp
+authorities (TSAs). See [Trust lists](../conformance/trust-lists.mdx).
+
+<span id="cai">**CAI**</span>: See [Content Authenticity
+Initiative](#content-authenticity-initiative).
+
+<span id="cai-open-source-sdk">**CAI open-source SDK**</span>: Open-source
+software for developing Content Credentials applications; includes the C2PA
+Tool, Rust library, and libraries for Python, C/C++, web JavaScript, Node.js,
+Android, and iOS. See [Introduction](../introduction.mdx).
+
+<span id="cawg">**CAWG**</span>: A working group within the Decentralized
+Identity Foundation (DIF) that defines technical standards for identity
+assertions (proving who created content), metadata assertions (providing
+detailed information about content), and training and data mining assertions
+(specifying how the content may be used).
+
+<span id="cbor">**CBOR**</span>: See [Concise Binary Object
+Representation](#concise-binary-object-representation).
+
+<span id="certificate">**Certificate**</span>: An electronic document (also
+called a public key certificate or digital certificate) that vouches for the
+holder's identity. Like a passport, the certificate is issued by a trusted third
+party (the certificate authority or CA), cannot be forged, and contains
+identifying information. See [Signing and certificates](../signing/index.md).
+
+<span id="certificate-authority">**Certificate authority (CA)**</span>: A
+trusted third party that verifies the identity of an organization applying for a
+digital certificate. After verifying the organization's identity, the CA issues
+a certificate and binds the organization's identity to a public key. A digital
+certificate can be trusted because it is chained to the CA's root certificate.
+See [Getting a certificate](../signing/get-cert.md).
+
+<span id="claim">**Claim**</span>: Digitally signed and tamper-evident data in a
+manifest that references a set of assertions by one or more actors, concerning
+an asset, and the information necessary to represent the content binding. For
+example, a claim could specify that a particular image was edited by John Doe
+using Product X on 05/08/2021 at 11am to change the image contrast.
+
+<span id="claim-generator">**Claim generator**</span>: The non-human (hardware
+or software) actor that generates the claim about an asset as well as the claim
+signature, thus leading to the asset's associated manifest.
+
+<span id="claim-signature">**Claim signature**</span>: Part of the manifest that
+is the digital signature on the claim using an actor's private key. See [Signing
+and certificates](../signing/index.md).
+
+<span id="coalition-for-content-provenance-and-authenticity">
+  **Coalition for Content Provenance and Authenticity (C2PA)**
+</span>
+: A formal coalition that drafts technical standards and specifications as a
+foundation for universal content provenance. The C2PA is a mutually governed
+standards development organization (SDO) under the structure of the Linux
+Foundation's Joint Development Foundation. For more information, see
+[c2pa.org](https://c2pa.org).
+
+<span id="composed-asset">**Composed asset**</span>: An asset created from
+multiple parts or fragments of digital content (referred to as ingredients). For
+example, an image (image A) with another image (image B) imported and
+superimposed on top of it. In this example, image B is referred to as an
+ingredient. When starting from an existing asset, it's a special case of a
+derived asset; however, a composed asset can also be created from a "blank
+slate."
+
+<span id="concise-binary-object-representation">
+  **Concise Binary Object Representation (CBOR)**
+</span>
+: A binary data serialization format loosely based on JSON that allows the
+transmission of data objects containing name-value pairs, but in a more concise
+manner than with JSON. CBOR is defined in Internet Standard [RFC
+8949](https://www.rfc-editor.org/rfc/rfc8949).
+
+<span id="content-authenticity-initiative">
+  **Content Authenticity Initiative (CAI)**
+</span>
+: A group of creators, technologists, journalists, and activists leading the
+global effort to address digital misinformation and content authenticity.
+Collaborators include: Adobe, BBC, Microsoft, The New York Times Co., Leica,
+Nikon, Truepic, and Qualcomm. For more information, see [Content Authenticity
+Initiative](https://contentauthenticity.org).
+
+<span id="content-binding">**Content binding**</span>: Information that
+associates specific digital content to a specific manifest associated with a
+specific asset, either as a hard binding or a soft binding. See [Working with
+manifests](../manifest/understanding.md).
+
+<span id="content-credentials">**Content Credentials**</span>: Tamper-evident
+metadata associated with an asset that shows the attribution and provenance
+details for an asset. Corresponds to a manifest store. See [Working with
+manifests](../manifest/understanding.md).
+
+<span id="content-credentials-application">
+  **Content Credentials application**
+</span>
+: Software that uses the CAI open-source SDK to display and/or generate Content
+Credentials for assets.
+
+<span id="context">**Context**</span>: A class in the SDK that comprises
+Settings and optionally a Signer, and that you pass to Reader or Builder to
+control their behavior. See [Settings
+reference](../manifest/json-ref/settings-ref.mdx).
+
+<span id="context-provider">**ContextProvider**</span>: An abstract base class
+in the SDK that defines the interface Reader and Builder use to access a
+context.
+
+<span id="cryptographic-hash">**Cryptographic hash**</span>: An algorithm that
+can be run on digital data such as an image file to produce a unique
+"fingerprint" value. If the data changes then the hash value will also change.
+
+<span id="derived-asset">**Derived asset**</span>: An asset created by starting
+from an existing asset and performing actions on it that modify its digital
+content and asset metadata.
+
+<span id="digital-content">**Digital content**</span>: The portion of an asset
+that represents the actual content, such as the pixels of an image, along with
+any additional technical metadata required to understand the content (for
+example, a color profile or encoding parameters).
+
+<span id="durable-content-credentials">**Durable Content Credentials**</span>:
+An approach to help content provenance persist across content platforms by using
+C2PA manifest data in conjunction with invisible watermarks, actively inserted
+into the content, and content fingerprints, passively computed from the content.
+See [Durable Content Credentials](../durable-cr/index.md).
+
+<span id="exchangeable-image-file-format">
+  **Exchangeable image file format (Exif)**
+</span>
+: A standard that specifies formats for images, sound, and ancillary tags used
+by digital cameras (including smartphones) and related devices.
+
+<span id="extensible-metadata-platform">
+  **Extensible Metadata Platform (XMP)**
+</span>
+: An ISO standard, originally created by Adobe Inc., for the creation,
+processing, and interchange of standardized and custom metadata for digital
+documents and data sets. For more information, see [Adobe
+XMP](https://www.adobe.com/products/xmp.html).
+
+<span id="fingerprint">**Fingerprint**</span>: A set of inherent properties
+computable from digital content that identifies the content or near duplicates
+of it. See [Watermarking and fingerprinting](../durable-cr/soft-bindings.mdx).
+
+<span id="hard-binding">**Hard binding**</span>: One or more cryptographic
+hashes that uniquely identifies an entire asset or a portion thereof.
+
+<span id="identity-assertion">**Identity assertion**</span>: An assertion that
+enables a credential holder to prove control over a digital identity and to use
+that identity to document the named actor's role(s) in an asset's lifecycle. See
+[Identity Assertion](https://cawg.io/identity/) and [Reading CAWG identity
+assertions](../manifest/reading/reading-cawg-id.md).
+
+<span id="identity-claims-aggregator">**Identity claims aggregator**</span>: An
+actor that collects CAWG identity claims (attestations) regarding a named actor
+from various identity providers and can replay those identity claims into
+identity assertions on behalf of the named actor. This may be the same as the
+identity assertion generator.
+
+<span id="ingredient">**Ingredient**</span>: Part of a composed asset, such as
+an image superimposed on top of another image. See [Reading
+ingredients](../manifest/reading/ingredients-reading.md) and [Writing
+ingredients](../manifest/writing/ingredients.md).
+
+<span id="intent">**Intent**</span>: A declaration that tells a `Builder` what
+kind of manifest to create. Intents enable validation, add actions required by
+the C2PA specification, and help prevent invalid operations. There are three
+intent types: **Create** for new digital creations (requires a
+`DigitalSourceType` and must not have a parent ingredient), **Edit** for
+modifying a pre-existing parent asset (must have a parent ingredient), and
+**Update** for non-editorial changes such as re-encoding (a restricted version
+of Edit).
+
+<span id="interim-trust-list">**Interim trust list**</span>: Initial Content
+Authenticity trust list that was frozen as of 1 Jan 2026. See [Trust
+lists](../conformance/trust-lists.mdx).
+
+<span id="invisible-watermark">**Invisible watermark**</span>: See
+[watermark](#watermark).
+
+<span id="json">**JSON (JavaScript Object Notation)**</span>: A lightweight
+data-interchange and file format that uses human-readable text to store and
+transmit data objects consisting of attribute-value pairs and arrays (or other
+serializable values). For more information, see [json.org](https://json.org).
+
+<span id="jumbf">**JPEG universal metadata box format (JUMBF)**</span>: A
+proposed International Organization for Standardization (ISO) standard that
+provides a mechanism to embed and refer to generic metadata in JPEG files.
+
+<span id="manifest">**Manifest**</span>: The set of information about the
+provenance of an asset based on the combination of one or more assertions
+(including content bindings), a single claim, and a claim signature. A manifest
+is part of a manifest store. See [Working with
+manifests](../manifest/understanding.md).
+
+<span id="manifest-archive">**Manifest archive**</span>: See
+[archive](#archive).
+
+<span id="manifest-consumer">**Manifest consumer**</span>: An actor who consumes
+an asset with an associated manifest for the purpose of obtaining the provenance
+data from the manifest.
+
+<span id="manifest-repository">**Manifest repository**</span>: A repository that
+contains manifests and manifest stores, and which can be searched using a
+content binding.
+
+<span id="manifest-store">**Manifest store**</span>: A collection of manifests
+that can either be embedded into an asset or be external to it. See [Working
+with manifests](../manifest/understanding.md).
+
+<span id="manifest-working-store">**Manifest working store**</span>: See
+[working store](#working-store).
+
+<span id="metadata">**Metadata**</span>: See [asset metadata](#asset-metadata).
+
+<span id="metadata-assertion">**Metadata assertion**</span>: A CAWG assertion
+for binding metadata from standards such as XMP, IPTC, and Exif to a C2PA
+manifest in a tamper-evident way. Unlike the `c2pa.metadata` assertion from the
+C2PA technical specification, this specification places no restrictions on which
+metadata fields may be included, so it supports a broader set of use cases. This
+makes it well-suited for use in gathered assertions in the C2PA claim schema,
+where the signer of the C2PA manifest does not attest to the accuracy of the
+provided metadata but still ensures the integrity of the C2PA manifest. See
+[Metadata Assertion](https://cawg.io/metadata/).
+
+<span id="ocsp">**Online Certificate Status Protocol (OCSP)**</span>: An
+internet protocol used for obtaining the revocation status of an X.509 digital
+certificate, that is, whether the certificate is still valid. See [IETF RFC
+6960](https://www.rfc-editor.org/rfc/rfc6960).
+
+<span id="origin">**Origin**</span>: The manifest in the provenance data that
+represents the software or device that initially created the asset.
+
+<span id="private-key">**Private key**</span>: In public key cryptography, a
+unique digital key (very long number) used to decode messages that were
+encrypted with the corresponding public key. Every private key matches to
+exactly one public key and is the only key that can decode messages encoded by
+the matching public key. To ensure security, a private key's owner must never
+disclose it to anyone else.
+
+<span id="provenance">**Provenance**</span>: The logical concept of
+understanding the history of an asset and its interaction with actors and other
+assets, as represented by the provenance data.
+
+<span id="provenance-data">**Provenance data**</span>: The set of manifests for
+an asset and, in the case of a composed asset, its ingredients.
+
+<span id="public-key">**Public key**</span>: In public key cryptography, a
+unique digital key (very long number) used to encode messages that can then be
+decrypted with the corresponding private key. Every public key matches to
+exactly one private key. A message encoded using a particular public key can be
+decoded only by using the matching private key. Public keys can be freely
+disseminated without compromising security.
+
+<span id="reader">**Reader**</span>: A class in the SDK that you use to read and
+validate a manifest store from an asset. See [Reading manifest
+data](../manifest/reading/reading.md) and [Reader
+reference](../manifest/json-ref/reader-ref.mdx).
+
+<span id="redaction">**Redaction**</span>: Removing an assertion from an asset's
+manifest when the asset is used as an ingredient. See the [C2PA technical
+specification](https://c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html).
+
+<span id="resource">**Resource**</span>: Binary assets referenced by manifest
+assertions, such as thumbnails or ingredient thumbnails.
+
+<span id="settings">**Settings**</span>: A class in the SDK that controls
+behavior such as thumbnail generation, trust lists, and verification flags. See
+[Settings reference](../manifest/json-ref/settings-ref.mdx).
+
+<span id="sidecar-file">**Sidecar file**</span>: A file containing a manifest
+store, with the same base name as the asset file but with a `.c2pa` extension. A
+sidecar file is an alternative to embedding the manifest store in an asset's
+metadata. For example, an asset named `cat.jpg` would have a sidecar file named
+`cat.c2pa`. See [Working with manifests](../manifest/understanding.md).
+
+<span id="signer">**Signer**</span>: An actor whose credential's private key is
+used to sign a claim. The signer is identified by the subject of the credential.
+See [Signing and certificates](../signing/index.md).
+
+<span id="soft-binding">**Soft binding**</span>: A content identifier that is
+either embedded as a watermark in the digital content or is not statistically
+unique. For example, TrustMark watermarks are added via soft bindings. See
+[Watermarking and fingerprinting](../durable-cr/soft-bindings.mdx).
+
+<span id="time-stamp">**Time-stamp**</span>: A time-stamp issued by a trusted
+time-stamp authority used to prove that a manifest signature existed at a
+certain date and time. See [Trust lists](../conformance/trust-lists.mdx).
+
+<span id="time-stamp-authority">**Time-stamp authority**</span>: A trusted third
+party that provides an [RFC
+3161](https://www.rfc-editor.org/rfc/rfc3161)-compliant time-stamp authority
+(TSA). See [RFC 3161, section
+1](https://www.rfc-editor.org/rfc/rfc3161#section-1).
+
+<span id="training-and-data-mining-assertion">
+  **Training and data mining assertion**
+</span>
+: A CAWG assertion that enables someone to provide information about whether an
+asset with C2PA metadata may be used for data mining or AI/ML training. See
+[Training and Data Mining Assertion](https://cawg.io/training-and-data-mining/).
+
+<span id="trust-list">**Trust list**</span>: See [C2PA trust
+list](#c2pa-trust-list).
+
+<span id="trust-signals">**Trust signals**</span>: The collection of information
+that can inform an actor's judgment of the trustworthiness of an asset. These
+are in addition to the signer of a claim, upon which the fundamental trust model
+relies.
+
+<span id="trustmark">**TrustMark**</span>: An open-source universal watermarking
+system for images that several Adobe products use to make Durable Content
+Credentials. See [TrustMark watermarking](../durable-cr/trustmark-intro.md).
+
+<span id="tsa">**TSA**</span>: See [time-stamp
+authority](#time-stamp-authority).
+
+<span id="validation">**Validation**</span>: The process of determining if
+Content Credentials are properly configured and signed. For example: Is an asset
+actually the one described by its associated manifest, and does the manifest
+follow the format and rules defined in the C2PA specification. See [Manifest
+validation](../manifest/reading/validation.md).
+
+<span id="validator">**Validator**</span>: A manifest consumer who performs
+validation on an active manifest. See [Manifest
+validation](../manifest/reading/validation.md).
+
+<span id="verifiable-credential">**Verifiable credential (VC)**</span>: A
+tamper-evident credential whose authorship can be cryptographically verified.
+This term may be used in the generic sense or may refer to the [W3C
+Recommendation Verifiable Credentials Data
+Model](https://www.w3.org/TR/vc-data-model-2.0/).
+
+<span id="w3c-decentralized-identifier">**W3C decentralized identifier**</span>:
+A portable URL-based identifier, also known as a DID, associated with an entity.
+These identifiers are most often used in a W3C verifiable credential and are
+associated with credential subjects such that a W3C verifiable credential itself
+can be easily ported from one repository to another without the need to reissue
+the credential. An example of a DID is `did:example:123456abcdef`.
+
+<span id="w3c-decentralized-identifier-document">
+  **W3C decentralized identifier document**
+</span>
+: Also referred to as a DID document, this is a document that is accessible
+using a verifiable data registry and contains information related to a specific
+W3C decentralized identifier, such as the associated repository and public key
+information.
+
+<span id="w3c-verifiable-credential">**W3C verifiable credential**</span>: A
+tamper-evident credential that has authorship that can be cryptographically
+verified.
+
+<span id="watermark">**Watermark**</span>: Information incorporated (perceptibly
+or imperceptibly) into the digital content of an asset which can be used, for
+example, to uniquely identify the asset or to store a reference to a manifest.
+See [Watermarking and fingerprinting](../durable-cr/soft-bindings.mdx).
+
+<span id="working-store">**Working store**</span>: An editable, in-progress
+manifest represented by a `Builder` that has not yet been signed and bound to an
+asset. A working store contains the C2PA manifest state (claims, ingredients,
+assertions) being assembled. It can be serialized to an archive for saving,
+transferring, or resuming later, and uses the same standard JUMBF
+`application/c2pa` format as signed manifests.{' '}
+
+<span id="xmp">**XMP**</span>: See [Extensible Metadata
+Platform](#extensible-metadata-platform).
