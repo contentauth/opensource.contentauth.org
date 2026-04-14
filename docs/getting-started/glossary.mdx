@@ -25,7 +25,8 @@ person using such tools.
 of a working store saved to a file or stream (typically a `.c2pa` file). An
 archive uses the standard JUMBF `application/c2pa` format and can be read back
 to restore a `Builder`. While "working store" emphasizes the editable state,
-"archive" emphasizes the saved bytes.{' '}
+"archive" emphasizes the saved bytes. See [Using working stores and
+archives](../tasks/archives.mdx).
 
 <span id="assertion">**Assertion**</span>: A data structure in the manifest that
 contains information about an asset's creation, authorship, how it's been
@@ -53,8 +54,9 @@ comprising a set of facts (provenance data and hard bindings) that can be
 cryptographically verified as not having been tampered with.
 
 <span id="builder">**Builder**</span>: A class in the SDK that you use to create
-and add a signed manifest to an asset. See [Writing manifest
-data](../manifest/writing/writing.md) and [Builder
+and add a signed manifest to an asset. See [Adding and signing a
+manifest](../tasks/build.mdx), [Writing manifest
+data](../manifest/writing/writing.md), and [Builder
 reference](../manifest/json-ref/builder-ref.mdx).
 
 <span id="builder-intent">**Builder intent**</span>: See [intent](#intent).
@@ -80,16 +82,12 @@ authorities (TSAs). See [Trust lists](../conformance/trust-lists.mdx).
 <span id="cai">**CAI**</span>: See [Content Authenticity
 Initiative](#content-authenticity-initiative).
 
+<span id="cawg">**CAWG**</span>: See [Creator Assertions Working Group](#creator-assertions-working-group).
+
 <span id="cai-open-source-sdk">**CAI open-source SDK**</span>: Open-source
 software for developing Content Credentials applications; includes the C2PA
 Tool, Rust library, and libraries for Python, C/C++, web JavaScript, Node.js,
 Android, and iOS. See [Introduction](../introduction.mdx).
-
-<span id="cawg">**CAWG**</span>: A working group within the Decentralized
-Identity Foundation (DIF) that defines technical standards for identity
-assertions (proving who created content), metadata assertions (providing
-detailed information about content), and training and data mining assertions
-(specifying how the content may be used).
 
 <span id="cbor">**CBOR**</span>: See [Concise Binary Object
 Representation](#concise-binary-object-representation).
@@ -157,12 +155,21 @@ manifests](../manifest/understanding.md).
 
 <span id="context">**Context**</span>: A class in the SDK that comprises
 Settings and optionally a Signer, and that you pass to Reader or Builder to
-control their behavior. See [Settings
+control their behavior. See [Configuring SDK settings with
+Context](../tasks/settings.mdx) and [Settings
 reference](../manifest/json-ref/settings-ref.mdx).
 
 <span id="context-provider">**ContextProvider**</span>: An abstract base class
 in the SDK that defines the interface Reader and Builder use to access a
 context.
+
+<span id="creator-assertions-working-group">**Creator Assertions Working Group (CAWG)**</span>: A working group within the Decentralized
+Identity Foundation (DIF) that defines technical standards for:
+- [Identity assertions](#identity-assertion), proving who created content.
+- Metadata assertions, providing detailed information about content.
+- Training and data mining assertions, specifying how content may be used. 
+
+For details, see the [CAWG website](https://cawg.io/)
 
 <span id="cryptographic-hash">**Cryptographic hash**</span>: An algorithm that
 can be run on digital data such as an image file to produce a unique
@@ -222,7 +229,7 @@ intent types: **Create** for new digital creations (requires a
 `DigitalSourceType` and must not have a parent ingredient), **Edit** for
 modifying a pre-existing parent asset (must have a parent ingredient), and
 **Update** for non-editorial changes such as re-encoding (a restricted version
-of Edit).
+of Edit). See [Using builder intents](../tasks/intents.mdx).
 
 <span id="interim-trust-list">**Interim trust list**</span>: Initial Content
 Authenticity trust list that was frozen as of 1 Jan 2026. See [Trust
@@ -236,18 +243,15 @@ data-interchange and file format that uses human-readable text to store and
 transmit data objects consisting of attribute-value pairs and arrays (or other
 serializable values). For more information, see [json.org](https://json.org).
 
-<span id="jumbf">**JPEG universal metadata box format (JUMBF)**</span>: A
-proposed International Organization for Standardization (ISO) standard that
-provides a mechanism to embed and refer to generic metadata in JPEG files.
+<span id="jumbf">**JPEG universal metadata box format (JUMBF)**</span>: An international technical 
+standard that provides a mechanism to embed and refer to generic metadata in JPEG files. See [ISO/IEC 19566](https://www.iso.org/standard/84635.html).
 
 <span id="manifest">**Manifest**</span>: The set of information about the
 provenance of an asset based on the combination of one or more assertions
 (including content bindings), a single claim, and a claim signature. A manifest
-is part of a manifest store. See [Working with
-manifests](../manifest/understanding.md).
+is part of a manifest store. See [Working with manifests](../manifest/understanding.md).
 
-<span id="manifest-archive">**Manifest archive**</span>: See
-[archive](#archive).
+<span id="manifest-archive">**Manifest archive**</span>: See [archive](#archive).
 
 <span id="manifest-consumer">**Manifest consumer**</span>: An actor who consumes
 an asset with an associated manifest for the purpose of obtaining the provenance
@@ -268,17 +272,15 @@ with manifests](../manifest/understanding.md).
 
 <span id="metadata-assertion">**Metadata assertion**</span>: A CAWG assertion
 for binding metadata from standards such as XMP, IPTC, and Exif to a C2PA
-manifest in a tamper-evident way. Unlike the `c2pa.metadata` assertion from the
-C2PA technical specification, this specification places no restrictions on which
-metadata fields may be included, so it supports a broader set of use cases. This
-makes it well-suited for use in gathered assertions in the C2PA claim schema,
+manifest in a tamper-evident way. Unlike the `c2pa.metadata` assertion, it has no restrictions on which metadata fields may be included, so it supports a broader set of use cases. This
+makes it well-suited for use in C2PA gathered assertions,
 where the signer of the C2PA manifest does not attest to the accuracy of the
 provided metadata but still ensures the integrity of the C2PA manifest. See
 [CAWG - Metadata Assertion](https://cawg.io/metadata/).
 
 <span id="ocsp">**Online Certificate Status Protocol (OCSP)**</span>: An
 internet protocol used for obtaining the revocation status of an X.509 digital
-certificate, that is, whether the certificate is still valid. See [IETF RFC
+certificate; that is, whether the certificate is still valid. See [IETF RFC
 6960](https://www.rfc-editor.org/rfc/rfc6960).
 
 <span id="private-key">**Private key**</span>: In public key cryptography, a
@@ -300,11 +302,12 @@ unique digital key (very long number) used to encode messages that can then be
 decrypted with the corresponding private key. Every public key matches to
 exactly one private key. A message encoded using a particular public key can be
 decoded only by using the matching private key. Public keys can be freely
-disseminated without compromising security.
+disseminated without compromising security. See [Getting started - Introduction to public key infrastructure](index.mdx#introduction-to-public-key-infrastructure).
 
 <span id="reader">**Reader**</span>: A class in the SDK that you use to read and
-validate a manifest store from an asset. See [Reading manifest
-data](../manifest/reading/reading.md) and [Reader
+validate a manifest store from an asset. See [Reading and verifying manifest
+data](../tasks/read.mdx), [Reading manifest
+data](../manifest/reading/reading.md), and [Reader
 reference](../manifest/json-ref/reader-ref.mdx).
 
 <span id="redaction">**Redaction**</span>: Removing an assertion from an asset's
@@ -312,11 +315,13 @@ manifest when the asset is used as an ingredient. See the [C2PA technical
 specification](https://c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html).
 
 <span id="resource">**Resource**</span>: Binary assets referenced by manifest
-assertions, such as thumbnails or ingredient thumbnails.
+assertions, such as thumbnails or ingredient thumbnails. See [Getting resources
+from a manifest](../tasks/get-resources.mdx).
 
 <span id="settings">**Settings**</span>: A class in the SDK that controls
 behavior such as thumbnail generation, trust lists, and verification flags. See
-[Settings reference](../manifest/json-ref/settings-ref.mdx).
+[Configuring SDK settings with Context](../tasks/settings.mdx) and [Settings
+reference](../manifest/json-ref/settings-ref.mdx).
 
 <span id="sidecar-file">**Sidecar file**</span>: A file containing a manifest
 store, with the same base name as the asset file but with a `.c2pa` extension. A
@@ -379,12 +384,8 @@ This term may be used in the generic sense or may refer to the [W3C
 Recommendation Verifiable Credentials Data
 Model](https://www.w3.org/TR/vc-data-model-2.0/).
 
-<span id="w3c-decentralized-identifier">**W3C decentralized identifier**</span>:
-A portable URL-based identifier, also known as a DID, associated with an entity.
-These identifiers are most often used in a W3C verifiable credential and are
-associated with credential subjects such that a W3C verifiable credential itself
-can be easily ported from one repository to another without the need to reissue
-the credential. An example of a DID is `did:example:123456abcdef`.
+<span id="w3c-decentralized-identifier">**W3C decentralized identifier (DID)**</span>:
+A portable URL-based identifier associated with an entity used in a W3C verifiable credential. An example of a DID is `did:example:123456abcdef`. CAWG identity assertions use DIDs for [identity claims aggregation](#identity-claims-aggregator) credentials. 
 
 <span id="w3c-decentralized-identifier-document">**W3C decentralized identifier document**</span>: Also referred to as a DID document, this is a document that is accessible using
 a verifiable data registry and contains information related to a specific W3C decentralized
@@ -404,7 +405,8 @@ manifest represented by a `Builder` that has not yet been signed and bound to an
 asset. A working store contains the C2PA manifest state (claims, ingredients,
 assertions) being assembled. It can be serialized to an archive for saving,
 transferring, or resuming later, and uses the same standard JUMBF
-`application/c2pa` format as signed manifests.{' '}
+`application/c2pa` format as signed manifests. See [Using working stores and
+archives](../tasks/archives.mdx).
 
 <span id="xmp">**XMP**</span>: See [Extensible Metadata
 Platform](#extensible-metadata-platform).
