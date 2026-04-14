@@ -406,13 +406,7 @@ const sidebars = {
       label: 'Community resources',
       link: { type: 'doc', id: 'community-resources' },
       collapsed: true,
-      items: [
-        {
-          type: 'doc',
-          label: 'Task planning & roadmap',
-          id: 'roadmap',
-        },
-      ],
+      items: [],
     },
   ],
 };
