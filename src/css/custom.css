@@ -346,6 +346,11 @@ body:not(.is-scrolling) .navbar {
     flex-flow: row-reverse;
     justify-content: space-between;
   }
+
+  /* https://github.com/contentauth/opensource.contentauth.org/issues/248 */
+  [class*='navbarSearchContainer'] {
+    right: calc(var(--ifm-navbar-padding-horizontal) + 44px) !important;
+  }
 }
 
 /*  Admonitions */
