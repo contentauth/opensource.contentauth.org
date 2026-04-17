@@ -41,7 +41,8 @@
         "merkle_tree_max_proofs": 5,
         "backing_store_memory_threshold_in_mb": 512,
         "decode_identity_assertions": true,
-        "allowed_network_hosts": null
+        "allowed_network_hosts": null,
+        "prefer_compress_manifests": false
       }
     },
     "verify": {
@@ -177,7 +178,7 @@
           "default": null
         },
         "merkle_tree_max_proofs": {
-          "description": "Maximum number of proofs when validating or writing a [`BmffHash`] merkle tree.\n\nThis option defaults to 5.\n\nSee more information in the spec here:\n[bmff_based_hash - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_bmff_based_hash)\n\n[`BmffHash`]: crate::assertions::BmffHash",
+          "description": "Maximum number of proof hashes stored in UUID merkle boxes when  generating a [`BmffHash`] merkle tree.  This\ndetermines the Merkle tree row stored in the manifest and thus the number of proof hashes that need to be\nprovided during validation. The value may be 0 to store just leaf node hashes (no UUID boxes are generated in this case).\n\nThis option defaults to 5.\n\nSee more information in the spec here:\n[bmff_based_hash - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_bmff_based_hash)\n\n[`BmffHash`]: crate::assertions::BmffHash",
           "type": "integer",
           "format": "uint",
           "minimum": 0,
@@ -205,6 +206,11 @@
             "$ref": "#/$defs/HostPattern"
           },
           "default": null
+        },
+        "prefer_compress_manifests": {
+          "description": "Whether to prefer compressing manifests. This can reduce the size of the manifest. Compressed manifest\nare not always possible and will default back to uncompressed if the manifest contains features\nthat are not compatible with compression.\n\n The default value is false.\n\nSee more information in the spec here:\n[Compressed manifests - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_compressed_boxes)",
+          "type": "boolean",
+          "default": false
         }
       }
     },
