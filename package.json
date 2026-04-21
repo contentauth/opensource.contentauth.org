@@ -23,6 +23,7 @@
     "@docusaurus/preset-classic": "^3.5.2",
     "@docusaurus/theme-mermaid": "^3.5.2",
     "@mdx-js/react": "^3.0.0",
+    "@signalwire/docusaurus-plugin-llms-txt": "^1.2.2",
     "@stackblitz/sdk": "^1.6.0",
     "c2pa": "^0.30.17",
     "c2pa-wc": "^0.14.17",
