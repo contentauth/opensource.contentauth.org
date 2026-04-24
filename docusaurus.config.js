@@ -213,6 +213,16 @@ async function createConfig() {
           contextualSearch: true,
         },
       }),
+    plugins: [
+      [
+        '@signalwire/docusaurus-plugin-llms-txt',
+        {
+          siteDescription:
+            'Integrate secure provenance signals into your site, app, or service using open-source tools developed by the Content Authenticity Initiative.',
+          depth: 2,
+        },
+      ],
+    ],
     themes: ['docusaurus-json-schema-plugin', '@docusaurus/theme-mermaid'],
   };
 }
