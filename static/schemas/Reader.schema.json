@@ -108,7 +108,7 @@
         "instance_id": {
           "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
           "type": "string",
-          "default": "xmp:iid:cd870be1-bfb0-4f6b-bd08-a8d1dd3a1fa6"
+          "default": "xmp:iid:4b41d66f-d74e-4a9f-87bf-c15654ab8c15"
         },
         "thumbnail": {
           "anyOf": [
@@ -144,7 +144,7 @@
           "default": []
         },
         "redactions": {
-          "description": "A list of redactions - URIs to a redacted assertions",
+          "description": "JUMBF URIs of assertions that were redacted by this manifest.\n\nEach entry has the form\n`self#jumbf=/c2pa/<manifest_label>/c2pa.assertions/<assertion_label>`\nand corresponds to an assertion that was intentionally removed from an\ningredient manifest in the claim chain.",
           "type": [
             "array",
             "null"

@@ -30,7 +30,7 @@
       "default": [
         {
           "name": "c2pa-rs",
-          "version": "0.80.1"
+          "version": "0.80.2"
         }
       ]
     },
@@ -59,7 +59,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:2b8cea1d-96d2-4a57-a797-4833d364c4f6"
+      "default": "xmp:iid:40dd1e7c-c748-4c1c-b093-940bf392ac36"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -89,7 +89,7 @@
       "default": []
     },
     "redactions": {
-      "description": "A list of redactions - URIs to redacted assertions.",
+      "description": "JUMBF URIs of assertions to redact from ingredient manifests.\n\nEach URI has the form\n`self#jumbf=/c2pa/<manifest_label>/c2pa.assertions/<assertion_label>`.\nUse a [`Reader`](crate::Reader) to discover the manifest label.\nSee the [redaction guide](https://github.com/contentauth/c2pa-rs/blob/main/docs/redaction.md)\nfor details.",
       "type": [
         "array",
         "null"
