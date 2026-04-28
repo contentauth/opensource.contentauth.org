@@ -10,6 +10,7 @@ import TabItem from '@theme/TabItem';
 import PythonRead from './python/_python-settings.md';
 import CppRead from './cpp/_cpp-settings.md';
 import RustRead from './rust/_rust-settings.md';
+import JsSettings from './js/_js-settings.md';
 
 Regardless of which language you're working in, you use the `Context` and `Settings` classes to control SDK behavior including verification, trust anchors, thumbnails, signing, and more.
 
@@ -89,6 +90,12 @@ For Boolean values, use JSON `true` and `false`, not the strings `"true"` and `"
   <TabItem value="python" label="Python" default>
 
     <PythonRead name="python-settings" />
+
+  </TabItem>
+
+  <TabItem value="js" label="JavaScript">
+
+    <JsSettings name="js-settings" />
 
   </TabItem>
 
