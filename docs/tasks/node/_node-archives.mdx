@@ -1,0 +1,114 @@
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+### Saving a working store to an archive
+
+Use `toArchive` to serialize the current `Builder` state (working store) to a file or to an in-memory buffer. The binary uses the standard C2PA JUMBF `application/c2pa` archive format (often stored with a `.c2pa` extension).
+
+```typescript
+import { Builder } from '@contentauth/c2pa-node';
+import { readFile } from 'node:fs/promises';
+
+const builder = Builder.new();
+
+await builder.addIngredient(
+  JSON.stringify({
+    title: 'source.jpg',
+    relationship: 'parentOf',
+    format: 'image/jpeg',
+  }),
+  { buffer: await readFile('source.jpg'), mimeType: 'image/jpeg' },
+);
+
+await builder.toArchive({ path: 'manifest.c2pa' });
+```
+
+Write the archive to a buffer:
+
+```typescript
+const archive: { buffer: Buffer | null } = { buffer: null };
+await builder.toArchive(archive);
+// archive.buffer is populated with the archive bytes
+```
+
+### Restoring a working store from an archive
+
+Use `Builder.fromArchive` to construct a new `Builder` from archive bytes or a file path. Pass optional [settings](../settings.mdx) as the second argument when you need custom verification or builder behavior.
+
+```typescript
+import { Builder, LocalSigner } from '@contentauth/c2pa-node';
+import { readFile } from 'node:fs/promises';
+
+const restored = await Builder.fromArchive({ path: 'manifest.c2pa' });
+
+const signer = LocalSigner.newSigner(
+  await readFile('signer.pem'),
+  await readFile('signer.key'),
+  'es256',
+);
+
+restored.sign(
+  signer,
+  { path: 'asset.jpg' },
+  { path: 'signed-asset.jpg' },
+);
+```
+
+### Two-phase workflow
+
+**Phase 1 — prepare** a manifest and ingredients, then save an archive:
+
+```typescript
+import { Builder } from '@contentauth/c2pa-node';
+import { readFile } from 'node:fs/promises';
+
+const builder = Builder.new();
+await builder.addIngredient(
+  JSON.stringify({ title: 'sketch.png', relationship: 'componentOf' }),
+  { buffer: await readFile('sketch.png'), mimeType: 'image/png' },
+);
+await builder.toArchive({ path: 'draft.c2pa' });
+```
+
+**Phase 2 — sign** after loading the archive:
+
+```typescript
+import { Builder, LocalSigner } from '@contentauth/c2pa-node';
+import { readFile } from 'node:fs/promises';
+
+const builder = await Builder.fromArchive({ path: 'draft.c2pa' });
+const signer = LocalSigner.newSigner(
+  await readFile('signer.pem'),
+  await readFile('signer.key'),
+  'es256',
+);
+
+builder.sign(
+  signer,
+  { path: 'artwork.jpg' },
+  { path: 'signed-artwork.jpg' },
+);
+```
+
+### Reading an archive with `Reader`
+
+Archives are read like other assets by setting `mimeType` to `application/c2pa`. You can list ingredients and copy binary resources into a new `Builder` with `addResource` (see [Getting resources from a manifest](../get-resources.mdx)).
+
+```typescript
+import { Reader } from '@contentauth/c2pa-node';
+import { readFile } from 'node:fs/promises';
+
+const archiveBuffer = await readFile('ingredients.c2pa');
+const reader = await Reader.fromAsset(
+  { buffer: archiveBuffer, mimeType: 'application/c2pa' },
+  { verify: { verify_after_reading: false } },
+);
+
+const active = reader?.getActive();
+const ingredients = active?.ingredients ?? [];
+```
+
+### Ingredient archives
+
+To build a reusable ingredient catalog, add ingredients (stable `instance_id` values help later lookup), then call `toArchive`. Consumers read the archive with `Reader` and merge selected ingredients into a signing `Builder`, transferring thumbnails and `manifest_data` URIs with `resourceToAsset` / `addResource` as in the [@contentauth/c2pa-node README](https://github.com/contentauth/c2pa-node-v2#adding-ingredients-from-archives-c2pa-files).

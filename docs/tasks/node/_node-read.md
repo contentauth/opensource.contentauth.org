@@ -42,7 +42,10 @@ import { Reader } from '@contentauth/c2pa-node';
 
 async function readFromBuffer(filePath: string): Promise<void> {
   const buffer = await fs.readFile(filePath);
-  const reader = await Reader.fromAsset({ buffer, mimeType: 'jpeg' }); // adjust mimeType as needed
+  const reader = await Reader.fromAsset({
+    buffer,
+    mimeType: 'image/jpeg',
+  });
   if (!reader) {
     console.log('No C2PA manifest found.');
     return;
