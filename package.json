@@ -59,5 +59,13 @@
   },
   "lint-staged": {
     "**/*": "prettier --ignore-unknown --write"
+  },
+  "overrides": {
+    "webpackbar": "^7.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "webpackbar": "^7.0.0"
+    }
   }
 }

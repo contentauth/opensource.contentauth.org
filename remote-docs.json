@@ -143,12 +143,22 @@
     },
     {
       "repo": "contentauth/c2pa-rs",
+      "path": "docs/redaction.md",
+      "dest": "docs/rust-sdk/docs/redaction.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "Redaction",
+        "order": 8
+      }
+    },
+    {
+      "repo": "contentauth/c2pa-rs",
       "path": "docs/embeddable-api.md",
       "dest": "docs/rust-sdk/docs/embeddable-api.md",
       "sidebar": {
         "category": "rust-sdk",
         "label": "Embeddable signing API",
-        "order": 8
+        "order": 9
       }
     },
     {
@@ -158,7 +168,7 @@
       "sidebar": {
         "category": "rust-sdk",
         "label": "Release notes",
-        "order": 9
+        "order": 10
       }
     },
 
