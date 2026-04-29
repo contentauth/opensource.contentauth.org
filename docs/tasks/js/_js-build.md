@@ -1,10 +1,17 @@
 
-Use [`@contentauth/c2pa-web`](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-web) to build manifests and sign assets in the browser. The high-level flow is: `await createC2pa({ wasmSrc, settings? })` → `c2pa.builder.new()` / [`fromDefinition`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.BuilderFactory.html#fromdefinition) / [`fromArchive`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.BuilderFactory.html#fromarchive) → add actions, ingredients, thumbnails → [`sign`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Builder.html#sign) or [`signAndGetManifestBytes`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Builder.html#signandgetmanifestbytes) → `await builder.free()` and `c2pa.dispose()`.
+Use [`@contentauth/c2pa-web`](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-web) to build manifests and sign assets in the browser. 
+
+The high-level flow is: 
+1. Call `await createC2pa({ wasmSrc, settings? })` 
+1. Call `c2pa.builder.new()` / [`fromDefinition`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.BuilderFactory.html#fromdefinition) / [`fromArchive`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.BuilderFactory.html#fromarchive) 
+1. Add actions, ingredients, thumbnails 
+1. Call [`sign`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Builder.html#sign) or [`signAndGetManifestBytes`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Builder.html#signandgetmanifestbytes) 
+1. Call `await builder.free()` and `c2pa.dispose()`.
 
 You implement the [`Signer`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Signer.html) interface (`alg`, `reserveSize`, `sign`) so signing can call your backend, WebCrypto, or a test key.
 
 :::warning
-Never embed production private keys in client-side code. Prefer a remote signer (your API, KMS, or HSM) and harden the page against XSS.
+Never embed production private keys in client-side code. Instead use a remote signer (your API, KMS, or HSM) and harden the page against XSS.
 :::
 
 Embedding signed manifests into binary formats is handled here for supported web formats; for server-side embedding across all formats, use Node, Python, Rust, or C++.
