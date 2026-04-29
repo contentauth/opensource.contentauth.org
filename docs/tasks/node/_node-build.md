@@ -1,171 +1,106 @@
-This is an example of how to assign a manifest to an asset and sign the claim using Node.js:
+Use the `Builder` and `LocalSigner` classes from `@contentauth/c2pa-node` to assemble manifest data and sign an asset.
 
-```ts
+### Create a builder
+
+```typescript
 import { Builder } from '@contentauth/c2pa-node';
 
-// Create a new builder
+// Default settings
 const builder = Builder.new();
 
-// Create with custom settings
-const settings = {
-  builder: {
-    generate_c2pa_archive: true
-  }
-};
-const builder = Builder.new(settings);
+// With settings (JSON object or string; see [Settings](../settings.mdx))
+const withSettings = Builder.new({
+  builder: { generate_c2pa_archive: true },
+});
 
-// Or create from an existing manifest definition
-const builder = Builder.withJson(manifestDefinition);
-
-// Or create with both manifest and settings
-const builder = Builder.withJson(manifestDefinition, settings);
-
-// Add assertions to the manifest
-builder.addAssertion('c2pa.actions', actionsAssertion);
-
-// Add resources
-await builder.addResource('resource://example', resourceAsset);
-
-// Sign the manifest
-const manifest = builder.sign(signer, inputAsset, outputAsset);
+// From an existing manifest definition (see manifest JSON reference)
+const fromDefinition = Builder.withJson({
+  claim_generator_info: [{ name: 'my-app', version: '1.0.0' }],
+  title: 'My image',
+  format: 'image/jpeg',
+  assertions: [],
+  resources: { resources: {} },
+});
 ```
 
-Use the `c2pa.sign()` method to sign an ingredient, either locally if you have a signing certificate and key available, or by using a remote signing API.
+### Add assertions and resources
 
-## Signing a stream
+```typescript
+builder.addAssertion('c2pa.actions', {
+  actions: [{ action: 'c2pa.created' }],
+});
 
-If you have an asset file's data loaded into a stream, you can use it to sign the asset
+await builder.addResource('resource://example/thumb', {
+  buffer: thumbnailBytes,
+  mimeType: 'image/jpeg',
+});
+```
 
-**NOTE**: Signing using a stream is currently supported only for `image/jpeg` and `image/png` data. For all other file types, use the [file-based approach](#signing-files) .
+### Sign with a local certificate and key
 
-```ts
+`LocalSigner.newSigner` takes the signing certificate (PEM), private key (PEM), algorithm (`es256`, `ps256`, `ed25519`, etc.), and an optional RFC 3161 timestamp URL.
+
+```typescript
+import { Builder, LocalSigner } from '@contentauth/c2pa-node';
 import { readFile } from 'node:fs/promises';
-import { createC2pa, createTestSigner } from 'c2pa-node';
 
-// read an asset into a buffer
-const buffer = await readFile('to-be-signed.jpg');
-const asset: Asset = { buffer, mimeType: 'image/jpeg' };
+const cert = await readFile('signer.pem');
+const key = await readFile('signer.key');
+const signer = LocalSigner.newSigner(cert, key, 'es256');
 
-// build a manifest to use for signing
-const manifest = new ManifestBuilder(
+const builder = Builder.withJson({
+  claim_generator_info: [{ name: 'my-app', version: '1.0.0' }],
+  title: 'output.jpg',
+  format: 'image/jpeg',
+  assertions: [],
+  resources: { resources: {} },
+});
+
+builder.setIntent('edit');
+
+// Output to a file
+builder.sign(signer, { path: 'input.jpg' }, { path: 'signed.jpg' });
+```
+
+### Sign to an in-memory buffer
+
+Use a destination object with `buffer: null`; after `sign`, the signed asset bytes are written into `dest.buffer`.
+
+```typescript
+const dest: { buffer: Buffer | null } = { buffer: null };
+builder.sign(signer, { path: 'input.jpg' }, dest);
+const signedBytes = dest.buffer;
+```
+
+### Callback signing (`signAsync`)
+
+For signing in hardware, a remote service, or other custom flows, use `CallbackSigner` and `signAsync`:
+
+```typescript
+import { Builder, CallbackSigner } from '@contentauth/c2pa-node';
+import { readFile } from 'node:fs/promises';
+
+const cert = await readFile('signer.pem');
+
+const callbackSigner = CallbackSigner.newSigner(
   {
-    claim_generator: 'my-app/1.0.0',
-    format: 'image/jpeg',
-    title: 'buffer_signer.jpg',
-    assertions: [
-      {
-        label: 'c2pa.actions',
-        data: {
-          actions: [
-            {
-              action: 'c2pa.created',
-            },
-          ],
-        },
-      },
-      {
-        label: 'com.custom.my-assertion',
-        data: {
-          description: 'My custom test assertion',
-          version: '1.0.0',
-        },
-      },
-    ],
+    alg: 'es256',
+    certs: [cert],
+    reserveSize: 1024,
   },
-  { vendor: 'cai' },
+  async (data: Buffer) => {
+    return customSign(data);
+  },
 );
 
-// create a signing function
-async function sign(asset, manifest) {
-  const signer = await createTestSigner();
-  const c2pa = createC2pa({
-    signer,
-  });
-
-  const { signedAsset, signedManifest } = await c2pa.sign({
-    asset,
-    manifest,
-  });
-}
-
-// sign
-await sign(asset, manifest);
-```
-
-**Remote signing**
-
-If you have access to a web service that performs signing, you can use it to sign remotely; for example:
-
-```ts
-import { readFile } from 'node:fs/promises';
-import { fetch, Headers } from 'node-fetch';
-import { createC2pa, SigningAlgorithm } from 'c2pa-node';
-
-function createRemoteSigner() {
-  return {
-    type: 'remote',
-    async reserveSize() {
-      const url = `https://my.signing.service/box-size`;
-      const res = await fetch(url);
-      const data = (await res.json()) as { boxSize: number };
-      return data.boxSize;
-    },
-    async sign({ reserveSize, toBeSigned }) {
-      const url = `https://my.signing.service/sign?boxSize=${reserveSize}`;
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: new Headers({
-          'Content-Type': 'application/octet-stream',
-        }),
-        body: toBeSigned,
-      });
-      return res.buffer();
-    },
-  };
-}
-
-async function sign(asset, manifest) {
-  const signer = createRemoteSigner();
-  const c2pa = createC2pa({
-    signer,
-  });
-
-  const { signedAsset, signedManifest } = await c2pa.sign({
-    asset,
-    manifest,
-  });
-}
-
-const buffer = await readFile('to-be-signed.jpg');
-const asset: Asset = { buffer, mimeType: 'image/jpeg' };
-
-const manifest = new ManifestBuilder(
-  {
-    claim_generator: 'my-app/1.0.0',
-    format: 'image/jpeg',
-    title: 'buffer_signer.jpg',
-    assertions: [
-      {
-        label: 'c2pa.actions',
-        data: {
-          actions: [
-            {
-              action: 'c2pa.created',
-            },
-          ],
-        },
-      },
-      {
-        label: 'com.custom.my-assertion',
-        data: {
-          description: 'My custom test assertion',
-          version: '1.0.0',
-        },
-      },
-    ],
-  },
-  { vendor: 'cai' },
+const builder = Builder.new();
+await builder.signAsync(
+  callbackSigner,
+  { path: 'input.jpg' },
+  { path: 'signed.jpg' },
 );
-
-await sign(asset, manifest);
 ```
+
+Replace `customSign` with your implementation that returns the detached signature bytes for the C2PA claim.
+
+For identity assertions (CAWG), see `IdentityAssertionBuilder` and `IdentityAssertionSigner` in the [c2pa-node-v2 README](https://github.com/contentauth/c2pa-node-v2#identity-assertion-components).
