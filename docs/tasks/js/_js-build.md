@@ -1,95 +1,97 @@
-Using client-side JavaScript, you can:
-- Create and compose manifests using the JavaScript library manifest `builder` API.
-- Perform signing in the browser if you have a private key available to the client (using WebCrypto, an imported key, or an ephemeral/test key). The web library provides a `Signer` interface you can implement to call into whatever signing capability you have in the browser.
-- Produce a manifest store or sidecar (`.c2pa`) file entirely in the browser (so you can download a signed sidecar next to the asset). 
 
-Signing Content Credentials requires an end-entity X.509 certificate that fits the C2PA trust model to produce publicly verifiable signatures. Getting and protecting that certificate/private key in a browser is risky and should not be done in production. 
+Use [`@contentauth/c2pa-web`](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-web) to build manifests and sign assets in the browser. 
 
-::: warning
-Never put production private keys into client code!
+The high-level flow is: 
+1. Call `await createC2pa({ wasmSrc, settings? })` 
+1. Call `c2pa.builder.new()` / [`fromDefinition`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.BuilderFactory.html#fromdefinition) / [`fromArchive`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.BuilderFactory.html#fromarchive) 
+1. Add actions, ingredients, thumbnails 
+1. Call [`sign`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Builder.html#sign) or [`signAndGetManifestBytes`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Builder.html#signandgetmanifestbytes) 
+1. Call `await builder.free()` and `c2pa.dispose()`.
+
+You implement the [`Signer`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Signer.html) interface (`alg`, `reserveSize`, `sign`) so signing can call your backend, WebCrypto, or a test key.
+
+:::warning
+Never embed production private keys in client-side code. Instead use a remote signer (your API, KMS, or HSM) and harden the page against XSS.
 :::
 
-Embedding into binaries: While you can build and sign manifests client-side, embedding a signed manifest properly into binary file formats (JPEG/PNG/MP4, etc.) is functionality that server-side libraries (Node.js, Python, C/C++, and Rust) explicitly provide. 
+Embedding signed manifests into binary formats is handled here for supported web formats; for server-side embedding across all formats, use Node, Python, Rust, or C++.
 
-Security & auditability: Browser-stored keys (or keys entered by users) are exposed to theft, malware, or cross-site scripting (XSS) attacks. For production signing, best practice is to use a remote signer (KMS/HSM) or server-side signing where keys are protected and signing operations are auditable.
+### Remote signer example
 
-```js
+```typescript
 import { createC2pa, type Signer } from '@contentauth/c2pa-web';
 import wasmSrc from '@contentauth/c2pa-web/resources/c2pa.wasm?url';
 
-// 1) Create a Signer that calls your backend (which returns the signature bytes)
 function createRemoteSigner(): Signer {
   return {
     alg: 'es256',
-    reserveSize: async () => 4096, // bytes to reserve for TSA/countersignature (tune as needed)
-    sign: async (toBeSigned: Uint8Array, _reserveSize: number) => {
+    reserveSize: async () => 4096,
+    sign: async (toBeSigned: Uint8Array) => {
       const res = await fetch('/api/sign', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          alg: 'es256',
-          payload: Array.from(toBeSigned),
-        }),
+        headers: { 'Content-Type': 'application/octet-stream' },
+        body: toBeSigned,
       });
       if (!res.ok) throw new Error('Signing failed');
-      const sigBytes = new Uint8Array(await res.arrayBuffer());
-      return sigBytes;
+      return new Uint8Array(await res.arrayBuffer());
     },
   };
 }
 
 async function run() {
-  // 2) Initialize the SDK
   const c2pa = await createC2pa({ wasmSrc });
 
-  // 3) Fetch the asset to sign
-  const imgUrl = 'https://contentauth.github.io/example-assets/images/cloudscape-ACA-Cr.jpeg';
-  const resp = await fetch(imgUrl);
+  const resp = await fetch('/image-to-sign.jpg');
   const assetBlob = await resp.blob();
 
-  // 4) Build a simple manifest (add a created action and optional thumbnail)
   const builder = await c2pa.builder.new();
   await builder.addAction({
     action: 'c2pa.created',
-    digitalSourceType: 'http://cv.iptc.org/newscodes/digitalsourcetype/digitalCapture',
+    digitalSourceType:
+      'http://cv.iptc.org/newscodes/digitalsourcetype/digitalCapture',
   });
-  // Optional: include a thumbnail that represents the asset
   await builder.setThumbnailFromBlob('image/jpeg', assetBlob);
 
-  // 5) Sign and get a new asset with the manifest embedded
   const signer = createRemoteSigner();
   const signedBytes = await builder.sign(signer, assetBlob.type, assetBlob);
 
-  // 6) Use/save the signed asset
   const signedBlob = new Blob([signedBytes], { type: assetBlob.type });
   const url = URL.createObjectURL(signedBlob);
-  // e.g., download
   const a = document.createElement('a');
   a.href = url;
   a.download = 'signed.jpg';
   a.click();
   URL.revokeObjectURL(url);
 
-  // Cleanup
   await builder.free();
   c2pa.dispose();
 }
 
-run().catch(console.error);
+void run();
 ```
 
-To retrieve manifest bytes alongside the signed asset:
+### Manifest bytes and remote manifest
 
-```js
+```typescript
 const { asset, manifest } = await builder.signAndGetManifestBytes(
   signer,
   assetBlob.type,
-  assetBlob
+  assetBlob,
 );
-// asset -> signed asset bytes
-// manifest -> embedded manifest bytes
 ```
 
-Notes:
-- You provide the `Signer` used in the example above. In production, this object wraps a service/HSM that returns a proper signature for your algorithm (`es256`, `ps256`, `ed25519`, etc.). Set `reserveSize` to a value large enough for timestamps/countersignatures your signer adds.
-- To attach a remote manifest instead of embedding, use `builder.setRemoteUrl(url)` and `builder.setNoEmbed(true)` before signing.
+To publish a remote manifest instead of embedding, call [`setRemoteUrl`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Builder.html#setremoteurl) and [`setNoEmbed(true)`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Builder.html#setnoembed) before `sign`.
+
+### Start from a manifest definition
+
+```typescript
+const builder = await c2pa.builder.fromDefinition({
+  claim_generator_info: [{ name: 'my-app', version: '1.0.0' }],
+  title: 'My image',
+  format: 'image/jpeg',
+  assertions: [],
+  ingredients: [],
+});
+```
+
+For [intents](../intents.mdx) and [archives](../archives.mdx), see the dedicated task pages.

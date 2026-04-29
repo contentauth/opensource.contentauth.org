@@ -1,25 +1,54 @@
 
-Once you've used [`createC2pa`](https://contentauth.github.io/c2pa-js/functions/_contentauth_c2pa-web.index.createC2pa.html) to create an instance of c2pa-web (for example in `c2pa` in this example), use `c2pa.reader.fromBlob()` to create a [Reader](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.index.Reader.html) for an asset.
+Initialize the SDK with [`createC2pa`](https://contentauth.github.io/c2pa-js/modules/_contentauth_c2pa-web.html#createc2pa), then use [`reader.fromBlob`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.ReaderFactory.html#fromblob) to open an asset. Call [`manifestStore`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Reader.html#manifeststore) for the full store, or [`activeManifest`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Reader.html#activemanifest) for the active claim.
 
-Then use Reader's [`manifestStore()` method](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.index.Reader.html#manifeststore) to read manifest data (if any) from the asset.
+Always call [`reader.free()`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Reader.html#free) when finished, and [`c2pa.dispose()`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.C2paSdk.html#dispose) when tearing down the worker.
 
-For example:
+### Read from a `Blob`
 
-```js
+With Vite (or similar), load the Wasm URL:
+
+```typescript
 import { createC2pa } from '@contentauth/c2pa-web';
 import wasmSrc from '@contentauth/c2pa-web/resources/c2pa.wasm?url';
-const c2pa = createC2pa({ wasmSrc });
 
-const response = await fetch(
-  'https://contentauth.github.io/example-assets/images/Firefly_tabby_cat.jpg'
-);
+const c2pa = await createC2pa({ wasmSrc });
 
+const response = await fetch('/signed-image.jpg');
 const blob = await response.blob();
+
 const reader = await c2pa.reader.fromBlob(blob.type, blob);
+if (!reader) {
+  console.log('No C2PA manifest found.');
+  c2pa.dispose();
+  return;
+}
+
 const manifestStore = await reader.manifestStore();
+console.log(JSON.stringify(manifestStore, null, 2));
 
-console.log(manifestStore);
+const active = await reader.activeManifest();
+console.log('Active title:', active.title);
 
-// Free SDK objects when they are no longer needed to avoid memory leaks.
 await reader.free();
+c2pa.dispose();
 ```
+
+Optional [per-read settings](../settings.mdx) override the defaults passed to `createC2pa`:
+
+```typescript
+const reader = await c2pa.reader.fromBlob(blob.type, blob, {
+  verify: { verifyAfterReading: false, verifyTrust: true },
+});
+```
+
+### Inline Wasm (no separate `.wasm` request)
+
+For constrained environments, use [`@contentauth/c2pa-web/inline`](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-web#using-an-inline-wasm-binary) (larger bundle):
+
+```typescript
+import { createC2pa } from '@contentauth/c2pa-web/inline';
+
+const c2pa = await createC2pa();
+```
+
+See the [c2pa-web README](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-web) for CDN-hosted Wasm and API details.

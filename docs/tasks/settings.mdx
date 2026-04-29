@@ -10,29 +10,15 @@ import TabItem from '@theme/TabItem';
 import PythonRead from './python/_python-settings.md';
 import CppRead from './cpp/_cpp-settings.md';
 import RustRead from './rust/_rust-settings.md';
+import JsSettings from './js/_js-settings.md';
 
-Regardless of which language you're working in, you use the `Context` and `Settings` classes to control SDK behavior including verification, trust anchors, thumbnails, signing, and more.
-
-## Overview of Context
-
-`Context` encapsulates SDK configuration that controls how `Reader`, `Builder`, and other components operate, including:
-
-- **Settings**: Trust configuration, builder behavior, thumbnails, and more.
-- **Signer configuration**: Optional signing credentials that can be stored for reuse.
-
-Using `Context` provides explicit, isolated configuration without thread-local state. It enables you to run different configurations simultaneously (for example for development with test certificates or production with strict validation), simplifies testing, and improves code clarity.
-
-`Context`:
-
-- Can be moved but not copied. After moving, `is_valid()` returns `false` on the source.
-- Is used at construction: `Reader` and `Builder` copy configuration from the `Context` at construction time. The `Context` doesn't need to outlive them.
-- Is reusable: Use the same `Context` to create multiple `Reader` and `Builder` instances.
+Regardless of which language you're working in, you use the `Context` and `Settings` classes to control SDK behavior including verification, trust anchors, thumbnails, signing, and more:
+- `Settings` is a declarative configuration for the SDK that you can load from a JSON file or set programmatically.
+- `Context` controls how `Reader`, `Builder`, and other components operate, including:
+  - **Settings**: Trust configuration, builder behavior, thumbnails, and more.
+  - **Signer configuration**: Optional signing credentials that can be stored for reuse.
 
 ## Overview of Settings
-
-You can specify a declarative configuration for the SDK using `Settings`, that you can load from a JSON file or set programmatically.
-
-### Settings object structure
 
 > [!TIP]
 > For the complete reference to the Settings object, see [SDK object reference - Settings](https://opensource.contentauthenticity.org/docs/manifest/json-ref/settings-schema).
@@ -72,6 +58,14 @@ For Boolean values, use JSON `true` and `false`, not the strings `"true"` and `"
 
 ## Creating and using Context
 
+Using `Context` provides explicit, isolated configuration without thread-local state. It enables you to run different configurations simultaneously (for example for development with test certificates or production with strict validation), simplifies testing, and improves code clarity.
+
+`Context`:
+
+- Can be moved but not copied. After moving, `is_valid()` returns `false` on the source.
+- Is used at construction: `Reader` and `Builder` copy configuration from the `Context` at construction time. The `Context` doesn't need to outlive them.
+- Is reusable: Use the same `Context` to create multiple `Reader` and `Builder` instances.
+
 <Tabs groupId="programming-lang" queryString="lang">
 
   <TabItem value="rust" label="Rust">
@@ -89,6 +83,12 @@ For Boolean values, use JSON `true` and `false`, not the strings `"true"` and `"
   <TabItem value="python" label="Python" default>
 
     <PythonRead name="python-settings" />
+
+  </TabItem>
+
+  <TabItem value="js" label="JavaScript">
+
+    <JsSettings name="js-settings" />
 
   </TabItem>
 

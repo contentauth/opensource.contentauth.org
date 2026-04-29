@@ -1,0 +1,90 @@
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+The snippets below assume `const c2pa = await createC2pa({ wasmSrc });` is in scope (see [Configuring SDK settings](../settings.mdx) and [Reading manifests](../read.mdx) for initialization). Call `c2pa.dispose()` when you no longer need the worker.
+
+### Save a working store to bytes
+
+[`Builder.toArchive`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Builder.html#toarchive) returns a `Uint8Array` in standard `application/c2pa` form. You can persist it, attach it as an ingredient, or download it as a sidecar.
+
+```typescript
+const builder = await c2pa.builder.fromDefinition({
+  claim_generator_info: [{ name: 'my-app', version: '1.0.0' }],
+  title: 'Draft',
+  format: 'image/jpeg',
+  assertions: [],
+  ingredients: [],
+});
+
+const ingredientBlob = await fetch('/source.jpg').then((r) => r.blob());
+await builder.addIngredientFromBlob(
+  { title: 'source.jpg', format: 'image/jpeg', instance_id: 'src-1' },
+  ingredientBlob.type,
+  ingredientBlob,
+);
+
+const archive = await builder.toArchive();
+await builder.free();
+
+const file = new File([archive], 'draft.c2pa', { type: 'application/c2pa' });
+```
+
+### Restore a builder from an archive
+
+[`BuilderFactory.fromArchive`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.BuilderFactory.html#fromarchive) accepts a `Blob` of archive bytes. Optional [settings](../settings.mdx) apply only to that builder instance.
+
+```typescript
+const restored = await c2pa.builder.fromArchive(new Blob([archive]));
+
+const definition = await restored.getDefinition();
+console.log(definition.ingredients?.length);
+
+await restored.free();
+```
+
+### Read an archive with `Reader`
+
+Use MIME type `application/c2pa` so the reader treats the blob as an archive (not a raster image).
+
+```typescript
+const reader = await c2pa.reader.fromBlob(
+  'application/c2pa',
+  new Blob([archive]),
+  { verify: { verifyAfterReading: false } },
+);
+
+if (!reader) {
+  throw new Error('Could not read archive');
+}
+
+const store = await reader.manifestStore();
+const active = await reader.activeManifest();
+await reader.free();
+```
+
+### Two-phase workflow
+
+**Phase 1 — prepare** on the client, then upload or store the archive bytes.
+
+**Phase 2 — sign** by loading the archive into a builder and calling `sign` with the final asset blob (see [Adding and signing a manifest](../build.mdx)).
+
+### Use an archive as an ingredient
+
+Pass `application/c2pa` as the ingredient format so provenance from a prior builder is embedded as an ingredient (often with `edit` intent).
+
+```typescript
+const archive = await originalBuilder.toArchive();
+await originalBuilder.free();
+
+const newBuilder = await c2pa.builder.new();
+await newBuilder.setIntent('edit');
+
+await newBuilder.addIngredientFromBlob(
+  { title: 'previous-work.c2pa', relationship: 'parentOf' },
+  'application/c2pa',
+  new Blob([archive]),
+);
+```
+
+See [c2pa-web — Creating and reusing builder archives](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-web#creating-and-reusing-builder-archives) for additional examples.
