@@ -22,17 +22,11 @@
       ]
     },
     "claim_generator_info": {
-      "description": "Claim Generator Info is always required with an entry",
+      "description": "Software that generated the claim, as a list of [`ClaimGeneratorInfo`].\n\nIn JSON, when this key is **omitted** (or the array is empty), the value is\nresolved at claim-building time: settings.builder.claim_generator_info if set, otherwise\non the active [`Context`] is used if set, otherwise [`ClaimGeneratorInfo::default`].\nA non-empty list in the definition is used as given.",
       "type": "array",
       "items": {
         "$ref": "#/$defs/ClaimGeneratorInfo"
-      },
-      "default": [
-        {
-          "name": "c2pa-rs",
-          "version": "0.80.2"
-        }
-      ]
+      }
     },
     "metadata": {
       "description": "Optional manifest metadata. This will be deprecated in the future; not recommended to use.",
@@ -59,7 +53,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:40dd1e7c-c748-4c1c-b093-940bf392ac36"
+      "default": "xmp:iid:8066d7ae-4180-49ea-87da-b06ecba4c30d"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
