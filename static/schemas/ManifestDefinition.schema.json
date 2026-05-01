@@ -53,7 +53,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:e8dec466-c9dc-4724-aea0-5ecc3ef21896"
+      "default": "xmp:iid:a68f206c-6b9c-4f99-a0da-2cf0aa512172"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
