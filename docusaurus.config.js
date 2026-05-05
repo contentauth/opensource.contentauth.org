@@ -6,6 +6,9 @@
 
 const lightCodeTheme = require('prism-react-renderer').themes.github;
 const darkCodeTheme = require('prism-react-renderer').themes.dracula;
+const remoteDocs = require('./remote-docs.json');
+const { readFileSync } = require('fs');
+const { resolve } = require('path');
 
 const copyright = `
 <div style="font-size: 0.75rem;">
@@ -17,32 +20,98 @@ const copyright = `
 `;
 
 // Map of external repositories to their GitHub repository names, paths, and organizations
+// Used to create 'Edit this page' links
 const externalRepos = {
-  'c2pa-c': { repo: 'c2pa-c', path: '', org: 'contentauth' },
-  'c2pa-min': { repo: 'c2pa-min', path: '', org: 'contentauth' },
-  'c2pa-node': { repo: 'c2pa-node', path: '', org: 'contentauth' },
-  'c2pa-node-example': {
-    repo: 'c2pa-node-example',
-    path: '',
-    org: 'contentauth',
-  },
+  'c2pa-cpp': { repo: 'c2pa-cpp', path: '', org: 'contentauth' },
+  'c2pa-ios': { repo: 'c2pa-ios', path: '', org: 'contentauth' },
+  'c2pa-android': { repo: 'c2pa-android', path: '', org: 'contentauth' },
+  'c2pa-js': { repo: 'c2pa-js', path: '', org: 'contentauth' },
+
+  'c2pa-node-v2': { repo: 'c2pa-node', path: '', org: 'contentauth' },
   'c2pa-python': { repo: 'c2pa-python', path: '', org: 'contentauth' },
   'c2pa-python-example': {
     repo: 'c2pa-python-example',
     path: '',
     org: 'contentauth',
   },
-  'c2pa-service-example': {
-    repo: 'c2pa-service-example',
-    path: '',
-    org: 'contentauth',
-  },
+
   c2patool: { repo: 'c2pa-rs', path: 'cli/', org: 'contentauth' },
   'rust-sdk': { repo: 'c2pa-rs', path: '', org: 'contentauth' },
   trustmark: { repo: 'trustmark', path: '', org: 'adobe' },
 };
 
-/** @type {import('@docusaurus/types').Config} */
+// Exact edit URLs for docs that are mirrored from remote-docs.json sources.
+// This handles cases where local doc names differ from source repo paths.
+/** @type {Record<string, string>} */
+const remoteDocEditUrls = {};
+
+for (const source of remoteDocs.sources) {
+  if (typeof source.dest !== 'string' || !source.dest.startsWith('docs/')) {
+    continue;
+  }
+  if (typeof source.repo !== 'string' || typeof source.path !== 'string') {
+    continue;
+  }
+
+  const docPath = source.dest.replace(/^docs\//, '').toLowerCase();
+  let branch = 'main';
+  if ('branch' in source && typeof source.branch === 'string') {
+    branch = source.branch;
+  }
+
+  remoteDocEditUrls[
+    docPath
+  ] = `https://github.com/${source.repo}/edit/${branch}/${source.path}`;
+}
+
+const contentauthGithubBaseUrl = 'https://github.com/contentauth/';
+const frontMatterRegex = /^---\r?\n([\s\S]*?)\r?\n---/;
+const customEditPathRegex = /^\s*custom_edit_path:\s*(.+?)\s*$/m;
+/** @type {Map<string, string | null>} */
+const customEditUrlCache = new Map();
+
+/**
+ * Reads a doc's frontmatter and returns its custom contentauth edit URL, if any.
+ * @param {string | undefined} versionDocsDirPath
+ * @param {string} docPath
+ * @returns {string | null}
+ */
+function getFrontMatterCustomEditUrl(versionDocsDirPath, docPath) {
+  if (!versionDocsDirPath) {
+    return null;
+  }
+
+  const cacheKey = `${versionDocsDirPath}:${docPath}`;
+  if (customEditUrlCache.has(cacheKey)) {
+    return customEditUrlCache.get(cacheKey) ?? null;
+  }
+
+  let customEditUrl = null;
+  try {
+    const markdown = readFileSync(resolve(versionDocsDirPath, docPath), 'utf8');
+    const frontMatterMatch = markdown.match(frontMatterRegex);
+    if (frontMatterMatch) {
+      const customEditPathMatch =
+        frontMatterMatch[1].match(customEditPathRegex);
+      if (customEditPathMatch) {
+        const customEditPath = customEditPathMatch[1]
+          .trim()
+          .replace(/^['"]|['"]$/g, '')
+          .replace(/^\/+/, '');
+        if (customEditPath) {
+          customEditUrl = `${contentauthGithubBaseUrl}${customEditPath}`;
+        }
+      }
+    }
+  } catch {
+    // Ignore missing/non-readable files and continue with default edit URL logic.
+  }
+
+  customEditUrlCache.set(cacheKey, customEditUrl);
+  return customEditUrl;
+}
+
+/** @returns {Promise<import('@docusaurus/types').Config>} */
 async function createConfig() {
   const { default: remarkGithubAdmonitionsToDirectives } = await import(
     'remark-github-admonitions-to-directives'
@@ -90,7 +159,9 @@ async function createConfig() {
           docs: {
             beforeDefaultRemarkPlugins: [remarkGithubAdmonitionsToDirectives],
             sidebarPath: require.resolve('./sidebars.js'),
-            editUrl: ({ docPath }) => {
+            editUrl: ({ docPath, versionDocsDirPath }) => {
+              const normalizedDocPath = docPath.toLowerCase();
+
               // Don't show edit link for dynamically generated API docs
               if (docPath.startsWith('js-sdk/api/')) {
                 return null;
@@ -101,16 +172,34 @@ async function createConfig() {
                 return 'https://github.com/contentauth/c2pa-rs/edit/main/docs/supported-formats.md';
               }
 
+              // Allow docs to point at a contentauth README/source via frontmatter.
+              const customEditUrl = getFrontMatterCustomEditUrl(
+                versionDocsDirPath,
+                docPath,
+              );
+              if (customEditUrl) {
+                return customEditUrl;
+              }
+
+              // Use explicit source mappings from remote-docs.json when available.
+              const remoteDocEditUrl = remoteDocEditUrls[normalizedDocPath];
+              if (remoteDocEditUrl) {
+                return remoteDocEditUrl;
+              }
+
               // Check if the doc is from an external repository
               const externalRepo = Object.keys(externalRepos).find((repo) =>
-                docPath.startsWith(`${repo}/`),
+                normalizedDocPath.startsWith(`${repo}/`),
               );
 
               if (externalRepo) {
                 // Get the GitHub repository info for this external repo
                 const repoInfo = externalRepos[externalRepo];
                 // Remove the repo prefix from the path to get the relative path in the repo
-                let repoPath = docPath.replace(`${externalRepo}/`, '');
+                let repoPath = normalizedDocPath.replace(
+                  `${externalRepo}/`,
+                  '',
+                );
                 // Convert readme.md to README.md in the path
                 repoPath = repoPath.replace(/readme\.md$/i, 'README.md');
                 return `https://github.com/${repoInfo.org}/${repoInfo.repo}/edit/main/${repoInfo.path}${repoPath}`;
