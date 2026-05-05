@@ -1,6 +1,7 @@
 ---
 id: node-landing
 title: Node.js library
+custom_edit_path: c2pa-node-v2/edit/main/README.md
 ---
 
 import Readme from './c2pa-node-v2/readme.md';

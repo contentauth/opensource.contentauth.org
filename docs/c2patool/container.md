@@ -1,6 +1,7 @@
 ---
 id: c2patool-index
 title: C2PA Tool
+custom_edit_path: c2pa-rs/edit/main/cli/README.md
 ---
 
 :::tip
