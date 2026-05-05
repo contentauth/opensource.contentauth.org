@@ -469,8 +469,51 @@ main .row:not(:has(.theme-doc-toc-desktop)) > .col {
 */
 
 .scroll-target,
-.markdown span[id] {
+.markdown span[id],
+.markdown .glossary-inline-terms h4 {
   scroll-margin-top: 130px; /* Slightly more than title bar */
+}
+
+/* Glossary page: term labels use #### but should read like inline "Term: definition" blocks */
+.markdown .glossary-inline-terms > h4 {
+  display: inline;
+  font-size: inherit;
+  font-weight: var(--ifm-font-weight-bold);
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+  color: var(--ifm-heading-color);
+}
+
+/* Hash anchor link uses padding-left while invisible; that gap reads as extra space before the definition */
+.markdown .glossary-inline-terms > h4 .hash-link {
+  padding-left: 0;
+}
+
+.markdown .glossary-inline-terms > h4:focus .hash-link,
+.markdown .glossary-inline-terms > h4:hover .hash-link {
+  padding-left: 0.35rem;
+}
+
+.markdown .glossary-inline-terms > h4:not(:first-of-type)::before {
+  content: '';
+  display: block;
+  margin-top: var(--ifm-paragraph-margin-bottom);
+}
+
+.markdown .glossary-inline-terms > h4 + p {
+  display: inline;
+  margin: 0;
+}
+
+.markdown .glossary-inline-terms > h4 + p + p {
+  display: block;
+  margin: var(--ifm-paragraph-margin-bottom) 0;
+}
+
+.markdown .glossary-inline-terms > h4 + ul {
+  display: block;
+  margin: var(--ifm-paragraph-margin-bottom) 0;
 }
 
 .warning {
