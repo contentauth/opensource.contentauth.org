@@ -13,7 +13,8 @@
 /docs/js-sdk/examples/quickstart/*.ts
 /docs/js-sdk/examples/view-manifest/*.ts
 /docs/js-sdk/examples/view-manifest/*.html
-/docs/c2pa-js/*.md
+/docs/c2pa-js/**/*.md
+/docs/c2pa-js/packages/*.md
 /docs/c2pa-js/docs/*.md
 /docs/c2patool/readme*.md
 /docs/c2patool/docs/*.md
