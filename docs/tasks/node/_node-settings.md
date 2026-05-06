@@ -4,7 +4,7 @@ For the full settings schema, see [SDK object reference — Settings](../../mani
 
 ### Inline settings
 
-```typescript
+```javascript
 import { Reader } from '@contentauth/c2pa-node';
 
 const settings = {
@@ -19,7 +19,7 @@ const reader = await Reader.fromAsset({ path: 'image.jpg' }, settings);
 
 `Builder` accepts the same shape (or a JSON string):
 
-```typescript
+```javascript
 import { Builder } from '@contentauth/c2pa-node';
 
 const builder = Builder.new({
@@ -29,9 +29,9 @@ const builder = Builder.new({
 
 ### Helper functions
 
-Use the helpers from `@contentauth/c2pa-node` to build typed fragments, merge them, and serialize to JSON (camelCase keys are converted to snake_case for the Rust-backed SDK):
+Use the helpers from `@contentauth/c2pa-node` to build settings fragments, merge them, and serialize to JSON (camelCase keys are converted to snake_case for the Rust-backed SDK):
 
-```typescript
+```javascript
 import {
   Builder,
   Reader,
@@ -71,16 +71,15 @@ const combined = mergeSettings(trustSettings, verifySettings, cawgTrustSettings)
 const asJson = settingsToJson(combined);
 ```
 
-### Load settings from a file or URL
+### Load settings from a URL
 
-```typescript
-import { Reader, Builder, loadSettingsFromFile, loadSettingsFromUrl } from '@contentauth/c2pa-node';
+Only use HTTPS URLs you trust for `loadSettingsFromUrl`.
 
-const fileSettings = await loadSettingsFromFile('./c2pa-settings.toml');
-const reader = await Reader.fromAsset({ path: 'image.jpg' }, fileSettings);
+```javascript
+import { Reader, Builder, loadSettingsFromUrl } from '@contentauth/c2pa-node';
 
 const urlSettings = await loadSettingsFromUrl('https://example.com/c2pa-settings.json');
 const builder = Builder.new(urlSettings);
 ```
 
-Only use HTTPS URLs you trust for `loadSettingsFromUrl`.
+

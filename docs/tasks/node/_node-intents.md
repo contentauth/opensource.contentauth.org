@@ -2,7 +2,7 @@
 
 In Node.js, call `setIntent` on a `Builder` from `@contentauth/c2pa-node`. The intent shapes validation, default actions, and whether a parent ingredient is required.
 
-```typescript
+```javascript
 import { Builder } from '@contentauth/c2pa-node';
 
 const builder = Builder.new();
@@ -16,7 +16,7 @@ builder.setIntent({
 
 You can also set `edit` or `update` with a string:
 
-```typescript
+```javascript
 builder.setIntent('edit');
 builder.setIntent('update');
 ```
@@ -25,7 +25,7 @@ builder.setIntent('update');
 
 Use a `create` intent for new digital creations. You must supply a [digital source type](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_digital_source_type) URI. The manifest must not have a parent ingredient; the SDK can add a `c2pa.created` action when appropriate.
 
-```typescript
+```javascript
 import { Builder, LocalSigner } from '@contentauth/c2pa-node';
 import { readFile } from 'node:fs/promises';
 
@@ -52,7 +52,7 @@ builder.sign(
 
 Use `edit` when modifying existing content. If you do not add a parent ingredient, one can be created from the source asset you pass to `sign`.
 
-```typescript
+```javascript
 import { Builder } from '@contentauth/c2pa-node';
 
 const builder = Builder.new();
@@ -61,7 +61,7 @@ builder.setIntent('edit');
 
 To supply the parent explicitly, add an ingredient JSON string and optional asset buffer (see [Adding manifest data](../build.mdx)):
 
-```typescript
+```javascript
 import { Builder } from '@contentauth/c2pa-node';
 import { readFile } from 'node:fs/promises';
 
@@ -84,7 +84,7 @@ await builder.addIngredient(parentJson, {
 
 Use `update` for restricted, metadata-oriented changes: typically a single parent ingredient and no changes to the parent’s hashed content.
 
-```typescript
+```javascript
 import { Builder } from '@contentauth/c2pa-node';
 
 const builder = Builder.new();

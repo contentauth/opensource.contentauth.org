@@ -2,14 +2,11 @@ Binary resources (thumbnails, icons, linked manifest blobs) are referenced by UR
 
 ### Write a resource to a file
 
-```typescript
+```javascript
 import { Reader } from '@contentauth/c2pa-node';
 import path from 'node:path';
 
-async function writeThumbnail(
-  assetPath: string,
-  outputPath: string,
-): Promise<void> {
+async function writeThumbnail(assetPath, outputPath) {
   const reader = await Reader.fromAsset({ path: assetPath });
   if (!reader) {
     throw new Error('No C2PA manifest found for this asset.');
@@ -27,21 +24,18 @@ async function writeThumbnail(
 
 ### Read a resource into a buffer
 
-Pass a destination object with `buffer: null`. The implementation fills `buffer` after the call.
+Pass a destination object with `buffer: null`. 
 
-```typescript
+```javascript
 import { Reader } from '@contentauth/c2pa-node';
 
-async function readResourceToBuffer(
-  assetPath: string,
-  uri: string,
-): Promise<Buffer> {
+async function readResourceToBuffer(assetPath, uri) {
   const reader = await Reader.fromAsset({ path: assetPath });
   if (!reader) {
     throw new Error('No C2PA manifest found.');
   }
 
-  const dest: { buffer: Buffer | null } = { buffer: null };
+  const dest = { buffer: null };
   await reader.resourceToAsset(uri, dest);
   if (!dest.buffer) {
     throw new Error('Resource could not be read.');
@@ -54,7 +48,7 @@ async function readResourceToBuffer(
 
 You can inspect `reader.json()` for the full manifest store, or use `getActive()` for the active manifest only. Ingredient thumbnails use the same `identifier` pattern as the claim thumbnail.
 
-```typescript
+```javascript
 import { Reader } from '@contentauth/c2pa-node';
 
 const reader = await Reader.fromAsset({ path: 'signed.jpg' });

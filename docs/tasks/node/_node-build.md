@@ -2,7 +2,7 @@ Use the `Builder` and `LocalSigner` classes from `@contentauth/c2pa-node` to ass
 
 ### Create a builder
 
-```typescript
+```javascript
 import { Builder } from '@contentauth/c2pa-node';
 
 // Default settings
@@ -25,7 +25,7 @@ const fromDefinition = Builder.withJson({
 
 ### Add assertions and resources
 
-```typescript
+```javascript
 builder.addAssertion('c2pa.actions', {
   actions: [{ action: 'c2pa.created' }],
 });
@@ -40,7 +40,7 @@ await builder.addResource('resource://example/thumb', {
 
 `LocalSigner.newSigner` takes the signing certificate (PEM), private key (PEM), algorithm (`es256`, `ps256`, `ed25519`, etc.), and an optional RFC 3161 timestamp URL.
 
-```typescript
+```javascript
 import { Builder, LocalSigner } from '@contentauth/c2pa-node';
 import { readFile } from 'node:fs/promises';
 
@@ -66,8 +66,8 @@ builder.sign(signer, { path: 'input.jpg' }, { path: 'signed.jpg' });
 
 Use a destination object with `buffer: null`; after `sign`, the signed asset bytes are written into `dest.buffer`.
 
-```typescript
-const dest: { buffer: Buffer | null } = { buffer: null };
+```javascript
+const dest = { buffer: null };
 builder.sign(signer, { path: 'input.jpg' }, dest);
 const signedBytes = dest.buffer;
 ```
@@ -76,7 +76,7 @@ const signedBytes = dest.buffer;
 
 For signing in hardware, a remote service, or other custom flows, use `CallbackSigner` and `signAsync`:
 
-```typescript
+```javascript
 import { Builder, CallbackSigner } from '@contentauth/c2pa-node';
 import { readFile } from 'node:fs/promises';
 
@@ -88,7 +88,7 @@ const callbackSigner = CallbackSigner.newSigner(
     certs: [cert],
     reserveSize: 1024,
   },
-  async (data: Buffer) => {
+  async (data) => {
     return customSign(data);
   },
 );

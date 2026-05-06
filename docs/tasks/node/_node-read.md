@@ -1,14 +1,14 @@
 
 Use the `Reader` class to read C2PA manifest data from a file or buffer. For example:
 
-```ts
-// read-manifest.ts
+```javascript
+// read-manifest.js
 import { Reader } from '@contentauth/c2pa-node';
 
-async function main(): Promise<void> {
+async function main() {
   const inputPath = process.argv[2];
   if (!inputPath) {
-    console.error('Usage: ts-node read-manifest.ts <path-to-asset>');
+    console.error('Usage: node read-manifest.js <path-to-asset>');
     process.exit(1);
   }
 
@@ -24,7 +24,7 @@ async function main(): Promise<void> {
   // If you only want the active manifest:
   const active = reader.getActive();
   if (active) {
-    console.log('Active manifest label:', manifestStore.active_manifest);
+    console.log('Active manifest:', active);
   }
 }
 
@@ -36,11 +36,11 @@ main().catch((err) => {
 
 Using a buffer
 
-```ts
+```javascript
 import fs from 'node:fs/promises';
 import { Reader } from '@contentauth/c2pa-node';
 
-async function readFromBuffer(filePath: string): Promise<void> {
+async function readFromBuffer(filePath) {
   const buffer = await fs.readFile(filePath);
   const reader = await Reader.fromAsset({
     buffer,
