@@ -406,11 +406,6 @@
 
     { "_comment": "Node.js library" },
     {
-      "repo": "contentauth/c2pa-node",
-      "path": "README.md",
-      "dest": "docs/c2pa-node/readme.md"
-    },
-    {
       "repo": "contentauth/c2pa-node-v2",
       "path": "README.md",
       "dest": "docs/c2pa-node-v2/readme.md"

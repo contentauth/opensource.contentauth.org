@@ -124,6 +124,9 @@ async function createConfig() {
     baseUrl: '/',
     staticDirectories: ['static'],
     onBrokenLinks: 'warn',
+    // Schema reference pages (docs/manifest/json-ref/*-ref.mdx) render headings and
+    // ids inside SchemaReference from JSON Schema at runtime, so build-time anchor
+    // extraction cannot see those hashes. Links to #fragments on those pages are valid.
     onBrokenAnchors: 'log',
     markdown: {
       mermaid: true,
