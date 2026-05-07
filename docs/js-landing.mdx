@@ -1,0 +1,24 @@
+---
+id: js-landing
+title: JavaScript library
+---
+
+:::warning As of Oct 2025
+The old, deprecated `c2pa-js` repository is now in [c2pa-js-legacy](https://github.com/contentauth/c2pa-js-legacy).  If you need to work with C2PA metadata in the browser, use the libraries in this repository instead of the old library.
+:::
+
+The [c2pa-js](c2pa-js/README.md) repository is a monorepo containing the following libraries published for production use:
+
+
+- [**c2pa-web**](c2pa-js/packages/c2pa-web/README.md): Library for C2PA metadata in the browser. Import and use this package in browser client JavaScript code.
+- [**c2pa-wasm**](c2pa-js/packages/c2pa-wasm/README.md): WebAssembly bindings for c2pa-rs, built with wasm-bindgen. They power c2pa-web; most applications should use c2pa-web instead of calling the bindings directly.
+- [**c2pa-types**](c2pa-js/packages/c2pa-types/README.md): TypeScript types generated from c2pa-rs structs for use by c2pa-web and c2pa-node-v2.
+
+
+For video walkthroughs on using the JavaScript SDK, see the following lessons from the Content Credentials Foundations course:
+
+- [Reading and validating C2PA data with Javascript in the browser](https://learn.contentauthenticity.org/reading-and-validating-content-credentials)
+- [Formatting C2PA data for L1 - L3 disclosures](https://learn.contentauthenticity.org/formatting-c2pa-data-for-display)
+
+
+

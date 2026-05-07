@@ -276,7 +276,7 @@
           ]
         },
         "claim_generator_info": {
-          "description": "Claim generator info that is automatically added to the builder.\n\nNote that this information will prepend any claim generator info\nprovided explicitly to the builder.",
+          "description": "When set, used as [`ClaimGeneratorInfo`] when\n[`ManifestDefinition::claim_generator_info`](crate::builder::ManifestDefinition) is empty\n(e.g. key omitted in JSON or an empty array). If `None` or when the definition lists at\nleast one generator, that path does not use this value.",
           "anyOf": [
             {
               "$ref": "#/$defs/ClaimGeneratorInfoSettings"

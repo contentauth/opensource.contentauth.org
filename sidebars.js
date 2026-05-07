@@ -267,7 +267,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'JavaScript library',
-      link: { type: 'doc', id: 'js-sdk/js-landing' },
+      link: { type: 'doc', id: 'js-landing' },
       collapsed: true,
       items: [
         ...getRemoteSidebarItems('c2pa-js'),
