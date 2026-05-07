@@ -35,12 +35,11 @@ async function readResourceToBuffer(assetPath, uri) {
     throw new Error('No C2PA manifest found.');
   }
 
-  const dest = { buffer: null };
-  await reader.resourceToAsset(uri, dest);
-  if (!dest.buffer) {
+  const { buffer } = await reader.resourceToAsset(uri, { buffer: null });
+  if (!buffer || buffer.length === 0) {
     throw new Error('Resource could not be read.');
   }
-  return dest.buffer;
+  return buffer;
 }
 ```
 
