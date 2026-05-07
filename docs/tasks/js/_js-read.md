@@ -11,26 +11,30 @@ With Vite (or similar), load the Wasm URL:
 import { createC2pa } from '@contentauth/c2pa-web';
 import wasmSrc from '@contentauth/c2pa-web/resources/c2pa.wasm?url';
 
-const c2pa = await createC2pa({ wasmSrc });
+async function readCredentials(url) {
+  const c2pa = await createC2pa({ wasmSrc });
 
-const response = await fetch('/signed-image.jpg');
-const blob = await response.blob();
+  const response = await fetch(url);
+  const blob = await response.blob();
 
-const reader = await c2pa.reader.fromBlob(blob.type, blob);
-if (!reader) {
-  console.log('No C2PA manifest found.');
+  const reader = await c2pa.reader.fromBlob(blob.type, blob);
+  if (!reader) {
+    console.log('No C2PA manifest found.');
+    c2pa.dispose();
+    return;
+  }
+
+  const manifestStore = await reader.manifestStore();
+  console.log(JSON.stringify(manifestStore, null, 2));
+
+  const active = await reader.activeManifest();
+  console.log('Active title:', active.title);
+
+  await reader.free();
   c2pa.dispose();
-  return;
 }
 
-const manifestStore = await reader.manifestStore();
-console.log(JSON.stringify(manifestStore, null, 2));
-
-const active = await reader.activeManifest();
-console.log('Active title:', active.title);
-
-await reader.free();
-c2pa.dispose();
+await readCredentials('/signed-image.jpg');
 ```
 
 Optional [per-read settings](../settings.mdx) override the defaults passed to `createC2pa`:

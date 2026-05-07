@@ -7,33 +7,37 @@ After you obtain a [`Reader`](https://contentauth.github.io/c2pa-js/interfaces/_
 import { createC2pa } from '@contentauth/c2pa-web';
 import wasmSrc from '@contentauth/c2pa-web/resources/c2pa.wasm?url';
 
-const c2pa = await createC2pa({ wasmSrc });
+async function getActiveManifestThumbnail(url) {
+  const c2pa = await createC2pa({ wasmSrc });
 
-const response = await fetch('/signed-image.jpg');
-const blob = await response.blob();
+  const response = await fetch(url);
+  const blob = await response.blob();
 
-const reader = await c2pa.reader.fromBlob(blob.type, blob);
-if (!reader) {
-  c2pa.dispose();
-  return;
-}
+  const reader = await c2pa.reader.fromBlob(blob.type, blob);
+  if (!reader) {
+    c2pa.dispose();
+    return;
+  }
 
-const active = await reader.activeManifest();
-const uri = active.thumbnail?.identifier;
-if (!uri) {
+  const active = await reader.activeManifest();
+  const uri = active.thumbnail?.identifier;
+  if (!uri) {
+    await reader.free();
+    c2pa.dispose();
+    return;
+  }
+
+  const bytes = await reader.resourceToBytes(uri);
+  const thumbBlob = new Blob([bytes], {
+    type: active.thumbnail?.format ?? 'image/jpeg',
+  });
+  const thumbUrl = URL.createObjectURL(thumbBlob);
+
   await reader.free();
   c2pa.dispose();
-  return;
 }
 
-const bytes = await reader.resourceToBytes(uri);
-const thumbBlob = new Blob([bytes], {
-  type: active.thumbnail?.format ?? 'image/jpeg',
-});
-const thumbUrl = URL.createObjectURL(thumbBlob);
-
-await reader.free();
-c2pa.dispose();
+await getActiveManifestThumbnail('/signed-image.jpg');
 ```
 
 ### Ingredient resources
