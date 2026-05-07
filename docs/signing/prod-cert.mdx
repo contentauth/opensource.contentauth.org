@@ -3,7 +3,7 @@ id: prod-cert
 title: Using a signing certificate in production
 ---
 
-Accessing a private key and certificate [directly from the local file system](local-signing.md) is fine during development, but doing so in production is not secure. Instead use one or both of:
+Accessing a private key and certificate [directly from the local file system](local-signing.mdx) is fine during development, but doing so in production is not secure. Instead use one or both of:
 
 - A **key management service** (KMS), to securely store and manage cryptographic keys, including generation, storage, rotation, and revocation. Popular KMS providers include [Amazon KMS](https://aws.amazon.com/kms/), [Google Cloud Key Management](https://cloud.google.com/security/products/security-key-management), and [Azure Key Vault](https://azure.microsoft.com/en-us/products/key-vault).
 - A **hardware security module** (HSM), a physical device that attaches directly to a server to securely manage and perform operations on cryptographic keys.
