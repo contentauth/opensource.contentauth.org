@@ -383,25 +383,26 @@
     {
       "repo": "contentauth/c2pa-js",
       "path": "README.md",
-      "dest": "docs/c2pa-js/readme.md"
+      "dest": "docs/c2pa-js/README.md",
+      "sidebar": { "category": "c2pa-js", "label": "c2pa-js", "order": 1 }
     },
     {
       "repo": "contentauth/c2pa-js",
       "path": "packages/c2pa-web/README.md",
-      "dest": "docs/c2pa-js/c2pa-web-readme.md",
-      "sidebar": { "category": "c2pa-js", "label": "c2pa-web", "order": 1 }
+      "dest": "docs/c2pa-js/packages/c2pa-web/README.md",
+      "sidebar": { "category": "c2pa-js", "label": "c2pa-web", "order": 2 }
     },
     {
       "repo": "contentauth/c2pa-js",
       "path": "packages/c2pa-types/README.md",
-      "dest": "docs/c2pa-js/c2pa-types-readme.md",
-      "sidebar": { "category": "c2pa-js", "label": "c2pa-types", "order": 2 }
+      "dest": "docs/c2pa-js/packages/c2pa-types/README.md",
+      "sidebar": { "category": "c2pa-js", "label": "c2pa-types", "order": 3 }
     },
     {
       "repo": "contentauth/c2pa-js",
       "path": "packages/c2pa-wasm/README.md",
-      "dest": "docs/c2pa-js/c2pa-wasm-readme.md",
-      "sidebar": { "category": "c2pa-js", "label": "c2pa-wasm", "order": 3 }
+      "dest": "docs/c2pa-js/packages/c2pa-wasm/README.md",
+      "sidebar": { "category": "c2pa-js", "label": "c2pa-wasm", "order": 4 }
     },
 
     { "_comment": "Node.js library" },
