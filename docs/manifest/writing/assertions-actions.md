@@ -60,7 +60,7 @@ Content bindings are standard assertions such as `c2pa.hash.boxes` and `c2pa.has
 The CAI SDK writes content bindings assertions, so normally you don't need to write them, just read them.
 :::
 
-For example, the `c2pa.hash.data` assertion shown in the [detailed manifest example](../examples.mdx#detailed-manifest) specifies an exclusion hash:
+For example, the `c2pa.hash.data` assertion shown in the example below specifies an exclusion hash:
 
 ```json
 "assertions": [
