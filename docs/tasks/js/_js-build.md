@@ -1,3 +1,5 @@
+## Using a remote signer
+
 :::info
 Although you can use `c2pa-web` to build manifests and sign assets in the browser using a remote signing service, doing so presents a security vulnerability because someone can use an authenticated session to call the signing endpoint to sign any asset.
 :::
