@@ -303,7 +303,8 @@
             {
               "type": "null"
             }
-          ]
+          ],
+          "default": null
         },
         "certificate_status_should_override": {
           "description": "Whether to only use [`CertificateStatus`] assertions to check certificate revocation status. If there\nis a stapled OCSP in the COSE claim of the manifest, it will be ignored. If [`Verify::ocsp_fetch`] is\nenabled, it will also be ignored.\n\nThe default value is false.\n\n[`CertificateStatus`]: crate::assertions::CertificateStatus\n[`Verify::ocsp_fetch`]: crate::settings::Verify::ocsp_fetch",
@@ -321,7 +322,8 @@
             {
               "type": "null"
             }
-          ]
+          ],
+          "default": null
         },
         "created_assertion_labels": {
           "description": "Assertions with a base label included in this list will be automatically marked as a created assertion.\nAssertions not in this list will be automatically marked as gathered.\n\nNote that the label should be a **base label**, not including the assertion version nor instance.\n\nSee more information on the difference between created vs gathered assertions in the spec here:\n[fields - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_fields)",
