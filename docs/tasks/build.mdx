@@ -10,7 +10,14 @@ import TabItem from '@theme/TabItem';
 import PythonBuild from './python/_python-build.md';
 import CppBuild from './cpp/_cpp-build.md';
 import RustBuild from './rust/_rust-build.md';
+import JsBuild from './js/_js-build.md';
+import JsBuildLocal from './js/_js-build-local.md';
+
 import NodeBuild from './node/_node-build.md';
+
+import LocalSignWarning from '../partials/_local-sign-warning.md';
+
+<LocalSignWarning />
 
 <Tabs groupId="programming-lang" queryString="lang">
 
@@ -32,6 +39,14 @@ import NodeBuild from './node/_node-build.md';
 
   </TabItem>
 
+  <TabItem value="js" label="JavaScript">
+
+    <JsBuildLocal name="js-build" />
+
+    <JsBuild name="js-build" />
+
+  </TabItem>
+  
   <TabItem value="node" label="Node.js">
 
     <NodeBuild name="node-build" />
