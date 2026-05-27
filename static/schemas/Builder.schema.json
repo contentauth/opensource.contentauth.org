@@ -53,7 +53,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:ba90a55d-d58d-4f4c-9cbf-81c759077251"
+      "default": "xmp:iid:468eb34a-a9cd-4756-ac51-ad9a3faf1514"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -116,14 +116,6 @@
     "no_embed": {
       "description": "If true, the manifest store will not be embedded in the asset on sign.",
       "type": "boolean"
-    },
-    "base_path": {
-      "description": "Base path to search for resources.",
-      "type": [
-        "string",
-        "null"
-      ],
-      "deprecated": true
     },
     "intent": {
       "description": "A builder should construct a created, opened or updated manifest.",
