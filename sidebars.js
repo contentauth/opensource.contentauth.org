@@ -135,6 +135,7 @@ const sidebars = {
           id: 'tasks/build',
           label: 'Adding and signing a manifest',
         },
+        ...getRemoteSidebarItems('tasks'),
       ],
     },
     {
