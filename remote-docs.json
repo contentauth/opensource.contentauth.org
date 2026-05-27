@@ -177,7 +177,6 @@
       "repo": "contentauth/c2pa-rs",
       "path": "docs/deprecation-policy.md",
       "dest": "docs/rust-sdk/deprecation-policy.md",
-      "branch": "doc/deprecation-policy",
       "sidebar": {
         "category": "tasks",
         "label": "Deprecation policy",
