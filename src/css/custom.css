@@ -318,6 +318,31 @@ main .row:not(:has(.theme-doc-toc-desktop)) > .col {
   background: var(--cai-color-background-dark);
 }
 
+/* Categories with a linked doc use menu__link--sublist, which Infima excludes from
+   the default active background. Match doc-link highlighting when that page is open. */
+.theme-doc-sidebar-menu .menu__list-item-collapsible--active .menu__link {
+  background-color: var(--ifm-menu-color-background-active) !important;
+  color: var(--ifm-menu-color-active);
+}
+
+.theme-doc-sidebar-menu
+  .menu__list-item
+  .menu__list
+  .menu__list-item-collapsible--active
+  .menu__link::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: var(--ifm-menu-link-padding-vertical);
+  left: 0;
+  height: calc(
+    100% - var(--ifm-menu-link-padding-vertical) -
+      var(--ifm-menu-link-padding-vertical)
+  );
+  width: 2px;
+  background: var(--ifm-color-primary);
+}
+
 .theme-doc-sidebar-menu
   .menu__list-item
   .menu__list
