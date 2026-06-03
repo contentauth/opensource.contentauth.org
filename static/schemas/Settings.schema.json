@@ -51,6 +51,7 @@
       "default": {
         "verify_after_reading": true,
         "verify_after_sign": false,
+        "verify_after_sign_hash": false,
         "verify_trust": true,
         "verify_timestamp_trust": true,
         "ocsp_fetch": false,
@@ -228,7 +229,12 @@
           "default": true
         },
         "verify_after_sign": {
-          "description": "Whether to verify the manifest after signing in the [`Builder`].\n\nThe default value is false.\nThere is a known bug related to this setting: [#1875](https://github.com/contentauth/c2pa-rs/issues/1875).\nWhen the bug is fixed, the default value should be true.\n\n<div class=\"warning\">\nDisabling validation can improve signing performance, BUT it carries the risk of signing an invalid\nmanifest.\n</div>\n\n[`Builder`]: crate::Builder",
+          "description": "Whether to verify the manifest after signing in the [`Builder`].\n\nThe default value is false.\n\nIn the future, this setting will default to true.\n\n<div class=\"warning\">\nDisabling validation can improve signing performance, BUT it carries the risk of signing an invalid\nmanifest.\n</div>\n\n[`Builder`]: crate::Builder",
+          "type": "boolean",
+          "default": false
+        },
+        "verify_after_sign_hash": {
+          "description": "Whether to include asset hash validation when verifying after signing.\n\nThe default value is false.\n\nHas no effect when [`Verify::verify_after_sign`] is false.",
           "type": "boolean",
           "default": false
         },
