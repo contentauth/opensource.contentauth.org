@@ -53,7 +53,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:3a3067c9-a344-4db7-afe9-8ff720e9945b"
+      "default": "xmp:iid:c2735cb4-87ef-45d8-bd71-6d510f864080"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -126,8 +126,7 @@
         {
           "type": "null"
         }
-      ],
-      "deprecated": true
+      ]
     },
     "timestamp_manifest_labels": {
       "description": "Manifest labels to fetch timestamps for.\n\nExamples of a manifest label may include:\n- `contentauth:urn:uuid:c2677d4b-0a93-4444-876f-ed2f2d40b8cf`\n- `urn:c2pa:fa479510-2a7d-c165-7b26-488a267f4c6a`",
