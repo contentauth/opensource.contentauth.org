@@ -312,21 +312,21 @@ const sidebars = {
         {
           type: 'category',
           label: 'iOS',
-          link: { type: 'doc', id: 'c2pa-ios/README' },
+          link: { type: 'doc', id: 'c2pa-swift/README' },
           collapsed: true,
           items: [
-            ...getRemoteSidebarItems('c2pa-ios').filter(
-              (i) => i.id !== 'c2pa-ios/README',
+            ...getRemoteSidebarItems('c2pa-swift').filter(
+              (i) => i.id !== 'c2pa-swift/README',
             ),
             {
               type: 'link',
               label: 'API documentation',
-              href: 'https://contentauth.github.io/c2pa-ios/documentation/c2pa/',
+              href: 'https://contentauth.github.io/c2pa-swift/documentation/c2pa/',
             },
             {
               type: 'link',
               label: 'GitHub',
-              href: 'https://github.com/contentauth/c2pa-ios',
+              href: 'https://github.com/contentauth/c2pa-swift',
             },
           ],
         },
