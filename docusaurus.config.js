@@ -27,7 +27,11 @@ const externalRepos = {
   'c2pa-android': { repo: 'c2pa-android', path: '', org: 'contentauth' },
   'c2pa-js': { repo: 'c2pa-js', path: '', org: 'contentauth' },
 
-  'c2pa-node-v2': { repo: 'c2pa-node', path: '', org: 'contentauth' },
+  'c2pa-node': {
+    repo: 'c2pa-js',
+    path: 'packages/c2pa-node/',
+    org: 'contentauth',
+  },
   'c2pa-python': { repo: 'c2pa-python', path: '', org: 'contentauth' },
   'c2pa-python-example': {
     repo: 'c2pa-python-example',

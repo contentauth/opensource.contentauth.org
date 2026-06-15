@@ -290,16 +290,16 @@ const sidebars = {
       link: { type: 'doc', id: 'node-landing' },
       collapsed: true,
       items: [
-        ...getRemoteSidebarItems('c2pa-node-v2'),
+        ...getRemoteSidebarItems('c2pa-node'),
         {
           type: 'link',
           label: 'API documentation',
-          href: 'https://contentauth.github.io/c2pa-node-v2/',
+          href: 'https://contentauth.github.io/c2pa-js/',
         },
         {
           type: 'link',
           label: 'GitHub',
-          href: 'https://github.com/contentauth/c2pa-node-v2/tree/main',
+          href: 'https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node',
         },
       ],
     },

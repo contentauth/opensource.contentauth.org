@@ -111,4 +111,4 @@ const ingredients = active?.ingredients ?? [];
 
 ### Ingredient archives
 
-To build a reusable ingredient catalog, add ingredients (stable `instance_id` values help later lookup), then call `toArchive`. Consumers read the archive with `Reader` and merge selected ingredients into a signing `Builder`, transferring thumbnails and `manifest_data` URIs with `resourceToAsset` / `addResource` as in the [@contentauth/c2pa-node README](https://github.com/contentauth/c2pa-node-v2#adding-ingredients-from-archives-c2pa-files).
+To build a reusable ingredient catalog, add ingredients (stable `instance_id` values help later lookup), then call `toArchive`. Consumers read the archive with `Reader` and merge selected ingredients into a signing `Builder`, transferring thumbnails and `manifest_data` URIs with `resourceToAsset` / `addResource` as in the [@contentauth/c2pa-node README](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node#adding-ingredients-from-archives-c2pa-files).

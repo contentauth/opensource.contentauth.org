@@ -417,10 +417,11 @@
       "sidebar": { "category": "c2pa-js", "label": "c2pa-wasm", "order": 4 }
     },
 
-    { "_comment": "Node.js library" },
+    { "_comment": "Node.js library (packages/c2pa-node in c2pa-js monorepo)" },
     {
-      "repo": "contentauth/c2pa-node-v2",
-      "path": "README.md",
+      "repo": "contentauth/c2pa-js",
+      "branch": "feat/migrate-c2pa-node",
+      "path": "packages/c2pa-node/README.md",
       "dest": "docs/c2pa-node-v2/readme.md"
     },
     {
@@ -428,7 +429,7 @@
       "path": "docs/supported-formats.md",
       "dest": "docs/c2pa-node-v2/supported-formats.md",
       "sidebar": {
-        "category": "c2pa-node-v2",
+        "category": "c2pa-node",
         "label": "Supported media formats",
         "order": 1
       }
