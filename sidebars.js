@@ -311,7 +311,7 @@ const sidebars = {
       items: [
         {
           type: 'category',
-          label: 'iOS',
+          label: 'iOS (Swift)',
           link: { type: 'doc', id: 'c2pa-swift/README' },
           collapsed: true,
           items: [
@@ -332,7 +332,7 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Android',
+          label: 'Android (Kotlin)',
           link: { type: 'doc', id: 'c2pa-android/README' },
           collapsed: true,
           items: [
