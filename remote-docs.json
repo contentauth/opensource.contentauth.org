@@ -434,19 +434,19 @@
       }
     },
 
-    { "_comment": "Mobile libraries - iOS" },
+    { "_comment": "Mobile libraries - iOS (Swift)" },
     {
-      "repo": "contentauth/c2pa-ios",
+      "repo": "contentauth/c2pa-swift",
       "path": "README.md",
-      "dest": "docs/c2pa-ios/README.md",
-      "sidebar": { "category": "c2pa-ios", "label": "Overview", "order": 0 }
+      "dest": "docs/c2pa-swift/README.md",
+      "sidebar": { "category": "c2pa-swift", "label": "Overview", "order": 0 }
     },
     {
       "repo": "contentauth/c2pa-ios-example",
       "path": "README.md",
       "dest": "docs/c2pa-ios-example/README.md",
       "sidebar": {
-        "category": "c2pa-ios",
+        "category": "c2pa-swift",
         "label": "Example iOS app",
         "order": 1
       }

@@ -23,7 +23,7 @@ const copyright = `
 // Used to create 'Edit this page' links
 const externalRepos = {
   'c2pa-cpp': { repo: 'c2pa-cpp', path: '', org: 'contentauth' },
-  'c2pa-ios': { repo: 'c2pa-ios', path: '', org: 'contentauth' },
+  'c2pa-swift': { repo: 'c2pa-swift', path: '', org: 'contentauth' },
   'c2pa-android': { repo: 'c2pa-android', path: '', org: 'contentauth' },
   'c2pa-js': { repo: 'c2pa-js', path: '', org: 'contentauth' },
 
