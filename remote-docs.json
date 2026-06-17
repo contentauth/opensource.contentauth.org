@@ -420,7 +420,6 @@
     { "_comment": "Node.js library (packages/c2pa-node in c2pa-js monorepo)" },
     {
       "repo": "contentauth/c2pa-js",
-      "branch": "feat/migrate-c2pa-node",
       "path": "packages/c2pa-node/README.md",
       "dest": "docs/c2pa-node-v2/readme.md"
     },
