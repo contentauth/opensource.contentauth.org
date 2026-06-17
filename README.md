@@ -24,7 +24,7 @@ This table summarizes the content that this script fetches from other repos.
 | `c2pa-cpp` | [c2pa-cpp](https://github.com/contentauth/c2pa-cpp) | C++ library docs. |
 | `c2pa-swift` | [c2pa-swift](https://github.com/contentauth/c2pa-swift) | Mobile iOS/Swift library docs. |
 | `c2pa-android` | [c2pa-android](https://github.com/contentauth/c2pa-android) | Android library docs. | 
-| `c2pa-node-v2` | [c2pa-node](https://github.com/contentauth/c2pa-node-v2) | Node library docs. |
+| `c2pa-node-v2` | [c2pa-node](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node) | Node library docs (packages/c2pa-node in c2pa-js monorepo). |
 | `c2pa-node-example`  | [c2pa-node-example](https://github.com/contentauth/c2pa-node-example) | Node example app.|
 | `c2pa-python` | [c2pa-python](https://github.com/contentauth/c2pa-python) | Python library docs. |
 | `c2pa-python example` | [c2pa-python-example](https://github.com/contentauth/c2pa-python-example) | Python example app. |

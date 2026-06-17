@@ -103,4 +103,4 @@ await builder.signAsync(
 
 Replace `customSign` with your implementation that returns the detached signature bytes for the C2PA claim.
 
-For identity assertions (CAWG), see `IdentityAssertionBuilder` and `IdentityAssertionSigner` in the [c2pa-node-v2 README](https://github.com/contentauth/c2pa-node-v2#identity-assertion-components).
+For identity assertions (CAWG), see `IdentityAssertionBuilder` and `IdentityAssertionSigner` in the [c2pa-node README](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node#identity-assertion-components).
