@@ -8,7 +8,7 @@ These projects are still under active development. They may have bugs and missin
 :::
 
 These projects are available to enable developing apps for mobile devices:
-- [**iOS Library**](/c2pa-swift/README.md): Provides iOS/macOS support via Swift Package/XCFramework.  <br/>GitHub repository: https://github.com/contentauth/c2pa-swift.
-- [**Android Library**](c2pa-android/README.md): Provides native Android support via an AAR library. <br/>GitHub repository: https://github.com/contentauth/c2pa-android.
+- [**Swift library**](/c2pa-swift/README.md): Provides iOS/macOS support via Swift Package/XCFramework.  <br/>GitHub repository: https://github.com/contentauth/c2pa-swift.
+- [**Android library**](c2pa-android/README.md): Provides native Android support via an AAR library. <br/>GitHub repository: https://github.com/contentauth/c2pa-android.
 
 Both of these projects wrap the C2PA Rust implementation ([c2pa-rs](https://github.com/contentauth/c2pa-rs)) using its C API bindings.

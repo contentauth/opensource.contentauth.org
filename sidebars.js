@@ -311,7 +311,7 @@ const sidebars = {
       items: [
         {
           type: 'category',
-          label: 'iOS (Swift)',
+          label: 'iOS/macOS (Swift)',
           link: { type: 'doc', id: 'c2pa-swift/README' },
           collapsed: true,
           items: [
