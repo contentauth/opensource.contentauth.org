@@ -42,7 +42,8 @@
         "backing_store_memory_threshold_in_mb": 512,
         "decode_identity_assertions": true,
         "allowed_network_hosts": null,
-        "prefer_compress_manifests": false
+        "prefer_compress_manifests": false,
+        "max_decompressed_manifest_size_in_mb": 32
       }
     },
     "verify": {
@@ -212,6 +213,13 @@
           "description": "Whether to prefer compressing manifests. This can reduce the size of the manifest. Compressed manifest\nare not always possible and will default back to uncompressed if the manifest contains features\nthat are not compatible with compression.\n\n The default value is false.\n\nSee more information in the spec here:\n[Compressed manifests - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_compressed_boxes)",
           "type": "boolean",
           "default": false
+        },
+        "max_decompressed_manifest_size_in_mb": {
+          "description": "Maximum size in megabytes of a Brotli-decompressed JUMBF manifest.\nLimits memory consumption from decompression bomb attacks.\n\nThe default is 32 MB.",
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0,
+          "default": 32
         }
       }
     },
