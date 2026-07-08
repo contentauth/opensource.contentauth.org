@@ -271,7 +271,26 @@ const sidebars = {
       link: { type: 'doc', id: 'js-landing' },
       collapsed: true,
       items: [
-        ...getRemoteSidebarItems('c2pa-js'),
+        {
+          type: 'doc',
+          id: 'c2pa-js/packages/c2pa-web/README',
+          label: 'c2pa-web',
+        },
+        {
+          type: 'doc',
+          id: 'c2pa-js/packages/c2pa-types/README',
+          label: 'c2pa-types',
+        },
+        {
+          type: 'doc',
+          id: 'c2pa-js/packages/c2pa-wasm/README',
+          label: 'c2pa-wasm',
+        },
+        {
+          type: 'doc',
+          id: 'c2pa-js/supported-formats',
+          label: 'Supported media formats',
+        },
         {
           type: 'link',
           label: 'API documentation',
@@ -287,10 +306,9 @@ const sidebars = {
     {
       type: 'category',
       label: 'Node.js library',
-      link: { type: 'doc', id: 'node-landing' },
+      link: { type: 'doc', id: 'c2pa-js/packages/c2pa-node/README' },
       collapsed: true,
       items: [
-        ...getRemoteSidebarItems('c2pa-node'),
         {
           type: 'link',
           label: 'API documentation',

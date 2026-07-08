@@ -484,6 +484,13 @@ main .row:not(:has(.theme-doc-toc-desktop)) > .col {
   width: 170px;
 }
 
+.packages-table th:nth-child(1),
+.packages-table td:nth-child(1),
+.packages-table th:nth-child(3),
+.packages-table td:nth-child(3) {
+  white-space: nowrap;
+}
+
 /* For content to be displayed only in GitHub. Typically this will be used in imported markdown files. */
 
 .github-only {
