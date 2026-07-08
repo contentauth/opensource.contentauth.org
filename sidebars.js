@@ -290,7 +290,12 @@ const sidebars = {
       link: { type: 'doc', id: 'node-landing' },
       collapsed: true,
       items: [
-        ...getRemoteSidebarItems('c2pa-node'),
+        {
+          type: 'doc',
+          id: 'm',
+          label: '',
+        },
+        //  ...getRemoteSidebarItems('c2pa-node'),
         {
           type: 'link',
           label: 'API documentation',
