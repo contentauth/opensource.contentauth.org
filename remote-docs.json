@@ -421,17 +421,12 @@
     {
       "repo": "contentauth/c2pa-js",
       "path": "packages/c2pa-node/README.md",
-      "dest": "docs/c2pa-node-v2/readme.md"
+      "dest": "docs/c2pa-js/packages/c2pa-node/README.md"
     },
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/supported-formats.md",
-      "dest": "docs/c2pa-node-v2/supported-formats.md",
-      "sidebar": {
-        "category": "c2pa-node",
-        "label": "Supported media formats",
-        "order": 1
-      }
+      "dest": "docs/c2pa-js/supported-formats.md"
     },
 
     { "_comment": "Mobile libraries - iOS (Swift)" },
