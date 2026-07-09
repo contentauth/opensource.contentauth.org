@@ -394,7 +394,6 @@
     { "_comment": "JavaScript library" },
     {
       "repo": "contentauth/c2pa-js",
-      "branch": "node-pkg-doc",
       "path": "README.md",
       "dest": "docs/c2pa-js/README.md",
       "sidebar": { "category": "c2pa-js", "label": "c2pa-js", "order": 1 }
