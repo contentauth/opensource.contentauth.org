@@ -53,7 +53,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:b81e2d41-5ba2-4aab-ab1f-52bbb70b1387"
+      "default": "xmp:iid:59cd4420-3460-4705-9110-027775d19a45"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -782,7 +782,7 @@
       ]
     },
     "TextSelectorRange": {
-      "description": "One or two [`TextSelector`][TextSelector] identifiying the range to select.",
+      "description": "One or two [`TextSelector`] identifiying the range to select.",
       "type": "object",
       "properties": {
         "selector": {

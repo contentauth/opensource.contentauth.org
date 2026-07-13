@@ -108,7 +108,7 @@
         "instance_id": {
           "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
           "type": "string",
-          "default": "xmp:iid:4fadb609-d03f-4cbc-835c-1556c7f40730"
+          "default": "xmp:iid:15140878-1f9f-4fe7-ab77-1c57940c3a09"
         },
         "thumbnail": {
           "anyOf": [
@@ -822,7 +822,7 @@
       ]
     },
     "TextSelectorRange": {
-      "description": "One or two [`TextSelector`][TextSelector] identifiying the range to select.",
+      "description": "One or two [`TextSelector`] identifiying the range to select.",
       "type": "object",
       "properties": {
         "selector": {
