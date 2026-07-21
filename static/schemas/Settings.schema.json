@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Settings",
-  "description": "Settings for configuring all aspects of c2pa-rs.\n\n[Settings::default] will be set thread-locally by default. Any settings set via\n[Settings::from_toml] or [Settings::from_file] will also be thread-local.",
+  "description": "Settings for configuring all aspects of c2pa-rs.\n\n[`Settings::default`] is used as the thread-local configuration by default.\nUse [`Settings::new`] together with builder-style methods such as\n[`with_toml`] to construct a configuration without modifying thread-local\nstate.\n\n[`with_toml`]: Settings::with_toml",
   "type": "object",
   "properties": {
     "version": {
@@ -19,7 +19,8 @@
         "user_anchors": null,
         "trust_anchors": null,
         "trust_config": null,
-        "allowed_list": null
+        "allowed_list": null,
+        "trusted_ica_issuers": null
       }
     },
     "cawg_trust": {
@@ -30,7 +31,8 @@
         "user_anchors": null,
         "trust_anchors": null,
         "trust_config": null,
-        "allowed_list": null
+        "allowed_list": null,
+        "trusted_ica_issuers": null
       }
     },
     "core": {
@@ -161,6 +163,17 @@
             "string",
             "null"
           ],
+          "default": null
+        },
+        "trusted_ica_issuers": {
+          "description": "Exact-match allow-list of trusted CAWG identity claims aggregation (ICA)\nissuer DIDs.\n\nEach entry is a full DID string (any DID method) that is compared, after\nstripping any fragment, against the `issuer` of an ICA verifiable\ncredential. An issuer that is not present on this list is reported with\nthe informational code `cawg.ica.untrusted_issuer` for that identity\nassertion and its `cawg.ica.credential_valid` success code is withheld.\n\nThe default value is empty, meaning that NO ICA issuer is trusted. This\nis a deliberate secure default: a self-issued `did:jwk` (or any other\nissuer) is not trustworthy simply because its signature is\nself-consistent. Populate this list with the DIDs of issuers you trust.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
           "default": null
         }
       }
