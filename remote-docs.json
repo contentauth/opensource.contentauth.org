@@ -171,6 +171,16 @@
         "order": 10
       }
     },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "docs/instanceid_behavior.md",
+      "dest": "docs/rust-sdk/docs/instanceid-behavior.md",
+      "sidebar": {
+        "category": "rust-sdk",
+        "label": "InstanceID behavior",
+        "order": 11
+      }
+    },
 
     { "_comment": "Working with the SDK" },
     {
@@ -326,7 +336,7 @@
       "dest": "docs/c2pa-cpp/docs/context-settings.md",
       "sidebar": {
         "category": "c2pa-cpp",
-        "label": "Configuring the SDK",
+        "label": "Configuring SDK settings",
         "order": 3
       }
     },
