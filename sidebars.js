@@ -225,6 +225,11 @@ const sidebars = {
           id: 'manifest/json-ref/settings-schema',
           label: 'Settings',
         },
+        {
+          type: 'doc',
+          id: 'manifest/json-ref/crjson-schema',
+          label: 'CrJSON',
+        },
       ],
     },
     {

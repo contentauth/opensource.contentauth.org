@@ -16,6 +16,7 @@ The JSON manifest is an abstract translation layer that's easier to understand t
 - [Builder](builder-ref.mdx) - Use to add a signed manifest to an asset.
 - [ManifestDefinition](manifest-def.mdx) - Use to define a manifest (a collection of ingredients and assertions) that can be added to a manifest store, signed, and embedded into a file.
 - [Settings](settings-ref.mdx) - Use to define all aspects of code for working with Content Credentials.
+- [CrJSON](crjson-ref.mdx) - Content Credential JSON document format for representing C2PA manifests as JSON (excludes asset_info, content, and metadata).
 
 
 
