@@ -9,6 +9,7 @@ const darkCodeTheme = require('prism-react-renderer').themes.dracula;
 const remoteDocs = require('./remote-docs.json');
 const { readFileSync } = require('fs');
 const { resolve } = require('path');
+const remarkStripHiddenLinks = require('./src/remark/remark-strip-hidden-links');
 
 const copyright = `
 <div style="font-size: 0.75rem;">
@@ -164,7 +165,10 @@ async function createConfig() {
         /** @type {import('@docusaurus/preset-classic').Options} */
         ({
           docs: {
-            beforeDefaultRemarkPlugins: [remarkGithubAdmonitionsToDirectives],
+            beforeDefaultRemarkPlugins: [
+              remarkGithubAdmonitionsToDirectives,
+              remarkStripHiddenLinks,
+            ],
             sidebarPath: require.resolve('./sidebars.js'),
             editUrl: ({ docPath, versionDocsDirPath }) => {
               const normalizedDocPath = docPath.toLowerCase();

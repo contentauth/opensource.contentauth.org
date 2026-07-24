@@ -280,11 +280,6 @@ The [C2PA Technical Specification](https://c2pa.org/specifications/specification
 
 V1 actions are fully specified in the `actions` array. However, a v2 action may either be fully specified in an element of the `actions` array or it may be derived from an element in the `templates` array with the same action name.
 
-<div style={{display: 'none'}}>
-The CAI APIs can read all v2 actions and write **most** v2 actions.  
-We should document v2 actions that can it NOT write.
-</div>
-
 ### Action names
 
 The value of the `action` property must be either one of the pre-defined [standard C2PA action strings](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_actions) of the form `c2pa.*` or a custom action name. The set of standard C2PA actions includes fundamental ones as `c2pa.created` for when an asset is first created, and others (`c2pa.cropped`, `c2pa.resized`, and so on) for when an asset's content is modified in some way.  
