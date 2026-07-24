@@ -108,7 +108,7 @@
         "instance_id": {
           "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
           "type": "string",
-          "default": "xmp:iid:b69102a5-27e9-4277-b39e-3c60b0f109ef"
+          "default": "xmp:iid:6efb6bce-f569-4643-850f-f7dddf9a61f6"
         },
         "thumbnail": {
           "anyOf": [
@@ -1317,7 +1317,7 @@
           "description": "Human-readable issuing authority for this signature.",
           "anyOf": [
             {
-              "$ref": "#/$defs/SigningAlg"
+              "$ref": "#/$defs/SigningAlgSchema"
             },
             {
               "type": "null"
@@ -1361,44 +1361,17 @@
         }
       }
     },
-    "SigningAlg": {
-      "description": "Describes the digital signature algorithms allowed by the C2PA spec.\n\nPer [§13.2, “Digital Signatures”]:\n\n> All digital signatures applied as per the technical requirements of this\n> specification shall be generated using one of the digital signature\n> algorithms and key types listed as described in this section.\n\n[§13.2, “Digital Signatures”]: https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_digital_signatures",
-      "oneOf": [
-        {
-          "description": "ECDSA with SHA-256",
-          "type": "string",
-          "const": "Es256"
-        },
-        {
-          "description": "ECDSA with SHA-384",
-          "type": "string",
-          "const": "Es384"
-        },
-        {
-          "description": "ECDSA with SHA-512",
-          "type": "string",
-          "const": "Es512"
-        },
-        {
-          "description": "RSASSA-PSS using SHA-256 and MGF1 with SHA-256",
-          "type": "string",
-          "const": "Ps256"
-        },
-        {
-          "description": "RSASSA-PSS using SHA-384 and MGF1 with SHA-384",
-          "type": "string",
-          "const": "Ps384"
-        },
-        {
-          "description": "RSASSA-PSS using SHA-512 and MGF1 with SHA-512",
-          "type": "string",
-          "const": "Ps512"
-        },
-        {
-          "description": "Edwards-Curve DSA (Ed25519 instance only)",
-          "type": "string",
-          "const": "Ed25519"
-        }
+    "SigningAlgSchema": {
+      "description": "JSON Schema proxy for [`SigningAlg`].\n\n`c2pa_raw_crypto::SigningAlg` intentionally does not depend on `schemars`,\nso it does not implement [`schemars::JsonSchema`]. SDK types that expose a\n`SigningAlg` in their JSON schema reference this mirror (whose variants match\n`SigningAlg`'s serialized form) via `#[schemars(with = \"...\")]`.",
+      "type": "string",
+      "enum": [
+        "Es256",
+        "Es384",
+        "Es512",
+        "Ps256",
+        "Ps384",
+        "Ps512",
+        "Ed25519"
       ]
     },
     "ValidationState": {

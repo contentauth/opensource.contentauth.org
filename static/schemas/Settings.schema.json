@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Settings",
-  "description": "Settings for configuring all aspects of c2pa-rs.\n\n[Settings::default] will be set thread-locally by default. Any settings set via\n[Settings::from_toml] or [Settings::from_file] will also be thread-local.",
+  "description": "Settings for configuring all aspects of c2pa-rs.\n\n[`Settings::default`] is used as the thread-local configuration by default.\nUse [`Settings::new`] together with builder-style methods such as\n[`with_toml`] to construct a configuration without modifying thread-local\nstate.\n\n[`with_toml`]: Settings::with_toml",
   "type": "object",
   "properties": {
     "version": {
@@ -19,7 +19,8 @@
         "user_anchors": null,
         "trust_anchors": null,
         "trust_config": null,
-        "allowed_list": null
+        "allowed_list": null,
+        "trusted_ica_issuers": null
       }
     },
     "cawg_trust": {
@@ -30,7 +31,8 @@
         "user_anchors": null,
         "trust_anchors": null,
         "trust_config": null,
-        "allowed_list": null
+        "allowed_list": null,
+        "trusted_ica_issuers": null
       }
     },
     "core": {
@@ -51,7 +53,7 @@
       "$ref": "#/$defs/Verify",
       "default": {
         "verify_after_reading": true,
-        "verify_after_sign": false,
+        "verify_after_sign": true,
         "verify_after_sign_hash": false,
         "verify_trust": true,
         "verify_timestamp_trust": true,
@@ -162,6 +164,17 @@
             "null"
           ],
           "default": null
+        },
+        "trusted_ica_issuers": {
+          "description": "Exact-match allow-list of trusted CAWG identity claims aggregation (ICA)\nissuer DIDs.\n\nEach entry is a full DID string (any DID method) that is compared, after\nstripping any fragment, against the `issuer` of an ICA verifiable\ncredential. An issuer that is not present on this list is reported with\nthe informational code `cawg.ica.untrusted_issuer` for that identity\nassertion and its `cawg.ica.credential_valid` success code is withheld.\n\nThe default value is empty, meaning that NO ICA issuer is trusted. This\nis a deliberate secure default: a self-issued `did:jwk` (or any other\nissuer) is not trustworthy simply because its signature is\nself-consistent. Populate this list with the DIDs of issuers you trust.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "default": null
         }
       }
     },
@@ -239,7 +252,7 @@
         "verify_after_sign": {
           "description": "Whether to verify the manifest after signing in the [`Builder`].\n\nThe default value is false.\n\nIn the future, this setting will default to true.\n\n<div class=\"warning\">\nDisabling validation can improve signing performance, BUT it carries the risk of signing an invalid\nmanifest.\n</div>\n\n[`Builder`]: crate::Builder",
           "type": "boolean",
-          "default": false
+          "default": true
         },
         "verify_after_sign_hash": {
           "description": "Whether to include asset hash validation when verifying after signing.\n\nThe default value is false.\n\nHas no effect when [`Verify::verify_after_sign`] is false.",
@@ -931,7 +944,7 @@
               "properties": {
                 "alg": {
                   "description": "Algorithm to use for signing.",
-                  "$ref": "#/$defs/SigningAlg"
+                  "$ref": "#/$defs/SigningAlgSchema"
                 },
                 "sign_cert": {
                   "description": "Certificate used for signing (PEM format).",
@@ -994,7 +1007,7 @@
                 },
                 "alg": {
                   "description": "Algorithm to use for signing.",
-                  "$ref": "#/$defs/SigningAlg"
+                  "$ref": "#/$defs/SigningAlgSchema"
                 },
                 "sign_cert": {
                   "description": "Certificate used for signing (PEM format).",
@@ -1042,44 +1055,17 @@
         }
       ]
     },
-    "SigningAlg": {
-      "description": "Describes the digital signature algorithms allowed by the C2PA spec.\n\nPer [§13.2, “Digital Signatures”]:\n\n> All digital signatures applied as per the technical requirements of this\n> specification shall be generated using one of the digital signature\n> algorithms and key types listed as described in this section.\n\n[§13.2, “Digital Signatures”]: https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_digital_signatures",
-      "oneOf": [
-        {
-          "description": "ECDSA with SHA-256",
-          "type": "string",
-          "const": "Es256"
-        },
-        {
-          "description": "ECDSA with SHA-384",
-          "type": "string",
-          "const": "Es384"
-        },
-        {
-          "description": "ECDSA with SHA-512",
-          "type": "string",
-          "const": "Es512"
-        },
-        {
-          "description": "RSASSA-PSS using SHA-256 and MGF1 with SHA-256",
-          "type": "string",
-          "const": "Ps256"
-        },
-        {
-          "description": "RSASSA-PSS using SHA-384 and MGF1 with SHA-384",
-          "type": "string",
-          "const": "Ps384"
-        },
-        {
-          "description": "RSASSA-PSS using SHA-512 and MGF1 with SHA-512",
-          "type": "string",
-          "const": "Ps512"
-        },
-        {
-          "description": "Edwards-Curve DSA (Ed25519 instance only)",
-          "type": "string",
-          "const": "Ed25519"
-        }
+    "SigningAlgSchema": {
+      "description": "JSON Schema proxy for [`SigningAlg`].\n\n`c2pa_raw_crypto::SigningAlg` intentionally does not depend on `schemars`,\nso it does not implement [`schemars::JsonSchema`]. SDK types that expose a\n`SigningAlg` in their JSON schema reference this mirror (whose variants match\n`SigningAlg`'s serialized form) via `#[schemars(with = \"...\")]`.",
+      "type": "string",
+      "enum": [
+        "Es256",
+        "Es384",
+        "Es512",
+        "Ps256",
+        "Ps384",
+        "Ps512",
+        "Ed25519"
       ]
     }
   }
