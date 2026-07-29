@@ -39,16 +39,16 @@ Settings JSON has this top-level structure:
 }
 ```
 
-| Property                                                                    | Description                                                  |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `version`                                                                   | Settings format version (must be 1)                          |
-| [`trust`](../manifest/json-ref/settings-schema/#trust)                      | Certificate trust configuration for C2PA validation          |
-| [`cawg_trust`](../manifest/json-ref/settings-schema/#trust)                 | Certificate trust configuration for CAWG identity assertions |
-| [`core`](../manifest/json-ref/settings-schema/#core)                        | Core SDK behavior and performance tuning                     |
-| [`verify`](../manifest/json-ref/settings-schema/#verify)                    | Validation and verification behavior                         |
-| [`builder`](../manifest/json-ref/settings-schema/#builder)                  | Manifest creation and embedding behavior                     |
-| [`signer`](../manifest/json-ref/settings-schema/#signer-settings)           | C2PA signer configuration                                    |
-| [`cawg_x509_signer`](../manifest/json-ref/settings-schema/#signer-settings) | CAWG identity assertion signer configuration                 |
+| Property  | Description |  
+|---------- | ----------- |
+| `version`  | Settings format version (must be 1)  |
+| [`trust`](../manifest/json-ref/settings-schema/#trust)| Certificate trust configuration for C2PA validation   |
+| [`cawg_trust`](../manifest/json-ref/settings-schema/#trust) | Certificate trust configuration for CAWG identity assertions |
+| [`core`](../manifest/json-ref/settings-schema/#core) | Core SDK behavior and performance tuning  |
+| [`verify`](../manifest/json-ref/settings-schema/#verify) | Validation and verification behavior   |
+| [`builder`](../manifest/json-ref/settings-schema/#builder) | Manifest creation and embedding behavior   |
+| [`signer`](../manifest/json-ref/settings-schema/#signer-settings) | C2PA signer configuration   |
+| [`cawg_x509_signer`](../manifest/json-ref/settings-schema/#signer-settings) | CAWG identity assertion signer configuration   |
 
 The `version` property must be `1`. All other properties are optional.
 
