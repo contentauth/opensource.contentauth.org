@@ -23,7 +23,7 @@ You implement the [`Signer`](https://contentauth.github.io/c2pa-js/interfaces/_c
 Browser pages are exposed to XSS: any script on the page can try to use keys that JavaScript can reach. Prefer **non-extractable** Web Crypto keys, user-gated imports (file input, `navigator.credentials`, or hardware where supported), and hardening such as CSP. Do not ship production private keys as PEM strings or other recoverable secrets in frontend bundles. If you use a **remote** signer instead, treat it like an API that must authorize exactly what is being signed (for example bind requests to a content hash and tight scopes), not as a generic “sign this blob” endpoint for an authenticated session.
 :::
 
-For obtaining and packaging certificates and keys outside the browser, see [Signing with local credentials](../../signing/local-signing).
+For obtaining and packaging certificates and keys outside the browser, see [Signing with local credentials](../../docs/signing/local-signing).
 
 Embedding signed manifests into binary formats is handled here for supported web formats; for server-side embedding across all formats, use Node, Python, Rust, or C++.
 

@@ -186,7 +186,32 @@ const sidebars = {
       link: { type: 'doc', id: 'rust-sdk/readme' },
       collapsed: true,
       items: [
-        ...getRemoteSidebarItems('rust-sdk', ['rust-sdk/readme']),
+        ...getRemoteSidebarItems('rust-sdk', [
+          'rust-sdk/readme',
+          'rust-sdk/docs/release-process',
+        ]),
+        {
+          type: 'category',
+          label: 'Release process',
+          link: { type: 'doc', id: 'rust-sdk/docs/release-process' },
+          items: [
+            {
+              type: 'link',
+              label: 'Deprecation policy',
+              href: 'https://github.com/contentauth/c2pa-rs/blob/main/docs/deprecation-policy.md',
+            },
+            {
+              type: 'link',
+              label: 'Experimental features',
+              href: 'https://github.com/contentauth/c2pa-rs/blob/main/docs/experimental-features.md',
+            },
+            {
+              type: 'link',
+              label: 'Support tiers',
+              href: 'https://github.com/contentauth/c2pa-rs/blob/main/docs/support-tiers.md',
+            },
+          ],
+        },
         {
           type: 'link',
           label: 'API documentation',
