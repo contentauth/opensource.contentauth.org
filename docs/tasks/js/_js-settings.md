@@ -1,7 +1,7 @@
 
 In the browser, there is no `Context` class. You pass a **camelCase** [`Settings`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.Settings.html) object to [`createC2pa`](https://contentauth.github.io/c2pa-js/modules/_contentauth_c2pa-web.html#createc2pa); that becomes the default for new readers and builders. You can still pass a `Settings` object as the last argument to [`reader.fromBlob`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.ReaderFactory.html#fromblob) or [`builder.new`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.BuilderFactory.html#new) / [`fromDefinition`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.BuilderFactory.html#fromdefinition) / [`fromArchive`](https://contentauth.github.io/c2pa-js/interfaces/_contentauth_c2pa-web.BuilderFactory.html#fromarchive) to override those defaults for a single instance.
 
-For the full JSON schema (including `version` and snake_case fields used by Rust tooling), see [SDK object reference — Settings](../../manifest/json-ref/settings-schema). The web SDK maps the camelCase `Settings` shape to what the Wasm layer expects.
+For the full JSON schema (including `version` and snake_case fields used by Rust tooling), see [SDK object reference — Settings](../../docs/manifest/json-ref/settings-schema). The web SDK maps the camelCase `Settings` shape to what the Wasm layer expects.
 
 ### Default `createC2pa` settings
 

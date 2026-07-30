@@ -1,6 +1,6 @@
 The Node.js library does not expose a `Context` type. Instead, you pass **per-instance** settings: a JavaScript object, a JSON string, or file contents (JSON or TOML) from `loadSettingsFromFile`, as the second argument to `Reader.fromAsset`, `Reader.fromManifestDataAndAsset`, `Builder.new`, `Builder.withJson`, or `Builder.fromArchive`.
 
-For the full settings schema, see [SDK object reference — Settings](../../manifest/json-ref/settings-schema).
+For the full settings schema, see [SDK object reference — Settings](../../manifest/json-ref/settings-ref.mdx).
 
 ### Inline settings
 
