@@ -21,9 +21,9 @@
   },
   "dependencies": {
     "@contentauth/react": "^0.2.95",
-    "@docusaurus/core": "^3.5.2",
-    "@docusaurus/preset-classic": "^3.5.2",
-    "@docusaurus/theme-mermaid": "^3.5.2",
+    "@docusaurus/core": "^3.10.2",
+    "@docusaurus/preset-classic": "^3.10.2",
+    "@docusaurus/theme-mermaid": "^3.10.2",
     "@mdx-js/react": "^3.0.0",
     "@signalwire/docusaurus-plugin-llms-txt": "^1.2.2",
     "@stackblitz/sdk": "^1.6.0",
