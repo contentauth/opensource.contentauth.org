@@ -77,6 +77,20 @@
   --ifm-tabs-color-active: var(--cai-color-primary);
 }
 
+[data-theme='dark'] {
+  --cai-color-background: #1b1b1d;
+  --cai-color-on-background: #e3e3e3;
+  --cai-color-background-dark: #2b2b2e;
+  --cai-color-on-background-dark: #e3e3e3;
+  --cai-color-disabled: #3a3a3d;
+  --cai-color-on-disabled: #8a8a8d;
+  --cai-color-surface: #242526;
+  --cai-color-on-surface: #e3e3e3;
+  --cai-color-primary-light: #1f3b57;
+  --cai-color-secondary-light: #4a4020;
+  --cai-color-shadow: rgba(0, 0, 0, 0.6);
+}
+
 * {
   -webkit-font-smoothing: antialiased;
 }
@@ -151,6 +165,14 @@ a.hash-link {
   filter: brightness(1);
 }
 
+[data-theme='dark'] .header-logo {
+  filter: brightness(0) invert(1);
+}
+
+[data-theme='dark'] .header-logo:hover {
+  filter: brightness(1);
+}
+
 .header-github-link:before {
   content: '';
   width: 24px;
@@ -170,6 +192,10 @@ body:not(.is-scrolling) .navbar {
 
 .navbar__logo {
   height: 54px;
+}
+
+[data-theme='dark'] .navbar__logo img {
+  filter: invert(1);
 }
 
 .navbar__button {
@@ -455,6 +481,7 @@ main .row:not(:has(.theme-doc-toc-desktop)) > .col {
 
 .review-comment {
   background-color: yellow;
+  color: #000000;
   padding: 5px;
   font-style: italic;
   margin-bottom: 10px;
@@ -462,6 +489,7 @@ main .row:not(:has(.theme-doc-toc-desktop)) > .col {
 
 .code_summary {
   background-color: #dee0e2 !important;
+  color: #000000;
   padding: 5px;
   border-radius: 5px;
   border: 1px solid #e6e3e0;

@@ -172,7 +172,12 @@ export default function Roadmap({ src = '/project-roadmap/roadmap.tsv' }) {
                   {isOpen ? '▾' : '▸'}
                 </span>
                 <span>{section.heading}</span>
-                <span style={{ color: '#666', fontWeight: 400 }}>
+                <span
+                  style={{
+                    color: 'var(--cai-color-on-disabled)',
+                    fontWeight: 400,
+                  }}
+                >
                   ({items.length})
                 </span>
               </button>
@@ -193,7 +198,8 @@ export default function Roadmap({ src = '/project-roadmap/roadmap.tsv' }) {
                         <th
                           style={{
                             textAlign: 'left',
-                            borderBottom: '1px solid #ddd',
+                            borderBottom:
+                              '1px solid var(--cai-color-background-dark)',
                             padding: '8px',
                           }}
                         >
@@ -202,7 +208,8 @@ export default function Roadmap({ src = '/project-roadmap/roadmap.tsv' }) {
                         <th
                           style={{
                             textAlign: 'left',
-                            borderBottom: '1px solid #ddd',
+                            borderBottom:
+                              '1px solid var(--cai-color-background-dark)',
                             padding: '8px',
                             width: '200px',
                           }}
@@ -229,7 +236,8 @@ export default function Roadmap({ src = '/project-roadmap/roadmap.tsv' }) {
                           <tr key={`${section.key}-${idx}`}>
                             <td
                               style={{
-                                borderBottom: '1px solid #eee',
+                                borderBottom:
+                                  '1px solid var(--cai-color-background-dark)',
                                 padding: '8px',
                               }}
                             >
@@ -237,7 +245,8 @@ export default function Roadmap({ src = '/project-roadmap/roadmap.tsv' }) {
                             </td>
                             <td
                               style={{
-                                borderBottom: '1px solid #eee',
+                                borderBottom:
+                                  '1px solid var(--cai-color-background-dark)',
                                 padding: '8px',
                               }}
                             >

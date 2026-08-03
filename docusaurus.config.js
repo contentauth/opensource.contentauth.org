@@ -251,7 +251,9 @@ async function createConfig() {
         // Relative to your site's 'static' directory.
         // Cannot be SVGs. Can be external URLs too.
         colorMode: {
-          disableSwitch: true,
+          defaultMode: 'light',
+          disableSwitch: false,
+          respectPrefersColorScheme: true,
         },
         docs: {
           sidebar: {
