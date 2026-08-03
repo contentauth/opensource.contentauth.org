@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import useBrokenLinks from '@docusaurus/useBrokenLinks';
 
 const slugify = (text) =>
   String(text || '')
@@ -296,12 +297,16 @@ function PropertiesTable({
   required,
   defaults,
 }) {
+  const brokenLinks = useBrokenLinks();
   if (!properties || Object.keys(properties).length === 0) return null;
+
+  const titleId = title ? slugify(title) : null;
+  if (titleId) brokenLinks.collectAnchor(titleId);
 
   return (
     <>
       {title ? (
-        <h3 className="scroll-target" id={slugify(title)}>
+        <h3 className="scroll-target" id={titleId}>
           {title}
         </h3>
       ) : null}
@@ -405,6 +410,7 @@ function PropertiesTable({
 }
 
 function DefinitionsTOC({ defs }) {
+  const brokenLinks = useBrokenLinks();
   const names = useMemo(
     () =>
       Object.keys(defs || {}).sort((a, b) =>
@@ -413,6 +419,7 @@ function DefinitionsTOC({ defs }) {
     [defs],
   );
   if (names.length === 0) return null;
+  brokenLinks.collectAnchor('definitions');
 
   const colCount = 4;
   const perCol = Math.ceil(names.length / colCount);
@@ -523,7 +530,9 @@ function UnionOptionsTable({ options, contextName }) {
 }
 
 function DefinitionSection({ name, schema }) {
+  const brokenLinks = useBrokenLinks();
   const titleId = slugify(name);
+  brokenLinks.collectAnchor(titleId);
   const isObjectType =
     (schema && schema.type === 'object') ||
     (schema && isObject(schema.properties));
@@ -630,10 +639,12 @@ function DefinitionSection({ name, schema }) {
   );
 }
 
-export default function SchemaReference({ schemaUrl }) {
-  const [schema, setSchema] = useState(null);
+export default function SchemaReference({ schemaUrl, schema: schemaProp }) {
+  const brokenLinks = useBrokenLinks();
+  const [fetchedSchema, setFetchedSchema] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!schemaProp);
+  const schema = schemaProp || fetchedSchema;
 
   // Ensure hash anchors (e.g., #buildersettings) scroll into view after
   // the dynamically generated content renders, and on subsequent hash changes.
@@ -728,6 +739,10 @@ export default function SchemaReference({ schemaUrl }) {
   };
 
   useEffect(() => {
+    // Schema was supplied directly (statically imported at build time), so
+    // there's nothing to fetch and the headings/anchors below already
+    // rendered during SSR.
+    if (schemaProp) return undefined;
     let cancelled = false;
     async function run() {
       setLoading(true);
@@ -736,7 +751,7 @@ export default function SchemaReference({ schemaUrl }) {
         const res = await fetch(schemaUrl);
         if (!res.ok) throw new Error(`Failed to fetch schema: ${schemaUrl}`);
         const json = await res.json();
-        if (!cancelled) setSchema(json);
+        if (!cancelled) setFetchedSchema(json);
       } catch (e) {
         if (!cancelled) setError(e.message || String(e));
       } finally {
@@ -747,20 +762,24 @@ export default function SchemaReference({ schemaUrl }) {
     return () => {
       cancelled = true;
     };
-  }, [schemaUrl]);
+  }, [schemaUrl, schemaProp]);
 
   const inferredDefaults = useMemo(
     () => buildDefDefaults(schema || {}),
     [schema],
   );
 
-  if (loading) return <p>Loading schema…</p>;
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
-  if (!schema) return <p>No schema loaded.</p>;
+  if (!schemaProp) {
+    if (loading) return <p>Loading schema…</p>;
+    if (error) return <p style={{ color: 'red' }}>{error}</p>;
+    if (!schema) return <p>No schema loaded.</p>;
+  }
 
   const defs = schema.$defs || schema.definitions || {};
   const title = schema.title || 'Schema';
   const titleId = slugify(title);
+  brokenLinks.collectAnchor(titleId);
+  brokenLinks.collectAnchor('properties');
 
   return (
     <div>
