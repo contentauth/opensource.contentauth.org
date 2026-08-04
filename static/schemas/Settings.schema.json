@@ -121,6 +121,13 @@
           "type": "null"
         }
       ]
+    },
+    "soft_binding": {
+      "description": "List of soft binding algorithms to validate against. If not specified, soft binding errors may be generated.",
+      "$ref": "#/$defs/SoftBinding",
+      "default": {
+        "soft_binding_algorithms": null
+      }
     }
   },
   "$defs": {
@@ -1067,6 +1074,21 @@
         "Ps512",
         "Ed25519"
       ]
+    },
+    "SoftBinding": {
+      "type": "object",
+      "properties": {
+        "soft_binding_algorithms": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "default": null
+        }
+      }
     }
   }
 }
