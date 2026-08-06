@@ -15,17 +15,15 @@
       "description": "Settings for configuring the C2PA trust lists.",
       "$ref": "#/$defs/Trust",
       "default": {
-        "verify_trust_list": true,
         "user_anchors": null,
         "trust_anchors": null,
         "trust_config": null,
-        "allowed_list": null,
-        "trusted_ica_issuers": null
+        "allowed_list": null
       }
     },
     "cawg_trust": {
       "description": "Settings for configuring the CAWG trust lists.",
-      "$ref": "#/$defs/Trust",
+      "$ref": "#/$defs/CawgTrust",
       "default": {
         "verify_trust_list": true,
         "user_anchors": null,
@@ -132,14 +130,9 @@
   },
   "$defs": {
     "Trust": {
-      "description": "Settings to configure the trust list.",
+      "description": "Settings to configure the C2PA trust list.\n\nThis configures the trust lists used when verifying C2PA manifest signers.\nCAWG identity trust is configured separately via [`CawgTrust`].",
       "type": "object",
       "properties": {
-        "verify_trust_list": {
-          "description": "Whether to verify certificates against the trust lists specified in [`Trust`]. This\noption is ONLY applicable to CAWG.\n\nThe default value is true.\n\n<div class=\"warning\">\nVerifying trust is REQUIRED by the CAWG spec. This option should only be used for development or testing.\n</div>",
-          "type": "boolean",
-          "default": true
-        },
         "user_anchors": {
           "description": "List of additional user-provided trust anchor root certificates as a PEM bundle.",
           "type": [
@@ -166,6 +159,49 @@
         },
         "allowed_list": {
           "description": "List of explicitly allowed certificates as a PEM bundle.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "CawgTrust": {
+      "description": "Settings to configure the CAWG identity trust lists.\n\nThis configures trust used when validating CAWG identity assertions. It is\nmodeled separately from the C2PA [`Trust`] because several of these settings\n(such as `verify_trust_list`) apply only to CAWG validation and have no\neffect on C2PA manifest verification.",
+      "type": "object",
+      "properties": {
+        "verify_trust_list": {
+          "description": "Whether to verify certificates against the trust lists specified in [`CawgTrust`].\n\nThe default value is true.\n\n<div class=\"warning\">\nVerifying trust is REQUIRED by the CAWG spec. This option should only be used for development or testing.\n</div>",
+          "type": "boolean",
+          "default": true
+        },
+        "user_anchors": {
+          "description": "List of additional user-provided trust anchor root certificates as a PEM\nbundle, used when validating CAWG X.509 identity signatures.\n\nThese trust lists are independent of the C2PA [`Trust`] settings and are\nconsulted only for CAWG identity validation.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "trust_anchors": {
+          "description": "List of default trust anchor root certificates as a PEM bundle, used when\nvalidating CAWG X.509 identity signatures.\n\nUnder the CAWG interim trust model (CAWG identity assertion spec §8.2.4.1,\nvalid for assertions issued on or before 31 March 2027 and carrying a\ntrusted time stamp), these are the CAWG-recognized trust anchors – the\nMozilla Root Store with the Email (S/MIME) trust bit enabled\n(<https://ccadb.my.salesforce-sites.com/mozilla/IncludedRootsPEMTxt?TrustBitsInclude=Email>)\nand the IPTC Origin Verified News Publishers trust-anchor list\n(<https://trust.iptc.org/anchor-list.pem>) – not the C2PA conformance\ntrust-list.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "trust_config": {
+          "description": "List of allowed extended key usage (EKU) object identifiers (OID) that\nCAWG identity certificates must have.\n\nThe CAWG interim trust model (CAWG identity assertion spec §8.2.4.1)\nrequires the `id-kp-emailProtection` EKU (1.3.6.1.5.5.7.3.4) together with\none of the CA/Browser Forum S/MIME certificate-policy OIDs:\norganization-validated (2.23.140.1.5.2.2 / 2.23.140.1.5.2.3),\nsponsor-validated (2.23.140.1.5.3.2 / 2.23.140.1.5.3.3), or\nindividual-validated (2.23.140.1.5.4.2 / 2.23.140.1.5.4.3). Mailbox-validated\nand legacy certificate purposes are not accepted.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "allowed_list": {
+          "description": "List of explicitly allowed CAWG identity certificates as a PEM bundle.\n\nUnder the CAWG interim trust model (CAWG identity assertion spec §8.2.4.1),\nthis corresponds to the IPTC Origin Verified News Publishers end-entity\ncertificate list (<https://trust.iptc.org/end-entity-list.pem>).",
           "type": [
             "string",
             "null"
