@@ -22,8 +22,7 @@ function formatType(cellSchema) {
 
   // $ref
   if (cellSchema.$ref) {
-    const ref = cellSchema.$ref;
-    const name = ref.startsWith('#/$defs/') ? ref.replace('#/$defs/', '') : ref;
+    const name = refToDefName(cellSchema.$ref) || cellSchema.$ref;
     return `<a href="#${slugify(name)}">${name}</a>`;
   }
 
@@ -471,10 +470,7 @@ function UnionOptionsTable({ options, contextName }) {
     if (Array.isArray(opt.type))
       return opt.type.map(capitalizeType).join(' or ');
     if (opt.$ref) {
-      const name = opt.$ref.startsWith('#/$defs/')
-        ? opt.$ref.replace('#/$defs/', '')
-        : opt.$ref;
-      return name;
+      return refToDefName(opt.$ref) || opt.$ref;
     }
     return 'N/A';
   };

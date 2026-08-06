@@ -492,6 +492,13 @@
       "dest": "static/sb-alg-list.json"
     },
 
+    { "_comment": "CrJSON schema (static JSON, hand-authored fixture)" },
+    {
+      "repo": "contentauth/c2pa-rs",
+      "path": "sdk/tests/fixtures/schemas/crJSON-schema.json",
+      "dest": "static/schemas/crJSON-schema.json"
+    },
+
     { "_comment": "Durable Content Credentials - TrustMark watermarking" },
     {
       "repo": "adobe/trustmark",
