@@ -11,10 +11,11 @@ All the open-source CAI code is hosted in GitHub in the [CAI GitHub organization
 
 - **Rust Library**: [c2pa-rs](https://github.com/contentauth/c2pa-rs)
 - **CLI tool**: [c2patool](https://github.com/contentauth/c2patool)
-- **JavaScript library**: [c2pa-web](https://github.com/contentauth/c2pa-web)
-- **Python library**: [c2pa-python](https://github.com/contentauth/c2pa-python)
-- **Node.js library**: [c2pa-node](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node)
 - **C++ library**: [c2pa-cpp](https://github.com/contentauth/c2pa-cpp)
+- **Python library**: [c2pa-python](https://github.com/contentauth/c2pa-python)
+- **JavaScript library**: [c2pa-js](https://github.com/contentauth/c2pa-js), a monorepo containing CAI JavaScript libraries and tools
+  - **Browser JavaScript**: [c2pa-web](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-web)
+  - **Node.js library**: [c2pa-node/](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node)
 
 If you think you've found a bug or want to request a feature, please open an issue in the appropriate repository.
 
