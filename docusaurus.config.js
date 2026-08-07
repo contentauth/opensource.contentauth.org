@@ -268,6 +268,11 @@ async function createConfig() {
           },
           items: [
             {
+              type: 'custom-editThisPage',
+              position: 'right',
+              className: 'header-logo header-edit-link',
+            },
+            {
               href: 'https://discord.gg/CAI',
               position: 'right',
               className: 'header-logo header-discord-link',
