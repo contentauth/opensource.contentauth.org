@@ -32,9 +32,6 @@ dependencies:
   '@stackblitz/sdk':
     specifier: ^1.6.0
     version: 1.11.0
-  c2pa:
-    specifier: ^0.30.17
-    version: 0.30.17
   c2pa-wc:
     specifier: ^0.14.17
     version: 0.14.17
