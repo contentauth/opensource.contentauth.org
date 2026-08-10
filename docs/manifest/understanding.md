@@ -24,7 +24,7 @@ To determine if an asset has Content Credentials, the SDK checks for the presenc
 1. In a sidebar file.
 1. In a remote manifest.
 
-So, for example to see if `foo.jpg` has Content Credentials, the SDK first checks if there's a manifest store in the file itself, then looks for a sidecar file (`foo.c2pa` in the same directory), and finally looks in the asset's metadata for a reference to a remote manifest store.  
+For example, to check whether `foo.jpg` has Content Credentials, the SDK first checks the file itself for a manifest store, then looks for a sidecar file (`foo.c2pa` in the same directory), and finally checks the asset's metadata for a reference to a remote manifest store.
 
 :::info
 Currently, only Adobe has implemented a Content Credentials cloud service to provide access to remote manifest stores, but in theory anyone could do so to provide a publicly-accessible network location for manifests.
