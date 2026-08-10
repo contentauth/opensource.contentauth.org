@@ -40,8 +40,8 @@ const externalRepos = {
     org: 'contentauth',
   },
 
-  c2patool: { repo: 'c2pa-rs', path: 'cli/', org: 'contentauth' },
-  'rust-sdk': { repo: 'c2pa-rs', path: '', org: 'contentauth' },
+  'c2pa-rs/cli': { repo: 'c2pa-rs', path: 'cli/', org: 'contentauth' },
+  'c2pa-rs': { repo: 'c2pa-rs', path: '', org: 'contentauth' },
   trustmark: { repo: 'trustmark', path: '', org: 'adobe' },
 };
 
