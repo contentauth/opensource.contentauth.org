@@ -3,7 +3,7 @@
 - [Using Context with Builder](#using-context-with-builder)
 
 :::info
-For more details on using `Context` and `Settings` in Rust, see [Rust library - Configuring SDK settings](../../docs/rust-sdk/docs/context-settings)
+For more details on using `Context` and `Settings` in Rust, see [Rust library - Configuring SDK settings](../../docs/c2pa-rs/docs/context-settings)
 :::
 
 

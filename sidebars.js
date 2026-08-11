@@ -169,10 +169,10 @@ const sidebars = {
     {
       type: 'category',
       label: 'C2PA Tool',
-      link: { type: 'doc', id: 'c2patool/c2patool-index' },
+      link: { type: 'doc', id: 'c2pa-rs/cli/readme' },
       collapsed: true,
       items: [
-        ...getRemoteSidebarItems('c2patool'),
+        ...getRemoteSidebarItems('c2pa-rs-cli'),
         {
           type: 'link',
           label: 'GitHub',
@@ -183,17 +183,17 @@ const sidebars = {
     {
       type: 'category',
       label: 'Rust library',
-      link: { type: 'doc', id: 'rust-sdk/readme' },
+      link: { type: 'doc', id: 'c2pa-rs/readme' },
       collapsed: true,
       items: [
-        ...getRemoteSidebarItems('rust-sdk', [
-          'rust-sdk/readme',
-          'rust-sdk/docs/release-process',
+        ...getRemoteSidebarItems('c2pa-rs', [
+          'c2pa-rs/readme',
+          'c2pa-rs/docs/release-process',
         ]),
         {
           type: 'category',
           label: 'Release process',
-          link: { type: 'doc', id: 'rust-sdk/docs/release-process' },
+          link: { type: 'doc', id: 'c2pa-rs/docs/release-process' },
           items: [
             {
               type: 'link',
