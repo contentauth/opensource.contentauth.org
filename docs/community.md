@@ -40,6 +40,16 @@ These related projects may be of interest, but the CAI team doesn't maintain or 
 - [**DASH video player**](https://github.com/contentauth/dash.js/tree/c2pa-dash):  DASH video player that displays Content Credentials in browsers for supported media types. This repo/branch is a work-in-progress forked from [dash.js](https://github.com/Dash-Industry-Forum/dash.js), the canonical reference JavaScript implementation for the playback of MPEG DASH. 
 - [**TrustMark**](https://github.com/adobe/trustmark): Open-source Python implementation of watermarking for encoding, decoding and removing image watermarks. You can use TrustMark as part of providing [durable content credentials](durable-cr/index.md).
 - [**C2PA Security Testing Tool**](https://github.com/contentauth/c2pa-attacks): A CLI tool derived from [c2patool](https://github.com/contentauth/c2patool) that performs security testing on a Content Credentials application.  This tool is intended for use by software security professionals.
+
+### External Community projects
+
+These projects are entirely community-driven, and the CAI team doesn't endorse, maintain, or support them.
+
+:::warning
+CAI has not vetted and does not endorse these third-party projects.
+Use at your own risk.
+:::
+
 - [**PHP library**](https://github.com/provemark/content-credentials): Builds, signs, reads and verifies Content Credentials from PHP, with a framework-agnostic core and a Laravel integration. Signing is delegated to a small Node service built on [c2pa-node](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node), so the private key stays out of the web application.
 - [**ChronoVerify MCP server**](https://github.com/beeswaxpat/chronoverify-mcp): Model Context Protocol (MCP) server for [ChronoVerify](https://chronoverify.com), a C2PA Conformant Validator listed on the [Conforming Products List](https://c2pa.org/conformance/). Lets AI agents and applications validate C2PA Content Credentials in images against the official trust lists, alongside EXIF/XMP metadata and pixel-forensics checks.
 
