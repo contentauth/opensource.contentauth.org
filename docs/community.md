@@ -30,7 +30,7 @@ Participants are required to follow the [Adobe Code of Conduct](https://github.c
 
 ### Verify
 
-The code for the [C2PA Verify website](https://verify.contentauthenticity.org/) is open source.  However, it currently uses the deprecated [Legacy JavaScript library](https://github.com/contentauth/c2pa-js-legacy).
+The code for the [C2PA Verify website](https://verify.contentauthenticity.org/) (Verify) is [open source](https://github.com/contentauth/verify-site). Verify is not a C2PA conforming validator product.  However, [Adobe Content Authenticity](https://contentauthenticity.adobe.com/) is a conforming validator product.
 
 ### Related projects
 
@@ -39,7 +39,7 @@ These related projects may be of interest, but the CAI team doesn't maintain or 
 - [**Drupal module**](https://github.com/contentauth/c2pa-drupal): Enables Drupal sites to process and display Content Credentials for supported image types.
 - [**DASH video player**](https://github.com/contentauth/dash.js/tree/c2pa-dash):  DASH video player that displays Content Credentials in browsers for supported media types. This repo/branch is a work-in-progress forked from [dash.js](https://github.com/Dash-Industry-Forum/dash.js), the canonical reference JavaScript implementation for the playback of MPEG DASH. 
 - [**TrustMark**](https://github.com/adobe/trustmark): Open-source Python implementation of watermarking for encoding, decoding and removing image watermarks. You can use TrustMark as part of providing [durable content credentials](durable-cr/index.md).
-- [**C2PA Security testing tool**](https://github.com/contentauth/c2pa-attacks): A CLI tool derived from [c2patool](https://github.com/contentauth/c2patool) that performs security testing on a Content Credentials application.  This tool is intended for use by software security professionals.
+- [**C2PA Security testing tool**](https://github.com/contentauth/c2pa-attacks): A CLI tool derived from [C2PA Tool](./c2pa-rs/cli/readme.md) that performs security testing on a Content Credentials application.  This tool is intended for use by software security professionals.
 
 ### External projects
 
