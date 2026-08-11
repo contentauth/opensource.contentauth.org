@@ -23,26 +23,43 @@ const copyright = `
 // Map of external repositories to their GitHub repository names, paths, and organizations
 // Used to create 'Edit this page' links
 const externalRepos = {
-  'c2pa-cpp': { repo: 'c2pa-cpp', path: '', org: 'contentauth' },
-  'c2pa-swift': { repo: 'c2pa-swift', path: '', org: 'contentauth' },
-  'c2pa-android': { repo: 'c2pa-android', path: '', org: 'contentauth' },
-  'c2pa-js': { repo: 'c2pa-js', path: '', org: 'contentauth' },
-
-  'c2pa-node': {
-    repo: 'c2pa-js',
-    path: 'packages/c2pa-node/',
+  'sdk-repos/c2pa-cpp': { repo: 'c2pa-cpp', path: '', org: 'contentauth' },
+  'sdk-repos/c2pa-swift': { repo: 'c2pa-swift', path: '', org: 'contentauth' },
+  'sdk-repos/c2pa-android': {
+    repo: 'c2pa-android',
+    path: '',
     org: 'contentauth',
   },
-  'c2pa-python': { repo: 'c2pa-python', path: '', org: 'contentauth' },
-  'c2pa-python-example': {
+  'sdk-repos/c2pa-android-example': {
+    repo: 'c2pa-android-example',
+    path: '',
+    org: 'contentauth',
+  },
+  'sdk-repos/c2pa-ios-example': {
+    repo: 'c2pa-ios-example',
+    path: '',
+    org: 'contentauth',
+  },
+  'sdk-repos/c2pa-js': { repo: 'c2pa-js', path: '', org: 'contentauth' },
+
+  'sdk-repos/c2pa-python': {
+    repo: 'c2pa-python',
+    path: '',
+    org: 'contentauth',
+  },
+  'sdk-repos/c2pa-python-example': {
     repo: 'c2pa-python-example',
     path: '',
     org: 'contentauth',
   },
 
-  'c2pa-rs/cli': { repo: 'c2pa-rs', path: 'cli/', org: 'contentauth' },
-  'c2pa-rs': { repo: 'c2pa-rs', path: '', org: 'contentauth' },
-  trustmark: { repo: 'trustmark', path: '', org: 'adobe' },
+  'sdk-repos/c2pa-rs/cli': {
+    repo: 'c2pa-rs',
+    path: 'cli/',
+    org: 'contentauth',
+  },
+  'sdk-repos/c2pa-rs': { repo: 'c2pa-rs', path: '', org: 'contentauth' },
+  'sdk-repos/trustmark': { repo: 'trustmark', path: '', org: 'adobe' },
 };
 
 // Exact edit URLs for docs that are mirrored from remote-docs.json sources.
@@ -318,6 +335,18 @@ async function createConfig() {
         },
       }),
     plugins: [
+      [
+        '@docusaurus/plugin-client-redirects',
+        {
+          createRedirects(existingPath) {
+            const prefix = '/docs/sdk-repos/';
+            if (existingPath.startsWith(prefix)) {
+              return `/docs/${existingPath.slice(prefix.length)}`;
+            }
+            return undefined;
+          },
+        },
+      ],
       [
         '@signalwire/docusaurus-plugin-llms-txt',
         {

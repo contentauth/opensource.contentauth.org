@@ -4,12 +4,12 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/README.md",
-      "dest": "docs/c2pa-rs/cli/readme.md"
+      "dest": "docs/sdk-repos/c2pa-rs/cli/readme.md"
     },
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/docs/usage.md",
-      "dest": "docs/c2pa-rs/cli/docs/usage.md",
+      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/usage.md",
       "sidebar": {
         "category": "c2pa-rs-cli",
         "label": "Using C2PA Tool",
@@ -19,7 +19,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/supported-formats.md",
-      "dest": "docs/c2pa-rs/cli/docs/supported-formats.md",
+      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/supported-formats.md",
       "sidebar": {
         "category": "c2pa-rs-cli",
         "label": "Supported media formats",
@@ -29,7 +29,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/docs/manifest.md",
-      "dest": "docs/c2pa-rs/cli/docs/manifest.md",
+      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/manifest.md",
       "sidebar": {
         "category": "c2pa-rs-cli",
         "label": "Using a manifest file",
@@ -39,7 +39,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/docs/signing.md",
-      "dest": "docs/c2pa-rs/cli/docs/signing.md",
+      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/signing.md",
       "sidebar": {
         "category": "c2pa-rs-cli",
         "label": "Signing assets with C2PA Tool",
@@ -49,7 +49,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/docs/x_509.md",
-      "dest": "docs/c2pa-rs/cli/docs/x_509.md",
+      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/x_509.md",
       "sidebar": {
         "category": "c2pa-rs-cli",
         "label": "Using a certificate for C2PA signing",
@@ -59,7 +59,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/docs/cawg_x509_signing.md",
-      "dest": "docs/c2pa-rs/cli/docs/cawg_x509_signing.md",
+      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/cawg_x509_signing.md",
       "sidebar": {
         "category": "c2pa-rs-cli",
         "label": "Using a certificate for CAWG signing",
@@ -69,7 +69,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/CHANGELOG.md",
-      "dest": "docs/c2pa-rs/cli/docs/changelog.md",
+      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/changelog.md",
       "sidebar": {
         "category": "c2pa-rs-cli",
         "label": "Change log",
@@ -81,13 +81,13 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "README.md",
-      "dest": "docs/c2pa-rs/readme.md",
+      "dest": "docs/sdk-repos/c2pa-rs/readme.md",
       "sidebar": { "category": "c2pa-rs", "label": "Overview", "order": 0 }
     },
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/usage.md",
-      "dest": "docs/c2pa-rs/docs/usage.md",
+      "dest": "docs/sdk-repos/c2pa-rs/docs/usage.md",
       "sidebar": {
         "category": "c2pa-rs",
         "label": "Using the Rust library",
@@ -97,7 +97,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/supported-formats.md",
-      "dest": "docs/c2pa-rs/docs/supported-formats.md",
+      "dest": "docs/sdk-repos/c2pa-rs/docs/supported-formats.md",
       "sidebar": {
         "category": "c2pa-rs",
         "label": "Supported media formats",
@@ -108,7 +108,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/context-settings.md",
-      "dest": "docs/c2pa-rs/docs/context-settings.md",
+      "dest": "docs/sdk-repos/c2pa-rs/docs/context-settings.md",
       "sidebar": {
         "category": "c2pa-rs",
         "label": "Configuring SDK settings",
@@ -118,7 +118,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/working-stores.md",
-      "dest": "docs/c2pa-rs/docs/working-stores.md",
+      "dest": "docs/sdk-repos/c2pa-rs/docs/working-stores.md",
       "sidebar": {
         "category": "c2pa-rs",
         "label": "Using working stores and archives",
@@ -128,7 +128,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/intents.md",
-      "dest": "docs/c2pa-rs/docs/intents.md",
+      "dest": "docs/sdk-repos/c2pa-rs/docs/intents.md",
       "sidebar": {
         "category": "c2pa-rs",
         "label": "Using Builder intents",
@@ -138,7 +138,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/progress_callbacks.md",
-      "dest": "docs/c2pa-rs/docs/progress_callbacks.md",
+      "dest": "docs/sdk-repos/c2pa-rs/docs/progress_callbacks.md",
       "sidebar": {
         "category": "c2pa-rs",
         "label": "Progress callbacks",
@@ -148,7 +148,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/cawg-identity.md",
-      "dest": "docs/c2pa-rs/docs/cawg-identity.md",
+      "dest": "docs/sdk-repos/c2pa-rs/docs/cawg-identity.md",
       "sidebar": {
         "category": "c2pa-rs",
         "label": "Using CAWG identity assertions",
@@ -158,7 +158,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/redaction.md",
-      "dest": "docs/c2pa-rs/docs/redaction.md",
+      "dest": "docs/sdk-repos/c2pa-rs/docs/redaction.md",
       "sidebar": {
         "category": "c2pa-rs",
         "label": "Redaction",
@@ -168,7 +168,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/instanceid_behavior.md",
-      "dest": "docs/c2pa-rs/docs/instanceid-behavior.md",
+      "dest": "docs/sdk-repos/c2pa-rs/docs/instanceid-behavior.md",
       "sidebar": {
         "category": "c2pa-rs",
         "label": "InstanceID behavior",
@@ -178,7 +178,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/embeddable-api.md",
-      "dest": "docs/c2pa-rs/docs/embeddable-api.md",
+      "dest": "docs/sdk-repos/c2pa-rs/docs/embeddable-api.md",
       "sidebar": {
         "category": "c2pa-rs",
         "label": "Embeddable signing API",
@@ -188,7 +188,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/release-notes.md",
-      "dest": "docs/c2pa-rs/docs/release-notes.md",
+      "dest": "docs/sdk-repos/c2pa-rs/docs/release-notes.md",
       "sidebar": {
         "category": "c2pa-rs",
         "label": "Release notes (Rust)",
@@ -199,7 +199,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/release-process.md",
-      "dest": "docs/c2pa-rs/docs/release-process.md",
+      "dest": "docs/sdk-repos/c2pa-rs/docs/release-process.md",
       "sidebar": {
         "category": "c2pa-rs",
         "label": "Release process",
@@ -210,13 +210,13 @@
     {
       "repo": "contentauth/c2pa-python",
       "path": "README.md",
-      "dest": "docs/c2pa-python/readme.md",
+      "dest": "docs/sdk-repos/c2pa-python/readme.md",
       "sidebar": { "category": "c2pa-python", "label": "Overview", "order": 0 }
     },
     {
       "repo": "contentauth/c2pa-python",
       "path": "docs/usage.md",
-      "dest": "docs/c2pa-python/docs/usage.md",
+      "dest": "docs/sdk-repos/c2pa-python/docs/usage.md",
       "sidebar": {
         "category": "c2pa-python",
         "label": "Using the Python library",
@@ -226,7 +226,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/supported-formats.md",
-      "dest": "docs/c2pa-python/docs/supported-formats.md",
+      "dest": "docs/sdk-repos/c2pa-python/docs/supported-formats.md",
       "sidebar": {
         "category": "c2pa-python",
         "label": "Supported media formats",
@@ -237,7 +237,7 @@
     {
       "repo": "contentauth/c2pa-python",
       "path": "docs/class-diagram.md",
-      "dest": "docs/c2pa-python/docs/class-diagram.md",
+      "dest": "docs/sdk-repos/c2pa-python/docs/class-diagram.md",
       "sidebar": {
         "category": "c2pa-python",
         "label": "Class diagram",
@@ -247,7 +247,7 @@
     {
       "repo": "contentauth/c2pa-python",
       "path": "docs/context-settings.md",
-      "dest": "docs/c2pa-python/docs/context-settings.md",
+      "dest": "docs/sdk-repos/c2pa-python/docs/context-settings.md",
       "sidebar": {
         "category": "c2pa-python",
         "label": "Configuring SDK settings",
@@ -257,7 +257,7 @@
     {
       "repo": "contentauth/c2pa-python",
       "path": "docs/intents.md",
-      "dest": "docs/c2pa-python/docs/intents.md",
+      "dest": "docs/sdk-repos/c2pa-python/docs/intents.md",
       "sidebar": {
         "category": "c2pa-python",
         "label": "Using Builder intents",
@@ -267,7 +267,7 @@
     {
       "repo": "contentauth/c2pa-python",
       "path": "docs/working-stores.md",
-      "dest": "docs/c2pa-python/docs/working-stores.md",
+      "dest": "docs/sdk-repos/c2pa-python/docs/working-stores.md",
       "sidebar": {
         "category": "c2pa-python",
         "label": "Manifests, working stores, and archives",
@@ -277,7 +277,7 @@
     {
       "repo": "contentauth/c2pa-python",
       "path": "docs/selective-manifests.md",
-      "dest": "docs/c2pa-python/docs/selective-manifests.md",
+      "dest": "docs/sdk-repos/c2pa-python/docs/selective-manifests.md",
       "sidebar": {
         "category": "c2pa-python",
         "label": "Selective manifest construction",
@@ -287,7 +287,7 @@
     {
       "repo": "contentauth/c2pa-python",
       "path": "examples/README.md",
-      "dest": "docs/c2pa-python/docs/examples.md",
+      "dest": "docs/sdk-repos/c2pa-python/docs/examples.md",
       "sidebar": {
         "category": "c2pa-python",
         "label": "Python example code",
@@ -297,7 +297,7 @@
     {
       "repo": "contentauth/c2pa-python",
       "path": "docs/release-notes.md",
-      "dest": "docs/c2pa-python/docs/release-notes.md",
+      "dest": "docs/sdk-repos/c2pa-python/docs/release-notes.md",
       "sidebar": {
         "category": "c2pa-python",
         "label": "Release notes (Python)",
@@ -307,7 +307,7 @@
     {
       "repo": "contentauth/c2pa-python-example",
       "path": "README.md",
-      "dest": "docs/c2pa-python-example/readme.md",
+      "dest": "docs/sdk-repos/c2pa-python-example/readme.md",
       "sidebar": {
         "category": "c2pa-python",
         "label": "C2PA Python example",
@@ -319,13 +319,13 @@
     {
       "repo": "contentauth/c2pa-cpp",
       "path": "README.md",
-      "dest": "docs/c2pa-cpp/readme.md",
+      "dest": "docs/sdk-repos/c2pa-cpp/readme.md",
       "sidebar": { "category": "c2pa-cpp", "label": "Overview", "order": 0 }
     },
     {
       "repo": "contentauth/c2pa-cpp",
       "path": "docs/usage.md",
-      "dest": "docs/c2pa-cpp/docs/usage.md",
+      "dest": "docs/sdk-repos/c2pa-cpp/docs/usage.md",
       "sidebar": {
         "category": "c2pa-cpp",
         "label": "Using the C++ library",
@@ -335,7 +335,7 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/supported-formats.md",
-      "dest": "docs/c2pa-cpp/docs/supported-formats.md",
+      "dest": "docs/sdk-repos/c2pa-cpp/docs/supported-formats.md",
       "sidebar": {
         "category": "c2pa-cpp",
         "label": "Supported media formats",
@@ -345,7 +345,7 @@
     {
       "repo": "contentauth/c2pa-cpp",
       "path": "docs/context-settings.md",
-      "dest": "docs/c2pa-cpp/docs/context-settings.md",
+      "dest": "docs/sdk-repos/c2pa-cpp/docs/context-settings.md",
       "sidebar": {
         "category": "c2pa-cpp",
         "label": "Configuring SDK settings",
@@ -355,7 +355,7 @@
     {
       "repo": "contentauth/c2pa-cpp",
       "path": "docs/intents.md",
-      "dest": "docs/c2pa-cpp/docs/intents.md",
+      "dest": "docs/sdk-repos/c2pa-cpp/docs/intents.md",
       "sidebar": {
         "category": "c2pa-cpp",
         "label": "Using Builder intents",
@@ -365,7 +365,7 @@
     {
       "repo": "contentauth/c2pa-cpp",
       "path": "docs/working-stores.md",
-      "dest": "docs/c2pa-cpp/docs/working-stores.md",
+      "dest": "docs/sdk-repos/c2pa-cpp/docs/working-stores.md",
       "sidebar": {
         "category": "c2pa-cpp",
         "label": "Using working stores and archives",
@@ -375,7 +375,7 @@
     {
       "repo": "contentauth/c2pa-cpp",
       "path": "docs/selective-manifests.md",
-      "dest": "docs/c2pa-cpp/docs/selective-manifests.md",
+      "dest": "docs/sdk-repos/c2pa-cpp/docs/selective-manifests.md",
       "sidebar": {
         "category": "c2pa-cpp",
         "label": "Selective manifest construction",
@@ -385,7 +385,7 @@
     {
       "repo": "contentauth/c2pa-cpp",
       "path": "docs/embeddable-api.md",
-      "dest": "docs/c2pa-cpp/docs/embeddable-api.md",
+      "dest": "docs/sdk-repos/c2pa-cpp/docs/embeddable-api.md",
       "sidebar": {
         "category": "c2pa-cpp",
         "label": "Embeddable signing API",
@@ -395,7 +395,7 @@
     {
       "repo": "contentauth/c2pa-cpp",
       "path": "docs/release-notes.md",
-      "dest": "docs/c2pa-cpp/docs/release-notes.md",
+      "dest": "docs/sdk-repos/c2pa-cpp/docs/release-notes.md",
       "sidebar": {
         "category": "c2pa-cpp",
         "label": "Release notes (C++)",
@@ -405,7 +405,7 @@
     {
       "repo": "contentauth/c2pa-cpp",
       "path": "docs/faqs.md",
-      "dest": "docs/c2pa-cpp/docs/faqs.md",
+      "dest": "docs/sdk-repos/c2pa-cpp/docs/faqs.md",
       "sidebar": {
         "category": "c2pa-cpp",
         "label": "FAQs",
@@ -417,25 +417,25 @@
     {
       "repo": "contentauth/c2pa-js",
       "path": "README.md",
-      "dest": "docs/c2pa-js/README.md",
+      "dest": "docs/sdk-repos/c2pa-js/README.md",
       "sidebar": { "category": "c2pa-js", "label": "c2pa-js", "order": 1 }
     },
     {
       "repo": "contentauth/c2pa-js",
       "path": "packages/c2pa-web/README.md",
-      "dest": "docs/c2pa-js/packages/c2pa-web/README.md",
+      "dest": "docs/sdk-repos/c2pa-js/packages/c2pa-web/README.md",
       "sidebar": { "category": "c2pa-js", "label": "c2pa-web", "order": 2 }
     },
     {
       "repo": "contentauth/c2pa-js",
       "path": "packages/c2pa-types/README.md",
-      "dest": "docs/c2pa-js/packages/c2pa-types/README.md",
+      "dest": "docs/sdk-repos/c2pa-js/packages/c2pa-types/README.md",
       "sidebar": { "category": "c2pa-js", "label": "c2pa-types", "order": 3 }
     },
     {
       "repo": "contentauth/c2pa-js",
       "path": "packages/c2pa-wasm/README.md",
-      "dest": "docs/c2pa-js/packages/c2pa-wasm/README.md",
+      "dest": "docs/sdk-repos/c2pa-js/packages/c2pa-wasm/README.md",
       "sidebar": { "category": "c2pa-js", "label": "c2pa-wasm", "order": 4 }
     },
 
@@ -443,25 +443,25 @@
     {
       "repo": "contentauth/c2pa-js",
       "path": "packages/c2pa-node/README.md",
-      "dest": "docs/c2pa-js/packages/c2pa-node/README.md"
+      "dest": "docs/sdk-repos/c2pa-js/packages/c2pa-node/README.md"
     },
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/supported-formats.md",
-      "dest": "docs/c2pa-js/supported-formats.md"
+      "dest": "docs/sdk-repos/c2pa-js/supported-formats.md"
     },
 
     { "_comment": "Mobile libraries - iOS (Swift)" },
     {
       "repo": "contentauth/c2pa-swift",
       "path": "README.md",
-      "dest": "docs/c2pa-swift/README.md",
+      "dest": "docs/sdk-repos/c2pa-swift/README.md",
       "sidebar": { "category": "c2pa-swift", "label": "Overview", "order": 0 }
     },
     {
       "repo": "contentauth/c2pa-ios-example",
       "path": "README.md",
-      "dest": "docs/c2pa-ios-example/README.md",
+      "dest": "docs/sdk-repos/c2pa-ios-example/README.md",
       "sidebar": {
         "category": "c2pa-swift",
         "label": "Example iOS app",
@@ -473,13 +473,13 @@
     {
       "repo": "contentauth/c2pa-android",
       "path": "README.md",
-      "dest": "docs/c2pa-android/README.md",
+      "dest": "docs/sdk-repos/c2pa-android/README.md",
       "sidebar": { "category": "c2pa-android", "label": "Overview", "order": 0 }
     },
     {
       "repo": "contentauth/c2pa-android-example",
       "path": "README.md",
-      "dest": "docs/c2pa-android-example/README.md",
+      "dest": "docs/sdk-repos/c2pa-android-example/README.md",
       "sidebar": {
         "category": "c2pa-android",
         "label": "Example Android app",
@@ -500,13 +500,13 @@
     {
       "repo": "adobe/trustmark",
       "path": "README.md",
-      "dest": "docs/trustmark/README.md",
+      "dest": "docs/sdk-repos/trustmark/README.md",
       "sidebar": { "category": "trustmark", "label": "Overview", "order": 1 }
     },
     {
       "repo": "adobe/trustmark",
       "path": "python/CONFIG.md",
-      "dest": "docs/trustmark/python/CONFIG.md",
+      "dest": "docs/sdk-repos/trustmark/python/CONFIG.md",
       "sidebar": {
         "category": "trustmark",
         "label": "Configuration",
@@ -516,7 +516,7 @@
     {
       "repo": "adobe/trustmark",
       "path": "c2pa/README.md",
-      "dest": "docs/trustmark/c2pa/README.md",
+      "dest": "docs/sdk-repos/trustmark/c2pa/README.md",
       "sidebar": {
         "category": "trustmark",
         "label": "Using with C2PA",
@@ -526,7 +526,7 @@
     {
       "repo": "adobe/trustmark",
       "path": "js/README.md",
-      "dest": "docs/trustmark/js/README.md",
+      "dest": "docs/sdk-repos/trustmark/js/README.md",
       "sidebar": {
         "category": "trustmark",
         "label": "JavaScript example",
@@ -536,7 +536,7 @@
     {
       "repo": "adobe/trustmark",
       "path": "rust/README.md",
-      "dest": "docs/trustmark/rust/README.md",
+      "dest": "docs/sdk-repos/trustmark/rust/README.md",
       "sidebar": {
         "category": "trustmark",
         "label": "Rust implementation",
@@ -546,13 +546,13 @@
     {
       "repo": "adobe/trustmark",
       "path": "rust/crates/trustmark-cli/README.md",
-      "dest": "docs/trustmark/rust/crates/trustmark-cli/README.md",
+      "dest": "docs/sdk-repos/trustmark/rust/crates/trustmark-cli/README.md",
       "sidebar": { "category": "trustmark", "label": "Rust CLI", "order": 6 }
     },
     {
       "repo": "adobe/trustmark",
       "path": "FAQ.md",
-      "dest": "docs/trustmark/FAQ.md"
+      "dest": "docs/sdk-repos/trustmark/FAQ.md"
     }
   ]
 }

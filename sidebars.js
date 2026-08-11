@@ -169,7 +169,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'C2PA Tool',
-      link: { type: 'doc', id: 'c2pa-rs/cli/readme' },
+      link: { type: 'doc', id: 'sdk-repos/c2pa-rs/cli/readme' },
       collapsed: true,
       items: [
         ...getRemoteSidebarItems('c2pa-rs-cli'),
@@ -183,17 +183,17 @@ const sidebars = {
     {
       type: 'category',
       label: 'Rust library',
-      link: { type: 'doc', id: 'c2pa-rs/readme' },
+      link: { type: 'doc', id: 'sdk-repos/c2pa-rs/readme' },
       collapsed: true,
       items: [
         ...getRemoteSidebarItems('c2pa-rs', [
-          'c2pa-rs/readme',
-          'c2pa-rs/docs/release-process',
+          'sdk-repos/c2pa-rs/readme',
+          'sdk-repos/c2pa-rs/docs/release-process',
         ]),
         {
           type: 'category',
           label: 'Release process',
-          link: { type: 'doc', id: 'c2pa-rs/docs/release-process' },
+          link: { type: 'doc', id: 'sdk-repos/c2pa-rs/docs/release-process' },
           items: [
             {
               type: 'link',
@@ -255,10 +255,12 @@ const sidebars = {
     {
       type: 'category',
       label: 'Python library',
-      link: { type: 'doc', id: 'c2pa-python/readme' },
+      link: { type: 'doc', id: 'sdk-repos/c2pa-python/readme' },
       collapsed: true,
       items: [
-        ...getRemoteSidebarItems('c2pa-python', ['c2pa-python/readme']),
+        ...getRemoteSidebarItems('c2pa-python', [
+          'sdk-repos/c2pa-python/readme',
+        ]),
         {
           type: 'link',
           label: 'API documentation',
@@ -274,10 +276,10 @@ const sidebars = {
     {
       type: 'category',
       label: 'C++ library',
-      link: { type: 'doc', id: 'c2pa-cpp/readme' },
+      link: { type: 'doc', id: 'sdk-repos/c2pa-cpp/readme' },
       collapsed: true,
       items: [
-        ...getRemoteSidebarItems('c2pa-cpp', ['c2pa-cpp/readme']),
+        ...getRemoteSidebarItems('c2pa-cpp', ['sdk-repos/c2pa-cpp/readme']),
         {
           type: 'link',
           label: 'API documentation',
@@ -298,22 +300,22 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          id: 'c2pa-js/packages/c2pa-web/README',
+          id: 'sdk-repos/c2pa-js/packages/c2pa-web/README',
           label: 'c2pa-web',
         },
         {
           type: 'doc',
-          id: 'c2pa-js/packages/c2pa-types/README',
+          id: 'sdk-repos/c2pa-js/packages/c2pa-types/README',
           label: 'c2pa-types',
         },
         {
           type: 'doc',
-          id: 'c2pa-js/packages/c2pa-wasm/README',
+          id: 'sdk-repos/c2pa-js/packages/c2pa-wasm/README',
           label: 'c2pa-wasm',
         },
         {
           type: 'doc',
-          id: 'c2pa-js/supported-formats',
+          id: 'sdk-repos/c2pa-js/supported-formats',
           label: 'Supported media formats',
         },
         {
@@ -331,7 +333,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Node.js library',
-      link: { type: 'doc', id: 'c2pa-js/packages/c2pa-node/README' },
+      link: { type: 'doc', id: 'sdk-repos/c2pa-js/packages/c2pa-node/README' },
       collapsed: true,
       items: [
         {
@@ -355,11 +357,11 @@ const sidebars = {
         {
           type: 'category',
           label: 'iOS/macOS (Swift)',
-          link: { type: 'doc', id: 'c2pa-swift/README' },
+          link: { type: 'doc', id: 'sdk-repos/c2pa-swift/README' },
           collapsed: true,
           items: [
             ...getRemoteSidebarItems('c2pa-swift').filter(
-              (i) => i.id !== 'c2pa-swift/README',
+              (i) => i.id !== 'sdk-repos/c2pa-swift/README',
             ),
             {
               type: 'link',
@@ -376,11 +378,11 @@ const sidebars = {
         {
           type: 'category',
           label: 'Android (Kotlin)',
-          link: { type: 'doc', id: 'c2pa-android/README' },
+          link: { type: 'doc', id: 'sdk-repos/c2pa-android/README' },
           collapsed: true,
           items: [
             ...getRemoteSidebarItems('c2pa-android').filter(
-              (i) => i.id !== 'c2pa-android/README',
+              (i) => i.id !== 'sdk-repos/c2pa-android/README',
             ),
             {
               type: 'link',
