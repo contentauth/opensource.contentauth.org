@@ -4,14 +4,14 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/README.md",
-      "dest": "docs/c2patool/readme.md"
+      "dest": "docs/c2pa-rs/cli/readme.md"
     },
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/docs/usage.md",
-      "dest": "docs/c2patool/docs/usage.md",
+      "dest": "docs/c2pa-rs/cli/docs/usage.md",
       "sidebar": {
-        "category": "c2patool",
+        "category": "c2pa-rs-cli",
         "label": "Using C2PA Tool",
         "order": 1
       }
@@ -19,9 +19,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/supported-formats.md",
-      "dest": "docs/c2patool/docs/supported-formats.md",
+      "dest": "docs/c2pa-rs/cli/docs/supported-formats.md",
       "sidebar": {
-        "category": "c2patool",
+        "category": "c2pa-rs-cli",
         "label": "Supported media formats",
         "order": 2
       }
@@ -29,9 +29,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/docs/manifest.md",
-      "dest": "docs/c2patool/docs/manifest.md",
+      "dest": "docs/c2pa-rs/cli/docs/manifest.md",
       "sidebar": {
-        "category": "c2patool",
+        "category": "c2pa-rs-cli",
         "label": "Using a manifest file",
         "order": 3
       }
@@ -39,9 +39,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/docs/signing.md",
-      "dest": "docs/c2patool/docs/signing.md",
+      "dest": "docs/c2pa-rs/cli/docs/signing.md",
       "sidebar": {
-        "category": "c2patool",
+        "category": "c2pa-rs-cli",
         "label": "Signing assets with C2PA Tool",
         "order": 4
       }
@@ -49,9 +49,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/docs/x_509.md",
-      "dest": "docs/c2patool/docs/x_509.md",
+      "dest": "docs/c2pa-rs/cli/docs/x_509.md",
       "sidebar": {
-        "category": "c2patool",
+        "category": "c2pa-rs-cli",
         "label": "Using a certificate for C2PA signing",
         "order": 5
       }
@@ -59,9 +59,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/docs/cawg_x509_signing.md",
-      "dest": "docs/c2patool/docs/cawg_x509_signing.md",
+      "dest": "docs/c2pa-rs/cli/docs/cawg_x509_signing.md",
       "sidebar": {
-        "category": "c2patool",
+        "category": "c2pa-rs-cli",
         "label": "Using a certificate for CAWG signing",
         "order": 6
       }
@@ -69,23 +69,27 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "cli/CHANGELOG.md",
-      "dest": "docs/c2patool/docs/changelog.md",
-      "sidebar": { "category": "c2patool", "label": "Change log", "order": 7 }
+      "dest": "docs/c2pa-rs/cli/docs/changelog.md",
+      "sidebar": {
+        "category": "c2pa-rs-cli",
+        "label": "Change log",
+        "order": 7
+      }
     },
 
     { "_comment": "Rust library" },
     {
       "repo": "contentauth/c2pa-rs",
       "path": "README.md",
-      "dest": "docs/rust-sdk/readme.md",
-      "sidebar": { "category": "rust-sdk", "label": "Overview", "order": 0 }
+      "dest": "docs/c2pa-rs/readme.md",
+      "sidebar": { "category": "c2pa-rs", "label": "Overview", "order": 0 }
     },
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/usage.md",
-      "dest": "docs/rust-sdk/docs/usage.md",
+      "dest": "docs/c2pa-rs/docs/usage.md",
       "sidebar": {
-        "category": "rust-sdk",
+        "category": "c2pa-rs",
         "label": "Using the Rust library",
         "order": 1
       }
@@ -93,9 +97,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/supported-formats.md",
-      "dest": "docs/rust-sdk/docs/supported-formats.md",
+      "dest": "docs/c2pa-rs/docs/supported-formats.md",
       "sidebar": {
-        "category": "rust-sdk",
+        "category": "c2pa-rs",
         "label": "Supported media formats",
         "order": 2
       }
@@ -104,9 +108,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/context-settings.md",
-      "dest": "docs/rust-sdk/docs/context-settings.md",
+      "dest": "docs/c2pa-rs/docs/context-settings.md",
       "sidebar": {
-        "category": "rust-sdk",
+        "category": "c2pa-rs",
         "label": "Configuring SDK settings",
         "order": 3
       }
@@ -114,9 +118,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/working-stores.md",
-      "dest": "docs/rust-sdk/docs/working-stores.md",
+      "dest": "docs/c2pa-rs/docs/working-stores.md",
       "sidebar": {
-        "category": "rust-sdk",
+        "category": "c2pa-rs",
         "label": "Using working stores and archives",
         "order": 4
       }
@@ -124,9 +128,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/intents.md",
-      "dest": "docs/rust-sdk/docs/intents.md",
+      "dest": "docs/c2pa-rs/docs/intents.md",
       "sidebar": {
-        "category": "rust-sdk",
+        "category": "c2pa-rs",
         "label": "Using Builder intents",
         "order": 5
       }
@@ -134,9 +138,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/progress_callbacks.md",
-      "dest": "docs/rust-sdk/docs/progress_callbacks.md",
+      "dest": "docs/c2pa-rs/docs/progress_callbacks.md",
       "sidebar": {
-        "category": "rust-sdk",
+        "category": "c2pa-rs",
         "label": "Progress callbacks",
         "order": 6
       }
@@ -144,9 +148,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/cawg-identity.md",
-      "dest": "docs/rust-sdk/docs/cawg-identity.md",
+      "dest": "docs/c2pa-rs/docs/cawg-identity.md",
       "sidebar": {
-        "category": "rust-sdk",
+        "category": "c2pa-rs",
         "label": "Using CAWG identity assertions",
         "order": 7
       }
@@ -154,9 +158,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/redaction.md",
-      "dest": "docs/rust-sdk/docs/redaction.md",
+      "dest": "docs/c2pa-rs/docs/redaction.md",
       "sidebar": {
-        "category": "rust-sdk",
+        "category": "c2pa-rs",
         "label": "Redaction",
         "order": 8
       }
@@ -164,9 +168,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/instanceid_behavior.md",
-      "dest": "docs/rust-sdk/docs/instanceid-behavior.md",
+      "dest": "docs/c2pa-rs/docs/instanceid-behavior.md",
       "sidebar": {
-        "category": "rust-sdk",
+        "category": "c2pa-rs",
         "label": "InstanceID behavior",
         "order": 9
       }
@@ -174,9 +178,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/embeddable-api.md",
-      "dest": "docs/rust-sdk/docs/embeddable-api.md",
+      "dest": "docs/c2pa-rs/docs/embeddable-api.md",
       "sidebar": {
-        "category": "rust-sdk",
+        "category": "c2pa-rs",
         "label": "Embeddable signing API",
         "order": 10
       }
@@ -184,9 +188,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/release-notes.md",
-      "dest": "docs/rust-sdk/docs/release-notes.md",
+      "dest": "docs/c2pa-rs/docs/release-notes.md",
       "sidebar": {
-        "category": "rust-sdk",
+        "category": "c2pa-rs",
         "label": "Release notes (Rust)",
         "order": 11
       }
@@ -195,9 +199,9 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/release-process.md",
-      "dest": "docs/rust-sdk/docs/release-process.md",
+      "dest": "docs/c2pa-rs/docs/release-process.md",
       "sidebar": {
-        "category": "rust-sdk",
+        "category": "c2pa-rs",
         "label": "Release process",
         "order": 12
       }

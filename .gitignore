@@ -16,8 +16,8 @@
 /docs/c2pa-js/**/*.md
 /docs/c2pa-js/packages/*.md
 /docs/c2pa-js/docs/*.md
-/docs/c2patool/readme*.md
-/docs/c2patool/docs/*.md
+/docs/c2pa-rs/cli/readme*.md
+/docs/c2pa-rs/cli/docs/*.md
 /docs/c2pa-node/*.md
 /docs/c2pa-node-v2/*.md
 /docs/c2pa-node-example/*.md
@@ -26,8 +26,8 @@
 /docs/c2pa-python/docs/*.md
 /docs/c2pa-cpp/*.md
 /docs/c2pa-cpp/docs/*.md
-/docs/rust-sdk/*.md
-/docs/rust-sdk/docs/*.md
+/docs/c2pa-rs/*.md
+/docs/c2pa-rs/docs/*.md
 /docs/**/readme.md
 /docs/**/README.md
 /static/sb-alg-list.json
