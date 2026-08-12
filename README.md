@@ -15,17 +15,16 @@ The `docs` sub-directory contains documentation content (in markdown or `.mdx` f
 - `manifest`: Content for the [Understanding manifests](https://opensource.contentauthenticity.org/docs/manifest/understanding-manifest) section.
 - Various other sub-directories for content sections, e.g. `durable-cr`, `manifest`, `signing`, etc.
 
-Additionally, the [scripts/fetch-readme.js](./scripts/fetch-readme.js) script dynamically downloads documentation files (sometimes just the `README.md` but often other markdown files, too) from other repos in the SDK. See [Running the fetch script](#running-fetch-script).
+Additionally, the [scripts/fetch-readme.js](./scripts/fetch-readme.js) script dynamically downloads documentation files (sometimes just the `README.md` but often other markdown files, too) from other repos in the SDK. See [Running the fetch script](#running-fetch-script). All fetched content lands under `docs/sdk-repos/`, kept separate from the hand-authored sub-directories listed above so it's obvious at a glance which folders get silently overwritten by the fetch script.
 
 This table summarizes the content that this script fetches from other repos.
 
-| Sub-directory | Content fetched from... | Description | 
+| Sub-directory (under `docs/sdk-repos/`) | Content fetched from... | Description | 
 |-----------|-------------------------|-------------|
 | `c2pa-cpp` | [c2pa-cpp](https://github.com/contentauth/c2pa-cpp) | C++ library docs. |
 | `c2pa-swift` | [c2pa-swift](https://github.com/contentauth/c2pa-swift) | Mobile iOS/Swift library docs. |
 | `c2pa-android` | [c2pa-android](https://github.com/contentauth/c2pa-android) | Android library docs. | 
-| `c2pa-node` | [c2pa-node](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node) | Node library docs (packages/c2pa-node in c2pa-js monorepo). |
-| `c2pa-node-example`  | [c2pa-node-example](https://github.com/contentauth/c2pa-node-example) | Node example app.|
+| `c2pa-js/packages/c2pa-node` | [c2pa-node](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node) | Node library docs (packages/c2pa-node in c2pa-js monorepo). |
 | `c2pa-python` | [c2pa-python](https://github.com/contentauth/c2pa-python) | Python library docs. |
 | `c2pa-python example` | [c2pa-python-example](https://github.com/contentauth/c2pa-python-example) | Python example app. |
 | `c2pa-rs/cli` | [c2pa-rs cli directory](https://github.com/contentauth/c2pa-rs/cli) | C2PA Tool docs. |
@@ -73,7 +72,7 @@ The [remote-docs.json](./remote-docs.json) file is the single source of truth fo
 1. Add an entry to the `sources` array in `remote-docs.json`. Each entry has:
    - `repo` — GitHub repo in `org/repo` format (e.g. `contentauth/c2pa-rs`)
    - `path` — Path to the file in the source repo
-   - `dest` — Local path where the file will be saved (e.g. `docs/c2pa-rs/cli/readme.md` or `static/sb-alg-list.json`)
+   - `dest` — Local path where the file will be saved (e.g. `docs/sdk-repos/c2pa-rs/cli/readme.md` or `static/sb-alg-list.json`)
    - `branch` — (optional) Git branch to fetch from; defaults to `main`
    - `sidebar` — (optional) Include this to add the doc to the sidebar navigation:
      - `category` — Sidebar category (e.g. `c2pa-rs-cli`, `c2pa-rs`, `c2pa-python`)

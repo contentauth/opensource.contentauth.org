@@ -15,7 +15,7 @@ Trust lists connect the end-entity certificate that signed a manifest back to th
 
 The simplest way to add a C2PA manifest to an asset file and sign it is by using C2PA Tool (`c2patool`). You can run C2PA Tool manually from the command line (for example, during development) and more generally from any executable program that can call out to the shell.
 
-Similarly, using the Rust SDK, you can [add a manifest to an asset file](https://docs.rs/c2pa/latest/c2pa/#adding-a-signed-manifest-to-a-file), referencing the certificate and private key file. The [Node.js](../c2pa-js/packages/c2pa-node/), [Python](../c2pa-python), and [C++](../c2pa-cpp) libraries can also add and sign a manifest.
+Similarly, using the Rust SDK, you can [add a manifest to an asset file](https://docs.rs/c2pa/latest/c2pa/#adding-a-signed-manifest-to-a-file), referencing the certificate and private key file. The [Node.js](../sdk-repos/c2pa-js/packages/c2pa-node/), [Python](../sdk-repos/c2pa-python), and [C++](../sdk-repos/c2pa-cpp) libraries can also add and sign a manifest.
 
 <LocalSignWarning />
 
@@ -112,7 +112,7 @@ Subject Public Key Info:
 
 ### 4. Test with C2PA Tool
 
-You now have all the needed information to configure C2PA Tool for manifest signing. Edit your [manifest store file](../c2pa-rs/cli/docs/manifest.md) to add the following fields that are specific to C2PA Tool:
+You now have all the needed information to configure C2PA Tool for manifest signing. Edit your [manifest store file](../sdk-repos/c2pa-rs/cli/docs/manifest.md) to add the following fields that are specific to C2PA Tool:
 
 ```json
 "alg": "ps256",
@@ -122,7 +122,7 @@ You now have all the needed information to configure C2PA Tool for manifest sign
 
 The `private_key` and `sign_cert` properties must be full paths to the key and certificate chain files generated above.
 
-You can now use C2PA Tool [to add a manifest to an image or other asset file](../c2pa-rs/cli/docs/usage.md#adding-a-manifest-to-an-asset-file). The command will be something like this:
+You can now use C2PA Tool [to add a manifest to an image or other asset file](../sdk-repos/c2pa-rs/cli/docs/usage.md#adding-a-manifest-to-an-asset-file). The command will be something like this:
 
 ```
 c2patool -m my_manifest.json -o signed_image.jpg my_image.jpg

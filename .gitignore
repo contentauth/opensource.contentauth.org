@@ -13,31 +13,10 @@
 /docs/js-sdk/examples/quickstart/*.ts
 /docs/js-sdk/examples/view-manifest/*.ts
 /docs/js-sdk/examples/view-manifest/*.html
-/docs/c2pa-js/**/*.md
-/docs/c2pa-js/packages/*.md
-/docs/c2pa-js/docs/*.md
-/docs/c2pa-rs/cli/readme*.md
-/docs/c2pa-rs/cli/docs/*.md
-/docs/c2pa-node/*.md
-/docs/c2pa-node-v2/*.md
-/docs/c2pa-node-example/*.md
-/docs/c2pa-node/docs/*.md
-/docs/c2pa-python/*.md
-/docs/c2pa-python/docs/*.md
-/docs/c2pa-cpp/*.md
-/docs/c2pa-cpp/docs/*.md
-/docs/c2pa-rs/*.md
-/docs/c2pa-rs/docs/*.md
-/docs/**/readme.md
-/docs/**/README.md
+/docs/sdk-repos/**
+!/docs/sdk-repos/**/
+!/docs/sdk-repos/**/.gitkeep
 /static/sb-alg-list.json
-/docs/trustmark/*.md
-/docs/trustmark/c2pa/*.md
-/docs/trustmark/js/*.md
-/docs/trustmark/python/*.md
-/docs/trustmark/rust/*.md
-/docs/trustmark/rust/crates/trustmark-cli/*.md
-/docs/c2pa-swift/*.md
 
 # Misc
 .DS_Store
