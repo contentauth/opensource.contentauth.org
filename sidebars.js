@@ -295,7 +295,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'JavaScript library',
-      link: { type: 'doc', id: 'js-landing' },
+      link: { type: 'doc', id: 'sdk-repos/c2pa-js/README' },
       collapsed: true,
       items: [
         {
