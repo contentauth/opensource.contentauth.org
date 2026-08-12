@@ -22,10 +22,10 @@ Some useful references for handling keys and certificates include:
 
 ## Pre-production steps
 
-Because using a KMS can be complex, you may want to start by using a local "mock" service (such as LocalStack for Amazon KMS) as illustrated in the [c2pa-python-example](c2pa-python-example/readme.md#using-localstack). Doing this enables you to test your code before you set up a production KMS.
+Because using a KMS can be complex, you may want to start by using a local "mock" service (such as LocalStack for Amazon KMS) as illustrated in the [c2pa-python-example](sdk-repos/c2pa-python-example/readme.md#using-localstack). Doing this enables you to test your code before you set up a production KMS.
 
 You can also create a self-signed certificate for development purposes. The resulting manifests signed with this certificate won't be trusted, but you can use it to run the application to see how it works before purchasing a real certificate from a CA.
 
 ## The C2PA Python example
 
-The [c2pa-python-example](c2pa-python-example/readme.md) app provides an example of constructing a certificate signing request (CSR) and of using [Amazon KMS](https://aws.amazon.com/kms/).
+The [c2pa-python-example](sdk-repos/c2pa-python-example/readme.md) app provides an example of constructing a certificate signing request (CSR) and of using [Amazon KMS](https://aws.amazon.com/kms/).

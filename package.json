@@ -22,6 +22,7 @@
   "dependencies": {
     "@contentauth/react": "^0.2.95",
     "@docusaurus/core": "^3.10.2",
+    "@docusaurus/plugin-client-redirects": "^3.10.2",
     "@docusaurus/plugin-content-docs": "3.10.2",
     "@docusaurus/preset-classic": "^3.10.2",
     "@docusaurus/theme-mermaid": "^3.10.2",
