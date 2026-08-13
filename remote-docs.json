@@ -48,21 +48,11 @@
     },
     {
       "repo": "contentauth/c2pa-rs",
-      "path": "cli/docs/x_509.md",
-      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/x_509.md",
-      "sidebar": {
-        "category": "c2pa-rs-cli",
-        "label": "Using a certificate for C2PA signing",
-        "order": 5
-      }
-    },
-    {
-      "repo": "contentauth/c2pa-rs",
       "path": "cli/docs/cawg_x509_signing.md",
       "dest": "docs/sdk-repos/c2pa-rs/cli/docs/cawg_x509_signing.md",
       "sidebar": {
         "category": "c2pa-rs-cli",
-        "label": "Using a certificate for CAWG signing",
+        "label": "Adding CAWG identity assertions",
         "order": 6
       }
     },
