@@ -428,6 +428,16 @@
       "dest": "docs/sdk-repos/c2pa-js/packages/c2pa-wasm/README.md",
       "sidebar": { "category": "c2pa-js", "label": "c2pa-wasm", "order": 4 }
     },
+    {
+      "repo": "contentauth/c2pa-js",
+      "path": "packages/c2pa-utilities/README.md",
+      "dest": "docs/sdk-repos/c2pa-js/packages/c2pa-utilities/README.md",
+      "sidebar": {
+        "category": "c2pa-js",
+        "label": "c2pa-utilities",
+        "order": 5
+      }
+    },
 
     { "_comment": "Node.js library (packages/c2pa-node in c2pa-js monorepo)" },
     {
