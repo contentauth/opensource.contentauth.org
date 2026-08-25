@@ -315,6 +315,11 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'sdk-repos/c2pa-js/packages/c2pa-utilities/README',
+          label: 'c2pa-utilities',
+        },
+        {
+          type: 'doc',
           id: 'sdk-repos/c2pa-js/supported-formats',
           label: 'Supported media formats',
         },

@@ -9,10 +9,6 @@
 .cache-loader
 
 # External files loaded by fetch-readmes script
-/docs/js-sdk/api
-/docs/js-sdk/examples/quickstart/*.ts
-/docs/js-sdk/examples/view-manifest/*.ts
-/docs/js-sdk/examples/view-manifest/*.html
 /docs/sdk-repos/**
 !/docs/sdk-repos/**/
 !/docs/sdk-repos/**/.gitkeep
