@@ -53,7 +53,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp:iid:e01b72d0-1ec0-4646-9e16-bbc8b577fc92"
+      "default": "xmp.iid:e1a60afa-a3fb-43c3-9553-4db6114d091b"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -136,6 +136,13 @@
         },
         "operating_system": {
           "description": "A human readable string of the OS the claim generator is running on.\nCrJSON schema uses `operating_system`; C2PA CBOR may use `schema.org.SoftwareApplication.operatingSystem`.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "specVersion": {
+          "description": "The version of the specification used to produce this manifest (SemVer)",
           "type": [
             "string",
             "null"
@@ -937,6 +944,17 @@
             "null"
           ]
         },
+        "digital_source_type": {
+          "description": "One of the source types defined at <https://cv.iptc.org/newscodes/digitalsourcetype/>\nor in this specification. Cannot be combined with `activeManifest`.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DigitalSourceType"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "validation_status": {
           "description": "Validation status (Ingredient v1 & v2)",
           "type": [
@@ -1053,6 +1071,128 @@
         }
       ]
     },
+    "DigitalSourceType": {
+      "description": "Description of the source of an asset.\n\nThe digital source type must be either a value from the [IPTC Digital Source Types](https://cv.iptc.org/newscodes/digitalsourcetype) or a C2PA-specific value as given in [the C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_digital_source_type).",
+      "anyOf": [
+        {
+          "description": "Media whose digital content is effectively empty, such as a blank canvas or zero-length video.",
+          "type": "string",
+          "const": "http://c2pa.org/digitalsourcetype/empty"
+        },
+        {
+          "description": "Data that is the result of algorithmically using a model derived from sampled content and data.\nDiffers from [IPTC Digital Source Type](http://cv.iptc.org/newscodes/digitalsourcetype/) `trainedAlgorithmicMedia` in that\nthe result isn’t a media type (e.g., image or video) but is a data format (e.g., CSV, pickle).",
+          "type": "string",
+          "const": "http://c2pa.org/digitalsourcetype/trainedAlgorithmicData"
+        },
+        {
+          "description": "The media was captured from a real-life source using a digital camera or digital recording device.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/digitalCapture"
+        },
+        {
+          "description": "The media is the result of capturing multiple frames from a real-life source using a digital camera\nor digital recording device, then automatically merging them into a single frame using digital signal\nprocessing techniques and/or non-generative AI. Includes High Dynamic Range (HDR) processing common in\nsmartphone camera apps.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/computationalCapture"
+        },
+        {
+          "description": "The media was digitised from a negative on film or other transparent medium.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/negativeFilm"
+        },
+        {
+          "description": "The media was digitised from a positive on a transparency or other transparent medium.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/positiveFilm"
+        },
+        {
+          "description": "The media was digitised from a non-transparent medium such as a photographic print.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/print"
+        },
+        {
+          "description": "Minor augmentation or correction by a human, such as a digitally-retouched photo used in a magazine.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/minorHumanEdits",
+          "deprecated": true
+        },
+        {
+          "description": "Augmentation, correction or enhancement by one or more humans using non-generative tools.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/humanEdits"
+        },
+        {
+          "description": "Augmentation, correction or enhancement using a Generative AI model, such as with inpainting or\noutpainting operations.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia"
+        },
+        {
+          "description": "Modification or correction by algorithm without changing the main content of the media, initiated\nor configured by a human, such as sharpening or applying noise reduction.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/algorithmicallyEnhanced"
+        },
+        {
+          "description": "The digital image was created by computer software.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/softwareImage",
+          "deprecated": true
+        },
+        {
+          "description": "Media created by a human using digital tools.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/digitalArt",
+          "deprecated": true
+        },
+        {
+          "description": "Media created by a human using non-generative tools.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/digitalCreation"
+        },
+        {
+          "description": "Digital media representation of data via human programming or creativity.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/dataDrivenMedia"
+        },
+        {
+          "description": "Digital media created algorithmically using an Artificial Intelligence model trained on captured\ncontent.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia"
+        },
+        {
+          "description": "Media created purely by an algorithm not based on any sampled training data, e.g. an image created\nby software using a mathematical formula.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/algorithmicMedia"
+        },
+        {
+          "description": "A capture of the contents of the screen of a computer or mobile device.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/screenCapture"
+        },
+        {
+          "description": "Live recording of virtual event based on Generative AI and/or captured elements.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/virtualRecording"
+        },
+        {
+          "description": "Mix or composite of several elements, any of which may or may not be generative AI.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/composite"
+        },
+        {
+          "description": "Mix or composite of several elements that are all captures of real life.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/compositeCapture"
+        },
+        {
+          "description": "Mix or composite of several elements, at least one of which is Generative AI.",
+          "type": "string",
+          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/compositeSynthetic"
+        },
+        {
+          "description": "An unknown digital source type.",
+          "type": "string"
+        }
+      ]
+    },
     "ValidationStatus": {
       "description": "A `ValidationStatus` struct describes the validation status of a\nspecific part of a manifest.\n\nSee [Existing Manifests - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_existing_manifests).",
       "type": "object",
@@ -1108,6 +1248,28 @@
           "items": {
             "$ref": "#/$defs/IngredientDeltaValidationResult"
           }
+        },
+        "specVersion": {
+          "description": "The version of the specification against which the validation was performed (SemVer formatted string).",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "trustListUri": {
+          "description": "URI to the trust list that was used to validate manifests signing certificate.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "timestampTrustListUri": {
+          "description": "URI to the trust list use to validate the time-stamp.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "writeOnly": true
         },
         "validationTime": {
           "description": "Time when the validation was performed (RFC 3339 date-time). Used only for document-level validationInfo; not serialized in validationResults (e.g. ingredient assertions).",
