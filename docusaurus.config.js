@@ -335,13 +335,23 @@ async function createConfig() {
         },
       }),
     plugins: [
+      require.resolve('./src/plugins/docs404Sidebar'),
       [
         '@docusaurus/plugin-client-redirects',
         {
           createRedirects(existingPath) {
             const prefix = '/docs/sdk-repos/';
             if (existingPath.startsWith(prefix)) {
-              return `/docs/${existingPath.slice(prefix.length)}`;
+              const redirects = [`/docs/${existingPath.slice(prefix.length)}`];
+
+              const c2paRsPrefix = '/docs/sdk-repos/c2pa-rs/';
+              if (existingPath.startsWith(c2paRsPrefix)) {
+                redirects.push(
+                  `/docs/rust-sdk/${existingPath.slice(c2paRsPrefix.length)}`,
+                );
+              }
+
+              return redirects;
             }
             return undefined;
           },
