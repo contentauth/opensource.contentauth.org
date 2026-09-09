@@ -6,9 +6,9 @@ title: CAWG on Mobile
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Adding Creator Assertions (CAWG) on Mobile
+# Creator Assertions (CAWG) on Mobile
 
-This tutorial is a high-level guide with sample code for implementing the [Creator Assertions Working Group (CAWG)](https://cawg.io/) specifications using the [C2PA SDK for Android](https://github.com/contentauth/c2pa-android).
+This tutorial is a high-level guide with sample code for implementing the [Creator Assertions Working Group (CAWG)](https://cawg.io/) specifications using the [C2PA SDK for Android](https://github.com/contentauth/c2pa-android) and the [C2PA SDK for Swift](https://github.com/contentauth/c2pa-swift).
 
 A plain C2PA manifest answers "what device or app produced this file, and what happened to it?". Creator Assertions answer a different question: "who is the person or organization behind it, and what do they permit?". It achieves this with a second signing identity. The C2PA claim is signed by the capturing app or device; the CAWG identity assertion is signed by a credential belonging to the creator. Both signatures end up in the same manifest, and a validating verifier can check them independently.
 
@@ -30,6 +30,7 @@ In addition, the focus of this tutorial is on [CAWG signing using X.509 certific
 
 - [`C2PAManager.kt`](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt): assertions, signer setup, and signing
 - [`selfsign/CAWGIdentityManager.kt`](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/selfsign/CAWGIdentityManager.kt): key, certificate, and CSR generation
+- [`C2PAHelper.swift`](https://gitlab.com/guardianproject/proofmode/proofmode-ios/-/blob/main/Proofmode/Shared/C2PAHelper.swift): the same assertions, signer setup, and signing on iOS
 
 <Tabs>
   <TabItem value="android" label="Android (Gradle)" default>
@@ -42,8 +43,20 @@ c2pa = "0.0.10"
 c2pa = { module = "org.contentauth:c2pa", version.ref = "c2pa" }
 ```
   </TabItem>
-  <TabItem value="swift" label="Apple (Swift)" default>
-Swift code here
+  <TabItem value="apple" label="Apple (Swift)">
+```swift
+// Package.swift
+dependencies: [
+    .package(url: "https://github.com/contentauth/c2pa-swift.git", from: "0.0.13")
+]
+
+targets: [
+    .target(
+        name: "YourTarget",
+        dependencies: [.product(name: "C2PA", package: "c2pa-swift")]
+    )
+]
+```
   </TabItem>
 </Tabs>  
 
@@ -55,13 +68,17 @@ Swift code here
 
 The identity assertion is signed with a credential that represents a creator of some kind, possibly ranging from artist to producer, individual or organization. This credential is separate from the key that signs the C2PA claim. For CAWG signing, you need a private key and a matching X.509 certificate chain, both in "PEM" (short for Privacy Enhanced Mail, but no one calls it that) form. 
 
-CAWG support in this SDK has been tested with **256-bit elliptic curve keys on the NIST P-256 curve** (`secp256r1`), signed using ECDSA with SHA-256 — `SigningAlgorithm.ES256`.
+CAWG support in this SDK has been tested with **256-bit elliptic curve keys on the NIST P-256 curve** (`secp256r1`), signed using ECDSA with SHA-256: `SigningAlgorithm.ES256` on Android and `SigningAlgorithm.es256` on Apple platforms.
 
-> **Please note:** The identity signer in this sample is built with `Signer.fromKeys()` and needs the private key as a PEM string. It is not using hardware-backed keys, whose private material can never leave the secure element. It is possible to generate a hardware-backed key stored in a secure element, or even implement a Remote Signer with a key on a server, and use it with CAWG. We will leave that more advanced implementation as an exercise for the reader. The C2PA-Android samples and SDK projects contain a variety of code samples on how to do this.
+:::note
+
+The identity signer in this sample is built with `Signer.fromKeys()` on Android and the `Signer(certsPEM:privateKeyPEM:algorithm:)` initializer on Apple platforms, both of which need the private key as a PEM string. It is not using hardware-backed keys, whose private material can never leave the secure element. It is possible to generate a hardware-backed key stored in a secure element, or even implement a remote signer with a key on a server, and use it with CAWG. We will leave that more advanced implementation as an exercise for the reader. The c2pa-android and c2pa-swift sample apps contain a variety of code samples on how to do this, including `SecureEnclaveSigner` and `WebServiceSigner` in the Swift SDK.
+
+:::
 
 ### Generating a new identity
 
-`createCawgKey()` generates the key pair, writes the private key PEM to `<alias>.key`, generates a PKCS#10 certificate signing request into `<alias>.csr`, and stores a certificate chain in `<alias>.cert`.
+Generating an identity means creating the key pair, writing the private key PEM to `<alias>.key`, generating a PKCS#10 certificate signing request into `<alias>.csr`, and storing a certificate chain in `<alias>.cert`. On Android, `createCawgKey()` does all four steps; on Apple platforms, `CertificateManager` provides the certificate and CSR halves.
 
 <Tabs>
   <TabItem value="android" label="Android (Kotlin)" default>
@@ -88,17 +105,78 @@ val privateKey = fileKey.readText()
 val certChain = fileCert.readText()
 ```
   </TabItem>
-  <TabItem value="apple" label="Apple (Swift)" default>
+  <TabItem value="apple" label="Apple (Swift)">
 ```swift
-Swift code here
-```
+import C2PA
+import CryptoKit
+import Foundation
 
+let keyAlias = "CAWG_SECURE_1"
+let keyTag = "org.contentauth.cawg.\(keyAlias)"
+
+let dir = URL.documentsDirectory
+let fileKey = dir.appending(path: "\(keyAlias).key")
+let fileCert = dir.appending(path: "\(keyAlias).cert")
+let fileCSR = dir.appending(path: "\(keyAlias).csr")
+
+// Generate the key, CSR, and certificate on first run only.
+if !FileManager.default.fileExists(atPath: fileKey.path) {
+    // Identity signing needs an exportable key, so generate an ordinary keychain
+    // key rather than a Secure Enclave one.
+    let attributes: [String: Any] = [
+        kSecAttrKeyType as String: kSecAttrKeyTypeECSECPrimeRandom,
+        kSecAttrKeySizeInBits as String: 256,
+        kSecPrivateKeyAttrs as String: [
+            kSecAttrIsPermanent as String: true,
+            kSecAttrApplicationTag as String: keyTag,
+        ],
+    ]
+
+    var error: Unmanaged<CFError>?
+    guard let secPrivateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error),
+          let secPublicKey = SecKeyCopyPublicKey(secPrivateKey)
+    else {
+        throw error!.takeRetainedValue() as Error
+    }
+
+    let config = CertificateManager.CertificateConfig(
+        commonName: creatorName,
+        organization: creatorOrganization,
+        organizationalUnit: "Content Credentials",
+        country: Locale.current.region?.identifier ?? "US",
+        state: creatorState,
+        locality: creatorLocality
+    )
+
+    // A self-signed chain to sign with today, and a CSR to send to a CA.
+    let certChainPEM = try CertificateManager.createSelfSignedCertificateChain(
+        for: secPublicKey,
+        config: config
+    )
+    let csrPEM = try CertificateManager.createCSR(for: secPublicKey, config: config)
+
+    // SecKeyCopyExternalRepresentation returns the X9.63 form of the EC private key,
+    // which CryptoKit re-exports as a PKCS#8 PEM block.
+    guard let x963 = SecKeyCopyExternalRepresentation(secPrivateKey, nil) as Data? else {
+        throw CertificateManager.CertificateError.invalidKeyData
+    }
+    let privateKeyPEM = try P256.Signing.PrivateKey(x963Representation: x963).pemRepresentation
+
+    try privateKeyPEM.write(to: fileKey, atomically: true, encoding: .utf8)
+    try certChainPEM.write(to: fileCert, atomically: true, encoding: .utf8)
+    try csrPEM.write(to: fileCSR, atomically: true, encoding: .utf8)
+}
+
+// The local files now exist, based on the keyAlias name above.
+let privateKey = try String(contentsOf: fileKey, encoding: .utf8)
+let certChain = try String(contentsOf: fileCert, encoding: .utf8)
+```
   </TabItem>
 </Tabs>
 
 The certificate that is created with a freshly generated identity is self-signed. This is useful for development, but it will not chain to a public trust list, so verifiers will show the identity as untrusted. To get a credential that validates for other people, submit the generated CSR to a certificate authority that issues CAWG identity certificates, such as [SSL.com](https://www.ssl.com/products/content-authenticity/content-credentials/cawg/) or [Trufo](https://trufo.ai/products/certificates#cawg). Both offer individual- and organization-verified options. Any Certificate Authority on the [Mozilla Trust List](https://wiki.mozilla.org/CA/Included_Certificates) should be trusted for CAWG signatures.
 
-Proofmode provides the CSR to the user through `getCawgCSR()`, so it can be copied out and sent to a CA. When the CA returns a signed certificate, or when a creator already holds a credential, swap it in by overwriting the two PEM files and discarding the now-stale CSR:
+Proofmode provides the CSR to the user through `getCawgCSR()` on Android, and through the string written by `CertificateManager.createCSR(for:config:)` on Apple platforms, so it can be copied out and sent to a CA. When the CA returns a signed certificate, or when a creator already holds a credential, swap it in by overwriting the two PEM files and discarding the now-stale CSR:
 
 <Tabs>
   <TabItem value="android" label="Android (Kotlin)" default>
@@ -113,7 +191,15 @@ fun importCawgIdentity(privateKeyPem: String, certChainPem: String) {
   </TabItem>
   <TabItem value="apple" label="Apple (Swift)">
 ```swift
-Swift code here
+func importCawgIdentity(privateKeyPEM: String, certChainPEM: String) throws {
+    let dir = URL.documentsDirectory
+    try privateKeyPEM.write(
+        to: dir.appending(path: "\(cawgKeyAlias).key"), atomically: true, encoding: .utf8)
+    try certChainPEM.write(
+        to: dir.appending(path: "\(cawgKeyAlias).cert"), atomically: true, encoding: .utf8)
+    // The old CSR belongs to a key the user no longer holds.
+    try? FileManager.default.removeItem(at: dir.appending(path: "\(cawgKeyAlias).csr"))
+}
 ```
   </TabItem>
 </Tabs>
@@ -121,7 +207,7 @@ Swift code here
 
 ### Building the identity signer
 
-Once you hold both PEMs, the identity signer is an ordinary `Signer`. Note the argument order — **certificate chain first, then private key**:
+Once you hold both PEMs, the identity signer is an ordinary `Signer`. Note the argument order in both SDKs: **certificate chain first, then private key**.
 
 <Tabs>
   <TabItem value="android" label="Android (Kotlin)" default>
@@ -135,12 +221,22 @@ val identitySigner = Signer.fromKeys(
  </TabItem>
   <TabItem value="apple" label="Apple (Swift)">
 ```swift
-Swift code here
+let identitySigner = try Signer(
+    certsPEM: certChain,        // certificate chain
+    privateKeyPEM: privateKey,  // private key
+    algorithm: .es256
+)
 ```
   </TabItem>
 </Tabs>
 
-Hold on to this identitySigner instance, you will need it later!
+Hold on to this `identitySigner` instance, you will need it later.
+
+:::warning
+
+On Apple platforms, `Signer.withCawgIdentity` declares both of its signer parameters as `sending`, so the compiler rejects a signer that is still referenced elsewhere, such as one stored in a property. In Swift, construct both signers as fresh locals (or inline, as in Step 4) at the point where you combine them.
+
+:::
 
 ---
 
@@ -201,9 +297,38 @@ private fun createCAWGMetadataAssertion(
 See the [full helper in Proofmode](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L1254).
   </TabItem>
 <TabItem value="apple" label="Apple (Swift)">
+You declare the vocabularies you use in an `@context` block, then add key/value pairs using those prefixes. `AssertionDefinition.custom` wraps any JSON-compatible dictionary in an `AnyCodable` payload.
+
 ```swift
-Swift code here
+// The values the creator configured
+let cawgCreator = "Nathan Freitas"
+let cawgRights = "© 2026 Nathan Freitas. All Rights Reserved."
+
+// Declare the metadata vocabularies being used
+var cawgData: [String: Any] = [
+    "@context": [
+        "dc": "http://purl.org/dc/elements/1.1/",
+        "exif": "http://ns.adobe.com/exif/1.0/",
+    ]
+]
+
+// The metadata itself, keyed by vocabulary prefix
+if !cawgCreator.isEmpty {
+    cawgData["dc:creator"] = [cawgCreator]
+    cawgData["Exif.Image.Artist"] = cawgCreator
+}
+if !cawgRights.isEmpty {
+    cawgData["dc:rights"] = cawgRights
+    cawgData["Exif.Image.Copyright"] = cawgRights
+}
+
+// Turn it into an assertion and add it to the manifest's assertion list
+listAssertions.append(
+    AssertionDefinition.custom(label: "cawg.metadata", data: AnyCodable(cawgData))
+)
 ```
+
+See `createC2PAMetadataAssertion()` in [C2PAHelper.swift](https://gitlab.com/guardianproject/proofmode/proofmode-ios/-/blob/main/Proofmode/Shared/C2PAHelper.swift) for a version that also merges Exif and GPS fields read from the capture.
   </TabItem>
 </Tabs>
 ---
@@ -250,7 +375,23 @@ listAssertions.add(trainingMining)
   </TabItem>
 <TabItem value="apple" label="Apple (Swift)">
 ```swift
-Swift code here
+// Map each use category to a permission value.
+let trainingMiningEntries: [String: String] = [
+    "cawg.data_mining": "allowed",               // allow general data mining
+    "cawg.ai_generative_training": "notAllowed", // no generative model training
+    "cawg.ai_training": "notAllowed",            // no model training at all
+    "cawg.ai_inference": "allowed",              // inference on trained models is fine
+]
+
+// Each value is an object, so the map becomes [category: ["use": permission]]
+let entries = trainingMiningEntries.mapValues { ["use": $0] }
+
+let trainingMining = AssertionDefinition.custom(
+    label: "cawg.training-mining",
+    data: AnyCodable(["entries": entries])
+)
+
+listAssertions.append(trainingMining)
 ```
   </TabItem>
 </Tabs>
@@ -278,7 +419,24 @@ val combinedSigner = Signer.withCawgIdentity(
   </TabItem>
 <TabItem value="apple" label="Apple (Swift)">
 ```swift
-Swift code here
+// The role this actor played. See the named actor roles below.
+let listRoles = ["cawg.creator"]
+
+// withCawgIdentity consumes both inputs, so construct each one inline.
+let combinedSigner = try Signer.withCawgIdentity(
+    try Signer(                        // your existing claim signer
+        certsPEM: claimCertChain,
+        privateKeyPEM: claimPrivateKey,
+        algorithm: .es256
+    ),
+    identity: try Signer(              // the identity credential from Step 1
+        certsPEM: certChain,
+        privateKeyPEM: privateKey,
+        algorithm: .es256
+    ),
+    referencedAssertions: ["c2pa.actions", "cawg.training-mining", "cawg.metadata"],
+    roles: listRoles
+)
 ```
   </TabItem>
 </Tabs>
@@ -292,11 +450,13 @@ Swift code here
 
 For a photo captured in-app, `cawg.creator` is almost always the right choice. Custom values are permitted if they follow the namespace conventions.
 
-> ### Things to look out for
->
-> - **Never cache and reuse a signer** across sign operations when CAWG is enabled. The second call throws `c2pa signer is already closed`. Create a fresh signer for each file you sign.
-> - The two signers must be **distinct instances**; passing the same one twice throws `C2PAError.Api`.
-> - Do not call `withCawgIdentity()` concurrently with `close()` on the same signer; it reads the input pointers without synchronization.
+:::warning Things to look out for
+
+- **Never cache and reuse a signer** across sign operations when CAWG is enabled. The second call throws `c2pa signer is already closed` on Android, and `Signer was consumed by withCawgIdentity(...)` on Apple platforms. Create a fresh signer for each file you sign.
+- The two signers must be **distinct instances**. Passing the same one twice throws `C2PAError.Api` on Android and `C2PAError.api("claim and identity signers must be distinct instances")` on Apple platforms.
+- Do not call `withCawgIdentity()` concurrently with `close()` on the same signer; it reads the input pointers without synchronization.
+
+:::
 
 ---
 
@@ -306,7 +466,7 @@ With the assertions built and the signers combined, the remaining work is ordina
 
 ### Settings: created vs. gathered assertions
 
-C2PA distinguishes assertions the claim generator *created* itself from those it merely *gathered*. The SDK decides which bucket an assertion lands in by comparing its label against `builder.created_assertion_labels`. `Builder.DEFAULT_CREATED_ASSERTION_LABELS` covers the common ones (`c2pa.actions`, `c2pa.actions.v2`, the thumbnail and ingredient labels); add your own labels to that list for anything your app generates directly.
+C2PA distinguishes assertions the claim generator *created* itself from those it merely *gathered*. The SDK decides which bucket an assertion lands in by comparing its label against `builder.created_assertion_labels`. `Builder.DEFAULT_CREATED_ASSERTION_LABELS` on Android and `ManifestValidator.defaultCreatedAssertionLabels` on Apple platforms cover the common ones: `c2pa.actions`, `c2pa.actions.v2`, and the thumbnail and ingredient labels. Add your own labels to that list for anything your app generates directly.
 
 <Tabs>
   <TabItem value="android" label="Android (Kotlin)" default>
@@ -331,13 +491,22 @@ val settingsJson = buildJsonObject {
   </TabItem>
 <TabItem value="apple" label="Apple (Swift)">
 ```swift
-Swift code here
+let createdLabels = ManifestValidator.defaultCreatedAssertionLabels + [
+    "proofmode.metadata",
+    "c2pa.metadata",
+]
+
+let settingsDefinition = C2PASettingsDefinition(
+    version: 1,
+    trust: TrustSettings(trustConfig: trustConfig),  // PEM/config bundled with the app
+    builder: BuilderSettingsDefinition(createdAssertionLabels: createdLabels)
+)
 ```
   </TabItem>
 </Tabs>
 
 
-`trustConfig` is a trust configuration the app [ships as an asset](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/assets/trustConfig.txt) and reads at startup; it tells the SDK which certificate authorities to accept when validating. You can also set custom [trust anchors and allowed list](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L1071) by bundling the [list of C2PA Trusted Certificate Authorities](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/assets/C2PA-TRUST-LIST-AND-TSA-TRUST-LIST.pem).
+`trustConfig` is a trust configuration the app [ships as an asset](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/assets/trustConfig.txt) on Android, or as a bundle resource on Apple platforms, and reads at startup; it tells the SDK which certificate authorities to accept when validating. You can also set custom [trust anchors and allowed list](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L1071) by bundling the [list of C2PA Trusted Certificate Authorities](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/assets/C2PA-TRUST-LIST-AND-TSA-TRUST-LIST.pem).
 
 ### Build and sign
 
@@ -376,18 +545,40 @@ builder.sign(
  </TabItem>
 <TabItem value="apple" label="Apple (Swift)">
 ```swift
-Swift code here
+// Apply the settings, then build from the resulting context
+let settings = try C2PASettings(definition: settingsDefinition)
+let c2paContext = try C2PAContext(settings: settings)
+let builder = try Builder(context: c2paContext, manifestJSON: manifestJSON)
+
+// Record a CREATED action for a fresh camera capture
+let softwareAgent = "cawgTest-1.0"
+try builder.addAction(
+    Action(
+        action: .created,
+        digitalSourceType: .digitalCapture,
+        softwareAgent: softwareAgent
+    )
+)
+try builder.setIntent(.create(.digitalCapture))
+
+// Sign from a source stream into a destination stream with the combined signer
+try builder.sign(
+    format: contentType,
+    source: sourceStream,
+    destination: destStream,
+    signer: combinedSigner
+)
 ```
   </TabItem>
 </Tabs>
 
-Remember to close your streams and the combined signer in a `finally` block — see [`signStream()` in Proofmode](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L852) for the full pattern, including the guarded close of the already-consumed base signer.
+On Android, remember to close your streams and the combined signer in a `finally` block. Swift releases both when the last reference goes away, so there is nothing to close by hand — see [`signStream()` in Proofmode](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L852) for the full pattern, including the guarded close of the already-consumed base signer.
 
 ---
 
 ## Step 6: Verify the result
 
-**Always read back what you signed** A manifest can be produced successfully and still not contain the identity assertion you expected. A mismatched `referencedAssertions` label or an untrusted certificate will not necessarily fail the signing call.
+**Always read back what you signed.** A manifest can be produced successfully and still not contain the identity assertion you expected. A mismatched `referencedAssertions` label or an untrusted certificate will not necessarily fail the signing call.
 
 
 <Tabs>
@@ -406,7 +597,18 @@ if (validation.hasErrors()) {
   </TabItem>
 <TabItem value="apple" label="Apple (Swift)">
 ```swift
-Swift code here
+// Load the trust configuration used for validation
+let settingsJSON = try settingsDefinition.toJSON()
+try Signer.loadSettings(settingsJSON, format: .json)
+
+let manifestJSON = try C2PA.readFile(at: fileURL)
+
+// The manifest read back from the file reports its own validation state
+if let data = manifestJSON.data(using: .utf8),
+   let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+   let state = json["validation_state"] as? String {
+    print("C2PA validation state: \(state)")
+}
 ```
   </TabItem>
 </Tabs>
@@ -427,12 +629,13 @@ For an independent check, inspect the signed file with [c2patool](https://github
 
 | Symptom | Cause and fix |
 | --- | --- |
-| `c2pa signer is already closed` | A signer was reused after `withCawgIdentity()` consumed it. Create a fresh signer for every sign operation. |
-| `C2PAError.Api: c2pa and identity signers must be distinct instances` | The same `Signer` was passed as both `c2pa` and `identity`. |
+| `c2pa signer is already closed`, or `Signer was consumed by withCawgIdentity(...)` | A signer was reused after `withCawgIdentity()` consumed it. Create a fresh signer for every sign operation. |
+| `c2pa and identity signers must be distinct instances` | The same `Signer` was passed as both the claim signer and the identity signer. |
 | `PEM Base64 error: invalid Base64 encoding` | A PEM block whose Base64 body is not wrapped at 64 characters. Regenerate it with `PemWriter`, or re-wrap pasted input. |
 | No `cawg.identity` in the manifest | The combined signer was built but the *original* claim signer was passed to `builder.sign()`. Pass the value returned by `withCawgIdentity()`. |
 | Identity shows as untrusted in verifiers | The identity certificate is still the self-signed development one. Submit the CSR to a CA and import the issued chain. |
 | `referencedAssertions cannot exceed 255 entries` | Both `referencedAssertions` and `roles` are capped at 255 entries. |
+| `sending 'signer' risks causing data races` | A Swift 6 compile error: a signer passed to `withCawgIdentity` is still referenced elsewhere. Build it as a fresh local or pass it inline. |
 
 ---
 
@@ -448,8 +651,9 @@ For an independent check, inspect the signed file with [c2patool](https://github
 **SDK and sample code**
 
 - [c2pa-android SDK](https://github.com/contentauth/c2pa-android)
-- [c2pa-android-example](https://github.com/contentauth/c2pa-android-example) — this repository
-- [Proofmode C2PA implementation](https://github.com/guardianproject/proofmode-android/tree/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa) — the reference implementation for this guide
+- [c2pa-android-example](https://github.com/contentauth/c2pa-android-example)
+- [c2pa-swift SDK](https://github.com/contentauth/c2pa-swift), including its [example app](https://github.com/contentauth/c2pa-swift/tree/main/ExampleApp)
+- [Proofmode for Android C2PA implementation](https://github.com/guardianproject/proofmode-android/tree/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa) and [Proofmode for iOS C2PA implementation](https://gitlab.com/guardianproject/proofmode/proofmode-ios/-/blob/main/Proofmode/Shared/C2PAHelper.swift): the reference implementations for this guide
 
 **Certificate authorities issuing CAWG identity certificates**
 
