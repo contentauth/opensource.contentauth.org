@@ -20,17 +20,13 @@ This guide covers three CAWG features and how they fit together:
 
 The latest specifications are always on the [CAWG specs page](https://cawg.io/specs/).
 
-In addition, the focus of this tutorial is on [CAWG signing using X.509 certificates](https://opensource.contentauthenticity.org/docs/manifest/reading/reading-cawg-id/), and NOT using [Identity Claims Aggregation](https://cawg.io/about/identity-framework/) through W3C Verifiable Credentials. We expect to provide more guidance and support on the second approach in the near future. 
+In addition, the focus of this tutorial is [on-device CAWG signing using a local private key and X.509 certificates](https://opensource.contentauthenticity.org/docs/manifest/reading/reading-cawg-id/), and NOT remote singing on a server or using [Identity Claims Aggregation](https://cawg.io/about/identity-framework/) through W3C Verifiable Credentials. We expect to provide more guidance and support on the second approach in the near future. 
 
-## Before you start
+## Before You Start
 
-**SDK version.** CAWG support requires at least **c2pa-android 0.0.10 c2pa-swift 0.0.13**. Earlier releases can support the use of CAWG metadata or training-mining assertions, but do not include `Signer.withCawgIdentity` for CAWG Identity assertion signing.
+**SDK version.** CAWG support requires at least **c2pa-android 0.0.10 or c2pa-swift 0.0.13**. Earlier releases can support the use of CAWG metadata or training-mining assertions, but do not include `Signer.withCawgIdentity` for CAWG Identity assertion signing.
 
-**Reference implementation.** Every snippet below is taken from working code in the [Proofmode for Android](https://github.com/guardianproject/proofmode-android/tree/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa) or [Proofmode for iOS](https://gitlab.com/guardianproject/proofmode/proofmode-ios) codebase, primarily:
-
-- [`C2PAManager.kt`](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt): assertions, signer setup, and signing
-- [`selfsign/CAWGIdentityManager.kt`](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/selfsign/CAWGIdentityManager.kt): key, certificate, and CSR generation
-- [`C2PAHelper.swift`](https://gitlab.com/guardianproject/proofmode/proofmode-ios/-/blob/main/Proofmode/Shared/C2PAHelper.swift): the same assertions, signer setup, and signing on iOS
+**Reference implementation.** Every snippet below is taken from working code in the [Proofmode for Android](https://github.com/guardianproject/proofmode-android/tree/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa) or [Proofmode for iOS](https://gitlab.com/guardianproject/proofmode/proofmode-ios) codebase, or in other mobile sample code available through this site.
 
 <Tabs>
   <TabItem value="android" label="Android (Gradle)" default>
@@ -205,7 +201,7 @@ func importCawgIdentity(privateKeyPEM: String, certChainPEM: String) throws {
 </Tabs>
 	
 
-### Building the identity signer
+### Building a Local Identity Signer
 
 Once you hold both PEMs, the identity signer is an ordinary `Signer`. Note the argument order in both SDKs: **certificate chain first, then private key**.
 
@@ -238,9 +234,66 @@ On Apple platforms, `Signer.withCawgIdentity` declares both of its signer parame
 
 :::
 
+### Implementing a Custom Signer
+
+While it is not the focus of this guide, you can implement custom logic for CAWG signing, including remote signing, hardware-backed keys, or other advanced functionality. To do this, use the same callback signer that the primary C2PA signing mechanism uses. A callback signer takes the certificate chain up front and calls your closure with the bytes to sign, so the private key never has to exist as a PEM string.
+
+`withCawgIdentity()` only asks each of its inputs for a signature, an algorithm, a certificate chain, and a reserve size, so a callback signer works in either role. The example below passes one as the identity signer while the claim signer stays as it is, but you can equally pass a callback signer as the claim signer, or use one in both roles.
+
+<Tabs>
+  <TabItem value="android" label="Android (Kotlin)" default>
+```kotlin
+// The certificate chain is supplied up front; the private key stays wherever it
+// lives, such as StrongBox, an HSM, or a signing server.
+val identitySigner = Signer.withCallback(
+    algorithm = SigningAlgorithm.ES256,
+    certificateChainPEM = identityCertsPem,
+    tsaURL = null,
+) { data ->
+    // Return the signature over `data`.
+    myCustomCAWGSigningFunction(data)
+}
+
+// From here it behaves exactly like the PEM-backed signer from earlier.
+val combinedSigner = Signer.withCawgIdentity(
+    c2pa = c2paSigner,
+    identity = identitySigner,
+    referencedAssertions = listOf("c2pa.actions", "cawg.training-mining", "cawg.metadata"),
+    roles = listOf("cawg.creator"),
+)
+```
+ </TabItem>
+  <TabItem value="apple" label="Apple (Swift)">
+```swift
+// The certificate chain is supplied up front; the private key stays wherever it
+// lives, such as the Secure Enclave, an HSM, or a signing server.
+let identitySigner = try Signer(
+    algorithm: .es256,
+    certificateChainPEM: identityCertsPEM
+) { data in
+    // Return the signature over `data`.
+    try myCustomCAWGSigningFunction(data)
+}
+
+// From here it behaves exactly like the PEM-backed signer from earlier.
+let combinedSigner = try Signer.withCawgIdentity(
+    c2paSigner,
+    identity: identitySigner,
+    referencedAssertions: ["c2pa.actions", "cawg.training-mining", "cawg.metadata"],
+    roles: ["cawg.creator"]
+)
+```
+  </TabItem>
+</Tabs>
+
+Two details are worth knowing before you write the callback:
+
+- **Either signature encoding works.** For the ECDSA algorithms, the SDK accepts both a DER-encoded signature and a raw P1363 `r || s` pair, detecting DER and converting it. This is why the output of `SecKeyCreateSignature`, which is DER, can be returned unchanged, as `SecureEnclaveSigner` in the Swift SDK does.
+- **The callback is synchronous.** It runs on whichever thread is inside `builder.sign()`, and that call blocks until your closure returns. If the callback reaches out to a signing server, keep the whole sign operation off the main thread and give the request a sensible timeout.
+
 ---
 
-## Step 2: Add the CAWG metadata assertion
+## Step 2: Add the Metadata Assertion
 
 The [CAWG metadata assertion](https://cawg.io/metadata/1.2-draft/) carries descriptive metadata about the asset. The specification deliberately places no restriction on which fields you may include, so it works by embedding existing metadata vocabularies. The example below uses [Dublin Core](https://www.dublincore.org/specifications/) (`dc`) and [Exif](https://en.wikipedia.org/wiki/Exif).
 
@@ -333,7 +386,7 @@ See `createC2PAMetadataAssertion()` in [C2PAHelper.swift](https://gitlab.com/gua
 </Tabs>
 ---
 
-## Step 3: Add the training and data mining assertion
+## Step 3: Add the Training and Data Mining Assertion
 
 The [CAWG training and data mining assertion](https://cawg.io/training-and-data-mining/1.1/) records the creator's preferences about AI and data-mining use of the asset. It is an `entries` **map**, keyed by use category, where each value carries a `use` permission.
 
