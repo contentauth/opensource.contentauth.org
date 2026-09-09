@@ -355,11 +355,6 @@ const sidebars = {
       collapsed: true,
       items: [
         {
-          type: 'doc',
-          id: 'cawg-mobile',
-          label: 'CAWG assertions on Mobile',
-        },
-        {
           type: 'category',
           label: 'iOS/macOS (Swift)',
           link: { type: 'doc', id: 'sdk-repos/c2pa-swift/README' },
@@ -400,6 +395,11 @@ const sidebars = {
               href: 'https://github.com/contentauth/c2pa-android',
             },
           ],
+        },
+        {
+          type: 'doc',
+          id: 'cawg-mobile',
+          label: 'CAWG on Mobile',
         },
       ],
     },
