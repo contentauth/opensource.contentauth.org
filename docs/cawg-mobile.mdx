@@ -3,6 +3,9 @@ id: cawg-mobile
 title: CAWG on Mobile
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Adding Creator Assertions (CAWG) on Mobile
 
 This tutorial is a high-level guide with sample code for implementing the [Creator Assertions Working Group (CAWG)](https://cawg.io/) specifications using the [C2PA SDK for Android](https://github.com/contentauth/c2pa-android).
@@ -21,8 +24,15 @@ In addition, the focus of this tutorial is on [CAWG signing using X.509 certific
 
 ## Before you start
 
-**SDK version.** CAWG support requires **c2pa-android 0.0.10 or later**. Earlier releases do not include `Signer.withCawgIdentity`.
+**SDK version.** CAWG support requires at least **c2pa-android 0.0.10 c2pa-swift 0.0.13**. Earlier releases can support the use of CAWG metadata or training-mining assertions, but do not include `Signer.withCawgIdentity` for CAWG Identity assertion signing.
 
+**Reference implementation.** Every snippet below is taken from working code in the [Proofmode for Android](https://github.com/guardianproject/proofmode-android/tree/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa) or [Proofmode for iOS](https://gitlab.com/guardianproject/proofmode/proofmode-ios) codebase, primarily:
+
+- [`C2PAManager.kt`](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt): assertions, signer setup, and signing
+- [`selfsign/CAWGIdentityManager.kt`](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/selfsign/CAWGIdentityManager.kt): key, certificate, and CSR generation
+
+<Tabs>
+  <TabItem value="android" label="Android (Gradle)" default>
 ```toml
 # gradle/libs.versions.toml
 [versions]
@@ -31,13 +41,13 @@ c2pa = "0.0.10"
 [libraries]
 c2pa = { module = "org.contentauth:c2pa", version.ref = "c2pa" }
 ```
+  </TabItem>
+  <TabItem value="swift" label="Apple (Swift)" default>
+Swift code here
+  </TabItem>
+</Tabs>  
 
-**Reference implementation.** Every snippet below is taken from working code in the [Proofmode for Android](https://github.com/guardianproject/proofmode-android/tree/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa) codebase, primarily:
-
-- [`C2PAManager.kt`](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt): assertions, signer setup, and signing
-- [`selfsign/CAWGIdentityManager.kt`](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/selfsign/CAWGIdentityManager.kt): key, certificate, and CSR generation
-
-**What you already need working.** This guide assumes you can already produce a signed C2PA manifest with the C2PA Android SDK (a `Signer`, a manifest definition, and a successful `Builder.sign()` call). CAWG is layered on top of that, not a replacement for it.
+**What you already need working.** This guide assumes you can already produce a signed C2PA manifest with the [C2PA Android SDK](/docs/sdk-repos/c2pa-android/) (a `Signer`, a manifest definition, and a successful `Builder.sign()` call) or similar with [C2PA Swift](/docs/sdk-repos/c2pa-swift/). CAWG is layered on top of that, not a replacement for it.
 
 ---
 
@@ -53,6 +63,8 @@ CAWG support in this SDK has been tested with **256-bit elliptic curve keys on t
 
 `createCawgKey()` generates the key pair, writes the private key PEM to `<alias>.key`, generates a PKCS#10 certificate signing request into `<alias>.csr`, and stores a certificate chain in `<alias>.cert`.
 
+<Tabs>
+  <TabItem value="android" label="Android (Kotlin)" default>
 ```kotlin
 val keyAlias = "CAWG_SECURE_1"
 
@@ -75,11 +87,21 @@ if (!fileKey.exists()) {
 val privateKey = fileKey.readText()
 val certChain = fileCert.readText()
 ```
+  </TabItem>
+  <TabItem value="apple" label="Apple (Swift)" default>
+```swift
+Swift code here
+```
+
+  </TabItem>
+</Tabs>
 
 The certificate that is created with a freshly generated identity is self-signed. This is useful for development, but it will not chain to a public trust list, so verifiers will show the identity as untrusted. To get a credential that validates for other people, submit the generated CSR to a certificate authority that issues CAWG identity certificates, such as [SSL.com](https://www.ssl.com/products/content-authenticity/content-credentials/cawg/) or [Trufo](https://trufo.ai/products/certificates#cawg). Both offer individual- and organization-verified options. Any Certificate Authority on the [Mozilla Trust List](https://wiki.mozilla.org/CA/Included_Certificates) should be trusted for CAWG signatures.
 
 Proofmode provides the CSR to the user through `getCawgCSR()`, so it can be copied out and sent to a CA. When the CA returns a signed certificate, or when a creator already holds a credential, swap it in by overwriting the two PEM files and discarding the now-stale CSR:
 
+<Tabs>
+  <TabItem value="android" label="Android (Kotlin)" default>
 ```kotlin
 fun importCawgIdentity(privateKeyPem: String, certChainPem: String) {
     File(context.filesDir, "$CAWG_KEY_ALIAS.key").writeText(privateKeyPem)
@@ -88,11 +110,21 @@ fun importCawgIdentity(privateKeyPem: String, certChainPem: String) {
     File(context.filesDir, "$CAWG_KEY_ALIAS.csr").delete()
 }
 ```
+  </TabItem>
+  <TabItem value="apple" label="Apple (Swift)">
+```swift
+Swift code here
+```
+  </TabItem>
+</Tabs>
+	
 
 ### Building the identity signer
 
 Once you hold both PEMs, the identity signer is an ordinary `Signer`. Note the argument order — **certificate chain first, then private key**:
 
+<Tabs>
+  <TabItem value="android" label="Android (Kotlin)" default>
 ```kotlin
 val identitySigner = Signer.fromKeys(
     certChain,                 // certsPEM
@@ -100,6 +132,13 @@ val identitySigner = Signer.fromKeys(
     SigningAlgorithm.ES256,
 )
 ```
+ </TabItem>
+  <TabItem value="apple" label="Apple (Swift)">
+```swift
+Swift code here
+```
+  </TabItem>
+</Tabs>
 
 Hold on to this identitySigner instance, you will need it later!
 
@@ -109,6 +148,9 @@ Hold on to this identitySigner instance, you will need it later!
 
 The [CAWG metadata assertion](https://cawg.io/metadata/1.2-draft/) carries descriptive metadata about the asset. The specification deliberately places no restriction on which fields you may include, so it works by embedding existing metadata vocabularies. The example below uses [Dublin Core](https://www.dublincore.org/specifications/) (`dc`) and [Exif](https://en.wikipedia.org/wiki/Exif).
 
+
+<Tabs>
+  <TabItem value="android" label="Android (Kotlin)" default>
 You declare the vocabularies you use in an `@context` block, then add key/value pairs using those prefixes.
 
 ```kotlin
@@ -137,6 +179,7 @@ if (cawgRights.isNotEmpty()) {
 listAssertions.add(createCAWGMetadataAssertion(context, cawgContext, cawgInfo))
 ```
 
+
 `createCAWGMetadataAssertion()` is a thin helper that wraps the two maps into an `AssertionDefinition`:
 
 ```kotlin
@@ -156,7 +199,13 @@ private fun createCAWGMetadataAssertion(
 ```
 
 See the [full helper in Proofmode](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L1254).
-
+  </TabItem>
+<TabItem value="apple" label="Apple (Swift)">
+```swift
+Swift code here
+```
+  </TabItem>
+</Tabs>
 ---
 
 ## Step 3: Add the training and data mining assertion
@@ -174,6 +223,8 @@ The specification defines four categories and three permission values:
 
 Permitted values are `"allowed"`, `"notAllowed"`, and `"constrained"`. Use `constrained` together with a `constraint_info` string that explains the terms; the specification advises that a verifier lacking further information should treat `constrained` as equivalent to `notAllowed`.
 
+<Tabs>
+  <TabItem value="android" label="Android (Kotlin)" default>
 ```kotlin
 // Map each use category to a permission value.
 val trainingMiningEntries = linkedMapOf(
@@ -196,6 +247,14 @@ val trainingMining = AssertionDefinition.custom(
 
 listAssertions.add(trainingMining)
 ```
+  </TabItem>
+<TabItem value="apple" label="Apple (Swift)">
+```swift
+Swift code here
+```
+  </TabItem>
+</Tabs>
+
 
 ---
 
@@ -203,6 +262,8 @@ listAssertions.add(trainingMining)
 
 This is where CAWG joins the main signing flow. `Signer.withCawgIdentity()` takes your existing C2PA claim signer plus the identity signer from Step 1 and returns a single combined signer that emits the `cawg.identity` assertion alongside the C2PA claim signature.
 
+<Tabs>
+  <TabItem value="android" label="Android (Kotlin)" default>
 ```kotlin
 // The role this actor played. See the named actor roles below.
 val listRoles = listOf("cawg.creator")
@@ -214,6 +275,14 @@ val combinedSigner = Signer.withCawgIdentity(
     roles = listRoles,
 )
 ```
+  </TabItem>
+<TabItem value="apple" label="Apple (Swift)">
+```swift
+Swift code here
+```
+  </TabItem>
+</Tabs>
+
 
 **`referencedAssertions`** is the list of manifest assertion labels that the creator's signature vouches for. It is what turns the identity assertion from "this person exists" into "this person stands behind these specific claims". The identity specification requires the manifest's hard binding assertion to be covered as well; read back the signed manifest (Step 6) to confirm the final list is what you expect.
 
@@ -239,6 +308,8 @@ With the assertions built and the signers combined, the remaining work is ordina
 
 C2PA distinguishes assertions the claim generator *created* itself from those it merely *gathered*. The SDK decides which bucket an assertion lands in by comparing its label against `builder.created_assertion_labels`. `Builder.DEFAULT_CREATED_ASSERTION_LABELS` covers the common ones (`c2pa.actions`, `c2pa.actions.v2`, the thumbnail and ingredient labels); add your own labels to that list for anything your app generates directly.
 
+<Tabs>
+  <TabItem value="android" label="Android (Kotlin)" default>
 ```kotlin
 val createdLabels = Builder.DEFAULT_CREATED_ASSERTION_LABELS + listOf(
     "proofmode.metadata",
@@ -257,11 +328,23 @@ val settingsJson = buildJsonObject {
     })
 }
 ```
+  </TabItem>
+<TabItem value="apple" label="Apple (Swift)">
+```swift
+Swift code here
+```
+  </TabItem>
+</Tabs>
+
 
 `trustConfig` is a trust configuration the app [ships as an asset](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/assets/trustConfig.txt) and reads at startup; it tells the SDK which certificate authorities to accept when validating. You can also set custom [trust anchors and allowed list](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L1071) by bundling the [list of C2PA Trusted Certificate Authorities](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/assets/C2PA-TRUST-LIST-AND-TSA-TRUST-LIST.pem).
 
 ### Build and sign
 
+Now that the combined signer is ready, you can create a Builder from the C2PA context, and proceed with the reset of the C2PA signing as normal.
+ 
+<Tabs>
+  <TabItem value="android" label="Android (Kotlin)" default>
 ```kotlin
 // Apply the settings, then build from the resulting context
 val settings = C2PASettings.create().apply {
@@ -290,6 +373,13 @@ builder.sign(
     signer = combinedSigner,
 )
 ```
+ </TabItem>
+<TabItem value="apple" label="Apple (Swift)">
+```swift
+Swift code here
+```
+  </TabItem>
+</Tabs>
 
 Remember to close your streams and the combined signer in a `finally` block — see [`signStream()` in Proofmode](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L852) for the full pattern, including the guarded close of the already-consumed base signer.
 
@@ -299,6 +389,9 @@ Remember to close your streams and the combined signer in a `finally` block — 
 
 **Always read back what you signed** A manifest can be produced successfully and still not contain the identity assertion you expected. A mismatched `referencedAssertions` label or an untrusted certificate will not necessarily fail the signing call.
 
+
+<Tabs>
+  <TabItem value="android" label="Android (Kotlin)" default>
 ```kotlin
 // Load the trust configuration used for validation
 C2PA.loadSettings(settingsJson.toString(), "json")
@@ -310,6 +403,14 @@ if (validation.hasErrors()) {
     Timber.d("C2PA validation errors: ${validation.errors.joinToString("; ")}")
 }
 ```
+  </TabItem>
+<TabItem value="apple" label="Apple (Swift)">
+```swift
+Swift code here
+```
+  </TabItem>
+</Tabs>
+
 
 In the returned JSON, confirm that:
 
