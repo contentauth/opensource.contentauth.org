@@ -2,16 +2,16 @@
   "sources": [
     { "_comment": "C2PA Tool" },
     {
-      "repo": "contentauth/c2pa-rs",
-      "path": "cli/README.md",
-      "dest": "docs/sdk-repos/c2pa-rs/cli/readme.md"
+      "repo": "contentauth/c2patool",
+      "path": "README.md",
+      "dest": "docs/sdk-repos/c2patool/readme.md"
     },
     {
-      "repo": "contentauth/c2pa-rs",
-      "path": "cli/docs/usage.md",
-      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/usage.md",
+      "repo": "contentauth/c2patool",
+      "path": "docs/usage.md",
+      "dest": "docs/sdk-repos/c2patool/docs/usage.md",
       "sidebar": {
-        "category": "c2pa-rs-cli",
+        "category": "c2patool",
         "label": "Using C2PA Tool",
         "order": 1
       }
@@ -19,49 +19,49 @@
     {
       "repo": "contentauth/c2pa-rs",
       "path": "docs/supported-formats.md",
-      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/supported-formats.md",
+      "dest": "docs/sdk-repos/c2patool/docs/supported-formats.md",
       "sidebar": {
-        "category": "c2pa-rs-cli",
+        "category": "c2patool",
         "label": "Supported media formats",
         "order": 2
       }
     },
     {
-      "repo": "contentauth/c2pa-rs",
-      "path": "cli/docs/manifest.md",
-      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/manifest.md",
+      "repo": "contentauth/c2patool",
+      "path": "docs/manifest.md",
+      "dest": "docs/sdk-repos/c2patool/docs/manifest.md",
       "sidebar": {
-        "category": "c2pa-rs-cli",
+        "category": "c2patool",
         "label": "Using a manifest file",
         "order": 3
       }
     },
     {
-      "repo": "contentauth/c2pa-rs",
-      "path": "cli/docs/signing.md",
-      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/signing.md",
+      "repo": "contentauth/c2patool",
+      "path": "docs/signing.md",
+      "dest": "docs/sdk-repos/c2patool/docs/signing.md",
       "sidebar": {
-        "category": "c2pa-rs-cli",
+        "category": "c2patool",
         "label": "Signing assets with C2PA Tool",
         "order": 4
       }
     },
     {
-      "repo": "contentauth/c2pa-rs",
-      "path": "cli/docs/cawg_x509_signing.md",
-      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/cawg_x509_signing.md",
+      "repo": "contentauth/c2patool",
+      "path": "docs/cawg_x509_signing.md",
+      "dest": "docs/sdk-repos/c2patool/docs/cawg_x509_signing.md",
       "sidebar": {
-        "category": "c2pa-rs-cli",
+        "category": "c2patool",
         "label": "Adding CAWG identity assertions",
         "order": 6
       }
     },
     {
-      "repo": "contentauth/c2pa-rs",
-      "path": "cli/CHANGELOG.md",
-      "dest": "docs/sdk-repos/c2pa-rs/cli/docs/changelog.md",
+      "repo": "contentauth/c2patool",
+      "path": "CHANGELOG.md",
+      "dest": "docs/sdk-repos/c2patool/docs/changelog.md",
       "sidebar": {
-        "category": "c2pa-rs-cli",
+        "category": "c2patool",
         "label": "Change log",
         "order": 7
       }

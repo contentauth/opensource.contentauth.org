@@ -169,14 +169,14 @@ const sidebars = {
     {
       type: 'category',
       label: 'C2PA Tool',
-      link: { type: 'doc', id: 'sdk-repos/c2pa-rs/cli/readme' },
+      link: { type: 'doc', id: 'sdk-repos/c2patool/readme' },
       collapsed: true,
       items: [
-        ...getRemoteSidebarItems('c2pa-rs-cli'),
+        ...getRemoteSidebarItems('c2patool'),
         {
           type: 'link',
           label: 'GitHub',
-          href: 'https://github.com/contentauth/c2pa-rs/tree/main/cli',
+          href: 'https://github.com/contentauth/c2patool',
         },
       ],
     },
