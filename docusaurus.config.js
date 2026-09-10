@@ -53,11 +53,7 @@ const externalRepos = {
     org: 'contentauth',
   },
 
-  'sdk-repos/c2pa-rs/cli': {
-    repo: 'c2pa-rs',
-    path: 'cli/',
-    org: 'contentauth',
-  },
+  'sdk-repos/c2patool': { repo: 'c2patool', path: '', org: 'contentauth' },
   'sdk-repos/c2pa-rs': { repo: 'c2pa-rs', path: '', org: 'contentauth' },
   'sdk-repos/trustmark': { repo: 'trustmark', path: '', org: 'adobe' },
 };
@@ -335,13 +331,23 @@ async function createConfig() {
         },
       }),
     plugins: [
+      require.resolve('./src/plugins/docs404Sidebar'),
       [
         '@docusaurus/plugin-client-redirects',
         {
           createRedirects(existingPath) {
             const prefix = '/docs/sdk-repos/';
             if (existingPath.startsWith(prefix)) {
-              return `/docs/${existingPath.slice(prefix.length)}`;
+              const redirects = [`/docs/${existingPath.slice(prefix.length)}`];
+
+              const c2paRsPrefix = '/docs/sdk-repos/c2pa-rs/';
+              if (existingPath.startsWith(c2paRsPrefix)) {
+                redirects.push(
+                  `/docs/rust-sdk/${existingPath.slice(c2paRsPrefix.length)}`,
+                );
+              }
+
+              return redirects;
             }
             return undefined;
           },
