@@ -27,7 +27,7 @@ This table summarizes the content that this script fetches from other repos.
 | `c2pa-js/packages/c2pa-node` | [c2pa-node](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node) | Node library docs (packages/c2pa-node in c2pa-js monorepo). |
 | `c2pa-python` | [c2pa-python](https://github.com/contentauth/c2pa-python) | Python library docs. |
 | `c2pa-python example` | [c2pa-python-example](https://github.com/contentauth/c2pa-python-example) | Python example app. |
-| `c2pa-rs/cli` | [c2pa-rs cli directory](https://github.com/contentauth/c2pa-rs/cli) | C2PA Tool docs. |
+| `c2patool` | [c2patool](https://github.com/contentauth/c2patool) | C2PA Tool docs. |
 | `js-sdk` | [c2pa-js](https://github.com/contentauth/c2pa-js) | JavaScript library docs. |
 | `c2pa-rs` | [c2pa-rs](https://github.com/contentauth/c2pa-rs) | Rust library docs. |
 | `trustmark` | [adobe/trustmark](https://github.com/adobe/trustmark/) | Trustmark docs |
@@ -72,10 +72,10 @@ The [remote-docs.json](./remote-docs.json) file is the single source of truth fo
 1. Add an entry to the `sources` array in `remote-docs.json`. Each entry has:
    - `repo` — GitHub repo in `org/repo` format (e.g. `contentauth/c2pa-rs`)
    - `path` — Path to the file in the source repo
-   - `dest` — Local path where the file will be saved (e.g. `docs/sdk-repos/c2pa-rs/cli/readme.md` or `static/sb-alg-list.json`)
+   - `dest` — Local path where the file will be saved (e.g. `docs/sdk-repos/c2patool/readme.md` or `static/sb-alg-list.json`)
    - `branch` — (optional) Git branch to fetch from; defaults to `main`
    - `sidebar` — (optional) Include this to add the doc to the sidebar navigation:
-     - `category` — Sidebar category (e.g. `c2pa-rs-cli`, `c2pa-rs`, `c2pa-python`)
+     - `category` — Sidebar category (e.g. `c2patool`, `c2pa-rs`, `c2pa-python`)
      - `label` — Display label in the sidebar
      - `order` — Sort order within the category (lower numbers appear first)
 

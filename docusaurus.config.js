@@ -53,11 +53,7 @@ const externalRepos = {
     org: 'contentauth',
   },
 
-  'sdk-repos/c2pa-rs/cli': {
-    repo: 'c2pa-rs',
-    path: 'cli/',
-    org: 'contentauth',
-  },
+  'sdk-repos/c2patool': { repo: 'c2patool', path: '', org: 'contentauth' },
   'sdk-repos/c2pa-rs': { repo: 'c2pa-rs', path: '', org: 'contentauth' },
   'sdk-repos/trustmark': { repo: 'trustmark', path: '', org: 'adobe' },
 };
