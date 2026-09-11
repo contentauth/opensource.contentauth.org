@@ -401,6 +401,11 @@ const sidebars = {
             },
           ],
         },
+        {
+          type: 'doc',
+          id: 'cawg-mobile',
+          label: 'CAWG on Mobile',
+        },
       ],
     },
     {
