@@ -204,7 +204,7 @@ func importCawgIdentity(privateKeyPEM: String, certChainPEM: String) throws {
 
 ### Building a local identity signer
 
-Once you hold both PEMs, the identity signer is an ordinary `Signer`. The argument order in both SDKs: **certificate chain first, then private key**.
+Once you hold both PEMs, the identity signer is an ordinary `Signer`. The argument order in both SDKs is: **certificate chain first, then private key**.
 
 <Tabs>
   <TabItem value="android" label="Android (Kotlin)" default>
@@ -658,14 +658,14 @@ if let data = manifestJSON.data(using: .utf8),
   </TabItem>
 </Tabs>
 
-In the returned JSON, confirm that:
+Confirm that in the returned JSON:
 
 * The active manifest contains a `cawg.identity` assertion.
 * Its `referenced_assertions` lists the labels you passed in step four.
 * The `cawg.metadata` and `cawg.training-mining` assertions are present with the values you set.
 * The signature information reports the certificate you expect, not a leftover self-signed development certificate.
 
-For an independent check, inspect the signed file with [c2patool](https://github.com/contentauth/c2pa-rs/tree/main/cli) or inspect it wit [Adobe Content Authenticity (Beta)](https://inspect.cr/).
+For an independent check, inspect the signed file with [C2PA Tool](sdk-repos/c2patool/) or with [Adobe Content Authenticity (Beta)](https://inspect.cr/).
 
 ## Troubleshooting
 
