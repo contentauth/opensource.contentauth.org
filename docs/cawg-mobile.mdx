@@ -6,14 +6,13 @@ title: CAWG creator assertions for mobile apps
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
 ## Introduction
 
 The [Creator Assertions Working Group (CAWG)](https://cawg.io/) defines technical standards to assert attribution, identity, and related content information for digital content.
 
-While a C2PA manifest answers the question: "What device or app produced this file, and what happened to it?" a creator assertion answers the question: "Who is the person or organization behind this file, and what do they permit?"
+While a C2PA manifest answers the question: "_What device or app produced this file, and what happened to it_?" a CAWG assertion answers the question: "_Who is the person or organization behind this file, and what do they permit_?"
 
-The C2PA claim is signed by the capturing app or device. A creator assertion is a second claim signed by a credential belonging to the creator. Both the C2PA and CAWG signatures end up in the same manifest, and a validating app can verify them independently.
+The C2PA claim is signed by the capturing app or device. A CAWG assertion is a second claim signed by a credential belonging to the creator. Both the C2PA and CAWG signatures end up in the same manifest, and a validating app can verify them independently.
 
 ### About this guide
 
@@ -77,7 +76,7 @@ The identity signer in this sample is built with `Signer.fromKeys()` on Android 
 
 ### Generating a new identity
 
-Generating an identity means creating the key pair, writing the private key PEM to `<alias>.key`, generating a PKCS#10 certificate signing request into `<alias>.csr`, and storing a certificate chain in `<alias>.cert`. On Android, `createCawgKey()` does all four steps; on Apple platforms, `CertificateManager` provides the certificate and CSR halves.
+Generating an identity means creating the key pair, writing the private key PEM to `<alias>.key`, generating a PKCS#10 certificate signing request into `<alias>.csr`, and storing a certificate chain in `<alias>.cert`. On Android, `createCawgKey()` does all four steps; on Apple platforms, `CertificateManager` provides the certificate and [certificate signing request (CSR)](signing/get-cert.md#certificate-signing-requests-csrs).
 
 <Tabs>
   <TabItem value="android" label="Android (Kotlin)" default>
@@ -173,7 +172,7 @@ let certChain = try String(contentsOf: fileCert, encoding: .utf8)
   </TabItem>
 </Tabs>
 
-The certificate that is created with a freshly generated identity is self-signed. This is useful for development, but it will not chain to a public trust list, so verifiers will show the identity as untrusted. To get a credential that validates for other people, submit the generated CSR to a certificate authority that issues CAWG identity certificates, such as [SSL.com](https://www.ssl.com/products/content-authenticity/content-credentials/cawg/) or [Trufo](https://trufo.ai/products/certificates#cawg). Both offer individual- and organization-verified options. Any Certificate Authority on the [Mozilla Trust List](https://wiki.mozilla.org/CA/Included_Certificates) should be trusted for CAWG signatures.
+The certificate created with a freshly-generated identity is _self-signed_. This is useful for development, but will not chain to a public trust list, so verifiers will show the identity as untrusted. To get a credential that validates for other people, submit the generated CSR to a certificate authority (CA) that issues CAWG identity certificates, such as [SSL.com](https://www.ssl.com/products/content-authenticity/content-credentials/cawg/) or [Trufo](https://trufo.ai/products/certificates#cawg). Both offer individual- and organization-verified options. Any CA on the [Mozilla Trust List](https://wiki.mozilla.org/CA/Included_Certificates) should be trusted for CAWG signatures.
 
 Proofmode provides the CSR to the user through `getCawgCSR()` on Android, and through the string written by `CertificateManager.createCSR(for:config:)` on Apple platforms, so it can be copied out and sent to a CA. When the CA returns a signed certificate, or when a creator already holds a credential, swap it in by overwriting the two PEM files and discarding the now-stale CSR:
 
@@ -205,7 +204,7 @@ func importCawgIdentity(privateKeyPEM: String, certChainPEM: String) throws {
 
 ### Building a local identity signer
 
-Once you hold both PEMs, the identity signer is an ordinary `Signer`. Note the argument order in both SDKs: **certificate chain first, then private key**.
+Once you hold both PEMs, the identity signer is an ordinary `Signer`. The argument order in both SDKs: **certificate chain first, then private key**.
 
 <Tabs>
   <TabItem value="android" label="Android (Kotlin)" default>
@@ -232,7 +231,7 @@ Hold on to this `identitySigner` instance; you will need it later.
 
 :::warning
 
-On Apple platforms, `Signer.withCawgIdentity` declares both of its signer parameters as `sending`, so the compiler rejects a signer that is still referenced elsewhere, such as one stored in a property. In Swift, construct both signers as fresh locals (or inline, as in Step 4) at the point where you combine them.
+On Apple platforms, `Signer.withCawgIdentity` declares both of its signer parameters as `sending`, so the compiler rejects a signer that is still referenced elsewhere, such as one stored in a property. In Swift, construct both signers as fresh locals (or inline, as in step four) at the point where you combine them.
 
 :::
 
@@ -488,7 +487,7 @@ let combinedSigner = try Signer.withCawgIdentity(
   </TabItem>
 </Tabs>
 
-**`referencedAssertions`** is the list of manifest assertion labels that the creator's signature vouches for. It is what turns the identity assertion from "this person exists" into "this person stands behind these specific claims." The identity specification requires the manifest's hard binding assertion to be covered as well; read back the signed manifest (Step 6) to confirm the final list is what you expect.
+**`referencedAssertions`** is the list of manifest assertion labels that the creator's signature vouches for. It is what turns the identity assertion from "this person exists" into "this person stands behind these specific claims." The identity specification requires the manifest's hard binding assertion to be covered as well; read back the signed manifest (step six) to confirm the final list is what you expect.
 
 **`roles`** describes what the actor did. The [identity specification](https://cawg.io/identity/1.1/) defines seven named actor roles:
 
@@ -672,13 +671,13 @@ For an independent check, inspect the signed file with [c2patool](https://github
 
 | Symptom | Cause and fix |
 | ------- | ------------- |
-| `c2pa signer is already closed`, or `Signer was consumed by withCawgIdentity(...)` | A signer was reused after `withCawgIdentity()` consumed it. Create a fresh signer for every sign operation. |
-| `c2pa and identity signers must be distinct instances` | The same `Signer` was passed as both the claim signer and the identity signer. |
-| `PEM Base64 error: invalid Base64 encoding` | A PEM block whose Base64 body is not wrapped at 64 characters. Regenerate it with `PemWriter`, or re-wrap pasted input. |
-| No `cawg.identity` in the manifest | The combined signer was built but the *original* claim signer was passed to `builder.sign()`. Pass the value returned by `withCawgIdentity()`. |
-| Identity shows as untrusted in verifiers | The identity certificate is still the self-signed development one. Submit the CSR to a CA and import the issued chain. |
+| `c2pa signer is already closed`, or `Signer was consumed by withCawgIdentity(...)` | A signer was reused after `withCawgIdentity()` consumed it. <br/>**Fix**: Create a fresh signer for every sign operation. |
+| `c2pa and identity signers must be distinct instances` | The same `Signer` was passed as both the claim signer and the identity signer. <br/>**Fix**: Use a different signer for CAWG. |
+| `PEM Base64 error: invalid Base64 encoding` | A PEM block whose Base64 body is not wrapped at 64 characters. <br/>**Fix**: Regenerate it with `PemWriter`, or re-wrap pasted input. |
+| No `cawg.identity` in the manifest | The combined signer was built but the *original* claim signer was passed to `builder.sign()`. <br/>**Fix**: Pass the value returned by `withCawgIdentity()`. |
+| Identity shows as untrusted in verifiers | The identity certificate is still the self-signed development one. <br/>**Fix**: Submit the CSR to a CA and import the issued chain. |
 | `referencedAssertions cannot exceed 255 entries` | Both `referencedAssertions` and `roles` are capped at 255 entries. |
-| `sending 'signer' risks causing data races` | A Swift 6 compile error: a signer passed to `withCawgIdentity` is still referenced elsewhere. Build it as a fresh local or pass it inline. |
+| `sending 'signer' risks causing data races` | A Swift 6 compile error: a signer passed to `withCawgIdentity` is still referenced elsewhere. <br/>**Fix**: Build it as a fresh local or pass it inline. |
 
 ## References
 
