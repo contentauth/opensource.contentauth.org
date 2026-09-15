@@ -1,35 +1,41 @@
 ---
 id: cawg-mobile
-title: CAWG on Mobile
+title: CAWG creator assertions for mobile apps
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Creator Assertions (CAWG) on Mobile
 
-This tutorial is a high-level guide with sample code for implementing the [Creator Assertions Working Group (CAWG)](https://cawg.io/) specifications using the [C2PA SDK for Android](https://github.com/contentauth/c2pa-android) and the [C2PA SDK for Swift](https://github.com/contentauth/c2pa-swift).
+## Introduction
 
-A plain C2PA manifest answers "what device or app produced this file, and what happened to it?". Creator Assertions answer a different question: "who is the person or organization behind it, and what do they permit?". It achieves this with a second signing identity. The C2PA claim is signed by the capturing app or device; the CAWG identity assertion is signed by a credential belonging to the creator. Both signatures end up in the same manifest, and a validating verifier can check them independently.
+The [Creator Assertions Working Group (CAWG)](https://cawg.io/) defines technical standards to assert attribution, identity, and related content information for digital content.
 
-This guide covers three CAWG features and how they fit together:
+While a C2PA manifest answers the question: "What device or app produced this file, and what happened to it?" a creator assertion answers the question: "Who is the person or organization behind this file, and what do they permit?"
 
-* [Identity](https://cawg.io/identity/1.1/) (`cawg.identity`): Who the identity of the signer is, and which assertions they vouch for
-* [Metadata](https://cawg.io/metadata/1.2-draft/) (`cawg.metadata`): Creator name, copyright, and other standard metadata
-* [Training and data mining](https://cawg.io/training-and-data-mining/1.1/) (`cawg.training-mining`): Whether the asset may be used for AI training or data mining
+The C2PA claim is signed by the capturing app or device. A creator assertion is a second claim signed by a credential belonging to the creator. Both the C2PA and CAWG signatures end up in the same manifest, and a validating app can verify them independently.
 
-The latest specifications are always on the [CAWG specs page](https://cawg.io/specs/).
+### About this guide
 
-In addition, the focus of this tutorial is [on-device CAWG signing using a local private key and X.509 certificates](https://opensource.contentauthenticity.org/docs/manifest/reading/reading-cawg-id/), and NOT remote singing on a server or using [Identity Claims Aggregation](https://cawg.io/about/identity-framework/) through W3C Verifiable Credentials. We expect to provide more guidance and support on the second approach in the near future. 
+This guide explains how to implement CAWG assertions using the [C2PA Android library](sdk-repos/c2pa-android/) and the [C2PA Swift library](sdk-repos/c2pa-swift). It covers three CAWG features and how they fit together:
 
-## Before You Start
+* [Identity](https://cawg.io/identity/1.1/) (`cawg.identity`): The identity of the signer, and which assertions they vouch for.
+* [Metadata](https://cawg.io/metadata/1.2-draft/) (`cawg.metadata`): Creator name, copyright, and other standard metadata.
+* [Training and data mining](https://cawg.io/training-and-data-mining/1.1/) (`cawg.training-mining`): Whether the asset may be used for AI training or data mining.
 
-**SDK version.** CAWG support requires at least **c2pa-android 0.0.10 or c2pa-swift 0.0.13**. Earlier releases can support the use of CAWG metadata or training-mining assertions, but do not include `Signer.withCawgIdentity` for CAWG Identity assertion signing.
+It covers [on-device CAWG signing using a local private key and X.509 certificates](/docs/manifest/reading/reading-cawg-id/), and NOT remote signing on a server or using [identity claims aggregation](https://cawg.io/about/identity-framework/) through W3C verifiable credentials.
 
-**Reference implementation.** Every snippet below is taken from working code in the [Proofmode for Android](https://github.com/guardianproject/proofmode-android/tree/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa) or [Proofmode for iOS](https://gitlab.com/guardianproject/proofmode/proofmode-ios) codebase, or in other mobile sample code available through this site.
+Every code snippet in this guide is from working code in the [Proofmode for Android](https://github.com/guardianproject/proofmode-android/tree/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa) or [Proofmode for iOS](https://gitlab.com/guardianproject/proofmode/proofmode-ios) codebase, or in other mobile sample code available through this site.
+
+## Prerequisites
+
+**What you already need working**: This guide assumes you can already produce a signed C2PA manifest with the [C2PA Android library](/docs/sdk-repos/c2pa-android/) (a `Signer`, a manifest definition, and a successful `Builder.sign()` call) or similar with [C2PA Swift library](/docs/sdk-repos/c2pa-swift/). CAWG is layered on top of that, not a replacement for it.
+
+**Required version**: CAWG support requires at least **c2pa-android 0.0.10** or **c2pa-swift 0.0.13**. Earlier releases of these libraries support the use of CAWG metadata or training-mining assertions, but do not include `Signer.withCawgIdentity` for CAWG identity assertion signing.
 
 <Tabs>
   <TabItem value="android" label="Android (Gradle)" default>
+
 ```toml
 # gradle/libs.versions.toml
 [versions]
@@ -38,6 +44,7 @@ c2pa = "0.0.10"
 [libraries]
 c2pa = { module = "org.contentauth:c2pa", version.ref = "c2pa" }
 ```
+
   </TabItem>
   <TabItem value="apple" label="Apple (Swift)">
 ```swift
@@ -56,19 +63,15 @@ targets: [
   </TabItem>
 </Tabs>  
 
-**What you already need working.** This guide assumes you can already produce a signed C2PA manifest with the [C2PA Android SDK](/docs/sdk-repos/c2pa-android/) (a `Signer`, a manifest definition, and a successful `Builder.sign()` call) or similar with [C2PA Swift](/docs/sdk-repos/c2pa-swift/). CAWG is layered on top of that, not a replacement for it.
-
----
-
 ## Step 1: Create or import a CAWG signing identity
 
-The identity assertion is signed with a credential that represents a creator of some kind, possibly ranging from artist to producer, individual or organization. This credential is separate from the key that signs the C2PA claim. For CAWG signing, you need a private key and a matching X.509 certificate chain, both in "PEM" (short for Privacy Enhanced Mail, but no one calls it that) form. 
+The identity assertion is signed with a credential that represents a creator of some kind, ranging from artist to producer, and individual or organization. This credential is separate from the key that signs the C2PA claim. For CAWG signing, you need a private key and a matching X.509 certificate chain, both in PEM (privacy enhanced mail) format. 
 
 CAWG support in this SDK has been tested with **256-bit elliptic curve keys on the NIST P-256 curve** (`secp256r1`), signed using ECDSA with SHA-256: `SigningAlgorithm.ES256` on Android and `SigningAlgorithm.es256` on Apple platforms.
 
 :::note
 
-The identity signer in this sample is built with `Signer.fromKeys()` on Android and the `Signer(certsPEM:privateKeyPEM:algorithm:)` initializer on Apple platforms, both of which need the private key as a PEM string. It is not using hardware-backed keys, whose private material can never leave the secure element. It is possible to generate a hardware-backed key stored in a secure element, or even implement a remote signer with a key on a server, and use it with CAWG. We will leave that more advanced implementation as an exercise for the reader. The c2pa-android and c2pa-swift sample apps contain a variety of code samples on how to do this, including `SecureEnclaveSigner` and `WebServiceSigner` in the Swift SDK.
+The identity signer in this sample is built with `Signer.fromKeys()` on Android and the `Signer(certsPEM:privateKeyPEM:algorithm:)` initializer on Apple platforms, both of which need the private key as a PEM string. It is not using hardware-backed keys, whose private material can never leave the secure element. It is possible to generate a hardware-backed key stored in a secure element, or even implement a remote signer with a key on a server, and use it with CAWG. We will leave that more advanced implementation as an exercise for the reader. The Android and Swift sample apps contain a variety of code samples on how to do this, including `SecureEnclaveSigner` and `WebServiceSigner` in the Swift SDK.
 
 :::
 
@@ -199,9 +202,8 @@ func importCawgIdentity(privateKeyPEM: String, certChainPEM: String) throws {
 ```
   </TabItem>
 </Tabs>
-	
 
-### Building a Local Identity Signer
+### Building a local identity signer
 
 Once you hold both PEMs, the identity signer is an ordinary `Signer`. Note the argument order in both SDKs: **certificate chain first, then private key**.
 
@@ -226,7 +228,7 @@ let identitySigner = try Signer(
   </TabItem>
 </Tabs>
 
-Hold on to this `identitySigner` instance, you will need it later.
+Hold on to this `identitySigner` instance; you will need it later.
 
 :::warning
 
@@ -234,7 +236,7 @@ On Apple platforms, `Signer.withCawgIdentity` declares both of its signer parame
 
 :::
 
-### Implementing a Custom Signer
+### Implementing a custom signer
 
 While it is not the focus of this guide, you can implement custom logic for CAWG signing, including remote signing, hardware-backed keys, or other advanced functionality. To do this, use the same callback signer that the primary C2PA signing mechanism uses. A callback signer takes the certificate chain up front and calls your closure with the bytes to sign, so the private key never has to exist as a PEM string.
 
@@ -291,12 +293,9 @@ Two details are worth knowing before you write the callback:
 - **Either signature encoding works.** For the ECDSA algorithms, the SDK accepts both a DER-encoded signature and a raw P1363 `r || s` pair, detecting DER and converting it. This is why the output of `SecKeyCreateSignature`, which is DER, can be returned unchanged, as `SecureEnclaveSigner` in the Swift SDK does.
 - **The callback is synchronous.** It runs on whichever thread is inside `builder.sign()`, and that call blocks until your closure returns. If the callback reaches out to a signing server, keep the whole sign operation off the main thread and give the request a sensible timeout.
 
----
-
-## Step 2: Add the Metadata Assertion
+## Step 2: Add the metadata assertion
 
 The [CAWG metadata assertion](https://cawg.io/metadata/1.2-draft/) carries descriptive metadata about the asset. The specification deliberately places no restriction on which fields you may include, so it works by embedding existing metadata vocabularies. The example below uses [Dublin Core](https://www.dublincore.org/specifications/) (`dc`) and [Exif](https://en.wikipedia.org/wiki/Exif).
-
 
 <Tabs>
   <TabItem value="android" label="Android (Kotlin)" default>
@@ -327,7 +326,6 @@ if (cawgRights.isNotEmpty()) {
 // Turn it into an assertion and add it to the manifest's assertion list
 listAssertions.add(createCAWGMetadataAssertion(context, cawgContext, cawgInfo))
 ```
-
 
 `createCAWGMetadataAssertion()` is a thin helper that wraps the two maps into an `AssertionDefinition`:
 
@@ -384,16 +382,15 @@ listAssertions.append(
 See `createC2PAMetadataAssertion()` in [C2PAHelper.swift](https://gitlab.com/guardianproject/proofmode/proofmode-ios/-/blob/main/Proofmode/Shared/C2PAHelper.swift) for a version that also merges Exif and GPS fields read from the capture.
   </TabItem>
 </Tabs>
----
 
-## Step 3: Add the Training and Data Mining Assertion
+## Step 3: Add the training and data mining assertion
 
 The [CAWG training and data mining assertion](https://cawg.io/training-and-data-mining/1.1/) records the creator's preferences about AI and data-mining use of the asset. It is an `entries` **map**, keyed by use category, where each value carries a `use` permission.
 
 The specification defines four categories and three permission values:
 
 | Category | Covers |
-| --- | --- |
+| -------- | ------ |
 | `cawg.data_mining` | Data mining generally |
 | `cawg.ai_inference` | Inference using an already-trained model |
 | `cawg.ai_training` | Training a model of any kind |
@@ -449,12 +446,9 @@ listAssertions.append(trainingMining)
   </TabItem>
 </Tabs>
 
-
----
-
 ## Step 4: Combine the C2PA and identity signers
 
-This is where CAWG joins the main signing flow. `Signer.withCawgIdentity()` takes your existing C2PA claim signer plus the identity signer from Step 1 and returns a single combined signer that emits the `cawg.identity` assertion alongside the C2PA claim signature.
+This is where CAWG joins the main signing flow. `Signer.withCawgIdentity()` takes your existing C2PA claim signer plus the identity signer from step one and returns a single combined signer that emits the `cawg.identity` assertion alongside the C2PA claim signature.
 
 <Tabs>
   <TabItem value="android" label="Android (Kotlin)" default>
@@ -494,12 +488,17 @@ let combinedSigner = try Signer.withCawgIdentity(
   </TabItem>
 </Tabs>
 
-
-**`referencedAssertions`** is the list of manifest assertion labels that the creator's signature vouches for. It is what turns the identity assertion from "this person exists" into "this person stands behind these specific claims". The identity specification requires the manifest's hard binding assertion to be covered as well; read back the signed manifest (Step 6) to confirm the final list is what you expect.
+**`referencedAssertions`** is the list of manifest assertion labels that the creator's signature vouches for. It is what turns the identity assertion from "this person exists" into "this person stands behind these specific claims." The identity specification requires the manifest's hard binding assertion to be covered as well; read back the signed manifest (Step 6) to confirm the final list is what you expect.
 
 **`roles`** describes what the actor did. The [identity specification](https://cawg.io/identity/1.1/) defines seven named actor roles:
 
-`cawg.creator` · `cawg.contributor` · `cawg.editor` · `cawg.producer` · `cawg.publisher` · `cawg.sponsor` · `cawg.translator`
+- `cawg.creator`
+- `cawg.contributor`
+- `cawg.editor`
+- `cawg.producer`
+- `cawg.publisher`
+- `cawg.sponsor`
+- `cawg.translator`
 
 For a photo captured in-app, `cawg.creator` is almost always the right choice. Custom values are permitted if they follow the namespace conventions.
 
@@ -510,8 +509,6 @@ For a photo captured in-app, `cawg.creator` is almost always the right choice. C
 - Do not call `withCawgIdentity()` concurrently with `close()` on the same signer; it reads the input pointers without synchronization.
 
 :::
-
----
 
 ## Step 5: Configure the builder and sign
 
@@ -558,12 +555,11 @@ let settingsDefinition = C2PASettingsDefinition(
   </TabItem>
 </Tabs>
 
-
 `trustConfig` is a trust configuration the app [ships as an asset](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/assets/trustConfig.txt) on Android, or as a bundle resource on Apple platforms, and reads at startup; it tells the SDK which certificate authorities to accept when validating. You can also set custom [trust anchors and allowed list](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L1071) by bundling the [list of C2PA Trusted Certificate Authorities](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/assets/C2PA-TRUST-LIST-AND-TSA-TRUST-LIST.pem).
 
 ### Build and sign
 
-Now that the combined signer is ready, you can create a Builder from the C2PA context, and proceed with the reset of the C2PA signing as normal.
+Now that the combined signer is ready, you can create a Builder from the C2PA context, and proceed with the rest of the C2PA signing as normal.
  
 <Tabs>
   <TabItem value="android" label="Android (Kotlin)" default>
@@ -625,14 +621,11 @@ try builder.sign(
   </TabItem>
 </Tabs>
 
-On Android, remember to close your streams and the combined signer in a `finally` block. Swift releases both when the last reference goes away, so there is nothing to close by hand — see [`signStream()` in Proofmode](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L852) for the full pattern, including the guarded close of the already-consumed base signer.
-
----
+On Android, remember to close your streams and the combined signer in a `finally` block. Swift releases both when the last reference goes away, so there is nothing to close by hand. See [`signStream()` in Proofmode](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L852) for the full pattern, including the guarded close of the already-consumed base signer.
 
 ## Step 6: Verify the result
 
 **Always read back what you signed.** A manifest can be produced successfully and still not contain the identity assertion you expected. A mismatched `referencedAssertions` label or an untrusted certificate will not necessarily fail the signing call.
-
 
 <Tabs>
   <TabItem value="android" label="Android (Kotlin)" default>
@@ -666,22 +659,19 @@ if let data = manifestJSON.data(using: .utf8),
   </TabItem>
 </Tabs>
 
-
 In the returned JSON, confirm that:
 
-* the active manifest contains a `cawg.identity` assertion;
-* its `referenced_assertions` lists the labels you passed in Step 4;
-* `cawg.metadata` and `cawg.training-mining` are present with the values you set;
-* the signature info reports the certificate you expect — not a leftover self-signed development certificate.
+* The active manifest contains a `cawg.identity` assertion.
+* Its `referenced_assertions` lists the labels you passed in step four.
+* The `cawg.metadata` and `cawg.training-mining` assertions are present with the values you set.
+* The signature information reports the certificate you expect, not a leftover self-signed development certificate.
 
-For an independent check, inspect the signed file with [c2patool](https://github.com/contentauth/c2pa-rs/tree/main/cli) or upload it to the [Content Credentials verify site](https://contentcredentials.org/verify).
-
----
+For an independent check, inspect the signed file with [c2patool](https://github.com/contentauth/c2pa-rs/tree/main/cli) or inspect it wit [Adobe Content Authenticity (Beta)](https://inspect.cr/).
 
 ## Troubleshooting
 
 | Symptom | Cause and fix |
-| --- | --- |
+| ------- | ------------- |
 | `c2pa signer is already closed`, or `Signer was consumed by withCawgIdentity(...)` | A signer was reused after `withCawgIdentity()` consumed it. Create a fresh signer for every sign operation. |
 | `c2pa and identity signers must be distinct instances` | The same `Signer` was passed as both the claim signer and the identity signer. |
 | `PEM Base64 error: invalid Base64 encoding` | A PEM block whose Base64 body is not wrapped at 64 characters. Regenerate it with `PemWriter`, or re-wrap pasted input. |
@@ -690,14 +680,12 @@ For an independent check, inspect the signed file with [c2patool](https://github
 | `referencedAssertions cannot exceed 255 entries` | Both `referencedAssertions` and `roles` are capped at 255 entries. |
 | `sending 'signer' risks causing data races` | A Swift 6 compile error: a signer passed to `withCawgIdentity` is still referenced elsewhere. Build it as a fresh local or pass it inline. |
 
----
-
-## Reference
+## References
 
 **Specifications**
 
 - [CAWG specifications index](https://cawg.io/specs/)
-- [Identity assertion 1.1](https://cawg.io/identity/1.1/) — including [named actor roles](https://cawg.io/identity/1.1/#_named_actor_roles)
+- [Identity assertion 1.1](https://cawg.io/identity/1.1/), including [named actor roles](https://cawg.io/identity/1.1/#_named_actor_roles)
 - [Metadata assertion 1.2 (draft)](https://cawg.io/metadata/1.2-draft/)
 - [Training and data mining assertion 1.1](https://cawg.io/training-and-data-mining/1.1/)
 
