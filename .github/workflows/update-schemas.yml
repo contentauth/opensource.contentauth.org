@@ -54,6 +54,17 @@ jobs:
             echo "false"
           fi
 
+      - name: Close existing schema PRs
+        if: steps.diffs.outputs.diff == 'true'
+        run: |
+          PRS=$(gh pr list --state open --json number,headRefName \
+            -q '.[] | select(.headRefName | startswith("schema-")) | .number')
+          if [ -n "$PRS" ]; then
+            echo "$PRS" | xargs -I {} gh pr close {} --delete-branch
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Send schema PR
         if: steps.diffs.outputs.diff == 'true'
         id: create-pr
