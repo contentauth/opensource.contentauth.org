@@ -57,10 +57,10 @@ jobs:
       - name: Close existing schema PRs
         if: steps.diffs.outputs.diff == 'true'
         run: |
-          NUMBERS=$(gh pr list --state open --json number,headRefName \
+          PRS=$(gh pr list --state open --json number,headRefName \
             -q '.[] | select(.headRefName | startswith("schema-")) | .number')
-          if [ -n "$NUMBERS" ]; then
-            echo "$NUMBERS" | xargs -I {} gh pr close {} --delete-branch
+          if [ -n "$PRS" ]; then
+            echo "$PRS" | xargs -I {} gh pr close {} --delete-branch
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
