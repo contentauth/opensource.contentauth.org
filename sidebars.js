@@ -404,7 +404,7 @@ const sidebars = {
         {
           type: 'doc',
           id: 'cawg-mobile',
-          label: 'CAWG on Mobile',
+          label: 'CAWG on mobile',
         },
       ],
     },
