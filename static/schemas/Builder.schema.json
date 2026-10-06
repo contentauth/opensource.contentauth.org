@@ -53,7 +53,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp.iid:95caab0d-9a0d-4246-b26c-88f7b939562b"
+      "default": "xmp.iid:eaeb70e7-5e54-4cff-9c98-146cecce59e6"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -1083,6 +1083,13 @@
           "items": {
             "$ref": "#/$defs/ResourceRef"
           }
+        },
+        "is_created": {
+          "description": "If true, the ingredient assertion is added to created_assertions, rather than to gathered_assertions, which is the default.\nParentOf ingredients are always created assertions, and this field is ignored for them.",
+          "type": [
+            "boolean",
+            "null"
+          ]
         }
       }
     },

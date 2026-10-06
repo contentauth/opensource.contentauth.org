@@ -108,7 +108,7 @@
         "instance_id": {
           "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
           "type": "string",
-          "default": "xmp.iid:e589348a-be9b-4191-9e5c-1f6359510aaf"
+          "default": "xmp.iid:e60399da-1dfa-42d3-92a2-46aaef43bc36"
         },
         "thumbnail": {
           "anyOf": [
@@ -1123,6 +1123,13 @@
           "items": {
             "$ref": "#/$defs/ResourceRef"
           }
+        },
+        "is_created": {
+          "description": "If true, the ingredient assertion is added to created_assertions, rather than to gathered_assertions, which is the default.\nParentOf ingredients are always created assertions, and this field is ignored for them.",
+          "type": [
+            "boolean",
+            "null"
+          ]
         }
       }
     },
