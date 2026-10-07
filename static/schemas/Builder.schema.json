@@ -1083,6 +1083,13 @@
           "items": {
             "$ref": "#/$defs/ResourceRef"
           }
+        },
+        "is_created": {
+          "description": "If true, the ingredient assertion is added to created_assertions, rather than to gathered_assertions, which is the default.\nParentOf ingredients are always created assertions, and this field is ignored for them.",
+          "type": [
+            "boolean",
+            "null"
+          ]
         }
       }
     },
