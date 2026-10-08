@@ -2,6 +2,10 @@ const assert = require('node:assert/strict');
 const { readFileSync } = require('node:fs');
 const path = require('node:path');
 const { test } = require('node:test');
+const {
+  createSlugger,
+  resolveMarkdownLinkPathname,
+} = require('@docusaurus/utils');
 const { sourceHash, getTranslationIssue } = require('./check-translations');
 
 test('accepts current reviewed and draft translations', () => {
@@ -16,6 +20,91 @@ test('accepts current reviewed and draft translations', () => {
       ),
       undefined,
     );
+  }
+});
+
+test('localized Glossaries preserve every entry anchor and resolve source links', () => {
+  const root = path.join(__dirname, '..');
+  const source = readFileSync(
+    path.join(root, 'docs/getting-started/glossary.mdx'),
+    'utf8',
+  );
+  const slugger = createSlugger();
+  const anchors = [...source.matchAll(/^#### (.+)$/gm)].map((match) =>
+    slugger.slug(match[1]),
+  );
+  const linkTargets = (text) =>
+    [...text.matchAll(/\]\(([^)]+)\)/g)].map((match) => match[1]);
+  const normalizeTarget = (target) =>
+    /\.mdx?(?:#|$)/.test(target) && !target.startsWith('https://')
+      ? path.posix.resolve('/getting-started', target)
+      : target;
+  const sourceToPermalink = new Map(
+    linkTargets(source)
+      .filter((target) => /\.mdx?(?:#|$)/.test(target))
+      .map((target) => {
+        const normalized = normalizeTarget(target).split('#')[0];
+        return [`@site/docs${normalized}`, normalized];
+      }),
+  );
+  assert(anchors.length > 0, 'English Glossary must define entries');
+  for (const locale of ['fr', 'it', 'de', 'es']) {
+    const document = readFileSync(
+      path.join(
+        root,
+        'i18n',
+        locale,
+        'docusaurus-plugin-content-docs/current/getting-started/glossary.mdx',
+      ),
+      'utf8',
+    );
+    const headings = [...document.matchAll(/^#### (.+)$/gm)];
+    const translatedAnchors = headings.map(
+      (match) => match[1].match(/\{#([^}]+)\}$/)?.[1],
+    );
+    assert.deepEqual(translatedAnchors, anchors, `${locale}: entry anchors`);
+    assert.equal(new Set(translatedAnchors).size, anchors.length);
+    assert.deepEqual(
+      linkTargets(document).map(normalizeTarget),
+      linkTargets(source).map(normalizeTarget),
+      `${locale}: link targets`,
+    );
+    for (const target of linkTargets(document).filter((target) =>
+      /\.mdx?(?:#|$)/.test(target),
+    )) {
+      const pathname = target.split('#')[0];
+      assert.equal(
+        resolveMarkdownLinkPathname(pathname, {
+          siteDir: root,
+          sourceFilePath: path.join(
+            root,
+            'i18n',
+            locale,
+            'docusaurus-plugin-content-docs/current/getting-started/glossary.mdx',
+          ),
+          contentPaths: {
+            contentPath: path.join(root, 'docs'),
+            contentPathLocalized: path.join(
+              root,
+              'i18n',
+              locale,
+              'docusaurus-plugin-content-docs/current',
+            ),
+          },
+          sourceToPermalink,
+        }),
+        normalizeTarget(pathname),
+        `${locale}: unresolved ${target}`,
+      );
+    }
+    for (const target of linkTargets(document).filter((target) =>
+      target.startsWith('#'),
+    )) {
+      assert(
+        translatedAnchors.includes(target.slice(1)),
+        `${locale}: missing ${target}`,
+      );
+    }
   }
 });
 
