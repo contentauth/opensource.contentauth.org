@@ -1,4 +1,32 @@
 {
+  "site.sdkOverview.description": {
+    "message": "Visión general de las bibliotecas y herramientas del SDK de la CAI"
+  },
+  "site.sdkOverview.website": { "message": "Sitio web" },
+  "site.sdkOverview.client": { "message": "JavaScript del lado del cliente" },
+  "site.sdkOverview.server": { "message": "Código del servidor, por ejemplo" },
+  "site.sdkOverview.native": { "message": "Aplicaciones nativas" },
+  "site.sdkOverview.embedded": { "message": "Aplicaciones integradas" },
+  "site.sdkOverview.ffi": {
+    "message": "Interfaz de funciones externas de Rust (FFI)*"
+  },
+  "site.sdkOverview.sdk": { "message": "SDK de la CAI" },
+  "site.sdkOverview.javascriptLibrary": { "message": "Biblioteca JavaScript" },
+  "site.sdkOverview.cli": { "message": "Herramienta de línea de comandos" },
+  "site.sdkOverview.rustLibrary": { "message": "Biblioteca Rust" },
+  "site.sdkOverview.view": { "message": "Ver las Content Credentials" },
+  "site.sdkOverview.modify": {
+    "message": "Ver, crear y modificar las Content Credentials"
+  },
+  "site.sdkOverview.asset": {
+    "message": "Integradas en el archivo del recurso"
+  },
+  "site.sdkOverview.adobeTools": {
+    "message": "(Para las herramientas de Adobe)"
+  },
+  "site.sdkOverview.ffiNote": {
+    "message": "*Si es necesario, según el lenguaje nativo de la aplicación anfitriona."
+  },
   "site.i18n.draftTranslation": {
     "message": "Esta traducción es un borrador pendiente de revisión humana."
   },

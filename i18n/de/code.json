@@ -1,4 +1,28 @@
 {
+  "site.sdkOverview.description": {
+    "message": "Übersicht der Bibliotheken und Werkzeuge des CAI-SDK"
+  },
+  "site.sdkOverview.website": { "message": "Website" },
+  "site.sdkOverview.client": { "message": "Clientseitiges JavaScript" },
+  "site.sdkOverview.server": { "message": "Servercode, zum Beispiel" },
+  "site.sdkOverview.native": { "message": "Native Anwendungen" },
+  "site.sdkOverview.embedded": { "message": "Eingebettete Anwendungen" },
+  "site.sdkOverview.ffi": {
+    "message": "Rust-Schnittstelle für fremde Funktionen (FFI)*"
+  },
+  "site.sdkOverview.sdk": { "message": "CAI-SDK" },
+  "site.sdkOverview.javascriptLibrary": { "message": "JavaScript-Bibliothek" },
+  "site.sdkOverview.cli": { "message": "Befehlszeilenwerkzeug" },
+  "site.sdkOverview.rustLibrary": { "message": "Rust-Bibliothek" },
+  "site.sdkOverview.view": { "message": "Content Credentials anzeigen" },
+  "site.sdkOverview.modify": {
+    "message": "Content Credentials anzeigen, erstellen und ändern"
+  },
+  "site.sdkOverview.asset": { "message": "In die Asset-Datei eingebettet" },
+  "site.sdkOverview.adobeTools": { "message": "(Für Adobe-Werkzeuge)" },
+  "site.sdkOverview.ffiNote": {
+    "message": "*Bei Bedarf, abhängig von der nativen Sprache der Hostanwendung."
+  },
   "site.i18n.draftTranslation": {
     "message": "Diese Übersetzung ist ein Entwurf und wartet auf eine menschliche Prüfung."
   },

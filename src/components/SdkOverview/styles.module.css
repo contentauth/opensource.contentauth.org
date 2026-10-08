@@ -1,0 +1,194 @@
+.figure {
+  --sdk-blue: #4675bc;
+  --sdk-fill: #dce6f6;
+  margin: 0 0 var(--ifm-paragraph-margin-bottom);
+  color: #161616;
+}
+
+.scroll {
+  overflow-x: auto;
+  background: #fafafa;
+}
+
+.scroll:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.diagram {
+  position: relative;
+  width: 100%;
+  min-width: 840px;
+  max-width: 1094px;
+  aspect-ratio: 1094 / 760;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.connections {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--sdk-blue);
+}
+
+.box,
+.website,
+.sdk,
+.output {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  text-align: center;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.box,
+.website {
+  border: 1px solid #73829a;
+  border-radius: 8px;
+  background: var(--sdk-fill);
+}
+
+.website {
+  left: 1.83%;
+  top: 2.63%;
+  width: 56.22%;
+  height: 33.55%;
+  justify-content: flex-start;
+}
+
+.client {
+  left: 5.48%;
+  top: 13.16%;
+  width: 16%;
+  height: 13.16%;
+}
+.server {
+  left: 30.16%;
+  top: 8.55%;
+  width: 21.94%;
+  height: 20.4%;
+}
+.native {
+  left: 63.07%;
+  top: 5.26%;
+  width: 34.28%;
+  height: 18.42%;
+  gap: 8px;
+}
+.ffi {
+  left: 63.99%;
+  top: 29.61%;
+  width: 32.91%;
+  height: 7.89%;
+  font-style: italic;
+}
+
+.client,
+.server,
+.ffi,
+.asset,
+.cloud {
+  background: #f0f0f0;
+}
+
+.server ul {
+  margin: 4px 0 0;
+  padding-left: 20px;
+  text-align: left;
+}
+
+.sdk {
+  left: 1.83%;
+  top: 43.42%;
+  width: 96.34%;
+  height: 20.4%;
+  border: 2px dashed #b95151;
+  border-radius: 8px;
+}
+
+.sdkLabel {
+  position: absolute;
+  right: 12px;
+  top: -13px;
+  padding: 0 6px;
+  background: #fafafa;
+}
+
+.webLibrary {
+  left: 3.2%;
+  top: 46.05%;
+  width: 17.37%;
+  height: 14.47%;
+}
+.cli {
+  left: 22.39%;
+  top: 46.05%;
+  width: 12.8%;
+  height: 14.47%;
+}
+.bindings {
+  left: 37.02%;
+  top: 44.74%;
+  width: 15.54%;
+  height: 17.11%;
+}
+.mobile {
+  left: 54.39%;
+  top: 46.05%;
+  width: 18.74%;
+  height: 14.47%;
+}
+.rust {
+  left: 75.41%;
+  top: 46.05%;
+  width: 13.71%;
+  height: 14.47%;
+}
+
+.output {
+  background: var(--sdk-blue);
+  border-radius: 50%;
+  color: #fff;
+  padding: 12px 24px;
+}
+
+.view {
+  left: 2.74%;
+  top: 69.74%;
+  width: 20.11%;
+  height: 14.47%;
+}
+.modify {
+  left: 33.82%;
+  top: 69.74%;
+  width: 31.99%;
+  height: 14.47%;
+}
+.asset {
+  left: 36.11%;
+  top: 89.47%;
+  width: 26.51%;
+  height: 7.89%;
+}
+.cloud {
+  left: 70.84%;
+  top: 77%;
+  width: 23.77%;
+  height: 16%;
+  border-radius: 8px;
+}
+
+.note {
+  position: absolute;
+  left: 73.13%;
+  top: 93.42%;
+  width: 24.68%;
+  font-size: 12px;
+}
