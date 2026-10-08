@@ -1,0 +1,78 @@
+---
+id: introduction
+title: Das Open-Source-SDK der CAI
+translation_status: draft
+translation_source_hash: a7ed291e698cf96df2108b77128fe4c267d33054ce1ccdd1251f9a9b4ceaf826
+---
+
+import cr_pin from '@site/static/img/cr-pin.png';
+import cai_open_source from '@site/static/img/cai-open-source.jpg';
+
+Bevor Sie mit der Entwicklung beginnen, empfehlen wir Ihnen, diese Einführung und die Seite [Erste Schritte](getting-started/index.mdx) zu lesen, um die Grundlagen und den Kontext kennenzulernen. Auch [Arbeiten mit Manifesten](manifest/understanding.md) enthält hilfreiche Informationen, unabhängig von der verwendeten Sprache und Bibliothek.
+
+Die Coalition for Content Provenance and Authenticity (C2PA) und die Content Authenticity Initiative (CAI) arbeiten gemeinsam daran, einen offenen Branchenstandard für die Authentizität und Herkunft von Inhalten zu entwickeln und seine Einführung zu fördern.
+
+:::tip Siehe auch
+Eine Reihe von Lernvideos zur Verwendung des Open-Source-SDK der CAI finden Sie unter [**Content Credentials Foundations**](https://learn.contentauthenticity.org/).
+:::
+
+## Bestandteile des SDK {#whats-in-the-sdk}
+
+Das Open-Source-SDK der CAI umfasst:
+
+- [**Die Rust-Bibliothek**](sdk-repos/c2pa-rs/readme.md), die die Anbindungen für andere Programmiersprachen erzeugt und auch direkt zum Lesen und Erzeugen von Manifestdaten verwendet werden kann. Sie bildet die Grundlage aller anderen Komponenten.
+- [**C2PA Tool**](sdk-repos/c2patool/readme.md), ein Befehlszeilenwerkzeug für die Arbeit mit Manifesten und Medien. Es kapselt das Rust-SDK und bietet die meisten seiner Funktionen. C2PA Tool kann:
+  - Einen Bericht der JSON-Manifestdaten anzeigen, die mit einem Asset verknüpft sind.
+  - Manifestdaten mit einem Asset verknüpfen.
+  - Ein Manifest zum zugehörigen Manifestspeicher hinzufügen, wenn das Asset bereits Manifestdaten enthält.
+- [**Die JavaScript-Bibliothek**](sdk-repos/c2pa-js/README.md), mit der Webseiten Manifestdaten lesen, validieren, erstellen und signieren sowie mithilfe von clientseitigem JavaScript in unterstützte Asset-Dateien einbetten können. Damit können Sie Ihrer Website Oberflächenelemente hinzufügen, die Manifestdaten gemäß den [C2PA-Empfehlungen zur Benutzererfahrung](https://spec.c2pa.org/specifications/specifications/2.2/ux/UX_Recommendations.html) anzeigen.
+- **Die Bibliotheken für [C/C++](sdk-repos/c2pa-cpp/readme.md), [Python](sdk-repos/c2pa-python/readme.md) und [Node.js](sdk-repos/c2pa-js/packages/c2pa-node/README.md)**, mit denen Anwendungen Manifestdaten lesen und validieren, erstellen und signieren sowie in unterstützte Asset-Dateien einbetten können.
+- [**Die mobilen Bibliotheken**](mobile.md), mit denen iOS- und Android-Anwendungen Manifestdaten lesen und erzeugen können.
+
+Das folgende Diagramm gibt einen Überblick über das SDK.
+
+<img src={cai_open_source} width="800" alt="Übersicht der Bibliotheken und Werkzeuge des CAI-SDK" />
+
+## Verwendung des SDK {#how-to-use-the-sdk}
+
+Anwendungen können das CAI-SDK auf verschiedene Arten verwenden:
+
+- Anwendungen in C++, Python, Node.js oder clientseitigem JavaScript können die entsprechenden Bibliotheken verwenden, um:
+  - Manifeste zu erstellen, zu ändern und zu signieren.
+  - Manifeste in Mediendateien einzubetten.
+  - Manifeste zu analysieren und zu validieren.
+- Anwendungen können C2PA Tool direkt als externen Prozess aufrufen. Dieser Ansatz ist jedoch nur eingeschränkt skalierbar.
+- Mobile Anwendungen können die iOS- und Android-Bibliotheken für alle diese Aufgaben verwenden.
+
+Native Anwendungen können außerdem Rusts _Foreign Function Interface_ (FFI) verwenden, um Funktionen der Rust-Bibliothek aufzurufen. Die FFI ermöglicht die Zusammenarbeit zwischen Rust und anderen Programmiersprachen. Eine Windows-Anwendung kann beispielsweise Rust-Funktionen aus C++ oder C# aufrufen. Ein Beispiel finden Sie im [c2c2pa-Repository](https://github.com/contentauth/c2c2pa).
+
+Eine eingebettete Anwendung kann die Rust-FFI ebenso wie eine native Anwendung verwenden, um Rust-Funktionen aus C oder C++ aufzurufen. Eingebettete Anwendungen unterliegen besonderen Einschränkungen ihrer Geräte, etwa begrenztem Speicher, leistungsschwacher Hardware, zeitweise fehlender Netzwerkverbindung, speziellen Betriebssystemen oder dem Betrieb ohne Betriebssystem direkt auf der Hardware (Bare Metal). Wenden Sie sich deshalb direkt an das CAI-Team, wenn Sie eine eingebettete Anwendung entwickeln möchten.
+
+## Weitere Informationen {#more-information}
+
+Weitere Informationen über C2PA und CAI finden Sie auf diesen Websites:
+
+| Website | Organisation | Zweck / Beschreibung |
+| --- | --- | --- |
+| [c2pa.org](https://c2pa.org/) | C2PA / Linux Foundation | Standardisierungsorganisation<br/>Technische Spezifikationen und Leitfäden |
+| [contentcredentials.org](https://contentcredentials.org/) | C2PA | Website für Verbraucher |
+| [contentauthenticity.org](https://contentauthenticity.org/) | CAI | Branchenkonsortium<br/>Open-Source-Software und Community-Ressourcen |
+
+### C2PA {#c2pa}
+
+Die C2PA stellt formale technische Spezifikationen und offene Standards für die Herkunft von Inhalten bereit, die sich an Urheber, Bearbeiter, Verlage, Medienplattformen und Verbraucher richten. Sie ist eine gemeinsam verwaltete Standardisierungsorganisation unter dem Dach der [Joint Development Foundation der Linux Foundation](https://jointdevelopment.org/).
+
+#### Das „cr“-Symbol {#the-cr-icon}
+
+<img src={cr_pin} width="50" style={{ float: 'left', margin: 10 }} alt="cr-Symbol für Content Credentials" />
+
+Das „cr“-Symbol (auch „cr“-Pin genannt) ist eine eingetragene Marke der C2PA und das _De-facto_-Kennzeichen für C2PA-Benutzererfahrungen. [Konforme Produkte](conformance/index.mdx) können die Marke „Content Credentials“ und den „Cr“-Pin verwenden, um eine einheitliche Benutzererfahrung zu bieten und zu signalisieren, dass eine Anwendung, ein Werkzeug oder eine Website C2PA-Standards implementiert.
+
+:::info
+Ausführliche Hinweise zur Verwendung des „cr“-Symbols finden Sie im [C2PA-Leitfaden zur Benutzererfahrung für Implementierer](https://c2pa.org/specifications/specifications/2.0/ux/UX_Recommendations.html#_l1_indicator_of_c2pa_data).
+:::
+
+### CAI {#cai}
+
+Die **CAI** ist ein von Adobe geführtes branchenübergreifendes Konsortium, das die Einführung von Content Credentials auf Grundlage der C2PA-Standards unterstützt. Sie entwickelt und pflegt Open-Source-Software auf Basis der technischen Spezifikationen der C2PA.
+Zu ihren Mitgliedern gehören Adobe, Microsoft, The New York Times Co., The Associated Press, Intel, Qualcomm und viele weitere Organisationen.

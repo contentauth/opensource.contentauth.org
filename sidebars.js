@@ -12,6 +12,7 @@ function getRemoteSidebarItems(category, excludeIds = []) {
     .map((s) => ({
       type: 'doc',
       id: getDocId(s.dest),
+      key: getDocId(s.dest),
       label: s.sidebar.label,
     }))
     .filter((item) => item.id && !excludeIds.includes(item.id));
@@ -32,6 +33,7 @@ const sidebars = {
         {
           type: 'doc',
           label: 'FAQs',
+          key: 'getting-started/faqs',
           id: 'getting-started/faqs',
         },
         {
@@ -129,6 +131,7 @@ const sidebars = {
           type: 'doc',
           id: 'tasks/archives',
           label: 'Using working stores and archives',
+          key: 'tasks/archives',
         },
         {
           type: 'doc',
@@ -176,6 +179,7 @@ const sidebars = {
         {
           type: 'link',
           label: 'GitHub',
+          key: 'c2patool.github',
           href: 'https://github.com/contentauth/c2patool',
         },
       ],
@@ -215,11 +219,13 @@ const sidebars = {
         {
           type: 'link',
           label: 'API documentation',
+          key: 'rust.api',
           href: 'https://docs.rs/c2pa',
         },
         {
           type: 'link',
           label: 'GitHub',
+          key: 'rust.github',
           href: 'https://github.com/contentauth/c2pa-rs',
         },
       ],
@@ -264,11 +270,13 @@ const sidebars = {
         {
           type: 'link',
           label: 'API documentation',
+          key: 'python.api',
           href: 'https://contentauth.github.io/c2pa-python/api/c2pa/index.html',
         },
         {
           type: 'link',
           label: 'GitHub',
+          key: 'python.github',
           href: 'https://github.com/contentauth/c2pa-python',
         },
       ],
@@ -283,11 +291,13 @@ const sidebars = {
         {
           type: 'link',
           label: 'API documentation',
+          key: 'cpp.api',
           href: 'https://contentauth.github.io/c2pa-cpp/annotated.html',
         },
         {
           type: 'link',
           label: 'GitHub',
+          key: 'cpp.github',
           href: 'https://github.com/contentauth/c2pa-cpp',
         },
       ],
@@ -322,15 +332,18 @@ const sidebars = {
           type: 'doc',
           id: 'sdk-repos/c2pa-js/supported-formats',
           label: 'Supported media formats',
+          key: 'javascript.supported-formats',
         },
         {
           type: 'link',
           label: 'API documentation',
+          key: 'javascript.api',
           href: 'https://contentauth.github.io/c2pa-js/modules/_contentauth_c2pa-web.html',
         },
         {
           type: 'link',
           label: 'GitHub',
+          key: 'javascript.github',
           href: 'https://github.com/contentauth/c2pa-js',
         },
       ],
@@ -344,11 +357,13 @@ const sidebars = {
         {
           type: 'link',
           label: 'API documentation',
+          key: 'node.api',
           href: 'https://contentauth.github.io/c2pa-js/modules/_contentauth_c2pa-node.html',
         },
         {
           type: 'link',
           label: 'GitHub',
+          key: 'node.github',
           href: 'https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node',
         },
       ],
@@ -371,11 +386,13 @@ const sidebars = {
             {
               type: 'link',
               label: 'API documentation',
+              key: 'swift.api',
               href: 'https://contentauth.github.io/c2pa-swift/documentation/c2pa/',
             },
             {
               type: 'link',
               label: 'GitHub',
+              key: 'swift.github',
               href: 'https://github.com/contentauth/c2pa-swift',
             },
           ],
@@ -392,11 +409,13 @@ const sidebars = {
             {
               type: 'link',
               label: 'API documentation',
+              key: 'android.api',
               href: 'https://contentauth.github.io/c2pa-android/',
             },
             {
               type: 'link',
               label: 'GitHub',
+              key: 'android.github',
               href: 'https://github.com/contentauth/c2pa-android',
             },
           ],
@@ -451,6 +470,7 @@ const sidebars = {
             {
               type: 'link',
               label: 'GitHub',
+              key: 'trustmark.github',
               href: 'https://github.com/adobe/trustmark/',
             },
           ],

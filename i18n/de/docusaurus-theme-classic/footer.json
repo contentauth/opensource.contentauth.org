@@ -1,0 +1,6 @@
+{
+  "copyright": {
+    "message": "<div style=\"font-size: 0.75rem;\">Copyright © {year} Adobe. Alle Rechte vorbehalten. | <a style=\"text-decoration: underline;\" href=\"https://www.adobe.com/privacy.html\" target=\"_blank\" rel=\"noopener noreferrer\">Datenschutz</a> | <a style=\"text-decoration: underline;\" href=\"https://www.adobe.com/legal/terms.html\" target=\"_blank\" rel=\"noopener noreferrer\">Nutzungsbedingungen</a> | <a style=\"text-decoration: underline;\" href=\"https://www.adobe.com/privacy/us-rights.html\" target=\"_blank\" rel=\"noopener noreferrer\">Meine personenbezogenen Daten nicht verkaufen oder weitergeben</a></div>",
+    "description": "The footer copyright"
+  }
+}

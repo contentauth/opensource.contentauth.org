@@ -100,6 +100,57 @@ $ npm run build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+### Internationalization
+
+The site supports English, French, Italian, German, and Spanish. English keeps
+its existing URLs; other languages use `/fr/`, `/it/`, `/de/`, and `/es/`.
+`npm run build` builds all locales and checks translation source hashes first.
+Use `npm start -- --locale fr` to develop one locale, or
+`npm run build -- --locale fr` to build it. A single-locale build uses the site
+root; use the combined build to test language switching and production prefixes.
+
+Translations mirror the English filenames under
+`i18n/<locale>/docusaurus-plugin-content-docs/current/`. Missing translations fall
+back to English with a localized notice. Fallback content carries `lang="en"`
+and `noindex`; the localized navigation remains available. Translation drafts
+also carry a review notice and `noindex`. Docusaurus excludes these pages from
+the sitemap.
+
+Introduction currently has AI-generated translation drafts in all four target
+languages. These drafts have not received human linguistic review. Getting
+Started, FAQs, and Glossary remain English until reviewers supply translations.
+
+To add or review a translation:
+
+1. Translate the complete document, preserving its ID, slug, heading anchors,
+   MDX imports, JSX, technical identifiers, and code. Use the matching filename.
+2. Compute the English source hash with `shasum -a 256 docs/<source-file>`.
+3. Add `translation_source_hash` and `translation_status: draft` to the localized
+   frontmatter. Do not update the hash without checking the changed English.
+4. Ask a language reviewer to check terminology, accuracy, links, and images.
+   After approval, set `translation_status: reviewed`.
+5. Run `npm run i18n:check`, `npm run i18n:test`, and `npm run build`.
+
+`npm run i18n:check` fails on stale or missing source hashes and invalid review
+states. It reports missing pilot translations without blocking the sparse pilot.
+Use `npm run i18n:check -- --require-complete` as the launch gate for all 16
+reviewed pilot translations.
+
+Extract English UI catalogs with `npm run write-translations -- --locale en`.
+Repeat with each target locale to update its catalogs. Extraction preserves
+existing translations; it does not translate document content. Keep stable
+sidebar keys and message IDs for future TMS synchronization. External SDK
+documents continue to land under `docs/sdk-repos/`; the fetch script does not
+write into `i18n/`.
+
+For sparse translations, test links from English fallback documents to localized
+documents. A Markdown source-file link can become unresolved when Docusaurus
+selects the translated file. Use the corresponding stable relative page route
+where needed, as the glossary does for Introduction.
+
+See [the internationalization plan](I18N.md) for rollout status, verification
+results, TMS requirements, and remaining publishing decisions.
+
 ### Deployment
 
 Deployments are handled automatically by Netlify. Please open up a pull request with any changes and a preview site will be created automatically so you can share what the rendered site will look like before merging.
