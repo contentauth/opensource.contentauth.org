@@ -1,0 +1,446 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docs.category.Getting started": {
+    "message": "Primi passi",
+    "description": "The label for category 'Getting started' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Understanding manifests": {
+    "message": "Comprendere i manifesti",
+    "description": "The label for category 'Understanding manifests' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Reading manifest data": {
+    "message": "Leggere i dati dei manifesti",
+    "description": "The label for category 'Reading manifest data' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Writing manifest data": {
+    "message": "Scrivere i dati dei manifesti",
+    "description": "The label for category 'Writing manifest data' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Working with the SDK": {
+    "message": "Lavorare con l'SDK",
+    "description": "The label for category 'Working with the SDK' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Signing and certificates": {
+    "message": "Firma e certificati",
+    "description": "The label for category 'Signing and certificates' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.C2PA Tool": {
+    "message": "C2PA Tool",
+    "description": "The label for category 'C2PA Tool' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Rust library": {
+    "message": "Libreria Rust",
+    "description": "The label for category 'Rust library' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Release process": {
+    "message": "Processo di rilascio",
+    "description": "The label for category 'Release process' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.SDK object reference": {
+    "message": "Riferimento degli oggetti dell'SDK",
+    "description": "The label for category 'SDK object reference' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Python library": {
+    "message": "Libreria Python",
+    "description": "The label for category 'Python library' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.C++ library": {
+    "message": "Libreria C++",
+    "description": "The label for category 'C++ library' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.JavaScript library": {
+    "message": "Libreria JavaScript",
+    "description": "The label for category 'JavaScript library' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Node.js library": {
+    "message": "Libreria Node.js",
+    "description": "The label for category 'Node.js library' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Mobile libraries": {
+    "message": "Librerie mobili",
+    "description": "The label for category 'Mobile libraries' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.iOS/macOS (Swift)": {
+    "message": "iOS/macOS (Swift)",
+    "description": "The label for category 'iOS/macOS (Swift)' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Android (Kotlin)": {
+    "message": "Android (Kotlin)",
+    "description": "The label for category 'Android (Kotlin)' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.C2PA conformance program": {
+    "message": "Programma di conformità C2PA",
+    "description": "The label for category 'C2PA conformance program' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.Durable Content Credentials": {
+    "message": "Content Credentials durature",
+    "description": "The label for category 'Durable Content Credentials' in sidebar 'docs'"
+  },
+  "sidebar.docs.category.TrustMark watermarking": {
+    "message": "Watermarking con TrustMark",
+    "description": "The label for category 'TrustMark watermarking' in sidebar 'docs'"
+  },
+  "sidebar.docs.link.c2patool.github": {
+    "message": "GitHub",
+    "description": "The label for link 'GitHub' in sidebar 'docs', linking to 'https://github.com/contentauth/c2patool'"
+  },
+  "sidebar.docs.link.Deprecation policy": {
+    "message": "Deprecation policy",
+    "description": "The label for link 'Deprecation policy' in sidebar 'docs', linking to 'https://github.com/contentauth/c2pa-rs/blob/main/docs/deprecation-policy.md'"
+  },
+  "sidebar.docs.link.Experimental features": {
+    "message": "Experimental features",
+    "description": "The label for link 'Experimental features' in sidebar 'docs', linking to 'https://github.com/contentauth/c2pa-rs/blob/main/docs/experimental-features.md'"
+  },
+  "sidebar.docs.link.Support tiers": {
+    "message": "Support tiers",
+    "description": "The label for link 'Support tiers' in sidebar 'docs', linking to 'https://github.com/contentauth/c2pa-rs/blob/main/docs/support-tiers.md'"
+  },
+  "sidebar.docs.link.rust.api": {
+    "message": "API documentation",
+    "description": "The label for link 'API documentation' in sidebar 'docs', linking to 'https://docs.rs/c2pa'"
+  },
+  "sidebar.docs.link.rust.github": {
+    "message": "GitHub",
+    "description": "The label for link 'GitHub' in sidebar 'docs', linking to 'https://github.com/contentauth/c2pa-rs'"
+  },
+  "sidebar.docs.link.python.api": {
+    "message": "API documentation",
+    "description": "The label for link 'API documentation' in sidebar 'docs', linking to 'https://contentauth.github.io/c2pa-python/api/c2pa/index.html'"
+  },
+  "sidebar.docs.link.python.github": {
+    "message": "GitHub",
+    "description": "The label for link 'GitHub' in sidebar 'docs', linking to 'https://github.com/contentauth/c2pa-python'"
+  },
+  "sidebar.docs.link.cpp.api": {
+    "message": "API documentation",
+    "description": "The label for link 'API documentation' in sidebar 'docs', linking to 'https://contentauth.github.io/c2pa-cpp/annotated.html'"
+  },
+  "sidebar.docs.link.cpp.github": {
+    "message": "GitHub",
+    "description": "The label for link 'GitHub' in sidebar 'docs', linking to 'https://github.com/contentauth/c2pa-cpp'"
+  },
+  "sidebar.docs.link.javascript.api": {
+    "message": "API documentation",
+    "description": "The label for link 'API documentation' in sidebar 'docs', linking to 'https://contentauth.github.io/c2pa-js/modules/_contentauth_c2pa-web.html'"
+  },
+  "sidebar.docs.link.javascript.github": {
+    "message": "GitHub",
+    "description": "The label for link 'GitHub' in sidebar 'docs', linking to 'https://github.com/contentauth/c2pa-js'"
+  },
+  "sidebar.docs.link.node.api": {
+    "message": "API documentation",
+    "description": "The label for link 'API documentation' in sidebar 'docs', linking to 'https://contentauth.github.io/c2pa-js/modules/_contentauth_c2pa-node.html'"
+  },
+  "sidebar.docs.link.node.github": {
+    "message": "GitHub",
+    "description": "The label for link 'GitHub' in sidebar 'docs', linking to 'https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node'"
+  },
+  "sidebar.docs.link.swift.api": {
+    "message": "API documentation",
+    "description": "The label for link 'API documentation' in sidebar 'docs', linking to 'https://contentauth.github.io/c2pa-swift/documentation/c2pa/'"
+  },
+  "sidebar.docs.link.swift.github": {
+    "message": "GitHub",
+    "description": "The label for link 'GitHub' in sidebar 'docs', linking to 'https://github.com/contentauth/c2pa-swift'"
+  },
+  "sidebar.docs.link.android.api": {
+    "message": "API documentation",
+    "description": "The label for link 'API documentation' in sidebar 'docs', linking to 'https://contentauth.github.io/c2pa-android/'"
+  },
+  "sidebar.docs.link.android.github": {
+    "message": "GitHub",
+    "description": "The label for link 'GitHub' in sidebar 'docs', linking to 'https://github.com/contentauth/c2pa-android'"
+  },
+  "sidebar.docs.link.TrustMark Rust API docs": {
+    "message": "TrustMark Rust API docs",
+    "description": "The label for link 'TrustMark Rust API docs' in sidebar 'docs', linking to 'https://docs.rs/trustmark'"
+  },
+  "sidebar.docs.link.trustmark.github": {
+    "message": "GitHub",
+    "description": "The label for link 'GitHub' in sidebar 'docs', linking to 'https://github.com/adobe/trustmark/'"
+  },
+  "sidebar.docs.doc.getting-started/faqs": {
+    "message": "Domande frequenti",
+    "description": "The label for the doc item 'FAQs' in sidebar 'docs', linking to the doc getting-started/faqs"
+  },
+  "sidebar.docs.doc.Glossary": {
+    "message": "Glossario",
+    "description": "The label for the doc item 'Glossary' in sidebar 'docs', linking to the doc getting-started/glossary"
+  },
+  "sidebar.docs.doc.Using ACA Inspect": {
+    "message": "Using ACA Inspect",
+    "description": "The label for the doc item 'Using ACA Inspect' in sidebar 'docs', linking to the doc getting-started/inspect"
+  },
+  "sidebar.docs.doc.Examples": {
+    "message": "Examples",
+    "description": "The label for the doc item 'Examples' in sidebar 'docs', linking to the doc manifest/manifest-examples"
+  },
+  "sidebar.docs.doc.Configuring settings": {
+    "message": "Configuring settings",
+    "description": "The label for the doc item 'Configuring settings' in sidebar 'docs', linking to the doc tasks/settings"
+  },
+  "sidebar.docs.doc.Reading manifest data": {
+    "message": "Reading manifest data",
+    "description": "The label for the doc item 'Reading manifest data' in sidebar 'docs', linking to the doc tasks/read"
+  },
+  "sidebar.docs.doc.Getting manifest resources": {
+    "message": "Getting manifest resources",
+    "description": "The label for the doc item 'Getting manifest resources' in sidebar 'docs', linking to the doc tasks/get-resources"
+  },
+  "sidebar.docs.doc.Using builder intents": {
+    "message": "Using builder intents",
+    "description": "The label for the doc item 'Using builder intents' in sidebar 'docs', linking to the doc tasks/intents"
+  },
+  "sidebar.docs.doc.tasks/archives": {
+    "message": "Using working stores and archives",
+    "description": "The label for the doc item 'Using working stores and archives' in sidebar 'docs', linking to the doc tasks/archives"
+  },
+  "sidebar.docs.doc.Adding and signing a manifest": {
+    "message": "Adding and signing a manifest",
+    "description": "The label for the doc item 'Adding and signing a manifest' in sidebar 'docs', linking to the doc tasks/build"
+  },
+  "sidebar.docs.doc.Using test certificates": {
+    "message": "Using test certificates",
+    "description": "The label for the doc item 'Using test certificates' in sidebar 'docs', linking to the doc signing/test-certs"
+  },
+  "sidebar.docs.doc.Getting a certificate": {
+    "message": "Getting a certificate",
+    "description": "The label for the doc item 'Getting a certificate' in sidebar 'docs', linking to the doc signing/get-cert"
+  },
+  "sidebar.docs.doc.Signing with local credentials": {
+    "message": "Signing with local credentials",
+    "description": "The label for the doc item 'Signing with local credentials' in sidebar 'docs', linking to the doc signing/local-signing"
+  },
+  "sidebar.docs.doc.Using a certificate in production": {
+    "message": "Using a certificate in production",
+    "description": "The label for the doc item 'Using a certificate in production' in sidebar 'docs', linking to the doc signing/prod-cert"
+  },
+  "sidebar.docs.doc.sdk-repos/c2patool/docs/usage": {
+    "message": "Using C2PA Tool",
+    "description": "The label for the doc item 'Using C2PA Tool' in sidebar 'docs', linking to the doc sdk-repos/c2patool/docs/usage"
+  },
+  "sidebar.docs.doc.sdk-repos/c2patool/docs/supported-formats": {
+    "message": "Supported media formats",
+    "description": "The label for the doc item 'Supported media formats' in sidebar 'docs', linking to the doc sdk-repos/c2patool/docs/supported-formats"
+  },
+  "sidebar.docs.doc.sdk-repos/c2patool/docs/manifest": {
+    "message": "Using a manifest file",
+    "description": "The label for the doc item 'Using a manifest file' in sidebar 'docs', linking to the doc sdk-repos/c2patool/docs/manifest"
+  },
+  "sidebar.docs.doc.sdk-repos/c2patool/docs/signing": {
+    "message": "Signing assets with C2PA Tool",
+    "description": "The label for the doc item 'Signing assets with C2PA Tool' in sidebar 'docs', linking to the doc sdk-repos/c2patool/docs/signing"
+  },
+  "sidebar.docs.doc.sdk-repos/c2patool/docs/cawg_x509_signing": {
+    "message": "Adding CAWG identity assertions",
+    "description": "The label for the doc item 'Adding CAWG identity assertions' in sidebar 'docs', linking to the doc sdk-repos/c2patool/docs/cawg_x509_signing"
+  },
+  "sidebar.docs.doc.sdk-repos/c2patool/docs/changelog": {
+    "message": "Change log",
+    "description": "The label for the doc item 'Change log' in sidebar 'docs', linking to the doc sdk-repos/c2patool/docs/changelog"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-rs/docs/usage": {
+    "message": "Using the Rust library",
+    "description": "The label for the doc item 'Using the Rust library' in sidebar 'docs', linking to the doc sdk-repos/c2pa-rs/docs/usage"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-rs/docs/supported-formats": {
+    "message": "Supported media formats",
+    "description": "The label for the doc item 'Supported media formats' in sidebar 'docs', linking to the doc sdk-repos/c2pa-rs/docs/supported-formats"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-rs/docs/context-settings": {
+    "message": "Configuring SDK settings",
+    "description": "The label for the doc item 'Configuring SDK settings' in sidebar 'docs', linking to the doc sdk-repos/c2pa-rs/docs/context-settings"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-rs/docs/working-stores": {
+    "message": "Using working stores and archives",
+    "description": "The label for the doc item 'Using working stores and archives' in sidebar 'docs', linking to the doc sdk-repos/c2pa-rs/docs/working-stores"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-rs/docs/intents": {
+    "message": "Using Builder intents",
+    "description": "The label for the doc item 'Using Builder intents' in sidebar 'docs', linking to the doc sdk-repos/c2pa-rs/docs/intents"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-rs/docs/progress_callbacks": {
+    "message": "Progress callbacks",
+    "description": "The label for the doc item 'Progress callbacks' in sidebar 'docs', linking to the doc sdk-repos/c2pa-rs/docs/progress_callbacks"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-rs/docs/cawg-identity": {
+    "message": "Using CAWG identity assertions",
+    "description": "The label for the doc item 'Using CAWG identity assertions' in sidebar 'docs', linking to the doc sdk-repos/c2pa-rs/docs/cawg-identity"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-rs/docs/redaction": {
+    "message": "Redaction",
+    "description": "The label for the doc item 'Redaction' in sidebar 'docs', linking to the doc sdk-repos/c2pa-rs/docs/redaction"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-rs/docs/instanceid-behavior": {
+    "message": "InstanceID behavior",
+    "description": "The label for the doc item 'InstanceID behavior' in sidebar 'docs', linking to the doc sdk-repos/c2pa-rs/docs/instanceid-behavior"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-rs/docs/embeddable-api": {
+    "message": "Embeddable signing API",
+    "description": "The label for the doc item 'Embeddable signing API' in sidebar 'docs', linking to the doc sdk-repos/c2pa-rs/docs/embeddable-api"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-rs/docs/release-notes": {
+    "message": "Release notes (Rust)",
+    "description": "The label for the doc item 'Release notes (Rust)' in sidebar 'docs', linking to the doc sdk-repos/c2pa-rs/docs/release-notes"
+  },
+  "sidebar.docs.doc.Reader": {
+    "message": "Reader",
+    "description": "The label for the doc item 'Reader' in sidebar 'docs', linking to the doc manifest/json-ref/reader-schema"
+  },
+  "sidebar.docs.doc.Builder": {
+    "message": "Builder",
+    "description": "The label for the doc item 'Builder' in sidebar 'docs', linking to the doc manifest/json-ref/builder-schema"
+  },
+  "sidebar.docs.doc.ManifestDefinition": {
+    "message": "ManifestDefinition",
+    "description": "The label for the doc item 'ManifestDefinition' in sidebar 'docs', linking to the doc manifest/json-ref/manifest-definition-schema"
+  },
+  "sidebar.docs.doc.Settings": {
+    "message": "Settings",
+    "description": "The label for the doc item 'Settings' in sidebar 'docs', linking to the doc manifest/json-ref/settings-schema"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-python/docs/usage": {
+    "message": "Using the Python library",
+    "description": "The label for the doc item 'Using the Python library' in sidebar 'docs', linking to the doc sdk-repos/c2pa-python/docs/usage"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-python/docs/supported-formats": {
+    "message": "Supported media formats",
+    "description": "The label for the doc item 'Supported media formats' in sidebar 'docs', linking to the doc sdk-repos/c2pa-python/docs/supported-formats"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-python/docs/class-diagram": {
+    "message": "Class diagram",
+    "description": "The label for the doc item 'Class diagram' in sidebar 'docs', linking to the doc sdk-repos/c2pa-python/docs/class-diagram"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-python/docs/context-settings": {
+    "message": "Configuring SDK settings",
+    "description": "The label for the doc item 'Configuring SDK settings' in sidebar 'docs', linking to the doc sdk-repos/c2pa-python/docs/context-settings"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-python/docs/intents": {
+    "message": "Using Builder intents",
+    "description": "The label for the doc item 'Using Builder intents' in sidebar 'docs', linking to the doc sdk-repos/c2pa-python/docs/intents"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-python/docs/working-stores": {
+    "message": "Manifests, working stores, and archives",
+    "description": "The label for the doc item 'Manifests, working stores, and archives' in sidebar 'docs', linking to the doc sdk-repos/c2pa-python/docs/working-stores"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-python/docs/selective-manifests": {
+    "message": "Selective manifest construction",
+    "description": "The label for the doc item 'Selective manifest construction' in sidebar 'docs', linking to the doc sdk-repos/c2pa-python/docs/selective-manifests"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-python/docs/examples": {
+    "message": "Python example code",
+    "description": "The label for the doc item 'Python example code' in sidebar 'docs', linking to the doc sdk-repos/c2pa-python/docs/examples"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-python/docs/release-notes": {
+    "message": "Release notes (Python)",
+    "description": "The label for the doc item 'Release notes (Python)' in sidebar 'docs', linking to the doc sdk-repos/c2pa-python/docs/release-notes"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-python-example/readme": {
+    "message": "C2PA Python example",
+    "description": "The label for the doc item 'C2PA Python example' in sidebar 'docs', linking to the doc sdk-repos/c2pa-python-example/readme"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-cpp/docs/usage": {
+    "message": "Using the C++ library",
+    "description": "The label for the doc item 'Using the C++ library' in sidebar 'docs', linking to the doc sdk-repos/c2pa-cpp/docs/usage"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-cpp/docs/supported-formats": {
+    "message": "Supported media formats",
+    "description": "The label for the doc item 'Supported media formats' in sidebar 'docs', linking to the doc sdk-repos/c2pa-cpp/docs/supported-formats"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-cpp/docs/context-settings": {
+    "message": "Configuring SDK settings",
+    "description": "The label for the doc item 'Configuring SDK settings' in sidebar 'docs', linking to the doc sdk-repos/c2pa-cpp/docs/context-settings"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-cpp/docs/intents": {
+    "message": "Using Builder intents",
+    "description": "The label for the doc item 'Using Builder intents' in sidebar 'docs', linking to the doc sdk-repos/c2pa-cpp/docs/intents"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-cpp/docs/working-stores": {
+    "message": "Using working stores and archives",
+    "description": "The label for the doc item 'Using working stores and archives' in sidebar 'docs', linking to the doc sdk-repos/c2pa-cpp/docs/working-stores"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-cpp/docs/selective-manifests": {
+    "message": "Selective manifest construction",
+    "description": "The label for the doc item 'Selective manifest construction' in sidebar 'docs', linking to the doc sdk-repos/c2pa-cpp/docs/selective-manifests"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-cpp/docs/embeddable-api": {
+    "message": "Embeddable signing API",
+    "description": "The label for the doc item 'Embeddable signing API' in sidebar 'docs', linking to the doc sdk-repos/c2pa-cpp/docs/embeddable-api"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-cpp/docs/release-notes": {
+    "message": "Release notes (C++)",
+    "description": "The label for the doc item 'Release notes (C++)' in sidebar 'docs', linking to the doc sdk-repos/c2pa-cpp/docs/release-notes"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-cpp/docs/faqs": {
+    "message": "FAQs",
+    "description": "The label for the doc item 'FAQs' in sidebar 'docs', linking to the doc sdk-repos/c2pa-cpp/docs/faqs"
+  },
+  "sidebar.docs.doc.c2pa-web": {
+    "message": "c2pa-web",
+    "description": "The label for the doc item 'c2pa-web' in sidebar 'docs', linking to the doc sdk-repos/c2pa-js/packages/c2pa-web/README"
+  },
+  "sidebar.docs.doc.c2pa-types": {
+    "message": "c2pa-types",
+    "description": "The label for the doc item 'c2pa-types' in sidebar 'docs', linking to the doc sdk-repos/c2pa-js/packages/c2pa-types/README"
+  },
+  "sidebar.docs.doc.c2pa-wasm": {
+    "message": "c2pa-wasm",
+    "description": "The label for the doc item 'c2pa-wasm' in sidebar 'docs', linking to the doc sdk-repos/c2pa-js/packages/c2pa-wasm/README"
+  },
+  "sidebar.docs.doc.c2pa-utilities": {
+    "message": "c2pa-utilities",
+    "description": "The label for the doc item 'c2pa-utilities' in sidebar 'docs', linking to the doc sdk-repos/c2pa-js/packages/c2pa-utilities/README"
+  },
+  "sidebar.docs.doc.javascript.supported-formats": {
+    "message": "Supported media formats",
+    "description": "The label for the doc item 'Supported media formats' in sidebar 'docs', linking to the doc sdk-repos/c2pa-js/supported-formats"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-ios-example/README": {
+    "message": "Example iOS app",
+    "description": "The label for the doc item 'Example iOS app' in sidebar 'docs', linking to the doc sdk-repos/c2pa-ios-example/README"
+  },
+  "sidebar.docs.doc.sdk-repos/c2pa-android-example/README": {
+    "message": "Example Android app",
+    "description": "The label for the doc item 'Example Android app' in sidebar 'docs', linking to the doc sdk-repos/c2pa-android-example/README"
+  },
+  "sidebar.docs.doc.CAWG on mobile": {
+    "message": "CAWG on mobile",
+    "description": "The label for the doc item 'CAWG on mobile' in sidebar 'docs', linking to the doc cawg-mobile"
+  },
+  "sidebar.docs.doc.Watermarking and fingerprinting": {
+    "message": "Watermarking and fingerprinting",
+    "description": "The label for the doc item 'Watermarking and fingerprinting' in sidebar 'docs', linking to the doc durable-cr/sb-algs"
+  },
+  "sidebar.docs.doc.sdk-repos/trustmark/README": {
+    "message": "Overview",
+    "description": "The label for the doc item 'Overview' in sidebar 'docs', linking to the doc sdk-repos/trustmark/README"
+  },
+  "sidebar.docs.doc.sdk-repos/trustmark/python/CONFIG": {
+    "message": "Configuration",
+    "description": "The label for the doc item 'Configuration' in sidebar 'docs', linking to the doc sdk-repos/trustmark/python/CONFIG"
+  },
+  "sidebar.docs.doc.sdk-repos/trustmark/c2pa/README": {
+    "message": "Using with C2PA",
+    "description": "The label for the doc item 'Using with C2PA' in sidebar 'docs', linking to the doc sdk-repos/trustmark/c2pa/README"
+  },
+  "sidebar.docs.doc.sdk-repos/trustmark/js/README": {
+    "message": "JavaScript example",
+    "description": "The label for the doc item 'JavaScript example' in sidebar 'docs', linking to the doc sdk-repos/trustmark/js/README"
+  },
+  "sidebar.docs.doc.sdk-repos/trustmark/rust/README": {
+    "message": "Rust implementation",
+    "description": "The label for the doc item 'Rust implementation' in sidebar 'docs', linking to the doc sdk-repos/trustmark/rust/README"
+  },
+  "sidebar.docs.doc.sdk-repos/trustmark/rust/crates/trustmark-cli/README": {
+    "message": "Rust CLI",
+    "description": "The label for the doc item 'Rust CLI' in sidebar 'docs', linking to the doc sdk-repos/trustmark/rust/crates/trustmark-cli/README"
+  },
+  "sidebar.docs.doc.FAQ": {
+    "message": "FAQ",
+    "description": "The label for the doc item 'FAQ' in sidebar 'docs', linking to the doc durable-cr/tm-faq"
+  }
+}
