@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Builder",
-  "description": "Use a Builder to add a signed manifest to an asset.\n\n## Example: Adding a signed manifest to an asset\n\n```\n# use c2pa::Result;\nuse std::io::Cursor;\n\nuse c2pa::{settings::Settings, Builder, SigningAlg};\nuse serde::Serialize;\n\n#[derive(Serialize)]\nstruct Test {\n    my_tag: usize,\n}\n\n# fn main() -> Result<()> {\n{\n    Settings::from_toml(include_str!(\"../tests/fixtures/test_settings.toml\"))?;\n    let mut builder = Builder::from_json(r#\"{\"title\": \"Test\"}\"#)?;\n    builder.add_assertion(\"org.contentauth.test\", &Test { my_tag: 42 })?;\n\n    // embed a manifest using the signer\n    let mut source = std::fs::File::open(\"tests/fixtures/C.jpg\")?;\n    let mut dest = Cursor::new(Vec::new());\n    let signer = Settings::signer()?;\n    let _c2pa_data = builder.sign(&signer, \"image/jpeg\", &mut source, &mut dest)?;\n}\n# Ok(())\n# }\n```",
+  "description": "Use a Builder to add a signed manifest to an asset.\n\n## Example: Adding a signed manifest to an asset\n\n```\n# use c2pa::Result;\nuse std::io::Cursor;\n\nuse c2pa::{Builder, Context};\nuse serde::Serialize;\n\n#[derive(Serialize)]\nstruct Test {\n    my_tag: usize,\n}\n\n# fn main() -> Result<()> {\nlet context =\n    Context::new().with_settings(include_str!(\"../tests/fixtures/test_settings.toml\"))?;\nlet mut builder = Builder::from_context(context).with_definition(r#\"{\"title\": \"Test\"}\"#)?;\nbuilder.add_assertion(\"org.contentauth.test\", &Test { my_tag: 42 })?;\n\n// Embed a signed manifest into the destination stream.\nlet mut source = std::fs::File::open(\"tests/fixtures/C.jpg\")?;\nlet mut dest = Cursor::new(Vec::new());\nlet _c2pa_data = builder.save_to_stream(\"image/jpeg\", &mut source, &mut dest)?;\n# Ok(())\n# }\n```",
   "type": "object",
   "properties": {
     "claim_version": {
@@ -53,7 +53,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp.iid:eda53aaf-f7c0-4d91-8320-13fa82c0037f"
+      "default": "xmp.iid:c06f50b5-01ad-4e61-a550-2581462d4f98"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -472,18 +472,6 @@
             "null"
           ]
         },
-        "role": {
-          "description": "A value from our controlled vocabulary or an entity-specific value (e.g., com.litware.coolArea) that represents\nthe role of a region among other regions.",
-          "anyOf": [
-            {
-              "$ref": "#/$defs/Role"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "deprecated": true
-        },
         "description": {
           "description": "A free-text string.",
           "type": [
@@ -860,56 +848,6 @@
         "value"
       ]
     },
-    "Role": {
-      "description": "A role describing the region.",
-      "oneOf": [
-        {
-          "description": "Arbitrary area worth identifying.",
-          "type": "string",
-          "const": "c2pa.areaOfInterest"
-        },
-        {
-          "description": "This area is all that is left after a crop action.",
-          "type": "string",
-          "const": "c2pa.cropped"
-        },
-        {
-          "description": "This area has had edits applied to it.",
-          "type": "string",
-          "const": "c2pa.edited"
-        },
-        {
-          "description": "The area where an ingredient was placed/added.",
-          "type": "string",
-          "const": "c2pa.placed"
-        },
-        {
-          "description": "Something in this area was redacted.",
-          "type": "string",
-          "const": "c2pa.redacted"
-        },
-        {
-          "description": "Area specific to a subject (human or not).",
-          "type": "string",
-          "const": "c2pa.subjectArea"
-        },
-        {
-          "description": "A range of information was removed/deleted.",
-          "type": "string",
-          "const": "c2pa.deleted"
-        },
-        {
-          "description": "Styling was applied to this area.",
-          "type": "string",
-          "const": "c2pa.styled"
-        },
-        {
-          "description": "Invisible watermarking was applied to this area for the purpose of soft binding.",
-          "type": "string",
-          "const": "c2pa.watermarked"
-        }
-      ]
-    },
     "Ingredient": {
       "description": "An `Ingredient` is any external asset that has been used in the creation of an asset.",
       "type": "object",
@@ -1152,12 +1090,6 @@
           "const": "http://cv.iptc.org/newscodes/digitalsourcetype/print"
         },
         {
-          "description": "Minor augmentation or correction by a human, such as a digitally-retouched photo used in a magazine.",
-          "type": "string",
-          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/minorHumanEdits",
-          "deprecated": true
-        },
-        {
           "description": "Augmentation, correction or enhancement by one or more humans using non-generative tools.",
           "type": "string",
           "const": "http://cv.iptc.org/newscodes/digitalsourcetype/humanEdits"
@@ -1171,18 +1103,6 @@
           "description": "Modification or correction by algorithm without changing the main content of the media, initiated\nor configured by a human, such as sharpening or applying noise reduction.",
           "type": "string",
           "const": "http://cv.iptc.org/newscodes/digitalsourcetype/algorithmicallyEnhanced"
-        },
-        {
-          "description": "The digital image was created by computer software.",
-          "type": "string",
-          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/softwareImage",
-          "deprecated": true
-        },
-        {
-          "description": "Media created by a human using digital tools.",
-          "type": "string",
-          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/digitalArt",
-          "deprecated": true
         },
         {
           "description": "Media created by a human using non-generative tools.",
