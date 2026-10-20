@@ -53,7 +53,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp.iid:32903aee-412b-4e46-adb1-58605efded26"
+      "default": "xmp.iid:705f677d-e612-4de3-a159-20521219e66f"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -438,18 +438,6 @@
             "null"
           ]
         },
-        "role": {
-          "description": "A value from our controlled vocabulary or an entity-specific value (e.g., com.litware.coolArea) that represents\nthe role of a region among other regions.",
-          "anyOf": [
-            {
-              "$ref": "#/$defs/Role"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "deprecated": true
-        },
         "description": {
           "description": "A free-text string.",
           "type": [
@@ -826,56 +814,6 @@
         "value"
       ]
     },
-    "Role": {
-      "description": "A role describing the region.",
-      "oneOf": [
-        {
-          "description": "Arbitrary area worth identifying.",
-          "type": "string",
-          "const": "c2pa.areaOfInterest"
-        },
-        {
-          "description": "This area is all that is left after a crop action.",
-          "type": "string",
-          "const": "c2pa.cropped"
-        },
-        {
-          "description": "This area has had edits applied to it.",
-          "type": "string",
-          "const": "c2pa.edited"
-        },
-        {
-          "description": "The area where an ingredient was placed/added.",
-          "type": "string",
-          "const": "c2pa.placed"
-        },
-        {
-          "description": "Something in this area was redacted.",
-          "type": "string",
-          "const": "c2pa.redacted"
-        },
-        {
-          "description": "Area specific to a subject (human or not).",
-          "type": "string",
-          "const": "c2pa.subjectArea"
-        },
-        {
-          "description": "A range of information was removed/deleted.",
-          "type": "string",
-          "const": "c2pa.deleted"
-        },
-        {
-          "description": "Styling was applied to this area.",
-          "type": "string",
-          "const": "c2pa.styled"
-        },
-        {
-          "description": "Invisible watermarking was applied to this area for the purpose of soft binding.",
-          "type": "string",
-          "const": "c2pa.watermarked"
-        }
-      ]
-    },
     "Ingredient": {
       "description": "An `Ingredient` is any external asset that has been used in the creation of an asset.",
       "type": "object",
@@ -1118,12 +1056,6 @@
           "const": "http://cv.iptc.org/newscodes/digitalsourcetype/print"
         },
         {
-          "description": "Minor augmentation or correction by a human, such as a digitally-retouched photo used in a magazine.",
-          "type": "string",
-          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/minorHumanEdits",
-          "deprecated": true
-        },
-        {
           "description": "Augmentation, correction or enhancement by one or more humans using non-generative tools.",
           "type": "string",
           "const": "http://cv.iptc.org/newscodes/digitalsourcetype/humanEdits"
@@ -1137,18 +1069,6 @@
           "description": "Modification or correction by algorithm without changing the main content of the media, initiated\nor configured by a human, such as sharpening or applying noise reduction.",
           "type": "string",
           "const": "http://cv.iptc.org/newscodes/digitalsourcetype/algorithmicallyEnhanced"
-        },
-        {
-          "description": "The digital image was created by computer software.",
-          "type": "string",
-          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/softwareImage",
-          "deprecated": true
-        },
-        {
-          "description": "Media created by a human using digital tools.",
-          "type": "string",
-          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/digitalArt",
-          "deprecated": true
         },
         {
           "description": "Media created by a human using non-generative tools.",
