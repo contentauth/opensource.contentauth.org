@@ -326,7 +326,7 @@ const sidebars = {
         {
           type: 'link',
           label: 'API documentation',
-          href: 'https://contentauth.github.io/c2pa-js/modules/_contentauth_c2pa-web.html',
+          href: 'https://contentauth.github.io/c2pa-js/web/',
         },
         {
           type: 'link',
@@ -344,7 +344,7 @@ const sidebars = {
         {
           type: 'link',
           label: 'API documentation',
-          href: 'https://contentauth.github.io/c2pa-js/modules/_contentauth_c2pa-node.html',
+          href: 'https://contentauth.github.io/c2pa-js/node/',
         },
         {
           type: 'link',
