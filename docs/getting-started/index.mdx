@@ -12,7 +12,7 @@ The SDK implements C2PA functionality for supported asset formats and platforms.
 
 ## Important terminology
 
-These simplified definitions introduce the main concepts. For authoritative definitions and additional terms, see the [Glossary in the C2PA specification](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_glossary).
+These simplified definitions introduce the main concepts. For more detail and additional terms, see the [Glossary](glossary.mdx).
 
 _Content provenance_ is information about the creation, authorship, and editing of a digital asset. _Content Credentials_ record provenance with cryptographic signatures and content bindings that make tampering detectable.
 
@@ -26,7 +26,7 @@ As illustrated below, a _manifest_ contains assertions about an asset, a claim t
 
 **Action**: An operation performed on an asset, such as creating, cropping, or adjusting it.
 
-**Assertion**: Structured information about an asset. For example, an actions assertion can record editing operations. See the [standard C2PA assertions](https://c2pa.org/specifications/specifications/2.2/specs/C2PA_Specification.html#_c2pa_standard_assertions).
+**Assertion**: Structured information about an asset. For example, an actions assertion can record editing operations. See the [standard C2PA assertions](https://c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_c2pa_standard_assertions).
 
 **Certificate Authority (CA)**: An organization that issues digitally signed certificates under a defined certificate policy.
 
@@ -58,10 +58,10 @@ Successful validation provides evidence of integrity and, when the signer is tru
 
 ### Basic SDK workflow
 
-Once you've [chosen the SDK library to use](../introduction.mdx) based on you runtime environment, the basic SDK workflow is:
+Once you've [chosen the SDK library to use](../introduction.mdx) based on your runtime environment, the basic SDK workflow is:
 
-1. **Read and validate** an asset with a [Reader](../manifest/reading/reading.md). Distinguish missing credentials from invalid credentials. Inspect the validation results and the `Invalid`, `Valid`, or `Trusted` state; see [Validating manifests](../manifest/reading/validation.md).
-1. **Build and sign** provenance with a [Builder](../manifest/writing/writing.md), adding relevant assertions and ingredients and supplying a signer.
+1. **Read and validate** an asset with a [Reader](../manifest/reading/reading.md). Distinguish missing from invalid Content Credentials. Inspect the validation results and the `Invalid`, `Valid`, or `Trusted` state; see [Validating manifests](../manifest/reading/validation.md).
+1. **Build and sign** Content Credentials with a [Builder](../manifest/writing/writing.md), adding relevant assertions and ingredients and supplying a signer.
 1. **Preserve and display** the resulting manifest store and validation results using the storage and UI guidance below.
 
 In the Rust library, a [Context](../sdk-repos/c2pa-rs/docs/context-settings.md) configures verification, trust, network access, and signers. Configure appropriate trust anchors and remote-fetch policies for your application. Equivalent APIs and feature availability vary across language libraries and releases.
@@ -84,7 +84,7 @@ Signing requirements differ between prototyping and production:
 2. **Obtain an appropriate production certificate.** Follow the [C2PA certificate requirements](../signing/get-cert.md) and the requirements of your intended trust ecosystem. Conforming generator products must use a certificate chaining to the C2PA trust list; a generic email or document-signing certificate is not automatically sufficient.
 3. **Protect the private key.** Use a suitable signer backed by a hardware security module (HSM) or key management service (KMS) for production. A certificate signing request (CSR) contains the public key; it does not require sharing your private key with the CA. Never include production private keys in browser code or distributed applications.
 
-A trusted timestamp from a time-stamping authority (TSA) can establish that the signature existed while the signing certificate was valid, supporting verification after certificate expiry. This is different from a date recorded in an assertion. See [Time-stamps](../manifest/understanding.md#time-stamps).
+A trusted time-stamp from a time-stamping authority (TSA) can establish that the signature existed while the signing certificate was valid, supporting verification after certificate expiry. This is different from a date recorded in an assertion. See [Time-stamps](../manifest/understanding.md#time-stamps).
 
 :::info
 For the development-to-production workflow, see [Signing and certificates](../signing/index.md).
@@ -92,7 +92,7 @@ For the development-to-production workflow, see [Signing and certificates](../si
 
 ### Trust lists
 
-The [C2PA trust list](../conformance/trust-lists.mdx#c2pa-trust-list) contains certificate trust anchors for conforming generator products. A separate TSA trust list supports timestamp validation. Validators must apply the appropriate trust policy; a cryptographically valid signature is not automatically from a trusted signer.
+The [C2PA trust list](../conformance/trust-lists.mdx#c2pa-trust-list) contains certificate trust anchors for conforming generator products. A separate TSA trust list supports time-stamp validation. Validators must apply the appropriate trust policy; a cryptographically valid signature is not automatically from a trusted signer.
 
 For current lists, legacy [interim trust list](../conformance/trust-lists.mdx#interim-trust-list) support, and tool-specific behavior, see [Trust lists](../conformance/trust-lists.mdx).
 
@@ -120,7 +120,7 @@ Embedding keeps the manifest store self-contained, but increases file size by an
 
 ### Storing a manifest in the cloud
 
-Any developer can host remote manifest stores; this is not limited to Adobe services. Use HTTPS and preserve the reference in the asset. Adobe Content Credentials Cloud is a separate service used by Adobe tools, not a prerequisite for remote storage.
+Any developer can create a cloud manifest storage system to host remote manifest stores; this is not limited to Adobe services. Use HTTPS and preserve the reference in the asset. Adobe Content Credentials Cloud is a separate service used by Adobe tools, not a prerequisite for remote storage.
 
 Remote storage alone does not ensure recovery if the reference is stripped. [Durable Content Credentials](../durable-cr/index.md) combine stored manifests with soft bindings and a lookup service to help rediscover provenance. Finding a matching manifest is not a substitute for checking its signature and applicable content bindings.
 
