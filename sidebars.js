@@ -422,6 +422,7 @@ const sidebars = {
           type: 'doc',
           id: 'conformance/conformance-impl-guide',
         },
+        ...getRemoteSidebarItems('conformance'),
       ],
     },
     {
