@@ -30,9 +30,15 @@ For educational videos on using the CAI open-source SDK, see [**Content Credenti
 
 For an overview of platform-specific mobile options, see [Mobile libraries](mobile.md).
 
-:::tip Choose by runtime, not repository name
 The [JavaScript SDK repository](sdk-repos/c2pa-js/README.md) contains both browser and Node.js packages. For application development, choose **`@contentauth/c2pa-web`** or **`@contentauth/c2pa-node`** rather than treating `c2pa-js` as a single interchangeable library.
+
+:::note Library capabilities
+Supported asset formats, signing algorithms, platform integrations, and individual APIs depend on the library and release. Signing also requires an appropriate signer and certificate; installing an SDK library does not supply a production signing identity.
 :::
+
+Creating or updating provenance normally means creating a new signed manifest that records the operation and relevant source assets, rather than editing an existing signed manifest in place.
+
+C2PA Tool is useful for inspection, scripts, and prototypes. For applications that repeatedly process assets, a language library generally provides more direct integration than launching a separate command-line process for every operation.
 
 ## SDK architecture overview
 
@@ -68,29 +74,6 @@ A shared core does **not** mean every SDK release exposes every feature or suppo
 For most integrations, use an existing language library. For integrations not covered by those libraries, Rust's _foreign function interface_ (FFI) enables interoperability with other languages.
 
 Embedded environments can have additional constraints, including limited memory, low-powered hardware, intermittent connectivity, unusual operating systems, or bare-metal execution. Contact the CAI team before planning an embedded integration. Don't assume that a desktop library or prebuilt binary will work unchanged.
-
-## Capability matrix
-
-The following table summarizes the capabilities of the SDK libraries and tools. Runtime and deployment requirements are usually the most important factors when choosing between them.
-
-| SDK or tool | Primary environment | Read and validate manifests | Create manifests | Sign and embed manifests |
-| --- | --- | --- | --- | --- |
-| **c2pa-web** | Browser, using WebAssembly | Yes | Yes | Yes, with a supplied signer |
-| **c2pa-node** | Node.js, using a native add-on | Yes | Yes | Yes |
-| **Python** | Native Python runtime | Yes | Yes | Yes |
-| **C/C++** | Native applications and services | Yes | Yes | Yes |
-| **Swift** | iOS and macOS | Yes | Yes | Yes |
-| **Android** | Android applications | Yes | Yes | Yes |
-| **Rust** | Rust applications and services | Yes | Yes | Yes |
-| **C2PA Tool** | Command line | Yes | Yes, using manifest definitions | Yes |
-
-:::note Capability boundaries
-These entries describe broad capabilities, not complete feature parity. Supported asset formats, signing algorithms, platform integrations, and individual APIs depend on the SDK and release. Signing also requires an appropriate signer and certificate; installing an SDK does not supply a production signing identity.
-:::
-
-Creating or updating provenance normally means creating a new signed manifest that records the operation and relevant source assets, rather than editing an existing signed manifest in place.
-
-C2PA Tool is useful for inspection, scripts, and prototypes. For applications that repeatedly process assets, a language SDK generally provides more direct integration than launching a separate command-line process for every operation.
 
 ## JavaScript applications
 
