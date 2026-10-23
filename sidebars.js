@@ -140,6 +140,23 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Technical FAQs',
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-rust',
+          label: 'Rust SDK FAQ',
+        },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-conformance',
+          label: 'C2PA Conformance FAQs',
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Signing and certificates',
       link: { type: 'doc', id: 'signing/signing-and-certs' },
       collapsed: true,
