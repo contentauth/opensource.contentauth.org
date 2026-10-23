@@ -5,8 +5,6 @@ CAI Rust SDK Discord history covering April through October 2026. They are
 not confirmed FAQ answers. Verify each topic before publishing guidance.
 Discord source links may require channel access.
 
-See the [Technical FAQ](./tech-faq-rust.md) for the nine drafted answers.
-
 ## Verification website reports invalid content that the SDK reports as trusted
 
 **Candidate question:** Why does a verification website reject an asset

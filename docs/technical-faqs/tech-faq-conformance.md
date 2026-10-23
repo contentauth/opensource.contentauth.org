@@ -6,6 +6,9 @@ verified against the latest requirements. Date-specific guidance reflects
 those discussions, not a guarantee of current program policy. Discord source
 links may require channel access.
 
+Selected answers also draw on the General channel history from April through
+October 2026, with the same source-only, unverified status.
+
 ## How do I start the conformance process?
 
 Start with the [C2PA Conformance Program](https://c2pa.org/conformance/)
@@ -55,6 +58,20 @@ separately signed CAWG identity assertion when a product needs to identify
 its users. Product conformance alone does not establish each user's identity.
 
 [Source: product conformance and identity, August 12, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1537131310424784896)
+
+## Does a conformance listing mean the public product already uses production certificates?
+
+Not necessarily. The May 23 General-channel reply explains that a product
+can appear on the conforming products list before public launch. There can
+also be a delay between listing and deploying a production certificate:
+the selected CA must verify conformance and the applicant's legal identity.
+
+The reply explains a possible listing/deployment gap; it does not establish
+the status of every named product in the discussion or make a beta
+certificate trusted. Evaluate the certificate actually used to sign an
+asset rather than inferring its trust from the product's listing alone.
+
+[Source: listing, launch, and certificate deployment distinction, May 23, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1507727660401295360)
 
 ## Why does a generator application ask about validation?
 
@@ -355,7 +372,14 @@ the `referenced_assertions` array of `cawg.identity`.
 This answers attribution and cryptographic protection; it does not claim
 that the assertion enforces a user's preference on downstream systems.
 
+An August 11 General-channel reply also cautions that companies were not
+reliably respecting training-and-mining assertions in practice. Treat the
+assertion as a statement of preference, not a technical block on scraping
+or a guarantee against undesired AI use.
+
 [Source: gathered preference assertion and optional identity link, June 8, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1513597018038206725)
+
+[Source: practical enforcement limitation, August 11, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1536753197203587175)
 
 ## Can my organization's identity certificate identify all my users?
 

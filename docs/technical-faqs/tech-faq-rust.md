@@ -1,9 +1,14 @@
-# Technical FAQ
+# FAQ: Rust library
 
-These answers are based on discussions in the CAI Rust SDK Discord channel
-from April through October 2026. Version-specific information reflects those
-discussions and has not been independently checked against the latest release.
-Discord source links may require channel access.
+These FAQs are based on discussions in the CAI Rust SDK Discord channel from 2026. 
+In some cases, the information may be specific to a particular version of the SDK. Always confirm  using the latest release.
+
+Selected answers also draw on the General channel history from April through
+October 2026; those additions have not been externally verified.
+
+:::note
+Discord source links require a Discord account and joining the public CAI Discord server.
+:::
 
 ## Can I configure trust anchors using a URL?
 
@@ -79,6 +84,19 @@ verify that it still applies to the edited asset.
 [Source: parent handling, October 14, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1559968978376593439)
 
 [Source: gathered-assertion clarification, October 14, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1560080821287657594)
+
+An October 15 General-channel troubleshooting reply also recommends edit
+intent when an existing asset produces
+`assertion.action.malformed: first action must be created or opened`
+or `assertion.action.ingredientMismatch`. In that case, the manually defined
+`actions` were not nested inside `assertions`, and the workflow also needed
+a referenced `parentOf` ingredient. The user confirmed that switching to
+edit intent worked. Do not assume an "Invalid Manifest" error is a trust
+problem without inspecting its validation details.
+
+[Source: action structure and edit-intent fix, October 15, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1560317418574839849)
+
+[Source: successful result, October 15, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1560344798165074072)
 
 ## How do I add timestamps for existing ingredient manifests?
 
@@ -192,3 +210,35 @@ When reading an asset, explicitly provide the corresponding sidecar using
 `--external-manifest`.
 
 [Source: September 16, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1549894561537466399)
+
+## Why does manifest compression barely reduce a long existing chain?
+
+The October 15 support reply explains that compression applies to the
+current manifest being written, not retroactively to every manifest in an
+existing chain. To compare compressed and uncompressed chains, enable
+`prefer_compress_manifests` while writing each generation.
+
+Support tested ten manifests containing a repetitive text custom assertion.
+The final manifest-store size was 154,638 bytes without compression and
+52,583 bytes with compression enabled at each generation. The responder
+explicitly cautioned that repetitive test data would likely compress better
+than real-world content. This is not a promised compression ratio or a way
+to shrink all prior manifests by appending one compressed manifest.
+
+[Source: compression scope and test recommendation, October 15, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1560358414264172585)
+
+[Source: controlled comparison and data caveat, October 15, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1560370962875285566)
+
+## Can I use the Rust implementation from a JVM backend?
+
+The September 14 reply points to the Rust implementation's
+[C API](https://github.com/contentauth/c2pa-rs/tree/main/c2pa_c_ffi) as an
+integration route through JNI.
+
+The responder said a Kotlin library had been discussed, but development
+had focused on Android-specific needs. Forking the Android bindings for a
+JVM service was suggested as possible work, not offered as an existing,
+maintained JVM package. The export does not establish a supported Java
+binding or provide a complete JNI integration example.
+
+[Source: Android scope and C API integration route, September 14, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1549054456258240674)
