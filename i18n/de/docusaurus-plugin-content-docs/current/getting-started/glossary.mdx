@@ -1,0 +1,362 @@
+---
+id: glossary
+title: Glossar
+hide_table_of_contents: true
+translation_status: draft
+translation_source_hash: af5d0b551b6008f301551aa014ac8f34a22557d3d4f83b38c7c0aadd55f62527
+---
+
+:::info
+Dieses Glossar definiert zentrale Begriffe der Dokumentation und ergänzt das [Glossar der C2PA-Spezifikation für Content Credentials](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_glossary).
+Bei Abweichungen hat die C2PA-Spezifikation Vorrang.
+:::
+
+<div className="glossary-inline-terms">
+
+#### Aktion: {#action}
+
+Vorgang, den ein Akteur an einem Asset ausführt. Zum Beispiel „erstellen“, „einbetten“ oder „Kontrast ändern“ bei einem Bild. Siehe [Zusicherungen und Aktionen](/manifest/writing/assertions-actions.md).
+
+#### Aktives Manifest: {#active-manifest}
+
+Letztes Manifest in der Liste der Manifeste eines Manifestspeichers. Das aktive Manifest enthält die Inhaltsbindungen, die validiert werden können. Siehe [Mit Manifesten arbeiten](/manifest/understanding.md).
+
+#### Akteur: {#actor}
+
+Person, Organisation, Gerät oder Softwareprodukt. Zum Beispiel eine Kamera, eine Bildbearbeitungssoftware, ein Cloud-Dienst oder die Person, die solche Werkzeuge verwendet.
+
+#### Archiv: {#archive}
+
+Serialisierte, portable Darstellung eines Arbeitsbestands, die in einer Datei oder einem Datenstrom gespeichert ist (üblicherweise einer `.c2pa`-Datei). Ein Archiv verwendet das standardisierte JUMBF-Format `application/c2pa` und kann eingelesen werden, um einen `Builder` wiederherzustellen. „Arbeitsbestand“ betont den bearbeitbaren Zustand, „Archiv“ die gespeicherten Bytes. Siehe [Arbeitsbestände und Archive verwenden](/tasks/archives.mdx).
+
+#### Zusicherung: {#assertion}
+
+Datenstruktur im Manifest mit Informationen über die Erstellung, Urheberschaft und Bearbeitung eines Assets sowie weiteren relevanten Angaben. Eine Liste der standardisierten Zusicherungen finden Sie in der [technischen C2PA-Spezifikation](https://c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html). Siehe auch [Zusicherungen und Aktionen](/manifest/writing/assertions-actions.md).
+
+#### Asset: {#asset}
+
+Datei oder Datenstrom mit digitalen Inhalten. Derzeit sind damit bestimmte Bild-, Video- oder Audiodateitypen gemeint; die unterstützten Asset-Typen werden künftig erweitert. Siehe auch [zusammengesetztes Asset](#composed-asset) und [abgeleitetes Asset](#derived-asset).
+
+#### Asset-Metadaten: {#asset-metadata}
+
+Teil eines Assets, der nichttechnische Informationen über das Asset und seine digitalen Inhalte darstellt, beispielsweise gespeichert nach Standards wie Exif oder XMP.
+
+#### Asset-Ausgabevariante: {#asset-rendition}
+
+Darstellung eines Assets, entweder als Teil eines Assets oder als vollständig neues Asset, dessen digitale Inhalte eine nichtredaktionelle Transformation durchlaufen haben, etwa eine Neukodierung oder Skalierung, ohne dass die Asset-Metadaten geändert wurden.
+
+#### Authentizität: {#authenticity}
+
+Eigenschaft digitaler Inhalte, die eine Reihe von Fakten umfasst (Provenienzdaten und harte Bindungen), deren Unversehrtheit kryptografisch überprüft werden kann.
+
+#### Builder: {#builder}
+
+SDK-Klasse, mit der Sie ein signiertes Manifest erstellen und zu einem Asset hinzufügen. Siehe [Ein Manifest hinzufügen und signieren](/tasks/build.mdx), [Manifestdaten schreiben](/manifest/writing/writing.md) und die [Builder-Referenz](/manifest/json-ref/builder-ref.mdx).
+
+#### Builder-Absicht: {#builder-intent}
+
+Siehe [Absicht](#intent).
+
+#### C2PA: {#c2pa}
+
+Siehe [Coalition for Content Provenance and Authenticity](#coalition-for-content-provenance-and-authenticity-c2pa).
+
+#### C2PA Tool: {#c2pa-tool}
+
+Befehlszeilenprogramm zur Arbeit mit C2PA-Manifestdaten, implementiert im [Repository c2pa-rs](https://github.com/contentauth/c2pa-rs). Das Programm heißt „C2PA Tool“, der Befehl zum Ausführen lautet `c2patool`. Siehe die [Dokumentation von C2PA Tool](/sdk-repos/c2patool/readme.md).
+
+#### C2PA-Vertrauensliste: {#c2pa-trust-list}
+
+Von der C2PA verwaltete Liste von X.509-Zertifikatsvertrauensankern, die Zertifikate für Hardware- und Software-Signierende ausstellen. Diese verwenden die Zertifikate zum Signieren von Erklärungen. Siehe [Vertrauenslisten](/conformance/trust-lists.mdx).
+
+#### C2PA-TSA-Vertrauensliste: {#c2pa-tsa-trust-list}
+
+Von der C2PA verwaltete Liste von X.509-Zertifikatsvertrauensankern, die Zertifikate für Zeitstempelstellen (TSAs) ausstellen. Siehe [Vertrauenslisten](/conformance/trust-lists.mdx).
+
+#### CAI: {#cai}
+
+Siehe [Content Authenticity Initiative](#content-authenticity-initiative-cai).
+
+#### CAWG: {#cawg}
+
+Siehe [Creator Assertions Working Group](#creator-assertions-working-group-cawg).
+
+#### Open-Source-SDK der CAI: {#cai-open-source-sdk}
+
+Open-Source-Software zur Entwicklung von Content Credentials-Anwendungen. Sie umfasst C2PA Tool, die Rust-Bibliothek sowie Bibliotheken für Python, C/C++, Web-JavaScript, Node.js, Android und iOS. Siehe [Einführung](../introduction).
+
+#### CBOR: {#cbor}
+
+Siehe [Concise Binary Object Representation](#concise-binary-object-representation-cbor).
+
+#### Zertifikat: {#certificate}
+
+Elektronisches Dokument, auch Public-Key-Zertifikat oder digitales Zertifikat genannt, das die Identität des Inhabers bestätigt. Wie ein Reisepass wird es von einer vertrauenswürdigen dritten Partei (der Zertifizierungsstelle oder CA) ausgestellt, kann nicht gefälscht werden und enthält identifizierende Angaben. Siehe [Signaturen und Zertifikate](/signing/index.md).
+
+#### Zertifizierungsstelle (CA): {#certificate-authority-ca}
+
+Vertrauenswürdige dritte Partei, die die Identität einer Organisation prüft, die ein digitales Zertifikat beantragt. Nach der Prüfung stellt die CA ein Zertifikat aus und bindet die Identität der Organisation an einen öffentlichen Schlüssel. Ein digitales Zertifikat ist vertrauenswürdig, weil es durch eine Zertifikatskette mit dem Stammzertifikat der CA verbunden ist. Siehe [Ein Zertifikat erhalten](/signing/get-cert.md).
+
+#### Erklärung: {#claim}
+
+Digital signierte Daten in einem Manifest, deren Manipulation erkennbar ist. Sie verweisen auf Zusicherungen eines oder mehrerer Akteure zu einem Asset sowie auf die Informationen, die zur Darstellung der Inhaltsbindung erforderlich sind. Beispielsweise könnte eine Erklärung angeben, dass John Doe am 05/08/2021 um 11 Uhr mit Product X den Kontrast eines bestimmten Bildes geändert hat.
+
+#### Erklärungsgenerator: {#claim-generator}
+
+Nichtmenschlicher Akteur (Hardware oder Software), der die Erklärung über ein Asset sowie die Erklärungssignatur erzeugt und damit das zugehörige Manifest des Assets erstellt.
+
+#### Erklärungssignatur: {#claim-signature}
+
+Teil des Manifests, der die digitale Signatur der Erklärung mit dem privaten Schlüssel eines Akteurs enthält. Siehe [Signaturen und Zertifikate](/signing/index.md).
+
+#### Coalition for Content Provenance and Authenticity (C2PA): {#coalition-for-content-provenance-and-authenticity-c2pa}
+
+Formelle Koalition, die technische Standards und Spezifikationen als Grundlage für eine universelle Inhaltsprovenienz erarbeitet. Die C2PA ist eine gemeinschaftlich geführte Standardisierungsorganisation (SDO) innerhalb der Joint Development Foundation der Linux Foundation. Weitere Informationen finden Sie auf [c2pa.org](https://c2pa.org).
+
+#### Zusammengesetztes Asset: {#composed-asset}
+
+Asset, das aus mehreren Teilen oder Fragmenten digitaler Inhalte, sogenannten Zutaten, erstellt wurde. Zum Beispiel ein Bild (Bild A), in das ein weiteres Bild (Bild B) importiert und darübergelegt wird. In diesem Beispiel ist Bild B eine Zutat. Wenn ein vorhandenes Asset als Ausgangspunkt dient, handelt es sich um einen Sonderfall eines abgeleiteten Assets. Ein zusammengesetztes Asset kann jedoch auch von Grund auf erstellt werden.
+
+#### Concise Binary Object Representation (CBOR): {#concise-binary-object-representation-cbor}
+
+Binäres Datenserialisierungsformat, das sich lose an JSON orientiert und die Übertragung von Datenobjekten mit Name-Wert-Paaren in kompakterer Form als JSON ermöglicht. CBOR ist im Internetstandard [RFC 8949](https://www.rfc-editor.org/rfc/rfc8949) definiert.
+
+#### Content Authenticity Initiative (CAI): {#content-authenticity-initiative-cai}
+
+Gruppe von Kreativen, Technologiefachleuten, journalistisch Tätigen sowie Aktivistinnen und Aktivisten, die den weltweiten Einsatz gegen digitale Desinformation und für die Authentizität von Inhalten anführt. Zu den Beteiligten gehören Adobe, BBC, Microsoft, The New York Times Co., Leica, Nikon, Truepic und Qualcomm. Weitere Informationen finden Sie bei der [Content Authenticity Initiative](https://contentauthenticity.org).
+
+#### Inhaltsbindung: {#content-binding}
+
+Informationen, die bestimmte digitale Inhalte mit einem bestimmten Manifest eines bestimmten Assets verknüpfen, entweder als harte oder als weiche Bindung. Siehe [Mit Manifesten arbeiten](/manifest/understanding.md).
+
+#### Content Credentials: {#content-credentials}
+
+Mit einem Asset verknüpfte Metadaten, deren Manipulation erkennbar ist und die Angaben zur Zuordnung und Provenienz des Assets enthalten. Sie entsprechen einem Manifestspeicher. Siehe [Mit Manifesten arbeiten](/manifest/understanding.md).
+
+#### Context: {#context}
+
+SDK-Klasse, die `Settings` und optional einen `Signer` umfasst und die Sie an `Reader` oder `Builder` übergeben, um deren Verhalten zu steuern. Siehe [SDK-Einstellungen mit Context konfigurieren](/tasks/settings.mdx) und die [Settings-Referenz](/manifest/json-ref/settings-ref.mdx).
+
+#### ContextProvider: {#contextprovider}
+
+Abstrakte Basisklasse im SDK, die die Schnittstelle definiert, über die `Reader` und `Builder` auf einen Kontext zugreifen.
+
+#### Creator Assertions Working Group (CAWG): {#creator-assertions-working-group-cawg}
+
+Arbeitsgruppe innerhalb der Decentralized Identity Foundation (DIF), die technische Standards für folgende Bereiche definiert:
+
+- [Identitätszusicherungen](#identity-assertion), die belegen, wer Inhalte erstellt hat.
+- Metadatenzusicherungen, die detaillierte Informationen über Inhalte liefern.
+- Zusicherungen zu Training und Data-Mining, die festlegen, wie Inhalte verwendet werden dürfen.
+
+Weitere Informationen finden Sie auf der [CAWG-Website](https://cawg.io/).
+
+#### Kryptografischer Hash: {#cryptographic-hash}
+
+Algorithmus, der auf digitale Daten wie eine Bilddatei angewendet werden kann, um einen eindeutigen „Fingerabdruck“ zu erzeugen. Wenn sich die Daten ändern, ändert sich auch der Hashwert.
+
+#### Abgeleitetes Asset: {#derived-asset}
+
+Asset, das aus einem vorhandenen Asset durch Aktionen entsteht, die dessen digitale Inhalte und Asset-Metadaten verändern.
+
+#### Digitale Inhalte: {#digital-content}
+
+Teil eines Assets, der die eigentlichen Inhalte darstellt, etwa die Pixel eines Bildes, einschließlich zusätzlicher technischer Metadaten, die zum Verständnis erforderlich sind, beispielsweise ein Farbprofil oder Kodierungsparameter.
+
+#### Dauerhafte Content Credentials: {#durable-content-credentials}
+
+Ansatz, der die Provenienz von Inhalten über verschiedene Plattformen hinweg bewahren soll. Dazu werden C2PA-Manifestdaten mit unsichtbaren Wasserzeichen, die aktiv in die Inhalte eingefügt werden, und mit passiv aus den Inhalten berechneten Fingerabdrücken kombiniert. Siehe [Dauerhafte Content Credentials](/durable-cr/index.md).
+
+#### Exchangeable image file format (Exif): {#exchangeable-image-file-format-exif}
+
+Standard, der Formate für Bilder, Ton und ergänzende Tags festlegt, die Digitalkameras, einschließlich Smartphones, und verwandte Geräte verwenden.
+
+#### Extensible Metadata Platform (XMP): {#extensible-metadata-platform-xmp}
+
+ISO-Standard, ursprünglich von Adobe Inc. entwickelt, zur Erstellung, Verarbeitung und zum Austausch standardisierter und benutzerdefinierter Metadaten für digitale Dokumente und Datensätze. Weitere Informationen finden Sie unter [Adobe XMP](https://www.adobe.com/products/xmp.html).
+
+#### Fingerabdruck: {#fingerprint}
+
+Menge inhärenter Eigenschaften, die aus digitalen Inhalten berechnet werden können und die Inhalte oder nahezu identische Kopien davon identifizieren. Siehe [Wasserzeichen und Fingerabdrücke](/durable-cr/soft-bindings.mdx).
+
+#### Harte Bindung: {#hard-binding}
+
+Ein oder mehrere kryptografische Hashwerte, die ein gesamtes Asset oder einen Teil davon eindeutig identifizieren.
+
+#### Identitätszusicherung: {#identity-assertion}
+
+CAWG-Zusicherung, mit der der Inhaber eines Nachweises die Kontrolle über eine digitale Identität belegen und diese Identität verwenden kann, um die Rollen des benannten Akteurs im Lebenszyklus eines Assets zu dokumentieren. Siehe [CAWG: Identitätszusicherung](https://cawg.io/identity/) und [CAWG-Identitätszusicherungen lesen](/manifest/reading/reading-cawg-id.md).
+
+#### Aggregator von Identitätserklärungen: {#identity-claims-aggregator}
+
+Akteur, der CAWG-Identitätserklärungen (Bescheinigungen) über einen benannten Akteur von verschiedenen Identitätsanbietern sammelt und diese im Namen des Akteurs in Identitätszusicherungen wiederverwenden kann. Er kann zugleich der Generator der Identitätszusicherungen sein.
+
+#### Zutat: {#ingredient}
+
+Teil eines zusammengesetzten Assets, beispielsweise ein Bild, das über ein anderes Bild gelegt wird. Siehe [Zutaten lesen](/manifest/reading/ingredients-reading.md) und [Zutaten schreiben](/manifest/writing/ingredients.md).
+
+#### Absicht: {#intent}
+
+Deklaration, die einem `Builder` mitteilt, welche Art von Manifest erstellt werden soll. Absichten ermöglichen Validierung, fügen die von der C2PA-Spezifikation vorgeschriebenen Aktionen hinzu und helfen, ungültige Vorgänge zu verhindern. Es gibt drei Absichtstypen: **Create** für neue digitale Werke (erfordert einen `DigitalSourceType` und darf keine übergeordnete Zutat haben), **Edit** zur Änderung eines vorhandenen übergeordneten Assets (muss eine übergeordnete Zutat haben) und **Update** für nichtredaktionelle Änderungen wie Neukodierung (eine eingeschränkte Version von Edit). Siehe [Builder-Absichten verwenden](/tasks/intents.mdx).
+
+#### Vorläufige Vertrauensliste: {#interim-trust-list}
+
+Ursprüngliche Content Authenticity-Vertrauensliste, deren Stand seit dem 1. Januar 2026 eingefroren ist. Siehe [Vertrauenslisten](/conformance/trust-lists.mdx).
+
+#### Unsichtbares Wasserzeichen: {#invisible-watermark}
+
+Siehe [Wasserzeichen](#watermark).
+
+#### JSON (JavaScript Object Notation): {#json-javascript-object-notation}
+
+Leichtgewichtiges Datenaustausch- und Dateiformat, das lesbaren Text verwendet, um Datenobjekte aus Attribut-Wert-Paaren und Arrays oder anderen serialisierbaren Werten zu speichern und zu übertragen. Weitere Informationen finden Sie auf [json.org](https://json.org).
+
+#### JPEG universal metadata box format (JUMBF): {#jpeg-universal-metadata-box-format-jumbf}
+
+Internationaler technischer Standard, der einen Mechanismus zum Einbetten und Referenzieren allgemeiner Metadaten in JPEG-Dateien bereitstellt. Siehe [ISO/IEC 19566](https://www.iso.org/standard/84635.html).
+
+#### Manifest: {#manifest}
+
+Gesamtheit der Informationen über die Provenienz eines Assets, basierend auf einer Kombination aus einer oder mehreren Zusicherungen (einschließlich Inhaltsbindungen), einer einzelnen Erklärung und einer Erklärungssignatur. Ein Manifest ist Teil eines Manifestspeichers. Siehe [Mit Manifesten arbeiten](/manifest/understanding.md).
+
+#### Manifestarchiv: {#manifest-archive}
+
+Siehe [Archiv](#archive).
+
+#### Manifestnutzer: {#manifest-consumer}
+
+Akteur, der ein Asset mit einem zugehörigen Manifest nutzt, um die Provenienzdaten aus dem Manifest zu erhalten.
+
+#### Manifestrepository: {#manifest-repository}
+
+Repository mit Manifesten und Manifestspeichern, das über eine Inhaltsbindung durchsucht werden kann.
+
+#### Manifestspeicher: {#manifest-store}
+
+Sammlung von Manifesten, die in ein Asset eingebettet sein oder außerhalb des Assets liegen kann. Siehe [Mit Manifesten arbeiten](/manifest/understanding.md).
+
+#### Manifestarbeitsbestand: {#manifest-working-store}
+
+Siehe [Arbeitsbestand](#working-store).
+
+#### Metadaten: {#metadata}
+
+Siehe [Asset-Metadaten](#asset-metadata).
+
+#### Metadatenzusicherung: {#metadata-assertion}
+
+CAWG-Zusicherung zur Verknüpfung von Metadaten aus Standards wie XMP, IPTC und Exif mit einem C2PA-Manifest, sodass Manipulationen erkennbar sind. Anders als die Zusicherung `c2pa.metadata` beschränkt sie nicht die zulässigen Metadatenfelder und unterstützt daher mehr Anwendungsfälle. Sie eignet sich besonders für gesammelte C2PA-Zusicherungen, bei denen die signierende Partei nicht die Richtigkeit der bereitgestellten Metadaten bestätigt, aber weiterhin die Integrität des C2PA-Manifests gewährleistet. Siehe [CAWG: Metadatenzusicherung](https://cawg.io/metadata/).
+
+#### Online Certificate Status Protocol (OCSP): {#online-certificate-status-protocol-ocsp}
+
+Internetprotokoll zur Abfrage des Sperrstatus eines digitalen X.509-Zertifikats, also zur Feststellung, ob es noch gültig ist. Siehe [IETF RFC 6960](https://www.rfc-editor.org/rfc/rfc6960).
+
+#### Privater Schlüssel: {#private-key}
+
+In der Public-Key-Kryptografie ein eindeutiger digitaler Schlüssel (eine sehr lange Zahl), der Nachrichten entschlüsselt, die mit dem zugehörigen öffentlichen Schlüssel verschlüsselt wurden. Jeder private Schlüssel gehört zu genau einem öffentlichen Schlüssel und ist der einzige Schlüssel, der damit verschlüsselte Nachrichten entschlüsseln kann. Um die Sicherheit zu gewährleisten, darf der Inhaber eines privaten Schlüssels diesen niemals anderen offenlegen.
+
+#### Provenienz: {#provenance}
+
+Logisches Konzept zum Verständnis der Geschichte eines Assets und seiner Interaktionen mit Akteuren und anderen Assets, wie sie in den Provenienzdaten dargestellt werden.
+
+#### Provenienzdaten: {#provenance-data}
+
+Gesamtheit der Manifeste eines Assets und, bei einem zusammengesetzten Asset, seiner Zutaten.
+
+#### Öffentlicher Schlüssel: {#public-key}
+
+In der Public-Key-Kryptografie ein eindeutiger digitaler Schlüssel (eine sehr lange Zahl), der Nachrichten verschlüsselt, die anschließend mit dem zugehörigen privaten Schlüssel entschlüsselt werden können. Jeder öffentliche Schlüssel gehört zu genau einem privaten Schlüssel. Eine mit einem bestimmten öffentlichen Schlüssel verschlüsselte Nachricht kann nur mit dem entsprechenden privaten Schlüssel entschlüsselt werden. Öffentliche Schlüssel können ohne Sicherheitsverlust frei verbreitet werden. Siehe [Erste Schritte: Einführung in die Public-Key-Infrastruktur](/getting-started/index.mdx#introduction-to-public-key-infrastructure).
+
+#### Reader: {#reader}
+
+SDK-Klasse, mit der Sie einen Manifestspeicher aus einem Asset lesen und validieren. Siehe [Manifestdaten lesen und überprüfen](/tasks/read.mdx), [Manifestdaten lesen](/manifest/reading/reading.md) und die [Reader-Referenz](/manifest/json-ref/reader-ref.mdx).
+
+#### Entfernung einer Zusicherung: {#redaction}
+
+Entfernen einer Zusicherung aus dem Manifest eines Assets, wenn das Asset als Zutat verwendet wird. Siehe die [technische C2PA-Spezifikation](https://c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html).
+
+#### Ressource: {#resource}
+
+Binäre Assets, auf die Zusicherungen im Manifest verweisen, etwa Vorschaubilder oder Vorschaubilder von Zutaten. Siehe [Ressourcen aus einem Manifest abrufen](/tasks/get-resources.mdx).
+
+#### Settings: {#settings}
+
+SDK-Klasse, die Verhalten wie die Erzeugung von Vorschaubildern, Vertrauenslisten und Überprüfungsflags steuert. Siehe [SDK-Einstellungen mit Context konfigurieren](/tasks/settings.mdx) und die [Settings-Referenz](/manifest/json-ref/settings-ref.mdx).
+
+#### Begleitdatei: {#sidecar-file}
+
+Datei mit einem Manifestspeicher, die denselben Basisnamen wie die Asset-Datei, jedoch die Erweiterung `.c2pa` trägt. Eine Begleitdatei ist eine Alternative zum Einbetten des Manifestspeichers in die Asset-Metadaten. Ein Asset namens `cat.jpg` hätte beispielsweise eine Begleitdatei namens `cat.c2pa`. Siehe [Mit Manifesten arbeiten](/manifest/understanding.md).
+
+#### Signierende Partei: {#signer}
+
+Akteur, mit dessen privatem Schlüssel des Nachweises eine Erklärung signiert wird. Die signierende Partei wird durch das Subjekt des Nachweises identifiziert. Siehe [Signaturen und Zertifikate](/signing/index.md).
+
+#### Weiche Bindung: {#soft-binding}
+
+Inhaltskennung, die entweder als Wasserzeichen in die digitalen Inhalte eingebettet wird oder statistisch nicht eindeutig ist. Beispielsweise werden TrustMark-Wasserzeichen über weiche Bindungen hinzugefügt. Siehe [Wasserzeichen und Fingerabdrücke](/durable-cr/soft-bindings.mdx).
+
+#### Zeitstempel: {#time-stamp}
+
+Von einer vertrauenswürdigen Zeitstempelstelle ausgestellter Zeitstempel, mit dem nachgewiesen wird, dass eine Manifestsignatur zu einem bestimmten Datum und einer bestimmten Uhrzeit existierte. Siehe [Vertrauenslisten](/conformance/trust-lists.mdx).
+
+#### Zeitstempelstelle: {#time-stamp-authority}
+
+Vertrauenswürdige dritte Partei, die eine Zeitstempelstelle (TSA) gemäß [RFC 3161](https://www.rfc-editor.org/rfc/rfc3161) bereitstellt. Siehe [RFC 3161, Abschnitt 1](https://www.rfc-editor.org/rfc/rfc3161#section-1).
+
+#### Zusicherung zu Training und Data-Mining: {#training-and-data-mining-assertion}
+
+CAWG-Zusicherung, mit der angegeben werden kann, ob ein Asset mit C2PA-Metadaten für Data-Mining oder das Training von KI- oder ML-Modellen verwendet werden darf. Siehe [CAWG: Zusicherung zu Training und Data-Mining](https://cawg.io/training-and-data-mining/).
+
+#### Vertrauensliste: {#trust-list}
+
+Siehe [C2PA-Vertrauensliste](#c2pa-trust-list).
+
+#### Vertrauenssignale: {#trust-signals}
+
+Gesamtheit der Informationen, die das Urteil eines Akteurs über die Vertrauenswürdigkeit eines Assets unterstützen können. Sie ergänzen die Identität der signierenden Partei einer Erklärung, auf der das grundlegende Vertrauensmodell beruht.
+
+#### TrustMark: {#trustmark}
+
+Universelles Open-Source-Wasserzeichensystem für Bilder, das mehrere Adobe-Produkte zur Erstellung dauerhafter Content Credentials verwenden. Siehe [TrustMark-Wasserzeichen](/durable-cr/trustmark-intro.md).
+
+#### TSA: {#tsa}
+
+Siehe [Zeitstempelstelle](#time-stamp-authority).
+
+#### Validierung: {#validation}
+
+Prozess zur Feststellung, ob Content Credentials ordnungsgemäß konfiguriert und signiert sind. Zum Beispiel: Entspricht ein Asset tatsächlich der Beschreibung in seinem zugehörigen Manifest, und hält das Manifest das Format und die Regeln der C2PA-Spezifikation ein? Siehe [Manifestvalidierung](/manifest/reading/validation.md).
+
+#### Validator: {#validator}
+
+Manifestnutzer, der ein aktives Manifest validiert. Siehe [Manifestvalidierung](/manifest/reading/validation.md).
+
+#### Überprüfbarer Nachweis (VC): {#verifiable-credential-vc}
+
+Nachweis, dessen Manipulation erkennbar ist und dessen Urheberschaft kryptografisch überprüft werden kann. Der Begriff kann allgemein verwendet werden oder sich auf die [W3C-Empfehlung zum Datenmodell für überprüfbare Nachweise](https://www.w3.org/TR/vc-data-model-2.0/) beziehen.
+
+#### Dezentraler W3C-Identifikator (DID): {#w3c-decentralized-identifier-did}
+
+Portabler, URL-basierter Identifikator, der einer Entität zugeordnet ist und in einem überprüfbaren W3C-Nachweis verwendet wird. Ein Beispiel ist `did:example:123456abcdef`. CAWG-Identitätszusicherungen verwenden DIDs für Nachweise zur [Aggregation von Identitätserklärungen](#identity-claims-aggregator).
+
+#### Dokument eines dezentralen W3C-Identifikators: {#w3c-decentralized-identifier-document}
+
+Auch DID-Dokument genannt. Dieses Dokument ist über ein überprüfbares Datenregister zugänglich und enthält Informationen zu einem bestimmten dezentralen W3C-Identifikator, etwa zum zugehörigen Repository und zum öffentlichen Schlüssel.
+
+#### Überprüfbarer W3C-Nachweis: {#w3c-verifiable-credential}
+
+Nachweis, dessen Manipulation erkennbar ist und dessen Urheberschaft kryptografisch überprüft werden kann.
+
+#### Wasserzeichen: {#watermark}
+
+Informationen, die wahrnehmbar oder nicht wahrnehmbar in die digitalen Inhalte eines Assets eingefügt werden. Sie können beispielsweise dazu dienen, das Asset eindeutig zu identifizieren oder einen Verweis auf ein Manifest zu speichern. Siehe [Wasserzeichen und Fingerabdrücke](/durable-cr/soft-bindings.mdx).
+
+#### Arbeitsbestand: {#working-store}
+
+Bearbeitbares, noch in Erstellung befindliches Manifest, das durch einen `Builder` dargestellt wird und noch nicht signiert und an ein Asset gebunden ist. Ein Arbeitsbestand enthält den im Aufbau befindlichen C2PA-Manifestzustand (Erklärungen, Zutaten, Zusicherungen). Er kann zum Speichern, Übertragen oder späteren Fortsetzen in ein Archiv serialisiert werden und verwendet dasselbe standardisierte JUMBF-Format `application/c2pa` wie signierte Manifeste. Siehe [Arbeitsbestände und Archive verwenden](/tasks/archives.mdx).
+
+#### XMP: {#xmp}
+
+Siehe [Extensible Metadata Platform](#extensible-metadata-platform-xmp).
+
+</div>

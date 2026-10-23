@@ -7,13 +7,13 @@
 const lightCodeTheme = require('prism-react-renderer').themes.github;
 const darkCodeTheme = require('prism-react-renderer').themes.dracula;
 const remoteDocs = require('./remote-docs.json');
-const { readFileSync } = require('fs');
+const { existsSync, readFileSync } = require('fs');
 const { resolve } = require('path');
 const remarkStripHiddenLinks = require('./src/remark/remark-strip-hidden-links');
 
 const copyright = `
 <div style="font-size: 0.75rem;">
-  Copyright © ${new Date().getFullYear()} Adobe. All rights reserved.
+  Copyright © {year} Adobe. All rights reserved.
 | <a style="text-decoration: underline;" href="https://www.adobe.com/privacy.html" target="_blank" rel="noopener noreferrer">Privacy</a>
 | <a style="text-decoration: underline;" href="https://www.adobe.com/legal/terms.html" target="_blank" rel="noopener noreferrer">Terms of use</a>
 | <a style="text-decoration: underline;" href="https://www.adobe.com/privacy/us-rights.html" target="_blank" rel="noopener noreferrer">Do not sell or share my personal information</a>
@@ -140,6 +140,17 @@ async function createConfig() {
     tagline: 'Open-source tools for content authenticity and provenance',
     url: 'https://contentauth.netlify.com',
     baseUrl: '/',
+    i18n: {
+      defaultLocale: 'en',
+      locales: ['en', 'fr', 'it', 'de', 'es'],
+      localeConfigs: {
+        en: { label: 'English' },
+        fr: { label: 'Français' },
+        it: { label: 'Italiano' },
+        de: { label: 'Deutsch' },
+        es: { label: 'Español' },
+      },
+    },
     staticDirectories: ['static'],
     onBrokenLinks: 'warn',
     onBrokenAnchors: 'warn',
@@ -180,7 +191,14 @@ async function createConfig() {
               remarkStripHiddenLinks,
             ],
             sidebarPath: require.resolve('./sidebars.js'),
-            editUrl: ({ docPath, versionDocsDirPath }) => {
+            editUrl: ({ docPath, versionDocsDirPath, locale }) => {
+              const translationPath = `i18n/${locale}/docusaurus-plugin-content-docs/current/${docPath}`;
+              if (
+                locale !== 'en' &&
+                existsSync(resolve(__dirname, translationPath))
+              ) {
+                return `https://github.com/contentauth/opensource.contentauth.org/edit/main/${translationPath}`;
+              }
               const normalizedDocPath = docPath.toLowerCase();
 
               // Don't show edit link for dynamically generated API docs
@@ -281,6 +299,10 @@ async function createConfig() {
           },
           items: [
             {
+              type: 'localeDropdown',
+              position: 'right',
+            },
+            {
               type: 'custom-editThisPage',
               position: 'right',
               className: 'header-logo header-edit-link',
@@ -336,14 +358,20 @@ async function createConfig() {
         '@docusaurus/plugin-client-redirects',
         {
           createRedirects(existingPath) {
-            const prefix = '/docs/sdk-repos/';
-            if (existingPath.startsWith(prefix)) {
-              const redirects = [`/docs/${existingPath.slice(prefix.length)}`];
+            const match = existingPath.match(
+              /^(\/[^/]+)?\/docs\/sdk-repos\/(.+)$/,
+            );
+            if (match) {
+              const localePrefix = match[1] ?? '';
+              const docPath = match[2];
+              const redirects = [`${localePrefix}/docs/${docPath}`];
 
-              const c2paRsPrefix = '/docs/sdk-repos/c2pa-rs/';
-              if (existingPath.startsWith(c2paRsPrefix)) {
+              const c2paRsPrefix = 'c2pa-rs/';
+              if (docPath.startsWith(c2paRsPrefix)) {
                 redirects.push(
-                  `/docs/rust-sdk/${existingPath.slice(c2paRsPrefix.length)}`,
+                  `${localePrefix}/docs/rust-sdk/${docPath.slice(
+                    c2paRsPrefix.length,
+                  )}`,
                 );
               }
 

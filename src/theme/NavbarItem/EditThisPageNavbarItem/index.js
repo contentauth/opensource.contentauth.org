@@ -1,6 +1,7 @@
 import React, { useSyncExternalStore } from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
+import { translate } from '@docusaurus/Translate';
 import {
   getEditThisPageUrl,
   subscribeEditThisPageUrl,
@@ -19,12 +20,17 @@ export default function EditThisPageNavbarItem({ className }) {
     return null;
   }
 
+  const label = translate({
+    id: 'theme.common.editThisPage',
+    message: 'Edit this page',
+  });
+
   return (
     <Link
       to={editUrl}
       className={clsx(className)}
-      aria-label="Edit this page"
-      title="Edit this page"
+      aria-label={label}
+      title={label}
     />
   );
 }

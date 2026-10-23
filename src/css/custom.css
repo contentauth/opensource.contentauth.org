@@ -410,6 +410,10 @@ main .row:not(:has(.theme-doc-toc-desktop)) > .col {
 }
 
 @media (max-width: 996px) {
+  .navbar__items--right > .header-edit-link {
+    display: none;
+  }
+
   .navbar__items {
     flex-flow: row-reverse;
     justify-content: space-between;

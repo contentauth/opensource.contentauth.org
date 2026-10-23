@@ -1,0 +1,362 @@
+---
+id: glossary
+title: Glossaire
+hide_table_of_contents: true
+translation_status: draft
+translation_source_hash: af5d0b551b6008f301551aa014ac8f34a22557d3d4f83b38c7c0aadd55f62527
+---
+
+:::info
+Ce glossaire définit les principaux termes utilisés dans la documentation et complète le [glossaire de la spécification C2PA Content Credentials](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_glossary).
+En cas de divergence, la spécification C2PA fait référence.
+:::
+
+<div className="glossary-inline-terms">
+
+#### Action : {#action}
+
+Opération qu'un acteur effectue sur une ressource numérique. Par exemple, « créer », « intégrer » ou « modifier le contraste » d'une image. Voir [Assertions et actions](/manifest/writing/assertions-actions.md).
+
+#### Manifeste actif : {#active-manifest}
+
+Dernier manifeste de la liste des manifestes d'un magasin de manifestes. Le manifeste actif contient l'ensemble des liaisons au contenu qui peuvent être validées. Voir [Travailler avec les manifestes](/manifest/understanding.md).
+
+#### Acteur : {#actor}
+
+Personne, organisation, appareil ou logiciel. Par exemple, un appareil photo, un logiciel de retouche d'images, un service cloud ou une personne utilisant ces outils.
+
+#### Archive : {#archive}
+
+Représentation sérialisée et portable d'un magasin de travail, enregistrée dans un fichier ou un flux (généralement un fichier `.c2pa`). Une archive utilise le format JUMBF standard `application/c2pa` et peut être relue pour restaurer un `Builder`. Le terme « magasin de travail » met l'accent sur l'état modifiable, tandis que le terme « archive » désigne les octets enregistrés. Voir [Utiliser les magasins de travail et les archives](/tasks/archives.mdx).
+
+#### Assertion : {#assertion}
+
+Structure de données du manifeste contenant des informations sur la création d'une ressource numérique, ses auteurs, ses modifications et d'autres informations pertinentes. Pour consulter la liste des assertions standard, voir la [spécification technique C2PA](https://c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html). Voir aussi [Assertions et actions](/manifest/writing/assertions-actions.md).
+
+#### Ressource numérique : {#asset}
+
+Fichier ou flux de données contenant du contenu numérique. Actuellement, il s'agit de certains types de fichiers image, vidéo ou audio, mais les types pris en charge seront étendus à l'avenir. Voir aussi [ressource composée](#composed-asset) et [ressource dérivée](#derived-asset).
+
+#### Métadonnées de la ressource : {#asset-metadata}
+
+Partie d'une ressource qui représente les informations non techniques sur la ressource et son contenu numérique, telles que celles enregistrées selon les normes Exif ou XMP.
+
+#### Rendu de la ressource : {#asset-rendition}
+
+Représentation d'une ressource (comme partie d'une ressource ou comme ressource entièrement nouvelle) dont le contenu numérique a subi une transformation non éditoriale, par exemple un réencodage ou une mise à l'échelle, sans modification de ses métadonnées.
+
+#### Authenticité : {#authenticity}
+
+Propriété du contenu numérique comprenant un ensemble de faits (données de provenance et liaisons fortes) dont l'absence d'altération peut être vérifiée par des moyens cryptographiques.
+
+#### Builder : {#builder}
+
+Classe du SDK utilisée pour créer un manifeste signé et l'ajouter à une ressource numérique. Voir [Ajouter et signer un manifeste](/tasks/build.mdx), [Écrire les données de manifeste](/manifest/writing/writing.md) et la [référence de Builder](/manifest/json-ref/builder-ref.mdx).
+
+#### Intention de Builder : {#builder-intent}
+
+Voir [intention](#intent).
+
+#### C2PA : {#c2pa}
+
+Voir [Coalition for Content Provenance and Authenticity](#coalition-for-content-provenance-and-authenticity-c2pa).
+
+#### C2PA Tool : {#c2pa-tool}
+
+Utilitaire en ligne de commande permettant de travailler avec les données de manifeste C2PA, implémenté dans le [dépôt c2pa-rs](https://github.com/contentauth/c2pa-rs). L'utilitaire s'appelle « C2PA Tool », tandis que la commande permettant de l'exécuter est `c2patool`. Voir la [documentation de C2PA Tool](/sdk-repos/c2patool/readme.md).
+
+#### Liste de confiance C2PA : {#c2pa-trust-list}
+
+Liste gérée par la C2PA contenant les ancres de confiance des certificats X.509 qui délivrent des certificats aux signataires matériels et logiciels. Ceux-ci utilisent ces certificats pour signer des déclarations. Voir [Listes de confiance](/conformance/trust-lists.mdx).
+
+#### Liste de confiance TSA de la C2PA : {#c2pa-tsa-trust-list}
+
+Liste gérée par la C2PA contenant les ancres de confiance des certificats X.509 qui délivrent des certificats aux autorités d'horodatage (TSA). Voir [Listes de confiance](/conformance/trust-lists.mdx).
+
+#### CAI : {#cai}
+
+Voir [Content Authenticity Initiative](#content-authenticity-initiative-cai).
+
+#### CAWG : {#cawg}
+
+Voir [Creator Assertions Working Group](#creator-assertions-working-group-cawg).
+
+#### SDK open source de la CAI : {#cai-open-source-sdk}
+
+Logiciels open source permettant de développer des applications Content Credentials. Ils comprennent C2PA Tool, la bibliothèque Rust et des bibliothèques pour Python, C/C++, JavaScript web, Node.js, Android et iOS. Voir [Introduction](../introduction).
+
+#### CBOR : {#cbor}
+
+Voir [Concise Binary Object Representation](#concise-binary-object-representation-cbor).
+
+#### Certificat : {#certificate}
+
+Document électronique (également appelé certificat de clé publique ou certificat numérique) qui atteste l'identité de son titulaire. Comme un passeport, il est délivré par un tiers de confiance (l'autorité de certification ou CA), ne peut pas être falsifié et contient des informations d'identification. Voir [Signature et certificats](/signing/index.md).
+
+#### Autorité de certification (CA) : {#certificate-authority-ca}
+
+Tiers de confiance qui vérifie l'identité d'une organisation demandant un certificat numérique. Après cette vérification, la CA délivre un certificat et lie l'identité de l'organisation à une clé publique. Un certificat numérique est digne de confiance grâce à la chaîne qui le relie au certificat racine de la CA. Voir [Obtenir un certificat](/signing/get-cert.md).
+
+#### Déclaration : {#claim}
+
+Données d'un manifeste signées numériquement et dont toute altération est détectable. Elles référencent un ensemble d'assertions d'un ou de plusieurs acteurs concernant une ressource numérique, ainsi que les informations nécessaires pour représenter la liaison au contenu. Par exemple, une déclaration pourrait préciser que John Doe a modifié le contraste d'une image avec Product X le 05/08/2021 à 11 h.
+
+#### Générateur de déclarations : {#claim-generator}
+
+Acteur non humain (matériel ou logiciel) qui génère la déclaration relative à une ressource numérique ainsi que sa signature, produisant ainsi le manifeste associé à la ressource.
+
+#### Signature de déclaration : {#claim-signature}
+
+Partie du manifeste contenant la signature numérique de la déclaration réalisée avec la clé privée d'un acteur. Voir [Signature et certificats](/signing/index.md).
+
+#### Coalition for Content Provenance and Authenticity (C2PA) : {#coalition-for-content-provenance-and-authenticity-c2pa}
+
+Coalition officielle qui élabore des normes et des spécifications techniques pour établir une base universelle de provenance des contenus. La C2PA est un organisme de normalisation (SDO) à gouvernance partagée, au sein de la Joint Development Foundation de la Linux Foundation. Pour en savoir plus, voir [c2pa.org](https://c2pa.org).
+
+#### Ressource composée : {#composed-asset}
+
+Ressource créée à partir de plusieurs parties ou fragments de contenu numérique, appelés ingrédients. Par exemple, une image (image A) sur laquelle une autre image (image B) est importée et superposée. Dans cet exemple, l'image B est un ingrédient. Lorsqu'elle part d'une ressource existante, la ressource composée constitue un cas particulier de ressource dérivée, mais elle peut également être créée à partir de zéro.
+
+#### Concise Binary Object Representation (CBOR) : {#concise-binary-object-representation-cbor}
+
+Format de sérialisation binaire de données, inspiré de JSON, qui permet de transmettre des objets contenant des paires nom-valeur de façon plus concise que JSON. CBOR est défini par la norme Internet [RFC 8949](https://www.rfc-editor.org/rfc/rfc8949).
+
+#### Content Authenticity Initiative (CAI) : {#content-authenticity-initiative-cai}
+
+Groupe de créateurs, de technologues, de journalistes et de militants qui mène l'effort mondial visant à lutter contre la désinformation numérique et à promouvoir l'authenticité des contenus. Ses partenaires comprennent Adobe, BBC, Microsoft, The New York Times Co., Leica, Nikon, Truepic et Qualcomm. Pour en savoir plus, voir [Content Authenticity Initiative](https://contentauthenticity.org).
+
+#### Liaison au contenu : {#content-binding}
+
+Informations qui associent un contenu numérique précis à un manifeste précis lié à une ressource donnée, sous la forme d'une liaison forte ou d'une liaison souple. Voir [Travailler avec les manifestes](/manifest/understanding.md).
+
+#### Content Credentials : {#content-credentials}
+
+Métadonnées associées à une ressource numérique, dont toute altération est détectable, qui indiquent son attribution et sa provenance. Elles correspondent à un magasin de manifestes. Voir [Travailler avec les manifestes](/manifest/understanding.md).
+
+#### Context : {#context}
+
+Classe du SDK comprenant `Settings` et, éventuellement, un `Signer`, que vous transmettez à `Reader` ou à `Builder` pour contrôler leur comportement. Voir [Configurer les paramètres du SDK avec Context](/tasks/settings.mdx) et la [référence de Settings](/manifest/json-ref/settings-ref.mdx).
+
+#### ContextProvider : {#contextprovider}
+
+Classe de base abstraite du SDK qui définit l'interface utilisée par `Reader` et `Builder` pour accéder à un contexte.
+
+#### Creator Assertions Working Group (CAWG) : {#creator-assertions-working-group-cawg}
+
+Groupe de travail de la Decentralized Identity Foundation (DIF) qui définit des normes techniques pour :
+
+- Les [assertions d'identité](#identity-assertion), qui prouvent qui a créé le contenu.
+- Les assertions de métadonnées, qui fournissent des informations détaillées sur le contenu.
+- Les assertions d'entraînement et d'exploration de données, qui précisent comment le contenu peut être utilisé.
+
+Pour en savoir plus, voir le [site du CAWG](https://cawg.io/).
+
+#### Hachage cryptographique : {#cryptographic-hash}
+
+Algorithme appliqué à des données numériques, comme un fichier image, pour produire une valeur d'« empreinte » unique. Si les données changent, la valeur de hachage change également.
+
+#### Ressource dérivée : {#derived-asset}
+
+Ressource créée à partir d'une ressource existante en effectuant des actions qui modifient son contenu numérique et ses métadonnées.
+
+#### Contenu numérique : {#digital-content}
+
+Partie d'une ressource qui représente le contenu proprement dit, comme les pixels d'une image, ainsi que les métadonnées techniques supplémentaires nécessaires à sa compréhension, par exemple un profil colorimétrique ou des paramètres d'encodage.
+
+#### Content Credentials durables : {#durable-content-credentials}
+
+Approche visant à préserver la provenance des contenus sur différentes plateformes en associant les données de manifeste C2PA à des filigranes invisibles, insérés activement dans le contenu, et à des empreintes calculées passivement à partir du contenu. Voir [Content Credentials durables](/durable-cr/index.md).
+
+#### Exchangeable image file format (Exif) : {#exchangeable-image-file-format-exif}
+
+Norme qui définit les formats des images, des sons et des balises complémentaires utilisés par les appareils photo numériques, y compris les smartphones, et les appareils associés.
+
+#### Extensible Metadata Platform (XMP) : {#extensible-metadata-platform-xmp}
+
+Norme ISO, initialement créée par Adobe Inc., pour la création, le traitement et l'échange de métadonnées standardisées et personnalisées dans les documents numériques et les jeux de données. Pour en savoir plus, voir [Adobe XMP](https://www.adobe.com/products/xmp.html).
+
+#### Empreinte : {#fingerprint}
+
+Ensemble de propriétés intrinsèques calculables à partir d'un contenu numérique qui permettent d'identifier ce contenu ou ses quasi-doublons. Voir [Filigranes et empreintes](/durable-cr/soft-bindings.mdx).
+
+#### Liaison forte : {#hard-binding}
+
+Un ou plusieurs hachages cryptographiques qui identifient de façon unique une ressource numérique entière ou une partie de celle-ci.
+
+#### Assertion d'identité : {#identity-assertion}
+
+Assertion CAWG qui permet au titulaire d'une attestation de prouver qu'il contrôle une identité numérique et d'utiliser cette identité pour documenter les rôles de l'acteur nommé dans le cycle de vie d'une ressource numérique. Voir [CAWG : assertion d'identité](https://cawg.io/identity/) et [Lire les assertions d'identité CAWG](/manifest/reading/reading-cawg-id.md).
+
+#### Agrégateur de déclarations d'identité : {#identity-claims-aggregator}
+
+Acteur qui recueille auprès de différents fournisseurs d'identité des déclarations d'identité CAWG (attestations) concernant un acteur nommé et peut les réutiliser dans des assertions d'identité au nom de cet acteur. Il peut également être le générateur d'assertions d'identité.
+
+#### Ingrédient : {#ingredient}
+
+Partie d'une ressource composée, par exemple une image superposée à une autre. Voir [Lire les ingrédients](/manifest/reading/ingredients-reading.md) et [Écrire les ingrédients](/manifest/writing/ingredients.md).
+
+#### Intention : {#intent}
+
+Déclaration qui indique à un `Builder` le type de manifeste à créer. Les intentions permettent la validation, ajoutent les actions exigées par la spécification C2PA et contribuent à empêcher les opérations non valides. Il existe trois types d'intention : **Create** pour les nouvelles créations numériques (nécessite un `DigitalSourceType` et ne doit pas avoir d'ingrédient parent), **Edit** pour modifier une ressource parente préexistante (doit avoir un ingrédient parent) et **Update** pour les modifications non éditoriales comme le réencodage (version restreinte de Edit). Voir [Utiliser les intentions de Builder](/tasks/intents.mdx).
+
+#### Liste de confiance provisoire : {#interim-trust-list}
+
+Liste de confiance Content Authenticity initiale, figée au 1er janvier 2026. Voir [Listes de confiance](/conformance/trust-lists.mdx).
+
+#### Filigrane invisible : {#invisible-watermark}
+
+Voir [filigrane](#watermark).
+
+#### JSON (JavaScript Object Notation) : {#json-javascript-object-notation}
+
+Format léger d'échange de données et de fichiers qui utilise du texte lisible pour stocker et transmettre des objets composés de paires attribut-valeur et de tableaux, ou d'autres valeurs sérialisables. Pour en savoir plus, voir [json.org](https://json.org).
+
+#### JPEG universal metadata box format (JUMBF) : {#jpeg-universal-metadata-box-format-jumbf}
+
+Norme technique internationale qui fournit un mécanisme pour intégrer et référencer des métadonnées génériques dans les fichiers JPEG. Voir [ISO/IEC 19566](https://www.iso.org/standard/84635.html).
+
+#### Manifeste : {#manifest}
+
+Ensemble d'informations sur la provenance d'une ressource numérique, fondé sur la combinaison d'une ou de plusieurs assertions (y compris les liaisons au contenu), d'une déclaration unique et de sa signature. Un manifeste fait partie d'un magasin de manifestes. Voir [Travailler avec les manifestes](/manifest/understanding.md).
+
+#### Archive de manifeste : {#manifest-archive}
+
+Voir [archive](#archive).
+
+#### Consommateur de manifeste : {#manifest-consumer}
+
+Acteur qui utilise une ressource numérique associée à un manifeste afin d'obtenir les données de provenance de ce manifeste.
+
+#### Dépôt de manifestes : {#manifest-repository}
+
+Dépôt contenant des manifestes et des magasins de manifestes, dans lequel une recherche peut être effectuée à l'aide d'une liaison au contenu.
+
+#### Magasin de manifestes : {#manifest-store}
+
+Collection de manifestes qui peut être intégrée à une ressource numérique ou lui être externe. Voir [Travailler avec les manifestes](/manifest/understanding.md).
+
+#### Magasin de travail de manifeste : {#manifest-working-store}
+
+Voir [magasin de travail](#working-store).
+
+#### Métadonnées : {#metadata}
+
+Voir [métadonnées de la ressource](#asset-metadata).
+
+#### Assertion de métadonnées : {#metadata-assertion}
+
+Assertion CAWG qui lie les métadonnées de normes comme XMP, IPTC et Exif à un manifeste C2PA de manière à rendre toute altération détectable. Contrairement à l'assertion `c2pa.metadata`, elle ne limite pas les champs de métadonnées autorisés et prend donc en charge davantage de cas d'utilisation. Elle convient particulièrement aux assertions recueillies C2PA, dans lesquelles le signataire du manifeste C2PA n'atteste pas l'exactitude des métadonnées fournies, mais garantit néanmoins l'intégrité du manifeste. Voir [CAWG : assertion de métadonnées](https://cawg.io/metadata/).
+
+#### Online Certificate Status Protocol (OCSP) : {#online-certificate-status-protocol-ocsp}
+
+Protocole Internet permettant d'obtenir l'état de révocation d'un certificat numérique X.509, c'est-à-dire de savoir s'il est toujours valide. Voir [IETF RFC 6960](https://www.rfc-editor.org/rfc/rfc6960).
+
+#### Clé privée : {#private-key}
+
+En cryptographie à clé publique, clé numérique unique (nombre très long) utilisée pour déchiffrer les messages chiffrés avec la clé publique correspondante. Chaque clé privée correspond à une seule clé publique et constitue la seule clé permettant de déchiffrer les messages chiffrés avec celle-ci. Pour garantir la sécurité, le propriétaire d'une clé privée ne doit jamais la divulguer à qui que ce soit.
+
+#### Provenance : {#provenance}
+
+Concept logique permettant de comprendre l'historique d'une ressource numérique et ses interactions avec les acteurs et les autres ressources, tels que les représentent les données de provenance.
+
+#### Données de provenance : {#provenance-data}
+
+Ensemble des manifestes d'une ressource numérique et, dans le cas d'une ressource composée, de ses ingrédients.
+
+#### Clé publique : {#public-key}
+
+En cryptographie à clé publique, clé numérique unique (nombre très long) utilisée pour chiffrer les messages qui peuvent ensuite être déchiffrés avec la clé privée correspondante. Chaque clé publique correspond à une seule clé privée. Un message chiffré avec une clé publique donnée ne peut être déchiffré qu'avec la clé privée correspondante. Les clés publiques peuvent être diffusées librement sans compromettre la sécurité. Voir [Premiers pas : introduction à l'infrastructure à clé publique](/getting-started/index.mdx#introduction-to-public-key-infrastructure).
+
+#### Reader : {#reader}
+
+Classe du SDK utilisée pour lire et valider un magasin de manifestes à partir d'une ressource numérique. Voir [Lire et vérifier les données de manifeste](/tasks/read.mdx), [Lire les données de manifeste](/manifest/reading/reading.md) et la [référence de Reader](/manifest/json-ref/reader-ref.mdx).
+
+#### Suppression d'assertion : {#redaction}
+
+Suppression d'une assertion du manifeste d'une ressource numérique lorsque cette ressource est utilisée comme ingrédient. Voir la [spécification technique C2PA](https://c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html).
+
+#### Ressource : {#resource}
+
+Ressources binaires référencées par les assertions d'un manifeste, comme les vignettes ou les vignettes d'ingrédients. Voir [Obtenir les ressources d'un manifeste](/tasks/get-resources.mdx).
+
+#### Settings : {#settings}
+
+Classe du SDK qui contrôle des comportements comme la génération des vignettes, les listes de confiance et les indicateurs de vérification. Voir [Configurer les paramètres du SDK avec Context](/tasks/settings.mdx) et la [référence de Settings](/manifest/json-ref/settings-ref.mdx).
+
+#### Fichier annexe : {#sidecar-file}
+
+Fichier contenant un magasin de manifestes, portant le même nom de base que le fichier de la ressource numérique, mais avec l'extension `.c2pa`. Il constitue une alternative à l'intégration du magasin de manifestes dans les métadonnées de la ressource. Par exemple, une ressource nommée `cat.jpg` aurait un fichier annexe nommé `cat.c2pa`. Voir [Travailler avec les manifestes](/manifest/understanding.md).
+
+#### Signataire : {#signer}
+
+Acteur dont la clé privée de l'attestation sert à signer une déclaration. Le sujet de l'attestation identifie le signataire. Voir [Signature et certificats](/signing/index.md).
+
+#### Liaison souple : {#soft-binding}
+
+Identifiant de contenu qui est soit intégré au contenu numérique sous forme de filigrane, soit non unique sur le plan statistique. Par exemple, les filigranes TrustMark sont ajoutés au moyen de liaisons souples. Voir [Filigranes et empreintes](/durable-cr/soft-bindings.mdx).
+
+#### Horodatage : {#time-stamp}
+
+Horodatage délivré par une autorité d'horodatage de confiance pour prouver que la signature d'un manifeste existait à une date et à une heure précises. Voir [Listes de confiance](/conformance/trust-lists.mdx).
+
+#### Autorité d'horodatage : {#time-stamp-authority}
+
+Tiers de confiance qui fournit une autorité d'horodatage (TSA) conforme à la [RFC 3161](https://www.rfc-editor.org/rfc/rfc3161). Voir [RFC 3161, section 1](https://www.rfc-editor.org/rfc/rfc3161#section-1).
+
+#### Assertion d'entraînement et d'exploration de données : {#training-and-data-mining-assertion}
+
+Assertion CAWG qui permet de préciser si une ressource numérique dotée de métadonnées C2PA peut être utilisée pour l'exploration de données ou l'entraînement de modèles d'IA ou d'apprentissage automatique. Voir [CAWG : assertion d'entraînement et d'exploration de données](https://cawg.io/training-and-data-mining/).
+
+#### Liste de confiance : {#trust-list}
+
+Voir [liste de confiance C2PA](#c2pa-trust-list).
+
+#### Signaux de confiance : {#trust-signals}
+
+Ensemble d'informations qui peuvent éclairer le jugement d'un acteur sur la fiabilité d'une ressource numérique. Elles complètent l'identité du signataire d'une déclaration, sur laquelle repose le modèle de confiance fondamental.
+
+#### TrustMark : {#trustmark}
+
+Système open source universel de filigranage d'images utilisé par plusieurs produits Adobe pour créer des Content Credentials durables. Voir [Filigranage TrustMark](/durable-cr/trustmark-intro.md).
+
+#### TSA : {#tsa}
+
+Voir [autorité d'horodatage](#time-stamp-authority).
+
+#### Validation : {#validation}
+
+Processus permettant de déterminer si les Content Credentials sont correctement configurées et signées. Par exemple : une ressource numérique correspond-elle réellement à la description de son manifeste associé, et le manifeste respecte-t-il le format et les règles de la spécification C2PA ? Voir [Validation des manifestes](/manifest/reading/validation.md).
+
+#### Validateur : {#validator}
+
+Consommateur de manifeste qui valide un manifeste actif. Voir [Validation des manifestes](/manifest/reading/validation.md).
+
+#### Attestation vérifiable (VC) : {#verifiable-credential-vc}
+
+Attestation dont toute altération est détectable et dont l'auteur peut être vérifié par des moyens cryptographiques. Ce terme peut être utilisé au sens général ou désigner la [recommandation du W3C sur le modèle de données des attestations vérifiables](https://www.w3.org/TR/vc-data-model-2.0/).
+
+#### Identifiant décentralisé du W3C (DID) : {#w3c-decentralized-identifier-did}
+
+Identifiant portable fondé sur une URL et associé à une entité, utilisé dans une attestation vérifiable du W3C. Exemple de DID : `did:example:123456abcdef`. Les assertions d'identité CAWG utilisent les DID pour les attestations d'[agrégation de déclarations d'identité](#identity-claims-aggregator).
+
+#### Document d'identifiant décentralisé du W3C : {#w3c-decentralized-identifier-document}
+
+Également appelé document DID, ce document est accessible au moyen d'un registre de données vérifiables. Il contient des informations relatives à un identifiant décentralisé précis du W3C, comme le dépôt associé et les informations de clé publique.
+
+#### Attestation vérifiable du W3C : {#w3c-verifiable-credential}
+
+Attestation dont toute altération est détectable et dont l'auteur peut être vérifié par des moyens cryptographiques.
+
+#### Filigrane : {#watermark}
+
+Informations incorporées de manière perceptible ou imperceptible au contenu numérique d'une ressource, qui peuvent servir, par exemple, à identifier cette ressource de façon unique ou à enregistrer une référence à un manifeste. Voir [Filigranes et empreintes](/durable-cr/soft-bindings.mdx).
+
+#### Magasin de travail : {#working-store}
+
+Manifeste modifiable en cours de création, représenté par un `Builder`, qui n'a pas encore été signé ni lié à une ressource numérique. Un magasin de travail contient l'état du manifeste C2PA en cours d'assemblage (déclarations, ingrédients, assertions). Il peut être sérialisé dans une archive pour être enregistré, transféré ou repris ultérieurement et utilise le même format JUMBF standard `application/c2pa` que les manifestes signés. Voir [Utiliser les magasins de travail et les archives](/tasks/archives.mdx).
+
+#### XMP : {#xmp}
+
+Voir [Extensible Metadata Platform](#extensible-metadata-platform-xmp).
+
+</div>
