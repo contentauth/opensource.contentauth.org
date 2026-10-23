@@ -16,9 +16,7 @@
       "$ref": "#/$defs/Trust",
       "default": {
         "anchors": null,
-        "trust_config": null,
-        "user_anchors": null,
-        "trust_anchors": null
+        "trust_config": null
       }
     },
     "core": {
@@ -91,7 +89,7 @@
       }
     },
     "signer": {
-      "description": "Settings for configuring the base C2PA signer, accessible via [`Settings::signer`].",
+      "description": "Settings for configuring the base C2PA signer, accessible via [`crate::Context::signer`].",
       "anyOf": [
         {
           "$ref": "#/$defs/SignerSettings"
@@ -102,7 +100,7 @@
       ]
     },
     "cawg_x509_signer": {
-      "description": "Settings for configuring the CAWG x509 signer, accessible via [`Settings::signer`].",
+      "description": "Settings for configuring the CAWG x509 signer, used by [`crate::Context::signer`].",
       "anyOf": [
         {
           "$ref": "#/$defs/SignerSettings"
@@ -142,22 +140,6 @@
             "string",
             "null"
           ],
-          "default": null
-        },
-        "user_anchors": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "deprecated": true,
-          "default": null
-        },
-        "trust_anchors": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "deprecated": true,
           "default": null
         }
       }
@@ -806,12 +788,6 @@
           "const": "http://cv.iptc.org/newscodes/digitalsourcetype/print"
         },
         {
-          "description": "Minor augmentation or correction by a human, such as a digitally-retouched photo used in a magazine.",
-          "type": "string",
-          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/minorHumanEdits",
-          "deprecated": true
-        },
-        {
           "description": "Augmentation, correction or enhancement by one or more humans using non-generative tools.",
           "type": "string",
           "const": "http://cv.iptc.org/newscodes/digitalsourcetype/humanEdits"
@@ -825,18 +801,6 @@
           "description": "Modification or correction by algorithm without changing the main content of the media, initiated\nor configured by a human, such as sharpening or applying noise reduction.",
           "type": "string",
           "const": "http://cv.iptc.org/newscodes/digitalsourcetype/algorithmicallyEnhanced"
-        },
-        {
-          "description": "The digital image was created by computer software.",
-          "type": "string",
-          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/softwareImage",
-          "deprecated": true
-        },
-        {
-          "description": "Media created by a human using digital tools.",
-          "type": "string",
-          "const": "http://cv.iptc.org/newscodes/digitalsourcetype/digitalArt",
-          "deprecated": true
         },
         {
           "description": "Media created by a human using non-generative tools.",
@@ -995,7 +959,7 @@
       ]
     },
     "SignerSettings": {
-      "description": "Settings for configuring a local or remote [`Signer`].\n\nA [`Signer`] can be obtained by calling the [`signer()`] function.\n\n[`Signer`]: crate::Signer\n[`signer()`]: crate::settings::Settings::signer",
+      "description": "Settings for configuring a local or remote [`Signer`].\n\nA [`Signer`] can be created with [`SignerSettings::c2pa_signer`].\n\n[`Signer`]: crate::Signer",
       "oneOf": [
         {
           "description": "A signer configured locally.",
