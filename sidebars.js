@@ -141,42 +141,37 @@ const sidebars = {
     {
       type: 'category',
       label: 'Technical FAQs',
+      link: { type: 'doc', id: 'technical-faqs/index' },
       collapsed: true,
       items: [
         {
           type: 'doc',
           id: 'technical-faqs/tech-faq-general',
-          label: 'General FAQs',
         },
         {
           type: 'doc',
           id: 'technical-faqs/tech-faq-rust',
-          label: 'Rust SDK FAQ',
         },
         {
           type: 'doc',
           id: 'technical-faqs/tech-faq-node',
-          label: 'Node.js SDK FAQs',
         },
         {
           type: 'doc',
           id: 'technical-faqs/tech-faq-c2pa-tool',
-          label: 'C2PA Tool FAQs',
         },
         {
           type: 'doc',
           id: 'technical-faqs/tech-faq-conformance',
-          label: 'C2PA Conformance FAQs',
         },
         {
           type: 'doc',
           id: 'technical-faqs/tech-faq-cawg',
-          label: 'CAWG Standard FAQs',
         },
         {
           type: 'doc',
           id: 'technical-faqs/tech-faq-certificates',
-          label: 'Certificate FAQs',
+          label: 'Signing certificate FAQs',
         },
       ],
     },

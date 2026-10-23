@@ -1,99 +1,113 @@
+---
+hide_table_of_contents: true
+---
+
+import TOCInline from '@theme/TOCInline';
+
 # General FAQs
 
-These answers are based only on the 287 messages in the exported CAI General
-Discord channel history, covering April 1 through October 21, 2026. They
-have not been independently verified against external sources or current
-releases. Dated implementation guidance and linked resources reflect those
-discussions, not guarantees of current availability or compatibility.
-Discord source links may require server membership and channel access.
+<TOCInline toc={toc} />
 
-## Where can I find signed sample assets, including location and time examples?
+### Where can I find signed sample assets?
 
-The April replies point to Proofmode's public
-[Baseline repository](https://proofmode.org/baseline/), while warning that
-much of its content used older C2PA 1.x support. Another reply suggests the
-[`contentauth/example-assets` repository](https://github.com/contentauth/example-assets)
-as a place to submit signed assets for testing. Neither answer promises a
+Use Proofmode's public
+[Baseline repository](https://proofmode.org/baseline/) has signed sample
+assets, but be aware that much of its content uses older C2PA 1.x support. Use the [`contentauth/example-assets` repository](https://github.com/contentauth/example-assets) to submit signed assets for testing. Neither repository guarantees a
 complete, current conformance test suite.
 
-For location metadata, the Proofmode developer links the
+For location metadata, see the Proofmode
 [Android 3.0.2 release candidate](https://github.com/guardianproject/proofmode-android/releases/tag/3.0.2-RC-2)
 and its use of `c2pa.metadata` to include geolocation as a created assertion.
 Older conformance samples used `stds.exif`, described as deprecated but
-still valid. A follow-up links the
+still valid. See the
 [Kotlin metadata-generation code](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L840).
 
-These are source-provided examples and implementation pointers, not a
-guarantee that every sample contains GPS and a timestamp, that their
-certificates remain trusted, or that signed metadata proves the truth of
-the depicted event.
+Sources:
 
-[Source: Baseline and older sample versions, April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489689553886384228)
+- [Baseline and older sample versions; April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489689553886384228)
+- [Android geolocation implementation; April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489689681653141634)
+- [Older sample assertion format; April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489690080623726795)
+- [Metadata-generation code; April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489690402805125372)
+- [Shared signed-asset repository; April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489693250133430272)
 
-[Source: Android geolocation implementation, April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489689681653141634)
+### How can I get started with Content Credentials on Android or iOS?
 
-[Source: older sample assertion format, April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489690080623726795)
+Use the [mobile SDKs](../mobile.md) for Android and iOS.
 
-[Source: metadata-generation code, April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489690402805125372)
+### Does a Valid validation state mean that the signer is trusted?
 
-[Source: shared signed-asset repository, April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489693250133430272)
+No. There are three manifest states:
+**well-formed**, **valid**, and **trusted**. Trusted manifests are also
+valid, and valid manifests are also well-formed. The reverse does not follow.
 
-## How can I get started with Content Credentials on Android or iOS?
+A manifest signed with a test certificate can have a `Valid` state while
+`validation_results.activeManifest.failure` contains
+`signingCredential.untrusted`. This follows the manifest-state model.
 
-For users, the April 4 support reply recommends installing a C2PA-enabled
-camera app, giving Proofmode as an iOS example. This is app-based guidance,
-not a statement that the built-in camera on every iPhone signs assets.
+Do not label a manifest trusted merely because its state is `Valid`.
+Inspect the trust-related validation results, and distinguish trust that
+was not evaluated from a failed trust check. An issuer name alone does
+not establish trust.
 
-For developers, the April and May replies recommend the open-source
-[mobile SDKs](https://opensource.contentauthenticity.org/docs/mobile)
-for Android and iOS rather than maintaining a new C2PA implementation.
-SDK availability is distinct from the conformance or trust status of an
-application built with it.
+See the
+[manifest states specification](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_manifest_states).
 
-[Source: iOS camera-app route, April 4, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1490063556698443877)
+Sources:
 
-[Source: Android library recommendation, April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489689175270625582)
+- [Valid-but-untrusted result; July 29, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1532235743022288977)
+- [State hierarchy; July 30, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1532378030276612178)
+- [Specification reference; July 30, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1532378218420633610)
 
-[Source: Android and iOS SDK resources, May 14, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1504547100493348884)
+### Can a manifest carry custom sensor or verification information?
 
-## Can a manifest carry custom sensor or verification information?
-
-Yes. In response to a proposed sensor-noise extension, the April 20 answer
-confirms that custom assertions can be added to a C2PA manifest. A validator
+Yes. You can add custom assertions to a C2PA manifest. A validator
 that understands that assertion could use its information to identify where
 changes occurred.
 
 That is an extensibility mechanism, not endorsement of the proposal's
 claimed security guarantees or a promise that existing validators understand
-it. The follow-up about coordinating camera and editor implementations
-was not resolved in the exported discussion.
+it. A camera/editor workflow needs compatible implementations; custom
+assertions alone do not provide that coordination.
 
-[Source: custom assertions and validator support, April 20, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1495831402938110155)
+Source: [custom assertions and validator support, April 20, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1495831402938110155)
 
-## Where are embedding rules for TIFF-based and base-media file formats documented?
+### Where are embedding rules for TIFF-based and base-media file formats documented?
 
-The August 17 reply directs implementers to the **Embedded Formats annex**
+See the **Embedded Formats annex**
 of the
 [Content Credentials specification](https://c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html).
-It was answering a question about TIFF-based Sony formats and the
+for embedding rules relevant to TIFF-based Sony formats and the
 base-media-based Canon CR3 format.
 
 This is a specification pointer, not confirmation that every raw camera
-format is supported by a particular SDK. The reply did not supply the
-requested camera samples.
+format is supported by a particular SDK or that camera samples are available.
 
-[Source: Embedded Formats annex, August 17, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1538922552007589898)
+Source: [Embedded Formats annex, August 17, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1538922552007589898)
 
-## Where can I report a CAI security concern?
+### Where can I report a CAI security concern?
 
-The October 19 support reply recommends the
-[CAI contact form](https://contentauthenticity.org/contact) for something
-that needs reporting. In the follow-up, support said the specific report
-had been routed onward, but that the responder might not know its status.
+Use the [CAI contact form](https://contentauthenticity.org/contact) to report
+a security concern. Do not assume a dedicated security inbox, a response
+deadline, or public status updates are available.
 
-The discussion does not establish a dedicated security inbox, a response
-deadline, or a promise of public status updates.
+Sources:
 
-[Source: reporting contact, October 19, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1561895003670716528)
+- [Reporting contact; October 19, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1561895003670716528)
+- [Routing and status limitations; October 19, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1561895701028536405)
 
-[Source: routing and status limitations, October 19, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1561895701028536405)
+### Why might an HEIC thumbnail not appear in Verify?
+
+Signing and display are separate issues. If a thumbnail's format changes to
+`application/octet-stream` during signing, use a v2 claim: set
+`claim_version` to `2`, or omit it if your version defaults to v2.
+
+Display also depends on browser support. As of September 2026,
+`image/heic` thumbnails displayed in macOS Safari but not Chrome.
+A correctly embedded thumbnail therefore did not guarantee display in
+every browser. These observations are historical, not a current browser
+compatibility matrix.
+
+Sources:
+
+- [V2 claims and browser-dependent display; September 1, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1544362081107578961)
+- [Successful result; September 2, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1544907804417064970)

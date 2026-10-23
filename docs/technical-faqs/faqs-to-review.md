@@ -1,11 +1,17 @@
+---
+hide_table_of_contents: true
+---
+
+import TOCInline from '@theme/TOCInline';
+
 # Technical FAQ topics for review
 
-These editorial notes capture unresolved or time-sensitive topics from the
-CAI Rust SDK Discord history covering April through October 2026. They are
-not confirmed FAQ answers. Verify each topic before publishing guidance.
-Discord source links may require channel access.
+These editorial notes are not confirmed FAQ answers. Verify each topic
+before publishing guidance.
 
-## Verification website reports invalid content that the SDK reports as trusted
+<TOCInline toc={toc} />
+
+### Verification website reports invalid content that the SDK reports as trusted
 
 **Candidate question:** Why does a verification website reject an asset
 that the SDK reports as trusted?
@@ -23,13 +29,13 @@ Before publication:
 - Do not present incomplete website support as the cause of every validation
   discrepancy.
 
-[Source: initial guidance, April 7, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1491238678410821784)
+Sources:
 
-[Source: SDK validation result, April 16, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1494485332010209350)
+- [Initial guidance; April 7, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1491238678410821784)
+- [SDK validation result; April 16, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1494485332010209350)
+- [Pending website support information; April 20, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1495872312413655162)
 
-[Source: pending website support information, April 20, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1495872312413655162)
-
-## Server-side assertion validation with a remote signer
+### Server-side assertion validation with a remote signer
 
 **Candidate question:** How can a remote signer validate assertion values
 before signing without receiving the asset bytes?
@@ -52,15 +58,14 @@ Before publication:
 - Obtain authoritative guidance on the applicable conformance requirements;
   do not infer that client authentication alone is sufficient.
 
-[Source: proposed approach, August 10, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1536422380207996989)
+Sources:
 
-[Source: API limitations, August 11, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1536634968212774962)
+- [Proposed approach; August 10, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1536422380207996989)
+- [API limitations; August 11, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1536634968212774962)
+- [Security architecture; August 11, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1536713305916440648)
+- [Conformance referral; August 17, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1538923231476457533)
 
-[Source: security architecture, August 11, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1536713305916440648)
-
-[Source: conformance referral, August 17, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1538923231476457533)
-
-## Rust SDK 1.0 release timeline
+### Rust SDK 1.0 release timeline
 
 **Candidate question:** When will the Rust SDK reach 1.0?
 
@@ -70,9 +75,9 @@ This is a dated roadmap response, not a permanent FAQ answer.
 Before publication, check current release information and obtain an
 approved roadmap statement from the team.
 
-[Source: June 8, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1513639744167219280)
+Source: [June 8, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1513639744167219280)
 
-## Build failure caused by a yanked dependency
+### Build failure caused by a yanked dependency
 
 **Candidate question:** What should I do about the yanked dependency
 build failure?
@@ -89,9 +94,9 @@ Before publication:
 - Check how existing lockfiles affect reproducibility.
 - Prefer a dated troubleshooting notice over an evergreen FAQ entry.
 
-[Source: October 16, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1560738950807687341)
+Source: [October 16, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1560738950807687341)
 
-## Ingredient digital source type and remote-signer certificate chains
+### Ingredient digital source type and remote-signer certificate chains
 
 **Candidate questions:**
 
@@ -110,11 +115,12 @@ Before publication, verify each PR's status, identify the first release
 containing the change, and test a minimal example of the reported behavior.
 Treat these as separate FAQ entries if both remain useful.
 
-[Source: ingredient field, May 4, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1500953348722131055)
+Sources:
 
-[Source: certificate-chain parsing, May 4, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1500953982431133827)
+- [Ingredient field; May 4, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1500953348722131055)
+- [Certificate-chain parsing; May 4, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1500953982431133827)
 
-## Building the C SDK for 32-bit Windows
+### Building the C SDK for 32-bit Windows
 
 **Candidate question:** How do I build the C SDK for 32-bit Windows?
 
@@ -125,4 +131,4 @@ of a C2PA Tool version mismatch does not resolve this separate build issue.
 Before publication, confirm supported targets and toolchain requirements,
 reproduce the build, and verify the architecture of the resulting DLL.
 
-[Source: April 21, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1496248252767670272)
+Source: [April 21, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1496248252767670272)
