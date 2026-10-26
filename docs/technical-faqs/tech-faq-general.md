@@ -86,14 +86,11 @@ Source: [Embedded Formats annex, August 17, 2026](https://discord.com/channels/9
 
 ### Where can I report a CAI security concern?
 
-Use the [CAI contact form](https://contentauthenticity.org/contact) to report
-a security concern. Do not assume a dedicated security inbox, a response
-deadline, or public status updates are available.
+The CAI open-source library is maintained in partnership with Adobe. Adobe accepts security reports through its public [Intigriti program](https://app.intigriti.com/programs/adobe/adobepublic/detail). C2PA is listed in the program for vulnerability disclosure, but is not currently eligible for bounty rewards. Adobe continues to accept reports for assets that are not bounty-eligible, including critical findings it considers important.
 
-Sources:
+Do not create a public GitHub issue for any suspected security vulnerabilities. Details on how to report security vulnerabilities are available on [Adobe's bug bounty program page](https://www.adobe.com/trust/security/bug-bounty.html).
 
-- [Reporting contact; October 19, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1561895003670716528)
-- [Routing and status limitations; October 19, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1561895701028536405)
+For more information on security issues, see [SECURITY.md in the Rust library](https://github.com/contentauth/c2pa-rs/blob/main/SECURITY.md).
 
 ### Why might an HEIC thumbnail not appear in Verify?
 
