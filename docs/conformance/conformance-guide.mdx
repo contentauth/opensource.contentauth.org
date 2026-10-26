@@ -29,21 +29,19 @@ Content Credentials working in your product, start with these resources:
 
 ## Types of applicants
 
-The C2PA conformance program covers three types of applicants, and you
-must apply for each separately:
+The C2PA conformance program covers a range of applicants, depending on the product type, and (for generator products) implementation class and maximum assurance level.
 
-- **Generator products** that attach Content Credentials to assets using
-  a claim-signing certificate issued under a root on the C2PA
-  Trust List.
-- **Validator products** that read and validate Content Credentials
-  attached by C2PA-conforming generator products.
-- **Certificate authorities** that issue C2PA claim-signing
-  certificates to generator products from their root on the C2PA Trust
-  List.
+### Product types
 
-Generator products have three implementation classes,
-depending on where the product performs the critical functions of
-assertion management, manifest construction, and claim signing:
+C2PA recognizes three broad product types. You must apply separately for each type of product:
+
+- **Generator products** attach Content Credentials to assets using a claim-signing certificate issued under a root on the C2PA Trust List.
+- **Validator products** read and validate Content Credentials attached by C2PA-conforming generator products.
+- **Certificate authorities** issue C2PA claim-signing certificates to generator products from their root on the C2PA Trust List.
+
+### Implementation classes
+
+Generator products have three implementation classes, depending on where the product performs the critical functions of assertion management, manifest construction, and claim signing:
 
 - **Edge**: Critical functions run on an endpoint such as a phone,
   camera, or laptop.
@@ -51,17 +49,19 @@ assertion management, manifest construction, and claim signing:
 - **Distributed**: Critical functions are split between edge and backend
   subsystems.
 
+### Assurance levels
+
 Each application for generator product conformance specifies a *maximum assurance
 level* that the product seeks. The assurance level tells relying parties
 how much confidence they can place in the claims it signs. The program
 currently defines two levels:
 
-- **Level 1**: The product has software-based controls, such as an
-  encrypted claim-signing key, dependency vulnerability scanning, and
-  access control for the hosting environment.
-- **Level 2**: The product has level 1 controls and controls backed by
-  a hardware root of trust, such as a hardware-protected claim-signing
-  key and attestations presented to the CA during enrollment.
+- **Assurance level 1**: The generator product follows documented security practices, including secure authentication when requesting certificates, an encrypted signing key with controlled access, scanning for known vulnerabilities with timely patching, and protected traffic and hosting.
+- **Assurance level 2**: The generator product meets level 1 criteria and additionally holds its signing key in secure hardware-backed storage such as a cloud key management service or device keystore. When requesting certificates, it must also present hardware-verified dynamic evidence of its identity, key possession, and current security updates.
+
+:::note
+These descriptions are summaries. The authoritative requirements are in the [C2PA Generator Product Security Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/v0.2/C2PA%20Generator%20Product%20Security%20Requirements.pdf) document.
+:::
 
 ## Conformance process walkthrough
 
@@ -396,12 +396,9 @@ answer each of those questions with "No".
 After you complete the intake form, prepare your generator
 product security architecture document.
 
-Appendix C of [C2PA Generator Product Security
-Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/v0.2/C2PA%20Generator%20Product%20Security%20Requirements.pdf)
-provides the template. Complete it section by section. You
-must complete sections marked "Required" for your target level. You need
-to submit these answers to the C2PA conformance program as a Markdown
-file.
+The [C2PA Generator Product Security Architecture Document Template
+](https://github.com/c2pa-org/conformance-public/blob/main/docs/v0.2/C2PA%20Generator%20Product%20Security%20Architecture%20Document%20Template.md) provides a template to use. Complete it section by section. You
+must complete sections marked "Required" for your target level and then submit it to the C2PA conformance program as a Markdown file.
 
 See an example in the [Conformance Example App](https://github.com/contentauth/conformance-example-app/blob/main/conformance/documents/security_architecture.md).
 

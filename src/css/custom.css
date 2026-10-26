@@ -606,3 +606,11 @@ main .row:not(:has(.theme-doc-toc-desktop)) > .col {
   border: 1px solid #ccc;
   margin-bottom: 10px;
 }
+
+[data-theme='dark'] .conformance-box {
+  background-color: var(--cai-color-disabled);
+  color: var(--cai-color-on-surface);
+  border-color: var(--cai-color-disabled);
+}
+
+/* --cai-color-surface */
