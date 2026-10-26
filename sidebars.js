@@ -140,6 +140,43 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Technical FAQs',
+      link: { type: 'doc', id: 'technical-faqs/index' },
+      collapsed: true,
+      items: [
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-general',
+        },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-rust',
+        },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-node',
+        },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-c2pa-tool',
+        },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-conformance',
+        },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-cawg',
+        },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-certificates',
+          label: 'Signing certificate FAQs',
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Signing and certificates',
       link: { type: 'doc', id: 'signing/signing-and-certs' },
       collapsed: true,
