@@ -92,6 +92,12 @@ devDependencies:
   lint-staged:
     specifier: ^12.3.7
     version: 12.5.0
+  micromark:
+    specifier: ^4.0.2
+    version: 4.0.2
+  micromark-util-decode-string:
+    specifier: ^2.0.1
+    version: 2.0.1
   node-fetch:
     specifier: ^2.6.7
     version: 2.7.0
