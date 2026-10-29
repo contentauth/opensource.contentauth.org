@@ -543,6 +543,44 @@ main .row:not(:has(.theme-doc-toc-desktop)) > .col {
   scroll-margin-top: 130px; /* Slightly more than title bar */
 }
 
+.markdown .glossary-inline-terms {
+  padding-inline-start: 2rem;
+}
+
+.markdown .glossary-table thead th {
+  background-color: color-mix(
+    in srgb,
+    var(--ifm-table-stripe-background) 90%,
+    black
+  );
+}
+
+@media (min-width: 997px) {
+  main:has(.glossary-table),
+  main:has(.glossary-table) > .container {
+    max-width: 100%;
+  }
+
+  main
+    .row:has(.glossary-inline-terms, .glossary-table)
+    > .col:has(.theme-doc-toc-desktop) {
+    flex: 0 0 5rem;
+    max-width: 5rem;
+  }
+
+  main
+    .row:has(.glossary-inline-terms, .glossary-table)
+    > .col:has(.glossary-inline-terms, .glossary-table) {
+    flex: 1 1 0;
+    max-width: calc(100% - 5rem) !important;
+  }
+}
+
+.markdown .glossary-inline-terms > h3 {
+  margin-top: 2.5rem;
+  margin-inline-start: -2rem;
+}
+
 /* Glossary page: term labels use #### but should read like inline "Term: definition" blocks */
 .markdown .glossary-inline-terms > h4 {
   display: inline;
@@ -550,6 +588,7 @@ main .row:not(:has(.theme-doc-toc-desktop)) > .col {
   font-weight: var(--ifm-font-weight-bold);
   line-height: inherit;
   margin: 0;
+  margin-inline-start: -2rem;
   padding: 0;
   color: var(--ifm-heading-color);
 }
@@ -564,15 +603,15 @@ main .row:not(:has(.theme-doc-toc-desktop)) > .col {
   padding-left: 0.35rem;
 }
 
-.markdown .glossary-inline-terms > h4:not(:first-of-type)::before {
-  content: '';
-  display: block;
-  margin-top: var(--ifm-paragraph-margin-bottom);
-}
-
 .markdown .glossary-inline-terms > h4 + p {
   display: inline;
   margin: 0;
+}
+
+.markdown .glossary-inline-terms > h4 + p::after {
+  content: '';
+  display: block;
+  margin-bottom: var(--ifm-paragraph-margin-bottom);
 }
 
 .markdown .glossary-inline-terms > h4 + p + p {
