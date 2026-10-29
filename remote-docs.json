@@ -551,6 +551,26 @@
     },
     {
       "repo": "adobe/trustmark",
+      "path": "cpp/README.md",
+      "dest": "docs/sdk-repos/trustmark/cpp/README.md",
+      "sidebar": {
+        "category": "trustmark",
+        "label": "C++ implementation",
+        "order": 7
+      }
+    },
+    {
+      "repo": "adobe/trustmark",
+      "path": "python-hailo/README.md",
+      "dest": "docs/sdk-repos/trustmark/python-hailo/README.md",
+      "sidebar": {
+        "category": "trustmark",
+        "label": "Python (Hailo)",
+        "order": 8
+      }
+    },
+    {
+      "repo": "adobe/trustmark",
       "path": "FAQ.md",
       "dest": "docs/sdk-repos/trustmark/FAQ.md"
     }

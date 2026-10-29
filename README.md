@@ -92,6 +92,14 @@ The [remote-docs.json](./remote-docs.json) file is the single source of truth fo
 
 Entries with `{ "_comment": "Section name" }` are section headers only—they are ignored by the scripts and help organize the file for readability.
 
+When fetching `adobe/trustmark` docs, the script rewrites relative Markdown
+destinations (including reference definitions) to absolute
+`https://github.com/adobe/trustmark/blob/<branch>/...` URLs, resolved relative to
+each source file. Fragment-only links, external URLs, and code examples are
+preserved. Other repositories are fetched unchanged.
+
+Run the fetch-script tests with `node --test scripts/fetch-readme.test.js`.
+
 ### Building
 
 ```
