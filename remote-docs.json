@@ -487,6 +487,18 @@
       }
     },
 
+    { "_comment": "C2PA conformance program" },
+    {
+      "repo": "contentauth/conformance-example-app",
+      "path": "README.md",
+      "dest": "docs/sdk-repos/conformance-example-app/README.md",
+      "sidebar": {
+        "category": "conformance",
+        "label": "Conformance Example App",
+        "order": 2
+      }
+    },
+
     {
       "_comment": "Durable Content Credentials - watermarking algorithm list (static JSON)"
     },

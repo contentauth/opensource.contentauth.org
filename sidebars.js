@@ -416,6 +416,11 @@ const sidebars = {
       items: [
         {
           type: 'doc',
+          id: 'conformance/conformance-impl-guide',
+        },
+        ...getRemoteSidebarItems('conformance'),
+        {
+          type: 'doc',
           id: 'conformance/trust-lists',
         },
       ],
