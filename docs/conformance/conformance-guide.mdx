@@ -204,9 +204,12 @@ website or your own verification site, you'll need to complete a separate
 application process for that product.
 
 NOTE: Generator products often need to validate signed ingredients that
-are included when generating manifests. Validation of ingredients by a
-generator during signing does *not* require a separate validator product
-application. The intake form will cover this later.
+are included when generating manifests. This applies if the Generator product
+uses c2pa.opened. It must assert the media types it claims to open, regardless
+of whether it retains the manifest of the ingredient. Validation of ingredients
+by a generator during signing does *not* require a separate validator product
+application.
+
 
 Select "Generator Product" for the Conformance Example App:
 
