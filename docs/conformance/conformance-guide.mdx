@@ -151,21 +151,56 @@ C2PA will email you a link to the intake form where you enter
 information about your product or service that C2PA uses to populate
 the record on the conforming products list.
 
-#### Legal business information and product category
-
-On the first page, the form asks for legal business information for the
-public record.
-
-Enter:
+On the first page, the form asks for your email.
 
 <div className="conformance-box">
-
-Email: *jane@example.com*<br/>
-Legal organization name: *Example Corp.*<br/>
-Legal Business Address: *123 Main St, Santa Monica, CA 90401*
+*jane@example.com*
 </div>
 
-At the bottom of the first page, use the drop-down list to choose
+### Legal information
+
+On this page, the form asks for legal business information for the
+public record. It should match what was entered on the legal agreement.
+
+#### Legal Organization Name (from legal agreement)
+
+<div className="conformance-box">
+*Example Corp.*
+</div>
+
+#### Legal Business Street Address (from legal agreement)
+
+<div className="conformance-box">
+*123 Main St.*
+</div>
+
+#### Legal Business City (from legal agreement)
+
+<div className="conformance-box">
+*Santa Monica*
+</div>
+
+#### Legal Business State / Province (from legal agreement)
+
+<div className="conformance-box">
+*CA*
+</div>
+
+#### Legal Business Zip / Postal Code (from legal agreement)
+
+<div className="conformance-box">
+*90401*
+</div>
+
+#### Legal Business Country (from legal agreement)
+
+<div className="conformance-box">
+*US*
+</div>
+
+#### Product or Service
+
+Use the drop-down list to choose Product or Service as
 either **certificate authority** or a **generator/validator product**.
 The form displays different questions depending on your selection.
 
@@ -175,41 +210,46 @@ Select this:
 *Generator Product or Validator Product*
 </div>
 
-#### Interoperability testing and specification compliance
+#### Conformance Program Version
 
-In this step, you assert that you've complied with the specification and
-have performed interoperability testing.
-
-*Interoperability testing* helps confirm that your claim generator
-complies with the C2PA specification. Test against at least one other
-conformant implementation that covers all functional aspects of your
-build. Later in the process, you'll provide interoperability samples to C2PA.
-
-C2PA strongly recommends that you complete interoperability testing before
-submitting your product.
-
-Select "Yes":
+Lastly, you will confirm the version of the C2PA Conformance Program under 
+which this submission is being made. Right now, v0.2 of the program is the 
+only option and pre-filled.
 
 <div className="conformance-box">
-*Yes*
+*0.2*
 </div>
 
-#### Specific conformance role
+### Product Application
 
-On a previous page, you selected that the product was in the generator
-or validator category rather than the certificate authority category. On this
-page, you indicate that the product is specifically a **generator
-product**. If you have a separate validator implementation on your
-website or your own verification site, you'll need to complete a separate
-application process for that product.
+This section will convey information about your implementation and how it is publicly displayed.
 
-NOTE: Generator products often need to validate signed ingredients that
+#### Asserted C2PA Content Credentials Specification Version
+
+Enter:
+
+<div className="conformance-box">
+*2.4*
+</div>
+
+#### Does your product support generating or validating assets containing compressed manifests?
+
+Enter:
+
+<div className="conformance-box">
+*No*
+</div>
+
+#### Product Type
+
+Generator products often need to validate signed ingredients that
 are included when generating manifests. This applies if the Generator product
 uses c2pa.opened. It must assert the media types it claims to open, regardless
 of whether it retains the manifest of the ingredient. Validation of ingredients
 by a generator during signing does *not* require a separate validator product
-application.
-
+application. If you have a separate validator implementation on your
+website or your own verification site, you'll need to complete a separate
+application process for that product.
 
 Select "Generator Product" for the Conformance Example App:
 
@@ -217,20 +257,29 @@ Select "Generator Product" for the Conformance Example App:
 *Generator Product*
 </div>
 
-#### Earliest disclosure
+#### Date of Earliest Public Disclosure
 
 The next question applies if you're seeking conformance for a product
-that has not yet been released. In that case,
-specify a future date when you want the product to appear on the
-C2PA conforming products list.
+that has not yet been released. In that case, specify a future date when
+you want the product to appear on the C2PA conforming products list.
 
-This question doesn't apply to the example app, so select "N/A":
+This question doesn't apply to the example app, so select today's date:
 
 <div className="conformance-box">
-*N/A*
+*Today's Date*
 </div>
 
-#### Specific conformance role
+#### Is there a web address where users can learn more about this product or access it directly?
+
+Enter:
+
+<div className="conformance-box">
+*https://example.com/about*
+</div>
+
+### Generator Product Application
+
+#### Generator Product: What is the implementation type of your product
 
 As noted earlier, there are three implementation classes: edge,
 backend, and distributed. Since the Conformance Example App performs the
@@ -238,6 +287,14 @@ entire claim generation process on the server, choose **Backend Class**:
 
 <div className="conformance-box">
 *Backend Class*
+</div>
+
+#### Choose the option that best describes your product
+
+Select:
+
+<div className="conformance-box">
+*A creative application that allows humans to create or directly manipulate media using non-generative tools (e.g. a photo or video editing app)*
 </div>
 
 #### Certificate subject
@@ -317,7 +374,7 @@ Enter:
 *1.0.0*
 </div>
 
-#### Assurance level
+#### Max Assurance level
 
 In this field, enter the *maximum assurance level*, which tells a relying
 party how much confidence it can place in assertions and claims signed
@@ -329,26 +386,31 @@ Enter:
 *Assurance Level 1*
 </div>
 
+#### Please select the key and/or integrity attestation method(s) that your Generator Product is capable of invoking.
+
 An attestation method is not required for assurance level 1. When
 the form asks which key or integrity attestation methods
 your generator product can invoke, choose "None of the
 above".
 
-#### Still image generation support and generated media types
+<div className="conformance-box">
+*None of the above*
+</div>
+
+### Still Image Generation Support
 
 On the next two pages, the intake form asks whether the application
 ***generates*** still images and then which media types the application
 generates. First, indicate that the application generates signed
 still images.
 
-Enter:
+#### Does your Generator Product generate still images with C2PA manifests?
 
 <div className="conformance-box">
 *Yes*
 </div>
 
-The next page lists various media types. Select `image/jpeg` to match
-what you listed previously:
+#### Please select all still image media types that your Generator Product supports
 
 <div className="conformance-box">
 *image/jpeg*
@@ -367,15 +429,19 @@ The next several pages ask the following questions:
 Because the example app only signs still images, answer "No" for all
 these questions.
 
-#### Still image validation support and validated media types
+### Still Image Validation Support
 
 On the next two pages, the intake form asks whether the application
 ***validates*** still images and which media types it validates. First,
 indicate that it validates signed still images:
 
+#### Does your Product validate still images with C2PA manifests?
+
 <div className="conformance-box">
 *Yes*
 </div>
+
+#### Please select all still image media types that your Product supports
 
 The next page lists the media types. Select `image/jpeg` to match what
 you specified previously:
