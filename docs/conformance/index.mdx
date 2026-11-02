@@ -11,9 +11,9 @@ The C2PA conformance program covers:
 - [Certificate authorities (CAs)](#certificate-authorities).
 
 :::info
-If you're developing a product that reads or creates Content Credentials, you can apply for the C2PA conformance program. If accepted, the product is added to the [conforming products list](https://github.com/c2pa-org/conformance-public/blob/main/conforming-products/conforming-products-list.json), which indicates it is compliant with the C2PA Content Credentials specification.
+If you're developing a product that reads or creates Content Credentials, you can apply for the C2PA conformance program. If approved, C2PA adds your product to the [conforming products list](https://github.com/c2pa-org/conformance-public/blob/main/conforming-products/conforming-products-list.json), which indicates it is compliant with the C2PA Content Credentials specification and meets the program's security requirements.
 
-**To start the process, fill out C2PA's [expression of interest form](https://docs.google.com/forms/d/e/1FAIpQLScERZH5rKfoeSu3y6gGbkllkyeAhmF0G-kXS0eXpb2vR238Rg/viewform).**
+**For a detailed walkthrough of the process, see [Implementer's guide to conformance](conformance-guide.mdx)**
 :::
 
 When you apply to the conformance program, you will:
@@ -33,18 +33,18 @@ Use the [**Conformance Explorer**](https://spec.c2pa.org/conformance-explorer/) 
 A _validator product_ can read and validate a manifest store for a digital asset.
 A conforming validator product produces correct validation results according to the C2PA Content Credentials specification.
 
-For more information, see [C2PA Conformance Program Documents](https://github.com/c2pa-org/conformance-public/tree/main/docs/current), specifically
-[C2PA conformance program - section 6.1.1, Validator Product Specification Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Conformance%20Program.pdf).
+For more information, see [C2PA Conformance Program Documents](https://github.com/c2pa-org/conformance-public/tree/main/docs), specifically
+[C2PA conformance program - section 6.1.1, Validator Product Specification Requirements](https://github.com/c2pa-org/conformance-public/tree/main/docs/v0.2/C2PA%20Conformance%20Program.pdf).
 
 ### Generator products
 
 A _generator product_ can generate manifest data for a digital asset. A conforming generator product produces manifest data that conforms to the C2PA Content Credentials specification, creates assertions in the asset's active manifest and signs a claim using a valid X.509 certificate on the C2PA trust list.
 
-For more information, see [C2PA Conformance Program Documents](https://github.com/c2pa-org/conformance-public/tree/main/docs/current), specifically:
+For more information, see [C2PA Conformance Program Documents](https://github.com/c2pa-org/conformance-public/tree/main/docs), specifically:
 
-- [C2PA conformance program - section 6.1.1, Generator Product Specification Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Conformance%20Program.pdf)
+- [C2PA conformance program - section 6.1.1, Generator Product Specification Requirements](https://github.com/c2pa-org/conformance-public/tree/main/docs/v0.2/C2PA%20Conformance%20Program.pdf)
 - [C2PA Generator Product Security
-  Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Generator%20Product%20Security%20Requirements.pdf)
+  Requirements](https://github.com/c2pa-org/conformance-public/tree/main/docs/v0.2/C2PA%20Generator%20Product%20Security%20Requirements.pdf)
 
 <!--
 #### Preliminary certificate check
@@ -56,7 +56,7 @@ To confirm all the settings in your signing certificate, you can follow the prel
 #### Security requirements
 
 When you apply to the conformance program, you must fill out the information required in the **product security architecture template** in Appendix C of the [C2PA Generator Product Security
-Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Generator%20Product%20Security%20Requirements.pdf), providing details on:
+Requirements](https://github.com/c2pa-org/conformance-public/tree/main/docs/v0.2/C2PA%20Generator%20Product%20Security%20Requirements.pdf), providing details on:
 
 - The organization submitting the application.
 - The product, its capabilities, and the systems it uses or relies upon.
@@ -67,13 +67,13 @@ Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/curr
 A conforming product's _assurance level_ indicates the level of confidence that claims it signs reflect its intended behavior. A higher assurance level indicates a greater level of confidence. Currently, the conformance program has two assurance levels: level 1 and level 2:
 
 - [C2PA Generator Product Security
-  Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Generator%20Product%20Security%20Requirements.pdf) details the security requirements for each assurance level.
-- [C2PA certificate policy - Appendix A](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Certificate%20Policy.pdf) details the requirements for claim signing certificates for each assurance level.
+  Requirements](https://github.com/c2pa-org/conformance-public/tree/main/docs/v0.2/C2PA%20Generator%20Product%20Security%20Requirements.pdf) details the security requirements for each assurance level.
+- [C2PA certificate policy - Appendix A](https://github.com/c2pa-org/conformance-public/tree/main/docs/v0.2/C2PA%20Certificate%20Policy.pdf) details the requirements for claim signing certificates for each assurance level.
 
 The assurance level is encoded as the value of a custom X.509 v3 certificate extension in the product's claim signing certificate. The C2PA defines the _max assurance level_ of a generator product based on the security attributes of its overall implementation architecture. The assurance level in the certificate issued to a particular instance of a conforming generator product may be lower than the max assurance level.
 
 ## Certificate authorities
 
-The [C2PA certificate policy](https://github.com/c2pa-org/conformance-public/blob/main/docs/current/C2PA%20Certificate%20Policy.pdf) specifies requirements for certificate authorities (CAs) that issue claim signing certificates for use by generator products, and the requirements that those products have to meet when using the certificates.
+The [C2PA certificate policy](https://github.com/c2pa-org/conformance-public/tree/main/docs/v0.2/C2PA%20Certificate%20Policy.pdf) specifies requirements for certificate authorities (CAs) that issue claim signing certificates for use by generator products, and the requirements that those products have to meet when using the certificates.
 
 CAs that meet the certificate policy can be on the C2PA trust list, and can issue certificates to conforming generator products under the C2PA conformance program.
