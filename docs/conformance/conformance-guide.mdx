@@ -585,12 +585,12 @@ document. Use a blue dashed border for the target of evaluation and a
 pink dashed border for the conforming product inside it.
 
 The target of evaluation boundary contains everything your product
-depends on to produce signed assets. The conforming product boundary
-contains only the components that generate assertions, construct
-manifests, and request claim signing. For conformance-example-app,
-that's the upload endpoint, crop engine, and signing service. The
-KMS and storage are trusted infrastructure inside the TOE but outside
-the pink boundary, and the browser sits outside both with an arrow
+depends on to produce signed assets. It incorporates asset origination through
+to signing. The conforming product boundary contains only the components that
+generate assertions, construct manifests, and request claim signing. For
+conformance-example-app, that's the upload endpoint, crop engine, and signing
+service. The KMS and storage are trusted infrastructure inside the TOE but
+outside the pink boundary, and the browser sits outside both with an arrow
 pointing in.
 
 ![Conformance TOE](/img/conformance-toe.jpg)
