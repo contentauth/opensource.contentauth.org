@@ -410,7 +410,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'C2PA conformance program',
+      label: 'C2PA Conformance Program',
       link: { type: 'doc', id: 'conformance/index' },
       collapsed: true,
       items: [
