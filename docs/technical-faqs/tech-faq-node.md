@@ -26,17 +26,18 @@ const settings = {
 };
 ```
 
-Choose labels that reflect your implementation; this is not a universal
+Choose labels that reflect your implementation; the example is not a universal
 conformance configuration. Assertions are gathered by default, except for
 the hard binding, which is always created.
 
-Use only **base assertion labels**, without version or instance suffixes.
+Use only base assertion labels, without version or instance suffixes.
 For example, use `c2pa.ingredient`, not `c2pa.ingredient.v3`. The SDK
 handles the version.
 
-Update to the latest Node SDK release to avoid a bug in an earlier release.
-The first release containing that fix is not identified here. An upgrade does not replace
-the need to configure assertion placement.
+An April 2026 support response recommended updating the Node.js SDK to resolve
+an assertion-placement bug. The response did not identify the first release
+containing the fix. Update to the latest release, but continue to configure
+assertion placement explicitly.
 
 Sources:
 
@@ -47,8 +48,8 @@ Sources:
 ### How do I configure signing-certificate and timestamp trust?
 
 Load the C2PA Trust List and C2PA TSA Trust List, combine their PEM contents,
-and enable both trust checks. With those PEM
-strings already loaded as `c2paTrustList` and `c2paTsaTrustList`, pass the
+and enable both trust checks. After loading the PEM contents as
+`c2paTrustList` and `c2paTsaTrustList`, pass the
 settings to both the reader and builder:
 
 ```js
@@ -66,10 +67,9 @@ const reader = await Reader.fromAsset({ path: "photo.jpg" }, settings);
 const builder = Builder.withJson({ title: "photo.jpg" }, settings);
 ```
 
-This is a configuration excerpt, not a complete program: it assumes the
-reader and builder bindings are imported and the PEM contents have been
-fetched or read. It comes from the replacement package discussed above,
-not the deprecated `c2pa-node` 0.5.26 API.
+This excerpt assumes that `Reader` and `Builder` are imported and that the
+PEM contents have been fetched or read. It does not use the deprecated
+`c2pa-node` 0.5.26 API.
 
 Sources:
 
@@ -78,15 +78,16 @@ Sources:
 
 ### Should I pass a PEM file path or its contents as trust anchors?
 
-Pass the **PEM contents as a string**, not a file path. C2PA Tool's
+Pass the PEM contents as a string, not a file path. C2PA Tool's
 `load_trust_resource()` is a convenience for loading PEM data from a path
 or URL; do not assume that behavior applies to the Node SDK.
 
-The `loadSettingsFromFile()` function loads the whole settings file; it
-does not imply that an individual trust-anchor setting accepts a PEM path.
+The `loadSettingsFromFile()` function loads a complete settings file.
+It does not make an individual trust-anchor setting accept a PEM path.
 
-Supply PEM strings through `trust.trust_anchors`, as shown above. Changing
-the input format does not necessarily resolve every trust failure.
+Supply PEM strings through `trust.trust_anchors`, as shown above.
+If validation still reports a trust failure, inspect the validation results
+for other causes.
 
 Sources:
 

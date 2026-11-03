@@ -4,6 +4,10 @@ hide_table_of_contents: true
 
 # Technical FAQs
 
+These FAQs address common questions about the CAI SDKs, C2PA Tool, certificates,
+identity, and conformance. They are based on discussions in the
+[public CAI Discord server](https://discord.gg/CAI) from April through October 2026.
+
 - [General FAQs](./tech-faq-general.md)
 - [Rust library FAQs](./tech-faq-rust.md)
 - [C2PA Tool FAQs](./tech-faq-c2pa-tool.md)
@@ -12,10 +16,11 @@ hide_table_of_contents: true
 - [CAWG identity FAQs](./tech-faq-cawg.md)
 - [C2PA conformance FAQs](./tech-faq-conformance.md)
 
-These FAQs are derived from discussions in the [public CAI Discord server](https://discord.gg/CAI) from the latter part of 2026.
-
-Always check the version of the library that you're using and if possible use the latest version to get the latest features anb bug fixes.
+Check your SDK or tool version when applying this guidance. When possible, use
+the latest release for current features and bug fixes. Dated observations and
+provider offers might no longer apply.
 
 :::note
-Links to source Discord messages require a Discord account and joining the [public CAI Discord server](https://discord.gg/CAI).
+To open the source Discord messages, sign in to a Discord account and join the
+[public CAI Discord server](https://discord.gg/CAI).
 :::

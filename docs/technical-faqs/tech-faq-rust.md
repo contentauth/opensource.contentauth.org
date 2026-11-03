@@ -10,8 +10,8 @@ import TOCInline from '@theme/TOCInline';
 
 ### Can I configure trust anchors using a URL?
 
-The Rust SDK expects trust anchors as a **PEM string**, not a URL or file
-path. Your application must fetch or read the PEM data and pass its contents
+No. The Rust SDK expects trust anchors as a PEM string, not a URL or file
+path. Fetch or read the PEM data in your application, then pass its contents
 to the SDK.
 
 In contrast, C2PA Tool accepts URLs and paths as command-line arguments because it
@@ -49,9 +49,9 @@ created_assertion_labels = [
 ]
 ```
 
-Choose labels appropriate to your implementation. This example is not a
+Choose labels appropriate to your implementation; this example is not a
 universal conformance configuration. The hard-binding assertion is always
-a created assertion.
+created.
 
 See [Created versus gathered assertions](../manifest/writing/assertions-actions.md#created-versus-gathered-assertions)
 for more information.
@@ -60,7 +60,7 @@ Source: [Created assertions config; June 16, 2026](https://discord.com/channels/
 
 ### How do I preserve an existing asset's assertions when editing it?
 
-Include the original asset as a **`parentOf` ingredient**. If the asset is
+Include the original asset as a `parentOf` ingredient. If the asset is
 signed, its manifest and assertions are carried forward through that
 ingredient. You generally do not need to copy those assertions into your
 new manifest as gathered assertions.
@@ -75,8 +75,8 @@ The `Edit` intent automatically adds the `c2pa.opened` action and uses the sourc
 as the parent if you do not specify one. Do not manually add a duplicate
 `c2pa.opened` action.
 
-It is normal for a simple open-and-edit workflow to have no gathered
-assertions. If you intentionally reuse metadata as a new gathered assertion,
+A simple open-and-edit workflow can have no gathered assertions.
+If you reuse metadata as a new gathered assertion,
 verify that it still applies to the edited asset.
 
 Sources:
@@ -88,8 +88,8 @@ Use the `Edit` intent when an existing asset produces
 `assertion.action.malformed: first action must be created or opened`
 or `assertion.action.ingredientMismatch`. Ensure manually defined
 `actions` are nested inside `assertions` and the workflow includes
-a referenced `parentOf` ingredient. Do not assume an "Invalid Manifest" error is a trust
-problem without inspecting its validation details.
+a referenced `parentOf` ingredient. Inspect the validation details before
+treating an "Invalid Manifest" error as a trust problem.
 
 Sources:
 
@@ -108,12 +108,11 @@ fetch_scope = "all"
 
 Choose the builder intent according to the operation:
 
-- Use **update intent** when the asset content has not changed and you only
+- Use update intent when the asset content has not changed and you only
   need to add a timestamp assertion.
-- Use **edit intent** when you are also editing or reformatting the asset.
+- Use edit intent when you are also editing or reformatting the asset.
 
-Add the timestamp assertion while the relevant signing
-certificate is still within its validity period.
+Add the timestamp assertion before the relevant signing certificate expires.
 
 Sources:
 
@@ -123,7 +122,7 @@ Sources:
 
 ### Why is no thumbnail generated even though thumbnails are enabled?
 
-The SDK skips automatic thumbnail generation for **update manifests**,
+The SDK skips automatic thumbnail generation for update manifests,
 even when thumbnail generation is enabled. The specification does not
 permit update manifests to contain thumbnail
 assertions.
@@ -136,31 +135,30 @@ Assets with the same base name can produce the same default sidecar
 filename. For example, `file.obj` and `file.mtl` can both produce
 `file.c2pa`.
 
-Rename each sidecar immediately after creating it to preserve the original
-extension, for example:
+Rename each sidecar immediately after creating it, retaining the asset's
+original extension in the sidecar filename. For example:
 
 ```text
 file.obj.c2pa
 file.mtl.c2pa
 ```
 
-When reading an asset, explicitly provide the corresponding sidecar using
+When reading an asset with C2PA Tool, specify the corresponding sidecar with
 `--external-manifest`.
 
 Source: [Renaming sidecars, September 16, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1549894561537466399)
 
 ### Why does manifest compression barely reduce a long existing chain?
 
-Compression applies to the current manifest being written, not retroactively to every manifest in an
-existing chain. To compare compressed and uncompressed chains, enable
+Compression applies only to the manifest being written, not to earlier
+manifests in the chain. To compare compressed and uncompressed chains, enable
 `prefer_compress_manifests` while writing each generation.
 
 In a test of 10 manifests containing a repetitive text custom assertion,
-the final manifest-store size was 154,638 bytes without compression and
+the final manifest store was 154,638 bytes without compression and
 52,583 bytes with compression enabled at each generation. Repetitive test
-data would likely compress better
-than real-world content. This is not a promised compression ratio or a way
-to shrink all prior manifests by appending one compressed manifest.
+data is likely to compress better than real-world content, so results will
+vary. Appending a compressed manifest does not compress earlier manifests.
 
 Sources:
 
@@ -169,10 +167,9 @@ Sources:
 
 ### Can I use the Rust implementation from a JVM backend?
 
-The SDK does not provide a supported Java binding.
-And the Android bindings focus on Android-specific needs: Adapting them for a
-JVM service would require additional work; they are not an existing,
-maintained general-purpose Java package.
+The SDK does not provide a supported Java binding. The Android bindings
+are designed for Android, not as a maintained, general-purpose Java package.
+Adapting them for a JVM service requires additional work.
 
 You could use the Rust implementation's
 [C API](https://github.com/contentauth/c2pa-rs/tree/main/c2pa_c_ffi) to integrate through JNI.

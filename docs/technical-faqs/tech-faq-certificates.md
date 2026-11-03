@@ -10,43 +10,41 @@ import TOCInline from '@theme/TOCInline';
 
 ### How can an implementation obtain a broadly recognized signing certificate?
 
-Pass C2PA generator conformance to obtain a signing certificate intended
-for broad recognition by validators. After passing conformance, a generator can obtain a conforming
-product certificate from a certificate authority whose root is on the
-C2PA Trust List. 
+Complete C2PA generator conformance, then obtain a conforming product
+certificate from a certificate authority (CA) whose root is on the C2PA Trust
+List. These certificates are intended for broad recognition by validators.
 
 The process starts with a completed implementation and an
 expression of interest, followed by a legal agreement and intake form.
 Prepare a Generator Product Security Architecture Document and Diagram,
-plus signed interoperability samples.
+along with signed interoperability samples.
 
-See [C2PA conformance program](../conformance/index.mdx) for more information.
+See the [C2PA conformance program](../conformance/index.mdx) for more information.
 
 ### Is a C2PA claim-signing certificate the same as a creator identity certificate?
 
-No. Trusted C2PA
-claim-signing certificates are issued for conforming hardware or software
+No. Trusted C2PA claim-signing certificates are issued for conforming hardware or software
 products, rather than to establish the creator's identity.
 
-Use [CAWG](https://cawg.io), which complements C2PA by attaching verified identity through a CAWG identity assertion in the manifest. Treat the product-signing and identity roles separately;
-obtaining a product certificate does not by itself establish who created, edited, or published the content.
+To attach verified identity, use a [CAWG](https://cawg.io) identity assertion
+in the manifest. Product signing and identity are separate roles: a product
+certificate does not by itself establish who created, edited, or published
+the content.
 
 Source: [Product certificates versus creator identity; May 14, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1504655459725082675)
 
 ### Does renewing an Interim Trust List certificate preserve its listing?
 
-No. Renewal produces a new PEM and PEM hash, so
+No. Renewal produces a new PEM-encoded certificate and PEM hash, so
 validators do not recognize the renewed certificate as the one on the
 Interim Trust List (ITL).
 
-Do not treat the renewed certificate as the certificate to add to the
-official C2PA Trust List after conformance.
-Instead, passing conformance enables issuance of a conforming product
-certificate from a CA with its root on the C2PA Trust List.
+After conformance, obtain a conforming product certificate from a CA whose root
+is on the C2PA Trust List. The renewed ITL certificate is not added to that list.
 
-This distinguishes the particular certificate recognized by the ITL from
-the CA-root-based route for the C2PA Trust List. The ITL was frozen at the
-start of 2026; do not assume a current renewal or migration exception exists.
+The ITL recognizes individual certificates; the C2PA Trust List uses CA roots.
+The ITL was frozen at the start of 2026. Check current policy before relying on
+a renewal or migration exception.
 
 Sources:
 
@@ -60,8 +58,9 @@ Sources:
 Yes. Sign interoperability samples with a test certificate. A renewed ITL
 certificate can also be used for these samples.
 
-Permission to use that certificate for samples is distinct from production
-trust. A renewed ITL certificate is not the route to the official C2PA Trust List.
+Using a certificate for evaluation samples does not establish production trust.
+A renewed ITL certificate does not qualify as a production credential on the
+C2PA Trust List.
 
 Sources:
 
@@ -70,15 +69,15 @@ Sources:
 
 ### Which certificates should the signer include in x5chain?
 
-Pass the certificate chain to the signer in this order:
-**leaf first, then the intermediate CA certificate
-(ICA), without the root**. The signer populates `x5chain` in the COSE
+Pass the certificate chain to the signer with the leaf certificate first,
+followed by the intermediate CA certificate (ICA). Omit the root certificate.
+The signer populates `x5chain` in the COSE
 signature; the validator obtains the root from its trust list.
 
 The trust list is therefore not a replacement for supplying the signing
 chain's intermediate. Ensure the intermediate belongs to the leaf's chain;
-including an unrelated intermediate will not establish trust. Chain order
-alone does not diagnose every leaf/intermediate mismatch.
+including an unrelated intermediate will not establish trust. Correct chain
+order alone does not resolve every certificate mismatch.
 
 Sources:
 
@@ -87,26 +86,25 @@ Sources:
 
 ### What trust-anchor configuration was recommended for a custom validator?
 
-Concatenate the C2PA Trust List PEM and C2PA TSA Trust List PEM, then pass
-the combined contents as `trust_anchors` in the tool's `trust` settings. Include
-both claim-signing and timestamp-authority trust anchors.
+Concatenate the PEM contents of the C2PA Trust List and C2PA TSA Trust List,
+then pass the combined string through `trust.trust_anchors`. This includes
+both claim-signing and timestamp authority (TSA) trust anchors.
 
-This is configuration guidance, not a guarantee that a particular asset
-will be trusted or that an expired certificate's status is resolved merely
-by adding a list. Cryptographic validity and trust remain separate checks.
+Adding trust lists does not guarantee that an asset will be trusted or
+resolve all expired-certificate issues. Evaluate cryptographic validity and
+trust separately.
 
 Source: [combined signing and timestamp trust anchors, July 9, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1524771146631872583)
 
 ### Can a conforming product rotate its signing certificate and key?
 
-With Trufo, a product can request a new certificate or rotate a certificate
+With Trufo, a product can request or rotate a certificate
 at any time, with APIs available to automate the process. See
 [Trufo's certificate documentation](https://trufo.ai/documentation#certificates).
 
-This is provider-specific experience, not a published statement of every
-CA's issuance rules or all conformance requirements for key rotation. The
-applicable rotation interval and key-management procedure depend on your
-provider and product requirements.
+This guidance is specific to Trufo. Confirm rotation intervals,
+key-management procedures, and conformance requirements with your provider
+and for your product.
 
 Source: [Trufo rotation and automation experience, August 12, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1537108990797025280)
 
@@ -122,10 +120,9 @@ issuance by a trusted CA:
   [C2PA Certificate Policy](https://github.com/c2pa-org/conformance-public/blob/main/docs/v0.2/C2PA%20Certificate%20Policy.pdf)
   governs issuance by CAs with roots on the C2PA Trust List.
 
-Meeting the technical profile alone is not the same as establishing
-recognized trust. These are requirements references, not a
-reference implementation of a credential-issuer service or a list of
-required service endpoints.
+Meeting the technical profile alone does not establish recognized trust.
+These documents describe requirements; they do not provide a credential-issuer
+reference implementation or define a complete set of service endpoints.
 
 Source: [certificate profile versus CA issuance policy, September 28, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1554122925026840576)
 
@@ -136,9 +133,8 @@ generator products: an Assurance Level 1 claim-signing certificate valid
 for one year and up to 10,000 trusted timestamps. See
 [SSL.com's C2PA page](https://ssl.com/c2pa) for details and applications.
 
-This was a dated provider offer, not a guarantee of current pricing,
-eligibility, availability, or renewal terms. It did not remove the
-conformance prerequisite and was not an offer of an individual creator
-identity certificate.
+Check with SSL.com for current pricing, eligibility, availability, and renewal
+terms. The offer required product conformance and did not include individual
+creator identity certificates.
 
 Source: [provider free-tier announcement, June 23, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1519016971486761040)

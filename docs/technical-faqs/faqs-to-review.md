@@ -6,8 +6,8 @@ import TOCInline from '@theme/TOCInline';
 
 # Technical FAQ topics for review
 
-These editorial notes are not confirmed FAQ answers. Verify each topic
-before publishing guidance.
+This page contains editorial notes, not confirmed FAQ answers.
+Complete the verification steps for each topic before publishing guidance.
 
 <TOCInline toc={toc} />
 
@@ -16,7 +16,7 @@ before publishing guidance.
 **Candidate question:** Why does a verification website reject an asset
 that the SDK reports as trusted?
 
-The user reported that the SDK returned successful validation results and
+A user reported that the SDK returned successful validation results and
 a `Trusted` validation state. Support suspected incomplete website support
 for update manifests or timestamp assertions and recommended checking with
 the SDK or C2PA Tool. No website fix or support timeline was confirmed.
@@ -72,18 +72,20 @@ Sources:
 On June 8, 2026, support said the team was not ready to share a timeline.
 This is a dated roadmap response, not a permanent FAQ answer.
 
-Before publication, check current release information and obtain an
-approved roadmap statement from the team.
+Before publication:
+
+- Check the current release information.
+- Obtain an approved roadmap statement from the team.
 
 Source: [June 8, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1513639744167219280)
 
 ### Build failure caused by a yanked dependency
 
-**Candidate question:** What should I do about the yanked dependency
-build failure?
+**Candidate question:** How do I resolve a build failure caused by a yanked
+dependency?
 
-An October 16, 2026, announcement directed affected source builds to
-upgrade to `c2pa-rs` 0.91.3 because of a yanked `zip` dependency. The
+An October 16, 2026, announcement recommended upgrading affected source builds
+to `c2pa-rs` 0.91.3 because of a yanked `zip` dependency. The
 announcement named `zip` 8.6.0 and described 0.91.2 and earlier SDK
 versions as affected. These details have not been independently verified.
 
@@ -109,11 +111,14 @@ linked [PR #2078](https://github.com/contentauth/c2pa-rs/pull/2078) and
 The contributor also linked
 [PR #2075](https://github.com/contentauth/c2pa-rs/pull/2075) for parsing a
 remote signer's PEM certificate chain into individual DER certificates.
-The export does not confirm merge or release status for either fix.
+The source discussion does not confirm the merge or release status of either fix.
 
-Before publication, verify each PR's status, identify the first release
-containing the change, and test a minimal example of the reported behavior.
-Treat these as separate FAQ entries if both remain useful.
+Before publication:
+
+- Verify each PR's status.
+- Identify the first release containing each change.
+- Test a minimal example of each reported behavior.
+- Create separate FAQ entries if both topics remain useful.
 
 Sources:
 
@@ -125,10 +130,13 @@ Sources:
 **Candidate question:** How do I build the C SDK for 32-bit Windows?
 
 A user reported receiving an x64 DLL when attempting to build the C SDK
-for Win32 x86. No resolution appears in the export. The later resolution
+for Win32 x86. The source discussion contains no resolution. The later resolution
 of a C2PA Tool version mismatch does not resolve this separate build issue.
 
-Before publication, confirm supported targets and toolchain requirements,
-reproduce the build, and verify the architecture of the resulting DLL.
+Before publication:
+
+- Confirm supported targets and toolchain requirements.
+- Reproduce the build.
+- Verify the architecture of the resulting DLL.
 
 Source: [April 21, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1496248252767670272)

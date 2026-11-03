@@ -10,16 +10,17 @@ import TOCInline from '@theme/TOCInline';
 
 ### Where can I find signed sample assets?
 
-Use Proofmode's public
-[Baseline repository](https://proofmode.org/baseline/) has signed sample
-assets, but be aware that much of its content uses older C2PA 1.x support. Use the [`contentauth/example-assets` repository](https://github.com/contentauth/example-assets) to submit signed assets for testing. Neither repository guarantees a
-complete, current conformance test suite.
+Find signed sample assets in Proofmode's public
+[Baseline repository](https://proofmode.org/baseline/). Many of these assets use
+older C2PA 1.x versions. To contribute signed assets for testing, use the
+[`contentauth/example-assets` repository](https://github.com/contentauth/example-assets).
+Neither repository provides a guaranteed complete, current conformance test suite.
 
 For location metadata, see the Proofmode
 [Android 3.0.2 release candidate](https://github.com/guardianproject/proofmode-android/releases/tag/3.0.2-RC-2)
 and its use of `c2pa.metadata` to include geolocation as a created assertion.
-Older conformance samples used `stds.exif`, described as deprecated but
-still valid. See the
+Older conformance samples used `stds.exif`, which was described as deprecated
+but still valid in the April 2026 discussion. See the
 [Kotlin metadata-generation code](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L840).
 
 Sources:
@@ -36,13 +37,13 @@ Use the [mobile SDKs](../mobile.md) for Android and iOS.
 
 ### Does a Valid validation state mean that the signer is trusted?
 
-No. There are three manifest states:
+No. The three manifest states are
 **well-formed**, **valid**, and **trusted**. Trusted manifests are also
 valid, and valid manifests are also well-formed. The reverse does not follow.
 
 A manifest signed with a test certificate can have a `Valid` state while
 `validation_results.activeManifest.failure` contains
-`signingCredential.untrusted`. This follows the manifest-state model.
+`signingCredential.untrusted`.
 
 Do not label a manifest trusted merely because its state is `Valid`.
 Inspect the trust-related validation results, and distinguish trust that
@@ -60,35 +61,40 @@ Sources:
 
 ### Can a manifest carry custom sensor or verification information?
 
-Yes. You can add custom assertions to a C2PA manifest. A validator
-that understands that assertion could use its information to identify where
-changes occurred.
+Yes. Add custom assertions to a C2PA manifest to carry sensor or verification
+information. A validator that supports the assertion can use that information
+to identify where changes occurred.
 
-That is an extensibility mechanism, not endorsement of the proposal's
-claimed security guarantees or a promise that existing validators understand
-it. A camera/editor workflow needs compatible implementations; custom
-assertions alone do not provide that coordination.
+Custom assertions require compatible implementations in both the camera or
+editor and the validator. Existing validators might not support them, and
+adding an assertion does not by itself establish the security guarantees of
+the proposed workflow.
 
 Source: [custom assertions and validator support, April 20, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1495831402938110155)
 
 ### Where are embedding rules for TIFF-based and base-media file formats documented?
 
-See the **Embedded Formats annex**
-of the
-[Content Credentials specification](https://c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html).
-for embedding rules relevant to TIFF-based Sony formats and the
-base-media-based Canon CR3 format.
+See the Embedded Formats annex of the
+[Content Credentials specification](https://c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html)
+for embedding rules for TIFF-based Sony formats and the Canon CR3 format,
+which is based on the ISO base media file format.
 
-This is a specification pointer, not confirmation that every raw camera
-format is supported by a particular SDK or that camera samples are available.
+These rules do not imply that a particular SDK supports every raw camera
+format or that sample assets are available.
 
 Source: [Embedded Formats annex, August 17, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1538922552007589898)
 
 ### Where can I report a CAI security concern?
 
-The CAI open-source library is maintained in partnership with Adobe. Adobe accepts security reports through its public [Intigriti program](https://app.intigriti.com/programs/adobe/adobepublic/detail). C2PA is listed in the program for vulnerability disclosure, but is not currently eligible for bounty rewards. Adobe continues to accept reports for assets that are not bounty-eligible, including critical findings it considers important.
+Report suspected vulnerabilities through Adobe's public
+[Intigriti program](https://app.intigriti.com/programs/adobe/adobepublic/detail).
+The CAI open-source library is maintained in partnership with Adobe. C2PA is
+listed in the program for vulnerability disclosure but is not currently
+eligible for bounty rewards. Adobe also accepts reports for assets that are
+not bounty-eligible.
 
-Do not create a public GitHub issue for any suspected security vulnerabilities. Details on how to report security vulnerabilities are available on [Adobe's bug bounty program page](https://www.adobe.com/trust/security/bug-bounty.html).
+Do not disclose suspected vulnerabilities in public GitHub issues. For reporting
+instructions, see [Adobe's bug bounty program page](https://www.adobe.com/trust/security/bug-bounty.html).
 
 For more information on security issues, see [SECURITY.md in the Rust library](https://github.com/contentauth/c2pa-rs/blob/main/SECURITY.md).
 
@@ -100,8 +106,8 @@ Signing and display are separate issues. If a thumbnail's format changes to
 
 Display also depends on browser support. As of September 2026,
 `image/heic` thumbnails displayed in macOS Safari but not Chrome.
-A correctly embedded thumbnail therefore did not guarantee display in
-every browser. These observations are historical, not a current browser
+A correctly embedded thumbnail therefore did not display in every browser.
+Check support in your target browsers; these observations are not a current
 compatibility matrix.
 
 Sources:

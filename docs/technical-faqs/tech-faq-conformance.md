@@ -15,10 +15,10 @@ and its expression of interest form. See the
 [program document](https://github.com/c2pa-org/conformance-public/blob/main/docs/v0.2/C2PA%20Conformance%20Program.pdf)
 for details.
 
-A generator product must pass conformance before it can 
-obtain a signing certificate from an CA that has a root cert on the C2PA Trust List. 
-You can use test certificates while preparing for evaluation; however, they
-are not trusted production credentials.
+A generator product must pass conformance before it can obtain a signing
+certificate from a certificate authority (CA) whose root is on the C2PA Trust
+List. Use test certificates while preparing for evaluation; they are not
+trusted production credentials.
 
 Sources:
 
@@ -29,16 +29,16 @@ Sources:
 
 ### How do I follow up on an application or correct its media types?
 
-Contact the conformance administrator at **conformance@c2pa.org** for
+Contact the conformance administrator at conformance@c2pa.org for
 application-specific issues. For a missing response to an expression of
 interest, provide the representative email address used in the submission.
-There is no guaranteed response time.
+Response times are not guaranteed.
 
 If a generator application incorrectly omits validation capabilities, request
 a revision listing both the input media types it validates and the output
 media types it generates. For example, a product could validate JPEG and PNG
-ingredients while generating signed JPEG, PNG, WebP, and AVIF assets. Declare
-your actual capabilities, not this example's list.
+ingredients while generating signed JPEG, PNG, WebP, and AVIF assets.
+List only the capabilities your product supports.
 
 Sources:
 
@@ -51,27 +51,31 @@ Sources:
 Conformance is associated with a generator or validator product, whether
 software or hardware, rather than an individual user.
 
-Creator identity is a separate concern. Use a separately-signed CAWG identity assertion when a product needs to identify its users. Product conformance alone does not establish a user's identity.
+Creator identity is separate from product conformance. To identify users,
+include a separately signed CAWG identity assertion. Product conformance
+alone does not establish a user's identity.
 
 Source: [Product conformance and identity; August 12, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1537131310424784896)
 
 ### Does a conformance listing mean the public product already uses production certificates?
 
 Not necessarily. A product can appear on the conforming products list
-before public launch. There can
-also be a delay between listing and deploying a production certificate:
+before public launch. Production certificate deployment can also occur after
+listing:
 the selected CA must verify conformance and the applicant's legal identity.
 
-Listing alone does not make a beta certificate trusted. Evaluate the certificate actually used to sign an asset rather than inferring its trust from the product's listing alone.
+Listing alone does not make a beta certificate trusted. Evaluate the
+certificate used to sign the asset rather than inferring trust from the
+product's listing.
 
 Source: [Listing, launch, and certificate deployment distinction; May 23, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1507727660401295360)
 
 ### Why does a generator application ask about validation?
 
-A generator that ingests assets and creates or appends manifests must invoke
-validation logic against the C2PA CA and TSA Trust Lists as part of that
-process. Its declared **validate** media types describe those inputs; its
-**generate** media types describe the outputs for which it creates manifests.
+A generator that ingests assets and creates or appends manifests must validate
+those assets against the C2PA Trust List and C2PA TSA Trust List. Its declared
+validate media types describe those inputs; its generate media types
+describe the outputs for which it creates manifests.
 
 This ingredient validation is distinct from applying as a standalone
 validator product, which validates assets without generating manifests.
@@ -87,21 +91,21 @@ Sources:
 
 A distributed generator can divide asset generation, assertions, claim
 generation, and signing between edge and backend subsystems while functioning
-as one product. Use mutual authentication between the subsystems and a
-backend check that the caller is a valid instance of
+as one product. Use mutual authentication between the subsystems, and
+verify on the backend that the caller is a valid instance of
 the edge subsystem.
 
-Cooperating subsystems might be submitted as one distributed product,
-while components that independently generate assets,
-claims, and signatures would probably require separate submissions.
+Cooperating subsystems might qualify for a single distributed product submission.
+Components that independently generate assets, claims, and signatures are
+likely to require separate submissions.
 
 Do not classify a customer-hosted component solely by whether it runs on a
 server. Classification requires an assessment of the architecture.
 Submit an architecture summary and diagram to conformance@c2pa.org, identifying
-the **Target of Evaluation**, the components included in the generator
+the target of evaluation, the components included in the generator
 product, and how objects submitted for signing are authenticated.
-Dependency vulnerability scanning requirements can also be a challenge for
-customer-hosted deployments.
+Also consider how customer-hosted deployments will meet dependency
+vulnerability scanning requirements.
 
 Sources:
 
@@ -113,15 +117,17 @@ Sources:
 
 ### Does using the latest SDK make my product conformant?
 
-No. Use the latest SDK, but remember that SDKs are tools for building
-products and must be used in a conformant way.  Conformance also covers areas beyond software implementation, such as security architecture and key management practices.  You also have to submit interoperability test assets as part of the conformance process.
+No. The latest SDK provides tools for building a conforming product, but
+you must configure and use it correctly. Conformance also covers security
+architecture, key management, and other requirements beyond the SDK.
+You must submit interoperability test assets as part of the process.
 
-Some common problem areas to check include:
+When preparing your implementation:
 
-- Configuring created versus gathered assertions deliberately.
-- Using `c2pa.created` and `c2pa.opened` appropriately. Do not describe an
-  existing asset uploaded by a user as newly-created by your product.
-- Validating ingredients with the C2PA Trust List configured.
+- Configure created and gathered assertions explicitly.
+- Use `c2pa.created` and `c2pa.opened` appropriately. Do not describe an
+  existing asset uploaded by a user as newly created by your product.
+- Validate ingredients with the C2PA Trust List configured.
 
 Sources:
 
@@ -139,11 +145,10 @@ string through `trust.trust_anchors`.
 For SDK integrations, pass the settings to the builder through a context.
 Do not use deprecated thread-local settings.
 
-The C2PA Trust List alone may appear to work for timestamp trust because
-the lists share roots. Include the TSA list to pick up intermediate CA
-certificates. This is
-trust-anchor configuration guidance, not a complete answer to every
-certificate-expiration or point-in-time validation scenario.
+The C2PA Trust List alone might appear to work for timestamp trust because
+the lists share roots. Include the TSA list to obtain intermediate CA
+certificates. This configuration does not resolve every certificate-expiration
+or point-in-time validation issue.
 
 Sources:
 
@@ -153,14 +158,15 @@ Sources:
 
 ### Which timestamp endpoints are recommended for C2PA trust?
 
-As of August 10, 2026, these SSL.com endpoints are free for general use
+As of August 10, 2026, these SSL.com endpoints were free for general use,
 with roots on the C2PA TSA Trust List:
 
 - `http://ts-c2pa.ssl.com/rsa`
 - `http://ts-c2pa.ssl.com/ecc`
 
-Trufo's service requires payment and authentication. See the
+At that time, Trufo's service required payment and authentication. See the
 [Trufo timestamping documentation](https://trufo.ai/documentation#timestamping).
+Check current service terms before choosing a provider.
 
 Sources:
 
@@ -170,18 +176,17 @@ Sources:
 
 ### Can evaluation samples use test certificates and still report untrusted?
 
-Yes. Use SDK test certificates, CA-provided test certificates, or
-certificates you generate yourself, but evaluation signing certificates
-cannot be self-signed. Do not interpret
-"generate your own" as permission to use a self-signed signing certificate.
+Yes. Evaluation samples can use SDK test certificates, CA-provided test
+certificates, or certificates you generate yourself. However, the signing
+certificate must not be self-signed.
 
 See the
 [SDK test certificates](https://github.com/contentauth/c2pa-rs/tree/main/sdk/tests/fixtures/certs)
 and a [certificate creation walkthrough](https://learn.contentauthenticity.org/private-keys-and-certificates).
 
-Getting a `signingCredential.untrusted` error is normal
-before obtaining a conforming product certificate and does not itself prevent
-passing conformance.
+A `signingCredential.untrusted` result is expected before you obtain a
+conforming product certificate. That result alone does not prevent a product
+from passing conformance.
 
 Sources:
 
@@ -192,7 +197,7 @@ Sources:
 
 ### Does adding a trusted manifest remove warnings about earlier untrusted manifests?
 
-Do not assume that it does. Validators generally show a notice when an
+Not necessarily. Validators generally show a notice when an
 asset contains manifests signed with
 untrusted certificates. The notice may apply to individual manifests, the
 manifest store, or both, depending on the validator.
@@ -202,14 +207,14 @@ ingredient, it includes the ingredient validation results. If it uses only
 the C2PA Trust List, an ingredient signed with a certificate from an
 untrusted private CA will produce `signingCredential.untrusted`.
 
-This explains a trust-display consequence of a mixed pipeline. It is not a
-blanket ruling that every trusted/untrusted pipeline is prohibited.
+A warning about an earlier untrusted manifest does not by itself mean that
+the pipeline is prohibited by conformance requirements.
 
 Source: [Mixed-pipeline trust behavior; September 10, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1547716234173222962)
 
 ### How do I put the actions assertion in created assertions?
 
-Configure `builder.created_assertion_labels` using **base assertion labels**.
+Configure `builder.created_assertion_labels` using base assertion labels.
 For the Node bindings, use:
 
 ```js
@@ -225,11 +230,10 @@ const builder = Builder.withJson(manifestDefinition, settings);
 Use `c2pa.actions`, not `c2pa.actions.v2`. Likewise, do not include assertion
 instance suffixes such as those in `c2pa.ingredient.v3__2`.
 
-With only `c2pa.actions` in that setting, the actions assertion and the
-automatically created hard binding are created
-assertions; other assertions are gathered. Add other base labels as
-appropriate for your implementation. This is not a universal conformance
-configuration.
+With only `c2pa.actions` in this setting, the actions assertion and the
+hard-binding assertion are created; other assertions are gathered. Add other
+base labels as appropriate for your implementation. This example is not a
+universal conformance configuration.
 
 As of August 2026, the Reader output flattened created and gathered
 assertions into one list. Inspect the raw claim bytes to verify placement
@@ -244,10 +248,10 @@ Sources:
 
 ### Should ingredient assertions be created or gathered?
 
-Mark an ingredient assertion as created in most cases because the claim
-generator validates it. This is
-implementation-dependent guidance, not a statement that every assertion
-associated with an input asset must be created.
+In most cases, mark an ingredient assertion as created because the claim
+generator validates it. The appropriate placement depends on your
+implementation; not every assertion associated with an input asset must be
+created.
 
 Configure assertion placement deliberately rather than relying on the
 SDK default, which places assertions other than the hard binding in
@@ -260,9 +264,9 @@ Sources:
 
 ### What does digitalSourceType describe, and when is it needed?
 
-The `digitalSourceType` property describes the nature
-of how an **action** was performed, such as human, AI, or algorithmic activity.
-It is not one asset-wide value to copy unchanged through every edit.
+The `digitalSourceType` property describes how an action was performed, such
+as through human, AI, or algorithmic activity. It is not an asset-wide value
+to copy unchanged through every edit.
 C2PA 2.4 also allows it to describe an ingredient.
 
 Actions affecting the asset's editorial nature need
@@ -275,8 +279,8 @@ and 2.4. See the
 [specification requirement](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_mandatory_presence_of_at_least_one_actions_assertion)
 and section 2.4 of the
 [Additional Conformance Requirements](https://github.com/c2pa-org/conformance-public/blob/main/docs/v0.2/Additional%20Conformance%20Requirements%20Against%20the%20Content%20Credentials%20Specification.pdf).
-Do not infer that the field is optional merely because an older validator
-did not report its absence.
+The field is still required even if an older validator does not report its
+absence.
 
 Sources:
 
@@ -291,8 +295,8 @@ For invisible watermarking, use `c2pa.watermarked.bound`
 or `c2pa.watermarked.unbound`, depending on whether a `c2pa.soft-binding`
 assertion is used with it.
 
-For a visible logo, represent it as a `componentOf`
-ingredient and recording `c2pa.placed` with a parameter referencing that
+Represent a visible logo as a `componentOf`
+ingredient and record `c2pa.placed` with a parameter referencing that
 ingredient. For a text-only visible watermark, consider
 `c2pa.addedText`.
 
@@ -307,28 +311,25 @@ Use `c2pa.published` when releasing an asset to a wider audience, together
 with any other actions that actually occurred. There is no `c2pa.signed`
 action.
 
-Use the [official action definitions](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_actions)
-to describe the operation, rather than inventing an action solely because
-another signature was produced.
+Choose an action from the [official action definitions](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_actions)
+that describes the operation. Do not invent an action solely to indicate
+that another signature was produced.
 
 Source: [Publication action; May 17, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1505616834148303099)
 
 ### How should I represent a user's training and mining preferences?
 
-For a seller opt-out workflow, put `cawg.training-mining` in gathered
-assertions. It remains cryptographically protected there, but is not attributable to the C2PA claim
-generator or signer.
+For a seller opt-out workflow, include `cawg.training-mining` as a gathered
+assertion. The manifest signature protects the assertion, but the preference
+is not attributed to the C2PA claim generator or signer.
 
-This placement is covered by the manifest signature. If you want
-to connect the preference to a CAWG identity, reference the assertion through
+To associate the preference with a CAWG identity, reference the assertion in
 the `referenced_assertions` array of `cawg.identity`.
 
-This answers attribution and cryptographic protection; it does not claim
-that the assertion enforces a user's preference on downstream systems.
-
-Companies do not necessarily respect training-and-mining assertions. Treat the
-assertion as a statement of preference, not a technical block on scraping
-or a guarantee against undesired AI use.
+The assertion records a preference; it does not enforce that preference on
+downstream systems. Companies might not respect training and mining
+assertions, so they do not prevent scraping or guarantee protection against
+unwanted AI use.
 
 Sources:
 
@@ -350,12 +351,10 @@ implementation. Check the generator value in
 `claim.v2` rather than trying to change the report's validation version
 through generator metadata.
 
-This distinction explains the field mismatch, not every conformance check.
-Matching the generator field or passing a rubric alone is not presented
-here as proof that a product has passed the program.
+Matching specification-version fields or passing a rubric alone does not
+establish that a product has passed the conformance program.
 
 Sources:
 
 - [Field definitions; August 11, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1536901977655742567)
 - [Reproduced version mismatch; August 11, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1536918406375276704)
-

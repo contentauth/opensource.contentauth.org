@@ -10,33 +10,37 @@ import TOCInline from '@theme/TOCInline';
 
 ### How can I inspect a file locally using C2PA Tool?
 
-Use the open-source C2PA Tool CLI to inspect a file on your own machine:
+Run C2PA Tool on your local machine:
 
 ```sh
 c2patool file.jpg --detailed
 ```
 
-This avoids uploading the asset to a web inspection service. It is not a
-promise that every configuration or operation is network-free; for example,
-the trust initialization command fetches trust lists. Local
-inspection also does not by itself establish that the signer is trusted
-or that the depicted content is true.
+This command avoids uploading the asset to a web inspection service.
+Some configurations and operations still require network access; for example,
+trust initialization fetches trust lists. Local inspection alone does not
+establish that the signer is trusted or that the depicted content is true.
 
 Source: [Local CLI inspection command; September 11, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1548138360139419719)
 
 ### How do I load trust lists with C2PA Tool?
 
-You have to initialize trust lists explicitly. Earlier versions required supplying trust
-anchors through settings or the command line. Use `c2patool init trust` to fetch or update trust lists and store them for future calls:
+Run `c2patool init trust` to fetch or update trust lists and store them for
+subsequent runs:
 
 ```sh
 c2patool init trust
 ```
 
+Trust lists must be initialized explicitly. Earlier versions required trust
+anchors to be supplied through settings or the command line.
+
 Use a raw PEM URL when supplying a trust-anchor link.
 
 For more control, pass a settings file with `--settings`; TOML settings are
-passed through to the SDK. Supply the concatenated CA and TSA lists when needed to include TSA intermediate certificates.
+passed through to the SDK. Concatenate the certificate authority (CA) and
+timestamp authority (TSA) lists when needed to include TSA intermediate
+certificates.
 Trust sidecars are loaded automatically on subsequent runs from the same
 directory as the settings file.
 
@@ -71,7 +75,9 @@ Sources:
 ### How can I override an ingredient's title?
 
 Export a signed asset as an ingredient using the `--ingredient` option.
-The resulting folder contains ingredient JSON, a thumbnail, and the manifest binary. Edit the title in the ingredient JSON, then reference the folder through `ingredient_paths` in the new manifest definition like this:
+The resulting folder contains ingredient JSON, a thumbnail, and the manifest
+binary. Edit the title in the ingredient JSON, then reference the folder
+through `ingredient_paths` in the new manifest definition:
 
 ```json
 "ingredient_paths": ["./ingredient-folder"]
@@ -92,9 +98,8 @@ failure arrays in `validation_results.activeManifest`. Do not interpret
 an aggregate `Invalid` result as proof that the active manifest itself
 has a signature failure.
 
-Display each manifest's state independently and distinguish
-valid-but-untrusted manifests from trusted ones. That is
-presentation guidance, not a rule that cryptographic validity establishes
+Display each manifest's state independently, distinguishing valid-but-untrusted
+manifests from trusted ones. Cryptographic validity alone does not establish
 signer trust.
 
 Sources:
@@ -106,9 +111,8 @@ Sources:
 
 ### How do I supply my own thumbnail?
 
-Add a `thumbnail` object to the manifest definition. Its `identifier` is
-a file path relative to the manifest
-definition file:
+Add a `thumbnail` object to the manifest definition. Set `identifier` to
+the thumbnail's path relative to the manifest definition file:
 
 ```json
 "thumbnail": {
@@ -117,16 +121,14 @@ definition file:
 }
 ```
 
-This is a field excerpt to include in a complete manifest definition.
-For example:
+Include this field in a complete manifest definition, then run:
 
 ```sh
 c2patool sample.mp4 -m manifest.json -o sample-signed.mp4
 ```
 
-Use the same approach to define ingredient thumbnails. This
-provides an explicit thumbnail; it does not explain or promise automatic
-thumbnail generation for every input format.
+Use the same approach to define ingredient thumbnails. This example supplies a
+thumbnail explicitly; it does not demonstrate automatic thumbnail generation.
 
 Source: [custom thumbnails and relative paths, August 31, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1543975786468352150)
 
@@ -141,13 +143,13 @@ c2patool sample.tiff \
   --output signed.tiff
 ```
 
-For that command, the source asset becomes a `parentOf`
+With this command, the source asset becomes a `parentOf`
 ingredient and the tool automatically adds the `c2pa.opened` action.
-You can omit settings when using the default key and certificate, but do
-not assume those defaults are trusted or qualify a product for conformance.
+You can omit `--settings` when using the default key and certificate. Those
+defaults do not establish production trust or product conformance.
 
-When the implementation needs to designate created rather than gathered
-assertions, use settings such as:
+To mark assertions as created rather than gathered, configure
+`builder.created_assertion_labels` in the settings file. For example:
 
 ```toml
 [builder]
@@ -158,7 +160,8 @@ created_assertion_labels = [
 ]
 ```
 
-This is just an example. Select the assertions appropriate to the implementation. 
+Select assertion labels appropriate to your implementation; this example is
+not a universal conformance configuration.
 
 Sources:
 
@@ -167,11 +170,11 @@ Sources:
 
 ### Why does C2PA Tool behave differently when launched by my application versus on the command-line?
 
-Check the **actual executable and version** your application launches,
+Check the executable path and version your application launches,
 rather than only the version available in your terminal.
 
-For example in the reported case, the application launched C2PA Tool **0.26.1**,
-although the user expected **0.26.41**. Launching 0.26.41 resolved the
+In the reported case, the application launched C2PA Tool 0.26.1,
+although the user expected 0.26.41. Launching 0.26.41 resolved the
 missing timestamp assertion.
 
 Source: [confirmed resolution, April 22, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1496644840786624614)
@@ -189,4 +192,3 @@ Sources:
 - [Implementation; September 16, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1549892485080293416)
 - [Read command; September 16, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1549898982988455988)
 - [User confirmation; September 17, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1550145681090412695)
-
