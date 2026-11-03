@@ -43,7 +43,9 @@
         "verify_trust": true,
         "verify_timestamp_trust": true,
         "ocsp_fetch": false,
+        "ocsp_fetch_should_override": false,
         "remote_manifest_fetch": true,
+        "max_manifest_response_size": 10485760,
         "skip_ingredient_conflict_resolution": false,
         "strict_v1_validation": false
       }
@@ -299,7 +301,12 @@
           "default": true
         },
         "ocsp_fetch": {
-          "description": "Whether to fetch the certificates OCSP status during validation.\n\nRevocation status is checked in the following order:\n1. The OCSP staple stored in the COSE claim of the manifest\n2. Otherwise if `ocsp_fetch` is enabled, it fetches a new OCSP status\n3. Otherwise if `ocsp_fetch` is disabled, it checks `CertificateStatus` assertions\n\nThe default value is false.",
+          "description": "Whether to fetch the certificates OCSP status during validation.\n\nRevocation status is checked in the following order:\n1. If [`Verify::ocsp_fetch_should_override`] is enabled, it fetches a new OCSP status. If the\n   live fetch does not produce a definitive status (`notRevoked` or `revoked`), validation\n   falls back to the remaining steps below.\n2. If `builder.certificate_status_should_override` is enabled, it checks [`CertificateStatus`]\n   assertions.\n3. Otherwise, it checks the OCSP staple stored in the COSE claim (`rVals.ocspVals`) of the\n   manifest.\n4. Otherwise, if `ocsp_fetch` is enabled, it fetches a new OCSP status.\n5. Otherwise, it checks [`CertificateStatus`] assertions.\n\nThe default value is false.\n\n[`CertificateStatus`]: https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#certificate_status_assertion",
+          "type": "boolean",
+          "default": false
+        },
+        "ocsp_fetch_should_override": {
+          "description": "Whether to always fetch a live OCSP response first during validation, before checking any\n[`CertificateStatus`] assertions or stapled OCSP response in the COSE claim.\n\nEnabling this setting implies [`Verify::ocsp_fetch`] (you do not need to set both). It also\ntakes precedence over `builder.certificate_status_should_override`. If the live fetch fails\nor does not produce a definitive revocation status (`notRevoked` or `revoked`), validation\nfalls back to the embedded [`CertificateStatus`] assertions and COSE OCSP staple before\nreporting the OCSP responder as inaccessible.\n\nThe default value is false.\n\n[`CertificateStatus`]: https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#certificate_status_assertion",
           "type": "boolean",
           "default": false
         },
@@ -307,6 +314,13 @@
           "description": "Whether to fetch remote manifests in the following scenarios:\n- Constructing a [`Reader`]\n- Adding an [`Ingredient`] to the [`Builder`]\n\nThe default value is true.\n\n<div class=\"warning\">\nThis setting is only applicable if the crate is compiled with the `fetch_remote_manifests` feature.\n</div>\n\n[`Reader`]: crate::Reader\n[`Ingredient`]: crate::Ingredient\n[`Builder`]: crate::Builder",
           "type": "boolean",
           "default": true
+        },
+        "max_manifest_response_size": {
+          "description": "Maximum remote manifest response size in bytes. Responses with a larger\n`Content-Length` or body return [`Error::RemoteManifestFetch`].\n\nThe default is 10 MiB (10,485,760 bytes). The value must be positive and\nmust not exceed the platform's maximum vector capacity (`isize::MAX`).\nApplies only when the `fetch_remote_manifests` feature is enabled.\n\nThis limit is enforced after the HTTP resolver returns. It does not bound\nbuffering inside a resolver, including the built-in reqwest adapters.",
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0,
+          "default": 10485760
         },
         "skip_ingredient_conflict_resolution": {
           "description": "Whether to skip ingredient conflict resolution when multiple ingredients have the same\nmanifest identifier. This settings is only applicable for C2PA v2 validation.\n\nThe default value is false.\n\nSee more information in the spec here:\n[versioning_manifests_due_to_conflicts - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_versioning_manifests_due_to_conflicts)",
