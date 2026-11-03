@@ -487,6 +487,18 @@
       }
     },
 
+    { "_comment": "C2PA conformance program" },
+    {
+      "repo": "contentauth/conformance-example-app",
+      "path": "README.md",
+      "dest": "docs/sdk-repos/conformance-example-app/README.md",
+      "sidebar": {
+        "category": "conformance",
+        "label": "Conformance Example App",
+        "order": 2
+      }
+    },
+
     {
       "_comment": "Durable Content Credentials - watermarking algorithm list (static JSON)"
     },
@@ -548,6 +560,26 @@
       "path": "rust/crates/trustmark-cli/README.md",
       "dest": "docs/sdk-repos/trustmark/rust/crates/trustmark-cli/README.md",
       "sidebar": { "category": "trustmark", "label": "Rust CLI", "order": 6 }
+    },
+    {
+      "repo": "adobe/trustmark",
+      "path": "cpp/README.md",
+      "dest": "docs/sdk-repos/trustmark/cpp/README.md",
+      "sidebar": {
+        "category": "trustmark",
+        "label": "C++ implementation",
+        "order": 7
+      }
+    },
+    {
+      "repo": "adobe/trustmark",
+      "path": "python-hailo/README.md",
+      "dest": "docs/sdk-repos/trustmark/python-hailo/README.md",
+      "sidebar": {
+        "category": "trustmark",
+        "label": "Python (Hailo)",
+        "order": 8
+      }
     },
     {
       "repo": "adobe/trustmark",
