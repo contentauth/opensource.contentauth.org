@@ -596,3 +596,21 @@ main .row:not(:has(.theme-doc-toc-desktop)) > .col {
   content: '⚠️ WARNING: ';
   margin-right: 10px;
 }
+
+/* Conformance implementation guide */
+
+.conformance-box {
+  background-color: #f0f0f0;
+  padding: 15px 10px 0 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+[data-theme='dark'] .conformance-box {
+  background-color: var(--cai-color-disabled);
+  color: var(--cai-color-on-surface);
+  border-color: var(--cai-color-disabled);
+}
+
+/* --cai-color-surface */
