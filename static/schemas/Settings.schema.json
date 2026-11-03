@@ -16,7 +16,8 @@
       "$ref": "#/$defs/Trust",
       "default": {
         "anchors": null,
-        "trust_config": null
+        "trust_config": null,
+        "use_default_ekus": true
       }
     },
     "core": {
@@ -137,12 +138,17 @@
           "default": null
         },
         "trust_config": {
-          "description": "List of allowed extended key usage (EKU) object identifiers (OID) that\ncertificates must have.",
+          "description": "List of allowed extended key usage (EKU) object identifiers (OID) that\ncertificates must have.\n\nWhen [`Trust::use_default_ekus`] is true (the default), the EKUs defined by\nthe C2PA specification are always accepted and any OIDs listed here are\nadded to that set rather than replacing it.",
           "type": [
             "string",
             "null"
           ],
           "default": null
+        },
+        "use_default_ekus": {
+          "description": "Whether to accept the built-in set of extended key usage (EKU) OIDs defined\nby the C2PA specification in addition to those listed in [`Trust::trust_config`].\n\nWhen false, only the EKUs listed in [`Trust::trust_config`] (and any\n[`TrustAnchor::trust_config`]) are accepted. Note that `id-kp-emailProtection`,\n`id-kp-timeStamping`, and `id-kp-OCSPSigning` are always accepted.\n\nThe default value is true.",
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -150,7 +156,7 @@
       "type": "object",
       "properties": {
         "trust_anchors": {
-          "description": "Specifies the details of a specific trust list.  \n\nNormally this option contains the official C2PA-recognized trust anchors found here:\n<https://github.com/c2pa-org/conformance-public/tree/main/trust-list>\nor a user supplied trust list.  This format is a PEM string of certificates.\nFor C2PA trust lists the TrustListKind should be ['Signer]\n\nWhen validating CAWG X.509 identity signatures.\n\nUnder the CAWG interim trust model (CAWG identity assertion spec §8.2.4.1,\nvalid for assertions issued on or before 31 March 2027 and carrying a\ntrusted time stamp), these are the CAWG-recognized trust anchors – the\nMozilla Root Store with the Email (S/MIME) trust bit enabled\n(<https://ccadb.my.salesforce-sites.com/mozilla/IncludedRootsPEMTxt?TrustBitsInclude=Email>)\nand the IPTC Origin Verified News Publishers trust-anchor list\n(<https://trust.iptc.org/anchor-list.pem>) – not the C2PA conformance\ntrust-list.  For CAWG trust the TrustListKind should be ['CAWG']",
+          "description": "Specifies the details of a specific trust list.\n\nNormally this option contains the official C2PA-recognized trust anchors found here:\n<https://github.com/c2pa-org/conformance-public/tree/main/trust-list>\nor a user supplied trust list.  This format is a PEM string of certificates.\nFor C2PA trust lists the TrustListKind should be ['Signer]\n\nWhen validating CAWG X.509 identity signatures.\n\nUnder the CAWG interim trust model (CAWG identity assertion spec §8.2.4.1,\nvalid for assertions issued on or before 31 March 2027 and carrying a\ntrusted time stamp), these are the CAWG-recognized trust anchors – the\nMozilla Root Store with the Email (S/MIME) trust bit enabled\n(<https://ccadb.my.salesforce-sites.com/mozilla/IncludedRootsPEMTxt?TrustBitsInclude=Email>)\nand the IPTC Origin Verified News Publishers trust-anchor list\n(<https://trust.iptc.org/anchor-list.pem>) – not the C2PA conformance\ntrust-list.  For CAWG trust the TrustListKind should be ['CAWG']",
           "type": "string",
           "default": ""
         },
@@ -168,7 +174,7 @@
           "default": "manifest"
         },
         "trust_config": {
-          "description": "List of allowed extended key usage (EKU) object identifiers (OID) that\ncertificates must have. This will overlay the default top level trust_config.\nIf the trust_kind is CAWG it will override the top level trust config\n\n When validating CAWG identity certificates.\n\nThe CAWG interim trust model (CAWG identity assertion spec §8.2.4.1)\nrequires the `id-kp-emailProtection` EKU (1.3.6.1.5.5.7.3.4) together with\none of the CA/Browser Forum S/MIME certificate-policy OIDs:\norganization-validated (2.23.140.1.5.2.2 / 2.23.140.1.5.2.3),\nsponsor-validated (2.23.140.1.5.3.2 / 2.23.140.1.5.3.3), or\nindividual-validated (2.23.140.1.5.4.2 / 2.23.140.1.5.4.3). Mailbox-validated\nand legacy certificate purposes are not accepted.",
+          "description": "List of allowed extended key usage (EKU) object identifiers (OID) that\ncertificates must have. This will overlay the default top level trust_config.\nIf the trust_kind is CAWG it will override the top level trust config\n\nWhen validating CAWG identity certificates.\n\nThe CAWG interim trust model (CAWG identity assertion spec §8.2.4.1)\nrequires the `id-kp-emailProtection` EKU (1.3.6.1.5.5.7.3.4) together with\none of the CA/Browser Forum S/MIME certificate-policy OIDs:\norganization-validated (2.23.140.1.5.2.2 / 2.23.140.1.5.2.3),\nsponsor-validated (2.23.140.1.5.3.2 / 2.23.140.1.5.3.3), or\nindividual-validated (2.23.140.1.5.4.2 / 2.23.140.1.5.4.3). Mailbox-validated\nand legacy certificate purposes are not accepted.",
           "type": [
             "string",
             "null"
