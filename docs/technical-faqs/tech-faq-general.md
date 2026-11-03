@@ -10,32 +10,16 @@ import TOCInline from '@theme/TOCInline';
 
 ### Where can I find signed sample assets?
 
-Find signed sample assets in Proofmode's public
-[Baseline repository](https://proofmode.org/baseline/). Many of these assets use
-older C2PA 1.x versions. To contribute signed assets for testing, use the
+There are some signed sample assets in [Proofmode's Baseline repository](https://proofmode.org/baseline/). Many of these assets use
+older C2PA 1.x versions. There are also a few signed assets for testing in the
 [`contentauth/example-assets` repository](https://github.com/contentauth/example-assets).
 Neither repository provides a guaranteed complete, current conformance test suite.
-
-For location metadata, see the Proofmode
-[Android 3.0.2 release candidate](https://github.com/guardianproject/proofmode-android/releases/tag/3.0.2-RC-2)
-and its use of `c2pa.metadata` to include geolocation as a created assertion.
-Older conformance samples used `stds.exif`, which was described as deprecated
-but still valid in the April 2026 discussion. See the
-[Kotlin metadata-generation code](https://github.com/guardianproject/proofmode-android/blob/main/android-libproofmode/src/main/java/org/witness/proofmode/c2pa/C2PAManager.kt#L840).
-
-Sources:
-
-- [Baseline and older sample versions; April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489689553886384228)
-- [Android geolocation implementation; April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489689681653141634)
-- [Older sample assertion format; April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489690080623726795)
-- [Metadata-generation code; April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489690402805125372)
-- [Shared signed-asset repository; April 3, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1489693250133430272)
 
 ### How can I get started with Content Credentials on Android or iOS?
 
 Use the [mobile SDKs](../mobile.md) for Android and iOS.
 
-### Does a Valid validation state mean that the signer is trusted?
+### Does a 'Valid' validation state mean that the signer is trusted?
 
 No. The three manifest states are
 **well-formed**, **valid**, and **trusted**. Trusted manifests are also
@@ -50,8 +34,8 @@ Inspect the trust-related validation results, and distinguish trust that
 was not evaluated from a failed trust check. An issuer name alone does
 not establish trust.
 
-See the
-[manifest states specification](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_manifest_states).
+For details, see the
+[C2PA specification](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_manifest_states).
 
 Sources:
 
@@ -86,15 +70,10 @@ Source: [Embedded Formats annex, August 17, 2026](https://discord.com/channels/9
 
 ### Where can I report a CAI security concern?
 
+The CAI open-source library is maintained in partnership with Adobe.
 Report suspected vulnerabilities through Adobe's public
-[Intigriti program](https://app.intigriti.com/programs/adobe/adobepublic/detail).
-The CAI open-source library is maintained in partnership with Adobe. C2PA is
-listed in the program for vulnerability disclosure but is not currently
-eligible for bounty rewards. Adobe also accepts reports for assets that are
-not bounty-eligible.
-
-Do not disclose suspected vulnerabilities in public GitHub issues. For reporting
-instructions, see [Adobe's bug bounty program page](https://www.adobe.com/trust/security/bug-bounty.html).
+[Intigriti program](https://app.intigriti.com/programs/adobe/adobepublic/detail). C2PA is listed in the program for vulnerability disclosure but is 
+not currently eligible for bounty rewards. Adobe also accepts reports for assets that are not bounty-eligible.
 
 For more information on security issues, see [SECURITY.md in the Rust library](https://github.com/contentauth/c2pa-rs/blob/main/SECURITY.md).
 
