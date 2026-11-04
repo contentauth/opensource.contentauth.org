@@ -16,7 +16,8 @@
       "$ref": "#/$defs/Trust",
       "default": {
         "anchors": null,
-        "trust_config": null
+        "trust_config": null,
+        "use_default_ekus": true
       }
     },
     "core": {
@@ -43,7 +44,9 @@
         "verify_trust": true,
         "verify_timestamp_trust": true,
         "ocsp_fetch": false,
+        "ocsp_fetch_should_override": false,
         "remote_manifest_fetch": true,
+        "max_manifest_response_size": 10485760,
         "skip_ingredient_conflict_resolution": false,
         "strict_v1_validation": false
       }
@@ -135,12 +138,17 @@
           "default": null
         },
         "trust_config": {
-          "description": "List of allowed extended key usage (EKU) object identifiers (OID) that\ncertificates must have.",
+          "description": "List of allowed extended key usage (EKU) object identifiers (OID) that\ncertificates must have.\n\nWhen [`Trust::use_default_ekus`] is true (the default), the EKUs defined by\nthe C2PA specification are always accepted and any OIDs listed here are\nadded to that set rather than replacing it.",
           "type": [
             "string",
             "null"
           ],
           "default": null
+        },
+        "use_default_ekus": {
+          "description": "Whether to accept the built-in set of extended key usage (EKU) OIDs defined\nby the C2PA specification in addition to those listed in [`Trust::trust_config`].\n\nWhen false, only the EKUs listed in [`Trust::trust_config`] (and any\n[`TrustAnchor::trust_config`]) are accepted. Note that `id-kp-emailProtection`,\n`id-kp-timeStamping`, and `id-kp-OCSPSigning` are always accepted.\n\nThe default value is true.",
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -148,7 +156,7 @@
       "type": "object",
       "properties": {
         "trust_anchors": {
-          "description": "Specifies the details of a specific trust list.  \n\nNormally this option contains the official C2PA-recognized trust anchors found here:\n<https://github.com/c2pa-org/conformance-public/tree/main/trust-list>\nor a user supplied trust list.  This format is a PEM string of certificates.\nFor C2PA trust lists the TrustListKind should be ['Signer]\n\nWhen validating CAWG X.509 identity signatures.\n\nUnder the CAWG interim trust model (CAWG identity assertion spec §8.2.4.1,\nvalid for assertions issued on or before 31 March 2027 and carrying a\ntrusted time stamp), these are the CAWG-recognized trust anchors – the\nMozilla Root Store with the Email (S/MIME) trust bit enabled\n(<https://ccadb.my.salesforce-sites.com/mozilla/IncludedRootsPEMTxt?TrustBitsInclude=Email>)\nand the IPTC Origin Verified News Publishers trust-anchor list\n(<https://trust.iptc.org/anchor-list.pem>) – not the C2PA conformance\ntrust-list.  For CAWG trust the TrustListKind should be ['CAWG']",
+          "description": "Specifies the details of a specific trust list.\n\nNormally this option contains the official C2PA-recognized trust anchors found here:\n<https://github.com/c2pa-org/conformance-public/tree/main/trust-list>\nor a user supplied trust list.  This format is a PEM string of certificates.\nFor C2PA trust lists the TrustListKind should be ['Signer]\n\nWhen validating CAWG X.509 identity signatures.\n\nUnder the CAWG interim trust model (CAWG identity assertion spec §8.2.4.1,\nvalid for assertions issued on or before 31 March 2027 and carrying a\ntrusted time stamp), these are the CAWG-recognized trust anchors – the\nMozilla Root Store with the Email (S/MIME) trust bit enabled\n(<https://ccadb.my.salesforce-sites.com/mozilla/IncludedRootsPEMTxt?TrustBitsInclude=Email>)\nand the IPTC Origin Verified News Publishers trust-anchor list\n(<https://trust.iptc.org/anchor-list.pem>) – not the C2PA conformance\ntrust-list.  For CAWG trust the TrustListKind should be ['CAWG']",
           "type": "string",
           "default": ""
         },
@@ -166,7 +174,7 @@
           "default": "manifest"
         },
         "trust_config": {
-          "description": "List of allowed extended key usage (EKU) object identifiers (OID) that\ncertificates must have. This will overlay the default top level trust_config.\nIf the trust_kind is CAWG it will override the top level trust config\n\n When validating CAWG identity certificates.\n\nThe CAWG interim trust model (CAWG identity assertion spec §8.2.4.1)\nrequires the `id-kp-emailProtection` EKU (1.3.6.1.5.5.7.3.4) together with\none of the CA/Browser Forum S/MIME certificate-policy OIDs:\norganization-validated (2.23.140.1.5.2.2 / 2.23.140.1.5.2.3),\nsponsor-validated (2.23.140.1.5.3.2 / 2.23.140.1.5.3.3), or\nindividual-validated (2.23.140.1.5.4.2 / 2.23.140.1.5.4.3). Mailbox-validated\nand legacy certificate purposes are not accepted.",
+          "description": "List of allowed extended key usage (EKU) object identifiers (OID) that\ncertificates must have. This will overlay the default top level trust_config.\nIf the trust_kind is CAWG it will override the top level trust config\n\nWhen validating CAWG identity certificates.\n\nThe CAWG interim trust model (CAWG identity assertion spec §8.2.4.1)\nrequires the `id-kp-emailProtection` EKU (1.3.6.1.5.5.7.3.4) together with\none of the CA/Browser Forum S/MIME certificate-policy OIDs:\norganization-validated (2.23.140.1.5.2.2 / 2.23.140.1.5.2.3),\nsponsor-validated (2.23.140.1.5.3.2 / 2.23.140.1.5.3.3), or\nindividual-validated (2.23.140.1.5.4.2 / 2.23.140.1.5.4.3). Mailbox-validated\nand legacy certificate purposes are not accepted.",
           "type": [
             "string",
             "null"
@@ -299,7 +307,12 @@
           "default": true
         },
         "ocsp_fetch": {
-          "description": "Whether to fetch the certificates OCSP status during validation.\n\nRevocation status is checked in the following order:\n1. The OCSP staple stored in the COSE claim of the manifest\n2. Otherwise if `ocsp_fetch` is enabled, it fetches a new OCSP status\n3. Otherwise if `ocsp_fetch` is disabled, it checks `CertificateStatus` assertions\n\nThe default value is false.",
+          "description": "Whether to fetch the certificates OCSP status during validation.\n\nRevocation status is checked in the following order:\n1. If [`Verify::ocsp_fetch_should_override`] is enabled, it fetches a new OCSP status. If the\n   live fetch does not produce a definitive status (`notRevoked` or `revoked`), validation\n   falls back to the remaining steps below.\n2. If `builder.certificate_status_should_override` is enabled, it checks [`CertificateStatus`]\n   assertions.\n3. Otherwise, it checks the OCSP staple stored in the COSE claim (`rVals.ocspVals`) of the\n   manifest.\n4. Otherwise, if `ocsp_fetch` is enabled, it fetches a new OCSP status.\n5. Otherwise, it checks [`CertificateStatus`] assertions.\n\nThe default value is false.\n\n[`CertificateStatus`]: https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#certificate_status_assertion",
+          "type": "boolean",
+          "default": false
+        },
+        "ocsp_fetch_should_override": {
+          "description": "Whether to always fetch a live OCSP response first during validation, before checking any\n[`CertificateStatus`] assertions or stapled OCSP response in the COSE claim.\n\nEnabling this setting implies [`Verify::ocsp_fetch`] (you do not need to set both). It also\ntakes precedence over `builder.certificate_status_should_override`. If the live fetch fails\nor does not produce a definitive revocation status (`notRevoked` or `revoked`), validation\nfalls back to the embedded [`CertificateStatus`] assertions and COSE OCSP staple before\nreporting the OCSP responder as inaccessible.\n\nThe default value is false.\n\n[`CertificateStatus`]: https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#certificate_status_assertion",
           "type": "boolean",
           "default": false
         },
@@ -307,6 +320,13 @@
           "description": "Whether to fetch remote manifests in the following scenarios:\n- Constructing a [`Reader`]\n- Adding an [`Ingredient`] to the [`Builder`]\n\nThe default value is true.\n\n<div class=\"warning\">\nThis setting is only applicable if the crate is compiled with the `fetch_remote_manifests` feature.\n</div>\n\n[`Reader`]: crate::Reader\n[`Ingredient`]: crate::Ingredient\n[`Builder`]: crate::Builder",
           "type": "boolean",
           "default": true
+        },
+        "max_manifest_response_size": {
+          "description": "Maximum remote manifest response size in bytes. Responses with a larger\n`Content-Length` or body return [`Error::RemoteManifestFetch`].\n\nThe default is 10 MiB (10,485,760 bytes). The value must be positive and\nmust not exceed the platform's maximum vector capacity (`isize::MAX`).\nApplies only when the `fetch_remote_manifests` feature is enabled.\n\nThis limit is enforced after the HTTP resolver returns. It does not bound\nbuffering inside a resolver, including the built-in reqwest adapters.",
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0,
+          "default": 10485760
         },
         "skip_ingredient_conflict_resolution": {
           "description": "Whether to skip ingredient conflict resolution when multiple ingredients have the same\nmanifest identifier. This settings is only applicable for C2PA v2 validation.\n\nThe default value is false.\n\nSee more information in the spec here:\n[versioning_manifests_due_to_conflicts - C2PA Technical Specification](https://spec.c2pa.org/specifications/specifications/2.3/specs/C2PA_Specification.html#_versioning_manifests_due_to_conflicts)",

@@ -5,7 +5,7 @@
   "type": "object",
   "properties": {
     "claim_version": {
-      "description": "The version of the claim.  Defaults to 2.",
+      "description": "The version of the claim.  Defaults to 2.\n\nC2PA v1 claim signing (`Some(1)`) is deprecated as of 0.92.0 and will be\nremoved in 0.93.0, scheduled for mid-January 2027. Omit this field or set\nit to `Some(2)` to sign C2PA v2 claims instead. Reading and validating\nexisting C2PA v1 claims is unaffected.\nSee the [migration guide](https://github.com/contentauth/c2pa-rs/blob/main/docs/c2pa-v1-signing-migration.md).",
       "type": [
         "integer",
         "null"
@@ -53,7 +53,7 @@
     "instance_id": {
       "description": "Instance ID from `xmpMM:InstanceID` in XMP metadata.",
       "type": "string",
-      "default": "xmp.iid:6dcb99f2-8a50-42be-a214-7691f65c45e7"
+      "default": "xmp.iid:45e89ca5-8382-412c-91c4-0b4c633d41b1"
     },
     "thumbnail": {
       "description": "An optional ResourceRef to a thumbnail image that represents the asset that was signed.\nMust be available when the manifest is signed.",
@@ -1302,7 +1302,7 @@
           "type": "string"
         },
         "data": {
-          "description": "The assertion data",
+          "description": "The assertion data. For CBOR assertions, JSON input accepts json_b64\n`b64'<base64>'` strings for byte fields at any depth.",
           "$ref": "#/$defs/AssertionData"
         },
         "kind": {
