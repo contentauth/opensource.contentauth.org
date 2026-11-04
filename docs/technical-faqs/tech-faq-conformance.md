@@ -10,29 +10,19 @@ import TOCInline from '@theme/TOCInline';
 
 ### How do I start the conformance process?
 
-Start with the [C2PA Conformance Program](https://c2pa.org/conformance/)
-and its expression of interest form. See the
-[program document](https://github.com/c2pa-org/conformance-public/blob/main/docs/v0.2/C2PA%20Conformance%20Program.pdf)
-for details.
+Start with the [expression of interest form](https://docs.google.com/forms/d/e/1FAIpQLScERZH5rKfoeSu3y6gGbkllkyeAhmF0G-kXS0eXpb2vR238Rg/viewform?usp=header).
 
-A generator product must pass conformance before it can obtain a signing
-certificate from a certificate authority (CA) whose root is on the C2PA Trust
-List. Use test certificates while preparing for evaluation; they are not
-trusted production credentials.
 
-Sources:
+Use test certificates while preparing for evaluation; they are not
+trusted production credentials. A generator product must pass conformance before it can obtain a signing certificate from a certificate authority (CA) whose root is on the C2PA Trust List. 
 
-- [Certificate prerequisite; September 30, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1554850060112498779)
-- [Program document; September 30, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1554850126449737808)
-- [Expression of interest form; September 30, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1554850450874834964)
-- [Evaluation certificates; September 10, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1547716234173222962)
+For more information and a detailed example walkthrough of the application process, see the [Implementer's guide to conformance](../conformance/conformance-guide.mdx).
 
-### How do I follow up on an application or correct its media types?
+### How do I modify an application to the program?
 
-Contact the conformance administrator at conformance@c2pa.org for
-application-specific issues. For a missing response to an expression of
-interest, provide the representative email address used in the submission.
-Response times are not guaranteed.
+Contact the conformance administrator at conformance@c2pa.org for any issues with your 
+application to the C2PA Conformance Program. If you've submitted an expression of
+interest form but not received a timely response, provide the representative email address used in the submission. Response times are not guaranteed.
 
 If a generator application incorrectly omits validation capabilities, request
 a revision listing both the input media types it validates and the output
@@ -352,7 +342,7 @@ implementation. Check the generator value in
 through generator metadata.
 
 Matching specification-version fields or passing a rubric alone does not
-establish that a product has passed the conformance program.
+establish that a product has passed the C2PA Conformance Program.
 
 Sources:
 

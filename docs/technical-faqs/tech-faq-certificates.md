@@ -19,7 +19,7 @@ expression of interest, followed by a legal agreement and intake form.
 Prepare a Generator Product Security Architecture Document and Diagram,
 along with signed interoperability samples.
 
-See the [C2PA conformance program](../conformance/index.mdx) for more information.
+See the [C2PA Conformance Program](../conformance/index.mdx) for more information.
 
 ### Is a C2PA claim-signing certificate the same as a creator identity certificate?
 
