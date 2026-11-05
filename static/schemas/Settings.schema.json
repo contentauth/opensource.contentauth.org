@@ -31,7 +31,10 @@
         "allowed_network_hosts": null,
         "allow_redirects": true,
         "prefer_compress_manifests": false,
-        "max_decompressed_manifest_size_in_mb": 32
+        "max_decompressed_manifest_size_in_mb": 32,
+        "time_stamp_request_attempts": 3,
+        "time_stamp_request_timeout_in_ms": 10000,
+        "time_stamp_retry_delay_in_ms": 500
       }
     },
     "verify": {
@@ -270,6 +273,27 @@
           "format": "uint",
           "minimum": 0,
           "default": 32
+        },
+        "time_stamp_request_attempts": {
+          "description": "Number of times a blocking time-stamp request is sent before its last error is\nreturned. A new attempt is made only after a transient failure: no answer, a\ntimeout, or an HTTP 408, 429, 500, 502, 503 or 504 response. `1` disables retries.\n\nThe default is 3. The value must be at least 1. Async time-stamp requests are sent\nonce, as are blocking requests on browser WASM (which cannot sleep between attempts).",
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0,
+          "default": 3
+        },
+        "time_stamp_request_timeout_in_ms": {
+          "description": "Time limit of each time-stamp request attempt, in milliseconds, applied by the\nSDK's built-in HTTP resolvers. A time-stamp service answers in well under a second;\nwithout a limit an attempt that hangs would wait for the HTTP client's default.\n\nThe default is 10,000 (10 seconds). The value must be positive.",
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0,
+          "default": 10000
+        },
+        "time_stamp_retry_delay_in_ms": {
+          "description": "Pause before the second time-stamp request attempt, in milliseconds, doubled before\neach later one.\n\nThe default is 500.",
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0,
+          "default": 500
         }
       }
     },
