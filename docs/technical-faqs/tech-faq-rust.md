@@ -11,8 +11,8 @@ import TOCInline from '@theme/TOCInline';
 ### Can I configure trust anchors using a URL?
 
 No. The Rust SDK expects trust anchors as a PEM string, not a URL or file
-path. Fetch or read the PEM data in your application, then pass its contents
-to the SDK.
+path. Fetch or read the PEM data in your application, then attach settings
+containing the PEM to a `Context` and construct the reader from that context.
 
 In contrast, C2PA Tool accepts URLs and paths as command-line arguments because it
 retrieves the data before passing it to the SDK.
@@ -20,16 +20,21 @@ retrieves the data before passing it to the SDK.
 For example:
 
 ```rust
+use c2pa::{Context, Reader, Settings};
+
 let pem = reqwest::blocking::get("https://example.com/trust_anchors.pem")?
     .text()?;
 
-c2pa::settings::Settings::from_toml(
+let settings = Settings::new().with_toml(
     &toml::toml! {
         [trust]
         trust_anchors = pem
     }
     .to_string(),
 )?;
+
+let context = Context::new().with_settings(settings)?;
+let reader = Reader::from_context(context);
 ```
 
 Source: [Trust anchors: April 7, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1491236748653494503)
