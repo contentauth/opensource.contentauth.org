@@ -37,6 +37,27 @@ let context = Context::new().with_settings(settings)?;
 let reader = Reader::from_context(context);
 ```
 
+For a local PEM file, replace the `let pem = ...` assignment above with:
+
+```rust
+let pem = std::fs::read_to_string("path/to/trust_anchors.pem")?;
+```
+
+The path is read by your application; do not set `trust.trust_anchors` to
+the path itself.
+
+Alternatively, supply an inline PEM string:
+
+```rust
+let pem = r#"-----BEGIN CERTIFICATE-----
+...base64-encoded certificate data...
+-----END CERTIFICATE-----"#;
+```
+
+Replace the placeholder with your complete PEM certificate data. In all
+three cases, use the same settings and `Context` construction shown above:
+`trust.trust_anchors` receives the PEM contents, not a URL or file path.
+
 Source: [Trust anchors: April 7, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1491236748653494503)
 
 ### How do I mark assertions as created rather than gathered?

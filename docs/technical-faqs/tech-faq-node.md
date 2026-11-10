@@ -49,27 +49,30 @@ Sources:
 
 Load the C2PA Trust List and C2PA TSA Trust List, combine their PEM contents,
 and enable both trust checks. After loading the PEM contents as
-`c2paTrustList` and `c2paTsaTrustList`, pass the
-settings to both the reader and builder:
+`c2paTrustList` and `c2paTsaTrustList`, attach the settings to a `Context`
+and pass that context to both the reader and builder:
 
 ```js
-const settings = {
+import { Builder, Context, Reader } from "@contentauth/c2pa-node";
+
+const context = new Context({
   trust: {
-    trust_anchors: c2paTrustList + c2paTsaTrustList,
+    trustAnchors: c2paTrustList + c2paTsaTrustList,
   },
   verify: {
-    verify_trust: true,
-    verify_timestamp_trust: true,
+    verifyTrust: true,
+    verifyTimestampTrust: true,
   },
-};
+});
 
-const reader = await Reader.fromAsset({ path: "photo.jpg" }, settings);
-const builder = Builder.withJson({ title: "photo.jpg" }, settings);
+const reader = await Reader.fromAsset({ path: "photo.jpg" }, context);
+const builder = await Builder.withJsonAsync({ title: "photo.jpg" }, context);
 ```
 
-This excerpt assumes that `Reader` and `Builder` are imported and that the
-PEM contents have been fetched or read. It does not use the deprecated
-`c2pa-node` 0.5.26 API.
+This excerpt assumes that the PEM contents have been fetched or read.
+`Context` settings use camelCase keys. Use the asynchronous
+`Builder.withJsonAsync()` factory rather than the deprecated synchronous
+`Builder.withJson()` method.
 
 Sources:
 
@@ -78,14 +81,46 @@ Sources:
 
 ### Should I pass a PEM file path or its contents as trust anchors?
 
-Pass the PEM contents as a string, not a file path. C2PA Tool's
-`load_trust_resource()` is a convenience for loading PEM data from a path
-or URL; do not assume that behavior applies to the Node SDK.
+You can pass the PEM contents as a string or a file path.
 
 The `loadSettingsFromFile()` function loads a complete settings file.
 It does not make an individual trust-anchor setting accept a PEM path.
 
-Supply PEM strings through `trust.trust_anchors`, as shown above.
+For a local PEM file, read its contents in your application:
+
+```js
+import { readFile } from "node:fs/promises";
+
+const pem = await readFile("path/to/trust_anchors.pem", "utf8");
+```
+
+Alternatively, supply an inline PEM string:
+
+```js
+const pem = `-----BEGIN CERTIFICATE-----
+...base64-encoded certificate data...
+-----END CERTIFICATE-----`;
+```
+
+Replace the placeholder with your complete PEM certificate data. In either
+case, assign the PEM contents to `trust.trustAnchors` in a `Context`:
+
+```js
+const context = new Context({
+  trust: {
+    trustAnchors: pem,
+  },
+  verify: {
+    verifyTrust: true,
+    verifyTimestampTrust: true,
+  },
+});
+```
+
+Pass this context to the reader and builder as shown above. When checking
+both signing-certificate and timestamp trust, include both trust lists'
+PEM contents.
+
 If validation still reports a trust failure, inspect the validation results
 for other causes.
 

@@ -10,7 +10,7 @@ import TOCInline from '@theme/TOCInline';
 
 ### How can an implementation obtain a production signing certificate?
 
-After you [get your official notice of conformance](../conformance/conformance-guide.mdx#8-notice-of-conformance) for your generator product from C2PA, you can obtain a signing certificate from a certificate authority (CA) on the C2PA Trust List. These certificates are intended for broad recognition by validators.
+After you go through the conformance process and [get the official notice of conformance](../conformance/conformance-guide.mdx#8-notice-of-conformance) for your generator product from C2PA, you can obtain a signing certificate from a certificate authority (CA) on the C2PA Trust List. These certificates are intended for broad recognition by validators.
 
 See the [C2PA Conformance Program](../conformance/index.mdx) for more information.
 
@@ -19,10 +19,10 @@ See the [C2PA Conformance Program](../conformance/index.mdx) for more informatio
 No. Trusted C2PA claim-signing certificates are issued for conforming hardware or software
 products, rather than to establish the creator's identity.
 
-To attach verified identity, use a [CAWG](https://cawg.io) identity assertion
-in the manifest. Product signing and identity are separate roles: a product
-certificate does not by itself establish who created, edited, or published
-the content.
+To attach verified identity, use a [CAWG](https://cawg.io) identity assertion in the manifest signed by an X.509 certificate or an identity claims aggregation (ICA) credential.
+ Product signing and identity are separate roles.
+
+While a C2PA manifest answers the question: "What device or app produced this file, and what happened to it?" a CAWG assertion answers the question: "Who is the person or organization behind this file, and what do they permit?"
 
 Source: [Product certificates versus creator identity; May 14, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1504655459725082675)
 
