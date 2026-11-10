@@ -8,16 +8,9 @@ import TOCInline from '@theme/TOCInline';
 
 <TOCInline toc={toc} />
 
-### How can an implementation obtain a broadly recognized signing certificate?
+### How can an implementation obtain a production signing certificate?
 
-Complete C2PA generator conformance, then obtain a conforming product
-certificate from a certificate authority (CA) whose root is on the C2PA Trust
-List. These certificates are intended for broad recognition by validators.
-
-The process starts with a completed implementation and an
-expression of interest, followed by a legal agreement and intake form.
-Prepare a Generator Product Security Architecture Document and Diagram,
-along with signed interoperability samples.
+After you [get your official notice of conformance](../conformance/conformance-guide.mdx#8-notice-of-conformance) for your generator product from C2PA, you can obtain a signing certificate from a certificate authority (CA) on the C2PA Trust List. These certificates are intended for broad recognition by validators.
 
 See the [C2PA Conformance Program](../conformance/index.mdx) for more information.
 

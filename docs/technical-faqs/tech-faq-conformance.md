@@ -12,9 +12,7 @@ import TOCInline from '@theme/TOCInline';
 
 Start with the [expression of interest form](https://docs.google.com/forms/d/e/1FAIpQLScERZH5rKfoeSu3y6gGbkllkyeAhmF0G-kXS0eXpb2vR238Rg/viewform?usp=header).
 
-
-Use test certificates while preparing for evaluation; they are not
-trusted production credentials. A generator product must pass conformance before it can obtain a signing certificate from a certificate authority (CA) whose root is on the C2PA Trust List. 
+Use test certificates while preparing for evaluation. A generator product must pass conformance before it can obtain a production signing certificate from a CA on the C2PA Trust List.  
 
 For more information and a detailed example walkthrough of the application process, see the [Implementer's guide to conformance](../conformance/conformance-guide.mdx).
 
