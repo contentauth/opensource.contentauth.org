@@ -53,17 +53,29 @@ Use at your own risk.
 - [**PHP library**](https://github.com/provemark/content-credentials): Builds, signs, reads and verifies Content Credentials from PHP, with a framework-agnostic core and a Laravel integration. Signing is delegated to a small Node service built on [c2pa-node](https://github.com/contentauth/c2pa-js/tree/main/packages/c2pa-node), so the private key stays out of the web application.
 - [**ChronoVerify MCP server**](https://github.com/beeswaxpat/chronoverify-mcp): Model Context Protocol (MCP) server for [ChronoVerify](https://chronoverify.com), a C2PA Conformant Validator listed on the [Conforming Products List](https://c2pa.org/conformance/). Lets AI agents and applications validate C2PA Content Credentials in images against the official trust lists, alongside EXIF/XMP metadata and pixel-forensics checks.
 
-## Browser extension
+## CAI Ecosystem Explorer
 
-The free [browser extension for Google Chrome](https://chromewebstore.google.com/detail/c2pa-content-credentials/mjkaocdlpjmphfkjndocehcdhbigaafp?hl=en) enables you to verify and display manifests for images, audio and videos which have C2PA Content Credentials.
+The [CAI Ecosystem Explorer](https://contentauthenticity.org/ecosystem-explorer) is the CAI's central resource for exploring the provenance ecosystem.  You can view listings and filter by several different parameters, including conformance. The Ecosystem Explorer is a great way to find community and inspiration for your own work.
 
-## Content Credentials Foundations video course
+If you have an active, market-ready Content Credentials-enabled implementation, apply to add your organization and implementation(s) by [filling out the application form](https://airtable.com/appjyvJ38styejYOJ/pagQwJlkine9oiNfl/form).  We want to learn about your work and help share what you’re building. To update an existing listing, [contact us](https://contentauthenticity.org/contact).
 
-For a series of educational videos, see [Content Credentials Foundations: A Course for Implementers](http://learn.contentauthenticity.org/).
+:::note
+[C2PA Conformance](conformance/index.mdx) is not a requirement to be added to the Ecosystem Explorer, but listings indicate whether an implementation is conformant,  and conforming products are prioritized for promotion and other opportunities.
+:::
+
+For more background on the Ecosystem Explorer, see the [announcement blog post](https://contentauthenticity.org/blog/announcing-the-cai-ecosystem-explorer).
+
+## Educational video course
+
+For a series of videos for implementers, see [Content Credentials Foundations: A Course for Implementers](http://learn.contentauthenticity.org/).
 
 ## Discussions on Discord
 
 The CAI maintains a [Discord server](https://discord.gg/CAI) for open technical discussions within the developer community, with channels focused on different projects and topics.
+
+## Browser extension
+
+The free [browser extension for Google Chrome](https://chromewebstore.google.com/detail/c2pa-content-credentials/mjkaocdlpjmphfkjndocehcdhbigaafp?hl=en) enables you to verify and display manifests for images, audio and videos which have C2PA Content Credentials.
 
 ## Other resources
 
