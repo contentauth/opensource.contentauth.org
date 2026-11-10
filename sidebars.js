@@ -467,7 +467,23 @@ const sidebars = {
       label: 'Community resources',
       link: { type: 'doc', id: 'community-resources' },
       collapsed: true,
-      items: [],
+      items: [
+        {
+          type: 'link',
+          label: 'Ecosystem Explorer',
+          href: 'https://contentauthenticity.org/ecosystem-explorer',
+        },
+        {
+          type: 'link',
+          label: 'Learning videos',
+          href: 'http://learn.contentauthenticity.org/',
+        },
+        {
+          type: 'link',
+          label: 'Discord discussions',
+          href: 'https://discord.gg/CAI',
+        },
+      ],
     },
   ],
 };
