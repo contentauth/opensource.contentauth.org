@@ -47,6 +47,10 @@ Sources:
 
 ### How do I configure signing-certificate and timestamp trust?
 
+<!---
+This way no longer works!
+--->
+
 Load the C2PA Trust List and C2PA TSA Trust List, combine their PEM contents,
 and enable both trust checks. After loading the PEM contents as
 `c2paTrustList` and `c2paTsaTrustList`, attach the settings to a `Context`

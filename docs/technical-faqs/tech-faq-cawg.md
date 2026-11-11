@@ -10,14 +10,21 @@ import TOCInline from '@theme/TOCInline';
 
 ### Does c2pa-rs support identity claims aggregation?
 
-Yes. The Rust SDK (`c2pa-rs`) supports CAWG identity claims aggregation (ICA).
+Yes. The Rust library (`c2pa-rs`) supports CAWG identity claims aggregation (ICA).
 An implementation also uses the Node.js bindings. You must provide an
 aggregation service that returns the COSE-signed verifiable credential;
-the SDK does not provide that service.
+the library does not provide that service.
 
 See the Rust [identity module](https://github.com/contentauth/c2pa-rs/tree/main/sdk/src/identity)
 and its [tests](https://github.com/contentauth/c2pa-rs/tree/main/sdk/src/identity/tests).
-Confirm ICA support separately before using the Swift or Python SDKs.
+Confirm ICA support separately before using the Swift or Python libraries.
+
+:::note
+An identity claims aggregation (ICA) credential is signed by an issuer identified by a DID (for example a `did:web` or `did:jwk`). A valid signature only proves that the credential was signed by whoever controls that DID: it does **not**, on its own, establish that the issuer is trustworthy. In particular, a self-issued `did:jwk` can be minted by anyone, so accepting it as trusted would let an attacker assert any identity.
+:::
+
+For this reason, the library treats ICA issuers as untrusted unless they appear on an explicit allow-list. Configure the allow-list by adding a new CAWG specific trust anchor. `trust.anchors[].trusted_ica_issuers` setting, which is a list of exact DID strings (any DID method):
+
 
 Source: [Rust and Node ICA support and service responsibilities; August 14, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1537963403539390495)
 
@@ -72,7 +79,7 @@ Sources:
 
 ### Why can CAWG identity remain untrusted when the claim signer is trusted?
 
-CAWG trust anchors need separate SDK configuration. Trust in the C2PA claim
+CAWG trust anchors need separate configuration. Trust in the C2PA claim
 signer does not automatically establish trust in the identity assertion.
 Check for these possible causes:
 

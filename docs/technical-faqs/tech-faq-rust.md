@@ -10,6 +10,10 @@ import TOCInline from '@theme/TOCInline';
 
 ### Can I configure trust anchors using a URL?
 
+<!--
+Update for new way to configure trust using distinct types
+--->
+
 No. The Rust SDK expects trust anchors as a PEM string, not a URL or file
 path. Fetch or read the PEM data in your application, then attach settings
 containing the PEM to a `Context` and construct the reader from that context.
@@ -84,7 +88,7 @@ for more information.
 
 Source: [Created assertions config; June 16, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1516521499517779978)
 
-### How do I preserve an existing asset's assertions when editing it?
+### How do I preserve an asset's Content Credentials when editing it?
 
 Include the original asset as a `parentOf` ingredient. If the asset is
 signed, its manifest and assertions are carried forward through that
@@ -101,26 +105,10 @@ The `Edit` intent automatically adds the `c2pa.opened` action and uses the sourc
 as the parent if you do not specify one. Do not manually add a duplicate
 `c2pa.opened` action.
 
-A simple open-and-edit workflow can have no gathered assertions.
-If you reuse metadata as a new gathered assertion,
-verify that it still applies to the edited asset.
-
 Sources:
 
 - [Parent handling; October 14, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1559968978376593439)
 - [Gathered-assertion clarification; October 14, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1560080821287657594)
-
-Use the `Edit` intent when an existing asset produces
-`assertion.action.malformed: first action must be created or opened`
-or `assertion.action.ingredientMismatch`. Ensure manually defined
-`actions` are nested inside `assertions` and the workflow includes
-a referenced `parentOf` ingredient. Inspect the validation details before
-treating an "Invalid Manifest" error as a trust problem.
-
-Sources:
-
-- [action structure and edit-intent fix, October 15, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1560317418574839849)
-- [successful result, October 15, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1560344798165074072)
 
 ### How do I add timestamps for existing ingredient manifests?
 
@@ -131,6 +119,9 @@ Enable automatic timestamp assertions with these settings:
 enabled = true
 fetch_scope = "all"
 ```
+
+The `fetch_scope` setting indicates which manifests to fetch timestamps for.  
+The default is `"all"`.
 
 Choose the builder intent according to the operation:
 
@@ -146,7 +137,7 @@ Sources:
 - [intent selection, April 20, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1495827650026147952)
 - [certificate validity, April 7, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1491238678410821784)
 
-### Why is no thumbnail generated even though thumbnails are enabled?
+### Why is no thumbnail generated for update manifests, even though thumbnails are enabled?
 
 The SDK skips automatic thumbnail generation for update manifests,
 even when thumbnail generation is enabled. The specification does not
@@ -178,7 +169,7 @@ Source: [Renaming sidecars, September 16, 2026](https://discord.com/channels/983
 
 Compression applies only to the manifest being written, not to earlier
 manifests in the chain. To compare compressed and uncompressed chains, enable
-`prefer_compress_manifests` while writing each generation.
+`core.prefer_compress_manifests` while writing each generation.
 
 In a test of 10 manifests containing a repetitive text custom assertion,
 the final manifest store was 154,638 bytes without compression and
@@ -191,11 +182,11 @@ Sources:
 - [Compression scope and test recommendation, October 15, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1560358414264172585)
 - [Controlled comparison and data caveat, October 15, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1560370962875285566)
 
-### Can I use the Rust implementation from a JVM backend?
+### Can I use the Rust implementation from a Java backend?
 
 The SDK does not provide a supported Java binding. The Android bindings
-are designed for Android, not as a maintained, general-purpose Java package.
-Adapting them for a JVM service requires additional work.
+are designed for Android, not as a general-purpose Java package.
+Adapting them for a Java service requires additional work.
 
 You could use the Rust implementation's
 [C API](https://github.com/contentauth/c2pa-rs/tree/main/c2pa_c_ffi) to integrate through JNI.

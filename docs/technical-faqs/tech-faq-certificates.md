@@ -32,12 +32,11 @@ No. Renewal produces a new PEM-encoded certificate and PEM hash, so
 validators do not recognize the renewed certificate as the one on the
 Interim Trust List (ITL).
 
-After conformance, obtain a conforming product certificate from a CA whose root
+After completing the conformance program, obtain a conforming product certificate from a CA whose root
 is on the C2PA Trust List. The renewed ITL certificate is not added to that list.
 
 The ITL recognizes individual certificates; the C2PA Trust List uses CA roots.
-The ITL was frozen at the start of 2026. Check current policy before relying on
-a renewal or migration exception.
+The ITL was frozen at the start of 2026. 
 
 Sources:
 

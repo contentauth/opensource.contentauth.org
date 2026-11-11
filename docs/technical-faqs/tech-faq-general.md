@@ -15,6 +15,11 @@ older C2PA 1.x versions. There are also a few signed assets for testing in the
 [`contentauth/example-assets` repository](https://github.com/contentauth/example-assets).
 Neither repository provides a guaranteed complete, current conformance test suite.
 
+<!--
+Can we get interoperability assets from c2pa?  Tim to ask Scott.
+Ask on Discord for contributions
+-->
+
 ### How can I get started with Content Credentials on Android or iOS?
 
 Use the [mobile SDKs](../mobile.md) for Android and iOS.
@@ -45,6 +50,11 @@ Sources:
 
 ### Can a manifest carry custom sensor or verification information?
 
+<!--
+Use reverse domain name format for custom namespace for the assertion e.g. com.pixelstream.custom-assertion-name
+Custom assertions can be used for other purposes as well.
+-->
+
 Yes. Add custom assertions to a C2PA manifest to carry sensor or verification
 information. A validator that supports the assertion can use that information
 to identify where changes occurred.
@@ -55,18 +65,6 @@ adding an assertion does not by itself establish the security guarantees of
 the proposed workflow.
 
 Source: [custom assertions and validator support, April 20, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1495831402938110155)
-
-### Where are embedding rules for TIFF-based and base-media file formats documented?
-
-See the Embedded Formats annex of the
-[Content Credentials specification](https://c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html)
-for embedding rules for TIFF-based Sony formats and the Canon CR3 format,
-which is based on the ISO base media file format.
-
-These rules do not imply that a particular SDK supports every raw camera
-format or that sample assets are available.
-
-Source: [Embedded Formats annex, August 17, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1538922552007589898)
 
 ### Where can I report a CAI security concern?
 

@@ -16,14 +16,15 @@ Run C2PA Tool on your local machine:
 c2patool file.jpg --detailed
 ```
 
-This command avoids uploading the asset to a web inspection service.
+This command does not require uploading the asset to a web inspection tool such as [ACA Inspec]().
 Some configurations and operations still require network access; for example,
-trust initialization fetches trust lists. Local inspection alone does not
-establish that the signer is trusted or that the depicted content is true.
-
-Source: [Local CLI inspection command; September 11, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1548138360139419719)
+trust initialization fetches trust lists. 
 
 ### How do I load trust lists with C2PA Tool?
+
+<!---
+Update for new way to configure trust separately for signing, TSA, and CAWG.
+--->
 
 Run `c2patool init trust` to fetch or update trust lists and store them for
 subsequent runs:
