@@ -8,6 +8,9 @@ import TOCInline from '@theme/TOCInline';
 
 <TOCInline toc={toc} />
 
+For questions about manifest creation, custom assertions, and validation states,
+see the [Manifest FAQs](./tech-faq-manifests.md).
+
 ### Where can I find signed sample assets?
 
 There are some signed sample assets in [Proofmode's Baseline repository](https://proofmode.org/baseline/). Many of these assets use
@@ -23,48 +26,6 @@ Ask on Discord for contributions
 ### How can I get started with Content Credentials on Android or iOS?
 
 Use the [mobile SDKs](../mobile.md) for Android and iOS.
-
-### Does a 'Valid' validation state mean that the signer is trusted?
-
-No. The three manifest states are
-**well-formed**, **valid**, and **trusted**. Trusted manifests are also
-valid, and valid manifests are also well-formed. The reverse does not follow.
-
-A manifest signed with a test certificate can have a `Valid` state while
-`validation_results.activeManifest.failure` contains
-`signingCredential.untrusted`.
-
-Do not label a manifest trusted merely because its state is `Valid`.
-Inspect the trust-related validation results, and distinguish trust that
-was not evaluated from a failed trust check. An issuer name alone does
-not establish trust.
-
-For details, see the
-[C2PA specification](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_manifest_states).
-
-Sources:
-
-- [Valid-but-untrusted result; July 29, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1532235743022288977)
-- [State hierarchy; July 30, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1532378030276612178)
-- [Specification reference; July 30, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1532378218420633610)
-
-### Can a manifest carry custom sensor or verification information?
-
-<!--
-Use reverse domain name format for custom namespace for the assertion e.g. com.pixelstream.custom-assertion-name
-Custom assertions can be used for other purposes as well.
--->
-
-Yes. Add custom assertions to a C2PA manifest to carry sensor or verification
-information. A validator that supports the assertion can use that information
-to identify where changes occurred.
-
-Custom assertions require compatible implementations in both the camera or
-editor and the validator. Existing validators might not support them, and
-adding an assertion does not by itself establish the security guarantees of
-the proposed workflow.
-
-Source: [custom assertions and validator support, April 20, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1495831402938110155)
 
 ### Where can I report a CAI security concern?
 

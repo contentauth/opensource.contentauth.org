@@ -10,8 +10,9 @@ import TOCInline from '@theme/TOCInline';
 
 ### How do I configure created versus gathered assertions?
 
-Use `builder.created_assertion_labels` to identify the assertions attributed
-to your claim generator. For example:
+See [How do I configure created versus gathered assertions?](./tech-faq-manifests.md#how-do-i-configure-created-versus-gathered-assertions)
+for label selection, defaults, and placement rules. In Node.js, the settings
+object looks like this:
 
 ```js
 const settings = {
@@ -25,14 +26,6 @@ const settings = {
   }
 };
 ```
-
-Choose labels that reflect your implementation; the example is not a universal
-conformance configuration. Assertions are gathered by default, except for
-the hard binding, which is always created.
-
-Use only base assertion labels, without version or instance suffixes.
-For example, use `c2pa.ingredient`, not `c2pa.ingredient.v3`. The SDK
-handles the version.
 
 An April 2026 support response recommended updating the Node.js SDK to resolve
 an assertion-placement bug. The response did not identify the first release

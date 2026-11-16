@@ -8,6 +8,9 @@ import TOCInline from '@theme/TOCInline';
 
 <TOCInline toc={toc} />
 
+For manifest title inheritance and interpretation of validation states, see
+the [Manifest FAQs](./tech-faq-manifests.md).
+
 ### How can I inspect a file locally using C2PA Tool?
 
 Run C2PA Tool on your local machine:
@@ -16,7 +19,7 @@ Run C2PA Tool on your local machine:
 c2patool file.jpg --detailed
 ```
 
-This command does not require uploading the asset to a web inspection tool such as [ACA Inspec]().
+This command does not require uploading the asset to a web inspection tool such as [ACA Inspect](../getting-started/aca-inspect.mdx).
 Some configurations and operations still require network access; for example,
 trust initialization fetches trust lists. 
 
@@ -58,21 +61,6 @@ Sources:
 - [Settings option; August 6, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1534945015598678176)
 - [Persistence and concatenated lists; August 6, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1534995351101116646)
 
-### Does a new manifest automatically inherit its parent's title?
-
-No. The `parentOf` ingredient's title is not automatically assigned to the
-new claim's `dc:title`. Without an explicit title in the manifest definition,
-the output filename is used.
-
-Set the desired title in the new manifest definition rather than relying on
-inheritance. This sets the active manifest's title; changing an ingredient's
-title is a separate operation.
-
-Sources:
-
-- [Default title behavior; April 7, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1491244347075727431)
-- [Explicit title confirmation; April 30, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1499462978687209482)
-
 ### How can I override an ingredient's title?
 
 Export a signed asset as an ingredient using the `--ingredient` option.
@@ -88,27 +76,6 @@ Sources:
 
 - [Ingredient export and title workflow; April 30, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1499513543291305995)
 - [Successful result; May 1, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1499846501948456980)
-
-### Does the overall validation state describe only the active manifest?
-
-No. `validation_state` also considers ingredient deltas, so an ingredient
-failure can affect the overall state.
-
-For the active manifest alone, inspect the success, informational, and
-failure arrays in `validation_results.activeManifest`. Do not interpret
-an aggregate `Invalid` result as proof that the active manifest itself
-has a signature failure.
-
-Display each manifest's state independently, distinguishing valid-but-untrusted
-manifests from trusted ones. Cryptographic validity alone does not establish
-signer trust.
-
-Sources:
-
-- [Aggregate state clarification; May 27, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1509250331320778864)
-- [Active-manifest results; May 28, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1509555410921590835)
-- [Ingredient deltas; May 28, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1509555776585465907)
-- [Per-manifest presentation guidance; May 27, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1509374914510196737)
 
 ### How do I supply my own thumbnail?
 

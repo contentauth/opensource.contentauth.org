@@ -150,6 +150,23 @@ const sidebars = {
         },
         {
           type: 'doc',
+          id: 'technical-faqs/tech-faq-manifests',
+        },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-certificates',
+          label: 'Signing certificate FAQs',
+        },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-cawg',
+        },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-conformance',
+        },
+        {
+          type: 'doc',
           id: 'technical-faqs/tech-faq-rust',
         },
         {
@@ -159,19 +176,6 @@ const sidebars = {
         {
           type: 'doc',
           id: 'technical-faqs/tech-faq-c2pa-tool',
-        },
-        {
-          type: 'doc',
-          id: 'technical-faqs/tech-faq-conformance',
-        },
-        {
-          type: 'doc',
-          id: 'technical-faqs/tech-faq-cawg',
-        },
-        {
-          type: 'doc',
-          id: 'technical-faqs/tech-faq-certificates',
-          label: 'Signing certificate FAQs',
         },
       ],
     },

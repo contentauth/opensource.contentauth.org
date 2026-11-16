@@ -4,11 +4,12 @@ hide_table_of_contents: true
 
 # Technical FAQs
 
-These FAQs address common questions about the CAI SDKs, C2PA Tool, certificates,
+These FAQs address common questions about manifests, the CAI SDKs, C2PA Tool, certificates,
 identity, and conformance. They are based on discussions in the
 [public CAI Discord server](https://discord.gg/CAI) from April through October 2026.
 
 - [General FAQs](./tech-faq-general.md)
+- [Manifest FAQs](./tech-faq-manifests.md)
 - [Rust library FAQs](./tech-faq-rust.md)
 - [C2PA Tool FAQs](./tech-faq-c2pa-tool.md)
 - [Node.js library FAQs](./tech-faq-node.md)

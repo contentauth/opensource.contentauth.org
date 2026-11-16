@@ -130,3 +130,42 @@ terms. The offer required product conformance and did not include individual
 creator identity certificates.
 
 Source: [provider free-tier announcement, June 23, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1519016971486761040)
+
+### How do I configure trust for ingredient validation?
+
+Load both the [C2PA Trust List](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TRUST-LIST.pem)
+and the [C2PA TSA Trust List](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem).
+Fetch their PEM contents, concatenate them, and supply the resulting PEM
+string through `trust.anchors[].trust_anchors`.
+
+For SDK integrations, pass the settings to the builder through a context.
+Do not use deprecated thread-local settings.
+
+The C2PA Trust List alone might appear to work for timestamp trust because
+the lists share roots. Include the TSA list to obtain intermediate CA
+certificates. This configuration does not resolve every certificate-expiration
+or point-in-time validation issue.
+
+Sources:
+
+- [PEM configuration; May 22, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1507426136596942962)
+- [Context-based follow-up; May 23, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1507741760820871250)
+- [TSA intermediate certificates; August 19, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1539661485234724864)
+
+### Which timestamp endpoints are recommended for C2PA trust?
+
+As of August 10, 2026, these SSL.com endpoints were free for general use,
+with roots on the C2PA TSA Trust List:
+
+- `http://ts-c2pa.ssl.com/rsa`
+- `http://ts-c2pa.ssl.com/ecc`
+
+At that time, Trufo's service required payment and authentication. See the
+[Trufo timestamping documentation](https://trufo.ai/documentation#timestamping).
+Check current service terms before choosing a provider.
+
+Sources:
+
+- [SSL.com endpoints; August 10, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1536414294198059132)
+- [Trufo documentation; August 11, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1536747888305242223)
+- [Trufo access conditions; August 11, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1536748051287248998)
