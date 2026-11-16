@@ -186,7 +186,7 @@
           "default": null
         },
         "allowed_list": {
-          "description": "List of explicitly allowed CAWG identity or Singing certificates as a PEM bundle.\n\nUnder the CAWG interim trust model (CAWG identity assertion spec §8.2.4.1),\nthis corresponds to the IPTC Origin Verified News Publishers end-entity\ncertificate list (<https://trust.iptc.org/end-entity-list.pem>).\n\nWhen used for C2PA this will not be C2PA trust list recognized or acknowledged certificates and\nshould only be used for non-C2PA conformant cases.",
+          "description": "List of explicitly allowed CAWG identity or Singing certificates as a PEM bundle.\n\nUnder the CAWG interim trust model (CAWG identity assertion spec §8.2.4.1),\nthis corresponds to the IPTC Origin Verified News Publishers end-entity\ncertificate list (<https://trust.iptc.org/end-entity-list.pem>).\n\nWhen used for C2PA this will not be C2PA trust list recognized or acknowledged certificates and\nshould only be used for non-C2PA conformant cases.\n\nOnly the allowed list of a [`TrustListKind::Manifest`] entry trusts claim signers.\nThe allowed list of a [`TrustListKind::CAWG`] entry trusts CAWG identities only.",
           "type": [
             "string",
             "null"
