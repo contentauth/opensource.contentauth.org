@@ -10,10 +10,6 @@ import TOCInline from '@theme/TOCInline';
 
 ### Can I configure trust anchors using a URL?
 
-<!--
-Update for new way to configure trust using distinct types
---->
-
 No. The Rust SDK expects trust anchors as a PEM string, not a URL or file
 path. Fetch or read the PEM data in your application, then attach settings
 containing the PEM to a `Context` and construct the reader from that context.
@@ -31,7 +27,8 @@ let pem = reqwest::blocking::get("https://example.com/trust_anchors.pem")?
 
 let settings = Settings::new().with_toml(
     &toml::toml! {
-        [trust]
+        [[trust.anchors]]
+        trust_kind = "manifest"
         trust_anchors = pem
     }
     .to_string(),
@@ -47,7 +44,7 @@ For a local PEM file, replace the `let pem = ...` assignment above with:
 let pem = std::fs::read_to_string("path/to/trust_anchors.pem")?;
 ```
 
-The path is read by your application; do not set `trust.trust_anchors` to
+The path is read by your application; do not set `trust.anchors[].trust_anchors` to
 the path itself.
 
 Alternatively, supply an inline PEM string:
@@ -60,7 +57,7 @@ let pem = r#"-----BEGIN CERTIFICATE-----
 
 Replace the placeholder with your complete PEM certificate data. In all
 three cases, use the same settings and `Context` construction shown above:
-`trust.trust_anchors` receives the PEM contents, not a URL or file path.
+`trust.anchors[].trust_anchors` receives the PEM contents, not a URL or file path.
 
 Source: [Trust anchors: April 7, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1491236748653494503)
 

@@ -128,7 +128,7 @@ Sources:
 Load both the [C2PA Trust List](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TRUST-LIST.pem)
 and the [C2PA TSA Trust List](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem).
 Fetch their PEM contents, concatenate them, and supply the resulting PEM
-string through `trust.trust_anchors`.
+string through `trust.anchors[].trust_anchors`.
 
 For SDK integrations, pass the settings to the builder through a context.
 Do not use deprecated thread-local settings.

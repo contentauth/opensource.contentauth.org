@@ -79,7 +79,7 @@ Sources:
 ### What trust-anchor configuration was recommended for a custom validator?
 
 Concatenate the PEM contents of the C2PA Trust List and C2PA TSA Trust List,
-then pass the combined string through `trust.trust_anchors`. This includes
+then pass the combined string through `trust.anchors[].trust_anchors`. This includes
 both claim-signing and timestamp authority (TSA) trust anchors.
 
 Adding trust lists does not guarantee that an asset will be trusted or
