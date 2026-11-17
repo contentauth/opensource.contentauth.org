@@ -13,10 +13,9 @@ see the [Manifest FAQs](./tech-faq-manifests.md).
 
 ### Where can I find signed sample assets?
 
-There are some signed sample assets in [Proofmode's Baseline repository](https://proofmode.org/baseline/). Many of these assets use
-older C2PA 1.x versions. There are also a few signed assets for testing in the
+There are some signed sample assets in [Proofmode's Baseline repository](https://proofmode.org/baseline/). Many of these assets use older C2PA 1.x versions. There are also a few signed assets for testing in the
 [`contentauth/example-assets` repository](https://github.com/contentauth/example-assets).
-Neither repository provides a guaranteed complete, current conformance test suite.
+Neither repository provides a complete current conformance test suite.
 
 <!--
 Can we get interoperability assets from c2pa?  Tim to ask Scott.
@@ -25,7 +24,7 @@ Ask on Discord for contributions
 
 ### How can I get started with Content Credentials on Android or iOS?
 
-Use the [mobile SDKs](../mobile.md) for Android and iOS.
+Use the [mobile libraries](../mobile.md) for Android and Swift (for iOS).
 
 ### Where can I report a CAI security concern?
 

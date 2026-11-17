@@ -16,12 +16,14 @@ the [Manifest FAQs](./tech-faq-manifests.md).
 Run C2PA Tool on your local machine:
 
 ```sh
-c2patool file.jpg --detailed
+c2patool file.jpg
 ```
 
 This command does not require uploading the asset to a web inspection tool such as [ACA Inspect](../getting-started/aca-inspect.mdx).
 Some configurations and operations still require network access; for example,
-trust initialization fetches trust lists. 
+trust initialization fetches trust lists.
+
+<!-- Use CrJSON -->
 
 ### How do I load trust lists with C2PA Tool?
 
@@ -38,6 +40,9 @@ c2patool init trust
 
 Trust lists must be initialized explicitly. Earlier versions required trust
 anchors to be supplied through settings or the command line.
+
+See [Bootstrapping trust files with `init trust`](../sdk-repos/c2patool/docs/usage.md#bootstrapping-trust-files-with-init-trust)
+for settings-file locations and initialization options.
 
 Use a raw PEM URL when supplying a trust-anchor link.
 
@@ -63,7 +68,7 @@ Sources:
 
 ### How can I override an ingredient's title?
 
-Export a signed asset as an ingredient using the `--ingredient` option.
+Export a signed asset as an ingredient using the [`--ingredient` option](../sdk-repos/c2patool/docs/usage.md#creating-an-ingredient-from-a-file).
 The resulting folder contains ingredient JSON, a thumbnail, and the manifest
 binary. Edit the title in the ingredient JSON, then reference the folder
 through `ingredient_paths` in the new manifest definition:
@@ -100,52 +105,12 @@ thumbnail explicitly; it does not demonstrate automatic thumbnail generation.
 
 Source: [custom thumbnails and relative paths, August 31, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1543975786468352150)
 
-### How can I sign a TIFF sample and configure created assertions?
-
-C2PA Tool supports reading and writing TIFF files. For example:
-
-```sh
-c2patool sample.tiff \
-  --settings settings.toml \
-  --manifest manifest.json \
-  --output signed.tiff
-```
-
-With this command, the source asset becomes a `parentOf`
-ingredient and the tool automatically adds the `c2pa.opened` action.
-You can omit `--settings` when using the default key and certificate. Those
-defaults do not establish production trust or product conformance.
-
-To mark assertions as created rather than gathered, configure
-`builder.created_assertion_labels` in the settings file. For example:
-
-```toml
-[builder]
-
-created_assertion_labels = [
-  "c2pa.actions",
-  "c2pa.ingredient"
-]
-```
-
-Select assertion labels appropriate to your implementation; this example is
-not a universal conformance configuration.
-
-Sources:
-
-- [TIFF signing command and defaults; September 15, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1549488757898616973)
-- [Created assertion settings; September 15, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1549489530598588417)
-
 ### Why does C2PA Tool behave differently when launched by my application versus on the command-line?
 
-Check the executable path and version your application launches,
-rather than only the version available in your terminal.
+Check the executable path and version that your application launches and check the the version available in your terminal.
+They might be launching different versions of the tool.
 
-In the reported case, the application launched C2PA Tool 0.26.1,
-although the user expected 0.26.41. Launching 0.26.41 resolved the
-missing timestamp assertion.
-
-Source: [confirmed resolution, April 22, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1496644840786624614)
+Source: [`#c2pa-tool` channel April 22, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1496644840786624614)
 
 ### Can I create sidecar manifests for unsupported file types?
 
@@ -154,6 +119,10 @@ Yes. To read the asset with its sidecar, use:
 ```sh
 c2patool file.obj --external-manifest file.c2pa
 ```
+
+See [Generating an external manifest](../sdk-repos/c2patool/docs/usage.md#generating-an-external-manifest)
+for creating a sidecar, and [Using an external manifest](../sdk-repos/c2patool/docs/usage.md#using-an-external-manifest)
+for how `--external-manifest` selects it during validation.
 
 Sources:
 

@@ -8,36 +8,6 @@ import TOCInline from '@theme/TOCInline';
 
 <TOCInline toc={toc} />
 
-### How do I configure created versus gathered assertions?
-
-See [How do I configure created versus gathered assertions?](./tech-faq-manifests.md#how-do-i-configure-created-versus-gathered-assertions)
-for label selection, defaults, and placement rules. In Node.js, the settings
-object looks like this:
-
-```js
-const settings = {
-  builder: {
-    created_assertion_labels: [
-      "c2pa.actions",
-      "c2pa.thumbnail.claim",
-      "c2pa.thumbnail.ingredient",
-      "c2pa.ingredient"
-    ]
-  }
-};
-```
-
-An April 2026 support response recommended updating the Node.js SDK to resolve
-an assertion-placement bug. The response did not identify the first release
-containing the fix. Update to the latest release, but continue to configure
-assertion placement explicitly.
-
-Sources:
-
-- [Assertion settings; April 2, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1489395644274839582)
-- [Release guidance; April 2, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1489396659451592754)
-- [Base labels; April 2, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1489400012369694912)
-
 ### How do I configure signing-certificate and timestamp trust?
 
 <!---
@@ -82,6 +52,9 @@ You can pass the PEM contents as a string or a file path.
 
 The `loadSettingsFromFile()` function loads a complete settings file.
 It does not make an individual trust-anchor setting accept a PEM path.
+
+For settings-loading examples and helper functions, see the Node.js tab in
+[Configuring SDK settings](../tasks/settings.mdx?lang=node).
 
 For a local PEM file, read its contents in your application:
 

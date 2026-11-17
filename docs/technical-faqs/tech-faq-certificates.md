@@ -19,7 +19,7 @@ See the [C2PA Conformance Program](../conformance/index.mdx) for more informatio
 No. Trusted C2PA claim-signing certificates are issued for conforming hardware or software
 products, rather than to establish the creator's identity.
 
-To attach verified identity, use a [CAWG](https://cawg.io) identity assertion in the manifest signed by an X.509 certificate or an identity claims aggregation (ICA) credential.
+To attach verified identity, use a [CAWG identity assertion](../manifest/reading/reading-cawg-id.md) in the manifest signed by an X.509 certificate or an identity claims aggregation (ICA) credential.
  Product signing and identity are separate roles.
 
 While a C2PA manifest answers the question: "What device or app produced this file, and what happened to it?" a CAWG assertion answers the question: "Who is the person or organization behind this file, and what do they permit?"
@@ -29,14 +29,11 @@ Source: [Product certificates versus creator identity; May 14, 2026](https://dis
 ### Does renewing an Interim Trust List certificate preserve its listing?
 
 No. Renewal produces a new PEM-encoded certificate and PEM hash, so
-validators do not recognize the renewed certificate as the one on the
-Interim Trust List (ITL).
+validators do not recognize the renewed end-entity certificate as the one on the
+[Interim Trust List (ITL)](../conformance/trust-lists.mdx#interim-trust-list), which was frozen at the start of 2026.
 
-After completing the conformance program, obtain a conforming product certificate from a CA whose root
-is on the C2PA Trust List. The renewed ITL certificate is not added to that list.
+Instead of using the ITL, complete the C2PA Conformance Program to obtain a conforming product certificate from a CA whose root is on the C2PA Trust List. 
 
-The ITL recognizes individual certificates; the C2PA Trust List uses CA roots.
-The ITL was frozen at the start of 2026. 
 
 Sources:
 
@@ -44,20 +41,6 @@ Sources:
 - [Renewed certificate is not the C2PA Trust List route; June 16, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1516525716341264394)
 - [Conforming product certificate issuance; June 16, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1516525798838767719)
 - [Historical ITL freeze; April 6, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1490788225294536734)
-
-### Can conformance interoperability samples use a test certificate?
-
-Yes. Sign interoperability samples with a test certificate. A renewed ITL
-certificate can also be used for these samples.
-
-Using a certificate for evaluation samples does not establish production trust.
-A renewed ITL certificate does not qualify as a production credential on the
-C2PA Trust List.
-
-Sources:
-
-- [Certificates for interoperability samples; June 16, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1516516612000186498)
-- [Production trust distinction; June 16, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1516525716341264394)
 
 ### Which certificates should the signer include in x5chain?
 
@@ -70,6 +53,9 @@ The trust list is therefore not a replacement for supplying the signing
 chain's intermediate. Ensure the intermediate belongs to the leaf's chain;
 including an unrelated intermediate will not establish trust. Correct chain
 order alone does not resolve every certificate mismatch.
+
+For extracting the chain from a `.pfx` file, see
+[Extract certificate chain](../signing/local-signing.mdx#extract-certificate-chain).
 
 Sources:
 
@@ -85,6 +71,9 @@ both claim-signing and timestamp authority (TSA) trust anchors.
 Adding trust lists does not guarantee that an asset will be trusted or
 resolve all expired-certificate issues. Evaluate cryptographic validity and
 trust separately.
+
+See [Configuring SDK settings with Context](../tasks/settings.mdx)
+for applying trust and verification settings to readers and builders.
 
 Source: [combined signing and timestamp trust anchors, July 9, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1524771146631872583)
 
@@ -107,7 +96,8 @@ issuance by a trusted CA:
 
 - The specification's
   [certificate profiles](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_certificate_profiles)
-  define the certificate profile acceptable as a signing credential.
+  define the certificate profile acceptable as a signing credential. See also
+  the SDK's [certificate requirements](../signing/get-cert.md#certificate-requirements).
 - The
   [C2PA Certificate Policy](https://github.com/c2pa-org/conformance-public/blob/main/docs/v0.2/C2PA%20Certificate%20Policy.pdf)
   governs issuance by CAs with roots on the C2PA Trust List.
@@ -138,7 +128,7 @@ and the [C2PA TSA Trust List](https://raw.githubusercontent.com/c2pa-org/conform
 Fetch their PEM contents, concatenate them, and supply the resulting PEM
 string through `trust.anchors[].trust_anchors`.
 
-For SDK integrations, pass the settings to the builder through a context.
+For SDK integrations, pass the settings to the builder through a [context](../tasks/settings.mdx#creating-and-using-context).
 Do not use deprecated thread-local settings.
 
 The C2PA Trust List alone might appear to work for timestamp trust because
@@ -155,7 +145,7 @@ Sources:
 ### Which timestamp endpoints are recommended for C2PA trust?
 
 As of August 10, 2026, these SSL.com endpoints were free for general use,
-with roots on the C2PA TSA Trust List:
+with roots on the [C2PA TSA Trust List](../conformance/trust-lists.mdx#c2pa-time-stamping-authority-trust-list):
 
 - `http://ts-c2pa.ssl.com/rsa`
 - `http://ts-c2pa.ssl.com/ecc`

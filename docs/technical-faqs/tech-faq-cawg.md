@@ -15,16 +15,17 @@ An implementation also uses the Node.js bindings. You must provide an
 aggregation service that returns the COSE-signed verifiable credential;
 the library does not provide that service.
 
+For the assertion structure and the aggregator's role, see
+[Assertions signed using a claim aggregator](../manifest/reading/reading-cawg-id.md#assertions-signed-using-a-claim-aggregator).
+
 See the Rust [identity module](https://github.com/contentauth/c2pa-rs/tree/main/sdk/src/identity)
 and its [tests](https://github.com/contentauth/c2pa-rs/tree/main/sdk/src/identity/tests).
-Confirm ICA support separately before using the Swift or Python libraries.
 
 :::note
 An identity claims aggregation (ICA) credential is signed by an issuer identified by a DID (for example a `did:web` or `did:jwk`). A valid signature only proves that the credential was signed by whoever controls that DID: it does **not**, on its own, establish that the issuer is trustworthy. In particular, a self-issued `did:jwk` can be minted by anyone, so accepting it as trusted would let an attacker assert any identity.
 :::
 
 For this reason, the library treats ICA issuers as untrusted unless they appear on an explicit allow-list. Configure the allow-list by adding a new CAWG specific trust anchor. `trust.anchors[].trusted_ica_issuers` setting, which is a list of exact DID strings (any DID method):
-
 
 Source: [Rust and Node ICA support and service responsibilities; August 14, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1537963403539390495)
 
@@ -86,7 +87,7 @@ Check for these possible causes:
 - The validator has no CAWG trust anchors configured.
 - The CAWG certificate does not chain to the validator's configured anchors.
 
-Inspect the validation result's assertion URL to determine whether
+Inspect the validation result's [assertion URL](../manifest/reading/validation.md#jumbf-uris) to determine whether
 `signingCredential.untrusted` refers to `cawg.identity` rather than the claim
 signature. A successful signature or well-formedness check is not a
 substitute for the identity trust check.
@@ -116,7 +117,8 @@ Sources:
 
 ### What should I use instead of CreativeWork for creator-related data?
 
-Use CAWG identity and metadata assertions instead of
+Use [CAWG identity](../manifest/reading/reading-cawg-id.md) and
+[metadata assertions](../manifest/writing/assertions-actions.md#cawg-metadata-assertions) instead of
 `stds.schema-org.CreativeWork` for creator-related data. See
 [cawg.io](https://cawg.io). Identity trust must still be evaluated separately.
 

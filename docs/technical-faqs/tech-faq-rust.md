@@ -62,25 +62,10 @@ Replace the placeholder with your complete PEM certificate data. In all
 three cases, use the same settings and `Context` construction shown above:
 `trust.anchors[].trust_anchors` receives the PEM contents, not a URL or file path.
 
+For more ways to load and apply settings, see
+[Configuring SDK settings](../sdk-repos/c2pa-rs/docs/context-settings.md#using-context).
+
 Source: [Trust anchors: April 7, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1491236748653494503)
-
-### How do I mark assertions as created rather than gathered?
-
-See [How do I configure created versus gathered assertions?](./tech-faq-manifests.md#how-do-i-configure-created-versus-gathered-assertions)
-for label selection, defaults, and placement rules. In Rust, supply the
-setting as TOML:
-
-```toml
-[builder]
-created_assertion_labels = [
-  "c2pa.actions",
-  "c2pa.thumbnail.claim",
-  "c2pa.thumbnail.ingredient",
-  "c2pa.ingredient"
-]
-```
-
-Source: [Created assertions config; June 16, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1516521499517779978)
 
 ### How do I avoid sidecar filename collisions?
 
@@ -97,7 +82,7 @@ file.mtl.c2pa
 ```
 
 When reading an asset with C2PA Tool, specify the corresponding sidecar with
-`--external-manifest`.
+[`--external-manifest`](../sdk-repos/c2patool/docs/usage.md#using-an-external-manifest).
 
 Source: [Renaming sidecars, September 16, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1549894561537466399)
 

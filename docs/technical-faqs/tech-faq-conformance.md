@@ -36,7 +36,7 @@ Sources:
 
 ### Does conformance apply to the product or to each end user?
 
-Conformance is associated with a generator or validator product, whether
+Conformance is associated with a [generator or validator product](../conformance/conformance-guide.mdx#conformance-roles), whether
 software or hardware, rather than an individual user.
 
 Creator identity is separate from product conformance. To identify users,
@@ -77,7 +77,7 @@ Sources:
 
 ### How do I choose between backend, distributed, and separate product submissions?
 
-A distributed generator can divide asset generation, assertions, claim
+A [distributed generator](../conformance/conformance-guide.mdx#implementation-classes) can divide asset generation, assertions, claim
 generation, and signing between edge and backend subsystems while functioning
 as one product. Use mutual authentication between the subsystems, and
 verify on the backend that the caller is a valid instance of
@@ -106,9 +106,10 @@ Sources:
 ### Does using the latest SDK make my product conformant?
 
 No. The latest SDK provides tools for building a conforming product, but
-you must configure and use it correctly. Conformance also covers security
-architecture, key management, and other requirements beyond the SDK.
-You must submit interoperability test assets as part of the process.
+you must configure and use it correctly. Conformance also covers [security
+architecture](../conformance/index.mdx#security-requirements),
+key management, and other requirements beyond the SDK.
+You must submit [interoperability test assets](../conformance/conformance-guide.mdx#6-sample-evidence) as part of the process.
 
 When preparing your implementation:
 
@@ -127,10 +128,9 @@ Sources:
 
 Yes. Evaluation samples can use SDK test certificates, CA-provided test
 certificates, or certificates you generate yourself. However, the signing
-certificate must not be self-signed.
-
-See the
-[SDK test certificates](https://github.com/contentauth/c2pa-rs/tree/main/sdk/tests/fixtures/certs)
+certificate must not be self-signed. See the
+[test-certificate guide](../signing/test-certs.md),
+[SDK test certificates](https://github.com/contentauth/c2pa-rs/tree/main/sdk/tests/fixtures/certs),
 and a [certificate creation walkthrough](https://learn.contentauthenticity.org/private-keys-and-certificates).
 
 A `signingCredential.untrusted` result is expected before you obtain a
@@ -144,5 +144,11 @@ Sources:
 - [SDK fixtures; September 10, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1547720257018269826)
 - [Expected untrusted status; October 9, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1558172948022698065)
 
-For mixed-pipeline validation behavior, see
-[Does adding a trusted manifest remove warnings about earlier untrusted manifests?](./tech-faq-manifests.md#does-adding-a-trusted-manifest-remove-warnings-about-earlier-untrusted-manifests).
+### Can ingredient validation samples use a test certificate?
+
+Yes. If the C2PA interoperability assets don't include a format that you need, you can sign ingredient validation samples with your own test certificate. 
+
+Sources:
+
+- [Certificates for interoperability samples; June 16, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1516516612000186498)
+- [Production trust distinction; June 16, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1516525716341264394)
