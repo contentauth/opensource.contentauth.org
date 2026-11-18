@@ -14,11 +14,6 @@ There are some signed sample assets in [Proofmode's Baseline repository](https:/
 [`contentauth/example-assets` repository](https://github.com/contentauth/example-assets).
 Neither repository provides a complete current conformance test suite.
 
-<!--
-Can we get interoperability assets from c2pa?  Tim to ask Scott.
-Ask on Discord for contributions
--->
-
 ### How can I get started with Content Credentials on Android or iOS?
 
 Use the [mobile libraries](../mobile.md) for Android and Swift (for iOS).
