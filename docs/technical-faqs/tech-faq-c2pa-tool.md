@@ -8,9 +8,6 @@ import TOCInline from '@theme/TOCInline';
 
 <TOCInline toc={toc} />
 
-For manifest title inheritance and interpretation of validation states, see
-the [Manifest FAQs](./tech-faq-manifests.md).
-
 ### How can I inspect a file locally using C2PA Tool?
 
 Run C2PA Tool on your local machine:
@@ -19,52 +16,30 @@ Run C2PA Tool on your local machine:
 c2patool file.jpg
 ```
 
-This command does not require uploading the asset to a web inspection tool such as [ACA Inspect](../getting-started/aca-inspect.mdx).
+This avoids uploading the asset to an online inspection tool such as [ACA Inspect](../getting-started/aca-inspect.mdx).
 Some configurations and operations still require network access; for example,
 trust initialization fetches trust lists.
 
-<!-- Use CrJSON -->
+<!-- Use CrJSON? -->
 
 ### How do I load trust lists with C2PA Tool?
 
-<!---
-Update for new way to configure trust separately for signing, TSA, and CAWG.
---->
+<!--
+This originally mentioned setting the TSA Trust List, but the c2patool docs don't mention that.
+-->
 
-Run `c2patool init trust` to fetch or update trust lists and store them for
-subsequent runs:
+Enter this command to fetch the [official C2PA trust list](../conformance/trust-lists#c2pa-trust-list) and write it to `c2pa-trust-list.pem` in the same directory as the settings file:
 
 ```sh
 c2patool init trust
 ```
 
-Trust lists must be initialized explicitly. Earlier versions required trust
-anchors to be supplied through settings or the command line.
+Then any C2PA Tool command automatically loads the PEM file and enables trust checks.
 
-See [Bootstrapping trust files with `init trust`](../sdk-repos/c2patool/docs/usage.md#bootstrapping-trust-files-with-init-trust)
-for settings-file locations and initialization options.
+You can also load the interim trust list by using the `--legacy` option.
+See [Bootstrapping trust files with `init trust`](../sdk-repos/c2patool/docs/usage.md#bootstrapping-trust-files-with-init-trust) for details.  
 
-Use a raw PEM URL when supplying a trust-anchor link.
-
-For more control, pass a settings file with `--settings`; TOML settings are
-passed through to the SDK. Concatenate the certificate authority (CA) and
-timestamp authority (TSA) lists when needed to include TSA intermediate
-certificates.
-Trust sidecars are loaded automatically on subsequent runs from the same
-directory as the settings file.
-
-For ingredient validation during signing, configure both the C2PA Trust List
-and C2PA TSA Trust List.
-
-Sources:
-
-- [Explicit trust configuration; April 1, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1488985307343884348)
-- [Trust initialization; June 19, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1517556047324250223)
-- [Ingredient and timestamp trust; May 27, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1509239917262405742)
-- [Raw PEM URL; August 6, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1534942946212708522)
-- [Initialization command; August 6, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1534943626499719369)
-- [Settings option; August 6, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1534945015598678176)
-- [Persistence and concatenated lists; August 6, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1534995351101116646)
+Additional options provide more granular control; see [Trust subcommand options](../sdk-repos/c2patool/docs/usage.md#trust-subcommand-options).
 
 ### How can I override an ingredient's title?
 
@@ -100,8 +75,7 @@ Include this field in a complete manifest definition, then run:
 c2patool sample.mp4 -m manifest.json -o sample-signed.mp4
 ```
 
-Use the same approach to define ingredient thumbnails. This example supplies a
-thumbnail explicitly; it does not demonstrate automatic thumbnail generation.
+Use the same approach to define ingredient thumbnails.
 
 Source: [custom thumbnails and relative paths, August 31, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1543975786468352150)
 

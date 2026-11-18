@@ -302,17 +302,13 @@ assertions.
 
 Source: [Thumbnail auto-generation, April 19, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1495464171934974002)
 
-### Why does manifest compression barely reduce a long existing chain?
+### Why does manifest compression barely reduce the size of a long existing chain?
 
 Compression applies only to the manifest being written, not to earlier
 manifests in the chain. To compare compressed and uncompressed chains, enable
 [`core.prefer_compress_manifests`](../manifest/json-ref/settings-ref.mdx) while writing each generation.
 
-In a test of 10 manifests containing a repetitive text custom assertion,
-the final manifest store was 154,638 bytes without compression and
-52,583 bytes with compression enabled at each generation. Repetitive test
-data is likely to compress better than real-world content, so results will
-vary. Appending a compressed manifest does not compress earlier manifests.
+Appending a compressed manifest does not compress earlier manifests.
 
 Sources:
 

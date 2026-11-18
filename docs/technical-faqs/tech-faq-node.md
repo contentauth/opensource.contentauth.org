@@ -10,26 +10,22 @@ import TOCInline from '@theme/TOCInline';
 
 ### How do I configure signing-certificate and timestamp trust?
 
-<!---
-This way no longer works!
---->
-
-Load the C2PA Trust List and C2PA TSA Trust List, combine their PEM contents,
-and enable both trust checks. After loading the PEM contents as
-`c2paTrustList` and `c2paTsaTrustList`, attach the settings to a `Context`
-and pass that context to both the reader and builder:
+Attach the settings to a `Context` and pass it to both the `Reader` and `Builder` objects:
 
 ```js
 import { Builder, Context, Reader } from "@contentauth/c2pa-node";
 
 const context = new Context({
-  trust: {
-    trustAnchors: c2paTrustList + c2paTsaTrustList,
-  },
   verify: {
+    verifyAfterReading: false,
+    verifyAfterSign: false,
     verifyTrust: true,
-    verifyTimestampTrust: true,
+    ocspFetch: true
   },
+  trust: {
+    verifyTrustList: true,
+    trustAnchors: "path/to/anchors.pem"
+  }
 });
 
 const reader = await Reader.fromAsset({ path: "photo.jpg" }, context);
@@ -37,16 +33,17 @@ const builder = await Builder.withJsonAsync({ title: "photo.jpg" }, context);
 ```
 
 This excerpt assumes that the PEM contents have been fetched or read.
-`Context` settings use camelCase keys. Use the asynchronous
-`Builder.withJsonAsync()` factory rather than the deprecated synchronous
-`Builder.withJson()` method.
+`Context` settings use camelCase keys. 
 
-Sources:
-
-- [Reader and builder trust settings; July 29, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1532214117342122025)
-- [User confirmation; July 29, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1532235743022288977)
+For more information, see [Node.js library - Identity assertion components](../sdk-repos/c2pa-js/packages/c2pa-node/README.md#identity-assertion-components).
 
 ### Should I pass a PEM file path or its contents as trust anchors?
+
+<!-- 
+Combine with this Q?
+* How do I configure trust for ingredient validation? tech-faq-certificates.md#how-do-i-configure-trust-for-ingredient-validation 
+* Can I configure trust anchors using a URL? tech-faq-rust.md #can-i-configure-trust-anchors-using-a-url
+-->
 
 You can pass the PEM contents as a string or a file path.
 

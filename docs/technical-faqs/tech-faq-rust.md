@@ -8,17 +8,11 @@ import TOCInline from '@theme/TOCInline';
 
 <TOCInline toc={toc} />
 
-For preserving Content Credentials when editing, timestamping ingredients,
-update-manifest thumbnails, and compression, see the [Manifest FAQs](./tech-faq-manifests.md).
-
 ### Can I configure trust anchors using a URL?
 
 No. The Rust SDK expects trust anchors as a PEM string, not a URL or file
 path. Fetch or read the PEM data in your application, then attach settings
 containing the PEM to a `Context` and construct the reader from that context.
-
-In contrast, C2PA Tool accepts URLs and paths as command-line arguments because it
-retrieves the data before passing it to the SDK.
 
 For example:
 
@@ -88,7 +82,7 @@ Source: [Renaming sidecars, September 16, 2026](https://discord.com/channels/983
 
 ### Can I use the Rust implementation from a Java backend?
 
-The SDK does not provide a supported Java binding. The Android bindings
+The SDK does not provide a Java binding. The Android bindings
 are designed for Android, not as a general-purpose Java package.
 Adapting them for a Java service requires additional work.
 

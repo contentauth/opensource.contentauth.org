@@ -38,7 +38,7 @@ Conformance is associated with a [generator or validator product](../conformance
 
 Creator identity is separate from product conformance. 
 
-### Does a conformance listing mean the public product already uses production certificates?
+### Does a conformance listing mean a product uses production certificates?
 
 Not necessarily. A product can appear on the conforming products list
 before public launch with a production certificate.

@@ -8,9 +8,6 @@ import TOCInline from '@theme/TOCInline';
 
 <TOCInline toc={toc} />
 
-For questions about manifest creation, custom assertions, and validation states,
-see the [Manifest FAQs](./tech-faq-manifests.md).
-
 ### Where can I find signed sample assets?
 
 There are some signed sample assets in [Proofmode's Baseline repository](https://proofmode.org/baseline/). Many of these assets use older C2PA 1.x versions. There are also a few signed assets for testing in the
