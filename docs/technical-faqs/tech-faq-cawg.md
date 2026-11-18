@@ -11,8 +11,7 @@ import TOCInline from '@theme/TOCInline';
 ### Does c2pa-rs support identity claims aggregation?
 
 Yes. The Rust library (`c2pa-rs`) supports CAWG identity claims aggregation (ICA).
-An implementation also uses the Node.js bindings. You must provide an
-aggregation service that returns the COSE-signed verifiable credential;
+You must provide an aggregation service that returns the COSE-signed verifiable credential;
 the library does not provide that service.
 
 For the assertion structure and the aggregator's role, see
@@ -22,98 +21,30 @@ See the Rust [identity module](https://github.com/contentauth/c2pa-rs/tree/main/
 and its [tests](https://github.com/contentauth/c2pa-rs/tree/main/sdk/src/identity/tests).
 
 :::note
-An identity claims aggregation (ICA) credential is signed by an issuer identified by a DID (for example a `did:web` or `did:jwk`). A valid signature only proves that the credential was signed by whoever controls that DID: it does **not**, on its own, establish that the issuer is trustworthy. In particular, a self-issued `did:jwk` can be minted by anyone, so accepting it as trusted would let an attacker assert any identity.
+An identity claims aggregation (ICA) credential is signed by an issuer identified by a DID (for example a `did:web` or `did:jwk`). A valid signature only proves that the credential was signed by whoever controls that DID: it does **not**, on its own, establish that the issuer is trustworthy. In particular, anyone can mint a self-issued DID, so accepting it as trusted would let an attacker assert any identity.
 :::
 
-For this reason, the library treats ICA issuers as untrusted unless they appear on an explicit allow-list. Configure the allow-list by adding a new CAWG specific trust anchor. `trust.anchors[].trusted_ica_issuers` setting, which is a list of exact DID strings (any DID method):
+For this reason, the library treats ICA issuers as untrusted unless the DID appears in your `trusted_ica_issuers` setting.
 
 Source: [Rust and Node ICA support and service responsibilities; August 14, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1537963403539390495)
 
-### How can I inspect CAWG certificate fields when common_name is missing?
-
-Use the `--crjson` option to inspect certificate issuer and subject information
-when the standard CAWG signature report omits `common_name`:
-
-```sh
-c2patool signed.jpg --crjson
-```
-
-In the reported example, `cawg.identity.signature.certificateInfo` contains
-`issuer`, `subject`, and certificate validity dates. The common name is visible
-in the crJSON output.
-
-This workaround addresses a reporting issue observed in May 2026; its current
-status is not confirmed. A certificate's subject information alone does not
-establish identity trust.
-
-Sources:
-
-- [CrJSON workaround; May 8, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1502369680118124555)
-- [Certificate field structure; May 8, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1502369868396367913)
-- [Workaround confirmation; May 8, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1502377614436995162)
-
 ### Does a CAWG identity certificate need to chain to the C2PA Trust List?
 
-No. The C2PA Trust List contains roots for claim-signing certificates issued to
+No. The C2PA Trust List contains roots for _claim-signing certificates_ issued to
 generator products that have passed C2PA conformance. CAWG X.509 identity
 certificates use a separate trust model.
 
-As of August 2026, CAWG's interim model used the Mozilla Root Store and
-IPTC verified news publisher lists. See the
-[CAWG identity 1.3 X.509 trust model](https://cawg.io/identity/1.3/#_trust_model_for_x_509_certificates),
-the [Mozilla email-trust roots](https://ccadb.my.salesforce-sites.com/mozilla/IncludedRootsPEMTxt?TrustBitsInclude=Email) and the IPTC [end-entity](https://trust.iptc.org/end-entity-list.pem) and
-[anchor](https://trust.iptc.org/anchor-list.pem) lists.
+As of November, 2026, [CAWG's interim X.509 trust model](https://cawg.io/identity/1.3/#_trust_model_for_x_509_certificates) used the [Mozilla Root Store](https://wiki.mozilla.org/CA) and the 
+[IPTC verified news publisher list](https://iptc.org/verified-news-publishers-list/). 
 
-Evaluate C2PA product trust and CAWG identity trust separately. Check the
-current CAWG trust model before relying on these lists.
+S/MIME certificates are a common CAWG X.509 choice, including individual and organization certificates.
 
-S/MIME certificates are a common CAWG X.509 choice, including
-individual-validated, sponsor-validated, and
-organization-validated certificates. Having a government-issued identity
-certificate does not necessarily mean it meets CAWG's requirements;
-check the CAWG X.509 trust model rather than the C2PA product Trust List.
+### Are there guides for using CAWG on mobile?
 
-Sources:
+For an example workflow using the Android Proofmode app, CAWG X.509 assertions, and SSL.com identity certificates with captured photos and videos, see the
+[ProofMode CAWG Certificate Guide](https://proofmode.org/cawg_user_guide).
 
-- [Distinct C2PA and CAWG X.509 trust models; August 20, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1540009285424119868)
-- [CAWG certificate types and separate identity role; April 1, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1488868534166749375)
-
-### Why can CAWG identity remain untrusted when the claim signer is trusted?
-
-CAWG trust anchors need separate configuration. Trust in the C2PA claim
-signer does not automatically establish trust in the identity assertion.
-Check for these possible causes:
-
-- The validator has no CAWG trust anchors configured.
-- The CAWG certificate does not chain to the validator's configured anchors.
-
-Inspect the validation result's [assertion URL](../manifest/reading/validation.md#jumbf-uris) to determine whether
-`signingCredential.untrusted` refers to `cawg.identity` rather than the claim
-signature. A successful signature or well-formedness check is not a
-substitute for the identity trust check.
-
-Sources:
-
-- [Possible validator configuration causes; August 24, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1541459686690267136)
-- [Separate configuration and local leaf workaround; September 7, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1546545082130370620)
-- [Merged trust-list fix report; September 10, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1547575185790603264)
-- [Configured-root test result; September 10, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1547641280048275550)
-
-### Are there source-linked guides for CAWG on mobile?
-
-For a Proofmode Android workflow using CAWG X.509 assertions and SSL.com
-identity-validated certificates with captured photos and videos, see the
-[user guide](https://proofmode.org/cawg_user_guide). This functionality was
-available in a Proofmode Android release in October 2026.
-
-For SDK integration, see the [CAWG mobile SDK developer guide](../cawg-mobile.mdx).
-These resources have not been independently reviewed for this FAQ. Confirm
-support for your mobile SDK, certificate authority, and identity mechanism.
-
-Sources:
-
-- [Android implementation and user guide announcement; October 16, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1560673010854264932)
-- [Mobile developer guide; October 16, 2026](https://discord.com/channels/983153151341371422/1273777445551603714/1560673133684457494)
+For information on integrating CAWG using the CAI SDK, see the [CAWG mobile SDK developer guide](../cawg-mobile.mdx).
 
 ### What should I use instead of CreativeWork for creator-related data?
 
@@ -126,16 +57,15 @@ Source: [CAWG identity and metadata recommendation; August 31, 2026](https://dis
 
 ### Can my organization's identity certificate identify all my users?
 
-No. With the CAWG X.509 method, each user
-needs a CAWG certificate issued with that user's own name or organization.
-Your organization's certificate asserts your organization's identity, not
-the identities of all its users. Consider identity claims aggregation (ICA)
-for platforms.
+No. Your organization's certificate asserts your organization's identity, not
+the identities of all its users.
 
-Acting as a C2PA certificate authority (CA) is a separate role: issuing signing certificates to
-conforming products. To attach artist, creator, or publisher identity, use the
-[CAWG identity assertion](https://cawg.io/identity/1.3/), using an X.509
-certificate or ICA.
+There are two ways for users to assert their identity:
+
+- Using a CAWG X.509 certificate issued with that user's own name or organization.
+- Using identity claims aggregation (ICA), in which a trusted platform vendor (an identity claims aggregator)  signs CAWG identity assertions on the behalf of individual users.
+
+For more information, see [CAWG credential types](https://cawg.io/about/identity-framework/#_cawg_credential_types).
 
 Sources:
 

@@ -16,11 +16,9 @@ Use test certificates while preparing for evaluation. A generator product must p
 
 For more information and a detailed example walkthrough of the application process, see the [Implementer's guide to conformance](../conformance/conformance-guide.mdx).
 
-### How do I modify an application to the program?
+### How do I modify an C2PA Conformance Program application?
 
-Contact the conformance administrator at conformance@c2pa.org for any issues with your 
-application to the C2PA Conformance Program. If you've submitted an expression of
-interest form but not received a timely response, provide the representative email address used in the submission. Response times are not guaranteed.
+Contact the conformance administrator at `conformance@c2pa.org` for any issues with your application to the C2PA Conformance Program. If you've submitted an expression of interest form but not received a timely response, provide the representative email address used in the submission. Response times are not guaranteed.
 
 If a generator application incorrectly omits validation capabilities, request
 a revision listing both the input media types it validates and the output
@@ -36,34 +34,21 @@ Sources:
 
 ### Does conformance apply to the product or to each end user?
 
-Conformance is associated with a [generator or validator product](../conformance/conformance-guide.mdx#conformance-roles), whether
-software or hardware, rather than an individual user.
+Conformance is associated with a [generator or validator product](../conformance/conformance-guide.mdx#conformance-roles), whether software or hardware, rather than an individual user.
 
-Creator identity is separate from product conformance. To identify users,
-include a separately signed CAWG identity assertion. Product conformance
-alone does not establish a user's identity.
-
-Source: [Product conformance and identity; August 12, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1537131310424784896)
+Creator identity is separate from product conformance. 
 
 ### Does a conformance listing mean the public product already uses production certificates?
 
 Not necessarily. A product can appear on the conforming products list
-before public launch. Production certificate deployment can also occur after
-listing:
-the selected CA must verify conformance and the applicant's legal identity.
+before public launch with a production certificate.
 
-Listing alone does not make a beta certificate trusted. Evaluate the
-certificate used to sign the asset rather than inferring trust from the
-product's listing.
+### Why does the Conformance Program application ask about validation for a generator product?
 
-Source: [Listing, launch, and certificate deployment distinction; May 23, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1507727660401295360)
-
-### Why does a generator application ask about validation?
-
-A generator that ingests assets and creates or appends manifests must validate
+A generator product that creates or appends manifests must validate claims attached to 
 those assets against the C2PA Trust List and C2PA TSA Trust List. Its declared
-validate media types describe those inputs; its generate media types
-describe the outputs for which it creates manifests.
+**validate media types** describe the asset inputs; its **generate media types** 
+describe the asset outputs for which it creates manifests.
 
 This ingredient validation is distinct from applying as a standalone
 validator product, which validates assets without generating manifests.
@@ -77,23 +62,12 @@ Sources:
 
 ### How do I choose between backend, distributed, and separate product submissions?
 
-A [distributed generator](../conformance/conformance-guide.mdx#implementation-classes) can divide asset generation, assertions, claim
-generation, and signing between edge and backend subsystems while functioning
-as one product. Use mutual authentication between the subsystems, and
-verify on the backend that the caller is a valid instance of
-the edge subsystem.
-
-Cooperating subsystems might qualify for a single distributed product submission.
-Components that independently generate assets, claims, and signatures are
+A generator product is classified as either [edge, backend, or distributed](../conformance/conformance-guide.mdx#implementation-classes), depending on where it performs the critical functions of assertion management, manifest construction, and claim signing.  If the product performs some functions on an endpoint such as a phone, camera, or laptop and some on the server, then it is likely "distributed."  However, components that independently generate assets, claims, and signatures are
 likely to require separate submissions.
 
-Do not classify a customer-hosted component solely by whether it runs on a
-server. Classification requires an assessment of the architecture.
-Submit an architecture summary and diagram to conformance@c2pa.org, identifying
-the target of evaluation, the components included in the generator
-product, and how objects submitted for signing are authenticated.
-Also consider how customer-hosted deployments will meet dependency
-vulnerability scanning requirements.
+Classification requires an assessment of the overall architecture.
+Submit an architecture summary and diagram as part of your Conformance Program application, identifying
+the target of evaluation, the components included in the generator product, and how assets are authenticated.
 
 Sources:
 
@@ -107,16 +81,8 @@ Sources:
 
 No. The latest SDK provides tools for building a conforming product, but
 you must configure and use it correctly. Conformance also covers [security
-architecture](../conformance/index.mdx#security-requirements),
-key management, and other requirements beyond the SDK.
-You must submit [interoperability test assets](../conformance/conformance-guide.mdx#6-sample-evidence) as part of the process.
-
-When preparing your implementation:
-
-- Configure created and gathered assertions explicitly.
-- Use `c2pa.created` and `c2pa.opened` appropriately. Do not describe an
-  existing asset uploaded by a user as newly created by your product.
-- Validate ingredients with the C2PA Trust List configured.
+architecture](../conformance/index.mdx#security-requirements), key management, and other requirements outside the scope of the SDK.
+Additionally, you must submit [interoperability test assets](../conformance/conformance-guide.mdx#6-sample-evidence) as part of the process.
 
 Sources:
 
@@ -128,8 +94,7 @@ Sources:
 
 Yes. Evaluation samples can use SDK test certificates, CA-provided test
 certificates, or certificates you generate yourself. However, the signing
-certificate must not be self-signed. See the
-[test-certificate guide](../signing/test-certs.md),
+certificate must not be self-signed. See the [test-certificate guide](../signing/test-certs.md),
 [SDK test certificates](https://github.com/contentauth/c2pa-rs/tree/main/sdk/tests/fixtures/certs),
 and a [certificate creation walkthrough](https://learn.contentauthenticity.org/private-keys-and-certificates).
 
@@ -146,9 +111,16 @@ Sources:
 
 ### Can ingredient validation samples use a test certificate?
 
-Yes. If the C2PA interoperability assets don't include a format that you need, you can sign ingredient validation samples with your own test certificate. 
+Yes. If the C2PA interoperability assets don't include a format that you need, you can sign ingredient validation samples with your own test certificate.
 
 Sources:
 
 - [Certificates for interoperability samples; June 16, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1516516612000186498)
 - [Production trust distinction; June 16, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1516525716341264394)
+
+### Can a conforming product rotate its signing certificate?
+
+Level 1 conforming products are required to rotate their certs annually; however you can do it more often if you wish.
+
+When rotating a cert, generate a new private key and submit the CSR to the CA, 
+in accordance with your documented enrollment process.

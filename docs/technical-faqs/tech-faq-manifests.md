@@ -232,10 +232,9 @@ No. The `parentOf` ingredient's title is not automatically assigned to the
 new claim's `dc:title`. Without an explicit title in the manifest definition,
 the output filename is used.
 
-Set the desired title in the new manifest definition rather than relying on
-inheritance. This sets the active manifest's title; changing an ingredient's
-title is a separate operation. For the CLI workflow, see
-[How can I override an ingredient's title?](./tech-faq-c2pa-tool.md#how-can-i-override-an-ingredients-title).
+If you want to carry that title forward, set the `title` in the new manifest definition, as well as the `c2pa.metadata` assertion `dc:title` field, which is the C2PA's recommended way to add a title.
+
+For C2PA Tool, see [How can I override an ingredient's title?](./tech-faq-c2pa-tool.md#how-can-i-override-an-ingredients-title).
 
 Sources:
 
