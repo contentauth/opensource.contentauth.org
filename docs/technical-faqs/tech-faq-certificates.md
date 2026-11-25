@@ -83,52 +83,10 @@ Source: [provider free-tier announcement, June 23, 2026](https://discord.com/cha
 
 <Tabs groupId="programming-lang" queryString="lang">
 
-<TabItem value="rust1" label="Rust 1">
+<TabItem value="rust" label="Rust">
 
 Pass the PEM values of the [C2PA Trust List](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TRUST-LIST.pem)
 and the [C2PA TSA Trust List](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem) into the `trust.anchors[]` array. For SDK integrations, pass the settings to the builder through a [context](../tasks/settings.mdx#creating-and-using-context).
-
-For example, in Rust, assuming you have a local PEM file:
-
-```rust
-let context = Context::new().with_settings(json!({
-    "trust": { "anchors": [
-        { "trust_kind": "manifest", "trust_anchors": std::fs::read_to_string("c2pa-trust-list.pem")? },
-        { "trust_kind": "tsa",      "trust_anchors": std::fs::read_to_string("c2pa-tsa-trust-list.pem")? },
-        { "trust_kind": "tsa",      "trust_uri": std::fs::read_to_string("https://raw.githubusercontent.com/c2pa-org/conformance-public/main/trust-list/C2PA-TSA-TRUST-LIST.pem")?}
-    ]}
-}))?;
-```
-
-
-```rust
-use c2pa::{Context, Reader, Settings};
-
-let pem = reqwest::blocking::get("https://example.com/trust_anchors.pem")?
-    .text()?;
-
-let settings = Settings::new().with_toml(
-    &toml::toml! {
-        [[trust.anchors]]
-        trust_kind = "manifest"
-        trust_anchors = pem
-    }
-    .to_string(),
-)?;
-
-let context = Context::new().with_settings(settings)?;
-let reader = Reader::from_context(context);
-```
-
-Sources:
-
-- [PEM configuration; May 22, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1507426136596942962)
-- [Context-based follow-up; May 23, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1507741760820871250)
-- [TSA intermediate certificates; August 19, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1539661485234724864)
-
-</TabItem>
-
-<TabItem value="rust2" label="Rust 2">
 
 The Rust library expects trust anchors as a PEM string, not a URL or file
 path. Fetch or read the PEM data in your application, then attach settings
@@ -136,7 +94,23 @@ containing the PEM to a `Context` and construct the reader from that context.
 
 For example:
 
+```rust
+use c2pa::{Context, Reader, Settings};
 
+let context = Context::new().with_settings(json!({
+    "trust": { "anchors": [
+        { "trust_kind": "manifest", 
+          "trust_anchors": std::fs::read_to_string("c2pa-trust-list.pem")? },
+        { "trust_kind": "tsa",     
+          "trust_anchors": std::fs::read_to_string("c2pa-tsa-trust-list.pem")? },
+        { "trust_kind": "tsa",      
+          "trust_uri": std::fs::read_to_string("https://raw.githubusercontent.com/c2pa-org/conformance-public/main/trust-list/C2PA-TSA-TRUST-LIST.pem")?}
+    ]}
+}))?;
+
+let context = Context::new().with_settings(settings)?;
+let reader = Reader::from_context(context);
+```
 
 For a local PEM file, replace the `let pem = ...` assignment above with:
 
@@ -162,13 +136,22 @@ three cases, use the same settings and `Context` construction shown above:
 For more ways to load and apply settings, see
 [Configuring SDK settings](../sdk-repos/c2pa-rs/docs/context-settings.md#using-context).
 
-Source: [Trust anchors: April 7, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1491236748653494503)
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+TBD
+
+</TabItem>
+
+<TabItem value="c2patool" label="C2PA Tool">
+
+TBD
 
 </TabItem>
 
 <TabItem value="node" label="Node.js">
-
-**Node.js - Should I pass a PEM file path or its contents as trust anchors?**
 
 In in Node.js, pass the PEM contents as a string or a file path.
 
