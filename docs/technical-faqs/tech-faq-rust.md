@@ -8,58 +8,6 @@ import TOCInline from '@theme/TOCInline';
 
 <TOCInline toc={toc} />
 
-### Can I configure trust anchors using a URL?
-
-No. The Rust SDK expects trust anchors as a PEM string, not a URL or file
-path. Fetch or read the PEM data in your application, then attach settings
-containing the PEM to a `Context` and construct the reader from that context.
-
-For example:
-
-```rust
-use c2pa::{Context, Reader, Settings};
-
-let pem = reqwest::blocking::get("https://example.com/trust_anchors.pem")?
-    .text()?;
-
-let settings = Settings::new().with_toml(
-    &toml::toml! {
-        [[trust.anchors]]
-        trust_kind = "manifest"
-        trust_anchors = pem
-    }
-    .to_string(),
-)?;
-
-let context = Context::new().with_settings(settings)?;
-let reader = Reader::from_context(context);
-```
-
-For a local PEM file, replace the `let pem = ...` assignment above with:
-
-```rust
-let pem = std::fs::read_to_string("path/to/trust_anchors.pem")?;
-```
-
-The path is read by your application; do not set `trust.anchors[].trust_anchors` to
-the path itself.
-
-Alternatively, supply an inline PEM string:
-
-```rust
-let pem = r#"-----BEGIN CERTIFICATE-----
-...base64-encoded certificate data...
------END CERTIFICATE-----"#;
-```
-
-Replace the placeholder with your complete PEM certificate data. In all
-three cases, use the same settings and `Context` construction shown above:
-`trust.anchors[].trust_anchors` receives the PEM contents, not a URL or file path.
-
-For more ways to load and apply settings, see
-[Configuring SDK settings](../sdk-repos/c2pa-rs/docs/context-settings.md#using-context).
-
-Source: [Trust anchors: April 7, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1491236748653494503)
 
 ### How do I avoid sidecar filename collisions?
 

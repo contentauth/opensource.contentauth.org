@@ -24,10 +24,6 @@ trust initialization fetches trust lists.
 
 ### How do I load trust lists with C2PA Tool?
 
-<!--
-This originally mentioned setting the TSA Trust List, but the c2patool docs don't mention that.
--->
-
 Enter this command to fetch the [official C2PA trust list](../conformance/trust-lists#c2pa-trust-list) and write it to `c2pa-trust-list.pem` in the same directory as the settings file:
 
 ```sh
@@ -36,10 +32,28 @@ c2patool init trust
 
 Then any C2PA Tool command automatically loads the PEM file and enables trust checks.
 
-You can also load the interim trust list by using the `--legacy` option.
+You can load the Interim Trust List by using the `--legacy` option.
 See [Bootstrapping trust files with `init trust`](../sdk-repos/c2patool/docs/usage.md#bootstrapping-trust-files-with-init-trust) for details.  
 
+You can also configure the TSA Trust List using a settings file entry as shown in the following example. 
+
+```toml
+[[trust.anchors]]
+trust_kind = "tsa"
+trust_uri = "https://raw.githubusercontent.com/c2pa-org/conformance-public/main/trust-list/C2PA-TSA-TRUST-LIST.pem"
+trust_anchors = """
+-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+"""
+```
+
+:::note
+The `trust_uri` setting is not used to fetch the roots: The `trust_anchors` key provides them directly. The `trust_uri` is listed in the ingredient assertion validation results.
+:::
+
 Additional options provide more granular control; see [Trust subcommand options](../sdk-repos/c2patool/docs/usage.md#trust-subcommand-options).
+
 
 ### How can I override an ingredient's title?
 
@@ -79,7 +93,9 @@ Use the same approach to define ingredient thumbnails.
 
 Source: [custom thumbnails and relative paths, August 31, 2026](https://discord.com/channels/983153151341371422/983153390781616159/1543975786468352150)
 
-### Why does C2PA Tool behave differently when launched by my application versus on the command-line?
+### Why am I seeing unexpected tool behavior?
+
+> Why does C2PA Tool behave differently when launched by my application versus on the command-line?
 
 Check the executable path and version that your application launches and check the the version available in your terminal.
 They might be launching different versions of the tool.

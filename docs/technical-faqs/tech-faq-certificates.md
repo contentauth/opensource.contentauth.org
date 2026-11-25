@@ -3,6 +3,8 @@ hide_table_of_contents: true
 ---
 
 import TOCInline from '@theme/TOCInline';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Claim-signing certificate FAQs
 
@@ -77,7 +79,11 @@ Evaluate them for your specific needs.  See the [**Conformance Explorer > C2PA T
 
 Source: [provider free-tier announcement, June 23, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1519016971486761040)
 
-### How do I configure trust for ingredient validation?
+### How do I configure trust?
+
+<Tabs groupId="programming-lang" queryString="lang">
+
+<TabItem value="rust1" label="Rust 1">
 
 Pass the PEM values of the [C2PA Trust List](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TRUST-LIST.pem)
 and the [C2PA TSA Trust List](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem) into the `trust.anchors[]` array. For SDK integrations, pass the settings to the builder through a [context](../tasks/settings.mdx#creating-and-using-context).
@@ -88,9 +94,30 @@ For example, in Rust, assuming you have a local PEM file:
 let context = Context::new().with_settings(json!({
     "trust": { "anchors": [
         { "trust_kind": "manifest", "trust_anchors": std::fs::read_to_string("c2pa-trust-list.pem")? },
-        { "trust_kind": "tsa",      "trust_anchors": std::fs::read_to_string("c2pa-tsa-trust-list.pem")? }
+        { "trust_kind": "tsa",      "trust_anchors": std::fs::read_to_string("c2pa-tsa-trust-list.pem")? },
+        { "trust_kind": "tsa",      "trust_uri": std::fs::read_to_string("https://raw.githubusercontent.com/c2pa-org/conformance-public/main/trust-list/C2PA-TSA-TRUST-LIST.pem")?}
     ]}
 }))?;
+```
+
+
+```rust
+use c2pa::{Context, Reader, Settings};
+
+let pem = reqwest::blocking::get("https://example.com/trust_anchors.pem")?
+    .text()?;
+
+let settings = Settings::new().with_toml(
+    &toml::toml! {
+        [[trust.anchors]]
+        trust_kind = "manifest"
+        trust_anchors = pem
+    }
+    .to_string(),
+)?;
+
+let context = Context::new().with_settings(settings)?;
+let reader = Reader::from_context(context);
 ```
 
 Sources:
@@ -98,6 +125,106 @@ Sources:
 - [PEM configuration; May 22, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1507426136596942962)
 - [Context-based follow-up; May 23, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1507741760820871250)
 - [TSA intermediate certificates; August 19, 2026](https://discord.com/channels/983153151341371422/1403049797023174828/1539661485234724864)
+
+</TabItem>
+
+<TabItem value="rust2" label="Rust 2">
+
+The Rust library expects trust anchors as a PEM string, not a URL or file
+path. Fetch or read the PEM data in your application, then attach settings
+containing the PEM to a `Context` and construct the reader from that context.
+
+For example:
+
+
+
+For a local PEM file, replace the `let pem = ...` assignment above with:
+
+```rust
+let pem = std::fs::read_to_string("path/to/trust_anchors.pem")?;
+```
+
+The path is read by your application; do not set `trust.anchors[].trust_anchors` to
+the path itself.
+
+Alternatively, supply an inline PEM string:
+
+```rust
+let pem = r#"-----BEGIN CERTIFICATE-----
+...base64-encoded certificate data...
+-----END CERTIFICATE-----"#;
+```
+
+Replace the placeholder with your complete PEM certificate data. In all
+three cases, use the same settings and `Context` construction shown above:
+`trust.anchors[].trust_anchors` receives the PEM contents, not a URL or file path.
+
+For more ways to load and apply settings, see
+[Configuring SDK settings](../sdk-repos/c2pa-rs/docs/context-settings.md#using-context).
+
+Source: [Trust anchors: April 7, 2026](https://discord.com/channels/983153151341371422/983153550018371595/1491236748653494503)
+
+</TabItem>
+
+<TabItem value="node" label="Node.js">
+
+**Node.js - Should I pass a PEM file path or its contents as trust anchors?**
+
+In in Node.js, pass the PEM contents as a string or a file path.
+
+The `loadSettingsFromFile()` function loads a complete settings file.
+It does not make an individual trust-anchor setting accept a PEM path.
+
+For examples of loading settings, see the Node.js tab in
+[Configuring SDK settings](../tasks/settings.mdx?lang=node).
+
+For a local PEM file, read its contents in your application, for example:
+
+```js
+import { readFile } from "node:fs/promises";
+
+const pem = await readFile("path/to/trust_anchors.pem", "utf8");
+```
+
+Alternatively, supply an inline PEM string:
+
+```js
+const pem = `-----BEGIN CERTIFICATE-----
+...base64-encoded certificate data...
+-----END CERTIFICATE-----`;
+```
+
+Replace the placeholder with your complete PEM certificate data. In either
+case, assign the PEM contents to `trust.trustAnchors` in a `Context`:
+
+```js
+const context = new Context({
+  trust: {
+    trustAnchors: pem,
+  },
+  verify: {
+    verifyTrust: true,
+    verifyTimestampTrust: true,
+  },
+});
+```
+
+Pass this context to the `Reader` and `Builder`. When checking
+both signing-certificate and timestamp trust, include both trust lists' PEM contents.
+
+If validation still reports a trust failure, inspect the validation results
+for other causes.
+
+Sources:
+
+- [PEM contents; April 4, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1490086610321145876)
+- [Settings-file distinction; April 4, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1490087412364218409)
+- [C2PA Tool convenience method; April 4, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1490090813227536416)
+- [Later PEM-string example; July 29, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1532214117342122025)
+
+</TabItem>
+
+</Tabs>
 
 ### Which timestamp endpoints are recommended for C2PA trust?
 
