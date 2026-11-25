@@ -81,122 +81,136 @@ Source: [provider free-tier announcement, June 23, 2026](https://discord.com/cha
 
 ### How do I configure trust?
 
+The SDK applies your trust configuration in two situations:
+
+- When you validate an asset, the `Reader` checks the asset's claim signing certificate and time-stamp against the configured trust lists.
+- When you sign an asset, the `Builder` validates each ingredient that has Content Credentials in the same way, and records the results in the new manifest's ingredient assertion.
+
+These examples fetch [`C2PA-TRUST-LIST.pem`](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TRUST-LIST.pem) and [`C2PA-TSA-TRUST-LIST.pem`](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem), then pass the PEM contents to the `Context` for a `Builder`. A `Reader` takes a `Context` the same way. The `trust_uri` setting only identifies a trust list. The SDK doesn't fetch the list from it. Validation results report the C2PA trust list's value as `trustListUri`. In production, cache the trust lists instead of fetching them on every signing. For more information, see [Configuring SDK settings with Context](../tasks/settings.mdx).
+
 <Tabs groupId="programming-lang" queryString="lang">
 
 <TabItem value="rust" label="Rust">
 
-Pass the PEM values of the [C2PA Trust List](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TRUST-LIST.pem)
-and the [C2PA TSA Trust List](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem) into the `trust.anchors[]` array. For SDK integrations, pass the settings to the builder through a [context](../tasks/settings.mdx#creating-and-using-context).
-
-The Rust library expects trust anchors as a PEM string, not a URL or file
-path. Fetch or read the PEM data in your application, then attach settings
-containing the PEM to a `Context` and construct the reader from that context.
-
-For example:
-
 ```rust
-use c2pa::{Context, Reader, Settings};
+use c2pa::{Builder, Context};
+use serde_json::json;
+
+const TRUST_LIST_URL: &str = "https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TRUST-LIST.pem";
+const TSA_TRUST_LIST_URL: &str = "https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem";
+
+let trust_list = reqwest::blocking::get(TRUST_LIST_URL)?.text()?;
+let tsa_trust_list = reqwest::blocking::get(TSA_TRUST_LIST_URL)?.text()?;
 
 let context = Context::new().with_settings(json!({
-    "trust": { "anchors": [
-        { "trust_kind": "manifest", 
-          "trust_anchors": std::fs::read_to_string("c2pa-trust-list.pem")? },
-        { "trust_kind": "tsa",     
-          "trust_anchors": std::fs::read_to_string("c2pa-tsa-trust-list.pem")? },
-        { "trust_kind": "tsa",      
-          "trust_uri": std::fs::read_to_string("https://raw.githubusercontent.com/c2pa-org/conformance-public/main/trust-list/C2PA-TSA-TRUST-LIST.pem")?}
-    ]}
+    "trust": {
+        "anchors": [
+            {
+                "trust_kind": "manifest",
+                "trust_uri": TRUST_LIST_URL,
+                "trust_anchors": trust_list
+            },
+            {
+                "trust_kind": "tsa",
+                "trust_uri": TSA_TRUST_LIST_URL,
+                "trust_anchors": tsa_trust_list
+            }
+        ]
+    }
 }))?;
 
-let context = Context::new().with_settings(settings)?;
-let reader = Reader::from_context(context);
+let mut builder = Builder::from_context(context);
 ```
-
-For a local PEM file, replace the `let pem = ...` assignment above with:
-
-```rust
-let pem = std::fs::read_to_string("path/to/trust_anchors.pem")?;
-```
-
-The path is read by your application; do not set `trust.anchors[].trust_anchors` to
-the path itself.
-
-Alternatively, supply an inline PEM string:
-
-```rust
-let pem = r#"-----BEGIN CERTIFICATE-----
-...base64-encoded certificate data...
------END CERTIFICATE-----"#;
-```
-
-Replace the placeholder with your complete PEM certificate data. In all
-three cases, use the same settings and `Context` construction shown above:
-`trust.anchors[].trust_anchors` receives the PEM contents, not a URL or file path.
-
-For more ways to load and apply settings, see
-[Configuring SDK settings](../sdk-repos/c2pa-rs/docs/context-settings.md#using-context).
-
-
-</TabItem>
-
-<TabItem value="python" label="Python">
-
-TBD
-
-</TabItem>
-
-<TabItem value="c2patool" label="C2PA Tool">
-
-TBD
 
 </TabItem>
 
 <TabItem value="node" label="Node.js">
 
-In in Node.js, pass the PEM contents as a string or a file path.
-
-The `loadSettingsFromFile()` function loads a complete settings file.
-It does not make an individual trust-anchor setting accept a PEM path.
-
-For examples of loading settings, see the Node.js tab in
-[Configuring SDK settings](../tasks/settings.mdx?lang=node).
-
-For a local PEM file, read its contents in your application, for example:
-
 ```js
-import { readFile } from "node:fs/promises";
+import { Builder, Context } from '@contentauth/c2pa-node';
 
-const pem = await readFile("path/to/trust_anchors.pem", "utf8");
-```
+const TRUST_LIST_URL = 'https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TRUST-LIST.pem';
+const TSA_TRUST_LIST_URL = 'https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem';
 
-Alternatively, supply an inline PEM string:
-
-```js
-const pem = `-----BEGIN CERTIFICATE-----
-...base64-encoded certificate data...
------END CERTIFICATE-----`;
-```
-
-Replace the placeholder with your complete PEM certificate data. In either
-case, assign the PEM contents to `trust.trustAnchors` in a `Context`:
-
-```js
 const context = new Context({
   trust: {
-    trustAnchors: pem,
+    trustAnchors: TRUST_LIST_URL,
+    trustUri: TRUST_LIST_URL, // Not used by the Node.js library at this time
   },
-  verify: {
-    verifyTrust: true,
-    verifyTimestampTrust: true,
+  tsaTrust: {
+    trustAnchors: TSA_TRUST_LIST_URL,
+    trustUri: TSA_TRUST_LIST_URL, // Not used by the Node.js library at this time
   },
 });
+
+const builder = await Builder.newAsync(context);
 ```
 
-Pass this context to the `Reader` and `Builder`. When checking
-both signing-certificate and timestamp trust, include both trust lists' PEM contents.
+</TabItem>
 
-If validation still reports a trust failure, inspect the validation results
-for other causes.
+<TabItem value="python" label="Python">
+
+```py
+from urllib.request import urlopen
+
+from c2pa import Builder, Context
+
+TRUST_LIST_URL = "https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TRUST-LIST.pem"
+TSA_TRUST_LIST_URL = "https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem"
+
+with urlopen(TRUST_LIST_URL) as response:
+    trust_list = response.read().decode("utf-8")
+with urlopen(TSA_TRUST_LIST_URL) as response:
+    tsa_trust_list = response.read().decode("utf-8")
+
+ctx = Context.from_dict({
+    "trust": {
+        "anchors": [
+            {
+                "trust_kind": "manifest",
+                "trust_uri": TRUST_LIST_URL,
+                "trust_anchors": trust_list
+            },
+            {
+                "trust_kind": "tsa",
+                "trust_uri": TSA_TRUST_LIST_URL,
+                "trust_anchors": tsa_trust_list
+            }
+        ]
+    }
+})
+
+builder = Builder(manifest_definition, context=ctx)
+```
+
+</TabItem>
+
+<TabItem value="c2patool" label="C2PA Tool">
+
+Run this command to fetch the C2PA trust list and cache it next to the settings file:
+
+```sh
+c2patool init trust
+```
+
+C2PA Tool then loads the cached list and enables trust checks on every run, whether it validates or signs an asset. This command does not configure TSA trust, so add the contents of [`C2PA-TSA-TRUST-LIST.pem`](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem) to the settings file, which is `~/.config/c2pa/c2pa.toml` by default:
+
+```toml
+[[trust.anchors]]
+trust_kind = "tsa"
+trust_uri = "https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem"
+trust_anchors = """
+-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+"""
+```
+
+For more options, see [How do I load trust lists with C2PA Tool?](./tech-faq-c2pa-tool.md#how-do-i-load-trust-lists-with-c2pa-tool).
+
+</TabItem>
+
+</Tabs>
 
 Sources:
 
@@ -204,10 +218,6 @@ Sources:
 - [Settings-file distinction; April 4, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1490087412364218409)
 - [C2PA Tool convenience method; April 4, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1490090813227536416)
 - [Later PEM-string example; July 29, 2026](https://discord.com/channels/983153151341371422/1168635192680923206/1532214117342122025)
-
-</TabItem>
-
-</Tabs>
 
 ### Which timestamp endpoints are recommended for C2PA trust?
 
