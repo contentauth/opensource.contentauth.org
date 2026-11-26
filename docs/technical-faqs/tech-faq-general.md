@@ -3,10 +3,27 @@ hide_table_of_contents: true
 ---
 
 import TOCInline from '@theme/TOCInline';
+import DiscordFaqs from '../partials/_discord-faqs.md';
 
 # General FAQs
 
+<div style={{ backgroundColor: '#d6d4d4', padding: '10px', borderRadius: '4px', float: 'right' }}>
+See also:
+- [Manifest FAQs](./tech-faq-manifests.md)
+- [Claim-signing certificate FAQs](./tech-faq-certificates.md)
+- [CAWG identity FAQs](./tech-faq-cawg.md)
+- [C2PA conformance FAQs](./tech-faq-conformance.md)
+- [Rust library FAQs](./tech-faq-rust.md)
+- [C2PA Tool FAQs](./tech-faq-c2pa-tool.md)
+</div>
+
 <TOCInline toc={toc} />
+
+<div style={{width: '600px'}}>
+
+<DiscordFaqs/>
+
+</div>
 
 ### Where can I find signed sample assets?
 

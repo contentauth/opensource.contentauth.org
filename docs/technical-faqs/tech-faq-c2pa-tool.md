@@ -3,10 +3,13 @@ hide_table_of_contents: true
 ---
 
 import TOCInline from '@theme/TOCInline';
+import DiscordFaqs from '../partials/_discord-faqs.md';
 
 # C2PA Tool FAQs
 
 <TOCInline toc={toc} />
+
+<DiscordFaqs/>
 
 ### How can I inspect a file locally using C2PA Tool?
 
@@ -16,51 +19,16 @@ Run C2PA Tool on your local machine:
 c2patool file.jpg
 ```
 
-This avoids uploading the asset to an online inspection tool such as [ACA Inspect](../getting-started/aca-inspect.mdx).
-Some configurations and operations still require network access; for example,
-trust initialization fetches trust lists.
+This avoids uploading the asset to an online inspection tool such as [ACA Inspect](../getting-started/aca-inspect.mdx). Some  operations still require network access; for example, configuring trust fetches trust lists.
 
-<!-- Use CrJSON? -->
+For more a detailed manifest report, use the `--detailed` option or `--crjson` to display manifest data in [crJSON format](https://spec.c2pa.org/specifications/specifications/2.5/crJSON/crjson-format.html). 
 
-### How do I load trust lists with C2PA Tool?
-
-Enter this command to fetch the [official C2PA trust list](../conformance/trust-lists#c2pa-trust-list) and write it to `c2pa-trust-list.pem` in the same directory as the settings file:
-
-```sh
-c2patool init trust
-```
-
-Then any C2PA Tool command automatically loads the PEM file and enables trust checks.
-
-You can load the Interim Trust List by using the `--legacy` option.
-See [Bootstrapping trust files with `init trust`](../sdk-repos/c2patool/docs/usage.md#bootstrapping-trust-files-with-init-trust) for details.  
-
-You can also configure the TSA Trust List using a settings file entry as shown in the following example. 
-
-```toml
-[[trust.anchors]]
-trust_kind = "tsa"
-trust_uri = "https://raw.githubusercontent.com/c2pa-org/conformance-public/main/trust-list/C2PA-TSA-TRUST-LIST.pem"
-trust_anchors = """
------BEGIN CERTIFICATE-----
-...
------END CERTIFICATE-----
-"""
-```
-
-:::note
-The `trust_uri` setting is not used to fetch the roots: The `trust_anchors` key provides them directly. The `trust_uri` is listed in the ingredient assertion validation results.
-:::
-
-Additional options provide more granular control; see [Trust subcommand options](../sdk-repos/c2patool/docs/usage.md#trust-subcommand-options).
-
+See [Using C2PA Tool](../sdk-repos/c2patool/docs/usage.md) for more details on subcommands and options.
 
 ### How can I override an ingredient's title?
 
 Export a signed asset as an ingredient using the [`--ingredient` option](../sdk-repos/c2patool/docs/usage.md#creating-an-ingredient-from-a-file).
-The resulting folder contains ingredient JSON, a thumbnail, and the manifest
-binary. Edit the title in the ingredient JSON, then reference the folder
-through `ingredient_paths` in the new manifest definition:
+The resulting folder contains ingredient JSON, a thumbnail, and the manifest binary. Edit the title in the ingredient JSON, then reference the folder through `ingredient_paths` in the new manifest definition:
 
 ```json
 "ingredient_paths": ["./ingredient-folder"]

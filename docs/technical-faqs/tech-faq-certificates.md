@@ -5,16 +5,13 @@ hide_table_of_contents: true
 import TOCInline from '@theme/TOCInline';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import DiscordFaqs from '../partials/_discord-faqs.md';
 
 # Claim-signing certificate FAQs
 
 <TOCInline toc={toc} />
 
-### How can I obtain a production signing certificate?
-
-After you go through the conformance process and [get the official notice of conformance](../conformance/conformance-guide.mdx#8-notice-of-conformance) for your generator product from C2PA, you can obtain a signing certificate from a certificate authority (CA) on the C2PA Trust List. These certificates are intended for broad recognition by validators.
-
-See the [C2PA Conformance Program](../conformance/index.mdx) for more information.
+<DiscordFaqs/>
 
 ### Is a C2PA claim-signing certificate the same as a creator identity certificate?
 
@@ -27,6 +24,30 @@ To attach verified identity, use a [CAWG identity assertion](../manifest/reading
 While a C2PA manifest answers the question: "What device or app produced this file, and what happened to it?" a CAWG assertion answers the question: "Who is the person or organization behind this file, and what do they permit?"
 
 Source: [Product certificates versus creator identity; May 14, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1504655459725082675)
+
+### How can I obtain a production signing certificate?
+
+After you go through the conformance process and [get the official notice of conformance](../conformance/conformance-guide.mdx#8-notice-of-conformance) for your generator product from C2PA, you can obtain a signing certificate from a certificate authority (CA) on the C2PA Trust List. These certificates are intended for broad recognition by validators.
+
+See the [C2PA Conformance Program](../conformance/index.mdx) for more information.
+
+### Can I get a free signing certificate?
+
+As of June 23, 2026, SSL.com offered a free tier for qualifying [C2PA-conformant
+generator products](../conformance/index.mdx): an Assurance Level 1 claim-signing certificate valid for one year and up to 10,000 trusted timestamps. See [SSL.com's C2PA page](https://ssl.com/c2pa) for details and applications.
+
+Check with SSL.com for current pricing, eligibility, availability, and renewal
+terms. The offer requires product conformance and does not include individual
+creator identity certificates.
+
+:::note
+Conforming generator products must use a signing certificate issued by a CA with their root certificate on the C2PA trust list.  See [C2PA Conformance Program](../conformance/index.mdx) for more information.
+
+CAI does not endorse any particular certificate authority. Many CAs offer C2PA signing certificates. 
+Evaluate them for your specific needs.  See the [**Conformance Explorer > C2PA Trust List**](https://spec.c2pa.org/conformance-explorer/) for the most up-to-date list.
+:::
+
+Source: [provider free-tier announcement, June 23, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1519016971486761040)
 
 ### Does renewing an Interim Trust List certificate preserve its listing?
 
@@ -60,24 +81,6 @@ Sources:
 
 - [Chain order and root source; September 4, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1545416331376066621)
 - [Private follow-up without published resolution; September 7, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1546538935709208576)
-
-### Can I get a free signing certificate?
-
-As of June 23, 2026, SSL.com offered a free tier for qualifying [C2PA-conformant
-generator products](../conformance/index.mdx): an Assurance Level 1 claim-signing certificate valid for one year and up to 10,000 trusted timestamps. See [SSL.com's C2PA page](https://ssl.com/c2pa) for details and applications.
-
-Check with SSL.com for current pricing, eligibility, availability, and renewal
-terms. The offer requires product conformance and does not include individual
-creator identity certificates.
-
-:::note
-Conforming generator products must use a signing certificate issued by a CA with their root certificate on the C2PA trust list.  See [C2PA Conformance Program](../conformance/index.mdx) for more information.
-
-CAI does not endorse any particular certificate authority. Many CAs offer C2PA signing certificates. 
-Evaluate them for your specific needs.  See the [**Conformance Explorer > C2PA Trust List**](https://spec.c2pa.org/conformance-explorer/) for the most up-to-date list.
-:::
-
-Source: [provider free-tier announcement, June 23, 2026](https://discord.com/channels/983153151341371422/986451330992320512/1519016971486761040)
 
 ### How do I configure trust?
 
@@ -124,10 +127,38 @@ let mut builder = Builder::from_context(context);
 
 </TabItem>
 
+<TabItem value="c2patool" label="C2PA Tool">
+
+Run this command to fetch the [official C2PA trust list](../conformance/trust-lists#c2pa-trust-list) and write it to `c2pa-trust-list.pem` in the same directory as the settings file:
+
+```sh
+c2patool init trust
+```
+
+Every time you run C2PA Tool subsequently, it loads the cached trust list and performs trust checks, whether it validates or signs an asset. This command does not configure TSA trust, so add the contents of [`C2PA-TSA-TRUST-LIST.pem`](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem) to the settings file, which is `~/.config/c2pa/c2pa.toml` by default:
+
+```toml
+[[trust.anchors]]
+trust_kind = "tsa"
+trust_uri = "https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem"
+trust_anchors = """
+-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+"""
+```
+
+See [Bootstrapping trust files with `init trust`](../sdk-repos/c2patool/docs/usage.md#bootstrapping-trust-files-with-init-trust) for details. 
+
+To load the Interim Trust List, use the `--legacy` option.
+Additional options provide more granular control; see [Trust subcommand options](../sdk-repos/c2patool/docs/usage.md#trust-subcommand-options).
+
+</TabItem>
+
 <TabItem value="node" label="Node.js">
 
 ```js
-import { Builder, Context } from '@contentauth/c2pa-node';
+import { Builder, Context, Reader } from "@contentauth/c2pa-node";
 
 const TRUST_LIST_URL = 'https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TRUST-LIST.pem';
 const TSA_TRUST_LIST_URL = 'https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem';
@@ -143,6 +174,7 @@ const context = new Context({
   },
 });
 
+const reader = await Reader.fromAsset({ path: "photo.jpg" }, context);
 const builder = await Builder.newAsync(context);
 ```
 
@@ -182,31 +214,6 @@ ctx = Context.from_dict({
 
 builder = Builder(manifest_definition, context=ctx)
 ```
-
-</TabItem>
-
-<TabItem value="c2patool" label="C2PA Tool">
-
-Run this command to fetch the C2PA trust list and cache it next to the settings file:
-
-```sh
-c2patool init trust
-```
-
-C2PA Tool then loads the cached list and enables trust checks on every run, whether it validates or signs an asset. This command does not configure TSA trust, so add the contents of [`C2PA-TSA-TRUST-LIST.pem`](https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem) to the settings file, which is `~/.config/c2pa/c2pa.toml` by default:
-
-```toml
-[[trust.anchors]]
-trust_kind = "tsa"
-trust_uri = "https://raw.githubusercontent.com/c2pa-org/conformance-public/refs/heads/main/trust-list/C2PA-TSA-TRUST-LIST.pem"
-trust_anchors = """
------BEGIN CERTIFICATE-----
-...
------END CERTIFICATE-----
-"""
-```
-
-For more options, see [How do I load trust lists with C2PA Tool?](./tech-faq-c2pa-tool.md#how-do-i-load-trust-lists-with-c2pa-tool).
 
 </TabItem>
 

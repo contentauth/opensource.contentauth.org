@@ -3,10 +3,13 @@ hide_table_of_contents: true
 ---
 
 import TOCInline from '@theme/TOCInline';
+import DiscordFaqs from '../partials/_discord-faqs.md';
 
 # C2PA conformance FAQs
 
 <TOCInline toc={toc} />
+
+<DiscordFaqs/>
 
 ### How do I start the conformance process?
 
@@ -37,11 +40,6 @@ Sources:
 Conformance is associated with a [generator or validator product](../conformance/conformance-guide.mdx#conformance-roles), whether software or hardware, rather than an individual user.
 
 Creator identity is separate from product conformance. 
-
-### Does a conformance listing mean a product uses production certificates?
-
-Not necessarily. A product can appear on the conforming products list
-before public launch with a production certificate.
 
 ### Why does the Conformance Program application ask about validation for a generator product?
 
@@ -117,6 +115,11 @@ Sources:
 
 - [Certificates for interoperability samples; June 16, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1516516612000186498)
 - [Production trust distinction; June 16, 2026](https://discord.com/channels/983153151341371422/1276934105858314404/1516525716341264394)
+
+### Does a product listed in the conforming products lists have to use production certificates? 
+
+Not necessarily. A product can appear on the conforming products list
+before public launch with a production certificate.
 
 ### Can a conforming product rotate its signing certificate?
 

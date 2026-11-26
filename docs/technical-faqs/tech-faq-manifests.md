@@ -5,10 +5,13 @@ hide_table_of_contents: true
 import TOCInline from '@theme/TOCInline';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import DiscordFaqs from '../partials/_discord-faqs.md';
 
 # Manifest FAQs
 
 <TOCInline toc={toc} />
+
+<DiscordFaqs/>
 
 ### How do I configure created versus gathered assertions?
 

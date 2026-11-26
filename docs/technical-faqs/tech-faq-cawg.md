@@ -3,12 +3,15 @@ hide_table_of_contents: true
 ---
 
 import TOCInline from '@theme/TOCInline';
+import DiscordFaqs from '../partials/_discord-faqs.md';
 
 # CAWG identity FAQs
 
 <TOCInline toc={toc} />
 
-### Does c2pa-rs support identity claims aggregation?
+<DiscordFaqs/>
+
+### Does the Rust library support identity claims aggregation?
 
 Yes. The Rust library (`c2pa-rs`) supports CAWG identity claims aggregation (ICA).
 You must provide an aggregation service that returns the COSE-signed verifiable credential;

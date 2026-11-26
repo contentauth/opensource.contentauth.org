@@ -3,11 +3,13 @@ hide_table_of_contents: true
 ---
 
 import TOCInline from '@theme/TOCInline';
+import DiscordFaqs from '../partials/_discord-faqs.md';
 
 # Rust library FAQs
 
 <TOCInline toc={toc} />
 
+<DiscordFaqs/>
 
 ### How do I avoid sidecar filename collisions?
 
