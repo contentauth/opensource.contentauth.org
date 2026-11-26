@@ -31,11 +31,6 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          label: 'FAQs',
-          id: 'getting-started/faqs',
-        },
-        {
-          type: 'doc',
           label: 'Glossary',
           id: 'getting-started/glossary',
         },
@@ -43,6 +38,16 @@ const sidebars = {
           type: 'doc',
           label: 'Using ACA Inspect',
           id: 'getting-started/inspect',
+        },
+        {
+          type: 'doc',
+          label: 'FAQs',
+          id: 'getting-started/faqs',
+        },
+        {
+          type: 'doc',
+          label: 'General technical FAQs',
+          id: 'technical-faqs/tech-faq-general',
         },
       ],
     },
@@ -65,6 +70,10 @@ const sidebars = {
             {
               type: 'doc',
               id: 'manifest/reading/reading-cawg-id',
+            },
+            {
+              type: 'doc',
+              id: 'technical-faqs/tech-faq-cawg',
             },
             {
               type: 'doc',
@@ -96,6 +105,10 @@ const sidebars = {
           type: 'doc',
           id: 'manifest/manifest-examples',
           label: 'Examples',
+        },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-manifests',
         },
       ],
     },
@@ -164,6 +177,11 @@ const sidebars = {
           label: 'Using a certificate in production',
           id: 'signing/prod-cert',
         },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-certificates',
+          label: 'Signing certificate FAQs',
+        },
       ],
     },
     {
@@ -173,6 +191,10 @@ const sidebars = {
       collapsed: true,
       items: [
         ...getRemoteSidebarItems('c2patool'),
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-c2pa-tool',
+        },
         {
           type: 'link',
           label: 'GitHub',
@@ -190,6 +212,10 @@ const sidebars = {
           'sdk-repos/c2pa-rs/readme',
           'sdk-repos/c2pa-rs/docs/release-process',
         ]),
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-rust',
+        },
         {
           type: 'category',
           label: 'Release process',
@@ -422,6 +448,10 @@ const sidebars = {
         {
           type: 'doc',
           id: 'conformance/trust-lists',
+        },
+        {
+          type: 'doc',
+          id: 'technical-faqs/tech-faq-conformance',
         },
       ],
     },
